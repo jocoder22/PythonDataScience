@@ -14,3 +14,14 @@ plt.show()
 # Histogram
 plt.hist(x, bin = 10)
 plt.show()
+plt.clf()  # this clears the histogram
+
+
+# Plot customization
+plt.plot(x, y)
+plt.xlable('My X label')
+plt.ylable('My Y label')
+plt.title('My plot title')
+
+plt.show()
+
