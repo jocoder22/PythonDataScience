@@ -75,5 +75,9 @@ mycolors = {
     'IP30mg': 'yellow'
 }
 
+
 plt.scatter(x, y, s=zSizing, c=mycolors, alpha=6.2)
+plt.text(406, 13, "Failed")
+plt.text(508, 19, "lost")
+plt.grid(True)
 plt.show()
