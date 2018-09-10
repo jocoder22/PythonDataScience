@@ -10,3 +10,7 @@ plt.scatter(x, y)
 plt.xscale('log')
 plt.show()
 
+
+# Histogram
+plt.hist(x, bin = 10)
+plt.show()
