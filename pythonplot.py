@@ -45,8 +45,9 @@ plt.show()
 
 
 # Changing tick value and labels
-tvalues = []
-tlabels = []
+tvaluesx = []
+tlabelsx = []
 
-plt.xticks(tvalues, tlabels)
+plt.xticks(tvaluesx, tlabelsx)
+plt.yticks([0, 1, 2, 3], ['Baseline', 'Visit1', 'Visit2', 'Closeout'])
 plt.show()
