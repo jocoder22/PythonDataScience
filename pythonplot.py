@@ -73,4 +73,6 @@ mycolors = {
     'IP30mg': 'yellow'
 }
 
+plt.scatter(x, y, s=zSizing, col=mycolors, alpha=6.2)
+plt.show()
 
