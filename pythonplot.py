@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 
 x = []
 y = []
+
 # line plot
 plt.plot(x, y)
 plt.show()
@@ -40,4 +41,13 @@ plt.xlabel(label1)
 plt.ylable(label2)
 plt.title(title)
 
+plt.show()
+
+
+# Changing tick value and labels
+tvalues = []
+tlabels = []
+
+
+plt.xticks(tvalues, tlabels)
 plt.show()
