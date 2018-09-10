@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 x = []
 y = []
+z = []
 
 # line plot
 plt.plot(x, y)
