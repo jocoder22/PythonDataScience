@@ -48,6 +48,5 @@ plt.show()
 tvalues = []
 tlabels = []
 
-
 plt.xticks(tvalues, tlabels)
 plt.show()
