@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 
+x = []
+y = []
 # line plot
 plt.plot(x, y)
 plt.show()
@@ -12,7 +14,7 @@ plt.show()
 
 
 # Histogram
-plt.hist(x, bin = 10)
+plt.hist(x, bin=10)
 plt.show()
 plt.clf()  # this clears the histogram
 
