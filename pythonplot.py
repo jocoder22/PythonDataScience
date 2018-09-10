@@ -56,14 +56,14 @@ plt.show()
 
 
 # More customization
-# s= sets the size for the dots 
+# s= sets the size for the dots
 zSizing = np.array(z)
 plt.scatter(x, y, s=zSizing)
 
 plt.show()
 
 
-# Changing the color and opacity 
+# Changing the color and opacity
 # c= sets the color while alpha= sets the opacity(from 0.0 to 1.0)
 # using dictionary to define the colors
 mycolors = {
@@ -75,4 +75,3 @@ mycolors = {
 
 plt.scatter(x, y, s=zSizing, col=mycolors, alpha=6.2)
 plt.show()
-
