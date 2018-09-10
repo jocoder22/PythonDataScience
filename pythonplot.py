@@ -21,9 +21,23 @@ plt.clf()  # this clears the histogram
 
 # Plot customization
 plt.plot(x, y)
-plt.xlable('My X label')
-plt.ylable('My Y label')
+plt.xlabel('My X label')
+plt.ylabel('My Y label')
 plt.title('My plot title')
 
 plt.show()
 
+# More on labels and title
+label1 = 'First Label'
+label2 = 'Second Label'
+title = 'Main Title'
+
+
+plt.scatter(x, y)
+plt.xscale('log')
+
+plt.xlabel(label1)
+plt.ylable(label2)
+plt.title(title)
+
+plt.show()
