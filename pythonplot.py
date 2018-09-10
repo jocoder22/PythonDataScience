@@ -53,3 +53,24 @@ tlabelsx = []
 plt.xticks(tvaluesx, tlabelsx)
 plt.yticks([0, 1, 2, 3], ['Baseline', 'Visit1', 'Visit2', 'Closeout'])
 plt.show()
+
+
+# More customization
+# s= sets the size for the dots 
+zSizing = np.array(z)
+plt.scatter(x, y, s=zSizing)
+
+plt.show()
+
+
+# Changing the color and opacity 
+# c= sets the color while alpha= sets the opacity(from 0.0 to 1.0)
+# using dictionary to define the colors
+mycolors = {
+    'Placebo': 'red',
+    'IP10mg': 'blue',
+    'IP20mg': 'green',
+    'IP30mg': 'yellow'
+}
+
+
