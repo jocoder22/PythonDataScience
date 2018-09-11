@@ -26,3 +26,9 @@ char2 = np.array(['IP10mg', 'Placebo', 'IP10mg', 'Placebo', 'IP20mg'],
                  dtype='<U12')
 char2.type
 print(char2)
+
+
+# Using tuples
+tup1 = np.array([[(2, 3, 5), (9, 'man', 8)], [(9, 9, 4), ('Ken', 5, 3)]])
+tup1.dtype
+print(tup1)
