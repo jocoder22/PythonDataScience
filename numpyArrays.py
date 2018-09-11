@@ -60,5 +60,10 @@ for data in savmat1:
 savmat1.close()
 
 
+# loading data into current session 
 tup4 = np.load('Tup1.npy')
 print(tup4)
+
+
+matt1 = np.loadtxt('mat1.txt', delimiter=',')
+print(matt1)
