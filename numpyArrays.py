@@ -50,3 +50,15 @@ os.getcwd()
 
 # saving array, saved into .npy
 np.save('Tup1', tup1)
+np.savetxt('mat1.txt', mat1, delimiter=',')
+
+# print contents of saved files
+savmat1 = open('mat1.txt', 'r')
+for data in savmat1:
+    print(data)
+
+savmat1.close()
+
+
+tup4 = np.load('Tup1.npy')
+print(tup4)
