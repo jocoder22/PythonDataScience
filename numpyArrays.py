@@ -1,4 +1,7 @@
 import numpy as np
+# Find current working directory
+import os
+print(os.getcwd())
 
 # Create arrays of  ones, all integers
 
@@ -33,9 +36,6 @@ tup1 = np.array([[(2, 3, 5), (9, 'man', 8)], [(9, 9, 4), ('Ken', 5, 3)]])
 tup1.dtype
 print(tup1)
 
-
-
-
 # coping np array
 tup2 = tup1  # this actually copy, but establish link to tup1
 tup1[0, 0] = 'Josp'  # this will update values in tup2 also
@@ -43,6 +43,10 @@ tup1[0, 0] = 'Josp'  # this will update values in tup2 also
 # To actually copy, using copy() method
 tup3 = tup1.copy()
 tup1[0, 0] = 'Josphine'  # this wouldn't update values in tup3
+
+# find current working directory 
+os.getcwd()
+
 
 # saving array, saved into .npy
 np.save('Tup1', tup1)
