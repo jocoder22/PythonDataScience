@@ -16,3 +16,8 @@ Vones3 = np.array(Vones3, dtype=np.int8)
 mat1 = np.random.randn(5, 5)
 mat2 = np.random.randn(2, 3, 2)
 
+
+# create character array
+char1 = np.array([['Cup', 'Spoon', 'knives'], ['Table', 'Chairs', 'Beds']])
+char1.dtype  # dtype('<U6')
+print(char1)
