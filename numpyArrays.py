@@ -21,3 +21,8 @@ mat2 = np.random.randn(2, 3, 2)
 char1 = np.array([['Cup', 'Spoon', 'knives'], ['Table', 'Chairs', 'Beds']])
 char1.dtype  # dtype('<U6')
 print(char1)
+
+char2 = np.array(['IP10mg', 'Placebo', 'IP10mg', 'Placebo', 'IP20mg'],
+                 dtype='<U12')
+char2.type
+print(char2)
