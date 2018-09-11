@@ -17,7 +17,6 @@ mat1 = np.random.randn(5, 5)
 mat2 = np.random.randn(2, 3, 2)
 
 
-
 # create character array
 char1 = np.array([['Cup', 'Spoon', 'knives'], ['Table', 'Chairs', 'Beds']])
 char1.dtype  # dtype('<U6')
@@ -27,8 +26,6 @@ char2 = np.array(['IP10mg', 'Placebo', 'IP10mg', 'Placebo', 'IP20mg'],
                  dtype='<U12')
 char2.type
 print(char2)
-
-
 
 
 # Using tuples
