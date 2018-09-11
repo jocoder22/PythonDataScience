@@ -43,3 +43,6 @@ tup1[0, 0] = 'Josp'  # this will update values in tup2 also
 # To actually copy, using copy() method
 tup3 = tup1.copy()
 tup1[0, 0] = 'Josphine'  # this wouldn't update values in tup3
+
+# saving array, saved into .npy
+np.save('Tup1', tup1)
