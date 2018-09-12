@@ -96,3 +96,13 @@ mat1[:, ::-1]   # last column now first
 
 # Reverse rows and columns
 mat1[::-1, ::-1]
+
+
+# Retaining original dimension
+# Use np.newaxis to add new extra dimension
+mat3d = np.random.randn(3, 4, 2)
+mat3d1 = mat3d[:, 1, :]  # this is two dimensional
+print(mat3d1.shape)   # return (2, 3) => two dimensional
+
+mat3dd = mat3d[:, 1, np.newaxis, :]
+print(mat3dd.shape)  # return (2, 1, 3) => three dimensional
