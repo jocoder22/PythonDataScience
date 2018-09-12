@@ -74,10 +74,16 @@ print(matt1)
 # Slicing numpy array
 # Very important to remember the dimensions of the array
 # select all rows in mat1 = np.random.randn(5, 5)
+mat1[3, 2]
 matrow = mat1[0:4, :]   # or matrow = mat1[:4, :] or matrow = mat[:-1, :]
                         # this is up to but not including the 4th row
 
 
 # The 3rd option to indicate increments
-
 matrowin = mat1[:4:2, :]  # select every 2nd row
+
+
+# Don't flatten, retain the shape of the array in one column array
+# use list to keep the column
+matRshape = mat1[:4, [1]]
+
