@@ -18,6 +18,7 @@ Vones3 = np.array(Vones3, dtype=np.int8)
 # Create matrix of random integers
 mat1 = np.random.randn(5, 5)
 mat2 = np.random.randn(2, 3, 2)
+print(mat2.shape)  # show the dimensions of the array
 
 
 # create character array
@@ -29,6 +30,7 @@ char2 = np.array(['IP10mg', 'Placebo', 'IP10mg', 'Placebo', 'IP20mg'],
                  dtype='<U12')
 char2.type
 print(char2)
+print(char2.shape)
 
 
 # Using tuples
@@ -72,7 +74,7 @@ print(matt1)
 # Slicing numpy array
 # Very important to remember the dimensions of the array
 # select all rows in mat1 = np.random.randn(5, 5)
-matrow = mat1[0:4, :]   # or matrow = mat1[:4, :]
+matrow = mat1[0:4, :]   # or matrow = mat1[:4, :] or matrow = mat[:-1, :]
                         # this is up to but not including the 4th row
 
 
