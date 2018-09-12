@@ -89,7 +89,7 @@ matRshape = mat1[:4, [1]]
 
 # Reversing matrix
 # Reverse rows
-mat1[::-1, :]  # here last row will be first while the last row becomes the first
+mat1[::-1, :]  # here last row will be first while the last row now first
 
 # Reverse columns
 mat1[:, ::-1]   # last column now first
