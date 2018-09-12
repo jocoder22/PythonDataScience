@@ -76,3 +76,6 @@ matrow = mat1[0:4, :]   # or matrow = mat1[:4, :]
                         # this is up to but not including the 4th row
 
 
+# The 3rd option to indicate increments
+
+matrowin = mat1[:4:2, :]  # select every 2nd row
