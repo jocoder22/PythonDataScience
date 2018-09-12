@@ -15,5 +15,8 @@ ad = np.array(adlist)
 adsub = ad[ad != 'Cat']
 
 adindex = ad != "Cat"
+adindex2 = np.char.upper(ad) != "Cat".upper()
+print(adindex)
 
 adsub2 = ad[adindex]
+adsub3 =  ad[adindex2]
