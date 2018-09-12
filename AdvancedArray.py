@@ -19,4 +19,4 @@ adindex2 = np.char.upper(ad) != "Cat".upper()
 print(adindex)
 
 adsub2 = ad[adindex]
-adsub3 =  ad[adindex2]
+adsub3 = ad[adindex2]
