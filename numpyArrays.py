@@ -44,7 +44,7 @@ tup1[0, 0] = 'Josp'  # this will update values in tup2 also
 tup3 = tup1.copy()
 tup1[0, 0] = 'Josphine'  # this wouldn't update values in tup3
 
-# find current working directory 
+# find current working directory
 os.getcwd()
 
 
@@ -60,10 +60,19 @@ for data in savmat1:
 savmat1.close()
 
 
-# loading data into current session 
+# loading data into current session
 tup4 = np.load('Tup1.npy')
 print(tup4)
 
 
 matt1 = np.loadtxt('mat1.txt', delimiter=',')
 print(matt1)
+
+
+# Slicing numpy array
+# Very important to remember the dimensions of the array
+# select all rows in mat1 = np.random.randn(5, 5)
+matrow = mat1[0:4, :]   # or matrow = mat1[:4, :]
+                        # this is up to but not including the 4th row
+
+
