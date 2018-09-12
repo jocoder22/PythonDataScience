@@ -11,6 +11,7 @@ adlist = [[['January', 'February', 'March'],
 
 ad = np.array(adlist)
 
+
 # subsetting np array
 adsub = ad[ad != 'Cat']
 
