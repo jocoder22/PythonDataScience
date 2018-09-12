@@ -76,7 +76,7 @@ print(matt1)
 # select all rows in mat1 = np.random.randn(5, 5)
 mat1[3, 2]
 matrow = mat1[0:4, :]   """ or matrow = mat1[:4, :] or matrow = mat[:-1, :]
-                         this is up to but not including the 4th row
+                            this is up to but not including the 4th row
                         """
 
 
