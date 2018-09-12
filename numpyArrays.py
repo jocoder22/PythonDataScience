@@ -87,3 +87,12 @@ matrowin = mat1[:4:2, :]  # select every 2nd row
 # use list to keep the column
 matRshape = mat1[:4, [1]]
 
+# Reversing matrix
+# Reverse rows
+mat1[::-1, :]  # here last row will be first while the last row becomes the first
+
+# Reverse columns
+mat1[:, ::-1]   # last column now first
+
+# Reverse rows and columns
+mat1[::-1, ::-1]
