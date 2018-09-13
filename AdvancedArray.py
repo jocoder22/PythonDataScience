@@ -22,3 +22,13 @@ print(adindex2)
 
 adsub2 = ad[adindex]
 adsub3 = ad[adindex2]
+
+
+# Predefined indexing
+id1 = np.array([[0, 1],
+               [0, 1]])
+
+id2 = np.array([[0, 2],
+               [1, 1]])
+             
+print(ad[id1, id2])
