@@ -44,5 +44,11 @@ print(ad[id1, id2])
 
 id3 = np.array([[0, 2],
                [1, 1]])
-               
+
 print(ad[id1, id2, id3])
+
+"""
+[['January' 'Fire']
+ ['May' 'Dog']]
+
+ """
