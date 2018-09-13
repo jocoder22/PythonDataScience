@@ -33,6 +33,16 @@ id2 = np.array([[0, 2],
 
 print(ad[id1, id2])
 
+"""
+[[['January' 'February' 'March']
+ ['Rain' 'Wind' 'Fire']]
+
+ [['April' 'May' 'June']
+  ['Pig' 'Dog' 'Cat']]]
+
+"""
+
 id3 = np.array([[0, 2],
                [1, 1]])
+               
 print(ad[id1, id2, id3])
