@@ -52,3 +52,9 @@ print(ad[id1, id2, id3])
  ['May' 'Dog']]
 
  """
+
+
+# Reverse finding
+cordde = (0, 1, 1)
+print((id1[cordde], id2[cordde], id3[cordde]))
+
