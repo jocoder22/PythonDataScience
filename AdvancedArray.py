@@ -74,5 +74,23 @@ cat1.shape  # (1, 2, 2) , the dimensions must march
 cat2.shape  # (2, 2, 2) , the dimensions must march
 cat22.shape  # (1, 2, 2), again the dimensions must march
 cat1220 = np.concatenate((cat1, cat22), axis=0)  # add a new table
+"""
+[[['January' 'Fire']
+  ['May' 'Dog']]
+
+ [['ios' 'kad']
+  ['oek' 'msn']]]
+
+"""
 cat1221 = np.concatenate((cat1, cat22), axis=1)  # add a new row
+"""
+[[['January' 'Fire']
+  ['May' 'Dog']
+  ['ios' 'kad']
+  ['oek' 'msn']]]
+"""
 cat1222 = np.concatenate((cat1, cat22), axis=2)  # add a new column
+"""
+[[['January' 'Fire' 'ios' 'kad']
+  ['May' 'Dog' 'oek' 'msn']]]
+"""
