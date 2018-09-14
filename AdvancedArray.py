@@ -82,6 +82,7 @@ cat1220 = np.concatenate((cat1, cat22), axis=0)  # add a new table
   ['oek' 'msn']]]
 
 """
+
 cat1221 = np.concatenate((cat1, cat22), axis=1)  # add a new row
 """
 [[['January' 'Fire']
@@ -89,6 +90,7 @@ cat1221 = np.concatenate((cat1, cat22), axis=1)  # add a new row
   ['ios' 'kad']
   ['oek' 'msn']]]
 """
+
 cat1222 = np.concatenate((cat1, cat22), axis=2)  # add a new column
 """
 [[['January' 'Fire' 'ios' 'kad']
