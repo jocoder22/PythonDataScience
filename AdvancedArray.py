@@ -58,3 +58,21 @@ print(ad[id1, id2, id3])
 cordde = (0, 1, 1)
 print((id1[cordde], id2[cordde], id3[cordde]))
 
+# Concatenating arrays
+cat1 = np.array([[['January', 'Fire'],
+                ['May', 'Dog']]], dtype='<U9')
+
+cat2 = np.array([[['January', 'Fire'],
+                 ['May', 'Dog']],
+
+                 [['ios', 'kad'],
+                 ['oek', 'msn']]], dtype='<U9')
+
+cat22 = np.array([[["ios", "kad"], ["oek", "msn"]]])
+
+cat1.shape  # (1, 2, 2) , the dimensions must march
+cat2.shape  # (2, 2, 2) , the dimensions must march
+cat22.shape  # (1, 2, 2), again the dimensions must march
+cat1220 = np.concatenate((cat1, cat22), axis=0)
+cat1221 = np.concatenate((cat1, cat22), axis=1)
+cat1222 = np.concatenate((cat1, cat22), axis=2)
