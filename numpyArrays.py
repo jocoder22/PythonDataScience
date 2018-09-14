@@ -75,9 +75,11 @@ print(matt1)
 # Very important to remember the dimensions of the array
 # select all rows in mat1 = np.random.randn(5, 5)
 mat1[3, 2]
-matrow = mat1[0:4, :]   """ or matrow = mat1[:4, :] or matrow = mat1[:-1, :]
-                            this is up to but not including the 4th row
-                        """
+matrow = mat1[0:4, :]
+"""
+or matrow = mat1[:4, :] or matrow = mat1[:-1, :]
+this is up to but not including the 4th row
+"""
 
 
 # The 3rd option to indicate increments
