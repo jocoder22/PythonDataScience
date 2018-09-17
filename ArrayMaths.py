@@ -13,4 +13,6 @@ arr2 = ln(90)
 arr3 = radN2 + 10
 arr4 = radN1 / 6
 arr5 = radN2 ** 2
+arr6 = radN1 * radN2
+arr7 = radN1 ** (radN2 / 3)
 
