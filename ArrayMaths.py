@@ -26,5 +26,11 @@ arr7 = radN3 * radN4
 
 
 radN5 = np.array([[[6], [1], [4]]])
+radN6 = np.array([[[6]], [[1]], [[4]]])
 radN5.shape  # (1, 3, 1)
 arr8 = radN3 * radN5
+
+
+radN2.shape  # (3, 4, 6)
+radN6.shape  # (3, 1, 1)
+print(radN2 * radN6)
