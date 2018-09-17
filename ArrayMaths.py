@@ -34,3 +34,7 @@ arr8 = radN3 * radN5
 radN2.shape  # (3, 4, 6)
 radN6.shape  # (3, 1, 1)
 print(radN2 * radN6)
+
+
+# np arange
+listn = np.arange(0, 9)
