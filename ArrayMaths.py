@@ -23,3 +23,8 @@ radN4 = np.array([[[5, 8, 9, 1]]])
 print(radN3.shape)  # (2, 3, 4)
 print(radN4.shape)  # (1, 1, 4)
 arr7 = radN3 * radN4
+
+
+radN5 = np.array([[[6], [1], [4]]])
+radN5.shape  # (1, 3, 1)
+arr8 = radN3 * radN5
