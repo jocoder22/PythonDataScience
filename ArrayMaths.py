@@ -5,7 +5,7 @@ import numpy.linalg as ln
 
 radN1 = np.array(randn(2, 3, 4) * 8, dtype=np.int64)
 radN2 = np.array(randn(3, 4, 6) * 9, dtype=np.int64)
-arr1 = np.numpy([[3, 5, 7], [7, 9, 12], [5, 2, 5]])
+arr1 = np.array([[3, 5, 7], [7, 9, 12], [5, 2, 5]])
 arr2 = ln(90)
 
 
@@ -38,3 +38,7 @@ print(radN2 * radN6)
 
 # np arange
 listn = np.arange(0, 9)
+
+
+# np.reshape
+reshape_radN1 = radN1.reshape(4, 6)
