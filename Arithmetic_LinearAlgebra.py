@@ -13,3 +13,9 @@ EmptyArray = np.empty((3, 4), dtype=np.dtype('<U16'))
 
 # fill array with value;
 EmptyArray.fill('Goodies')
+
+
+# sum array;
+myarr1.sum()  # sum all the values
+myarr1.sum(axis=0)  # sum along the rows
+myarr1.sum(axis=1)  # sum along the columns
