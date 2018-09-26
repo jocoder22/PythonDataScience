@@ -32,3 +32,21 @@ myarr1.cumsum(axis=1)  # do running sum along the columns
 myarr2 = np.array(randn(5, 4) * 40, dtype=np.int8)
 myarr2.mean(axis=0)
 myarr2.mean(axis=1)
+
+# using ufuncs;
+print(myarr2)
+""" array([[-40,   3, -45,   7],
+            [  3, -16, -74, -51],
+            [ 19,  24, -22, -21],
+            [-14, -14, -61, -16],
+            [-41,   0,  91, -32]], dtype=int8)
+"""
+
+np.sign(myarr2)  # find the sign of elements of myarr2 i.e -1, 0, 1
+"""array([[-1,  1, -1,  1],
+            [ 1, -1, -1, -1],
+            [ 1,  1, -1, -1],
+            [-1, -1, -1, -1],
+            [-1,  0,  1, -1]], dtype=int8)
+"""
+
