@@ -42,6 +42,7 @@ print(myarr2)
             [-41,   0,  91, -32]], dtype=int8)
 """
 
+
 np.sign(myarr2)  # find the sign of elements of myarr2 i.e -1, 0, 1
 """array([[-1,  1, -1,  1],
             [ 1, -1, -1, -1],
