@@ -28,3 +28,7 @@ myarr1.cumsum(axis=0)  # do running sum along the rows
 myarr1.cumsum(axis=1)  # do running sum along the columns
 
 
+# Add mean function;
+myarr2 = np.array(randn(5, 4) * 40, dtype=np.int8)
+myarr2.mean(axis=0)
+myarr2.mean(axis=1)
