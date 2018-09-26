@@ -50,3 +50,5 @@ np.sign(myarr2)  # find the sign of elements of myarr2 i.e -1, 0, 1
             [-1,  0,  1, -1]], dtype=int8)
 """
 
+myarr2 * np.sign(myarr2)  # this creates absolute values of the array
+
