@@ -71,3 +71,18 @@ add20(myarr2)  # Error
 # using the vectorize function;
 add20vect = np.vectorize(add20)
 add20vect(myarr2)
+
+
+# using faster and efficient numpy function;
+
+
+def add20vem(arr):
+    return_arr = arr.copy()
+    return_arr[arr <= 0] = 0
+    return return_arr
+
+
+add20vem(myarr2)
+
+
+# Timing the two processes;
