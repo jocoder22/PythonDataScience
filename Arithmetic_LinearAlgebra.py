@@ -86,3 +86,9 @@ add20vem(myarr2)
 
 
 # Timing the two processes;
+import timeit
+
+nnn = """
+from numpy.random import randn
+import numpy as np
+"""
