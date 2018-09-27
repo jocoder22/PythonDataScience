@@ -63,6 +63,11 @@ def add20(num):
     else:
         return 0
 
+
 add20(14)  # 34
 add20(-12)  # 0
 add20(myarr2)  # Error
+
+# using the vectorize function;
+add20vect = np.vectorize(add20)
+add20vect(myarr2)
