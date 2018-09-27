@@ -103,3 +103,15 @@ def add20vem(arr):
 
 add20vem(my)
 """
+
+cott = """
+my = np.array(randn(5, 4) * 40, dtype=np.int8)
+def add20(num):
+    if num > 0:
+        return num + 20
+    else:
+        return 0
+
+add20vect = np.vectorize(add20)
+add20vect(my)
+"""
