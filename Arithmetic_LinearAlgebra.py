@@ -63,4 +63,6 @@ def add20(num):
     else:
         return 0
 
-
+add20(14)  # 34
+add20(-12)  # 0
+add20(myarr2)  # Error
