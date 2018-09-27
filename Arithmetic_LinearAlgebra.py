@@ -86,7 +86,7 @@ def add20vem(arr):
 add20vem(myarr2)
 
 
-# Timing the two processes;
+# Timing the two processes using timeit;
 
 
 nnn = """
