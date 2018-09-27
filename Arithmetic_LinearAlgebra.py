@@ -115,3 +115,11 @@ def add20(num):
 add20vect = np.vectorize(add20)
 add20vect(my)
 """
+
+timeit.timeit(setup=nnn,
+              stmt=codd,
+              number=1000000)  # 8.151
+
+timeit.timeit(setup=nnn,
+              stmt=cott,
+              number=1000000)  # 40.56
