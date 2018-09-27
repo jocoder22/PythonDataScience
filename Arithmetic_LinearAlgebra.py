@@ -1,5 +1,6 @@
 import numpy as np
 from numpy.random import randn
+import timeit
 
 myarr1 = np.array(randn(5, 5) * 20, dtype=np.int8)
 print(myarr1)
@@ -86,7 +87,7 @@ add20vem(myarr2)
 
 
 # Timing the two processes;
-import timeit
+
 
 nnn = """
 from numpy.random import randn
