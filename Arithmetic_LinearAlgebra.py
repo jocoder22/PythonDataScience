@@ -92,3 +92,14 @@ nnn = """
 from numpy.random import randn
 import numpy as np
 """
+
+codd = """
+my = np.array(randn(5, 4) * 40, dtype=np.int8)
+
+def add20vem(arr):
+    return_arr = arr.copy()
+    return_arr[arr <= 0] = 0
+    return return_arr
+
+add20vem(my)
+"""
