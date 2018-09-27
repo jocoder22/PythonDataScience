@@ -117,10 +117,12 @@ add20vect = np.vectorize(add20)
 add20vect(my)
 """
 
+# Time the program using numpy function;
 timeit.timeit(setup=nnn,
               stmt=codd,
               number=1000000)  # 8.151
 
+# Time program using vectorize function;
 timeit.timeit(setup=nnn,
               stmt=cott,
               number=1000000)  # 40.56
