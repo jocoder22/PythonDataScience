@@ -53,3 +53,14 @@ np.sign(myarr2)  # find the sign of elements of myarr2 i.e -1, 0, 1
 
 myarr2 * np.sign(myarr2)  # this creates absolute values of the array
 
+
+# using vectorize() function;
+
+
+def add20(num):
+    if num > 0:
+        return num + 20
+    else:
+        return 0
+
+
