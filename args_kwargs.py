@@ -7,7 +7,7 @@ def addall(a, *args):
     total = 0
     for i in args:
         total += i
-    return total
+    return total + a
 
 
 # **kwargs for passing keyword list ( or dictionary) to a function
