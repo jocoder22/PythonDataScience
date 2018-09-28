@@ -9,7 +9,7 @@ def addall(a, *args):
         total += i
     return total
 
-    
+
 # **kwargs for passing keyword list ( or dictionary) to a function
 # This makes **kwargs iterable, optional and can accept dictionary as argument;
 
@@ -19,10 +19,10 @@ def addall2(a, *agrs, **kwargs):
         total += (i ** a)
     for key, value in kwargs.items():
         print("The item is {} and the quantity is {}".format(key, value))
-    
+
     for i in kwargs.keys():
         print("The item is {}".format(i))
-    
+
     print(total)
     return "The total amonunt is ${}".format(total) 
 
