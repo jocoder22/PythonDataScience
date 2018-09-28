@@ -18,12 +18,19 @@ def addall2(a, *agrs, **kwargs):
     for i in agrs:
         total += (i ** 3)
     for key, value in kwargs.items():
-        print("The key is {} and the value is {}".format(key, value))
+        print("The item is {} and the quantity is {}".format(key, value))
     
     for i in kwargs.keys():
-        print("The key is {}".format(i))
+        print("The item is {}".format(i))
     
     print(total)
     return "The total amonunt is ${}".format(total) 
+
+
+# examples:;
+cost = (350, 400, 892, 180)
+Inventory = {"Shirts": 350, "Nlow": 400, "knits": 892, "Plood":180}
+
+
 
 
