@@ -32,5 +32,11 @@ cost = (350, 400, 892, 180)
 Inventory = {"Shirts": 350, "Nlow": 400, "knits": 892, "Plood": 180}
 
 
+addall2(3, 6, 9, 10, shirts=20, Tea=90, belt=10)
+
+
+
+
+
 
 
