@@ -24,7 +24,7 @@ def addall2(a, *agrs, **kwargs):
         print("The item is {}".format(i))
 
     print(total)
-    return "The total amonunt is ${}".format(total) 
+    return "The total amonunt is ${}".format(total)
 
 
 # examples:;
@@ -34,9 +34,4 @@ Inventory = {"Shirts": 350, "Nlow": 400, "knits": 892, "Plood": 180}
 
 addall2(3, 6, 9, 10, shirts=20, Tea=90, belt=10)
 
-
-
-
-
-
-
+addall2(3, *cost, **Inventory)
