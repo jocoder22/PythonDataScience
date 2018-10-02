@@ -32,3 +32,14 @@ data2.Name
 
 data2.head().loc[:, ['Gender', 'Age', 'Name']]
 type(data2.Name)  # <class 'pandas.core.series.Series'>
+
+
+# pandas built on numpy;
+dav = data2.values
+type(dav)  # <class 'numpy.ndarray'>
+
+
+# Form pandas dataframe from numpy array;
+newdata = pd.DataFrame(data)
+newdata
+type(newdata)  # <class 'pandas.core.frame.DataFrame'>
