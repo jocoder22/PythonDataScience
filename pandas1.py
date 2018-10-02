@@ -24,3 +24,8 @@ data2 = pd.read_csv("/Documents/test1.txt")
 data2
 type(data2)
 data2.head()
+
+# pandas slicing;
+data2.head().Name
+data2.head().Gender
+data2.Name
