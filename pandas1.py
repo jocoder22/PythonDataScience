@@ -17,3 +17,10 @@ type(data)
 data[:5]
 data[:5]['Name']
 data[:5][['Name', 'Age']]
+
+
+# Using pandas;
+data2 = pd.read_csv("/Documents/test1.txt")
+data2
+type(data2)
+data2.head()
