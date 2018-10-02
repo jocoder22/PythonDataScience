@@ -22,10 +22,13 @@ data[:5][['Name', 'Age']]
 # Using pandas;
 data2 = pd.read_csv("/Documents/test1.txt")
 data2
-type(data2)
+type(data2)  # <class 'pandas.core.frame.DataFrame'>
 data2.head()
 
 # pandas slicing;
 data2.head().Name
 data2.head().Gender
 data2.Name
+
+data2.head().loc[:, ['Gender', 'Age', 'Name']]
+type(data2.Name)  # <class 'pandas.core.series.Series'>
