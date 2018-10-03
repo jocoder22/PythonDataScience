@@ -65,6 +65,7 @@ print(tuple1)
 print(DataFrame(tuple1, columns=["Age", "Role"]))
 
 
+
 # create dataframe from dictionary;
 print(DataFrame({"Prices": [234, 689, 157],
                  "Product": ["Pen", "Pencils", "Crayons"]}))
