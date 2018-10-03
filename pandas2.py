@@ -20,6 +20,8 @@ print(indx)
 type(indx)  # <class 'pandas.core.indexes.base.Index'>
 
 Popl = Series([8902, 4893, 560,
-               849, 6210, 290,
-               486, 409, 194,
-               569, 954, 9840])
+               849, 510, 290,
+               486, 409, np.nan,
+               569, 954, 9840],
+              index=indx, name="Population")
+print(Popl)
