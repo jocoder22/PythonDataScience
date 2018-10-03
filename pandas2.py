@@ -27,8 +27,8 @@ Popl = Series([8902, 4893, 560,
 print(Popl)
 
 # creating series with dictionary;
-Sales = Series({"Tv": 459, "Radio": 250, "Laptop": 1245,
-                "Telephone": 57, "Ipad": 810, "Washer": 2690},
+Sales = Series({"Tv": 459.89, "Radio": 250.98, "Laptop": 1245.99,
+                "Telephone": 57.99, "Ipad": 810.98, "Washer": 2690},
                name="Electronics")
 print(Sales)
 
