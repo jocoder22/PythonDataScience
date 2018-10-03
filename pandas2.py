@@ -57,6 +57,14 @@ print(DataFrame(nmdata,
                 columns=["Price", "Discount", "Membership", "Sales"]))
 
 
+# creating dataframe from tuples;
+tuple1 = [(25, 'Boy'), (18, "Girl"),
+          (46, 'Man'), (35, 'Woman')]
+
+print(tuple1)
+print(DataFrame(tuple1, columns=["Age", "Role"]))
+
+
 # create dataframe from dictionary;
 print(DataFrame({"Prices": [234, 689, 157],
                  "Product": ["Pen", "Pencils", "Crayons"]}))
