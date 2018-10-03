@@ -7,6 +7,7 @@ series2 = Series(['Adam', 'Eve', 'kelly', 'Ben', 'Mary', 'John'])
 
 print(series1)
 print(series2)
+type(series1)  # <class 'pandas.core.series.Series'>
 
 
 # creating index;
