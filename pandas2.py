@@ -38,3 +38,11 @@ Countries = Series({"USA": "Washington DC", "Japan": "Tokyo",
                     "Kenya": "Nairobi"}, name="countries")
 
 print(Countries)
+
+
+# Creating DataFrames;
+# from numpy array;
+nmdata = np.arange(6, 18).reshape(3, 4)
+mmdata = np.arange(0, 9).reshape(3, 3)
+print(mmdata)
+print(nmdata)
