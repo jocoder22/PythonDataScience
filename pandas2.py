@@ -11,10 +11,15 @@ type(series1)  # <class 'pandas.core.series.Series'>
 
 
 # creating index;
-indx = pd.Index(["USA", "Canada", "Algeria"
-                 "Mexico", "Japan", "Kenya"
-                 "Malaysia", "Holland", "Poland"
+indx = pd.Index(["USA", "Canada", "Algeria",
+                 "Mexico", "Japan", "Kenya",
+                 "Malaysia", "Holland", "Poland",
                  "Brazil", "South Korea", "China"])
 
 print(indx)
 type(indx)  # <class 'pandas.core.indexes.base.Index'>
+
+Popl = Series([8902, 4893, 560,
+               849, 6210, 290,
+               486, 409, 194,
+               569, 954, 9840])
