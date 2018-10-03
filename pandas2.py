@@ -46,3 +46,11 @@ nmdata = np.arange(6, 18).reshape(3, 4)
 mmdata = np.arange(0, 9).reshape(3, 3)
 print(mmdata)
 print(nmdata)
+
+print(DataFrame(nmdata))
+
+
+# Adding DataFrame labels;
+print(DataFrame(nmdata,
+                index=["Book", "Radio", "Heater"],
+                columns=["Price", "Discount", "Membership", "Sales"]))
