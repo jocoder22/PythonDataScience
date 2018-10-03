@@ -55,3 +55,8 @@ print(DataFrame(nmdata))
 print(DataFrame(nmdata,
                 index=["Book", "Radio", "Heater"],
                 columns=["Price", "Discount", "Membership", "Sales"]))
+
+
+# create dataframe from dictionary;
+print(DataFrame({"Prices": [234, 689, 157],
+                 "Product": ["Pen", "Pencils", "Crayons"]}))
