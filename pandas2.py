@@ -25,3 +25,16 @@ Popl = Series([8902, 4893, 560,
                569, 954, 9840],
               index=indx, name="Population")
 print(Popl)
+
+# creating series with dictionary;
+Sales = Series({"Tv": 459, "Radio": 250, "Laptop": 1245,
+                "Telephone": 57, "Ipad": 810, "Washer": 2690},
+               name="Electronics")
+print(Sales)
+
+Countries = Series({"USA": "Washington DC", "Japan": "Tokyo",
+                    "South Korea": "Seoul", "Algeria": "Algiers",
+                    "Brazil": "Brasilia", "China": "Beijing",
+                    "Kenya": "Nairobi"}, name="countries")
+
+print(Countries)
