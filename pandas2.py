@@ -78,3 +78,7 @@ print(DataFrame({"Prices": [5234, 7689, 9157],
 # This is because the series are already indexed  ;
 # NaN is used to filled for missing values;
 print(DataFrame({"Names": series2, "Age": series1}))
+
+
+# form DataFrame from dictionary;
+print(DataFrame([Popl, Countries, Sales]))
