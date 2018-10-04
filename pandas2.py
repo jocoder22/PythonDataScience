@@ -86,3 +86,7 @@ print(DataFrame([Popl, Countries, Sales]))  # Not really what we want
 print(DataFrame({"Population": Popl,
                  "Countries": Countries,
                  "Electronics": Sales}))   # this is it!
+
+
+# or we can use the transpose function .T
+print(DataFrame([Popl,Countries, Sales]).T)  # works fines
