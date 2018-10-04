@@ -102,3 +102,14 @@ dpnd.append(DataFrame({"Population": Series({"Uganda": 1389, "Ghana": 1209}),
                                             "Ghana": "Accra"}),
                        "Electronics": Series({"Uganda": np.nan,
                                               "Ghana": np.nan})}))
+
+
+# using concat function; This is long and complicated;
+pd.concat([dpnd, DataFrame({"numbers": Series(np.arange(12),
+                                              index=Popl.index),
+                            "Letters": Series(["aiu", "ag", "hf", "tr",
+                                               "bsd", "srsgrf", "adf",
+                                               "opf", "uty", "dgd",
+                                               "dgd", "oert"],
+                                              index=Popl.index)})],
+          axis=1)
