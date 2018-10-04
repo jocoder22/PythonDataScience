@@ -89,4 +89,9 @@ print(DataFrame({"Population": Popl,
 
 
 # or we can use the transpose function .T
-print(DataFrame([Popl,Countries, Sales]).T)  # works fines
+print(DataFrame([Popl, Countries, Sales]).T)  # works fines
+
+
+# using the append and concat function;
+Popl.append(Series({"Uganda": 2345, "Ghana": 2309}))  # returns a new series
+print(Popl)  # return the old series, new series not permanently added
