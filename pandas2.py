@@ -113,3 +113,11 @@ pd.concat([dpnd, DataFrame({"numbers": Series(np.arange(12),
                                                "dgd", "oert"],
                                               index=Popl.index)})],
           axis=1)
+
+
+# Saving the data:
+dpnd.to_csv("mydata2.csv")
+dpnd.to_cvsc("C:/Users/okigboo/Documents/mydata2.txt")
+dpnd.to_json("C:/Users/okigboo/Documents/mydata2.json")
+dpnd.to_html("C:/Users/okigboo/Documents/mydata2.html")
+dpnd.to_pickle("C:/Users/okigboo/Documents/mydata2.npy")
