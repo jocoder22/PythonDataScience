@@ -95,3 +95,10 @@ print(DataFrame([Popl, Countries, Sales]).T)  # works fines
 # using the append and concat function;
 Popl.append(Series({"Uganda": 2345, "Ghana": 2309}))  # returns a new series
 print(Popl)  # return the old series, new series not permanently added
+
+dpnd = (DataFrame([Popl, Countries, Sales]).T)
+dpnd.append(DataFrame({"Population": Series({"Uganda": 1389, "Ghana": 1209}),
+                       "countries": Series({"Uganda": "Kampala",
+                                            "Ghana": "Accra"}),
+                       "Electronics": Series({"Uganda": np.nan,
+                                              "Ghana": np.nan})}))
