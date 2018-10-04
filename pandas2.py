@@ -116,8 +116,8 @@ pd.concat([dpnd, DataFrame({"numbers": Series(np.arange(12),
 
 
 # Saving the data:
-dpnd.to_csv("mydata2.csv")
-dpnd.to_cvsc("C:/Users/.../.../mydata2.txt")
+dpnd.to_csv("C:/Users/.../.../mydata2.csv")
+dpnd.to_csv("C:/Users/.../.../mydata2.txt")
 dpnd.to_json("C:/Users/.../.../mydata2.json")
 dpnd.to_html("C:/Users/.../.../mydata2.html")
 dpnd.to_pickle("C:/Users/.../.../mydata2.npy")
