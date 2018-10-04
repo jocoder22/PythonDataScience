@@ -81,4 +81,8 @@ print(DataFrame({"Names": series2, "Age": series1}))
 
 
 # form DataFrame from dictionary;
-print(DataFrame([Popl, Countries, Sales]))
+print(DataFrame([Popl, Countries, Sales]))  # Not really what we want
+
+print(DataFrame({"Population": Popl,
+                 "Countries": Countries,
+                 "Electronics": Sales}))   # this is it!
