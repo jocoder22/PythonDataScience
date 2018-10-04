@@ -74,4 +74,6 @@ print(DataFrame({"Prices": [5234, 7689, 9157],
                  "Product": ["Books", "Crayons"]}))  # produce error
 
 
-        
+# Using Dictionary and Series, DataFrame produce no error
+# This is because the series are already indexed  ;
+print(DataFrame({"Names": series2, "Age": series1}))
