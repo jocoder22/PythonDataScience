@@ -65,7 +65,13 @@ print(tuple1)
 print(DataFrame(tuple1, columns=["Age", "Role"]))
 
 
-
 # create dataframe from dictionary;
 print(DataFrame({"Prices": [234, 689, 157],
                  "Product": ["Pen", "Pencils", "Crayons"]}))
+
+# Arrays must all be same length
+print(DataFrame({"Prices": [5234, 7689, 9157],
+                 "Product": ["Books", "Crayons"]}))  # produce error
+
+
+        
