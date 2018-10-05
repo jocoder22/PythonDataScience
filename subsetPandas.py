@@ -53,5 +53,6 @@ dframe['Price']  # column selection
 
 dframe[['Price', 'Sales']]
 dframe.iloc[1:3, 1:2]
-
+dframe.loc['Discount':'Sales', 'CCC':'EEE']
+dframe.iloc[:, 1:3]
 
