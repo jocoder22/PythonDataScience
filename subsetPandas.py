@@ -10,3 +10,6 @@ ser100 = Series(np.arange(6),
 ser100[:2]
 ser100[['Radio', 'Monitor']]
 ser100['Radio': 'Monitor']
+ser100[ser100 > 3]
+ser100 > 3
+
