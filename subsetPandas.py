@@ -78,3 +78,19 @@ dframe2
 AAA         9      2
 DDD         8     11
 """
+
+dframe2.iloc[0,0] =12
+dframe2
+"""
+     Discount  Sales
+AAA        12      2
+DDD         8     11
+"""
+
+dframe2.iloc[:,1] = 6
+dframe2
+"""
+     Discount  Sales
+AAA        12      6
+DDD         8      6
+"""
