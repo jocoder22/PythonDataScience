@@ -62,5 +62,19 @@ dframe.iloc[:, 1:3]
 # Mixing types;
 dframe.iloc[:, 1:3].loc[['AAA', 'DDD']]  # double pass selection
 dframe2 = dframe.iloc[:, 1:3].loc[['AAA', 'DDD']].copy()
+dframe2
+"""
+     Discount  Sales
+AAA         1      2
+DDD        10     11
+"""
 
 
+# Changing values of dataframe;
+dframe2['Discount'] = Series({'AAA': 9, 'DDD': 8})
+dframe2
+"""
+     Discount  Sales
+AAA         9      2
+DDD         8     11
+"""
