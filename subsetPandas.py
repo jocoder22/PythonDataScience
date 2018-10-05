@@ -51,9 +51,16 @@ dframe.Sales  # column selection
 dframe['Sales']  # column selection
 dframe['Price']  # column selection
 
+
+# More subsetting;
 dframe[['Price', 'Sales']]
 dframe.iloc[1:4, 0:2]
 dframe.iloc[1:3, 1:2]
 dframe.loc['CCC':'EEE', 'Price':'Sales']
 dframe.iloc[:, 1:3]
+
+# Mixing types;
+dframe.iloc[:, 1:3].loc[['AAA', 'DDD']]  # double pass selection
+dframe2 = dframe.iloc[:, 1:3].loc[['AAA', 'DDD']].copy()
+
 
