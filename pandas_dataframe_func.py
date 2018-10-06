@@ -9,6 +9,8 @@ data1 = DataFrame(np.arange(24).reshape(8, 3),
 data1 - data1.loc[:,["Age","Weight"]]
 data1.mean()
 data1.std()
+data1.mean(axis='columns')
+
 
 # for standardization;
 (data1 - data1.mean())/data1.std()
@@ -23,9 +25,11 @@ myobj = {'Baby': [10, 90, 40],
          'Man': [89, 90, 78]}
 
 data2 = DataFrame(myobj)
+data2.mean
+data2.mean(axis='columns')
+
 
 np.sqrt(data1)
-
 # Mixed data type problem;
 np.sqrt(data2)  # error: all column must be numeric
 # use the select_dtypes() method to select only numeric;
@@ -52,3 +56,10 @@ geometricMean(data1)
 data1.apply(geometricMean, axis='columns')
 
 data1.applymap(lambda x: x if x > 12 else 12)
+
+
+
+
+# Function chaining;
+data1.apply(lambda x : x ** 0.5)
+data1.select_dtypes([np.number]).apply(lambda x : x ** 0.5)
