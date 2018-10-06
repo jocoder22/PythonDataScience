@@ -117,4 +117,16 @@ fser600 = Series(["Baby", "Girl", "Boy", "Woman", "Man"],
                  index=["Ba", "Gi", "Bo", "Wo", "Ma"])
 myobj = {'Baby': 10, 'Girl': 22, 'Boy': 45, 'Woman': 90, 'Man': 89}
 fser700 = Series(myobj)
+fser600.map(myobj)
 fser600.map(fser700)
+
+
+fser300.map(lambda x: x if x > 40 else 40)
+"""
+0    50
+1    40
+2    56
+3    89
+5    40
+dtype: int64
+"""
