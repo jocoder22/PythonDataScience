@@ -44,3 +44,11 @@ trunc(data1)
 trunc2(data2)  # Error, must all be of same type
 trunc2(data2.select_dtypes([np.number]))
 
+# function application;
+def geometricMean(dff):
+    return dff.prod() ** (1 / len(dff))
+
+geometricMean(data1)
+data1.apply(geometricMean, axis='columns')
+
+data1.applymap(lambda x: x if x > 12 else 12)
