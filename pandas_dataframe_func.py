@@ -25,16 +25,22 @@ myobj = {'Baby': [10, 90, 40],
 data2 = DataFrame(myobj)
 
 np.sqrt(data1)
+
+# Mixed data type problem;
 np.sqrt(data2)  # error: all column must be numeric
+# use the select_dtypes() method to select only numeric;
+np.sqrt(data2.select_dtypes([np.number]))
 
 @np.vectorize
 def trunc(x):
-    return x if x > 30 else 0
+    return x if x > 12 else 0
 
 @np.vectorize
 def trunc2(x):
-    return x if x > 12 else 0
+    return x if x > 30 else 0
 
-trunc2(data1)
-trunc(data2)  # Error, must all be of same type
+trunc(data1)
+# Mixed data type problem
+trunc2(data2)  # Error, must all be of same type
+trunc2(data2.select_dtypes([np.number]))
 
