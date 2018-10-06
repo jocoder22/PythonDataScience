@@ -107,3 +107,14 @@ fser300.max()
 fser300.idxmax()
 fser300.cumsum()
 fser200.abs()
+
+
+
+# Using python functions;
+fser300.apply(lambda x: x if x > 40 else 40)
+
+fser600 = Series(["Baby", "Girl", "Boy", "Woman", "Man"],
+                 index=["Ba", "Gi", "Bo", "Wo", "Ma"])
+myobj = {'Baby': 10, 'Girl': 22, 'Boy': 45, 'Woman': 90, 'Man': 89}
+fser700 = Series(myobj)
+fser600.map(fser700)
