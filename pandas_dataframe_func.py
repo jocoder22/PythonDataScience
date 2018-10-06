@@ -16,4 +16,25 @@ data1.sum()
 
 
 # Vectorization;
+myobj = {'Baby': [10, 90, 40],
+         'Girl': [22, 32, 25],
+         'Boy': [54, 56, 67], 
+         'Woman': ['Pen', 'Book', 'kett'],
+         'Man': [89, 90, 78]}
+
+data2 = DataFrame(myobj)
+
 np.sqrt(data1)
+np.sqrt(data2)  # error: all column must be numeric
+
+@np.vectorize
+def trunc(x):
+    return x if x > 30 else 0
+
+@np.vectorize
+def trunc2(x):
+    return x if x > 12 else 0
+
+trunc2(data1)
+trunc(data2)  # Error, must all be of same type
+
