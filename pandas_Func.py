@@ -3,7 +3,7 @@ from pandas import Series, DataFrame
 import numpy as np 
 
 fser100 = Series(np.arange(6))
-fser200 = Series([90, 34, 67, 12, 100, 79])
+fser200 = Series([90, -34, 67, 12, -100, 79])
 fser300 = Series([50, 24, 56, 89, 33],
                  index=[0, 1, 2, 3, 5])
 fser400 = Series(np.arange(5))
@@ -59,3 +59,18 @@ fser300 ** fser500
 dtype: int64
 """
 
+# Boolean operations; Compares identically index series
+fser100 > fser200
+fser400 > Series([1,1,0,2,5],index=[0,1,2,3,4])
+
+np.abs(fser200)
+"""
+0     90
+1     34
+2     67
+3     12
+4    100
+5     79
+dtype: int64
+"""
+type(np.abs(fser200))  # <class 'pandas.core.series.Series'>
