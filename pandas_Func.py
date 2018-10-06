@@ -74,3 +74,25 @@ np.abs(fser200)
 dtype: int64
 """
 type(np.abs(fser200))  # <class 'pandas.core.series.Series'>
+
+np.sqrt(np.abs(fser200))
+"""
+0     9.486833
+1     5.830952
+2     8.185353
+3     3.464102
+4    10.000000
+5     8.888194
+dtype: float64
+"""
+
+@np.vectorize
+def trunc(x):
+    return x if x > 0 else 0
+
+trunc(np.array([-1,5,6,-3,0]))
+# array([0, 5, 6, 0, 0])
+trunc(fser100)
+# array([0, 1, 2, 3, 4, 5])
+trunc(fser200)
+# array([90,  0, 67, 12,  0, 79], dtype=int64)
