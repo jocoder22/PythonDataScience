@@ -96,3 +96,14 @@ trunc(fser100)
 # array([0, 1, 2, 3, 4, 5])
 trunc(fser200)
 # array([90,  0, 67, 12,  0, 79], dtype=int64)
+trunc(fser300)
+# array([50, 24, 56, 89, 33], dtype=int64)
+# now numpy array, the index is lost
+
+# Statistics;
+fser300.mean()
+fser300.std()
+fser300.max()
+fser300.idxmax()
+fser300.cumsum()
+fser200.abs()
