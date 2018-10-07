@@ -104,8 +104,23 @@ xbar1 = mser.mean()
 mser.fillna(xbar1)
 print(mser.fillna(xbar1))
 
-mser.fillna(xbar1).mean()
+mser.mean()   
+mser.fillna(xbar1).mean()  # same value of mean
 
-mser.std()
-mser.fillna(xbar1).std()
+mser.std()  # 21.995670569671745
+mser.fillna(xbar1).std() # std went down: 19.048809486609468
 
+
+xsigma = mser.std()
+rep1 = Series(np.random.choice(mser[mser.notnull()],
+                               size=2), index=[4, 7])
+
+mser.fillna(rep1).std()  # 19.118054294305161
+
+
+# Filling missing data in DataFrame;
+data4.fillna(0)
+data4.mean()
+data4.fillna(data4.mean())
+data4.std()
+data4.fillna(data4.mean()).std()
