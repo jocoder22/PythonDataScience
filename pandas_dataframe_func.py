@@ -1,6 +1,7 @@
 import pandas as pd 
 from pandas import Series, DataFrame 
 import numpy as np 
+import random
 
 # create DataFrame;
 data1 = DataFrame(np.arange(24).reshape(8, 3),
@@ -63,3 +64,14 @@ data1.applymap(lambda x: x if x > 12 else 12)
 # Function chaining;
 data1.apply(lambda x : x ** 0.5)
 data1.select_dtypes([np.number]).apply(lambda x : x ** 0.5)
+
+
+
+# Handling missing data;
+# generate data;
+data3 = np.random.randn(44)
+data3[random.sample([i for i in range(44)], 7)] = np.nan
+data4 = DataFrame(data3.reshape(11, 4), 
+                  columns=['Age', 'Height', 'Weight', 'Grade'])
+
+print(data4)
