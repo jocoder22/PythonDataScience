@@ -75,3 +75,14 @@ data4 = DataFrame(data3.reshape(11, 4),
                   columns=['Age', 'Height', 'Weight', 'Grade'])
 
 print(data4)
+
+
+mser = Series([23, 45, 56.0, 90, np.nan, 55, 67, np.nan, 78])
+print(mser)
+
+np.isnan(data4)
+data4.isnull()
+data4.notnull()
+
+data4.dropna()
+print(mser.dropna())
