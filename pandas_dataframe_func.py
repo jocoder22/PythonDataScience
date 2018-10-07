@@ -93,3 +93,19 @@ mser2 = mser.copy()
 # to work in place (change the data permanently) 
 # use set inplace option to true
 mser2.dropna(inplace=True)
+
+
+# filling or replacing missing data
+mser3 = mser.copy()
+mser3.fillna(20)  # not done in place
+mser3.fillna(20, inplace=True)  # permanent replacement
+
+xbar1 = mser.mean()
+mser.fillna(xbar1)
+print(mser.fillna(xbar1))
+
+mser.fillna(xbar1).mean()
+
+mser.std()
+mser.fillna(xbar1).std()
+
