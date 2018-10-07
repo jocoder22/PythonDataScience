@@ -84,5 +84,12 @@ np.isnan(data4)
 data4.isnull()
 data4.notnull()
 
+# drop missing data;
 data4.dropna()
 print(mser.dropna())
+mser2 = mser.copy()
+
+# default dropna() does not work in place
+# to work in place (change the data permanently) 
+# use set inplace option to true
+mser2.dropna(inplace=True)
