@@ -1,6 +1,8 @@
 import numpy as np 
 import pandas as pd 
-from pandas import Series, DataFrame 
+import matplotlib.pyplot as plt
+from pandas import Series, DataFrame
+
 
 
 data = DataFrame(np.round(np.random.randn(7,3) *12),
@@ -29,3 +31,13 @@ data.rank() # methods for breaking ties: Average(default), max, min, first
 data.rank(method='max')
 data.rank(method='first')
 data.rank(method='min')
+
+
+
+# Plotting;
+dplot = DataFrame(np.random.randn(1000, 3).cumsum(axis=0),
+                  columns=['Price', 'Discount', 'Sales'])
+
+dplot.head()
+dplot.tail()
+dplot.shape
