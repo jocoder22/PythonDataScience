@@ -38,6 +38,8 @@ data.rank(method='min')
 seplot = Series(np.random.randn(200), columns='Debts')
 dplot = DataFrame(np.random.randn(1000, 3).cumsum(axis=0),
                   columns=['Price', 'Discount', 'Sales'])
+seplot1 = dplot.Price
+type(seplot1)  # <class 'pandas.core.series.Series'>
 
 dplot.head()
 dplot.tail()
