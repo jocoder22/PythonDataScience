@@ -7,3 +7,7 @@ data = DataFrame(np.round(np.random.randn(7,3) *12),
                  columns=['Box', 'Pen', 'Books'],
                  index=list('defcagb'))
 print(data)
+
+
+data.sort_index()
+data.sort_index(axis=1)
