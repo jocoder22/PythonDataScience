@@ -50,3 +50,5 @@ plt.show()
 
 
 # Plot dataframe;
+dplot.plot(kind='line')
+plt.show()
