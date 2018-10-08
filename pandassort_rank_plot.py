@@ -60,6 +60,8 @@ plt.show
 seplot1.plot(kind='kde')
 plt.show
 
+seplot.plot(kind='box')
+plt.show()
 
 # Plot dataframe;
 dplot.plot(kind='line')
@@ -86,5 +88,5 @@ plt.show()
 
 dplot.Price.plot.kde()
 plt.show()
-dplot.plot.kde()
+dplot.plot.kde()  # or dplot.plot(kind='kde')
 plt.show()
