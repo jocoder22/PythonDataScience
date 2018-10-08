@@ -11,9 +11,10 @@ Series(np.arange(8), index=multiindex)
 
 ser10 = Series(np.arange(8),
                index=[['AA', 'AA', 'AA', 'AA', 'CC', 'CC', 'CC', 'CC'],
-                      ['M', 'M', 'M', 'M', 'F', 'F', 'F', 'F'],
-                      [1, 2, 1, 2, 1, 2, 1, 2]]) 
+                      ['M', 'M', 'F', 'F', 'M', 'M', 'F', 'F'],
+                      [1, 2, 1, 2, 1, 2, 1, 2]])
 
-                      
-                                 
+
+
+
                 
