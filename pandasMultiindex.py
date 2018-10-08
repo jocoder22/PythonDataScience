@@ -22,6 +22,10 @@ ser10.loc[:, :, 2]
 ser10.loc['AA', :, :]
 
 
+# multiindex dataframe;
+data = DataFrame(np.random.randn(8, 3), index=multiindex,
+                 columns=['Age', 'Weight', 'Height'])
+
 
 
                 
