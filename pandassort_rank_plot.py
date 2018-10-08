@@ -49,6 +49,20 @@ dplot.shape
 # Plot series;
 plt.plot(seplot)
 plt.show()
+seplot1.plot(kind='line', ylim=(-30, 48))
+
+
+seplot1.hist()
+plt.show
+
+seplot1.plot(kind='hist')
+plt.show
+
+seplot1.plot(kind='kde')
+plt.show
+
+
+
 
 
 # Plot dataframe;
