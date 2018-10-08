@@ -68,3 +68,8 @@ plt.show
 # Plot dataframe;
 dplot.plot(kind='line')
 plt.show()
+
+dplot.plot(kind='box')
+dplot.plot(kind='scatter', x='Price', y='Sales')
+dplot.plot(kind='hexbin', x='Price', y='Sales')
+dplot.plot(kind='hexbin', x='Price', y='Sales', gridsize=25)
