@@ -47,6 +47,11 @@ mmdata = np.arange(0, 9).reshape(3, 3)
 print(mmdata)
 print(nmdata)
 
+# From series;
+ssss = DataFrame({"Pool": series1, "Legg": series2})
+ssss = DataFrame({"Pool": series1, "Legg": series2}).T
+ssss = DataFrame([series1, series2])
+
 # Form DataFrame;
 print(DataFrame(nmdata))
 

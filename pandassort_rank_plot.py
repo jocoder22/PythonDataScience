@@ -35,6 +35,7 @@ data.rank(method='min')
 
 
 # Plotting;
+seplot = Series(np.random.randn(200), columns='Debts')
 dplot = DataFrame(np.random.randn(1000, 3).cumsum(axis=0),
                   columns=['Price', 'Discount', 'Sales'])
 
