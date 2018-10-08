@@ -133,4 +133,8 @@ redata = {col: Series(np.random.choice(data4[col][data4[col].notnull()],
                       size=data4.isnull()[col].value_counts()[True]),
                       index=data4[col][data4[col].isnull()].index)
                       for col in data4}
-                      
+
+
+data4.fillna(redata)
+data4.fillna(redata).std()
+data4.fillna(redata).mean()
