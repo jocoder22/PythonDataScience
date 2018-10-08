@@ -26,6 +26,16 @@ ser10.loc['AA', :, :]
 data = DataFrame(np.random.randn(8, 3), index=multiindex,
                  columns=['Age', 'Weight', 'Height'])
 
+data.loc['AA']
+data.loc[('AA', 'Female')]
+data.loc[('AA', 'Female', 'Old')]
 
 
-                
+# Using slicer;
+data.loc[('AA', slice(None), 'Old')]
+data.loc[('AA', slice(None), 'Old'), :]
+data.loc[('AA', slice(None), 'Old'), 'Age']
+data.loc[('AA', slice(None, 'Male'), 'Old')]
+data.loc[('AA', slice(None, 'Male'), 'Old'), 'Age']
+data.loc[(slice(None), slice(None), 'Old'), 'Age']
+data.loc[(slice(None, 'BB'), slice(None, 'Male'), 'Old'), 'Age']
