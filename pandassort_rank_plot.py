@@ -1,11 +1,11 @@
-import numpy as np 
-import pandas as pd 
+import numpy as np
+import pandas as pd
+import scipy
 import matplotlib.pyplot as plt
 from pandas import Series, DataFrame
 
 
-
-data = DataFrame(np.round(np.random.randn(7,3) *12),
+data = DataFrame(np.round(np.random.randn(7, 3) * 12),
                  columns=['Box', 'Pen', 'Books'],
                  index=list('defcagb'))
 print(data)
@@ -27,11 +27,10 @@ data.sort_values(by=['Books','Box'])
 
 
 # ranking show the ranking of values if they are sorted;
-data.rank() # methods for breaking ties: Average(default), max, min, first
+data.rank()  # methods for breaking ties: Average(default), max, min, first
 data.rank(method='max')
 data.rank(method='first')
 data.rank(method='min')
-
 
 
 # Plotting;
@@ -50,7 +49,7 @@ dplot.shape
 plt.plot(seplot)
 plt.show()
 seplot1.plot(kind='line', ylim=(-30, 48))
-
+plt.show()
 
 seplot1.hist()
 plt.show
@@ -67,12 +66,25 @@ dplot.plot(kind='line')
 plt.show()
 
 dplot.plot(kind='box')
+plt.show()
 dplot.plot(kind='scatter', x='Price', y='Sales')
+plt.show()
 dplot.plot(kind='hexbin', x='Price', y='Sales')
+plt.show()
 dplot.plot(kind='hexbin', x='Price', y='Sales', gridsize=25)
+plt.show()
 
 
 dplot.std()
 dplot.std().plot(kind='bar')
+plt.show()
 pd.tools.plotting.scatter_matrix(dplot)
+plt.show()
 pd.plotting.scatter_matrix(dplot)
+plt.show()
+
+
+dplot.Price.plot.kde()
+plt.show()
+dplot.plot.kde()
+plt.show()
