@@ -136,5 +136,7 @@ redata = {col: Series(np.random.choice(data4[col][data4[col].notnull()],
 
 
 data4.fillna(redata)
+data4.std()
 data4.fillna(redata).std()
+data4.mean()
 data4.fillna(redata).mean()
