@@ -124,3 +124,13 @@ data4.mean()
 data4.fillna(data4.mean())
 data4.std()
 data4.fillna(data4.mean()).std()
+
+col = 'Age'
+data4[col]
+datacol = data4[col][data4[col].notnull()]
+
+redata = {col: Series(np.random.choice(data4[col][data4[col].notnull()],
+                      size=data4.isnull()[col].value_counts()[True]),
+                      index=data4[col][data4[col].isnull()].index)
+                      for col in data4}
+                      
