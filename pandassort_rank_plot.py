@@ -42,3 +42,11 @@ dplot = DataFrame(np.random.randn(1000, 3).cumsum(axis=0),
 dplot.head()
 dplot.tail()
 dplot.shape
+
+
+# Plot series;
+plt.plot(seplot)
+plt.show()
+
+
+# Plot dataframe;
