@@ -15,3 +15,6 @@ data.sort_index(axis=1)
 
 # sorting the columns with axis=1;
 data.sort_index(axis=1, ascending=False)
+
+data.sort_values(by='Box')
+data.sort_values(by=['Box','Pen'])
