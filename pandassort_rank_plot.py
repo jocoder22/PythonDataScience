@@ -34,7 +34,7 @@ data.rank(method='min')
 
 
 # Plotting;
-seplot = Series(np.random.randn(200), columns='Debts')
+seplot = Series(np.random.randn(200), name='Debts')
 dplot = DataFrame(np.random.randn(1000, 3).cumsum(axis=0),
                   columns=['Price', 'Discount', 'Sales'])
 seplot1 = dplot.Price
@@ -61,6 +61,9 @@ seplot1.plot(kind='kde')
 plt.show
 
 seplot.plot(kind='box')
+plt.show()
+
+seplot.plot.kde()
 plt.show()
 
 # Plot dataframe;
