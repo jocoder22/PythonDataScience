@@ -62,9 +62,6 @@ seplot1.plot(kind='kde')
 plt.show
 
 
-
-
-
 # Plot dataframe;
 dplot.plot(kind='line')
 plt.show()
@@ -73,3 +70,9 @@ dplot.plot(kind='box')
 dplot.plot(kind='scatter', x='Price', y='Sales')
 dplot.plot(kind='hexbin', x='Price', y='Sales')
 dplot.plot(kind='hexbin', x='Price', y='Sales', gridsize=25)
+
+
+dplot.std()
+dplot.std().plot(kind='bar')
+pd.tools.plotting.scatter_matrix(dplot)
+pd.plotting.scatter_matrix(dplot)
