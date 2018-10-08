@@ -22,3 +22,10 @@ data.sort_values(by='Box')
 data.sort_values(by=['Box','Pen'])
 data.sort_values(by='Books')
 data.sort_values(by=['Books','Box'])
+
+
+# ranking show the ranking of values if they are sorted;
+data.rank() # methods for breaking ties: Average(default), max, min, first
+data.rank(method='max')
+data.rank(method='first')
+data.rank(method='min')
