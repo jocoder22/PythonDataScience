@@ -11,3 +11,5 @@ print(data)
 
 data.sort_index()
 data.sort_index(axis=1)
+
+data.sort_index(axis=1, ascending=False)
