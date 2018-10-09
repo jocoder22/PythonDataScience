@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import scipy
 import matplotlib.pyplot as plt
 from pandas import Series, DataFrame
 
@@ -21,9 +20,9 @@ data.sort_index(axis=1, ascending=False)
 
 # Sorting by values;
 data.sort_values(by='Box')
-data.sort_values(by=['Box','Pen'])
+data.sort_values(by=['Box', 'Pen'])
 data.sort_values(by='Books')
-data.sort_values(by=['Books','Box'])
+data.sort_values(by=['Books', 'Box'])
 
 
 # ranking show the ranking of values if they are sorted;
@@ -34,7 +33,7 @@ data.rank(method='min')
 
 
 # Plotting;
-seplot = Series(np.random.randn(200), columns='Debts')
+seplot = Series(np.random.randn(200), name='Debts')
 dplot = DataFrame(np.random.randn(1000, 3).cumsum(axis=0),
                   columns=['Price', 'Discount', 'Sales'])
 seplot1 = dplot.Price
@@ -52,13 +51,13 @@ seplot1.plot(kind='line', ylim=(-30, 48))
 plt.show()
 
 seplot1.hist()
-plt.show
+plt.show()
 
 seplot1.plot(kind='hist')
-plt.show
+plt.show()
 
 seplot1.plot(kind='kde')
-plt.show
+plt.show()
 
 seplot.plot(kind='box')
 plt.show()
