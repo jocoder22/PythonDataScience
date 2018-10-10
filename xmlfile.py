@@ -44,3 +44,8 @@ cols = [col for col in xmlData if col not in ['Age', 'Year', 'Country', 'Region'
 index_list = xmlData[['Country', 'Year', 'Age']].values.T.tolist()
 xmlData = pd.DataFrame(xmlData[cols].values, columns=cols, index=index_list)
 
+
+
+# Reading JSON files;
+data = pd.read_json('PopPyramids.json',orient='index').T
+data = pd.read_json('PopPyramids.json')
