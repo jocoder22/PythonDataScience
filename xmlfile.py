@@ -35,3 +35,7 @@ for entry in root.entry:
 xmlfile2[1:4]
 
 f.close()
+
+# Form pandas DataFrame;
+xmlData = pd.DataFrame(xmlfile)
+xmlData.head()
