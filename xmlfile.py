@@ -39,3 +39,8 @@ f.close()
 # Form pandas DataFrame;
 xmlData = pd.DataFrame(xmlfile)
 xmlData.head()
+
+cols = [col for col in xmlData if col not in ['Age', 'Year', 'Country', 'Region']]
+index_list = xmlData[['Country', 'Year', 'Age']].values.T.tolist()
+xmlData = pd.DataFrame(xmlData[cols].values, columns=cols, index=index_list)
+
