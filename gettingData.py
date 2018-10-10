@@ -30,3 +30,9 @@ data.loc[('UnitedStates', 2013), :].head()
 data2 = pd.read_excel('PopPyramids.xlsx', sheet_name='Sheet1')
 # sheet_name starts at zero - zero indexed;
 data3 = pd.read_excel('PopPyramids.xlsx', sheet_name=0)
+
+
+# Read html file  -- must install lxml;
+data4 = pd.read_html('PopPyramids.html')  # return a list
+print(data4)
+data[0].head()
