@@ -62,6 +62,9 @@ plt.show()
 seplot.plot(kind='box')
 plt.show()
 
+seplot.plot.kde()
+plt.show()
+
 # Plot dataframe;
 dplot.plot(kind='line')
 plt.show()
@@ -79,8 +82,8 @@ plt.show()
 dplot.std()
 dplot.std().plot(kind='bar')
 plt.show()
-pd.tools.plotting.scatter_matrix(dplot)
-plt.show()
+# pd.tools.plotting.scatter_matrix(dplot)
+# plt.show()
 pd.plotting.scatter_matrix(dplot)
 plt.show()
 
