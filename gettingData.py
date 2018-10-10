@@ -26,7 +26,7 @@ data.loc[('UnitedStates', 2013), :]
 data.loc[('UnitedStates', 2013), :].head()
 
 
-
+# Read excel file -- must install xlrd and openpyxl ;
 data2 = pd.read_excel('PopPyramids.xlsx', sheet_name='Sheet1')
 # sheet_name starts at zero - zero indexed;
 data3 = pd.read_excel('PopPyramids.xlsx', sheet_name=0)
