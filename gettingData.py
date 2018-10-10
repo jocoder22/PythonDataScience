@@ -19,3 +19,7 @@ data = pd.read_csv('PopPyramids.csv',
 data.drop('Region', axis=1, inplace=True)
 data.sort_index(inplace=True)
 data.head()
+
+# Subsetting for United States;
+data.loc[('UnitedStates', 2013), :]
+data.loc[('UnitedStates', 2013), :].head()
