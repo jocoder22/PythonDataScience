@@ -20,6 +20,7 @@ mat1 = np.random.randn(5, 5)
 mat2 = np.random.randn(2, 3, 2)
 mat3 = np.random.randn(1, 13, 4)
 print(mat2.shape)  # show the dimensions of the array
+print(mat2.shape)
 
 
 # create character array
