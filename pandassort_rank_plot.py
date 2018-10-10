@@ -52,13 +52,13 @@ seplot1.plot(kind='line', ylim=(-30, 48))
 plt.show()
 
 seplot1.hist()
-plt.show
+plt.show()
 
 seplot1.plot(kind='hist')
-plt.show
+plt.show()
 
 seplot1.plot(kind='kde')
-plt.show
+plt.show()
 
 seplot.plot(kind='box')
 plt.show()
