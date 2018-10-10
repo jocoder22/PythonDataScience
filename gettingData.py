@@ -17,4 +17,4 @@ data = pd.read_csv('PopPyramids.csv',
 # drop column (Region) and sort data in place;
 data.drop('Region', axis=1, inplace=True)
 data.sort_index(inplace=True)
-pop.head()
+data.head()
