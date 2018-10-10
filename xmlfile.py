@@ -19,3 +19,19 @@ for entry in root.entry:
 
 xmlfile
 
+xmlfile[0]
+len(xmlfile) # 25080
+xmlfile[0:2]
+
+
+# Parsing to list;
+xmlfile2 = list()
+for entry in root.entry:
+    entry_fields = list()
+    for var in entry.var:
+        entry_fields.append(var.pyval)
+    xmlfile2.append(entry_fields)
+
+xmlfile2[1:4]
+
+f.close()
