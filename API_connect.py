@@ -13,3 +13,7 @@ parameters = {"key": secret_key,
               "FIPS": "*"}
 
 response = get(base_url, params=parameters)
+
+response.status.code
+response.url
+response.content
