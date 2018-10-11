@@ -6,7 +6,7 @@ from requests import get
 base_url = "http://api.census.gov/data/timeseries/idb/5year"
 # ?get=NAME,POP,CBR,CDR,E0,AREA_KM2&FIPS=NO&time=2012
 
-secret_key = "34a25d4f997aea1ccb52474dc8a7ba4fae696173"
+secret_key = "34a25d4f997aea1ccb52474dc8a7ba4"
 parameters = {"key": secret_key,
               "get": ",".join(["NAME", "POP", "CBR", "CDR", "E0", "AREA_KM2"]),
               "time": "from 2013 to 2017",
@@ -17,3 +17,6 @@ response = get(base_url, params=parameters)
 response.status.code
 response.url
 response.content
+
+resp_obj = response.json()
+type(resp_obj)  # <class 'list'>
