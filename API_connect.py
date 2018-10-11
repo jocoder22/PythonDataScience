@@ -11,20 +11,7 @@ parameters = {"key": secret_key,
               "time": "from 2013 to 2017",
               "FIPS": "*"}
 
-col = ["AREA_KM2", "ASFR15_19", "ASFR20_24", "ASFR25_29", "ASFR30_34", 
-       "ASFR40_44", "ASFR40_44", "ASFR45_49", "CBR", "E0", "E0_F", "FIPS",
-       "FMR0_4", "FMR0_4", "FMR1_4", "FPOP", "FPOP0_4"]
-
-par2 = {'key': secret_key,
-        'get': ','.join(col),
-        'time': 'from 2013 to 2017',
-        'FIPS': '*'}
-
 response = get(base_url, params=parameters)
-
-resp2 = get(base_url, params=par2)
-resp2.status.code
-
 
 response.status_code
 response.url
@@ -38,6 +25,23 @@ popdata.head()
 popdata.tail()
 
 
+col = ["NAME", "POP", "AREA_KM2", "ASFR15_19", "ASFR20_24", "ASFR25_29",
+       "ASFR40_44", "ASFR40_44", "ASFR45_49", "CBR", "E0", "E0_F", "FIPS",
+       "FMR0_4", "FMR0_4", "FMR1_4", "FPOP", "FPOP0_4"]
+
+par2 = {'key': secret_key,
+        'get': ','.join(col),
+        'time': 'from 2016 to 2018',
+        'FIPS': '*'}
+
+resp2 = get(base_url, params=par2)
+resp2.status.code
+resp2_obj = resp2.json()
+ppdata = pd.DataFrame(resp2_obj[1:], columns=resp2_obj[0])
+ppdata.tail()
+
+
+# Using url directly;
 response2 = get("https://api.census.gov/data/timeseries/idb/5year?get=NAME,POP,CBR,CDR,E0,AREA_KM2&FIPS=%2A&time=2012")
 response2 = response2.json()
 ppdata2 = pd.DataFrame(response2[1:], columns=response2[0])
