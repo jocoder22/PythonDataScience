@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 from requests import get
 
@@ -12,9 +11,13 @@ parameters = {"key": secret_key,
               "time": "from 2013 to 2017",
               "FIPS": "*"}
 
+col = ["AREA_KM2", "ASFR15_19", "ASFR20_24", "ASFR25_29", "ASFR30_34", 
+       "ASFR40_44", "ASFR40_44", "ASFR45_49", "CBR", "E0", "E0_F", "FIPS",
+       "FMR0_4", "FMR0_4", "FMR1_4", "FPOP", "FPOP0_4"]
+
 response = get(base_url, params=parameters)
 
-response.status.code
+response.status_code
 response.url
 response.content
 
