@@ -3,7 +3,7 @@ from requests import get
 
 
 base_url = "http://api.census.gov/data/timeseries/idb/5year"
-# ?get=NAME,POP,CBR,CDR,E0,AREA_KM2&FIPS=NO&time=2012
+
 
 secret_key = "34a25d4f997aea1ccb52474dc8a7ba4"
 parameters = {"key": secret_key,
@@ -27,3 +27,9 @@ type(resp_obj)  # <class 'list'>
 popdata = pd.DataFrame(resp_obj[1:], columns=resp_obj[0])
 popdata.head()
 popdata.tail()
+
+
+response2 = get("https://api.census.gov/data/timeseries/idb/5year?get=NAME,POP,CBR,CDR,E0,AREA_KM2&FIPS=%2A&time=2012")
+response2 = response2.json()
+ppdata2 = pd.DataFrame(response2[1:], columns=response2[0])
+ppdata2.tail()
