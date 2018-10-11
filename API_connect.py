@@ -15,7 +15,16 @@ col = ["AREA_KM2", "ASFR15_19", "ASFR20_24", "ASFR25_29", "ASFR30_34",
        "ASFR40_44", "ASFR40_44", "ASFR45_49", "CBR", "E0", "E0_F", "FIPS",
        "FMR0_4", "FMR0_4", "FMR1_4", "FPOP", "FPOP0_4"]
 
+par2 = {'key': secret_key,
+        'get': ','.join(col),
+        'time': 'from 2013 to 2017',
+        'FIPS': '*'}
+
 response = get(base_url, params=parameters)
+
+resp2 = get(base_url, params=par2)
+resp2.status.code
+
 
 response.status_code
 response.url
