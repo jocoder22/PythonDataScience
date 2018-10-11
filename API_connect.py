@@ -20,3 +20,7 @@ response.content
 
 resp_obj = response.json()
 type(resp_obj)  # <class 'list'>
+
+popdata = pd.DataFrame(resp_obj[1:], columns=resp_obj[0])
+popdata.head()
+popdata.tail()
