@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import scipy
 import matplotlib.pyplot as plt
 from pandas import Series, DataFrame
 
@@ -21,9 +20,9 @@ data.sort_index(axis=1, ascending=False)
 
 # Sorting by values;
 data.sort_values(by='Box')
-data.sort_values(by=['Box','Pen'])
+data.sort_values(by=['Box', 'Pen'])
 data.sort_values(by='Books')
-data.sort_values(by=['Books','Box'])
+data.sort_values(by=['Books', 'Box'])
 
 
 # ranking show the ranking of values if they are sorted;
