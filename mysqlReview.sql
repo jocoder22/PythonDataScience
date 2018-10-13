@@ -23,3 +23,15 @@ creat user 'josh'@'localhost' identified by 'kelly22';
 grant all on House.* to 'josh'@'localhost';
 
 
+-- log into mysql as new user, first quit as root user
+\q ; -- bye
+msql -ujosh -pkelly22
+show databases;  -- show the house database
+
+-- go back to root user
+\quit ; -- or exit
+mysql -uroot -ppass23
+show databases;
+
+
+
