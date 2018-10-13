@@ -43,6 +43,8 @@ describe city;  -- same a show columns from city
 -- Truncate and drop
 -- Truncate will clear data or entries in table
 -- while drop will delete the whole table
+\q ;
+
 
 
 
