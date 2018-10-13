@@ -7,3 +7,10 @@ show tables;
 show columns from city;
 show columns from country;
 
+-- connect to mysql using windows command line
+-- cd into mysql server bin
+cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+mysql -uroot -ppass23
+
+-- or msql --user=root --password=pass23
+
