@@ -14,3 +14,9 @@ mysql -uroot -ppass23
 
 -- or msql --user=root --password=pass23
 
+create database House;
+show databases;
+
+
+
+
