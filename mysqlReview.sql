@@ -4,4 +4,6 @@
 show databases;
 use world;
 show tables;
+show columns from city;
+show columns from country;
 
