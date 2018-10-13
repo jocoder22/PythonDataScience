@@ -40,6 +40,9 @@ drop database house;
 use world;
 show tables;
 describe city;  -- same a show columns from city
+-- Truncate and drop
+-- Truncate will clear data or entries in table
+-- while drop will drop the whole table
 
 
 
