@@ -33,5 +33,8 @@ show databases;  -- show the house database
 mysql -uroot -ppass23
 show databases;
 
+-- drop database house
+drop database house;
+
 
 
