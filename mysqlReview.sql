@@ -18,7 +18,7 @@ mysql -uroot -ppass23
 create database House;
 show databases;
 
--- create new user with password and grant new user all priviledges
+-- create new user with password and grant new user all priviledges for database House
 creat user 'josh'@'localhost' identified by 'kelly22';
 grant all on House.* to 'josh'@'localhost';
 
