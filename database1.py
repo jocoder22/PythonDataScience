@@ -15,7 +15,12 @@
 
 import pymysql as sql
 conn = sql.connect(host='localhost',
-                    user='root',
-                    password='pass23',
-                    db='mysql')
+                   user='root',
+                   password='pass23',
+                   db='mysql')
 cur = conn.cursor()
+
+cur.execute('show databases;')  # 8
+cur.execute('use world;')  # 0
+cur.execute('show tables;')  # 3
+
