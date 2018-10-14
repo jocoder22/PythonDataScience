@@ -24,3 +24,8 @@ cur.execute('show databases;')  # 8
 cur.execute('use world;')  # 0
 cur.execute('show tables;')  # 3
 
+
+# Close the connection
+cur.close
+conn.close
+
