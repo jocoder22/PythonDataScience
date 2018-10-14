@@ -19,3 +19,8 @@ conn.close()
 
 data = pd.read_csv('PopPyramids.csv')
 data.head()
+
+# change column name to lower case and replace space with underscore
+data.columns = pd.Index(pd.Series(data.columns).map(lambda x: x.lower().replace(" ","_")))
+data.index.rename([n.lower() for n in data.index.names], inplace=True)
+data.head()
