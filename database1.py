@@ -35,3 +35,31 @@ conn = sql.connect(host='localhost',
                    db='house')
 
 conn.close()
+
+
+
+
+# Establish connection
+conn = sql.connect(host='localhost',
+                   user='root',
+                   password='pass23',
+                   db='mysql')
+cur = conn.cursor()
+
+make_table = """CREATE TABLE 'populations'(
+                    'region' varchar(20),
+                    'year' int(4),
+                    'both_sexes_population' bigint(20),
+                    'male_population' bigint(20),
+                    'female_population' bigint(20),
+                    'percent_both_sexes' double,
+                    'percent_male' double,
+                    'percent_female' double,
+                    'sex_ratio' double,
+                    'age' char(5) NOT NULL,
+                    'country' char(28) NOT NULL,
+                    PRIMARY KEY ('country', 'year', 'age')
+                    );"""
+
+cur.execute(make_table)
+
