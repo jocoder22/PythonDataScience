@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 
-def sqL_stringgen(user, pword, host, dbase):
+def sqL_str_generator(user, pword, host, dbase):
     """
     Return string use for connection
     """
