@@ -44,6 +44,7 @@ conn = sql.connect(host='localhost',
                    user='root',
                    password='pass23',
                    db='mysql')
+
 cur = conn.cursor()
 
 make_table = """CREATE TABLE 'populations'(
