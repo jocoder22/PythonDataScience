@@ -50,6 +50,7 @@ show databases;
 -- drop database house
 drop database house;
 
+
 -- give information on table in database
 use world;
 show tables;
