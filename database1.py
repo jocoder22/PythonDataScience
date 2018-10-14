@@ -29,4 +29,7 @@ cur.execute('show tables;')  # 3
 cur.close()
 conn.close()
 
-
+conn = sql.connect(host='localhost',
+                   user='josh',
+                   password='kelly45',
+                   db='house')

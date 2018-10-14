@@ -19,9 +19,23 @@ create database House;
 show databases;
 
 -- create new user with password and grant new user all priviledges for database House
-creat user 'josh'@'localhost' identified by 'kelly22';
+CREATE USER 'josh'@'localhost' IDENTIFIED BY 'kelly22';
 grant all on House.* to 'josh'@'localhost';
 
+
+-- UPDATE mysql.user SET Password=PASSWORD('kelly2222') WHERE User='josh@localhost';
+-- UPDATE users SET pass = md5('kelly22') WHERE User='josh@localhost';
+
+-- change user password
+ALTER USER 'josh'@'localhost' IDENTIFIED BY 'kelly45';
+
+
+-- Drop user
+DROP USER 'josh'@'localhost';
+
+
+-- show users
+select host, user from mysql.user;
 
 -- log into mysql as new user, first quit as root user
 \q ; -- bye
