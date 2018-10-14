@@ -16,9 +16,9 @@ connstr = sql_str_generator("root","pass23","localhost","world")
 conn = create_engine(connstr).connect()
 
 
-
 data = pd.read_csv('PopPyramids.csv')
 data.head()
+
 
 # change column name to lower case and replace space with underscore
 data.columns = pd.Index(pd.Series(data.columns).map(lambda x: x.lower().replace(" ","_")))
@@ -29,9 +29,9 @@ data.head()
 make_table = """CREATE TABLE 'populations'(
                 'region' varchar(20),
                 'year' int(4),
-                'both_sexes_population' bigint(20),
-                'male_population' bigint(20),
-                'female_population' bigint(20),
+                'both_sexes_population' int(20),
+                'male_population' int(20),
+                'female_population' int(20),
                 'percent_both_sexes' double,
                 'percent_male' double,
                 'percent_female' double,
