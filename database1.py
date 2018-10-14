@@ -64,3 +64,5 @@ make_table = """CREATE TABLE 'populations'(
 
 cur.execute(make_table)
 
+
+

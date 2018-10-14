@@ -14,7 +14,7 @@ def sql_str_generator(user, pword, host, dbase):
 
 connstr = sql_str_generator("root","pass23","localhost","world")
 conn = create_engine(connstr).connect()
-conn.close()
+
 
 
 data = pd.read_csv('PopPyramids.csv')
@@ -39,5 +39,12 @@ make_table = """CREATE TABLE 'populations'(
                 'age' char(5) NOT NULL,
                 'country' char(28) NOT NULL,
                 PRIMARY KEY ('country', 'year', 'age')
-                );
-            """
+                );"""
+
+conn.execute(make_table)
+data.to_sql('population',con=conn, if_exists='append')
+
+
+
+
+conn.close()
