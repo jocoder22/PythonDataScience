@@ -14,6 +14,8 @@
 # cursor = db.cursor()
 
 import pymysql as sql
+import mysql.connector
+
 conn = sql.connect(host='localhost',
                    user='root',
                    password='pass23',
@@ -43,26 +45,34 @@ conn.close()
 conn = sql.connect(host='localhost',
                    user='root',
                    password='pass23',
-                   db='mysql')
+                   db='poppyramids')
 
 cur = conn.cursor()
 
-make_table = """CREATE TABLE 'populations'(
-                    'region' varchar(20),
-                    'year' int(4),
-                    'both_sexes_population' bigint(20),
-                    'male_population' bigint(20),
-                    'female_population' bigint(20),
-                    'percent_both_sexes' double,
-                    'percent_male' double,
-                    'percent_female' double,
-                    'sex_ratio' double,
-                    'age' char(5) NOT NULL,
-                    'country' char(28) NOT NULL,
+make_table = """CREATE TABLE populations(
+                    region varchar(20),
+                    year int(4),
+                    both_sexes_population bigint(20),
+                    male_population bigint(20),
+                    female_population bigint(20),
+                    percent_both_sexes double,
+                    percent_male double,
+                    percent_female double,
+                    sex_ratio double,
+                    age char(5) NOT NULL,
+                    country char(28) NOT NULL,
                     PRIMARY KEY ('country', 'year', 'age')
                     );"""
 
 cur.execute(make_table)
 
 
+conn = mysql.connector.connect(host='localhost',
+                   user='root',
+                   password='pass23')
 
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="josh",
+  password="kelly45")
