@@ -26,6 +26,7 @@ cur.execute('show tables;')  # 3
 
 
 # Close the connection
-cur.close
-conn.close
+cur.close()
+conn.close()
+
 
