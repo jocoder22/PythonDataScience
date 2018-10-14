@@ -33,3 +33,5 @@ conn = sql.connect(host='localhost',
                    user='josh',
                    password='kelly45',
                    db='house')
+
+conn.close()
