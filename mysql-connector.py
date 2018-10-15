@@ -8,6 +8,12 @@ conn = mysql.connector.connect(
 cur = conn.cursor()
 cur.execute("CREATE DATABASE mydbase44")
 cur.execute("use mydbase44")
+cur.execute("show databases")
+
+
+for x in cur:
+    print(x)
+
 
 
 
