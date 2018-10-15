@@ -13,8 +13,19 @@ conn = create_engine(connector_string('root',
 
 
 # query the database
-pop1_ = pd.read_sql('SELECT * FROM pop  WHERE country ="United States" AND year=2018;',
+pop1_ = pd.read_sql('''SELECT * FROM pop  WHERE country="United States" AND
+                    year=2018;''',
                     con=conn,
                     index_col=["country", "year", "age"])
 
-            
+pop1_
+
+
+# Add other queries
+pd.read_sql('SELECT * FROM pop;', con=conn,
+            index_col=['country', 'year', 'age'])
+
+pd.read_sql('''SELECT country, year, both_sexes_population
+            from pop
+            WHERE age = "Total" AND (year=2017 or year=2018);''',
+            con=conn, index_col=["country", "year"])
