@@ -26,6 +26,10 @@ pd.read_sql('SELECT * FROM pop;', con=conn,
             index_col=['country', 'year', 'age'])
 
 pd.read_sql('''SELECT country, year, both_sexes_population
-            from pop
+            FROM pop
             WHERE age = "Total" AND (year=2017 or year=2018);''',
             con=conn, index_col=["country", "year"])
+
+pd.read_sql('SELECT country FROM pop;', con=conn)
+
+pd.read_sql('SELECT DISTINCT country FROM pop;', con=conn)
