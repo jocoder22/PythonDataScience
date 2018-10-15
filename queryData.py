@@ -33,3 +33,6 @@ pd.read_sql('''SELECT country, year, both_sexes_population
 pd.read_sql('SELECT country FROM pop;', con=conn)
 
 pd.read_sql('SELECT DISTINCT country FROM pop;', con=conn)
+
+
+conn.close()
