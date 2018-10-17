@@ -35,3 +35,6 @@ data2.index = pd.to_datetime(data2.index)
 
 data1.head()
 data2.head()
+
+# Now do the joins
+data1.join(data2, how="inner")
