@@ -19,3 +19,9 @@ data2.head()
 plt.plot(data2)
 plt.show()
 
+# Merging datas - Inner, Outer, Right, Left
+# Pandas use join() method
+# Note the indexes - date - of both dataset are not of the same format
+data1.index   # '2015-01-02', '2015-01-05', '2015-01-06',
+data2.index   #  4/3/2017', '12/30/2016', '9/26/2016', '6/27/2016'
+
