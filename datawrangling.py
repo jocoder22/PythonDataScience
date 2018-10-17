@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-from pandas import Sereies, DataFrame
+from pandas import Series, DataFrame
 
 os.chdir("C:/Users/okigboo/Documents/Code/Code/Code/Section 2")
 
