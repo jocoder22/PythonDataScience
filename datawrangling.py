@@ -32,3 +32,6 @@ pd.to_datetime(data2.index)  # '2017-04-03', '2016-12-30', '2016-09-26',
 
 data1.index = pd.to_datetime(data1.index)
 data2.index = pd.to_datetime(data2.index)
+
+data1.head()
+data2.head()
