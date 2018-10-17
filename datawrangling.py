@@ -40,4 +40,4 @@ data2.head()
 data1.join(data2, how="inner")
 data1.join(data2, how="outer").head()
 data1.join(data2, how="left").head()
-
+data1.join(data2, how="right")
