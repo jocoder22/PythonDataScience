@@ -38,3 +38,5 @@ data2.head()
 
 # Now do the joins
 data1.join(data2, how="inner")
+data1.join(data2, how="outer").head()
+
