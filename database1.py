@@ -9,6 +9,8 @@
 #                      passwd="root",     # password
 #                      db="pythonspot") 
 
+
+
 # db = MySQLdb.connect(user="my-username", passwd="my-password", 
 #                      host="localhost", db="my-databasename")
 # cursor = db.cursor()
