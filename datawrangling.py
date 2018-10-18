@@ -57,3 +57,7 @@ data3.head()
 data3_stack = data3.stack()
 data3_stack
 
+# Unstacking
+data3_stack.unstack()
+data3_stack.unstack().head()
+
