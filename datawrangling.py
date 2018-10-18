@@ -69,3 +69,7 @@ data3_stack.unstack(level=3).head()
 data3_stack.unstack(level=4).head()  # Error! only 3 levels is possible
 
 
+
+
+# Unstacking with column names
+data3_stack.unstack(level="Age").head()
