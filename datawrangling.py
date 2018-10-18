@@ -75,3 +75,4 @@ data3_stack.unstack(level=[2, 1]).head()
 
 # Unstacking with column names
 data3_stack.unstack(level="Age").head()
+data3_stack.unstack(level=["Country", "Age"]).head()
