@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-from pandas import Series, DataFrame
+# from pandas import Series, DataFrame
 
 os.chdir("C:/Users/okigboo/Documents/Code/Code/Code/Section 2")
 
@@ -41,3 +41,6 @@ data1.join(data2, how="inner")
 data1.join(data2, how="outer").head()
 data1.join(data2, how="left").head()
 data1.join(data2, how="right")
+
+
+# Reshaping data;
