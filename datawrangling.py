@@ -44,3 +44,10 @@ data1.join(data2, how="right")
 
 
 # Reshaping data;
+# using Stacking and Unstacking 
+
+
+os.chdir("C:/Users/okigboo/Documents/Code/Code/Code/Section 1")
+data3 = pd.read_csv("PopPyramids.csv",
+                    index_col=["Country", "Year", "Age"])
+data3.drop("Region", 1, inplace=True)
