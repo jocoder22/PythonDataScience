@@ -88,3 +88,6 @@ data4.stack().unstack().head()
 # Melting and casting
 pd.melt(data4)
 data4.head()
+
+pd.melt(data4.head())
+pd.melt(data4, id_vars=['Year', 'Age', 'Country'])
