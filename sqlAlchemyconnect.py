@@ -1,9 +1,10 @@
 import os
-import pandas as pd 
+import pandas as pd
 from pandas import DataFrame
 from sqlalchemy import create_engine
 
 os.chdir("C:/Users/Jose/Documents/PythonDataScience1/Code/Code/Section 1")
+
 
 def sql_str_generator(user, pword, host, dbase):
     """
@@ -43,8 +44,6 @@ make_table = """CREATE TABLE 'populations'(
 
 conn.execute(make_table)
 data.to_sql('population',con=conn, if_exists='append')
-
-
 
 
 conn.close()
