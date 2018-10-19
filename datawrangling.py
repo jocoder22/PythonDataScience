@@ -44,7 +44,7 @@ data1.join(data2, how="right")
 
 
 # Reshaping data;
-# using Stacking and Unstacking 
+# using Stacking and Unstacking
 
 
 os.chdir("C:/Users/okigboo/Documents/Code/Code/Code/Section 1")

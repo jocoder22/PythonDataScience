@@ -13,8 +13,3 @@ cur.execute("show databases")
 
 for x in cur:
     print(x)
-
-
-
-
-
