@@ -81,3 +81,10 @@ data3_stack.unstack(level=["Country", "Age"]).head()
 # Reset Index
 data4 = data3.reset_index()
 data4.head()
+
+data4.stack().head()
+data4.stack().unstack().head()
+
+# Melting and casting
+pd.melt(data4)
+data4.head()
