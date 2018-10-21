@@ -114,4 +114,14 @@ pd.melt(data4.head(),
                     "Male Population",
                     "Female Population"])
 
+pd.pivot_table(data6, values="value", index=["Year", "Age", "Country"],
+               columns="variable")
+
+data8 = pd.melt(data4.head(),
+        value_vars=["Both Sexes Population",
+                    "Male Population",
+                    "Female Population"])
+
+
+
 
