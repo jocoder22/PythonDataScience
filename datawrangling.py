@@ -122,6 +122,5 @@ data8 = pd.melt(data4.head(),
                     "Male Population",
                     "Female Population"])
 
-
-
+data8.head()
 
