@@ -93,7 +93,13 @@ pd.melt(data4.head())
 pd.melt(data4, id_vars=['Year', 'Age', 'Country'])
 pd.melt(data4, id_vars=['Year', 'Age']).head()
 
+# Form new datasets
 data5 = pd.melt(data4.head())
 data6 = pd.melt(data4, id_vars=['Year', 'Age', 'Country'])
 data7 = pd.melt(data4, id_vars=['Year', 'Age'])
+
+data5.head()
+data6.head()
+data7.head()
+
 
