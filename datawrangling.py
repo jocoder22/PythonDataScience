@@ -92,3 +92,5 @@ data4.head()
 pd.melt(data4.head())
 pd.melt(data4, id_vars=['Year', 'Age', 'Country'])
 pd.melt(data4, id_vars=['Year', 'Age']).head()
+
+data5 = pd.melt(data4.head())
