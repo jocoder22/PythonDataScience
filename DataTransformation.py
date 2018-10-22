@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
 
 os.chdir("C:/Users/okigboo/Documents/Code/Code/Code/Section 1")
 
@@ -25,3 +26,11 @@ pyramids_data.head()
 # Bining data
 popbin = pd.cut(pyramids_data.Male, 10)
 popbin
+
+# Explore the bins
+popbin.value_counts()
+plt.hist(popbin.value_counts())
+plt.show()
+
+popbin.value_counts().plot("bar")
+plt.show()
