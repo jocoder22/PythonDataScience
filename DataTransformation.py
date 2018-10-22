@@ -40,3 +40,6 @@ popbin2 = pd.cut(pyramids_data.Male, [0, 1000, 10000, 100000,
                                       1000000, 10000000, 100000000])
 popbin2.value_counts()
 
+# Graph the bins
+popbin2.value_counts().plot("bar")
+plt.show()
