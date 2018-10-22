@@ -68,10 +68,10 @@ data3_stack.unstack()
 data3_stack.unstack().head()
 
 # Defining level of unstacking, using numeric index
-data3_stack.unstack(level=0).head()
-data3_stack.unstack(level=1).head()
-data3_stack.unstack(level=2).head()
-data3_stack.unstack(level=3).head()
+data3_stack.unstack(level=0).head()  # on country
+data3_stack.unstack(level=1).head()  # on year
+data3_stack.unstack(level=2).head()  # on age
+data3_stack.unstack(level=3).head()  # on rest of variables
 data3_stack.unstack(level=4).head()  # Error! only 3 levels is possible
 
 # Using list in levels, positional arguments
