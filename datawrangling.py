@@ -89,7 +89,11 @@ data4.stack().unstack().head()
 pd.melt(data4)
 data4.head()
 
+
+# melting only the head of  the dataset
 pd.melt(data4.head())
+
+# melting while preserving the index columns
 pd.melt(data4, id_vars=['Year', 'Age', 'Country'])
 pd.melt(data4, id_vars=['Year', 'Age']).head()
 
