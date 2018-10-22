@@ -85,6 +85,7 @@ data3_stack.unstack(level=["Country", "Age"]).head()
 
 
 # Reset Index
+# this turns the index into regular columns
 data4 = data3.reset_index()
 data4.head()
 
