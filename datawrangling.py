@@ -4,10 +4,8 @@ import matplotlib.pyplot as plt
 # from pandas import Series, DataFrame
 
 os.chdir("C:/Users/okigboo/Documents/Code/Code/Code/Section 2")
-
-
 os.chdir("C:/Users/Jose/Documents/PythonDataScience1/Code/Code/Section 2")
-"C:\Users\Jose\Documents\PythonDataScience1\Code\Code\Section 1"
+
 # Read data1
 data1 = pd.read_csv("AAPL-Close-15-17.csv", index_col="date")
 data1.head()
@@ -134,9 +132,11 @@ pd.melt(data4.head(),
                     "Female Population"])
 
 
+# using pivot table
 pd.pivot_table(data6, values="value", index=["Year", "Age", "Country"],
                columns="variable")
 
+pd.pivot_table(data6, values="value", columns="variable")
 
 data8 = pd.melt(data4.head(),
         value_vars=["Both Sexes Population",
