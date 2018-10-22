@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 os.chdir("C:/Users/okigboo/Documents/Code/Code/Code/Section 2")
 
 
+os.chdir("C:/Users/Jose/Documents/PythonDataScience1/Code/Code/Section 2")
+"C:\Users\Jose\Documents\PythonDataScience1\Code\Code\Section 1"
 # Read data1
 data1 = pd.read_csv("AAPL-Close-15-17.csv", index_col="date")
 data1.head()
@@ -52,6 +54,10 @@ data3 = pd.read_csv("PopPyramids.csv",
                     index_col=["Country", "Year", "Age"])
 data3.drop("Region", 1, inplace=True)
 data3.head()
+
+# list the columns names
+data3.columns
+data3.columns.tolist()
 
 # Stacking
 data3_stack = data3.stack()
