@@ -112,6 +112,8 @@ pd.melt(data4.head(), value_vars=["Both Sexes Population",
                                   "Male Population"
                                   "Female Population"])
 
+
+# specify both index columns and variables to melt
 pd.melt(data4.head(),
         id_vars=["Year", "Age", "Country"],
         value_vars=["Both Sexes Population",
