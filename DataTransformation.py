@@ -11,3 +11,7 @@ pyramids_data = pd.read_csv("PopPyramids.csv",
 pyramids_data.head()
 pyramids_data.columns
 pyramids_data.columns.tolist()
+
+# Drop column region
+pyramids_data.drop("Region", 1, inplace=True)
+pyramids_data.head()
