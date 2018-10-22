@@ -107,7 +107,7 @@ data6.head()
 data7.head()
 
 
-# Specify variables
+# Specify columns in the variables column
 pd.melt(data4.head(), value_vars=["Both Sexes Population",
                                   "Male Population"
                                   "Female Population"])
