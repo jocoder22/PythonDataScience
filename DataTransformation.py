@@ -92,3 +92,5 @@ pyramids_data.loc[(slice(None), "Total", 2017),
 xbar = pyramids_data.loc[pyramids_data.index.get_level_values(0) != "Total",
                          :].mean()
 
+stdev = pyramids_data.loc[pyramids_data.index.get_level_values(0) != "Total",
+                          :].std()
