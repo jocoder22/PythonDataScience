@@ -43,3 +43,6 @@ popbin2.value_counts()
 # Graph the bins
 popbin2.value_counts().plot("bar")
 plt.show()
+
+
+# Clamping dataset
