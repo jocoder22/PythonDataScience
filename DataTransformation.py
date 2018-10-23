@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+import numpy as np
+from numpy.random import randn
 import matplotlib.pyplot as plt
 
 os.chdir("C:/Users/okigboo/Documents/Code/Code/Code/Section 1")
@@ -49,3 +51,9 @@ plt.show()
 pyramids_data.Male["China"]
 china_clamp = pyramids_data.Male.clip(lower=0, upper=1000000)
 china_clamp["China"]
+
+# recoding and replacing
+vect1 = (randn(30) * 10) .round()
+vect1[[1, 2, 5, 6, 18, 20]] = 999
+rdata = pd.DataFrame(vect1.reshape(10, 3))
+rdata.replace({999: np.nan}, inplace=True)
