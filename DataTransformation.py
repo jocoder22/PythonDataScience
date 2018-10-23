@@ -68,3 +68,7 @@ sleepdata.loc[:, "Gender"].replace({"m": 0, "f": 1}, inplace=True)
 sleepdata
 
 sleepdata.mean()
+
+# Derived values
+pyramids_data["Total"] = pyramids_data.Male + pyramids_data.Female
+pyramids_data.head()
