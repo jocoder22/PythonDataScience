@@ -58,3 +58,11 @@ vect1 = (randn(30) * 10) .round()
 vect1[[1, 2, 5, 6, 18, 20]] = 999
 rdata = pd.DataFrame(vect1.reshape(10, 3))
 rdata.replace({999: np.nan}, inplace=True)
+
+
+sleepdata = pd.DataFrame({"Gender": ['m', 'f', 'f', 'f', 'm', 'f'],
+                          "Hours": [10, 12, 34, 56, 12, 34],
+                          "Weight": [123, 342, 156, 201, 256, 245]})
+sleepdata
+sleepdata.loc[:, "Gender"].replace({"m": 0, "f": 1}, inplace=True)
+sleepdata
