@@ -66,3 +66,5 @@ sleepdata = pd.DataFrame({"Gender": ['m', 'f', 'f', 'f', 'm', 'f'],
 sleepdata
 sleepdata.loc[:, "Gender"].replace({"m": 0, "f": 1}, inplace=True)
 sleepdata
+
+sleepdata.mean()
