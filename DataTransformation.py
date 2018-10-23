@@ -46,3 +46,6 @@ plt.show()
 
 
 # Clamping dataset
+pyramids_data.Male["China"]
+china_clamp = pyramids_data.Male.clip(lower=0, upper=1000000)
+china_clamp
