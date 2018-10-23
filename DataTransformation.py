@@ -79,5 +79,5 @@ pyramids_data.head()
 pyramids_data["FemalePercentage"] = pyramids_data.Female / pyramids_data.Total
 pyramids_data.head()
 
-pyramids_data["maleFemaleRatio"] = pyramids_data.Female / pyramids_data.Female
+pyramids_data["maleFemaleRatio"] = pyramids_data.Male / pyramids_data.Female
 pyramids_data.head()
