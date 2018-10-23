@@ -82,6 +82,7 @@ pyramids_data.head()
 pyramids_data["maleFemaleRatio"] = pyramids_data.Male / pyramids_data.Female
 pyramids_data.head()
 
+# Countries with high maleFemaleRatio
 pyramids_data.sort_index(inplace=True)
 pyramids_data.loc[(slice(None), "Total", 2017),
                   "maleFemaleRatio"].sort_values(ascending=False)
