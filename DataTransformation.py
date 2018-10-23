@@ -86,3 +86,9 @@ pyramids_data.head()
 pyramids_data.sort_index(inplace=True)
 pyramids_data.loc[(slice(None), "Total", 2017),
                   "maleFemaleRatio"].sort_values(ascending=False)
+
+
+# statistical and mathematical transformation
+xbar = pyramids_data.loc[pyramids_data.index.get_level_values(0) != "Total",
+                         :].mean()
+
