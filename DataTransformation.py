@@ -72,3 +72,8 @@ sleepdata.mean()
 # Derived values
 pyramids_data["Total"] = pyramids_data.Male + pyramids_data.Female
 pyramids_data.head()
+
+pyramids_data["MalePercentage"] = pyramids_data.Male / pyramids_data.Total
+pyramids_data.head()
+
+
