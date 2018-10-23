@@ -52,6 +52,7 @@ pyramids_data.Male["China"]
 china_clamp = pyramids_data.Male.clip(lower=0, upper=1000000)
 china_clamp["China"]
 
+
 # recoding and replacing
 vect1 = (randn(30) * 10) .round()
 vect1[[1, 2, 5, 6, 18, 20]] = 999
