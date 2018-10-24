@@ -100,4 +100,5 @@ pyramids_data['ScaledCenteredTotal'] = (pyramids_data['Total'] - xbar['Total']) 
 pyramids_data.loc[(slice(None), slice(None), 'Total'), 'ScaledCenteredTotal') = np.nan
 pyramids_data.loc[("Afghanistan", 2016)]
 
-pyramids_data["LogMale"] = np.log10(pyramids_data.male) + 1
+pyramids_data["LogMale"] = np.log10(pyramids_data.Male) + 1
+pyramids_data["LogFemale"] = np.log10(pyramids_data.Female) + 1
