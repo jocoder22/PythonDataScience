@@ -94,3 +94,6 @@ xbar = pyramids_data.loc[pyramids_data.index.get_level_values(0) != "Total",
 
 stdev = pyramids_data.loc[pyramids_data.index.get_level_values(0) != "Total",
                           :].std()
+
+pyramids_data['ScaledCenteredTotal'] = (pyramids_data['Total'] - xbar['Total']) / stdev['Total']
+
