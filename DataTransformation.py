@@ -103,4 +103,5 @@ pyramids_data.loc[("Afghanistan", 2016)]
 pyramids_data["LogMale"] = np.log10(pyramids_data.Male) + 1
 pyramids_data["LogFemale"] = np.log10(pyramids_data.Female) + 1
 pyramids_data["LogTotal"] = np.log10(pyramids_data.Total) + 1
+pyramids_data["LogFemalePercentage"] = np.log10(pyramids_data.FemalePercentage) + 1
 pyramids_data.head()
