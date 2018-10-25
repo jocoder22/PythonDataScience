@@ -20,3 +20,9 @@ string.punctuation
 all_join = "".join(c for c in eassy.lower() if c not in string.punctuation)
 all_join
 all_join.strip()
+eassy_split.strip()
+
+# Replace all double spaaces
+Nospace = re.sub('\s+', ' ', all_join)
+Nospace22 = Nospace.split()
+Nospace22[:10]
