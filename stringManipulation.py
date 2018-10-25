@@ -15,3 +15,8 @@ eassy_split[:10]
 
 "_".join(eassy[:10])
 "_".join(eassy_split[:10])
+
+string.punctuation
+all_join = "".join(c for c in eassy.lower() if c not in string.punctuation)
+all_join
+all_join.strip()
