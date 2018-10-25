@@ -12,3 +12,6 @@ print(eassy.lower())
 
 eassy_split = eassy.lower().split(" ")
 eassy_split[:10]
+
+"_".join(eassy[:10])
+"_".join(eassy_split[:10])
