@@ -1,6 +1,6 @@
 import os
-import numpy as np 
-import pandas as pd 
+import numpy as np
+import pandas as pd
 from pandas import Series, DataFrame
 
 import matplotlib.pyplot as plt
@@ -19,3 +19,7 @@ pyramids_data.head()
 pyramids_data_2016 = pyramids_data.loc[(slice(None), 2016), :]
 pyramids_data_2016 = pyramids_data_2016.index.droplevel("Year")
 pyramids_data_2016.head()
+
+
+pyramids_dataColumns = pyramids_data_2016.reset.index()
+pyramids_dataColumns.head()
