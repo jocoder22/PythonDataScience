@@ -14,3 +14,8 @@ pyramids_data = pyramids_data.loc[:, ['Male Population', 'Female Population']]
 pyramids_data.columns = pd.Index(["Male", "Female"])
 pyramids_data.sort(inplace=True)
 pyramids_data.head()
+
+
+pyramids_data_2016 = pyramids_data.loc[(slice(None), 2016), :]
+pyramids_data_2016 = pyramids_data_2016.index.droplevel("Year")
+pyramids_data_2016.head()
