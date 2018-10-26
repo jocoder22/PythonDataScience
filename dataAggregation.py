@@ -12,4 +12,5 @@ pyramids_data = pd.read_csv("PopPyramids.csv",
 
 pyramids_data = pyramids_data.loc[:, ['Male Population', 'Female Population']]
 pyramids_data.columns = pd.Index(["Male", "Female"])
+pyramids_data.sort(inplace=True)
 pyramids_data.head()
