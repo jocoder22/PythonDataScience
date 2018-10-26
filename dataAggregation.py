@@ -20,6 +20,6 @@ pyramids_data_2016 = pyramids_data.loc[(slice(None), 2016), :]
 pyramids_data_2016 = pyramids_data_2016.index.droplevel("Year")
 pyramids_data_2016.head()
 
-
+# remove the index, turns indexes to columns
 pyramids_dataColumns = pyramids_data_2016.reset.index()
 pyramids_dataColumns.head()
