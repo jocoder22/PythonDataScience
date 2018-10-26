@@ -23,6 +23,7 @@ pyramids_dataColumns = pyramids_data_2016.reset.index()
 pyramids_dataColumns.head()
 
 
+# Create long-form structure
 pyramids_data_long = pd.melt(pyramids_dataColumns,
                              id_vars=["Country", "Age"],
                              var_name="Sex",
