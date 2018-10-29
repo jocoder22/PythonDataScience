@@ -51,6 +51,7 @@ plt.show()
 pyramids_data.Male["China"]
 china_clamp = pyramids_data.Male.clip(lower=0, upper=1000000)
 china_clamp["China"]
+pyramids_data.head()
 
 
 # recoding and replacing
