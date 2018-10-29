@@ -86,6 +86,7 @@ pyramids_data.head()
 pyramids_data.sort_index(inplace=True)
 pyramids_data.loc[(slice(None), "Total", 2017),
                   "maleFemaleRatio"].sort_values(ascending=False)
+pyramids_data.head()
 
 
 # statistical and mathematical transformation
