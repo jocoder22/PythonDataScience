@@ -24,3 +24,9 @@ pyramids_data16.head()
 # store data in columns
 ppcolumns = pyramids_data16.reset_index()
 ppcolumns.head()
+
+# go long form
+pp16long = pd.melt(ppcolumns, id_vars=["Country", "Age"],
+                              value_name="Population",
+                              var_name="Sex")
+pp16long.head()
