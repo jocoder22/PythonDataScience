@@ -99,7 +99,7 @@ stdev = pyramids_data.loc[pyramids_data.index.get_level_values(0) != "Total",
 
 pyramids_data['ScaledCenteredTotal'] = (pyramids_data['Total'] - xbar['Total']) / stdev['Total']
 
-pyramids_data.loc[(slice(None), slice(None), 'Total'), 'ScaledCenteredTotal') = np.nan
+pyramids_data.loc[(slice(None), slice(None), 'Total'), 'ScaledCenteredTotal'] = np.nan
 pyramids_data.loc[("Afghanistan", 2016)]
 pyramids_data.head()
 
