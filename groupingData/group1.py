@@ -49,7 +49,6 @@ agesexgroup
 sexgroup.groups
 agegroup.groups
 
-
 # summarise groups
 sexgroup.sum()
 countrygroup.sum().sort_values("Population", ascending=False)
