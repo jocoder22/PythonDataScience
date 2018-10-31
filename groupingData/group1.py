@@ -42,3 +42,9 @@ agegroup
 countrygroup = pp16long.groupby("Country")
 sexgroup = pp16long.groupby("Sex")
 agesexgroup = pp16long.groupby(["Age", "Country"])
+agegroup
+agesexgroup
+
+# Look at the groups
+sexgroup.groups
+agegroup.groups
