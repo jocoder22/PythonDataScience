@@ -33,3 +33,8 @@ pp16long = pd.melt(ppcolumns, id_vars=["Country", "Age"],
                               value_name="Population",
                               var_name="Sex")
 pp16long.head()
+
+
+# creating groups
+agegroup = pp16long.groupby("Age")
+agegroup
