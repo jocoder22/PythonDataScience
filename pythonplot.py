@@ -42,7 +42,7 @@ plt.scatter(x, y)
 plt.xscale('log')
 
 plt.xlabel(label1)
-plt.ylable(label2)
+plt.ylabel(label2)
 plt.title(title)
 
 plt.show()
