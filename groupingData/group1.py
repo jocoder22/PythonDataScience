@@ -64,6 +64,7 @@ agesexgroup.sum()
 yeargroup = pyramids_data.groupby(level="Year")
 yeargroup.sum()
 
+
 # get Yearly population
 yeargroup.sum().sum(axis=1)
 yeargroup.sum().sum(axis=1).plot()
@@ -72,3 +73,14 @@ plt.show()
 
 yearcountrygroup = pyramids_data.groupby(level=["Year", "Country"])
 yearcountrygroup.sum()
+yearcountrygroup.sum().sum(axis=1)
+
+# Yearly populaiton of USA
+yearcountrygroup.sum().sum(axis=1).loc[:, "UnitedStates"]
+
+# iterate over sexgroup
+for name, data in sexgroup:
+    print(name)
+    print(data.head())
+
+
