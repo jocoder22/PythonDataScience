@@ -54,3 +54,7 @@ sexgroup.sum()
 countrygroup.sum().sort_values("Population", ascending=False)
 agegroup.sum()
 agesexgroup.sum()
+
+
+yeargroup = pyramids_data.groupby(level="Year")
+yeargroup.sum()
