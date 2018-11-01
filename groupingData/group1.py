@@ -56,5 +56,12 @@ agegroup.sum()
 agesexgroup.sum()
 
 
+# Group using index
 yeargroup = pyramids_data.groupby(level="Year")
 yeargroup.sum()
+
+# get Yearly population
+yeargroup.sum().sum(axis=1)
+yeargroup.sum().sum(axis=1).plot()
+plt.plot(yeargroup.sum().sum(axis=1))
+plt.show()
