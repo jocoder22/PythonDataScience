@@ -69,3 +69,6 @@ yeargroup.sum().sum(axis=1)
 yeargroup.sum().sum(axis=1).plot()
 plt.plot(yeargroup.sum().sum(axis=1))
 plt.show()
+
+yearcountrygroup = pyramids_data.groupby(level=["Year", "Country"])
+yearcountrygroup.sum()
