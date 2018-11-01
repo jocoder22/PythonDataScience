@@ -49,9 +49,13 @@ agesexgroup
 sexgroup.groups
 agegroup.groups
 
-# summarise groups
+# show populaiton based on gender
 sexgroup.sum()
+
+# show coutry population, descending order
 countrygroup.sum().sort_values("Population", ascending=False)
+
+# show total population based on agegroup
 agegroup.sum()
 agesexgroup.sum()
 
