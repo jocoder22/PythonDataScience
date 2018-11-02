@@ -40,5 +40,7 @@ countrygroup16.groups
 yeargroup.sum()
 
 
+# calculate summary statistics
 agegroup16.sum()
+agegroup16.mean()
 
