@@ -26,6 +26,7 @@ data2016 = pyramids_data.loc[pyramids_data.Year == 2016].drop("Year", axis=1)
 yeargroup = pyramids_data.groupby("Year")
 cyagroup = pyramids_data.groupby(["Country", "Year", "Age"])
 
+# Form groups
 agegroup16 = data2016.groupby("Age")
 countrygroup16 = data2016.groupby("Country")
 sexgroup16 = data2016.groupby("Sex")
