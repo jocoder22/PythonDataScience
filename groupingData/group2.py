@@ -59,3 +59,12 @@ countrygroup16.quantile(0.9)
 # Using aggregrage() method or the agg()
 countrygroup16.agg(np.sum)
 countrygroup16.agg([np.sum, np.mean, np.std])
+myfunc = lambda x: np.percentile(x, 75) - np.percentile(x, 8.25)
+myfunc(np.array([1, 2, 3, 4, 5, 6, 7, 8]))
+
+sexgroup16.agg(myfunc)
+myfunc.__name__
+
+
+sexgroup16.agg([np.sum, myfunc])
+sexgroup16.agg((("Total", np.sum), "IQR", myfunc))
