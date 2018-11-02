@@ -1,13 +1,13 @@
 import os
 import pandas as pd
-import numpy as np
 from numpy.random import randn
 import matplotlib.pyplot as plt
 
 
 os.chdir("C:/Users/Jose/Documents/PythonDataScience1/Code/Code/Section 1")
 pyramids_data = pd.read_csv("PopPyramids.csv")
-pyramids_data = pyramids_data.loc[:, ["Year", "Country", "Age", "Male Population",
+pyramids_data = pyramids_data.loc[:, ["Year", "Country", "Age",
+                                      "Male Population",
                                       "Female Population"]]
 
 pyramids_data.columns = pd.Index(["Year", "Country", "Age", "Male", "Female"])
@@ -45,3 +45,8 @@ agegroup16.sum()
 agegroup16.mean()
 agegroup16.std()
 agegroup16.describe()
+
+
+sexgroup16.sum()
+sexgroup16.mean()
+sexgroup16.describe()
