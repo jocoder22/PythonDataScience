@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import pandas as pd
 from numpy.random import randn
 import matplotlib.pyplot as plt
@@ -53,3 +54,8 @@ sexgroup16.describe()
 
 
 countrygroup16.quantile(0.9)
+
+
+# Using aggregrage() method or the agg()
+countrygroup16.agg(np.sum)
+countrygroup16.agg([np.sum, np.mean, np.std])
