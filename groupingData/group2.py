@@ -29,3 +29,5 @@ cyagroup = pyramids_data.groupby(["Country", "Year", "Age"])
 agegroup16 = data2016.groupby("Age")
 countrygroup16 = data2016.groupby("Country")
 sexgroup16 = data2016.groupby("Sex")
+
+sexgroup16.groups
