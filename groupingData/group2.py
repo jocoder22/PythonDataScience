@@ -34,3 +34,11 @@ sexgroup16 = data2016.groupby("Sex")
 sexgroup16.groups
 agegroup16.groups
 countrygroup16.groups
+
+
+# Group-level Calculations
+yeargroup.sum()
+
+
+agegroup16.sum()
+
