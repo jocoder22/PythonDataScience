@@ -50,3 +50,6 @@ agegroup16.describe()
 sexgroup16.sum()
 sexgroup16.mean()
 sexgroup16.describe()
+
+
+countrygroup16.quantile(0.9)
