@@ -18,3 +18,11 @@ pyramids_data = pd.melt(pyramids_data, id_vars=["Year", "Country", "Age"],
 
 pyramids_data.head(20)
 pyramids_data.tail(29)
+
+
+# Select 2016 data
+data2016 = pyramids_data.loc[pyramids_data.Year == 2016].drop("Year", axis=1)
+
+yeargroup = pyramids_data.groupby("Year")
+
+agegroup16 = data2016.groupby("Age")
