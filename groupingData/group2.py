@@ -43,4 +43,5 @@ yeargroup.sum()
 # calculate summary statistics
 agegroup16.sum()
 agegroup16.mean()
-
+agegroup16.std()
+agegroup16.describe()
