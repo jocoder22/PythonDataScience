@@ -4,8 +4,7 @@ import numpy as np
 from numpy.random import randn
 import matplotlib.pyplot as plt
 
-# C:\Users\Jose\Documents\PythonDataScience1\Code\Code\Section 1
-# C:\Users\Jose\Documents\PythonDataScience1\Code\Code\Section 1
+
 os.chdir("C:/Users/Jose/Documents/PythonDataScience1/Code/Code/Section 1")
 pyramids_data = pd.read_csv("PopPyramids.csv")
 pyramids_data = pyramids_data.loc[:, ["Year", "Country", "Age", "Male Population",
