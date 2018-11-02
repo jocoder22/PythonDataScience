@@ -10,3 +10,6 @@ pyramids_data = pyramids_data.loc[:, ["Year", "Country", "Age", "Male Population
                                    "Female Population"]]
 pyramids_data.columns = pd.Index(["Year", "Country", "Age", "Male", "Female"])
 pyramids_data = pyramids_data.loc[pyramids_data.Age != "Total"]
+pyramids_data = pd.melt(pyramids_data, id_vars=["Year", "Country", "Age"],
+                        value_name="Population", var_name="Sex")
+pyramids_data.head()
