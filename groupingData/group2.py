@@ -30,6 +30,7 @@ agegroup16 = data2016.groupby("Age")
 countrygroup16 = data2016.groupby("Country")
 sexgroup16 = data2016.groupby("Sex")
 
+
 # look at the groups
 sexgroup16.groups
 agegroup16.groups
