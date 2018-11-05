@@ -56,6 +56,9 @@ iStd2 = irisStd.reset_index()
 irisjoin = irisdata.join(iStd2, rsuffix='_std')
 irisjoin.head()
 
+
+# Join the dataset
 irisStd2 = irisfillna[['sepal_length', 'sepal_width', 'petal_length', 
                        'petal_width']].apply(gstandard)
+irisjoin2 = irisdata.join(irisStd2, rsuffix='_Standandized')
 
