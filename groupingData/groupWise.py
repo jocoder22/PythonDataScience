@@ -9,3 +9,5 @@ irisdata = pd.read_csv("iris.csv")
 # Explore dataset
 irisdata.head()
 irisdata.tail()
+irisdata.shape
+irisdata.columns
