@@ -43,3 +43,5 @@ gmean = lambda x: x.fillna(x.mean())
 irisfillna = irisgroup.apply(gmean)
 irisfillna.head()
 irisfillna.tail()
+
+# apply standardization
