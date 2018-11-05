@@ -23,3 +23,7 @@ fillingdata[:10, :]
 pdata = pd.DataFrame(fillingdata, index=irisdata.index, columns=irisdata.columns)
 pdata.head()
 
+# apply groupwise transformation
+iriscopy = irisdata.copy()
+iriscopy[fillingdata] = np.nan
+iriscopy.head()
