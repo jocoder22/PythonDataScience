@@ -79,5 +79,10 @@ irisdata = irisdata.join(irisStd2, rsuffix='_Standandized')
 # apply standardization to entire columns without regard to group
 # first drop species
 drop_species = irisdata.drop(columns='species')
+# drop_species = irisdata.drop('species', axis=1)
 
-drop_sepcies.apply(gstandard)
+
+# apply standardization
+iris_stand = drop_species.apply(gstandard)
+iris_stand.head()
+iris_stand.tail()
