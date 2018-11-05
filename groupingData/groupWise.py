@@ -18,3 +18,8 @@ fillingdata[np.random.choice(np.array(150 * 5), size=150, replace=False)] = True
 fillingdata = fillingdata.reshape(150, 5)
 fillingdata[:, 4] = False
 fillingdata[:10, :]
+
+# convert to dataFrame
+pdata = pd.DataFrame(fillingdata, index=irisdata.index, columns=irisdata.columns)
+pdata.head()
+
