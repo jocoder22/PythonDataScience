@@ -27,3 +27,7 @@ pdata.head()
 iriscopy = irisdata.copy()
 iriscopy[fillingdata] = np.nan
 iriscopy.head()
+
+iriscopy2 = irisdata.copy()
+iriscopy2[pdata] = np.nan
+iriscopy2.head()
