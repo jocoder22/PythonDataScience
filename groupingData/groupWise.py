@@ -46,7 +46,7 @@ irisfillna.tail()
 
 
 
-# apply standardization
+# apply standardization to entire columns
 # first split the dataset
 stdgroup = irisdata.groupby('species')
 stdgroup.groups
@@ -55,6 +55,9 @@ stdgroup.groups
 gstandard = lambda x: (x - x.mean()) / x.std()
 irisStd = irisfillna.loc[:, 'sepal_length':'petal_width'].apply(gstandard)
 irisStd.head()
+
+irisStd2 = stdgroup.apply(gstandard)
+stdgroup.head()
 
 
 # Remove the index
@@ -66,5 +69,5 @@ irisjoin.head()
 # Join the dataset
 irisStd2 = stdgroup[['sepal_length', 'sepal_width', 'petal_length', 
                        'petal_width']].apply(gstandard)
-irisjoin2 = irisdata.join(irisStd2, rsuffix='_Standandized')
+irisdata = irisdata.join(irisStd2, rsuffix='_Standandized')
 
