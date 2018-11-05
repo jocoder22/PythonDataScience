@@ -45,3 +45,4 @@ irisfillna.head()
 irisfillna.tail()
 
 # apply standardization
+gstandard = lambda x: (x - x.mean()) / x.std()
