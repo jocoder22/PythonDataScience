@@ -31,3 +31,8 @@ iriscopy.head()
 iriscopy2 = irisdata.copy()
 iriscopy2[pdata] = np.nan
 iriscopy2.head()
+
+# group the dataset according to species
+irisgroup = iriscopy.groupby('species')
+irisgroup.head()
+irisgroup.groups
