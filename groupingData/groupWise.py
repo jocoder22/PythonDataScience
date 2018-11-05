@@ -44,5 +44,7 @@ irisfillna = irisgroup.apply(gmean)
 irisfillna.head()
 irisfillna.tail()
 
+
 # apply standardization
 gstandard = lambda x: (x - x.mean()) / x.std()
+irisStd = irisgroup.loc[:,'sepal_length':'petal_width'].apply(gstandard)
