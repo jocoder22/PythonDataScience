@@ -11,3 +11,10 @@ irisdata.head()
 irisdata.tail()
 irisdata.shape
 irisdata.columns
+
+# replace missing
+fillingdata = np.array([False] * (150 * 5))
+fillingdata[np.random.choice(np.array(150 * 5), size=150, replace=False)] = True
+fillingdata = fillingdata.reshape(150, 5)
+fillingdata[:, 4] = False
+fillingdata[:10, :]
