@@ -36,3 +36,10 @@ iriscopy2.head()
 irisgroup = iriscopy.groupby('species')
 irisgroup.head()
 irisgroup.groups
+iriscopy.mean()
+
+# generate group means for each column
+gmean = lambda x: x.fillna(x.mean())
+irisfillna = irisgroup.apply(gmean)
+irisfillna.head()
+irisfillna.tail()
