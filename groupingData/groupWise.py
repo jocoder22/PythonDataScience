@@ -47,4 +47,15 @@ irisfillna.tail()
 
 # apply standardization
 gstandard = lambda x: (x - x.mean()) / x.std()
-irisStd = irisfillna.loc[:,'sepal_length':'petal_width'].apply(gstandard)
+irisStd = irisfillna.loc[:, 'sepal_length':'petal_width'].apply(gstandard)
+irisStd.head()
+
+
+# Remove the index
+iStd2 = irisStd.reset_index()
+irisjoin = irisdata.join(iStd2, rsuffix='_std')
+irisjoin.head()
+
+irisStd2 = irisfillna[['sepal_length', 'sepal_width', 'petal_length', 
+                       'petal_width']].apply(gstandard)
+
