@@ -26,4 +26,13 @@ Voters.AgeGroup.replace({"[18, 30)":"[18, 50)",
                          "[50, 60)":"[50, 90)",
                          "[60, 70)":"[50, 90)",
                          "[70, 80)":"[50, 90)",
-                         "[80, 90)":"[50, 90)"}}, inplace=True)
+                         "[80, 90)":"[50, 90)"}, inplace=True)
+
+# Categorize dataset
+Voters.Education = pd.Categorical(Voters.Education)
+Voters.AgeGroup = pd.Categorical(Voters.AgeGroup)
+Voters.VotedFor = pd.Categorical(Voters.VotedFor)
+
+# More exploration
+Voters.dtypes
+Voters.head()
