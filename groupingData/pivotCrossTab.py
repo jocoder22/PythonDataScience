@@ -48,3 +48,13 @@ UspopData.columns = pd.Index(["Year", "Age", "Male", "Female"])
 UspopData.head()
 UspopData.shape
 UspopData.dtypes
+
+# turn to long-format
+Uspoplong = pd.melt(UspopData, id_vars=["Year", "Age"],
+                               var_name="Sex",
+                               value_name="Population")
+
+Uspoplong.head()
+Uspoplong.shape
+Uspoplong.dtypes
+Uspoplong.tail()
