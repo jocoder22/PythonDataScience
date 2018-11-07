@@ -36,3 +36,10 @@ Voters.VotedFor = pd.Categorical(Voters.VotedFor)
 # More exploration
 Voters.dtypes
 Voters.head()
+
+# Read in second dataset
+pyramids_data = pd.read_csv("PopPyramids.csv")
+UspopData = pyramids_data.loc[(pyramids_data.Country == "UnitedStates") & 
+                              (pyramids_data.Age != "Total"), 
+                              ["Year", "Age", "Male Population", "Female Population"]]
+                              
