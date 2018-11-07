@@ -85,11 +85,15 @@ VotersD
 
 # Apply pivot_table()
 VotersD.pivot_table(index="Education", columns="AgeGroup", values="Clinton (D)", aggfunc="sum")
+VotersD.pivot_table(index="Education", columns="AgeGroup", values="Trump (R)", aggfunc="sum")
+VotersD.pivot_table(index="Education", columns="AgeGroup", values="Third Party (LG)", aggfunc="sum")
 
 # Mean here give proportion
 VotersD.pivot_table(index="Education", columns="AgeGroup", values="Clinton (D)", aggfunc="mean")
 VotersD.pivot_table(index="Education", columns="AgeGroup", values="Trump (R)", aggfunc="mean")
+VotersD.pivot_table(index="Education", columns="AgeGroup", values="Third Party (LG)", aggfunc="mean")
 
 # more on pivot_table
 VotersD.pivot_table(index="Education", columns="AgeGroup", values="Registered", aggfunc="sum")
 VotersD.pivot_table(index="Education", columns="AgeGroup", values="Registered", aggfunc="mean")
+
