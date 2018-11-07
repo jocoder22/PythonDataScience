@@ -79,3 +79,6 @@ Uspoplong.pivot_table(index="Sex", columns="Year", values="Population", aggfunc=
 pd.get_dummies(Voters.VotedFor).head()
 VotersD = Voters.join(pd.get_dummies(Voters.VotedFor))
 VotersD.head()
+
+VotersD["Third Party (LG)"] = VotersD["Johnson (L)"] + VotersD["Stein (G)"]
+VotersD
