@@ -21,3 +21,9 @@ Voters.Education.replace({
         "Bachelors":"Bachelors or More"  
         "Graduate":"Bachelors or More"}, inplace=True)
 
+Voters.AgeGroup.replace({"[18, 30)":"[18, 50)"
+                         "[30, 40)":"[18, 50)"
+                         "[40, 50)":"[18, 50)"
+                         "[50, 60)":"[18, 50)"
+                         "[60, 70)":"[18, 50)"
+                         "[70, 80)":"[18, 50)"}, inplace=True)
