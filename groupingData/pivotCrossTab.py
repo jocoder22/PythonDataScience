@@ -58,3 +58,12 @@ Uspoplong.head()
 Uspoplong.shape
 Uspoplong.dtypes
 Uspoplong.tail()
+
+# CrossTabulation
+pd.crosstab(Voters.Education, Voters.VotedFor)
+pd.crosstab(Voters.Education, Voters.VotedFor, margins=True)
+pd.crosstab(Voters.AgeGroup, Voters.Education)
+pd.crosstab(Voters.AgeGroup, Voters.VotedFor, margins=True)
+
+pd.crosstab([Voters.AgeGroup, Voters.Education], Voters.Registered)
+pd.crosstab([Voters.AgeGroup, Voters.Education], Voters.Registered, margins=True)
