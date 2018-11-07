@@ -11,3 +11,13 @@ Voters.shape
 Voters.columns
 Voters.head()
 Voters.tail()
+
+
+# post processing
+Voters.Education.replace({
+        "Less than high school":"No Bachelors"
+        "High school":"No Bachelors"
+        "Associate":"No Bachelors"
+        "Bachelors":"Bachelors or More"  
+        "Graduate":"Bachelors or More"}, inplace=True)
+
