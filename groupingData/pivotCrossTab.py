@@ -90,5 +90,6 @@ VotersD.pivot_table(index="Education", columns="AgeGroup", values="Clinton (D)",
 VotersD.pivot_table(index="Education", columns="AgeGroup", values="Clinton (D)", aggfunc="mean")
 VotersD.pivot_table(index="Education", columns="AgeGroup", values="Trump (R)", aggfunc="mean")
 
+# more on pivot_table
 VotersD.pivot_table(index="Education", columns="AgeGroup", values="Registered", aggfunc="sum")
 VotersD.pivot_table(index="Education", columns="AgeGroup", values="Registered", aggfunc="mean")
