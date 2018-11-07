@@ -59,6 +59,7 @@ Uspoplong.shape
 Uspoplong.dtypes
 Uspoplong.tail()
 
+
 # CrossTabulation
 pd.crosstab(Voters.Education, Voters.VotedFor)
 pd.crosstab(Voters.Education, Voters.VotedFor, margins=True)
@@ -68,6 +69,13 @@ pd.crosstab(Voters.AgeGroup, Voters.VotedFor, margins=True)
 pd.crosstab([Voters.AgeGroup, Voters.Education], Voters.Registered)
 pd.crosstab([Voters.AgeGroup, Voters.Education], Voters.Registered, margins=True)
 
+
 # Pivot tables: dataset must be in long-format
 Uspoplong.pivot_table(index="Age", columns="Year", values="Population", aggfunc="sum")
 Uspoplong.pivot_table(index="Sex", columns="Year", values="Population", aggfunc="sum")
+
+
+# create dummy variables
+pd.get_dummies(Voters.VotedFor).head()
+VotersD = Voters.join(pd.get_dummies(Voters.VotedFor))
+VotersD.head()
