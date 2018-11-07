@@ -4,4 +4,10 @@ import pandas as pd
 
 
 os.chdir("C:/Users/Jose/Documents/PythonDataScience1/Code/Code/Section 3")
-irisdata = pd.read_csv("iris.csv")
+Voters = pd.read_csv("VoterData.csv")
+
+# explore dataset
+Voters.shape
+Voters.columns
+Voters.head()
+Voters.tail()
