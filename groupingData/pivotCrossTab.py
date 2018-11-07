@@ -42,4 +42,9 @@ pyramids_data = pd.read_csv("PopPyramids.csv")
 UspopData = pyramids_data.loc[(pyramids_data.Country == "UnitedStates") & 
                               (pyramids_data.Age != "Total"), 
                               ["Year", "Age", "Male Population", "Female Population"]]
-UspopData.columns = pd.Index(["Year", "Age", "Male", "Female"])                            
+UspopData.columns = pd.Index(["Year", "Age", "Male", "Female"]) 
+
+# explore dataset
+UspopData.head()
+UspopData.shape
+UspopData.dtypes
