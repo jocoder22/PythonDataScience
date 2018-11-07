@@ -14,17 +14,16 @@ Voters.tail()
 
 
 # post processing
-Voters.Education.replace({
-        "Less than high school":"No Bachelors"
-        "High school":"No Bachelors"
-        "Associate":"No Bachelors"
-        "Bachelors":"Bachelors or More"  
-        "Graduate":"Bachelors or More"}, inplace=True)
+Voters.Education.replace({"Less than high school":"No Bachelors",
+                          "High school":"No Bachelors",
+                          "Associate":"No Bachelors",
+                          "Bachelors":"Bachelors or More",
+                          "Graduate":"Bachelors or More"}, inplace=True)
 
-Voters.AgeGroup.replace({"[18, 30)":"[18, 50)"
-                         "[30, 40)":"[18, 50)"
-                         "[40, 50)":"[18, 50)"
-                         "[50, 60)":"[50, 90)"
-                         "[60, 70)":"[50, 90)"
-                         "[70, 80)":"[50, 90)"
+Voters.AgeGroup.replace({"[18, 30)":"[18, 50)",
+                         "[30, 40)":"[18, 50)",
+                         "[40, 50)":"[18, 50)",
+                         "[50, 60)":"[50, 90)",
+                         "[60, 70)":"[50, 90)",
+                         "[70, 80)":"[50, 90)",
                          "[80, 90)":"[50, 90)"}}, inplace=True)
