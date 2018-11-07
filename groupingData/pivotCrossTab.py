@@ -82,3 +82,9 @@ VotersD.head()
 
 VotersD["Third Party (LG)"] = VotersD["Johnson (L)"] + VotersD["Stein (G)"]
 VotersD
+
+# Apply pivot_table()
+VotersD.pivot_table(index="Education", columns="AgeGroup", values="Clinton (D)", aggfunc="sum")
+
+# Mean here give proportion
+VotersD.pivot_table(index="Education", columns="AgeGroup", values="Clinton (D)", aggfunc="mean")
