@@ -10,4 +10,7 @@ header = {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q
           "Connection": "keep-alive",
           "Referrer": "https://www.goggle.com/",
           "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux i686, rv:54.8) Gecko/20180101 Firefox/54.0"}
-          
+
+# page = session.get(url, headers=header).text
+page = session.get(url).text
+print(page)
