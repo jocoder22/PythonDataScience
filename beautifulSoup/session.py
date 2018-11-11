@@ -62,8 +62,10 @@ for child in nobelist.table.findAll("tr"):  # iterate throught the rows of the t
     print("\nNode: Number %s \n-----" % count)
     print("Name: %s \n-----" % child.name)
     print(child)
-    for i in range(3): print()
+    for i in range(4): print()
     count += 1
 
 nobelist.table.tr
 nobelist.table.findAll("td")
+nobelist.table.parent
+
