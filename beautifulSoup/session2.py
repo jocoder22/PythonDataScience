@@ -9,6 +9,12 @@ url = "https://en.wikipedia.org/wiki/List_of_Nobel_laureates"
 
 page = session.get(url).text
 
+
 # make a BeautifulSoup object
 nobelist = Bs(page)
-nobeltable = nobelist.findAll("table", {"class":['wikitable', 'sortable']})
+nobeltable = nobelist.find("table", {"class":['wikitable', 'sortable']})
+
+tabledata = nobeltable.findAll("td")
+
+for data in tabledata:
+    print(data.a)
