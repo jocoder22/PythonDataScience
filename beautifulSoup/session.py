@@ -18,3 +18,15 @@ print(page)
 nobelist = Bs(page)
 nobelist.find("a")
 nobelist.find("div")
+
+# specific links
+nobelist.find_all("a", {"class" : "internal"})
+nobelist.find_all("a", {"class" : "internal"})[0].attrs["href"]
+nobelist.find_all("a", {"class" : "internal"})[1].attrs["href"]
+nobelist.find_all("a", {"class" : "internal"})[1].attrs["title"]
+
+nobelist.find("h1")
+nobelist.find("h1").contents
+
+
+
