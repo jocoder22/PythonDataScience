@@ -64,3 +64,6 @@ for name, link in links.items():
         except ValueError:
             pass
 
+datadict
+Nobeltable = DataFrame(datadict)
+Nobeltable
