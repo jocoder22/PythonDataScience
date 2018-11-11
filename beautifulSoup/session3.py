@@ -38,11 +38,28 @@ baseurl = "https://en.wikipedia.org"
 baseurl + links['William Nordhaus']  # 'https://en.wikipedia.org/wiki/William_Nordhaus'
 
 
+# scrap linked webpage
 winnerpage = session.get(baseurl + links['William Nordhaus']).text
 winnerObj = Bs(winnerpage)
 winnerObj.find("table", {"class": ["infobox", "biography", "vcard"]})
 winnerObj.find("span", {"class": "bday"})
 
-
+# Extract the needed info: birthday
 datetime.strptime(winnerObj.find("span", {"class": "bday"}).contents[0], "%Y-%m-%d")
 # datetime.datetime(1941, 5, 31, 0, 0)
+
+datadict = dict()
+for name, link in links.items():
+    sleep(10) # wait for ten seconds between pages
+    print("Fetching: " + name)
+    winnerpg = session.get(baseurl + links[name]).text
+    winnerObj = Bs(winnerpg)
+    winnerbdate = winnerObj.find("span", {"class": "bday"})
+    if winnerbdate != None:
+        try:
+            bthday = datetime.strptime(winnerbdate.contents[0], "%Y-%m-%d")
+            datadict[name] = {"Year": bthday.year,
+                              "Month": bthday.month,
+                              "Day": bthday.day}
+        except ValueError:
+            pass
