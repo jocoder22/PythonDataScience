@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as Bs
 session = requests.Session()
 # to see more https://www.whatismybrowser.com/
 
@@ -14,3 +14,7 @@ header = {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q
 # page = session.get(url, headers=header).text
 page = session.get(url).text
 print(page)
+
+nobelist = Bs(page)
+nobelist.find("a")
+nobelist.find("div")
