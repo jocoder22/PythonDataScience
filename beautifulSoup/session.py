@@ -33,7 +33,7 @@ nobelist.find("h1")
 nobelist.find("h1").contents  # ['List of Nobel laureates']
 
 
-# itereate over the search result
+# iterate over the search result
 alist = nobelist.findAll("a", {"class" : "internal"})
 type(alist)  # <class 'bs4.element.ResultSet'>
 
