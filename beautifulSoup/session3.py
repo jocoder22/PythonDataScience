@@ -31,3 +31,8 @@ for alinks in tabledata:
     if alinks.a != None:
         links[alinks.a.contents[0]] = alinks.a.attrs["href"]
 links
+
+
+# Create baseurl
+baseurl = "https://en.wikipedia.org"
+baseurl + links['William Nordhaus']  # 'https://en.wikipedia.org/wiki/William_Nordhaus'
