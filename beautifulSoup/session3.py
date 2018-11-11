@@ -36,3 +36,13 @@ links
 # Create baseurl
 baseurl = "https://en.wikipedia.org"
 baseurl + links['William Nordhaus']  # 'https://en.wikipedia.org/wiki/William_Nordhaus'
+
+
+winnerpage = session.get(baseurl + links['William Nordhaus']).text
+winnerObj = Bs(winnerpage)
+winnerObj.find("table", {"class": ["infobox", "biography", "vcard"]})
+winnerObj.find("span", {"class": "bday"})
+
+
+datetime.strptime(winnerObj.find("span", {"class": "bday"}).contents[0], "%Y-%m-%d")
+# datetime.datetime(1941, 5, 31, 0, 0)
