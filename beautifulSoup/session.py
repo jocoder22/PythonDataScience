@@ -46,4 +46,24 @@ nobelist.table.attrs["class"]
 nobelist.findAll("table", {"class":['wikitable', 'sortable']})
 
 
+children = nobelist.table.children  # <list_iterator object at 0x048306B0>
 
+tbody = nobelist.table.tbody # the table body without the header
+count = 1
+for child in tbody:  # iterate throught the rows of the table
+    print("\nNode: Number %s \n-----" % count)
+    print("Name: %s \n-----" % child.name)
+    print(child)
+    count += 1
+
+
+count = 1
+for child in nobelist.table.findAll("tr"):  # iterate throught the rows of the table
+    print("\nNode: Number %s \n-----" % count)
+    print("Name: %s \n-----" % child.name)
+    print(child)
+    for i in range(3): print()
+    count += 1
+
+nobelist.table.tr
+nobelist.table.findAll("td")
