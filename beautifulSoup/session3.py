@@ -4,6 +4,7 @@ from datetime import datetime
 from time import sleep
 from pandas import DataFrame
 from bs4 import BeautifulSoup as Bs
+import matplotlib.pyplot as plt
 
 
 # Begin a session
@@ -65,5 +66,12 @@ for name, link in links.items():
             pass
 
 datadict
-Nobeltable = DataFrame(datadict)
-Nobeltable
+NobelData = DataFrame(datadict).T
+NobelData
+
+# plot the dataframe
+NobelData.Month.value_counts().sort_index().plot(kind='hist')
+plt.show()
+
+NobelData.Month.value_counts().sort_index().plot(kind='bar')
+plt.show()
