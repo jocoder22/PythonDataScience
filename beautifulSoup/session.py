@@ -41,4 +41,9 @@ for i in range(len(alist)):
     alist[i].attrs["href"]
 
 
+nobelist.table
+nobelist.table.attrs["class"]
+nobelist.findAll("table", {"class":['wikitable', 'sortable']})
+
+
 
