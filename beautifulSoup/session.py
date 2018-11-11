@@ -21,12 +21,24 @@ nobelist.find("div")
 
 # specific links
 nobelist.find_all("a", {"class" : "internal"})
+"""[<a class="internal" href="/wiki/File:Nobel_Prize.png" title="Enlarge"></a>,
+    <a class="internal" href="/wiki/File:Nobel_Prize_winners_2012.jpg" title="Enlarge"></a>]
+"""
 nobelist.find_all("a", {"class" : "internal"})[0].attrs["href"]
 nobelist.find_all("a", {"class" : "internal"})[1].attrs["href"]
 nobelist.find_all("a", {"class" : "internal"})[1].attrs["title"]
 
 nobelist.find("h1")
-nobelist.find("h1").contents
+# [<h1 class="firstHeading" id="firstHeading" lang="en">List of Nobel laureates</h1>]
+nobelist.find("h1").contents  # ['List of Nobel laureates']
+
+
+# itereate over the search result
+alist = nobelist.findAll("a", {"class" : "internal"})
+type(alist)  # <class 'bs4.element.ResultSet'>
+
+for i in range(len(alist)):
+    alist[i].attrs["href"]
 
 
 
