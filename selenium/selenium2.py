@@ -11,6 +11,6 @@ btnsearch = webdriver.find_element_by_name("btnk")
 
 txtsearch.send_keys("selenium")
 sleep(3)
-txtsearch.send_keys(Keys.ECAPE)
+txtsearch.send_keys(Keys.ESCAPE)
 btnsearch.click()
 sleep(2)
