@@ -20,3 +20,17 @@ lst_aRes = driver.find_element_by_xpath("//div[@id='extrares']//a")
 num_common = len(lst_aRes)
 
 term = set()
+
+for i in range(num_common):
+    term.add(lst_aRes[i].text)
+    lst_aRes[i].click()
+    sleep(4)
+    lst_aChildRes = driver.find_element_by_xpath("//div[@id='extrares']//a")
+
+    for a in lst_aChildRes:
+        term.add(a.text)
+    driver.back()
+
+    lst_aRes = driver.find_element_by_xpath("//div[@id='extrares']//a")
+    sleep(2)
+        
