@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep
+from display import Image
 
 driver = webdriver.Chrome()
 driver.get("https://google.com")
@@ -34,3 +35,15 @@ for i in range(num_common):
     lst_aRes = driver.find_element_by_xpath("//div[@id='extrares']//a")
     sleep(2)
         
+
+links = list()
+for a in lst_aRes:
+    links.append(a.get_attribute("href"))
+
+links
+
+term
+
+driver.get_screenshot_as_file("screenshot.png")
+Image("screenshot.png")
+driver.close()
