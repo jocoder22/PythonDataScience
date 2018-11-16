@@ -18,12 +18,30 @@ page = session.get(url).text
 
 # make a BeautifulSoup object
 nobelist = Bs(page)
-nobeltable = nobelist.find("table", {"class":['wikitable', 'sortable']})
+# nobeltable = nobelist.find("table", {"class":['wikitable', 'sortable']})
 
-tabledata = nobeltable.findAll("td")
+# tabledata = nobeltable.findAll("td")
+
+# for data in tabledata:
+#     print(data.a)
+
+
+nobeltable2 = nobelist.find("table", {"class":['wikitable', 'sortable']})
+
+tabledata = nobeltable2.findAll("span", {"class": "fn"})
+tabledata
 
 for data in tabledata:
     print(data.a)
+
+
+link2 = dict()
+for item in nobeltable2.findAll("td"):
+        if item.a != None and item.a.attrs["href"][0:6] == "/wiki/":
+                link2[item.a.contents[0]] = item.a.attrs["href"]
+
+len(link2)
+
 
 # Add the information inside a dictionary
 links = dict()
@@ -31,7 +49,10 @@ links = dict()
 for alinks in tabledata:
     if alinks.a != None:
         links[alinks.a.contents[0]] = alinks.a.attrs["href"]
-links
+
+len(links)
+
+print(links)
 
 
 # Create baseurl
