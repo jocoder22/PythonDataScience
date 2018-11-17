@@ -1,14 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep
-from display import Image
+from PIL import Image
 
 driver = webdriver.Chrome()
 driver.get("https://google.com")
 
 sleep(5)
-txtsearch = webdriver.find_element_by_id("q")
-btnsearch = webdriver.find_element_by_name("btnK")
+txtsearch = driver.find_element_by_id("q")
+btnsearch = driver.find_element_by_name("btnK")
 
 txtsearch.send_keys("selenium")
 sleep(3)
@@ -45,5 +45,5 @@ links
 term
 
 driver.get_screenshot_as_file("screenshot.png")
-Image("screenshot.png")
+Image.open("screenshot.png")
 driver.close()
