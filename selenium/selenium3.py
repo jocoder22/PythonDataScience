@@ -36,5 +36,4 @@ link2 = dict()
 for a in bsdiv2.findAll("a"):
     link2[a.contents[0]] = url2 + a.attrs["href"]
 
-
 dict(itertools.islice(link2.items(), 4))
