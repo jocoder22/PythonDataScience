@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for pycoders project
+# Scrapy settings for pycodersScraper project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'pycoders'
+BOT_NAME = 'pycodersScraper'
 
-SPIDER_MODULES = ['pycoders.spiders']
-NEWSPIDER_MODULE = 'pycoders.spiders'
+SPIDER_MODULES = ['pycodersScraper.spiders']
+NEWSPIDER_MODULE = 'pycodersScraper.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'pycoders (+http://www.yourdomain.com)'
+#USER_AGENT = 'pycodersScraper (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -47,13 +47,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'pycoders.middlewares.PycodersSpiderMiddleware': 543,
+#    'pycodersScraper.middlewares.PycodersscraperSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'pycoders.middlewares.PycodersDownloaderMiddleware': 543,
+#    'pycodersScraper.middlewares.PycodersscraperDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'pycoders.pipelines.PycodersPipeline': 300,
+#    'pycodersScraper.pipelines.PycodersscraperPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
