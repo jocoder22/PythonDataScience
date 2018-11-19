@@ -1,0 +1,13 @@
+# start the scrapy shell
+scrapy shell https://www.6pm.com
+res = response.xpath('//article[@class="_1h6Kf T8hAn _11Y_i _1zLW0 IGB3R _2eECk"]')
+
+
+response.xpath('//span[@class="nextprev"]//a')
+response.xpath('//span[@class="nextprev"]//@href')
+
+response.xpath('//span[@class="nextprev"]//@href').extract_first()
+response.xpath('//span[@class="nextprev"]//@href').extract()
+
+threads = res.css("p._3BAWv")
+threads[0].xpath("text()").extract_first()
