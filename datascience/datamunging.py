@@ -6,4 +6,12 @@ iris_open = urllib.request.urlopen(reqs)
 iris_data = pd.read_csv(iris_open, sep=',', decimal='.', header=None,
                         names=['sepal_length', 'sepal_width', 'petal_length',
                                'petal_width', 'target'])
+
+
+# Explore the dataset
 iris_data.head()
+iris_data.tail()
+iris_data.columns
+
+Y_series = iris_data['target']
+X_frame = iris_data[['sepal_length', 'sepal_width']]
