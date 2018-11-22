@@ -25,3 +25,9 @@ X_frame.shape
 print(os.getcwd()) # C:/Users/Jose
 csvdataset = pd.read_csv(u'~/Desktop/new2.csv',sep=',' , parse_dates=[0]) 
 csvdataset
+
+
+# fill in missing values
+csvdataset.fillna(50)
+# Alternatively, using the column mean
+csvdataset.fillna(csvdataset.mean(axis=0))
