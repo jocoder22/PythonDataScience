@@ -1,3 +1,4 @@
+import os
 import urllib
 import pandas as pd
 irisurl = "http://aima.cs.berkeley.edu/data/iris.csv"
@@ -21,5 +22,6 @@ Y_series.shape
 X_frame.shape
 
 # Reading csv files
-csvdataset = pd.read_csv(u'C:/Users/Jose/Desktop/new2.csv',sep=',') 
+print(os.getcwd()) # C:/Users/Jose
+csvdataset = pd.read_csv(u'~/Desktop/new2.csv',sep=',') 
 csvdataset
