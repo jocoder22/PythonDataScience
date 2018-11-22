@@ -15,3 +15,7 @@ iris_data.columns
 
 Y_series = iris_data['target']
 X_frame = iris_data[['sepal_length', 'sepal_width']]
+
+
+Y_series.shape
+X_frame.shape
