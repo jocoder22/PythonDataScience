@@ -19,3 +19,7 @@ X_frame = iris_data[['sepal_length', 'sepal_width']]
 
 Y_series.shape
 X_frame.shape
+
+# Reading csv files
+csvdataset = pd.read_csv(u'C:/Users/Jose/Desktop/new2.csv',sep=',') 
+csvdataset
