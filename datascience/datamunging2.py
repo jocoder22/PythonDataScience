@@ -36,8 +36,24 @@ with open(r'C:/Users/Jose/Desktop/book.csv', 'rt') as stream:
         for (k, v) in row.items():
             mydict[k] = v
             mylist.append(mydict)
+    # below using dictionary comprehension
+        # mylist4 = {k:v for (k,v) in row.items()}
+        # mylist44.append(mydict)
+    # mylist2 = [{k:v} for n, row in enumerate(forma) for (k,v) in row.items()]
 
 mylist[:3]
+
+with open(r'C:/Users/Jose/Desktop/book.csv', 'rt') as stream:
+    mydict = dict()
+    mylist = list()
+    for n, row in enumerate(csv.DictReader(stream,
+        fieldnames = ['int0','int1','int2','int3','int4','int5','int6'],dialect='excel')):
+        if n <= 3:
+            print (n,row)
+        else:
+            break
+
+
 
 
 # Using csv.reader
