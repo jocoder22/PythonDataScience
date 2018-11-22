@@ -1,5 +1,6 @@
 import pandas as pd 
 from urllib.request import urlopen
+import csv
 
 site = 'http://mldata.org/repository/data/download/csv/book-evaluation-complete/'
 datasiteOpen = urlopen(site)
@@ -24,3 +25,16 @@ bookIter = pd.read_csv(u'~/Desktop/mydata.csv', header=None,
 print(bookIter.get_chunk(10).shape)
 next20 = bookIter.get_chunk(20)  
 next20
+
+
+# Reading using csv.DictReader
+with open(r'C:/Users/Jose/Desktop/book.csv', 'rt') as stream:
+    mydict = dict()
+    mylist = list()
+    for n, row in enumerate(csv.DictReader(stream,
+        fieldnames = ['int0','int1','int2','int3','int4','int5','int6'],dialect='excel')):
+        for (k, v) in row.items():
+            mydict[k] = v
+            mylist.append(mydict)
+
+mylist[:3]
