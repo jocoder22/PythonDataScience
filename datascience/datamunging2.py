@@ -38,3 +38,12 @@ with open(r'C:/Users/Jose/Desktop/book.csv', 'rt') as stream:
             mylist.append(mydict)
 
 mylist[:3]
+
+
+# Using csv.reader
+with open(r'C:/Users/Jose/Desktop/book.csv', 'rt') as dstream:
+    for n, row in enumerate(csv.reader(dstream, dialect='excel')):
+            if n <= 3:
+                print (n,row)
+            else:
+                break
