@@ -23,5 +23,5 @@ X_frame.shape
 
 # Reading csv files
 print(os.getcwd()) # C:/Users/Jose
-csvdataset = pd.read_csv(u'~/Desktop/new2.csv',sep=',') 
+csvdataset = pd.read_csv(u'~/Desktop/new2.csv',sep=',' , parse_dates=[0]) 
 csvdataset
