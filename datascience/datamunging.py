@@ -32,6 +32,7 @@ csvdataset.fillna(50)
 # Alternatively, using the column mean
 csvdataset.fillna(csvdataset.mean(axis=0))
 
+
 # Handling poorly formatted dataset
 baddataset = pd.read_csv(u'~/Desktop/bad.csv',sep=',', error_bad_lines=False) 
 # Info : b'Skipping line 4: expected 3 fields, saw 4\n'
