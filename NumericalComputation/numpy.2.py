@@ -25,9 +25,15 @@ print(zeroarray.dtype, zeroarray6.dtype)
 
 # Indentity
 I_array = np.identity(4)
+I_array7 = np.identity(4) + 7
 print(I_array, I_array.dtype)
 
 # ones
 ones = np.ones(5)
 print(ones, ones.dtype)
+
+
+# vector operations
+myarray - zeroarray6
+zeroarray6 / myarray
 
