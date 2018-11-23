@@ -27,3 +27,16 @@ print(xuint32, "Memory size of", xuint32.nbytes, "bytes")
 y = np.array([[4, 9, 12], [2, 7, 11]])
 yfloat = y.astype(np.float)
 yint64 = np.array(y, dtype=np.int64)
+
+print(yfloat.dtype, "with memory size of", yfloat.nbytes, "bytes")
+print(y.dtype, "with memory size of", y.nbytes, "bytes")
+print(yint64.dtype, "with memory size of", yint64.nbytes, "bytes")
+
+
+# large dataset
+largeData = np.random.rand(1000000, 100)
+print(type(largeData))
+print(largeData.dtype)
+print("largeData has", largeData.nbytes, "bytes of memory size")
+floatLargeData = largeData.astype(np.float32)
+print("floatLargeData has", floatLargeData.nbytes, "bytes of memory size")
