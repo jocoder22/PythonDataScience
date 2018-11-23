@@ -81,3 +81,14 @@ np.percentile(longdis, 95, axis=1)
 
 np.argmax(longdis)
 np.argmin(longdis)
+
+# slicing
+x[1:3]
+x[1:3, ]
+x[1:3:]
+x[:, 1:3]
+x[1:3, 1:3]
+x[[0, 1, 2], [0, 1, 3]]
+
+
+
