@@ -1,4 +1,4 @@
-import numpy as np 
+import numpy as np
 
 x = np.array([[2, 2, 5, 6], [6, 8, 10, 4]])
 print(x)
@@ -23,3 +23,7 @@ xuint32 = np.array([[2, 2, 5, 6], [6, 8, 10, 4]], dtype=np.uint32)
 print(xuint32, "Memory size of", xuint32.nbytes, "bytes")
 
 
+# changing dtypes
+y = np.array([[4, 9, 12], [2, 7, 11]])
+yfloat = y.astype(np.float)
+yint64 = np.array(y, dtype=np.int64)
