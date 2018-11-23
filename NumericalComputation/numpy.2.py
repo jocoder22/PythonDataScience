@@ -91,4 +91,8 @@ x[1:3, 1:3]
 x[[0, 1, 2], [0, 1, 3]]
 
 
-
+# numpy: Resizing
+x = np.arange(16).reshape(4, 4)  # only changes the output
+np.resize(x, (2, 2))  # change the array permanently
+np.resize(x, (6, 6))
+x = np.reshape(np.arange(16), (4, 4))
