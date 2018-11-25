@@ -53,3 +53,25 @@ print("The last 2 elements of the sum", c3[-2:])
 print("NumPySum elapsed time in microseconds", delta.microseconds) 
 
 
+
+
+size = int(sys.argv[2]) 
+print()
+print()
+print("Processing for n = ", size)
+
+start = datetime.now() 
+c = pythonsum(size) 
+delta = datetime.now() - start 
+print("The last 2 elements of the sum", c[-2:]) 
+print("PythonSum elapsed time in microseconds", delta.microseconds) 
+ 
+start = datetime.now() 
+c = numpysum(size) 
+delta = datetime.now() - start 
+print("The last 2 elements of the sum", c[-2:]) 
+print("NumPySum elapsed time in microseconds", delta.microseconds) 
+
+
+
+
