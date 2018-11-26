@@ -53,3 +53,13 @@ np.linalg.norm(mat1, np.inf)  # 47
 np.linalg.norm(mat1, ord=2)  # 39.254426189588429
 
 
+# Determinant
+# the determinant is the scaling factor of
+# a matrix in linear transformation.
+mat2 = np.array([12, 3, 4, 6, 7, 34, 21, 9, 4, 2, 9, 7]).reshape(3, 2, 2)
+mat3 = np.array([3, 4, 6, 8, 5, 13, 23, 9, 10]).reshape(3, 3)
+np.linalg.det(mat2)
+np.linalg.det(mat3)
+
+
+
