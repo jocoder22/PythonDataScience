@@ -7,9 +7,11 @@ b = np.array([3, 8, 6])
 # Using the inverse method
 a_inverse = np.linalg.inv(a)
 solution = np.dot(a_inverse, b)
+solution
 
 # Using the solve function
 solution2 = np.linalg.solve(a, b)
+solution2
 
 # check for equality
 np.allclose(solution, solution2)  # True
