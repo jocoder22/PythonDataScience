@@ -25,3 +25,31 @@ np.linalg.norm(L03, ord=1)  # 31
 np.linalg.norm(L01, ord=2)  # 5.4772255750516612
 np.linalg.norm(L02, ord=2)  # 11.704699910719626
 np.linalg.norm(L03, ord=2)  # 13.820274961085254
+
+
+# norms for Matrix
+# The norm of the matrix reveals how much that 
+# matrix could possibly stretch a vector
+# norms are very important for distance metrics  k-nearest 
+# neighbors algorithm (k-NN) and in k-means clustering as well.
+mat1 = np.array([12, 3, 4, 6, 7, 34, 21, 9, 4, 2, 9, 7]).reshape(4, 3)
+
+
+#  First order norm for matrix
+#  calculated the max element as column-wise first and
+#  gives the maximum result in all columns, which will 
+#  be the norm of the matrix for the first order. 
+np.linalg.norm(mat1, ord=1)  # 49
+
+
+#  Infinity order norm for matrix
+#  calculated the max element as row-wise first and 
+#  gives the maximum result in all rowe, which will 
+# be the norm of the matrix for the infinity order. 
+np.linalg.norm(mat1, np.inf)  # 47
+
+
+#  Euclidean/Frobenius norm for matrix
+np.linalg.norm(mat1, ord=2)  # 39.254426189588429
+
+
