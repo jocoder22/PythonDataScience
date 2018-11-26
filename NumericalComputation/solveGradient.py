@@ -21,3 +21,6 @@ gb = np.array([5, 8, 3, 12, 4, 1,  9, 8, 20, 0, 10, 6]).reshape(3, 4)
 
 gag = np.gradient(ga)
 gbg = np.gradient(gb)
+
+gag
+gbg
