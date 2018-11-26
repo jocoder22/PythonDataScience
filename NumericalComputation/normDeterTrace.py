@@ -67,3 +67,4 @@ np.linalg.det(mat3)
 np.trace(mat1)  # 23
 np.trace(mat2)  # array([33, 12])
 np.trace(mat3)  # 18
+np.trace(mat2.T)  # array([18, 16, 11])
