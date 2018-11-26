@@ -62,4 +62,8 @@ np.linalg.det(mat2)
 np.linalg.det(mat3)
 
 
-
+# Trace of a matrix
+# the trace is the sum of diagonal elements of a matrix
+np.trace(mat1)  # 23
+np.trace(mat2)  # array([33, 12])
+np.trace(mat3)  # 18
