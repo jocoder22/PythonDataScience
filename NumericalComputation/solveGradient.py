@@ -13,3 +13,11 @@ solution2 = np.linalg.solve(a, b)
 
 # check for equality
 np.allclose(solution, solution2)  # True
+
+
+# Grandient
+ga = np.array([5, 8, 12, 4, 9])
+gb = np.array([5, 8, 3, 12, 4, 1,  9, 8, 20, 0, 10, 6]).reshape(3, 4)
+
+gag = np.gradient(ga)
+gbg = np.gradient(gb)
