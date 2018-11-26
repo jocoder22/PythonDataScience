@@ -12,3 +12,4 @@ solution = np.dot(a_inverse, b)
 solution2 = np.linalg.solve(a, b)
 
 # check for equality
+np.allclose(solution, solution2)  # True
