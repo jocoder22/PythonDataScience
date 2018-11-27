@@ -33,3 +33,4 @@ workingdata.Date.dtype
 workingdata['Date'] = pd.to_datetime(workingdata['Date'].astype(str), format='%Y%m%d')
 workingdata.head()
 workingdata.shape
+workingdata.Date.dtype
