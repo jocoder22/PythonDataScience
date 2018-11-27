@@ -2,7 +2,8 @@ import pandas as pd
 from urllib.request import urlopen
 import csv
 
-site = 'http://mldata.org/repository/data/download/csv/book-evaluation-complete/'
+site = 'http://mldata.org/repository/data/download/csv/book- \
+        evaluation-complete/'
 datasiteOpen = urlopen(site)
 dataset = pd.read_csv(datasiteOpen, header=None,
                       names=['int0', 'int1', 'int2', 'int3',
@@ -54,10 +55,9 @@ with open(r'C:/Users/Jose/Desktop/book.csv', 'rt') as stream:
     mydict = dict()
     mylist = list()
     for n, row in enumerate(csv.DictReader(stream,
-                                           fieldnames=['int0', 'int1', 'int2',
-                                                       'int3', 'int4', 'int5',
-                                                       'int6'],
-                                           dialect='excel')):
+                            fieldnames=['int0', 'int1', 'int2',
+                                        'int3', 'int4', 'int5', 'int6'],
+                            dialect='excel')):
         if n <= 3:
             print(n, row)
         else:

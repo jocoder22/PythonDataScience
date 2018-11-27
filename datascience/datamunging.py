@@ -29,8 +29,8 @@ Y_series.shape
 X_frame.shape
 
 # Reading csv files
-print(os.getcwd()) # C:/Users/Jose
-csvdataset = pd.read_csv(u'~/Desktop/new2.csv',sep=',' , parse_dates=[0]) 
+print(os.getcwd())  # C:/Users/Jose
+csvdataset = pd.read_csv(u'~/Desktop/new2.csv', sep=',', parse_dates=[0])
 csvdataset
 
 
@@ -41,9 +41,6 @@ csvdataset.fillna(csvdataset.mean(axis=0))
 
 
 # Handling poorly formatted dataset
-baddataset = pd.read_csv(u'~/Desktop/bad.csv',sep=',', error_bad_lines=False) 
+baddataset = pd.read_csv(u'~/Desktop/bad.csv', sep=',', error_bad_lines=False)
 # Info : b'Skipping line 4: expected 3 fields, saw 4\n'
 baddataset
-
-
-
