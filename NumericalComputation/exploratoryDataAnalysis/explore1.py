@@ -38,4 +38,5 @@ for labels, row in zip(statlabels2, mystats):
     print(labels,  row)
 
 
-
+# Using scipy
+result = stats.describe(mydata, axis=0)
