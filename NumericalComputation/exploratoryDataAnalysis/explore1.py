@@ -48,4 +48,3 @@ var = result.variance
 percentile10 = stats.scoreatpercentile(mydata, per=10, axis=0)
 percentile90 = stats.scoreatpercentile(mydata, per=90, axis=0)
 range2 = stats.iqr(mydata, rng=(0, 100), axis=0)
-
