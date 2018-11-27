@@ -40,3 +40,12 @@ for labels, row in zip(statlabels2, mystats):
 
 # Using scipy
 result = stats.describe(mydata, axis=0)
+
+min2 = result.minmax[0]
+max2 = result.minmax[1]
+mean2 = result.mean
+var = result.variance
+percentile10 = stats.scoreatpercentile(mydata, per=10, axis=0)
+percentile90 = stats.scoreatpercentile(mydata, per=90, axis=0)
+range2 = stats.iqr(mydata, rng=(20, 80), axis=0)
+
