@@ -22,12 +22,20 @@ percentile10 = np.round(np.percentile(mydata, 10, axis=0), decimals=3)
 percentile90 = np.round(np.percentile(mydata, 90, axis=0), decimals=3)
 
 
-mystatics = np.vstack((min, max, range, mean, median,
-                       variance, percentile10, percentile90))
+mystats = np.vstack((min, max, range, mean, median,
+                     variance, percentile10, percentile90))
 
 statlabels = ["min", "max", "range", "mean",
               "median", "variance", "10%Tile", "90%Tile"]
 
 statlabels2 = ["minn", "maxx", "rang", "mean",
                "medi", "vari", "10%T", "90%T"]
+
+for labels, row in zip(statlabels2, mystats):
+    print('{} [{}]'.format(labels, "".join('%07s' % i for i in row)))
+
+for labels, row in zip(statlabels2, mystats):
+    print(labels,  row)
+
+
 
