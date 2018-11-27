@@ -23,3 +23,12 @@ mydata = [(20181109, "New York", "Winter", 23.9, 2),
 insert_query = "INSERT INTO WeatherData VALUES(?, ?, ?, ?)"
 connection.executemany(insert_query, mydata)
 connection.commit()
+
+# select query
+selectAll = "SELECT * FROM WeatherData;"
+workingdata = pd.read_sql_query(selectAll, connection)
+connection.close()
+
+workingdata.Date.dtype
+workingdata['Date'] = pd.to_datetime(workingdata['Date'].astype(str), format='%Y%m%d')
+
