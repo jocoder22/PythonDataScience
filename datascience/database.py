@@ -54,3 +54,11 @@ mystorage = pd.HDFStore("firststorage.h5")
 mystorage.keys()
 
 iris_pd = mystorage['iris']
+
+# Basic statistics
+myfunction = {'Septal_length': ['mean', 'max'],
+              'Septal_width': ['std', 'min'],
+              'petal_length': ['mean', 'var'],
+              'petal_width': ['max', 'med']}
+
+Summary_stats = iris_data.groupby(['target']).agg(myfunction)
