@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import h5py
 import sqlite3
 
 
@@ -34,3 +35,9 @@ workingdata['Date'] = pd.to_datetime(workingdata['Date'].astype(str), format='%Y
 workingdata.head()
 workingdata.shape
 workingdata.Date.dtype
+
+
+# Using h5py
+mystorage = pd.HDFStore("firststorage.h5")
+mystorage['iris'] = iris
+mystorage.close()
