@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-import h5py
-import sqlite3
+import h5py, sqlite3
+from urllib.request import urlopen
 
 
 droptable = "DROP TABLE IF EXISTS WeatherData;"
@@ -38,6 +38,13 @@ workingdata.Date.dtype
 
 
 # Using h5py
+
+irisurl = "http://aima.cs.berkeley.edu/data/iris.csv"
+irisdata = urlopen(irisurl)
+iris_data = pd.read_csv(irisdata, sep=',', decimal='.', header=None,
+                        names=['sepal_length', 'sepal_width', 'petal_length',
+                               'petal_width', 'target'])
+                               
 mystorage = pd.HDFStore("firststorage.h5")
-mystorage['iris'] = iris
+mystorage['iris'] = iris_data
 mystorage.close()
