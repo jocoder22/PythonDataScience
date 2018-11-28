@@ -44,7 +44,13 @@ irisdata = urlopen(irisurl)
 iris_data = pd.read_csv(irisdata, sep=',', decimal='.', header=None,
                         names=['sepal_length', 'sepal_width', 'petal_length',
                                'petal_width', 'target'])
-                               
+
+storage = pd.HDFStore("firststorage.h5")
+storage['iris'] = irisdata
+storage.close()
+
+# Open the file
 mystorage = pd.HDFStore("firststorage.h5")
-mystorage['iris'] = iris_data
-mystorage.close()
+mystorage.keys()
+
+iris_pd = mystorage['iris']
