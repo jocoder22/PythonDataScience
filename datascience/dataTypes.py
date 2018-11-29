@@ -30,3 +30,6 @@ print(hot1.transform([label1.transform(['Tuesday'])]).toarray())
 # Working with text
 categories = ['sci.med', 'sci.space']
 twenty_sci_news = fetch_20newsgroups(categories=categories)
+print(twenty_sci_news.data[0])  # content
+twenty_sci_news.filenames   # location of file
+print (twenty_sci_news.target[0]) # topic
