@@ -46,6 +46,7 @@ for n in wordcount[0].indices:
           wordcount[0, n]))
 
 
+# count the number of words
 counter = 0
 countlist = []
 countlist2 = []
