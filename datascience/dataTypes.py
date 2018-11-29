@@ -38,3 +38,26 @@ print(sciencenews.target[0])  # topic
 vect = CountVectorizer()
 wordcount = vect.fit_transform(sciencenews.data)
 wordcount.shape
+
+
+wordlist = vect.get_feature_names()
+for n in wordcount[0].indices:
+    print('The word "{}" appears {} times'.format(wordlist[n], 
+          wordcount[0, n]))
+
+
+counter = 0
+countlist = []
+countlist2 = []
+for i in range(wordcount.shape[0]):
+    for n in wordcount[i].indices:
+        print('The word "{}" appears {} times'.format(wordlist[n], 
+              wordcount[0, n]))
+        counter += 1
+    countlist.append(counter)
+    countlist2.append({i: counter})
+
+print(counter)
+countlist[:10]
+countlist2[:-10]
+    
