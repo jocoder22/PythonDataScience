@@ -48,22 +48,23 @@ for n in wordcount[0].indices:
 
 # count the number of words
 counter = 0
-countlist = []
-countlist2 = []
-countlist3 = []
+countlist5 = []
+countlist6 = []
+countlist7 = []
 for i in range(wordcount.shape[0]):
     innercount = 0
     for n in wordcount[i].indices:
         print('The word "{}" appears {} times'.format(wordlist[n],
-              wordcount[0, n]))
-        counter += 1
+              wordcount[i, n]))
         innercount += 1
-    countlist.append(counter)
-    countlist2.append({i: counter})
-    countlist3.append({i: innercount})
+        counter += 1
+        
+    countlist5.append(counter)
+    countlist6.append({i: counter})
+    countlist7.append({i: innercount})
 
 
 print(counter)
-countlist[:10]
-countlist2[-10:]
-countlist3[-10:]
+countlist5[:10]
+countlist6[-10:]
+countlist7[-10:]
