@@ -69,3 +69,11 @@ print(counter)
 countlist5[:10]
 countlist6[-10:]
 countlist7[-10:]
+
+
+# Calculate freq
+vect2 = TfidfVectorizer(use_idf=False, norm='l1')
+wordfreq = vect2.fit_transform(sciencenews.data)
+wordlist = vect2.get_feature_names()
+for n in wordfreq[0].indices:
+    print('Word "{}" has frequency {:.3f}'.format(wordlist[n], wordfreq[0, n]))
