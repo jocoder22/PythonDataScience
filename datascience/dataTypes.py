@@ -59,7 +59,7 @@ for i in range(wordcount.shape[0]):
               wordcount[i, n]))
         innercount += 1
         counter += 1
-        
+
     countlist5.append(counter)
     countlist6.append({i: counter})
     countlist7.append({i: innercount})
@@ -83,7 +83,8 @@ vect3 = TfidfVectorizer()
 wordfit2 = vect3.fit_transform(sciencenews.data)
 wordlist2 = vect3.get_feature_names()
 for n in wordfit2[0].indices:
-    print('Word "{}" has frequency {:.3f}'.format(wordlist2[n], wordfit2[0, n]))
+    print('Word "{}" has frequency {:.3f}'.format(wordlist2[n],
+          wordfit2[0, n]))
 
 
 # words combination
@@ -108,10 +109,20 @@ print("Last ten words with occurances: ", wordswithNumbersb[-10:])
 
 
 # ## Uni-gram and Bi-gram
-countvectbu = CountVectorizer(ngram_range=(2, 2))
+countvectbu = CountVectorizer(ngram_range=(1, 2))
 wordcountcbu = countvectbu.fit_transform(sciencenews.data)
 wordlistcbu = countvectbu.get_feature_names()
 print("Last 10 words on the list = ", wordlistcbu[-10:])
 wordswithNumbersbu = [wordlistcbu[n] + "(" + str(wordcountcbu[0, n]) + ")"
                       for n in wordcountcbu[0].indices]
 print("Last ten words with occurances: ", wordswithNumbersbu[-10:])
+
+
+# ## Bi-gram and tri-gram
+countvectbt = CountVectorizer(ngram_range=(2, 3))
+wordcountcbt = countvectbt.fit_transform(sciencenews.data)
+wordlistcbt = countvectbt.get_feature_names()
+print("Last 10 words on the list = ", wordlistcbt[-10:])
+wordswithNumbersbt = [wordlistcbt[n] + "(" + str(wordcountcbt[0, n]) + ")"
+                      for n in wordcountcbt[0].indices]
+print("Last ten words with occurances: ", wordswithNumbersbt[-10:])
