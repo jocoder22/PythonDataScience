@@ -118,6 +118,16 @@ wordswithNumbersbu = [wordlistcbu[n] + "(" + str(wordcountcbu[0, n]) + ")"
 print("Last ten words with occurances: ", wordswithNumbersbu[-10:])
 
 
+# ## Tri-gram
+countvectbtt = CountVectorizer(ngram_range=(3, 3))
+wordcountcbtt = countvectbtt.fit_transform(sciencenews.data)
+wordlistcbtt = countvectbtt.get_feature_names()
+print("Last 10 words on the list = ", wordlistcbtt[-10:])
+wordswithNumbersbtt = [wordlistcbtt[n] + "(" + str(wordcountcbtt[0, n]) + ")"
+                       for n in wordcountcbtt[0].indices]
+print("Last ten words with occurances: ", wordswithNumbersbtt[-10:])
+
+
 # ## Bi-gram and tri-gram
 countvectbt = CountVectorizer(ngram_range=(2, 3))
 wordcountcbt = countvectbt.fit_transform(sciencenews.data)
