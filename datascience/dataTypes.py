@@ -77,3 +77,14 @@ wordfreq = vect2.fit_transform(sciencenews.data)
 wordlist = vect2.get_feature_names()
 for n in wordfreq[0].indices:
     print('Word "{}" has frequency {:.3f}'.format(wordlist[n], wordfreq[0, n]))
+
+
+vect3 = TfidfVectorizer()
+wordfit2 = vect3.fit_transform(sciencenews.data)
+wordlist2 = vect3.get_feature_names()
+for n in wordfit2[0].indices:
+    print('Word "{}" has frequency {:.3f}'.format(wordlist2[n], wordfit2[0, n]))
+
+
+
+# words combination
