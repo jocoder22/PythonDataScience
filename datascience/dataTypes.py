@@ -137,3 +137,10 @@ print("Last 10 words on the list = ", wordlistcbt[-10:])
 wordswithNumbersbt = [wordlistcbt[n] + "(" + str(wordcountcbt[0, n]) + ")"
                       for n in wordcountcbt[0].indices]
 print("Last ten words with occurances: ", wordswithNumbersbt[-10:])
+
+
+# Multi-gram combination: use hashing
+hvect = HashingVectorizer(n_features=2000)
+wordhashed = hvect.fit_transform(sciencenews.data)
+wordhashed.shape
+
