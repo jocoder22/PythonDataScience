@@ -86,5 +86,22 @@ for n in wordfit2[0].indices:
     print('Word "{}" has frequency {:.3f}'.format(wordlist2[n], wordfit2[0, n]))
 
 
-
 # words combination
+# ## Uni-gram
+countvect = CountVectorizer(ngram_range=(1, 1), stop_words=[], min_df=1)
+wordcountc = countvect.fit_transform(sciencenews.data)
+wordlistc = countvect.get_feature_names()
+print("Last 10 words on the list = ", wordlistc[-10:])
+wordswithNumbers = [wordlistc[n] + "(" + str(wordcountc[0, n]) + ")"
+                    for n in wordcountc[0].indices]
+print("Last ten words with occurances: ", wordswithNumbers[-10:])
+
+
+# ## Bi-gram
+countvectb = CountVectorizer(ngram_range=(2, 2))
+wordcountcb = countvect.fit_transform(sciencenews.data)
+wordlistcb = countvect.get_feature_names()
+print("Last 10 words on the list = ", wordlistcb[-10:])
+wordswithNumbersb = [wordlistcb[n] + "(" + str(wordcountcb[0, n]) + ")"
+                     for n in wordcountcb[0].indices]
+print("Last ten words with occurances: ", wordswithNumbersb[-10:])
