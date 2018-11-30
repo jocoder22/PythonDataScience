@@ -99,8 +99,8 @@ print("Last ten words with occurances: ", wordswithNumbers[-10:])
 
 # ## Bi-gram
 countvectb = CountVectorizer(ngram_range=(2, 2))
-wordcountcb = countvect.fit_transform(sciencenews.data)
-wordlistcb = countvect.get_feature_names()
+wordcountcb = countvectb.fit_transform(sciencenews.data)
+wordlistcb = countvecbt.get_feature_names()
 print("Last 10 words on the list = ", wordlistcb[-10:])
 wordswithNumbersb = [wordlistcb[n] + "(" + str(wordcountcb[0, n]) + ")"
                      for n in wordcountcb[0].indices]
