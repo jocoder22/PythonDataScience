@@ -16,4 +16,5 @@ for catlink in section2.find_all("a")[1:]:
     print(catlink.get("title"), "->", catlink.get("href")) 
 
 
-
+ bs2 = section = soup.find_all("div" ,{"class" : "refbegin"})[0]
+ 
