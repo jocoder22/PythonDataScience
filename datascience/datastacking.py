@@ -32,7 +32,4 @@ data9[15:, 3:] = 900
 
 data10 = np.dstack((data1, data9))
 print(data1.shape, data9.shape, data10.shape)
-
-
-
-
+print(data1.ndim, data9.ndim, data10.ndim)
