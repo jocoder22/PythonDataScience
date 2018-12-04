@@ -21,7 +21,7 @@ n = 1
 
 sourceText = []
 for source in bs2.find_all("a"):
-    print("Source {}. ".format(n), source.get("title"), "->", source.get("href"), source.text) 
+    print("Source {}. ".format(n), source.get("title"), "->", source.get("href"), source.text)
     sourceText.append(source.text)
     n += 1
 
