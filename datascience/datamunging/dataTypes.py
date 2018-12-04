@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import LabelEncoder
@@ -143,4 +142,3 @@ print("Last ten words with occurances: ", wordswithNumbersbt[-10:])
 hvect = HashingVectorizer(n_features=2000)
 wordhashed = hvect.fit_transform(sciencenews.data)
 wordhashed.shape
-
