@@ -18,3 +18,19 @@ data5 = np.arange(20)
 np.hstack((data1, data4))
 np.column_stack((data1, data5))
 
+# working on 3-dimension, using dstack
+data9 = data1.copy()
+data9[:5, :3] = 200
+data9[:5, 3:] = 300
+data9[5:10, :3] = 400
+data9[5:10, 3:] = 500
+data9[10:15, :3] = 600
+data9[10:15, 3:] = 700
+data9[15:, :3] = 800
+data9[15:, 3:] = 900
+
+
+
+
+
+
