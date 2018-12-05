@@ -36,5 +36,8 @@ scatterplot = irisdata.plot(kind='scatter',
 plt.show()
 
 # check the distribution
-disttr = irisdata.petal_width.plot(kind='hist', alpha=0.5, bins=20)
+disttr20 = irisdata.petal_width.plot(kind='hist', alpha=0.5, bins=20)
+plt.show()
+
+disttr12 = irisdata.petal_width.plot(kind='hist', alpha=0.5, bins=12)
 plt.show()
