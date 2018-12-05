@@ -14,3 +14,14 @@ irisdata.describe()
 # get a boxplot
 boxes = irisdata.boxplot(return_type='axes')
 plt.show()
+
+irisdata.quantile([0.1, 0.65, 0.95, 0.99])
+irisdata.mean()
+
+# more exploration
+mydesc = irisdata.describe()
+mydesc.loc['count']
+mydesc.loc['mean', 'sepal_width']
+
+irisdata.mean().sepal_width
+irisdata.sepal_width.mean()
