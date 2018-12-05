@@ -25,3 +25,12 @@ mydesc.loc['mean', 'sepal_width']
 
 irisdata.mean().sepal_width
 irisdata.sepal_width.mean()
+
+pd.crosstab(irisdata['petal_length'] > irisdata.petal_length.mean(),
+            irisdata['petal_width'] > irisdata.petal_width.mean())
+
+# Exlore relationships
+scatterplot = irisdata.plot(kind='scatter',
+                            x='petal_width', y='petal_length',
+                            s=64, c='blue', edgecolors='white')
+plt.show()
