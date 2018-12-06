@@ -54,3 +54,13 @@ pca95b = PCA(n_components=0.95)
 pca95pcb = pca95b.fit_transform(boston.data)
 print(pca95b.explained_variance_ratio_.sum())
 print(pca95pcb.shape)
+
+
+# Randomized PCA
+rpca2 = PCA(svd_solver='randomized', n_components=2)
+rpca2c = rpca2.fit_transform(boston.data)
+plt.scatter(rpca2c[:, 0], rpca2c[:, 1], c=boston.target, 
+            alpha=0.8, s=60, marker='o', edgecolors='white')
+plt.show()
+rpca2.explained_variance_ratio_.sum()
+
