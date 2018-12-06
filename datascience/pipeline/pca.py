@@ -1,4 +1,5 @@
 from sklearn.datasets import load_iris
+from sklearn.datasets import load_boston
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import numpy as np
@@ -14,6 +15,7 @@ print(covdata)
 pca2 = PCA(n_components=2)
 pca2comp = pca2.fit_transform(iris.data)
 pca2comp.shape
+pca2.components
 
 plt.scatter(pca2comp[:, 0], pca2comp[:, 1], c=iris.target, alpha=0.8, 
             s=60, marker='o', edgecolors='white')
@@ -35,3 +37,20 @@ pca3e = pca3.explained_variance_ratio_.sum()
 # Percentage explained
 print("PCA 2-components explains {:.2f}%".format(pca2e*100))
 print("PCA 3-components explains {:.2f}%".format(pca3e*100))
+
+
+# find components making up at least 95%
+pca95 = PCA(n_components=0.95)
+pca95pc = pca95.fit_transform(iris.data)
+print(pca95.explained_variance_ratio_.sum())
+print(pca95pc.shape)
+
+
+# Apply PCA on Boston Housing data
+boston = load_boston()
+print(boston.data.shape)
+
+pca95b = PCA(n_components=0.95)
+pca95pcb = pca95b.fit_transform(boston.data)
+print(pca95b.explained_variance_ratio_.sum())
+print(pca95pcb.shape)
