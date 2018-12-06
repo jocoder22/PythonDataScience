@@ -41,3 +41,13 @@ plt.show()
 
 disttr12 = irisdata.petal_width.plot(kind='hist', alpha=0.5, bins=12)
 plt.show()
+
+
+
+img = plt.matshow(cov_data, cmap=plt.cm.rainbow)
+plt.colorbar(img, ticks=[-1, 0, 1], fraction=0.045)
+for x in range(cov_data.shape[0]):
+    for y in range(cov_data.shape[1]):
+        plt.text(x, y, "%0.2f" % cov_data[x,y], 
+                    size=12, color='black', ha="center", va="center")
+plt.show()
