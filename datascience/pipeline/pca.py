@@ -29,6 +29,9 @@ plt.scatter(pca3comp[:, 0], pca3comp[:, 1], c=iris.target, alpha=0.8,
             s=60, marker='o', edgecolors='white')
 plt.show()
 
-pca2 = pca2comp.explained_variance_ratio_.sum()
-pca3 = pca3comp.explained_variance_ratio_.sum()
+pca2e = pca2.explained_variance_ratio_.sum()
+pca3e = pca3.explained_variance_ratio_.sum()
 
+# Percentage explained
+print("PCA 2-components explains {:.2f}%".format(pca2e*100))
+print("PCA 3-components explains {:.2f}%".format(pca3e*100))
