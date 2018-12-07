@@ -15,7 +15,6 @@ print(covdata)
 pca2 = PCA(n_components=2)
 pca2comp = pca2.fit_transform(iris.data)
 pca2comp.shape
-pca2.components
 
 plt.scatter(pca2comp[:, 0], pca2comp[:, 1], c=iris.target, alpha=0.8, 
             s=60, marker='o', edgecolors='white')
@@ -59,7 +58,7 @@ print(pca95pcb.shape)
 # Randomized PCA
 rpca2 = PCA(svd_solver='randomized', n_components=2)
 rpca2c = rpca2.fit_transform(boston.data)
-plt.scatter(rpca2c[:, 0], rpca2c[:, 1], c=boston.target, 
+plt.scatter(rpca2c[:, 0], rpca2c[:, 1], c=boston.target,
             alpha=0.8, s=60, marker='o', edgecolors='white')
 plt.show()
 rpca2.explained_variance_ratio_.sum()
