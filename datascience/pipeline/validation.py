@@ -1,8 +1,8 @@
 from sklearn.datasets import load_boston, load_wine, load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from sklearn import metrics
-from sklearn.metrics import confusion_matrix
+# from sklearn import metrics
+from sklearn.metrics import confusion_matrix, classification_report
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -19,7 +19,8 @@ iris.target_names
 # Performance metrics
 c_metric = confusion_matrix(ytest, ypred)
 print(c_metric)
-
+print(classification_report(ytest, ypred, 
+                            target_names=iris.target_names)
 
 # Classified wine dataset
 wine = load_wine()
