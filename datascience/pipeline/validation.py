@@ -43,10 +43,21 @@ print(classification_report(wytest, wpred,
 
 
 # Plots of metrics
+# ## graph(1)
 img = plt.matshow(c_metric, cmap=plt.cm.autumn)
 plt.colorbar(img, fraction=0.045)
 for x in range(c_metric.shape[0]):
     for y in range(c_metric.shape[1]):
         plt.text(x, y, "{:.02f}".format(c_metric[x, y]),
+                 size=12, color='black', ha="center", va="center")
+plt.show()
+
+
+# ## graph(2)
+img2 = plt.matshow(cb_metric, cmap=plt.cm.autumn)
+plt.colorbar(img2, fraction=0.045)
+for x in range(cb_metric.shape[0]):
+    for y in range(cb_metric.shape[1]):
+        plt.text(x, y, "{:.02f}".format(cb_metric[x, y]),
                  size=12, color='black', ha="center", va="center")
 plt.show()
