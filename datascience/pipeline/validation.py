@@ -1,4 +1,4 @@
-from sklearn.datasets import load_boston, load_wine, load_iris
+from sklearn.datasets import load_wine, load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 # from sklearn import metrics
@@ -40,3 +40,13 @@ cb_metric = confusion_matrix(wytest, wpred)
 print(cb_metric)
 print(classification_report(wytest, wpred,
                             target_names=wine.target_names))
+
+
+# Plots of metrics
+img = plt.matshow(c_metric, cmap=plt.cm.autumn)
+plt.colorbar(img, fraction=0.045)
+for x in range(c_metric.shape[0]):
+    for y in range(c_metric.shape[1]):
+        plt.text(x, y, "{:.02f}".format(c_metric[x, y]),
+                 size=12, color='black', ha="center", va="center")
+plt.show()
