@@ -19,8 +19,8 @@ iris.target_names
 # Performance metrics
 c_metric = confusion_matrix(ytest, ypred)
 print(c_metric)
-print(classification_report(ytest, ypred, 
-                            target_names=iris.target_names)
+print(classification_report(ytest, ypred,
+                            target_names=iris.target_names))
 
 # Classified wine dataset
 wine = load_wine()
@@ -35,9 +35,8 @@ wine.target_names
 list(wine.target_names)
 wine.target[[20, 65, 123, 171]]
 
+# Performance metrics
 cb_metric = confusion_matrix(wytest, wpred)
 print(cb_metric)
-
-
-
-
+print(classification_report(wytest, wpred,
+                            target_names=wine.target_names))
