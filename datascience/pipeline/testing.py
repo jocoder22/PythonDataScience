@@ -24,3 +24,6 @@ Xtrain, Xtest, ytrain, ytest = train_test_split(ddata, dtarget, test_size=0.40,
 print ("(Xtrain shape {}, Xtest shape {},  ytrain shape {}, \
         ytest shape {})".format (Xtrain.shape, Xtest.shape, 
                             ytrain.shape, ytest.shape))
+
+h1.fit(Xtrain,ytrain)
+print (h1.score(Xtest,ytest)) 
