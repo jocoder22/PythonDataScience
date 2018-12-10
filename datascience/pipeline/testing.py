@@ -16,3 +16,11 @@ h3 = svm.SVC(kernel='poly', degree=3, C=1.0)
 
 h1.fit(ddata, dtarget)
 print(h1.score(ddata, dtarget))
+
+# split dataset and refit
+chosen_random_state = 1
+Xtrain, Xtest, ytrain, ytest = train_test_split(ddata, dtarget, test_size=0.40, 
+                                                random_state=chosen_random_state)
+print ("(Xtrain shape {}, Xtest shape {},  ytrain shape {}, \
+        ytest shape {})".format (Xtrain.shape, Xtest.shape, 
+                            ytrain.shape, ytest.shape))
