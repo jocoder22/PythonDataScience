@@ -36,4 +36,4 @@ for hypothesis in [h1, h2, h3]:
 print("{} -> cross validation accuracy: mean = {:.3f} \
        std = {:.3f}".format(hypothesis, np.mean(scores), np.std(scores)))
 
-
+print(scores)
