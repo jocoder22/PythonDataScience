@@ -21,4 +21,7 @@ cv_folds = 10  # Try 3, 5 or 20
 eval_scoring = 'accuracy'  # Try also f1
 workers = -1  # this will use all your CPU power
 
+Xtrain, Xtest, ytrain, ytest = train_test_split(
+                               ddata, dtarget, test_size=0.40,
+                               random_state=chosen_random_state)
 
