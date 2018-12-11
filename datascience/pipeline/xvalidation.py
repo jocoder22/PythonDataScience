@@ -34,7 +34,7 @@ for hypothesis in [h1, h2, h3]:
     scores = cross_val_score(hypothesis, Xtrain, ytrain,
                              cv=cv_folds, scoring=eval_scoring,
                              n_jobs=workers)
-    
+
     ScoresArray.append(scores)
     print("{} -> cross validation accuracy: mean = {:.3f} \
         std = {:.3f}".format(hypothesis, np.mean(scores), np.std(scores)))
