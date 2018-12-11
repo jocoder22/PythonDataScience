@@ -24,7 +24,7 @@ workers = -1  # this will use all your CPU power
 Xtrain, Xtest, ytrain, ytest = train_test_split(
                                ddata, dtarget, test_size=0.40,
                                random_state=chosen_random_state)
-                               
+
 print("(Xtrain shape {}, Xtest shape {},  \nytrain shape {}, \
       ytest shape {})".format(Xtrain.shape, Xtest.shape,
       ytrain.shape, ytest.shape))
@@ -33,7 +33,7 @@ for hypothesis in [h1, h2, h3]:
     scores = cross_val_score(hypothesis, Xtrain, ytrain,
                              cv=cv_folds, scoring=eval_scoring,
                              n_jobs=workers)
-print("{} -> cross validation accuracy: mean = {:.3f} \
-       std = {:.3f}".format(hypothesis, np.mean(scores), np.std(scores)))
+    print("{} -> cross validation accuracy: mean = {:.3f} \
+        std = {:.3f}".format(hypothesis, np.mean(scores), np.std(scores)))
 
 print(scores)
