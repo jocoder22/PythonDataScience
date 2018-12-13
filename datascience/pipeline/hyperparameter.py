@@ -4,7 +4,9 @@ from sklearn.model_selection import train_test_split
 
 digits = load_digits()
 print(digits.DESCR)
-ddata = digits.data
-dtarget = digits.target
-
+ddata, dtarget = digits.data,  digits.target
 ddata.shape
+
+# set up support vector machine algorithm
+hs = svm.SVC()
+hprob = svm.SVC(probability=True, random_state=1)
