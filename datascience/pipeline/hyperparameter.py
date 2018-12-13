@@ -22,6 +22,7 @@ search_grid = [
 scorer = 'accuracy'
 
 # set up the model searh function
-searchFunc = model_selection.GridSearchCV(estimator=hs,  
-                                param_grid=search_grid, scoring=scorer, 
-                                n_jobs=-1, iid=False, refit=True, cv=10)
+searchFunc = model_selection.GridSearchCV(
+                estimator=hs,  param_grid=search_grid,
+                scoring=scorer,  n_jobs=-1, iid=False,
+                refit=True, cv=10)
