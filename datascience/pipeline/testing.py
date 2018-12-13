@@ -56,8 +56,6 @@ print ("{} -> test mean accuracy = {:.3f}".format(h2,
        h2.score(Xtest,ytest)))
 
 
-
-
 # Using the test dataset
 h3.fit(X_train,y_train)
 print ("{} -> test mean accuracy = {:.3f}".format(h3,   
