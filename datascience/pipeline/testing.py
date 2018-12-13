@@ -51,13 +51,13 @@ for hypothesis in [h1, h2, h3]:
           hypothesis.score(Xvalidation, yvalidation)))
 
 
-h2.fit(X_train,y_train)
+h2.fit(Xtrain, ytrain)
 print ("{} -> test mean accuracy = {:.3f}".format(h2,   
        h2.score(Xtest,ytest)))
 
 
 # Using the test dataset
-h3.fit(X_train,y_train)
+h3.fit(Xtrain, ytrain)
 print ("{} -> test mean accuracy = {:.3f}".format(h3,   
        h3.score(Xtest,ytest)))
 
