@@ -3,6 +3,7 @@ from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Perceptron
 from sklearn.model_selection import train_test_split as split
+from sklearn.metrics import accuracy_score
 
 irisdata = datasets.load_iris()
 features_ = irisdata.data[:, [2, 3]]
@@ -27,3 +28,10 @@ X_test_std = stardard.transform(X_test)
 # fit the model
 model_1 = Perceptron(n_iter=40, eta0=0.1, random_state=1)
 model_1.fit(X_train_std, y_train)
+y_pred = model_1.predict(X_test_std)
+
+
+print('Accuracy: %.2f' % accuracy_score(y_test, y_pred))
+# Accuracy: 0.93
+
+print('Accuracy: {:.2f}%'.format(model_1.score(X_test_std, y_test) *100))
