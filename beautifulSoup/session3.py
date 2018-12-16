@@ -96,3 +96,4 @@ plt.show()
 
 NobelData.Month.value_counts().sort_index().plot(kind='bar')
 plt.show()
+
