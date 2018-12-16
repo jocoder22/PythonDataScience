@@ -1,6 +1,7 @@
 import numpy as np 
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import Perceptron
 from sklearn.model_selection import train_test_split as split
 
 irisdata = datasets.load_iris()
@@ -22,3 +23,7 @@ stardard = StandardScaler()
 stardard.fit(X_train)
 X_train_std = stardard.transform(X_train)
 X_test_std = stardard.transform(X_test)
+
+# fit the model
+model_1 = Perceptron(n_iter=40, eta0=0.1, random_state=1)
+model_1.fit(X_train_std, y_train)
