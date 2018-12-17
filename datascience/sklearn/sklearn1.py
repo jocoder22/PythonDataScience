@@ -23,7 +23,8 @@ print('Labels counts in y_test:', np.bincount(y_test))
 
 # Standardization
 stardard = StandardScaler()
-stardard.fit(X_train)
+# Standardization with the original data
+stardard.fit(features_)
 X_train_std = stardard.transform(X_train)
 X_test_std = stardard.transform(X_test)
 
