@@ -2,8 +2,10 @@ import numpy as np
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Perceptron
-from sklearn.model_selection import train_test_split as split
+from sklearn.model_selection import train_test_split as splitit
 from sklearn.metrics import accuracy_score
+from matplotlib.colors import ListedColormap
+import matplotlib.pyplot as plt
 
 irisdata = datasets.load_iris()
 features_ = irisdata.data[:, [2, 3]]
@@ -12,7 +14,7 @@ target_ = irisdata.target
 print(np.unique(target_))
 
 # split the dataset
-X_train, X_test, y_train, y_test = split(features_, target_, test_size=0.3,
+X_train, X_test, y_train, y_test = splitit(features_, target_, test_size=0.3,
                                        random_state=1, stratify=target_)
 
 print('Labels counts in target:', np.bincount(target_))
@@ -31,7 +33,7 @@ model_1.fit(X_train_std, y_train)
 y_pred = model_1.predict(X_test_std)
 
 
-print('Accuracy: %.2f' % accuracy_score(y_test, y_pred))
+print('Accuracy: %.3f' % accuracy_score(y_test, y_pred))
 # Accuracy: 0.93
 
 print('Accuracy: {:.2f}%'.format(model_1.score(X_test_std, y_test) *100))
