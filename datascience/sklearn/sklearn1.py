@@ -12,6 +12,8 @@ features_ = irisdata.data[:, [2, 3]]
 target_ = irisdata.target
 
 print(np.unique(target_))
+print(features_[:5, :])
+
 
 # split the dataset
 X_train, X_test, y_train, y_test = splitit(features_, target_, test_size=0.3,
