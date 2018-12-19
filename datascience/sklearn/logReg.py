@@ -25,3 +25,8 @@ features_std = stardard.transform(features_)
 # Split features into test and training datasets
 X_train, X_test, y_train, y_test = splitit(features_std, target_, test_size=0.3,
                                        random_state=1, stratify=target_)
+
+# fit the logistic regression
+logreg = LogisticRegression(C=100.0, random_state=1)
+logreg.fit(X_train, y_train)
+print(logreg.predict_proba(X_test[:3, :]))
