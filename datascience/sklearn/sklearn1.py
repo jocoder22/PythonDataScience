@@ -12,9 +12,35 @@ features_ = irisdata.data[:, [2, 3]]
 target_ = irisdata.target
 
 print(np.unique(target_))
-print(features_[:5, :])
 
 
+# Using the full dataset
+features_2 = irisdata.data
+# Standardization
+stardard = StandardScaler()
+# Standardization with the original data
+stardard.fit(features_2)
+features_std = stardard.transform(features_2)
+print(features_std[:5, :])
+
+# Split features into test and training datasets
+X_train, X_test, y_train, y_test = splitit(features_std, target_, test_size=0.3,
+                                       random_state=1, stratify=target_)
+
+
+# fit the model
+model_2 = Perceptron(n_iter=150, eta0=0.01, random_state=1)
+model_2.fit(X_train, y_train)
+y_pred = model_2.predict(X_test)
+
+
+print('Accuracy: {:.3f}'.format(accuracy_score(y_test, y_pred)))
+print('Accuracy: {:.2f}%'.format(model_2.score(X_test, y_test) *100))
+# Accuracy: 95.56%
+
+
+
+# Using only 2 features
 # split the dataset
 X_train, X_test, y_train, y_test = splitit(features_, target_, test_size=0.3,
                                        random_state=1, stratify=target_)
