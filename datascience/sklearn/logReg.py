@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/env python
 import numpy as np 
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 irisdata = datasets.load_iris()
 features_ = irisdata.data
 target_ = irisdata.target
+
+print(np.unique(target_))
 
 # Standardization
 stardard = StandardScaler()
