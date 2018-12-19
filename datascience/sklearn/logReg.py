@@ -32,3 +32,8 @@ logreg.fit(X_train, y_train)
 print(logreg.predict_proba(X_test[:10, :]))
 print(logreg.predict_proba(X_test[:10, :]).argmax(axis=1))
 print(logreg.predict(X_test[:10, :]))
+
+y_pred = logreg.predict(X_test)
+print('Accuracy: {:.3f}'.format(accuracy_score(y_test, y_pred)))
+print('Accuracy: {:.2f}%'.format(accuracy_score(y_test, y_pred) * 100))
+# Accuracy: 97.78%

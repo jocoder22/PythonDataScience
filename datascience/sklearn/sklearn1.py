@@ -36,3 +36,4 @@ y_pred = model_1.predict(X_test_std)
 
 print('Accuracy: {:.3f}'.format(accuracy_score(y_test, y_pred)))
 print('Accuracy: {:.2f}%'.format(model_1.score(X_test_std, y_test) *100))
+# Accuracy: 93.33%
