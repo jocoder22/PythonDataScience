@@ -29,4 +29,6 @@ X_train, X_test, y_train, y_test = splitit(features_std, target_, test_size=0.3,
 # fit the logistic regression
 logreg = LogisticRegression(C=100.0, random_state=1)
 logreg.fit(X_train, y_train)
-print(logreg.predict_proba(X_test[:3, :]))
+print(logreg.predict_proba(X_test[:10, :]))
+print(logreg.predict_proba(X_test[:10, :]).argmax(axis=1))
+print(logreg.predict(X_test[:10, :]))
