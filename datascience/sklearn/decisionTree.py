@@ -5,6 +5,7 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split as splitit
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 
 iris_ = datasets.load_iris()
@@ -44,7 +45,7 @@ mytree2.fit(Xd_train, yd_train)
 yd_pred = mytree2.predict(Xd_test)
 print('Accuracy: {:.3f}'.format(accuracy_score(yd_test, yd_pred)))
 print('Accuracy: {:.2f}%'.format(accuracy_score(yd_test, yd_pred) * 100))
-# Accuracy: 97.78%
+# Accuracy: 85.74%
 
 def runtree(xt, yt, xtest, ytest, n):
     scorelist = []
@@ -62,4 +63,16 @@ def runtree(xt, yt, xtest, ytest, n):
         # return scorelist
     print(scorelist)
 
-runtree(Xd_train, yd_train, Xd_test, yd_test, 50)
+# runtree(Xd_train, yd_train, Xd_test, yd_test, 50)
+
+
+ 
+# fit a randomforest tree model
+forest1 = RandomForestClassifier(criterion='gini', n_estimators=25,
+                                 random_state=1, n_jobs=2)
+
+forest1.fit(Xd_train, yd_train)
+yf_pred = forest1.predict(Xd_test)
+print('Accuracy: {:.3f}'.format(accuracy_score(yd_test, yf_pred)))
+print('Accuracy: {:.2f}%'.format(accuracy_score(yd_test, yf_pred) * 100))
+# Accuracy: 96.48%
