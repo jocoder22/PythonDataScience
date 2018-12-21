@@ -39,3 +39,8 @@ print('Accuracy: {:.2f}%'.format(accuracy_score(yi_test, yi_pred) * 100))
 
 
 
+mytree1.fit(Xd_train, yd_train)
+yd_pred = mytree1.predict(Xd_test)
+print('Accuracy: {:.3f}'.format(accuracy_score(yd_test, yd_pred)))
+print('Accuracy: {:.2f}%'.format(accuracy_score(yd_test, yd_pred) * 100))
+# Accuracy: 97.78%
