@@ -38,9 +38,28 @@ print('Accuracy: {:.2f}%'.format(accuracy_score(yi_test, yi_pred) * 100))
 # Accuracy: 97.78%
 
 
-
-mytree1.fit(Xd_train, yd_train)
-yd_pred = mytree1.predict(Xd_test)
+mytree2 = DecisionTreeClassifier(criterion='gini', max_depth=30, 
+                            random_state=1)
+mytree2.fit(Xd_train, yd_train)
+yd_pred = mytree2.predict(Xd_test)
 print('Accuracy: {:.3f}'.format(accuracy_score(yd_test, yd_pred)))
 print('Accuracy: {:.2f}%'.format(accuracy_score(yd_test, yd_pred) * 100))
 # Accuracy: 97.78%
+
+def runtree(xt, yt, xtest, ytest, n):
+    scorelist = []
+    for i in range(4, n):
+        tree = DecisionTreeClassifier(criterion='gini', max_depth=i, 
+                                random_state=1)
+        tree.fit(xt, yt)
+        y_pred = tree.predict(xtest)
+        # print('Accuracy: {:.3f}'.format(accuracy_score(yd_test, yd_pred)))
+        # print('Accuracy: {:.2f}%'.format(accuracy_score(yd_test, yd_pred) * 100))
+        sss = accuracy_score(ytest, y_pred) * 100
+        accu = round(sss, 2)
+        scorelist.append(accu)
+        # Accuracy: 97.78%
+        # return scorelist
+    print(scorelist)
+
+runtree(Xd_train, yd_train, Xd_test, yd_test, 50)
