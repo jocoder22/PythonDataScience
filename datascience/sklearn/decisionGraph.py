@@ -32,7 +32,7 @@ mytree1 = DecisionTreeClassifier(criterion='gini', max_depth=4,
 mytree1.fit(Xi_train, yi_train)
 
 # Graphing the tree structure
-dot_data = export_graphviz(mytree1,
+dot_data = export_graphviz(mytree1, filled=True, rounded=True,
                 class_names=iris_.target_names,
                 feature_names=iris_.feature_names,
                 out_file=None)
