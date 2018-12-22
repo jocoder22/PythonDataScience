@@ -6,8 +6,6 @@ from sklearn.model_selection import train_test_split as splitit
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from pydotplus import graph_from_dot_data
-from sklearn.tree import export_graphviz
 
 
 iris_ = datasets.load_iris()

@@ -8,7 +8,6 @@ from pydotplus import graph_from_dot_data
 from sklearn.tree import export_graphviz
 
 
-
 iris_ = datasets.load_iris()
 iris_features = iris_.data
 iris_target = iris_.target
@@ -40,3 +39,4 @@ dot_data = export_graphviz(mytree1, filled=True, rounded=True,
 graph = graph_from_dot_data(dot_data)
 graph.write_pdf('tree.pdf')
 graph.write_png('tree.png')
+
