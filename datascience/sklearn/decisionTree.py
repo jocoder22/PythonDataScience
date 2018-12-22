@@ -6,6 +6,8 @@ from sklearn.model_selection import train_test_split as splitit
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+from pydotplus import graph_from_dot_data
+from sklearn.tree import export_graphviz
 
 
 iris_ = datasets.load_iris()
@@ -76,3 +78,5 @@ yf_pred = forest1.predict(Xd_test)
 print('Accuracy: {:.3f}'.format(accuracy_score(yd_test, yf_pred)))
 print('Accuracy: {:.2f}%'.format(accuracy_score(yd_test, yf_pred) * 100))
 # Accuracy: 96.48%
+
+
