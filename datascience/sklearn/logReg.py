@@ -44,3 +44,7 @@ logRg.fit(X_train, y_train)
 print('Training accuracy:', logRg.score(X_train, y_train))
 print('Test accuracy:', logRg.score(X_test, y_test))
 
+y_predp = logRg.predict(X_test)
+print('Accuracy: {:.3f}'.format(accuracy_score(y_test, y_predp)))
+print('Accuracy: {:.2f}%'.format(accuracy_score(y_test, y_predp) * 100))
+# Accuracy: 97.78%
