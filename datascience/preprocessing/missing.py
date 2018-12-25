@@ -43,7 +43,8 @@ print(data4)
 
 
 # Using sklearn Imputer II
-imput2 = Imputer(missing_values=999, strategy="mean", axis=0)
+imput2 = Imputer(missing_values=9999, strategy="mean", axis=0)
+data4[data4.values >= 900] = 9999
 imput_fit2 =  imput2.fit(data4.values)
-Imputed_mydata2 = imput_fit.transform(data4.values)
+Imputed_mydata2 = imput_fit2.transform(data4.values)
 print(Imputed_mydata2)
