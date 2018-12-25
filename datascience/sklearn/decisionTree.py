@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split as splitit
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_selection import SelectFromModel
 
 
 iris_ = datasets.load_iris()
