@@ -17,8 +17,8 @@ print(features_[:5, :])
 # Standardization
 stardard = StandardScaler()
 # Standardization with the original data
-stardard.fit(features_)
-features_std = stardard.transform(features_)
+# stardard.fit(features_)
+features_std = stardard.fit_transform(features_)
 print(features_std[:5, :])
 
 # Split features into test and training datasets
@@ -36,3 +36,11 @@ y_pred = logreg.predict(X_test)
 print('Accuracy: {:.3f}'.format(accuracy_score(y_test, y_pred)))
 print('Accuracy: {:.2f}%'.format(accuracy_score(y_test, y_pred) * 100))
 # Accuracy: 97.78%
+
+
+# Apply L1 regularised LogisticRegression
+logRg = LogisticRegression(penalty='l1', C=100.0)
+logRg.fit(X_train, y_train)
+print('Training accuracy:', logRg.score(X_train, y_train))
+print('Test accuracy:', logRg.score(X_test, y_test))
+
