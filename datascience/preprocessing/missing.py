@@ -22,3 +22,22 @@ mydata_pd.dropna(axis=0)
 
 ## drop missing features, ver bad idea
 mydata_pd.dropna(axis=1)
+
+
+# Using sklearn Imputer
+imput = Imputer(missing_values="NaN", strategy="mean", axis=0)
+imput_fit =  imput.fit(mydata_pd.values)
+Imputed_mydata = imput_fit.transform(mydata_pd.values)
+print(Imputed_mydata)
+
+
+# other strategy: median, most_frequent
+
+data3 = np.random.randint(20, 35, size=44)
+data3[random.sample([i for i in range(44)], 7)] = 999
+data3[random.sample([i for i in range(44)], 7)] = 900
+data4 = DataFrame(data3.reshape(11, 4), 
+                  columns=['Age', 'Height', 'Weight', 'Grade'])
+
+print(data4)
+
