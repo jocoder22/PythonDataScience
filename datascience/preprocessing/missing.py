@@ -33,11 +33,17 @@ print(Imputed_mydata)
 
 # other strategy: median, most_frequent
 
-data3 = np.random.randint(20, 35, size=44)
-data3[random.sample([i for i in range(44)], 7)] = 999
-data3[random.sample([i for i in range(44)], 7)] = 900
-data4 = DataFrame(data3.reshape(11, 4), 
+data3 = np.random.randint(20, 35, size=88)
+data3[random.sample([i for i in range(88)], 7)] = 999
+data3[random.sample([i for i in range(88)], 7)] = 900
+data4 = DataFrame(data3.reshape(22, 4), 
                   columns=['Age', 'Height', 'Weight', 'Grade'])
 
 print(data4)
 
+
+# Using sklearn Imputer II
+imput2 = Imputer(missing_values=999, strategy="mean", axis=0)
+imput_fit2 =  imput2.fit(data4.values)
+Imputed_mydata2 = imput_fit.transform(data4.values)
+print(Imputed_mydata2)
