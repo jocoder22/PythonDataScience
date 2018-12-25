@@ -3,6 +3,7 @@
 import numpy as np
 from pandas import DataFrame
 from sklearn.preprocessing import Imputer
+from sklearn.impute import SimpleImputer
 import random
 
 random.seed(2)
@@ -32,7 +33,7 @@ print(Imputed_mydata)
 
 
 # other strategy: median, most_frequent
-
+random.seed(2)
 data3 = np.random.randint(20, 35, size=88)
 data3[random.sample([i for i in range(88)], 7)] = 999
 data3[random.sample([i for i in range(88)], 7)] = 900
@@ -48,3 +49,25 @@ data4[data4.values >= 900] = 9999
 imput_fit2 =  imput2.fit(data4.values)
 Imputed_mydata2 = imput_fit2.transform(data4.values)
 print(Imputed_mydata2)
+
+
+
+# Using SimpleImputer, it has no axis parameter
+data33 = np.arange(88)
+data33[random.sample([i for i in range(88)], 7)] = 999
+data33[random.sample([i for i in range(88)], 7)] = 900
+data44 = DataFrame(data33.reshape(22, 4), 
+                  columns=['Age', 'Height', 'Weight', 'Grade'])
+
+print(data44)
+
+imput_S = SimpleImputer(missing_values=9999, strategy="mean")
+data44[data44.values >= 900] = 9999
+data44_copy = data44.copy()
+imput_fit_s =  imput_S.fit(data44.values)
+Imputed_mydata_s = imput_fit_s.transform(data44.values)
+print(Imputed_mydata_s)
+
+
+imput_fit_si =  imput_S.fit_transform(data44_copy.values)
+print(np.array_equal(imput_fit_si, Imputed_mydata_s))
