@@ -73,6 +73,23 @@ forest1 = RandomForestClassifier(criterion='gini', n_estimators=25,
                                  random_state=1, n_jobs=2)
 
 forest1.fit(Xd_train, yd_train)
+feature_influence = forest1.feature_importances_
+feature_index = np.argsort(feature_influence)[::-1]
+count = 0
+newlist = []
+
+for f in range(Xd_train.shape[1]):
+    if feature_influence[feature_index[f]] >= 0.0100:
+        count += 1
+        print("%s)  %f" % (feature_index[f], 
+                            feature_influence[feature_index[f]]))
+    newlist.append(feature_influence[feature_index[f]])
+
+np.cumsum(newlist)
+print(count)
+
+
+
 yf_pred = forest1.predict(Xd_test)
 print('Accuracy: {:.3f}'.format(accuracy_score(yd_test, yf_pred)))
 print('Accuracy: {:.2f}%'.format(accuracy_score(yd_test, yf_pred) * 100))
@@ -81,6 +98,7 @@ print('Accuracy: {:.2f}%'.format(accuracy_score(yd_test, yf_pred) * 100))
 
 
 # using sklearn SelectFromModel
+## to select important features
 feature_select = SelectFromModel(forest1, threshold=0.1, prefit=True)
 features_selected = feature_select.transform(Xd_train)
 
