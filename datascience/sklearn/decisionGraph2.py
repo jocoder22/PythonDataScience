@@ -78,7 +78,6 @@ print(wine.feature_names)
 print(wine.target_names)
 wine.DESCR 
 
-
 Xw_train = wine_features
 yw_train = wine_target
 
@@ -87,6 +86,7 @@ mytree3 = DecisionTreeClassifier(criterion='gini', max_depth=4,
                             random_state=1)
 
 mytree3.fit(Xw_train, yw_train)
+
 
 # Graphing the tree structure
 dot_data3 = export_graphviz(mytree3, filled=True, rounded=True,
