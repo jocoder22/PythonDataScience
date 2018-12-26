@@ -78,12 +78,12 @@ feature_index = np.argsort(feature_influence)[::-1]
 count = 0
 newlist = []
 
-for f in range(Xd_train.shape[1]):
-    if feature_influence[feature_index[f]] >= 0.0100:
+for i in range(Xd_train.shape[1]):
+    if feature_influence[feature_index[i]] >= 0.0100:
         count += 1
-        print("%s)  %f" % (feature_index[f], 
-                            feature_influence[feature_index[f]]))
-    newlist.append(feature_influence[feature_index[f]])
+        print("%s)  %f" % (feature_index[i], 
+                            feature_influence[feature_index[i]]))
+    newlist.append(feature_influence[feature_index[i]])
 
 np.cumsum(newlist)
 print(count)
@@ -99,6 +99,16 @@ print('Accuracy: {:.2f}%'.format(accuracy_score(yd_test, yf_pred) * 100))
 
 # using sklearn SelectFromModel
 ## to select important features
-feature_select = SelectFromModel(forest1, threshold=0.1, prefit=True)
+feature_select = SelectFromModel(forest1, threshold=0.0100, prefit=True)
 features_selected = feature_select.transform(Xd_train)
+print('Number meeting threshold criterion:', features_selected.shape[1])
 
+print("{}    {}".format('Feature Number', 'Percentage Influence'))
+for t in range(features_selected.shape[1]):
+        print("{0:>12} {1:>11.02f}%".format(feature_index[t], 
+                            feature_influence[feature_index[t]]))
+
+
+for t in range(features_selected.shape[1]):
+        print("{0:>3}) {1:^10.04f}".format(feature_index[t], 
+                            feature_influence[feature_index[t]]))
