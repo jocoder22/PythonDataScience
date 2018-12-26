@@ -79,3 +79,8 @@ print('Accuracy: {:.2f}%'.format(accuracy_score(yd_test, yf_pred) * 100))
 # Accuracy: 96.48%
 
 
+
+# using sklearn SelectFromModel
+feature_select = SelectFromModel(forest1, threshold=0.1, prefit=True)
+features_selected = feature_select.transform(Xd_train)
+
