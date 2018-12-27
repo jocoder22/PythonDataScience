@@ -9,7 +9,7 @@ class Set:
         return str(self.dict)
 
     def add(self, value):
-        self.dict[value] = value*2
+        self.dict[value] = value ** 2
 
     def contains(self, value):
         return value in self.dict
