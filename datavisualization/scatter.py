@@ -2,6 +2,9 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import time
+
+plt.ion()
 
 xplot = np.linspace(0, 10, 1000)
 yplot = np.sin(xplot)
@@ -37,7 +40,8 @@ terrain, terrain_r, viridis, viridis_r, winter, winter_r
 
 plt.scatter(xplot+2, yplot, c=np.cos(xplot), cmap='inferno')
 plt.scatter(xplot+3, yplot, c=np.cos(xplot), cmap='inferno', edgecolors='none')
+plt.colormaps('inferno')
 
 plt.scatter(xplot+3, yplot, c=np.cos(xplot), cmap='magma', edgecolors='none',
             s=np.power(xplot, 4))
-plt.colormaps('inferno')
+
