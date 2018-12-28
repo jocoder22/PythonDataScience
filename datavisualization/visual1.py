@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 class Set:
     def __init__(self, values=None):
         self.dict = {}
