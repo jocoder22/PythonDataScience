@@ -15,3 +15,6 @@ config.gypi
 __*
 _*
 .vscode
+*.config
+*.txt
+*.pdf
