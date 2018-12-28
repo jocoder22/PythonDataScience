@@ -18,7 +18,8 @@ class Set:
     def remove(self, value):
         del self.dict[value]
 
-xt = Set([8,3,6,11])
+
+xt = Set([8, 3, 6, 11])
 print(xt)
 xt.add(10)
 xt.contains(23)
