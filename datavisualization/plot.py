@@ -36,7 +36,7 @@ Linestyle:
 """
 
 plt.plot(xplot+2, yplot, color='b', linestyle=':')
-plt.plot(xplot+4, yplot, color='m', linestyle='-.')
+plt.plot(xplot+3, yplot, color='m', linestyle='-.')
 
 '''
 Markers:
@@ -73,7 +73,8 @@ plt.plot(xplot+2, yplot, color='r', marker='^', markevery=10)
 plt.plot(xplot+2.5, yplot, color='b', linestyle=':', marker='^', markevery=10)
 
 # markersize affects the markers, while linewith affects the linestyle
-plt.plot(xplot+5, yplot, color='g', marker='p', markersize=0.5, linewidth=3, markevery=10)
+plt.plot(xplot+5, yplot, color='g', marker='p', markersize=0.5,
+         linewidth=3, markevery=10)
 
 
 # zorder is the ordering of overlayed plot, higher number are in front
