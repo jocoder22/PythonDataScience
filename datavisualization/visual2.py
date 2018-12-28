@@ -22,9 +22,9 @@ plt.close()
 
 # Ploting multiple plots: using subplot
 groups = ['group1', 'group2', 'group3']
-sales = [90, 800, 5600]
-members = [13, 45, 10]
-totalHr = [214, 689, 280]
+sales = [590, 800, 5600]
+members = [13, 25, 100]
+totalHr = [214, 689, 3280]
 
 plt.figure(1, figsize=(10.5, 4), facecolor='green',
            edgecolor='r')
