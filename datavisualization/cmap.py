@@ -30,7 +30,7 @@ for i in mylist:
                 edgecolors='none',
                 s=np.power(xplot, 4))
     plt.pause(1)
-    plt.cla()
+    plt.clf()
 
 plt.close()
 
