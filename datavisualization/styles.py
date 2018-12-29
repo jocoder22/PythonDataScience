@@ -33,7 +33,7 @@ mylist = ['Accent', 'Accent_r', 'Blues', 'Blues_r', 'BrBG', 'BrBG_r', 'BuGn',
 for i in mylist:
     plt.title('This is for style: ' + i)
     # plt.style.use(i)
-    # plt.title('This is for style: ' + i)
+    # plt.imshow(rand2f)
     plt.imshow(rand2f, cmap=i)
     plt.colorbar()
     plt.pause(1)
