@@ -4,6 +4,7 @@ import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split as splitit
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
 from pydotplus import graph_from_dot_data
 from sklearn.tree import export_graphviz
 
@@ -18,11 +19,19 @@ n_samples = len(X_digits)
 
 X_train = X_digits[:int(.9 * n_samples)]
 y_train = y_digits[:int(.9 * n_samples)]
+X_test = X_digits[:int((.1 * n_samples)+1)]
+y_test = y_digits[:int((.1 * n_samples)+1)]
 
 mytree3 = DecisionTreeClassifier(criterion='gini', max_depth=5, 
                             random_state=1)
 
 mytree3.fit(X_train, y_train)
+
+score = mytree3.score(X_test,y_test)
+print(score)
+# 0.6666
+
+
 
 
 dot_data = export_graphviz(mytree3, filled=True, rounded=True,
