@@ -3,6 +3,7 @@
 import numpy as np 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split as splitit
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from pydotplus import graph_from_dot_data
@@ -32,8 +33,18 @@ print(score)
 # 0.6666
 
 
+# fit a randomforest tree model
+forest = RandomForestClassifier(criterion='gini', n_estimators=50,
+                                 random_state=1, n_jobs=2)
+
+forest.fit(X_train, y_train)
+
+fscore = forest.score(X_test,y_test)
+print(fscore)
+# 1.0
 
 
+# display the tree
 dot_data = export_graphviz(mytree3, filled=True, rounded=True,
                 class_names=digits.target_names.astype('U10'),
                 out_file=None)
