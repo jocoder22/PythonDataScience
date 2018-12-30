@@ -24,7 +24,7 @@ cd ..
 # Then we need to tell nbconvert to point to this local copy. To do that 
 # we use the --reveal-prefix command line flag to point to the local copy.
 
-jupyter nbconvert your_talk.ipynb --to slides --reveal-prefix reveal.js
+jupyter nbconvert "Example 1.ipynb" --to slides --reveal-prefix reveal.js
 
 # This will create file your_talk.slides.html, which you should be able to 
 # access with open your_talk.slides.html. To access the speaker notes, 
