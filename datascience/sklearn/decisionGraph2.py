@@ -8,6 +8,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from pydotplus import graph_from_dot_data
 from sklearn.tree import export_graphviz
+import matplotlib.pyplot as plt
 
 
 digits = datasets.load_digits()
@@ -23,6 +24,18 @@ y_train = y_digits[:int(.9 * n_samples)]
 X_test = X_digits[:int((.1 * n_samples)+1)]
 y_test = y_digits[:int((.1 * n_samples)+1)]
 
+# display the first 10 images
+plt.figure(figsize = (20, 9))
+for i, (image, label) in enumerate(zip(X_digits[:10], y_digits[:10])):
+    plt.subplot(2, 5, i + 1)
+    plt.imshow(np.reshape(image, (8, 8)), cmap='gray')
+    plt.title("This is digit: {}".format(label), fontsize=10)
+    
+    plt.tight_layout()
+
+plt.show()
+
+# fit the DecisionTreeClassifier
 mytree3 = DecisionTreeClassifier(criterion='gini', max_depth=5, 
                             random_state=1)
 
