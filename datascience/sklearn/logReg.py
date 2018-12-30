@@ -48,3 +48,24 @@ y_predp = logRg.predict(X_test)
 print('Accuracy: {:.3f}'.format(accuracy_score(y_test, y_predp)))
 print('Accuracy: {:.2f}%'.format(accuracy_score(y_test, y_predp) * 100))
 # Accuracy: 97.78%
+
+#######
+# apply to digits_image
+digits = datasets.load_digits()
+Xdigits = digits.data / digits.data.max()
+y_digits = digits.target
+
+X_digits = stardard.fit_transform(Xdigits)
+print(X_digits.dtype)
+print(y_digits.dtype)
+n_samples = len(X_digits)
+
+X_train = X_digits[:int(.9 * n_samples)]
+y_train = y_digits[:int(.9 * n_samples)]
+X_test = X_digits[:int((.1 * n_samples)+1)]
+y_test = y_digits[:int((.1 * n_samples)+1)]
+
+logregImage = LogisticRegression()
+logregImage.fit(X_train, y_train)
+print(logregImage.score(X_test, y_test))
+# 0.97777
