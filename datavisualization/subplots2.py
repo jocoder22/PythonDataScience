@@ -15,14 +15,19 @@ plt.style.use(['dark_background'])
 # plot it
 fig = plt.figure(figsize=(20, 6))
 plt.tight_layout()
-plt.subplot2grid((2, 3), (0, 0), colspan=2,  xticklabels=[],
+a1 = plt.subplot2grid((2, 3), (0, 0), colspan=2,  xticklabels=[],
                  xticks=[])
+a1.yaxis.grid(True)
+
+
 plt.plot(x, y, "g-.")
 
-plt.subplot2grid((2, 3), (0, 2), rowspan=2)
+a2 = plt.subplot2grid((2, 3), (0, 2), rowspan=2)
 plt.scatter(x1, np.sin(x1), c=np.cos(x1), cmap='Paired',
             edgecolors='none',
             s=np.power(x1, 2))
+a2.yaxis.set_ticks_position('right')
+a2.xaxis.set_ticks_position('top')
 
 plt.subplot2grid((2, 3), (1, 0), colspan=2)
 plt.scatter(x, y, c=cll, cmap='Accent',
