@@ -22,5 +22,14 @@ ax2 = plt.subplot(232, yticks=[], sharex=ax1)
 plt.setp(ax2.get_yticklabels(), visible=False)
 plt.plot(x, y)
 
+ax3 = plt.subplot(233)
+ax3.plot(x, y)
+ax3.xaxis.set_ticks_position('top')
+ax3.xaxis.set_major_locator(ticker.MaxNLocator(9))
 
+# prune='upper''lower' 'both'
+# integer=True
+plt.xlim(0.01, 5.0)
+
+plt.show()
 
