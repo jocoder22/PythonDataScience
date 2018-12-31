@@ -11,7 +11,7 @@ x = np.arange(0, 100, 0.01)
 x1 = x[:1000]
 y = np.sin(x)
 cll = np.random.randn(len(x))
-
+plt.style.use(['dark_background'])
 # plot it
 fig = plt.figure(figsize=(20, 6))
 plt.tight_layout()
