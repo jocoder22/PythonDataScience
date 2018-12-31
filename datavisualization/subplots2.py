@@ -3,6 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 # generate some data
 x = np.arange(0, 100, 0.01)
 # indices = range(0,10000, 101)
