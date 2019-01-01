@@ -20,7 +20,8 @@ for i, xa in enumerate(plx):
              va='center', ha='right', fontsize=11)
     xa.yaxis.set_ticks_position('right')
 
-
+plt.pause(2)
+plt.clf()
 
 ax1 = plt.subplot2grid((4,3), (0, 0), rowspan=2, colspan=2)
 ax1.plot(x1, np.power(x1, 3))
