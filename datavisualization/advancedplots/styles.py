@@ -2,7 +2,17 @@
 import sys
 # sys.path.insert(0, '/Users/Jose/Desktop/ppp/')
 sys.path.append('C:/Users/Jose/Desktop/ppp')
-# from program_timer import program_performance
+
+# ### importin file in another folder
+# using open to read file 
+# path = 'C:/Users/Jose/Desktop/ppp'
+# file = open(''.join(path,'timer_function'))
+
+# ## using os
+# import os
+# os.chdir(path)
+# from timer_function import program_performance
+
 from timer_function import program_performance
 from scipy.ndimage.filters import gaussian_filter as gf
 import matplotlib.pyplot as plt
@@ -16,18 +26,19 @@ import itertools
 
 rand2 = np.random.normal(size=(512, 512))
 rand2f = gf(rand2, sigma=10)
-"""
+
+
+
 style_list = ['seaborn-dark', 'dark_background', 'seaborn-pastel', 'seaborn-colorblind',
- 'tableau-colorblind10', 'seaborn-notebook', 'seaborn-dark-palette',"""
-style_list = ['grayscale', 'seaborn-poster', 'seaborn', 'bmh', 'seaborn-talk',
+    'tableau-colorblind10', 'seaborn-notebook', 'seaborn-dark-palette',
+    'grayscale', 'seaborn-poster', 'seaborn', 'bmh', 'seaborn-talk',
     'seaborn-ticks', '_classic_test', 'ggplot', 'seaborn-white', 'classic',
     'Solarize_Light2', 'seaborn-paper', 'fast', 'fivethirtyeight',
     'seaborn-muted', 'seaborn-whitegrid', 'seaborn-darkgrid', 'seaborn-bright',
     'seaborn-deep']
 
-
-
 mylist = ['Accent', 'Accent_r', 'Blues', 'CMRmap', 'CMRmap_r', 'Dark2']
+
 
 """, 'Blues_r', 'BrBG', 'BrBG_r', 'BuGn',
           'BuGn_r', 'BuPu', 'BuPu_r', 'CMRmap', 'CMRmap_r', 'Dark2', 'Dark2_r',
@@ -46,6 +57,7 @@ mylist = ['Accent', 'Accent_r', 'Blues', 'CMRmap', 'CMRmap_r', 'Dark2']
 xx = np.linspace(0, 2 * np.pi)
 xx1 = np.linspace(0, 5, 150)
 
+
 def f1():
     k = 0
     for i in style_list:
@@ -53,7 +65,6 @@ def f1():
         for u in mylist:
             plt.plot(np.sin(xx1), 'r-o')
             plt.title('This is for style: {} and colormap: {}'.format(i, u))
-            
             plt.scatter(xx, np.sin(xx), c=np.cos(xx), cmap=u,
                             edgecolors='none',
                             s=np.power(xx, 5))
@@ -64,22 +75,20 @@ def f1():
     plt.close()
 
 
-# for i in style_list:
-#     with plt.style.context((i)):
-#         plt.title('This is for style: {}'.format(i))
-#         ax1 = plt.subplot2grid((1,2), (0, 0))
-#         ax1.imshow(rand2f)
-#         ax2 = plt.subplot2grid((1,2), (0, 1))
-#         ax2.plot(np.sin(np.linspace(0, 10, 100)), 'r-o')
-#         plt.pause(1)
-#         plt.clf()
+for i in style_list:
+    with plt.style.context((i)):
+        plt.title('This is for style: {}'.format(i))
+        ax1 = plt.subplot2grid((1,2), (0, 0))
+        ax1.imshow(rand2f)
+        ax2 = plt.subplot2grid((1,2), (0, 1))
+        ax2.plot(np.sin(np.linspace(0, 10, 100)), 'r-o')
+        plt.pause(1)
+        plt.clf()
     
-# plt.close()
-# print(n)
+plt.close()
 
 
-# [ i + [y] for y in x for i in r ]
-# result = list(itertools.product(*inputdata))
+
 
 def f2():
     m = 0
