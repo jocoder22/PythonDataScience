@@ -41,10 +41,11 @@ mylist = ['Accent', 'Accent_r', 'Blues', 'CMRmap', 'CMRmap_r', 'Dark2']
           'Set3', 'Set3_r', 'Spectral', 'Spectral_r', 'Wistia', 'Wistia_r',
           'YlGn', 'YlGnBu', 'YlGnBu_r', 'YlGn_r', 'YlOrBr', 'YlOrBr_r',
           'YlOrRd', 'YlOrRd_r']"""
-xx = np.linspace(0, 2 * np.pi)
-n = 0
 
+
+xx = np.linspace(0, 2 * np.pi)
 xx1 = np.linspace(0, 5, 150)
+
 def f1():
     k = 0
     for i in style_list:
@@ -95,7 +96,7 @@ def f2():
     print('m equal {}'.format(m))
     plt.close()
 
-print(n)
+
 
 if __name__ == '__main__':
     program_performance(f1, f2)
