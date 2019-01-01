@@ -1,44 +1,102 @@
 #!/usr/bin/env python
-
-import numpy as np 
-import matplotlib as mpl
+import sys
+# sys.path.insert(0, '/Users/Jose/Desktop/ppp/')
+sys.path.append('C:/Users/Jose/Desktop/ppp')
+# from program_timer import program_performance
+from timer_function import program_performance
+from scipy.ndimage.filters import gaussian_filter as gf
 import matplotlib.pyplot as plt
-from scipy.ndimage import gaussian_filter as gfl
+import numpy as np
+from sklearn.base import clone
+import itertools
 
-x1 = np.arange(0, 10, 0.1)
-y1 = np.cos(x1)
-
-fig, plx = plt.subplots(4, figsize=(20, 6), dpi=100, sharex=True)
-fig.subplots_adjust(top=0.95, bottom=0.1, left=0.2, right=0.89)
-
-for i, xa in enumerate(plx):
-    xa.scatter(x1, y1, c=np.sin(x1), s=np.power(x1, i))
-    pos = list(xa.get_position().bounds)
-    xpos = pos[0] - 0.01
-    ypos = pos[1] + pos[3]/2.
-    fig.text(xpos, ypos,'For power {}'.format(i), color='red', 
-             va='center', ha='right', fontsize=11)
-    xa.yaxis.set_ticks_position('right')
-
-plt.pause(2)
-plt.clf()
-
-ax1 = plt.subplot2grid((4,3), (0, 0), rowspan=2, colspan=2)
-ax1.plot(x1, np.power(x1, 3))
-ax1.xaxis.set_ticks_position('top')
-ax2 = plt.subplot2grid((4,3), (0, 2), xticks=[])
-ax2.scatter(x1, y1, c=np.sin(x1), s=np.power(x1, 2))
-ax3 = plt.subplot2grid((4,3), (2, 0), rowspan=2)
-ax3.hist(np.sin(x1))
-ax4 = plt.subplot2grid((4,3), (2, 1))
-ax4.hist(np.random.normal(size=1500), alpha=0.8)
-ax4.hist(np.random.normal(1, size=800), alpha=0.6)
-ax5 = plt.subplot2grid((4,3), (3, 1))
-ax5.scatter(x1, np.tan(x1), c=np.sin(x1))
-ax6 = plt.subplot2grid((4,3), (1, 2), rowspan=3)
-ax5.scatter(x1, np.sin(x1), c=np.sin(x1), s=np.power(x1, 3))
-ax6.scatter(x1, np.sin(x1), c=np.sin(x1), s=np.power(x1, 3))
+# 'C:\Users\Jose\Desktop\ppp'
+# 'C:/Users/Jose/Desktop/ppp/timer_function'
 
 
-plt.show()
+rand2 = np.random.normal(size=(512, 512))
+rand2f = gf(rand2, sigma=10)
+"""
+style_list = ['seaborn-dark', 'dark_background', 'seaborn-pastel', 'seaborn-colorblind',
+ 'tableau-colorblind10', 'seaborn-notebook', 'seaborn-dark-palette',"""
+style_list = ['grayscale', 'seaborn-poster', 'seaborn', 'bmh', 'seaborn-talk',
+    'seaborn-ticks', '_classic_test', 'ggplot', 'seaborn-white', 'classic',
+    'Solarize_Light2', 'seaborn-paper', 'fast', 'fivethirtyeight',
+    'seaborn-muted', 'seaborn-whitegrid', 'seaborn-darkgrid', 'seaborn-bright',
+    'seaborn-deep']
 
+
+
+mylist = ['Accent', 'Accent_r', 'Blues', 'CMRmap', 'CMRmap_r', 'Dark2']
+
+""", 'Blues_r', 'BrBG', 'BrBG_r', 'BuGn',
+          'BuGn_r', 'BuPu', 'BuPu_r', 'CMRmap', 'CMRmap_r', 'Dark2', 'Dark2_r',
+          'GnBu', 'GnBu_r', 'Greens', 'Greens_r', 'Greys', 'Greys_r', 'OrRd',
+          'OrRd_r', 'Oranges', 'Oranges_r', 'PRGn', 'PRGn_r', 'Paired',        
+          'Paired_r', 'Pastel1', 'Pastel1_r', 'Pastel2', 'Pastel2_r', 'PiYG',
+          'PiYG_r', 'PuBu', 'PuBuGn', 'PuBuGn_r', 'PuBu_r', 'PuOr', 'PuOr_r',
+          'PuRd', 'PuRd_r', 'Purples', 'Purples_r', 'RdBu', 'RdBu_r', 'RdGy',
+          'RdGy_r', 'RdPu', 'RdPu_r', 'RdYlBu', 'RdYlBu_r', 'RdYlGn',
+          'RdYlGn_r', 'Reds', 'Reds_r', 'Set1', 'Set1_r', 'Set2', 'Set2_r',
+          'Set3', 'Set3_r', 'Spectral', 'Spectral_r', 'Wistia', 'Wistia_r',
+          'YlGn', 'YlGnBu', 'YlGnBu_r', 'YlGn_r', 'YlOrBr', 'YlOrBr_r',
+          'YlOrRd', 'YlOrRd_r']"""
+xx = np.linspace(0, 2 * np.pi)
+n = 0
+
+xx1 = np.linspace(0, 5, 150)
+def f1():
+    k = 0
+    for i in style_list:
+        plt.style.use([i])
+        for u in mylist:
+            plt.plot(np.sin(xx1), 'r-o')
+            plt.title('This is for style: {} and colormap: {}'.format(i, u))
+            
+            plt.scatter(xx, np.sin(xx), c=np.cos(xx), cmap=u,
+                            edgecolors='none',
+                            s=np.power(xx, 5))
+            k += 1
+        plt.pause(1)
+        plt.clf()
+    print('k equal {}'.format(k))
+    plt.close()
+
+
+# for i in style_list:
+#     with plt.style.context((i)):
+#         plt.title('This is for style: {}'.format(i))
+#         ax1 = plt.subplot2grid((1,2), (0, 0))
+#         ax1.imshow(rand2f)
+#         ax2 = plt.subplot2grid((1,2), (0, 1))
+#         ax2.plot(np.sin(np.linspace(0, 10, 100)), 'r-o')
+#         plt.pause(1)
+#         plt.clf()
+    
+# plt.close()
+# print(n)
+
+
+# [ i + [y] for y in x for i in r ]
+# result = list(itertools.product(*inputdata))
+
+def f2():
+    m = 0
+    for s, c in itertools.product(style_list, mylist):
+        plt.style.use([s])
+        plt.plot(np.sin(xx), 'r-o')
+        plt.title('This is for style: {} and colormap: {}'.format(s, c))
+        plt.scatter(xx, np.sin(xx), c=np.cos(xx), cmap=c,
+                            edgecolors='none',
+                            s=np.power(xx, 5))
+        m += 1
+        plt.pause(1)
+        plt.clf()
+    print('m equal {}'.format(m))
+    plt.close()
+
+print(n)
+
+if __name__ == '__main__':
+    program_performance(f1, f2)
+        
