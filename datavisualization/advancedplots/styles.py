@@ -20,4 +20,24 @@ for i, xa in enumerate(plx):
              va='center', ha='right', fontsize=11)
     xa.yaxis.set_ticks_position('right')
 
+
+
+ax1 = plt.subplot2grid((4,3), (0, 0), rowspan=2, colspan=2)
+ax1.plot(x1, np.power(x1, 3))
+ax1.xaxis.set_ticks_position('top')
+ax2 = plt.subplot2grid((4,3), (0, 2), xticks=[])
+ax2.scatter(x1, y1, c=np.sin(x1), s=np.power(x1, 2))
+ax3 = plt.subplot2grid((4,3), (2, 0), rowspan=2)
+ax3.hist(np.sin(x1))
+ax4 = plt.subplot2grid((4,3), (2, 1))
+ax4.hist(np.random.normal(size=1500), alpha=0.8)
+ax4.hist(np.random.normal(1, size=800), alpha=0.6)
+ax5 = plt.subplot2grid((4,3), (3, 1))
+ax5.scatter(x1, np.tan(x1), c=np.sin(x1))
+ax6 = plt.subplot2grid((4,3), (1, 2), rowspan=3)
+ax5.scatter(x1, np.sin(x1), c=np.sin(x1), s=np.power(x1, 3))
+ax6.scatter(x1, np.sin(x1), c=np.sin(x1), s=np.power(x1, 3))
+
+
 plt.show()
+
