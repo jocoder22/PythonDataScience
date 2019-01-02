@@ -21,10 +21,4 @@ plt.axhspan(-0.15,0.25, color='k', alpha=0.4)
 plt.axhspan(-0.75,-0.5, color='y', alpha=0.6, xmax=0.8, xmin=0.3)
 
 
-
-
-# plt.grid()
-# color='r'
-# linestyle='-'
-
 plt.show()
