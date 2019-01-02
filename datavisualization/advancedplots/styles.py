@@ -110,3 +110,24 @@ def f2():
 if __name__ == '__main__':
     program_performance(f1, f2)
         
+
+
+
+
+
+# text
+
+plt.text(5,0, 'sine curve')
+ha ='center'
+va = 
+size=18 large x-large xx-large
+family='monospace' 
+weight = bold normal
+style =italic
+withdash=True
+dashlength =24
+rotation =45
+'sine\ncurve'
+
+plt.gca().yaxis.set_visible(False)
+plt.gca().spines['Left'].set_visible(False)
