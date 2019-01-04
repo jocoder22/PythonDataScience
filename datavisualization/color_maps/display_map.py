@@ -56,3 +56,5 @@ for cmap_category, cmap_list in cmaps:
     plot_color_gradients(cmap_category, cmap_list)
 
 plt.show()
+
+

@@ -16,7 +16,7 @@ data = pd.read_csv("people.csv")
 # pandas looping is similar to looping in a dict
 for index, cdict in data.iterrows():
     print('{:10}: {}'.format(index, cdict['age']))
-    data['NAME'] = cdict['name'].upper() 
+    data.loc[index, 'NAME'] = cdict['name'].upper()
 
 # forming another column
 data['Height_^2'] = data['height'].apply(lambda x: x * x)
