@@ -10,13 +10,16 @@ schema = np.dtype([('Name', '<U16'),
                    ('Age',  np.float16),
                    ('Gender', '<U16'),
                    ('City', '<U16')])
-data = np.loadtxt("/Documents/test1.txt",
+data = np.loadtxt("Desktop\\test1.txt",
                   skiprows=1, dtype=schema, delimiter=',')
 
-data =  np.loadtxt("Desktop/people.csv", delimiter=',')
+data =  np.loadtxt("text1.txt",skiprows=1, dtype=schema, delimiter=',')
 data  # this is a one dimensional numpy array
-data.shape
+data.shape # ==> (3,)
 type(data)
+
+data_multiD = np.reshape(data, (3, -1))
+data_multiD.shape  # (3, 1)
 
 
 # Slicing;
@@ -26,7 +29,6 @@ data[:5][['Name', 'Age']]
 
 
 # Using pandas
-data2 = pd.read_csv("/Documents/test1.txt")
 data2 = pd.read_csv("people.csv")
 data2
 type(data2)  # <class 'pandas.core.frame.DataFrame'>
