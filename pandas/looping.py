@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-import os
-import numpy as np
+# import os
+# import numpy as np
 import pandas as pd
 
-print(os.getcwd())
-os.chdir('c:\\Users\\Jose\\Desktop\\')
+# print(os.getcwd())
+# os.chdir('c:\\Users\\Jose\\Desktop\\')
 
-print(os.getcwd())
+# print(os.getcwd())
 
 # load dataset
 data = pd.read_csv("people.csv")
