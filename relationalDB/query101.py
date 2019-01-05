@@ -32,3 +32,14 @@ with engine.connect() as con:
 
 # Print the length of the DataFrame df
 print(len(df))
+
+
+# Open engine in context manager
+# Perform query and save results to DataFrame: df
+with engine.connect() as con:
+    rs = con.execute("SELECT * FROM Employee WHERE EmployeeId >= 6")
+    df = pd.DataFrame(rs.fetchall())
+    df.columns = rs.keys()
+
+# Print the head of the DataFrame df
+print(df.head())
