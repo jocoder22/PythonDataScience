@@ -26,6 +26,13 @@ data['Total'] = data['height'].apply(lambda x: x + x)
 print(data)
 
 
+data['BMI'] =  data['weight'] / (data['height'] * 0.3048)  ** 2
+# data['BMI'] = data['BMI'].apply(lambda x: '%.2f' % x)
+data['BMI'] = data['BMI'].apply(lambda x: f'{x:.2f}')
+print(data)
+
+
+
 newdict = {}
 # Iterate over the columns in DataFrame
 for entry in data:
@@ -55,4 +62,7 @@ for chunk in pd.read_csv('people.csv', chunksize=1):
 
 # Print the populated dictionary
 print(counts)
+
+
+
 
