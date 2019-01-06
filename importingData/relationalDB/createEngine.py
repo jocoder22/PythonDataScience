@@ -11,8 +11,7 @@ table_names = engine.table_names()
 # Print the table names to the shell
 print(table_names)
 
-# Open engine connection: con
-con = engine.connect()
+
 
 
 
