@@ -95,15 +95,3 @@ o2o = pd.merge(left=site, right=visited, on=None,left_on='name', right_on='site'
 # Print o2o
 print(o2o)
 
-
-# Convert the sex column to type 'category'
-tips.sex = tips.sex.astype('category')
-
-# Convert the smoker column to type 'category'
-tips.smoker = tips.smoker.astype('category')
-
-# Print the info of tips
-print(tips.info())
-
-
-
