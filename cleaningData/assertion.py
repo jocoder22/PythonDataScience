@@ -3,7 +3,7 @@ import pandas as pd
 
 
 gapminder = pd.read_csv('gapminder.csv')
-
+g1800s = pd.read_csv('g1800s')
 
 # Convert the year column to numeric
 gapminder.year = pd.to_numeric(gapminder.year)
@@ -22,3 +22,13 @@ assert pd.notnull(gapminder.country).all()
 
 # Assert that year does not contain any missing values
 assert pd.notnull(gapminder.year).all()
+
+
+# Check whether the first column is 'Life expectancy'
+assert g1800s.columns[0] == 'Life expectancy'
+
+# Check whether the values in the row are valid
+assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
+
+# Check that there is only one instance of each country
+assert g1800s['Life expectancy'].value_counts()[0] == 1
