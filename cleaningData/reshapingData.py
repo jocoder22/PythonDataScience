@@ -30,7 +30,22 @@ print(airquality_melt.head())
 
 
 
+gapminder = pd.read_csv('gapminder.csv')
+# Melt gapminder: gapminder_melt
+gapminder_melt = pd.melt(frame=gapminder, id_vars='Life expectancy')
 
+# Rename the columns
+gapminder_melt.columns = ['country', 'year', 'life_expectancy']
+
+# Print the head of gapminder_melt
+print(gapminder_melt.head())
+print(gapminder_melt.shape)
+
+
+
+
+
+tb = pd.read_csv('tb.csv')
 # Melt tb: tb_melt
 tb_melt = pd.melt(frame=tb, id_vars=['country','year'])
 
