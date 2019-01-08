@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 ## https://pandas-datareader.readthedocs.io/en/latest/index.html
 
+import sys
 import datetime
 import pandas_datareader as pdr
 from pandas_datareader import wb  # for world bank datasets
@@ -45,3 +46,7 @@ print(Idat.tail())
 # import sys
 # python - m pip install - -upgrade pip
 # !{sys.executable} - m pip install pandas-datareader
+# Install a conda package in the current Jupyter kernel
+
+# !conda install --yes --prefix {sys.prefix} pandas-datareader
+# pip install pandas-datareader
