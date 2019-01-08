@@ -109,6 +109,13 @@ gm_outliers = gapminder_2010.loc[outliers]
 print(gm_outliers)
 
 
+
+
+# download the olympic medalist dataset
+url = 'https://assets.datacamp.com/production/repositories/502/datasets/bf22326ecc9171f68796ad805a7c1135288120b6/all_medalists.csv'
+
+medals = pd.read_csv(url, sep=',')
+medals.to_csv('medals.csv')
 # Select the 'NOC' column of medals: country_names
 country_names = medals['NOC']
 
