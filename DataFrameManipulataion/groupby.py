@@ -1,3 +1,4 @@
+from scipy.stats import zscore
 import pandas as pd 
 
 ############# groupby
@@ -73,3 +74,36 @@ aggregated = by_year_region.agg(aggregator)
 # Print the last 6 entries of aggregated
 aggregated.tail(6)
 print(aggregated.tail(6))
+
+
+# Read file: sales
+sales = pd.read_csv('sales.csv', index_col='Date', parse_dates=True)
+
+# Create a groupby object: by_day
+by_day = sales.groupby(sales.index.strftime('%a'))
+
+# Create sum: units_sum
+units_sum = by_day['Units'].sum()
+
+# Print units_sum
+print(units_sum)
+
+
+# In this example, you're going to normalize the Gapminder data in 2010 for life expectancy
+# and fertility by the z-score per region. Using boolean indexing, you will filter out
+# countries that have high fertility rates and low life expectancy for their region.
+############### transform
+# Import zscore
+
+# Group gapminder_2010: standardized
+standardized = gapminder_2010.groupby(
+    'region')['life', 'fertility'].transform(zscore)
+
+# Construct a Boolean Series to identify outliers: outliers
+outliers = (standardized['life'] < -3) | (standardized['fertility'] > 3)
+
+# Filter gapminder_2010 by the outliers: gm_outliers
+gm_outliers = gapminder_2010.loc[outliers]
+
+# Print gm_outliers
+print(gm_outliers)
