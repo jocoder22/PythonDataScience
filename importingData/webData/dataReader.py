@@ -31,3 +31,9 @@ sp500.to_csv('sp500.csv')
 data['NY.GDP.PCAP.KD'].groupby(level=0).mean()
 wb.search('cell.*%').iloc[:, :2]
 ind = ['NY.GDP.PCAP.KD', 'IT.MOB.COV.ZS']
+
+ind = ['NY.GDP.PCAP.KD', 'IT.MOB.COV.ZS']
+Idat = wb.download(indicator=ind, country='all',
+                          start=2011, end=2011).dropna()
+dat.columns = ['gdp', 'cellphone']
+print(dat.tail())
