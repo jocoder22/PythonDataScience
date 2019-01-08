@@ -28,6 +28,8 @@ sp500.to_csv('sp500.csv')
                    country=['US', 'CA', 'MX'], 
                    start=2005, end=2008)
 
+
+data.head()
 data['NY.GDP.PCAP.KD'].groupby(level=0).mean()
 wb.search('cell.*%').iloc[:, :2]
 ind = ['NY.GDP.PCAP.KD', 'IT.MOB.COV.ZS']
@@ -35,5 +37,11 @@ ind = ['NY.GDP.PCAP.KD', 'IT.MOB.COV.ZS']
 ind = ['NY.GDP.PCAP.KD', 'IT.MOB.COV.ZS']
 Idat = wb.download(indicator=ind, country='all',
                           start=2011, end=2011).dropna()
-dat.columns = ['gdp', 'cellphone']
-print(dat.tail())
+Idat.columns = ['gdp', 'cellphone']
+print(Idat.head())
+print(Idat.tail())
+
+
+# import sys
+# python - m pip install - -upgrade pip
+# !{sys.executable} - m pip install pandas-datareader
