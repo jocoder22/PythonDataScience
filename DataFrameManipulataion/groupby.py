@@ -107,3 +107,92 @@ gm_outliers = gapminder_2010.loc[outliers]
 
 # Print gm_outliers
 print(gm_outliers)
+
+
+# Select the 'NOC' column of medals: country_names
+country_names = medals['NOC']
+
+# Count the number of medals won by each country: medal_counts
+medal_counts = country_names.value_counts()
+
+# Print top 15 countries ranked by medals
+print(medal_counts.head(15))
+
+
+# Construct the pivot table: counted
+counted = medals.pivot_table(
+    index='NOC', columns='Medal', values='Athlete', aggfunc='count')
+
+# Create the new column: counted['totals']
+counted['totals'] = counted.sum(axis='columns')
+
+# Sort counted by the 'totals' column
+counted = counted.sort_values('totals', ascending=False)
+
+# Print the top 15 rows of counted
+print(counted.head(15))
+
+
+# In this exercise, you will use .pivot_table() first to aggregate the total medals by type.
+# Then, you can use .sum() along the columns of the pivot table to produce a new column.
+# When the modified pivot table is sorted by the total medals column,
+# you can display the results from the last exercise with a bit more detail.
+# Select columns: ev_gen
+ev_gen = medals[['Event_gender', 'Gender']]
+
+# Drop duplicate pairs: ev_gen_uniques
+ev_gen_uniques = ev_gen.drop_duplicates()
+
+# Print ev_gen_uniques
+print(ev_gen_uniques)
+
+
+# Group medals by the two columns: medals_by_gender
+medals_by_gender = medals.groupby(['Event_gender', 'Gender'])
+
+# Create a DataFrame with a group count: medal_count_by_gender
+medal_count_by_gender = medals_by_gender.count()
+
+# Print medal_count_by_gender
+print(medal_count_by_gender)
+
+
+# Create the Boolean Series: sus
+sus = (medals.Event_gender == 'W') & (medals.Gender == 'Men')
+
+# Create a DataFrame with the suspicious row: suspect
+suspect = medals[sus]
+
+# Print suspect
+print(suspect)
+
+
+# Group medals by 'NOC': country_grouped
+country_grouped = medals.groupby('NOC')
+
+# Compute the number of distinct sports in which each country won medals: Nsports
+Nsports = country_grouped.Sport.nunique()
+
+# Sort the values of Nsports in descending order
+Nsports = Nsports.sort_values(ascending=False)
+
+# Print the top 15 rows of Nsports
+print(Nsports.head(15))
+
+# Extract all rows for which the 'Edition' is between 1952 & 1988: during_cold_war
+during_cold_war = (medals.Edition >= 1952) & (medals.Edition <= 1988)
+
+# Extract rows for which 'NOC' is either 'USA' or 'URS': is_usa_urs
+is_usa_urs = medals.NOC.isin(['USA', 'URS'])
+
+# Use during_cold_war and is_usa_urs to create the DataFrame: cold_war_medals
+cold_war_medals = medals.loc[during_cold_war & is_usa_urs]
+
+# Group cold_war_medals by 'NOC'
+country_grouped = cold_war_medals.groupby('NOC')
+
+# Create Nsports
+Nsports = country_grouped['Sport'].nunique().sort_values(ascending=False)
+
+# Print Nsports
+print(Nsports)
