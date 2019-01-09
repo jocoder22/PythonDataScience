@@ -1,5 +1,5 @@
 ############ appending series
-Import pandas as pd
+import pandas as pd
 
 # Load 'sales-jan-2015.csv' into a DataFrame: jan
 jan = pd.read_csv('sales-jan-2015.csv', parse_dates=True, index_col='Date')
