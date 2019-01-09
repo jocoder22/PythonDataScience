@@ -1,8 +1,25 @@
 from scipy.stats import zscore
 import pandas as pd 
 
+# download titanic dataset
+url = 'https://assets.datacamp.com/production/repositories/502/datasets/e280ed94bf4539afb57d8b1cbcc14bcf660d3c63/titanic.csv'
+titan = pd.read_csv(url, sep=',')
+titan.to_csv('titanic.csv')
+
+
+# download the olympic medalist dataset
+url2 = 'https://assets.datacamp.com/production/repositories/502/datasets/bf22326ecc9171f68796ad805a7c1135288120b6/all_medalists.csv'
+meda = pd.read_csv(url2, sep=',')
+meda.to_csv('medals.csv')
+
+
+url3 = 'https://assets.datacamp.com/production/repositories/502/datasets/09378cc53faec573bcb802dce03b01318108a880/gapminder_tidy.csv'
+gapmd = pd.read_csv(url3, sep=',')
+gapmd.to_csv('gapminder.csv')
+
 ############# groupby
 # Group titanic by 'pclass'
+titanic = pd.read_csv('titanic.csv')
 by_class = titanic.groupby('pclass')
 
 # Aggregate 'survived' column of by_class by count
@@ -49,6 +66,10 @@ print(aggregated.loc[:, ('age', 'max')])
 
 # Print the median fare in each class
 print(aggregated.loc[:, ('fare', 'median')])
+
+
+
+
 
 
 # Read the CSV file into a DataFrame and sort the index: gapminder
@@ -110,13 +131,9 @@ print(gm_outliers)
 
 
 
-
-# download the olympic medalist dataset
-url = 'https://assets.datacamp.com/production/repositories/502/datasets/bf22326ecc9171f68796ad805a7c1135288120b6/all_medalists.csv'
-
-medals = pd.read_csv(url, sep=',')
-medals.to_csv('medals.csv')
+# Using the olympic dataset
 # Select the 'NOC' column of medals: country_names
+medals = pd.read_csv('medals.csv')
 country_names = medals['NOC']
 
 # Count the number of medals won by each country: medal_counts
