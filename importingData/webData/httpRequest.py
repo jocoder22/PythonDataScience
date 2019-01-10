@@ -43,4 +43,3 @@ r = requests.get(url)
 # Extract the response: text
 text = r.text
 
-# Print the html

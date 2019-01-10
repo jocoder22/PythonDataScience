@@ -18,13 +18,17 @@ print(table_names)   # ['Person', 'Site', 'Survey', 'Visited']
 metadata = MetaData()
 person = Table('Person', metadata, autoload=True, autoload_with=engine)
 
+# Print the column names
+print(person.columns.keys())   # ['id', 'personal', 'family']
+
+# Print full table metadata
+print(repr(metadata.tables['Person']))  # same as below
+
 print(repr(person))
 # Table('Person', MetaData(bind=None), Column('id', TEXT(), table=<Person>), 
-#           Column('personal', TEXT(), table=<Person>), 
-#           Column('family', TEXT(), table=<Person>), schema=None)
+#                                      Column('personal', TEXT(), table=<Person>), 
+#                                      Column('family', TEXT(), table=<Person>), 
+#                                      schema=None)
 
 
-
-
-
-
+https: // raw.githubusercontent.com/dwyl/english-words/master/words.txt
