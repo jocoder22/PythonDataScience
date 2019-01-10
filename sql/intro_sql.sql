@@ -48,3 +48,15 @@ WHERE release_year > 1990
 GROUP BY release_year
 HAVING avg(budget) > 60000000
 ORDER BY avg_gross DESC;
+
+-- select country, average budget, average gross
+SELECT  country, avg(budget) AS avg_budget, avg(gross) AS avg_gross 
+-- from the films table
+FROM films
+-- group by country 
+GROUP BY country
+-- where the country has more than 10 titles
+HAVING count(title) > 10
+-- order by country
+ORDER BY country
+LIMIT 5;
