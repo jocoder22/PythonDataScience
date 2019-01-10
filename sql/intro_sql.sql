@@ -41,3 +41,10 @@ SELECT release_year, country, min(gross)
 FROM films
 GROUP BY release_year , country
 ORDER BY country, release_year;
+
+SELECT release_year, avg(budget) AS avg_budget, avg(gross) AS avg_gross
+FROM films
+WHERE release_year > 1990
+GROUP BY release_year
+HAVING avg(budget) > 60000000
+ORDER BY avg_gross DESC;
