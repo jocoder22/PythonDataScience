@@ -6,7 +6,7 @@ from io import BytesIO
 from zipfile import ZipFile
 
 # Create file path: file_path
-file_path = 'Summer Olympic medallists 1896 to 2008 - EDITIONS.tsv'
+# file_path = 'Summer Olympic medallists 1896 to 2008 - EDITIONS.tsv'
 
 url = 'https://assets.datacamp.com/production/repositories/516/datasets/2d14df8d3c6a1773358fa000f203282c2e1107d6/Summer%20Olympic%20medals.zip'
 
@@ -26,7 +26,7 @@ editions = pd.read_csv(zipp.open(mylist[8]), sep='\t')
 # editions = pd.read_csv(zipp.open(file_path), sep='\t')
 
 ioc_codes = pd.read_csv(zipp.open(mylist[9]))
-allmedals = pd.read_csv(f.open(mylist[7]), sep='\t', skiprows=4)
+allmedals = pd.read_csv(zipp.open(mylist[7]), sep='\t', skiprows=4)
 
 # Extract the relevant columns: editions
 # editions = editions.loc[:, ['Edition', 'Grand Total', 'City', 'Country']] -- data with index
@@ -35,37 +35,41 @@ editions = editions[['Edition', 'Grand Total',
 # Print editions DataFrame
 print(editions)
 
+newlist = allmedals[['Athlete', 'NOC', 'Medal','Edition']]
 
-# Create empty dictionary: medals_dict
-medals_dict = {}
+# # Create empty dictionary: medals_dict
+# medals_dict = {}
 
-for year in editions['Edition']:
+# for year in editions['Edition']:
 
-    # Create the file path: file_path
-    file_path = 'summer_{:d}.csv'.format(year)
+#     # Create the file path: file_path
+#     file_path = 'summer_{:d}.csv'.format(year)
 
-    # Load file_path into a DataFrame: medals_dict[year]
-    medals_dict[year] = pd.read_csv(file_path)  # this created  the year index
+#     # Load file_path into a DataFrame: medals_dict[year]
+#     medals_dict[year] = pd.read_csv(file_path)  # this created  the year index
 
-    # Extract relevant columns: medals_dict[year]
-    medals_dict[year] = medals_dict[year][['Athlete', 'NOC', 'Medal']]
+#     # Extract relevant columns: medals_dict[year]
+#     medals_dict[year] = medals_dict[year][['Athlete', 'NOC', 'Medal']]
 
-    # Assign year to column 'Edition' of medals_dict
-    medals_dict[year]['Edition'] = year
+#     # Assign year to column 'Edition' of medals_dict
+#     medals_dict[year]['Edition'] = year
 
-# Concatenate medals_dict: medals
-medals = pd.concat(medals_dict)
-# medals = pd.concat(medals_dict, ignore_index=True) ## this ignores the year index
+# # Concatenate medals_dict: medals
+# medals = pd.concat(medals_dict)
+# # medals = pd.concat(medals_dict, ignore_index=True) ## this ignores the year index
 
-# Print first and last 5 rows of medals
-print(medals.head())
-print(medals.tail())
+# # Print first and last 5 rows of medals
+# print(medals.head())
+# print(medals.tail())
 
 
 # Construct the pivot_table: medal_counts
-medal_counts = medals.pivot_table(
-    index='Edition', columns='NOC', values='Athlete', aggfunc='count')
+# medal_counts = medals.pivot_table(
+#     index='Edition', columns='NOC', values='Athlete', aggfunc='count')
 
+
+medal_counts = newlist.pivot_table(
+    index='Edition', columns='NOC', values='Athlete', aggfunc='count')
 # Print the first & last 5 rows of medal_counts
 print(medal_counts.head())
 print(medal_counts.tail())
