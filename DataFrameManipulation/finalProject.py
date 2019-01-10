@@ -166,3 +166,70 @@ ax.set_xticklabels(editions['City'])
 
 # Display the plot
 plt.show()
+
+
+# Build a statement to select the state, sum of 2008 population and census
+# division name: stmt
+stmt = select([
+    census.columns.state,
+    func.sum(census.columns.pop2008),
+    state_fact.columns.census_division_name
+])
+
+# Append select_from to join the census and state_fact tables by the census state and state_fact name columns
+stmt = stmt.select_from(
+    census.join(state_fact, census.columns.state == state_fact.columns.name)
+)
+
+# Append a group by for the state_fact name column
+stmt = stmt.group_by(state_fact.columns.name)
+
+# Execute the statement and get the results: results
+results = connection.execute(stmt).fetchall()
+
+# Loop over the the results object and print each record.
+for record in results:
+    print(record)
+
+
+# Make an alias of the employees table: managers
+managers = employees.alias()
+
+# Build a query to select manager's and their employees names: stmt
+stmt = select(
+    [managers.columns.name.label('manager'),
+     employees.columns.name.label('employee')]
+)
+
+# Match managers id with employees mgr: stmt
+stmt = stmt.where(managers.columns.id == employees.columns.mgr)
+
+# Order the statement by the managers name: stmt
+stmt = stmt.order_by(managers.columns.name)
+
+# Execute statement: results
+results = connection.execute(stmt).fetchall()
+
+# Print records
+for record in results:
+    print(record)
+
+
+# Make an alias of the employees table: managers
+managers = employees.alias()
+
+# Build a query to select managers and counts of their employees: stmt
+stmt = select([managers.columns.name, func.count(employees.columns.id)])
+
+# Append a where clause that ensures the manager id and employee mgr are equal
+stmt = stmt.where(managers.columns.id == employees.columns.mgr)
+
+# Group by Managers Name
+stmt = stmt.group_by(managers.columns.name)
+
+# Execute statement: results
+results = connection.execute(stmt).fetchall()
+
+# print manager
+for record in results:
+    print(record)

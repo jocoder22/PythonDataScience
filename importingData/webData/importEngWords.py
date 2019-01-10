@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+import doctest
+
 import requests
 from itertools import permutations
 
