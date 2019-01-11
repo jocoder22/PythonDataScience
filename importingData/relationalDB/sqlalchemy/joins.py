@@ -13,6 +13,8 @@ metadata = MetaData()
 
 survey = Table('Survey', metadata, autoload=True, autoload_with=engine)
 site = Table('Site', metadata, autoload=True, autoload_with=engine)
+visits = Table('Visited', metadata, autoload=True, autoload_with=engine)
+person = Table('Person', metadata, autoload=True, autoload_with=engine)
 
 ssmt = select([survey])
 
