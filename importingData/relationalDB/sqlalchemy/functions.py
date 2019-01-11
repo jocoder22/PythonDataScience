@@ -2,9 +2,13 @@
 # Import necessary module
 #!/usr/bin/env python
 # Import necessary module
-from sqlalchemy import func
+
 import os
-from sqlalchemy import create_engine, MetaData, Table, select,  and_
+from sqlalchemy import create_engine, MetaData, Table, select,  func, desc, case, cast
+from sqlalchemy import Table, Column, String, Integer, Float, Boolean
+import numpy as np 
+import pandas as pd
+import matplotlib.pyplot as plt
 
 path = 'C:/Users/okigboo/Desktop/PythonDataScience/importingData/webData'
 os.chdir(path)
@@ -20,23 +24,23 @@ ssmt = select([survey])
 
 
 ###### func
-# Build a query to count the distinct states values: stmt
-stmt = select([func.count(census.columns.state.distinct())])
+# Build a query to count the distinct persons values: stmt
+stmt = select([func.count(survey.columns.person.distinct())])
 
-# Execute the query and store the scalar result: distinct_state_count
-distinct_state_count = connection.execute(stmt).scalar()
+# Execute the query and store the scalar result: distinct_person_count
+distinct_person_count = connection.execute(stmt).scalar()
 
-# Print the distinct_state_count
-print(distinct_state_count)
+# Print the distinct_person_count
+print(distinct_person_count)
 
 
-# Build a query to select the state and count of ages by state: stmt
-stmt = select([census.columns.state, func.count(census.columns.age)])
+# Build a query to select the person and count of readings by person: stmt
+stmt = select([survey.columns.person, func.count(survey.columns.reading)])
 
-# Group stmt by state
-stmt = stmt.group_by(census.columns.state)
+# Group stmt by person
+stmt = stmt.group_by(survey.columns.person)
 
-# Execute the statement and store all the records: results
+# Execute the personment and store all the records: results
 results = connection.execute(stmt).fetchall()
 
 # Print results
@@ -46,16 +50,16 @@ print(results)
 print(results[0].keys())
 
 
-# Build an expression to calculate the sum of pop2008 labeled as population
-pop2008_sum = func.sum(census.columns.pop2008).label('population')
+# Build an expression to calculate the sum of taken labeled as TotalTaken
+taken_sum = func.sum(survey.columns.taken).label('TotalTaken')
 
-# Build a query to select the state and sum of pop2008: stmt
-stmt = select([census.columns.state, pop2008_sum])
+# Build a query to select the person and sum of taken: stmt
+stmt = select([survey.columns.person, taken_sum])
 
-# Group stmt by state
-stmt = stmt.group_by(census.columns.state)
+# Group stmt by person
+stmt = stmt.group_by(survey.columns.person)
 
-# Execute the statement and store all the records: results
+# Execute the personment and store all the records: results
 results = connection.execute(stmt).fetchall()
 
 # Print results
@@ -82,22 +86,28 @@ df = pd.DataFrame(results)
 
 # Set Column names
 df.columns = results[0].keys()
-
+label = list(df.columns)
+objects = tuple(df.person)
+y_pos = np.arange(len(objects))
 # Print the DataFrame
 print(df)
 
 # Plot the DataFrame
 df.plot.bar()
+plt.xlabel(label[0])
+plt.ylabel(label[1])
+
+plt.xticks(y_pos, objects)
 
 plt.show()
 
 
-# Build query to return state names by population difference from 2008 to 2000: stmt
-stmt = select([census.columns.state, (census.columns.pop2008 -
-                                      census.columns.pop2000).label('pop_change')])
+# Build query to return person names by population difference from 2008 to 2000: stmt
+stmt = select([survey.columns.person, (survey.columns.taken -
+                                      survey.columns.reading).label('pop_change')])
 
-# Append group by for the state: stmt
-stmt = stmt.group_by(census.columns.state)
+# Append group by for the person: stmt
+stmt = stmt.group_by(survey.columns.person)
 
 # Append order by for pop_change descendingly: stmt
 stmt = stmt.order_by(desc('pop_change'))
@@ -105,30 +115,30 @@ stmt = stmt.order_by(desc('pop_change'))
 # Return only 5 results: stmt
 stmt = stmt.limit(5)
 
-# Use connection to execute the statement and fetch all results
+# Use connection to execute the personment and fetch all results
 results = connection.execute(stmt).fetchall()
 
-# Print the state and population change for each record
+# Print the person and population change for each record
 for result in results:
-    print('{}:{}'.format(result.state, result.pop_change))
+    print('{}:{}'.format(result.person, result.pop_change))
 
 
 # import case, cast and Float from sqlalchemy
 
-# Build an expression to calculate female population in 2000
-female_pop2000 = func.sum(
+# Build an expression to calculate dyer population in 2000
+dyer_reading = func.sum(
     case([
-        (census.columns.sex == 'F', census.columns.pop2000)
+        (survey.columns.person == 'dyer', survey.columns.reading)
     ], else_=0))
 
 # Cast an expression to calculate total population in 2000 to Float
-total_pop2000 = cast(func.sum(census.columns.pop2000), Float)
+total_reading = cast(func.sum(survey.columns.reading), Float)
 
-# Build a query to calculate the percentage of females in 2000: stmt
-stmt = select([female_pop2000 / total_pop2000 * 100])
+# Build a query to calculate the percentreading of dyers in 2000: stmt
+stmt = select([dyer_reading / total_reading * 100])
 
-# Execute the query and store the scalar result: percent_female
-percent_female = connection.execute(stmt).scalar()
+# Execute the query and store the scalar result: percent_dyer
+percent_dyer = connection.execute(stmt).scalar()
 
-# Print the percentage
-print(percent_female)
+# Print the percentreading
+print(percent_dyer)
