@@ -45,3 +45,4 @@ ssmt = ssmt.where(survey.columns.person == 'lake')
 
 # Execute the query to retrieve all the data returned: results
 results = connection.execute(ssmt).fetchall()
+print(results)
