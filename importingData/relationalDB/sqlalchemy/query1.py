@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # Import necessary module
 import os
-from sqlalchemy import create_engine, MetaData, Table, select,  and_
-# from sqlalchemy import in_
+from sqlalchemy import create_engine, MetaData, Table, select,  and_ 
 
 path = 'C:/Users/okigboo/Desktop/PythonDataScience/importingData/webData'
 os.chdir(path)
@@ -30,13 +29,13 @@ for result in results:
 
 
 
-persons = ['dyer', 'roe']
-# Append a where clause to match all the states in_ the list states
-ssmt = ssmt.where(survey.columns.person.in_(persons))
+# persons = ['dyer', 'roe']
+# # Append a where clause to match all the states in_ the list states
+# ssmt = ssmt.where(survey.columns.person.in_(persons))
 
-# Loop over the ResultProxy and print the quant and reading
-for result in connection.execute(stmt):
-    print(result.quant, result.reading)
+# # Loop over the ResultProxy and print the quant and reading
+# for result in connection.execute(stmt):
+#     print(result.quant, result.reading)
 
 
 # Append a where clause to select only lake records and rad using and_

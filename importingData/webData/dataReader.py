@@ -46,7 +46,10 @@ print(Idat.tail())
 # import sys
 # python - m pip install - -upgrade pip
 # !{sys.executable} - m pip install pandas-datareader
+# !{sys.executable} - m pip install sqlalchemy
+
 # Install a conda package in the current Jupyter kernel
 
 # !conda install --yes --prefix {sys.prefix} pandas-datareader
+# !conda install --yes --prefix {sys.prefix} sqlalchemy
 # pip install pandas-datareader

@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 # Import necessary module
-from sqlalchemy import case, cast, Float
-import matplotlib.pyplot as plt
-import pandas as pd
-from sqlalchemy import desc
+
 import os
-from sqlalchemy import create_engine, MetaData, Table, select, and_
-# from sqlalchemy import in_
+from sqlalchemy import create_engine, MetaData, Table, select
+
 
 path = 'C:/Users/okigboo/Desktop/PythonDataScience/importingData/webData'
 os.chdir(path)
