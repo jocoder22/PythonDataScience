@@ -12,6 +12,7 @@ connection = engine.connect()
 metadata = MetaData()
 
 survey = Table('Survey', metadata, autoload=True, autoload_with=engine)
+site = Table('Site', metadata, autoload=True, autoload_with=engine)
 
 ssmt = select([survey])
 
