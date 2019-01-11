@@ -15,7 +15,7 @@ metadata = MetaData()
 
 print(engine.table_names())  # ['Person', 'Site', 'Survey', 'Visited']
 
-survey = Table('Visited', metadata, autoload=True, autoload_with=engine)
+survey = Table('Survey', metadata, autoload=True, autoload_with=engine)
 
 ssmt = select([survey])
 
