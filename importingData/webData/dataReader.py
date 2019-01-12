@@ -24,8 +24,8 @@ sp500.to_csv('sp500.csv')
 
 
 # for world bank dataset
- matches = wb.search('gdp.*capita.*const')
- data = wb.download(indicator='NY.GDP.PCAP.KD', 
+matches = wb.search('gdp.*capita.*const')
+data = wb.download(indicator='NY.GDP.PCAP.KD', 
                    country=['US', 'CA', 'MX'], 
                    start=2005, end=2008)
 
