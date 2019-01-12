@@ -24,7 +24,7 @@ print(xl.keys())
 
 
 colors = {'AF':'yellow','ASI':'magenta', 'EUR':'cyan', 
-          'LAT':'blue', 'NAM':'green', 'OCE':'red'}
+          'LAT':'blue', 'NAM':'green', 'OCE':'teal'}
 
 
 xl['ccmap'] = xl['Continent'].map(colors)
@@ -129,7 +129,7 @@ show(p)
 # Load apple dataset from Yahoo finance
 symbol = 'AAPL'
 starttime = datetime.datetime(2000, 3, 1)
-endtime = datetime.datetime(2000, 8, 31)
+endtime = datetime.datetime(2000, 7, 31)
 apple = pdr.get_data_yahoo(symbol, starttime, endtime)
 print(apple.columns)
 print(apple.index.name)
@@ -148,5 +148,50 @@ p.circle(apple.index, apple['Adj Close'], fill_color='white', size=4)
 
 # Specify the name of the output file and show the result
 output_file('lineCircle.html')
+show(p)
+
+
+# making patches using list of lists for the cordinates
+x = [[1,2.2,5,3,4],[1,4,3.2,2],[5,3,4,3.2,5.8,9,7.2],[2.2,5,6.3,5.2],[6.3,7.2,10,8,7.2,5]]
+y = [[4,2,3,3.8,5],[4,5,7,6],   [3,3.8,5,7,8,3.2,4.2], [2,3,2,1.6], [2,1,2.8,2.4,4.2,3]]
+
+p = figure(x_axis_label='Lattitude(degrees)', y_axis_label='Longitude(Degrees)')
+# Add patches to figure p with line_color=white for x and y
+p.patches(x,y, line_color='white')
+
+# Specify the name of the output file and show the result
+output_file('four_corners.html')
+show(p)
+
+
+
+# Import the ColumnDataSource class from bokeh.plotting
+from bokeh.plotting import ColumnDataSource
+
+# Create a ColumnDataSource from df: source
+source = ColumnDataSource(xl)
+
+# # Create the figure: p
+# p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female_literacy (% population)')
+
+# # Add circle glyphs to the figure p
+# p.circle('fertility','female literacy', color='ccmap', size=10, source=source)
+
+# # Specify the name of the output file and show the result
+# output_file('fertlity.html')
+# show(p)
+
+
+
+# Create a figure with the "box_select" tool: p
+p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female_literacy (% population)', 
+        tools='box_select,reset,pan,wheel_zoom,lasso_select,ybox_select')
+
+# Add circle glyphs to the figure p with the selected and non-selected properties
+p.circle('fertility','female literacy', selection_color='red',nonselection_alpha=0.1,
+        color='ccmap', size=10, source=source)
+
+# Specify the name of the output file and show the result
+output_file('fertlity2.html')
 show(p)
 
