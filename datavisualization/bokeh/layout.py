@@ -215,37 +215,50 @@ show(p)
 
 latin_america = ColumnDataSource(xl[xl['Continent'] == 'LAT'])
 europe = ColumnDataSource(xl[xl['Continent'] == 'EUR'])
-ocenic = ColumnDataSource(xl[xl['Continent'] == 'OCE'])
+oceanic = ColumnDataSource(xl[xl['Continent'] == 'OCE'])
 africa = ColumnDataSource(xl[xl['Continent'] == 'AF'])
 asia = ColumnDataSource(xl[xl['Continent'] == 'ASI'])
-North_america = ColumnDataSource(xl[xl['Continent'] == 'NAM'])
+north_america = ColumnDataSource(xl[xl['Continent'] == 'NAM'])
 
 # Assign the legend to the bottom left: p.legend.location
-p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+p2 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+p3 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+p4 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+p5 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+p6 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+
 
 # Add the first circle glyph to the figure p
-p.circle('fertility', 'female literacy', source=latin_america, size=10, color='red', legend='Latin America')
-p.circle('fertility', 'female literacy', source=north_america, size=10, color='blue', legend='Latin America')
-p.circle('fertility', 'female literacy', source=asia, size=10, color='cyan', legend='Latin America')
-p.circle('fertility', 'female literacy', source=africa, size=10, color='green', legend='Latin America')
-p.circle('fertility', 'female literacy', source=europe, size=10, color='purple', legend='Latin America')
+p1.circle('fertility', 'female literacy', source=latin_america, size=10, color='red', legend='Latin America')
+p2.circle('fertility', 'female literacy', source=north_america, size=10, color='blue', legend='North America')
+p3.circle('fertility', 'female literacy', source=asia, size=10, color='cyan', legend='Asia')
+p4.circle('fertility', 'female literacy', source=africa, size=10, color='green', legend='Africa')
+p5.circle('fertility', 'female literacy', source=europe, size=10, color='purple', legend='Europe')
+p6.circle('fertility', 'female literacy', source=oceanic, size=10, color='teal', legend='Oceanic')
 
 
 # Create tab1 from plot p1: tab1
 tab1 = Panel(child=p1, title='Latin America')
 
 # Create tab2 from plot p2: tab2
-tab2 = Panel(child=p2, title='Africa')
+tab4 = Panel(child=p4, title='Africa')
 
 # Create tab3 from plot p3: tab3
 tab3 = Panel(child=p3, title='Asia')
 
 # Create tab4 from plot p4: tab4
-tab4 = Panel(child=p4, title='Europe')
+tab5 = Panel(child=p5, title='Europe')
+
+# Create tab4 from plot p2: tab4
+tab2 = Panel(child=p2, title='North America')
+
+# Create tab4 from plot p6: tab4
+tab6 = Panel(child=p6, title='Oceanic')
 
 
 # Create a Tabs layout: layout
-layout = Tabs(tabs=[tab1, tab2, tab3, tab4])
+layout = Tabs(tabs=[tab1, tab2, tab3, tab4, tab5, tab6])
 
 # Specify the name of the output_file and show the result
 output_file('tabs.html')
