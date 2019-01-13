@@ -5,7 +5,8 @@ import pandas as pd
 from bokeh.io import curdoc
 from bokeh.plotting import figure
 from bokeh.layouts import widgetbox
-from bokeh.models import Slider
+from bokeh.models import Slider, Button
+from bokeh.models import CheckboxGroup, RadioGroup, Toggle
 from bokeh.models import ColumnDataSource, Select
 from bokeh.layouts import row, column, gridplot
 from bokeh.io import output_file, show
@@ -14,19 +15,23 @@ import random
 
 
 
-# Create ColumnDataSource: source
-n = 5
-x = np.linspace(0, n, 100)
-y = np.sin(x)
-# source = ColumnDataSource(data={'x': np.linspace(0, n, 100), 'y': np.sin(np.linspace(0, n, 100))})
-source = ColumnDataSource(data={'x': x, 'y': y})
 
-plot = figure()
-
+# create figure
+p1 = figure()
 
 # Create a slider: slider
-slider = Slider(title='my slider', start=0, end=20, step=1, value=5)
+slider = Slider(title='my slider', start=10, end=20, step=1, value=20)
 
+n = slider.value
+xx = np.linspace(0, n, 100)
+yy = np.sin(xx)
+
+# Create ColumnDataSource: source
+# source = ColumnDataSource(data={'x': np.linspace(0, n, 100), 'y': np.sin(np.linspace(0, n, 100))})
+source = ColumnDataSource(data={'x': xx, 'y': yy})
+
+# Add a line to the plot
+p1.line('x', 'y', source=source)
 
 # Define a callback function: callback
 def callback(attr, old, new):
@@ -36,26 +41,26 @@ def callback(attr, old, new):
 
     # Compute the updated y using np.sin(scale/x): new_y
     
-    x = np.linspace(0, n, 100)
-    y = np.sin(np.linspace(0, n, 100)) + np.sin(2 + x)
+    # x = np.linspace(0, n, 100)
+    yy = np.sin(np.linspace(0, n, 100)) + np.sin(2 + xx)
     # Update source with the new data values
-    source.data = {'x': x, 'y': y}
+    source.data = {'x': xx, 'y': yy}
 
 # Attach the callback to the 'value' property of slider
 slider.on_change('value', callback)
 
-# Add a line to the plot
-plot.line('x', 'y', source=source)
+
 
 # Create a column layout: layout
-layout = column(widgetbox(slider), plot)
+col = column(widgetbox(slider), p1)
+
 
 # output_file('slider.html')
 # show(layout)
 # layout = widgetbox(slider)
 
 # Add the layout to the current document
-curdoc().add_root(layout)
+# curdoc().add_root(col)
 
 
 
@@ -71,49 +76,54 @@ female_literacy= xl['female literacy']
 population = xl.population
 
 # Create ColumnDataSource: source
-source = ColumnDataSource(data={
+source2 = ColumnDataSource(data={
     'x' : fertility,
     'y' : female_literacy
 })
 
 # Create a new plot: plot
-plot = figure()
+p2 = figure()
 
 # Add circles to the plot
-plot.circle('x', 'y', source=source)
+p2.circle('x', 'y', source=source2)
 
 # Define a callback function: update_plot
 def update_plot(attr, old, new):
     # If the new Selection is 'female_literacy', update 'y' to female_literacy
     if new == 'female_literacy': 
-        source.data = {
+        source2.data = {
             'x' : fertility,
             'y' : female_literacy
         }
     # Else, update 'y' to population
     else:
-        source.data = {
+        source2.data = {
             'x' : fertility,
             'y' : population
         }
 
 # Create a dropdown Select widget: select    
-select = Select(title="distribution", options=['female_literacy', 'population'], value='female_literacy')
+select2 = Select(title="distribution", options=['female_literacy', 'population'], value='female_literacy')
 
 # Attach the update_plot callback to the 'value' property of select
-select.on_change('value', update_plot)
-
-# Create layout and add to current document
-layout = row(select, plot)
-curdoc().add_root(layout)
+select2.on_change('value', update_plot)
 
 
+
+layout2 = column(select2, p2)
+layout4 = row(col, layout2)
+curdoc().add_root(layout4)
+
+
+
+####################################
+p3 = figure()
 # Create two dropdown Select widgets: select1, select2
 select1 = Select(title='First', options=['A', 'B'], value='A')
 select2 = Select(title='Second', options=['1', '2', '3'], value='1')
 
 # Define a callback function: callback
-def callback(attr, old, new):
+def callback3(attr, old, new):
     # If select1 is 'A' 
     if select1.value == 'A':
         # Set select2 options to ['1', '2', '3']
@@ -129,7 +139,7 @@ def callback(attr, old, new):
         select2.value = '100'
 
 # Attach the callback to the 'value' property of select1
-select1.on_change('value', callback)
+select1.on_change('value', callback3)
 
 # Create layout and add to current document
 layout = widgetbox(select1, select2)
@@ -139,27 +149,29 @@ curdoc().add_root(layout)
 
 # Create a Button with label 'Update Data'
 button = Button(label='Update Data')
-
+N = 200
+x1 = np.linspace(0, 10, N)
+y1 = np.sin(x1)
+source5 = ColumnDataSource(data={'x': x1, 'y': y1})
 # Define an update callback with no arguments: update
 def update():
 
     # Compute new y values: y
-    y = np.sin(x) + np.random.random(N)
+    y1 = np.sin(x1 + np.random.random(N))
 
     # Update the ColumnDataSource data dictionary
-    source.data={'x': x, 'y': y}
+    source5.data={'x': x1, 'y': y1}
 
 # Add the update callback to the button
 button.on_click(update)
 
+p3.circle('x', 'y', source=source5)
+
 # Create layout and add to current document
-layout = column(widgetbox(button), plot)
+layout = column(widgetbox(button), p3)
 curdoc().add_root(layout)
 
 
-# Import CheckboxGroup, RadioGroup, Toggle from bokeh.models
-
-from bokeh.models import CheckboxGroup, RadioGroup, Toggle
 # Add a Toggle: toggle
 toggle = Toggle(button_type='success' , label='Toggle button')
 
@@ -171,3 +183,6 @@ radio = RadioGroup(labels=['Option 1', 'Option 2', 'Option 3'])
 
 # Add widgetbox(toggle, checkbox, radio) to the current document
 curdoc().add_root(widgetbox(toggle, checkbox, radio))
+
+
+# # # bokeh serve --show bokehServer2.py

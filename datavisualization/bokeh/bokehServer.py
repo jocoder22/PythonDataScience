@@ -5,7 +5,7 @@ import numpy as np
 from bokeh.io import curdoc
 from bokeh.plotting import figure
 from bokeh.layouts import widgetbox
-from bokeh.models import Slider
+from bokeh.models import Slider, Button
 from bokeh.plotting import ColumnDataSource
 from bokeh.layouts import row, column, gridplot
 from bokeh.io import output_file, show

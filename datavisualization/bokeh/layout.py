@@ -96,8 +96,8 @@ output_file('fert_column.html')
 show(layout)
 
 ###############################
-Using gridplot, same as multiple rows, and columns
-Create a list containing plots p1 and p2: row1
+# Using gridplot, same as multiple rows, and columns
+# Create a list containing plots p1 and p2: row1
 a2002 = apple.loc['2003':'2006',]
 sp1 = ColumnDataSource(a2002)
 a2007 = ColumnDataSource(apple.loc['2007':'2010',])
