@@ -216,6 +216,7 @@ p.circle('Date', 'Adj Close', size=10,
          hover_fill_color='firebrick', hover_alpha=0.5,
          hover_line_color='white', source=source)
 p.line(apple.index, apple['Adj Close'])
+
 # Create a HoverTool: hover
 hover = HoverTool(tooltips=None, mode='vline')
 
