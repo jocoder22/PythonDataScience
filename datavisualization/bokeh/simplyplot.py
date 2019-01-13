@@ -1,12 +1,16 @@
 
 import pandas as pd
-# Import figure from bokeh.plotting
-from bokeh.plotting import figure
 import datetime
 import pandas_datareader as pdr
 
+
+# Import figure from bokeh.plotting
+from bokeh.plotting import figure
 # Import output_file and show from bokeh.io
 from bokeh.io import output_file, show
+
+# Import the ColumnDataSource class from bokeh.plotting
+from bokeh.plotting import ColumnDataSource
 
 url = 'https://www.eea.europa.eu/data-and-maps/figures/correlation-between-fertility-and-female-education/trend01-5g-soer2010-xls/at_download/file'
 
@@ -134,8 +138,7 @@ apple = pdr.get_data_yahoo(symbol, starttime, endtime)
 print(apple.columns)
 print(apple.index.name)
 
-# Import figure from bokeh.plotting
-from bokeh.plotting import figure
+
 
 # Create a figure with x_axis_type='datetime': p
 p = figure(x_axis_type='datetime', x_axis_label='Date', y_axis_label='US Dollars')
@@ -165,10 +168,9 @@ show(p)
 
 
 
-# Import the ColumnDataSource class from bokeh.plotting
-from bokeh.plotting import ColumnDataSource
 
-# Create a ColumnDataSource from df: source
+
+# Create a ColumnDataSource from xl: source
 source = ColumnDataSource(xl)
 
 # Create the figure: p
