@@ -132,7 +132,7 @@ show(layout)
 
 
 ################# linked brushing
-Create a ColumnDataSource from xl: source
+# Create a ColumnDataSource from xl: source
 source = ColumnDataSource(xl)
 
 # Create the first figure: p1
