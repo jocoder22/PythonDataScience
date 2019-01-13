@@ -171,19 +171,20 @@ from bokeh.plotting import ColumnDataSource
 # Create a ColumnDataSource from df: source
 source = ColumnDataSource(xl)
 
-# # Create the figure: p
-# p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female_literacy (% population)')
+# Create the figure: p
+p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female_literacy (% population)')
 
-# # Add circle glyphs to the figure p
-# p.circle('fertility','female literacy', color='ccmap', size=10, source=source)
+# Add circle glyphs to the figure p
+p.circle('fertility','female literacy', color='ccmap', size=10, source=source)
 
-# # Specify the name of the output file and show the result
-# output_file('fertlity.html')
-# show(p)
+# Specify the name of the output file and show the result
+output_file('fertlity.html')
+show(p)
 
 
 
 # Create a figure with the "box_select" tool: p
+source = ColumnDataSource(xl)
 p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female_literacy (% population)', 
         tools='box_select,reset,pan,wheel_zoom,lasso_select,ybox_select')
 
@@ -191,7 +192,60 @@ p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female_l
 p.circle('fertility','female literacy', selection_color='red',nonselection_alpha=0.1,
         color='ccmap', size=10, source=source)
 
+
 # Specify the name of the output file and show the result
 output_file('fertlity2.html')
 show(p)
 
+
+
+
+
+# import the HoverTool
+from bokeh.models import HoverTool
+source = ColumnDataSource(apple)
+
+# Create a figure with x_axis_type='datetime': p
+p = figure(x_axis_type='datetime', x_axis_label='Daily Volume', y_axis_label='Adjusted Close(US Dollars)')
+
+# Add circle glyphs to figure p
+p.circle('Date', 'Adj Close', size=10,
+         fill_color='grey', alpha=0.3, line_color=None,
+         hover_fill_color='firebrick', hover_alpha=0.5,
+         hover_line_color='white', source=source)
+p.line(apple.index, apple['Adj Close'])
+# Create a HoverTool: hover
+hover = HoverTool(tooltips=None, mode='vline')
+
+# Add the hover tool to the figure p
+
+p.add_tools(hover)
+# Specify the name of the output file and show the result
+output_file('hover_glyph.html')
+show(p)
+
+
+
+
+
+
+#Import CategoricalColorMapper from bokeh.models
+from bokeh.models import CategoricalColorMapper
+
+# Convert df to a ColumnDataSource: source
+source = ColumnDataSource(xl)
+# Create the figure: p
+p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female_literacy (% population)')
+
+# Make a CategoricalColorMapper object: color_mapper
+color_mapper = CategoricalColorMapper(factors=['AF', 'ASI', 'EUR', 'OCE', 'NAM', 'LAT' ],
+                                      palette=['red', 'green', 'blue', 'teal', 'cyan', 'magenta'])
+
+# Add a circle glyph to the figure p
+p.circle('fertility','female literacy', source=source,
+            color=dict(field='Continent', transform=color_mapper),
+            legend='Continent')
+
+# Specify the name of the output file and show the result
+output_file('colormap.html')
+show(p)
