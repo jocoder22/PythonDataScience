@@ -1,12 +1,12 @@
 # Perform necessary imports
 import numpy as np
-
+import pandas as pd
 
 from bokeh.io import curdoc
 from bokeh.plotting import figure
 from bokeh.layouts import widgetbox
 from bokeh.models import Slider
-from bokeh.plotting import ColumnDataSource
+from bokeh.models import ColumnDataSource, Select
 from bokeh.layouts import row, column, gridplot
 from bokeh.io import output_file, show
 from numpy.random import random
@@ -60,8 +60,15 @@ curdoc().add_root(layout)
 
 
 
-# Perform necessary imports
-from bokeh.models import ColumnDataSource, Select
+# Access the European dataset
+url = 'https://www.eea.europa.eu/data-and-maps/figures/correlation-between-fertility-and-female-education/trend01-5g-soer2010-xls/at_download/file'
+
+# download named spread sheet
+xl = pd.read_excel(url,sheet_name='data COMPILATION',skiprows=7,nrows=162)
+
+fertility = xl.fertility
+female_literacy= xl['female literacy']
+population = xl.population
 
 # Create ColumnDataSource: source
 source = ColumnDataSource(data={
