@@ -225,10 +225,10 @@ p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female l
 
 # Add the first circle glyph to the figure p
 p.circle('fertility', 'female literacy', source=latin_america, size=10, color='red', legend='Latin America')
-p.circle('fertility', 'female literacy', source=latin_america, size=10, color='red', legend='Latin America')
-p.circle('fertility', 'female literacy', source=latin_america, size=10, color='red', legend='Latin America')
-p.circle('fertility', 'female literacy', source=latin_america, size=10, color='red', legend='Latin America')
-p.circle('fertility', 'female literacy', source=latin_america, size=10, color='red', legend='Latin America')
+p.circle('fertility', 'female literacy', source=north_america, size=10, color='blue', legend='Latin America')
+p.circle('fertility', 'female literacy', source=asia, size=10, color='cyan', legend='Latin America')
+p.circle('fertility', 'female literacy', source=africa, size=10, color='green', legend='Latin America')
+p.circle('fertility', 'female literacy', source=europe, size=10, color='purple', legend='Latin America')
 
 
 # Create tab1 from plot p1: tab1
