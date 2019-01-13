@@ -14,6 +14,10 @@ from bokeh.layouts import row, column, gridplot
 # Import HoverTool from bokeh.models
 from bokeh.models import HoverTool
 
+# Import Panel from bokeh.models.widgets
+from bokeh.models.widgets import Panel
+from bokeh.models.widgets import Tabs
+
 url = 'https://www.eea.europa.eu/data-and-maps/figures/correlation-between-fertility-and-female-education/trend01-5g-soer2010-xls/at_download/file'
 
 # download named spread sheet
@@ -206,64 +210,58 @@ show(p)
 
 
 
-# # Make a column layout that will be used as the second row: row2
-# row2 = column([mpg_hp, mpg_weight], sizing_mode='scale_width')
 
-# # Make a row layout that includes the above column layout: layout
-# layout = row([avg_mpg, row2], sizing_mode='scale_width')
+############## tab
 
-# # Specify the name of the output_file and show the result
-# output_file('layout_custom.html')
-# show(layout)
+latin_america = ColumnDataSource(xl[xl['Continent'] == 'LAT'])
+europe = ColumnDataSource(xl[xl['Continent'] == 'EUR'])
+ocenic = ColumnDataSource(xl[xl['Continent'] == 'OCE'])
+africa = ColumnDataSource(xl[xl['Continent'] == 'AF'])
+asia = ColumnDataSource(xl[xl['Continent'] == 'ASI'])
+North_america = ColumnDataSource(xl[xl['Continent'] == 'NAM'])
 
+# Assign the legend to the bottom left: p.legend.location
+p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
 
-
-
-
-
-
-
-
-# ############## tab
-# # Import Panel from bokeh.models.widgets
-# from bokeh.models.widgets import Panel
-# from bokeh.models.widgets import Tabs
-
-# # Create tab1 from plot p1: tab1
-# tab1 = Panel(child=p1, title='Latin America')
-
-# # Create tab2 from plot p2: tab2
-# tab2 = Panel(child=p2, title='Africa')
-
-# # Create tab3 from plot p3: tab3
-# tab3 = Panel(child=p3, title='Asia')
-
-# # Create tab4 from plot p4: tab4
-# tab4 = Panel(child=p4, title='Europe')
+# Add the first circle glyph to the figure p
+p.circle('fertility', 'female literacy', source=latin_america, size=10, color='red', legend='Latin America')
 
 
-# # Create a Tabs layout: layout
-# layout = Tabs(tabs=[tab1, tab2, tab3, tab4])
+# Create tab1 from plot p1: tab1
+tab1 = Panel(child=p1, title='Latin America')
 
-# # Specify the name of the output_file and show the result
-# output_file('tabs.html')
-# show(layout)
+# Create tab2 from plot p2: tab2
+tab2 = Panel(child=p2, title='Africa')
+
+# Create tab3 from plot p3: tab3
+tab3 = Panel(child=p3, title='Asia')
+
+# Create tab4 from plot p4: tab4
+tab4 = Panel(child=p4, title='Europe')
+
+
+# Create a Tabs layout: layout
+layout = Tabs(tabs=[tab1, tab2, tab3, tab4])
+
+# Specify the name of the output_file and show the result
+output_file('tabs.html')
+show(layout)
 
 
 
-# ##### linked ranges
-#   # Link the x_range of p2 to p1: p2.x_range
-# p2.x_range =  p1.x_range
+##### linked ranges
+  # Link the x_range of p2 to p1: p2.x_range
+p2.x_range =  p1.x_range
 
-# # Link the y_range of p2 to p1: p2.y_range
-# p2.y_range =  p1.y_range
+# Link the y_range of p2 to p1: p2.y_range
+p2.y_range =  p1.y_range
 
-# # Link the x_range of p3 to p1: p3.x_range
-# p3.x_range =  p1.x_range
+# Link the x_range of p3 to p1: p3.x_range
+p3.x_range =  p1.x_range
 
-# # Link the y_range of p4 to p1: p4.y_range
-# p4.y_range =  p1.y_range
+# Link the y_range of p4 to p1: p4.y_range
+p4.y_range =  p1.y_range
 
-# # Specify the name of the output_file and show the result
-# output_file('linked_range.html')
-# show(layout)
+# Specify the name of the output_file and show the result
+output_file('linked_range.html')
+show(layout)
