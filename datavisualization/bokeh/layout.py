@@ -50,111 +50,111 @@ print(apple.columns)
 print(apple.index.name)
 
 # # Create a ColumnDataSource from xl: source
-# source = ColumnDataSource(xl)
+source = ColumnDataSource(xl)
 
-# # Create the first figure: p1
-# p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+# Create the first figure: p1
+p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
 
-# # Add a circle glyph to p1
-# p1.circle('fertility', 'female literacy', source=source)
+# Add a circle glyph to p1
+p1.circle('fertility', 'female literacy', source=source)
 
-# # Create the second figure: p2
-# p2 = figure(x_axis_label='population', y_axis_label='female literacy (% population)')
+# Create the second figure: p2
+p2 = figure(x_axis_label='population', y_axis_label='female literacy (% population)')
 
-# # Add a circle glyph to p2
-# p2.circle('population', 'female literacy', source=source)
+# Add a circle glyph to p2
+p2.circle('population', 'female literacy', source=source)
 
-# # Put p1 and p2 into a horizontal row: layout
-# layout = row(p1, p2)
+# Put p1 and p2 into a horizontal row: layout
+layout = row(p1, p2)
 
-# # Specify the name of the output_file and show the result
-# output_file('fert_row.html')
-# show(layout)
-
-
-
-# ######## column layout
-# # Create a ColumnDataSource from xl: source
-# source = ColumnDataSource(xl)
-# # Create a blank figure: p1
-# p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
-
-# # Add circle scatter to the figure p1
-# p1.circle('fertility', 'female literacy', source=source)
-
-# # Create a new blank figure: p2
-# p2 = figure(x_axis_label='population', y_axis_label='female literacy (% population)')
-
-# # Add circle scatter to the figure p2
-# p2.circle('population', 'female literacy', source=source)
-
-# # Put plots p1 and p2 in a column: layout
-# layout = column(p1, p2)
-
-# # Specify the name of the output_file and show the result
-# output_file('fert_column.html')
-# show(layout)
-
-################################
-# Using gridplot, same as multiple rows, and columns
-# Create a list containing plots p1 and p2: row1
-# a2002 = apple.loc['2003':'2006',]
-# sp1 = ColumnDataSource(a2002)
-# a2007 = ColumnDataSource(apple.loc['2007':'2010',])
-# a2011 = ColumnDataSource(apple.loc['2011':'2014',])
-# a2015 = ColumnDataSource(apple.loc['2015':'2018',])
+# Specify the name of the output_file and show the result
+output_file('fert_row.html')
+show(layout)
 
 
-# # Create a figure with x_axis_type="datetime": p
-# p1 = figure(x_axis_type='datetime', x_axis_label='Date', y_axis_label='US Dollars')
-# p2 = figure(x_axis_type='datetime', x_axis_label='Date', y_axis_label='US Dollars')
-# p3 = figure(x_axis_type='datetime', x_axis_label='Date', y_axis_label='US Dollars')
-# p4 = figure(x_axis_type='datetime', x_axis_label='Date', y_axis_label='US Dollars')
 
-# # Plot date along the x axis and price along the y axis
-# p1.line('Date', 'Adj Close', source=sp1)
-# p2.line('Date', 'Adj Close', source=a2007 )
-# p3.line('Date', 'Adj Close', source=a2011)
-# p4.line('Date', 'Adj Close', source=a2015)
-
-# # Create a list containing plots p1 and p2: row1
-# row1 = [p1, p2]
-
-# # Create a list containing plots p3 and p4: row2
-# row2 = [p3, p4]
-
-# # Create a gridplot using row1 and row2: layout
-# layout = gridplot([row1, row2])
-
-# # Specify the name of the output_file and show the result
-# output_file('grid.html')
-# show(layout)
-
-
-################## linked brushing
+######## column layout
 # Create a ColumnDataSource from xl: source
-# source = ColumnDataSource(xl)
+source = ColumnDataSource(xl)
+# Create a blank figure: p1
+p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
 
-# # Create the first figure: p1
-# p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)',
-#             tools='box_select,lasso_select')
+# Add circle scatter to the figure p1
+p1.circle('fertility', 'female literacy', source=source)
 
-# # Add a circle glyph to p1
-# p1.circle('fertility', 'female literacy', source=source)
+# Create a new blank figure: p2
+p2 = figure(x_axis_label='population', y_axis_label='female literacy (% population)')
 
-# # Create the second figure: p2
-# p2 = figure(x_axis_label='fertility (children per woman)', y_axis_label='population (millions)',
-#             tools='box_select,lasso_select')
+# Add circle scatter to the figure p2
+p2.circle('population', 'female literacy', source=source)
 
-# # Add a circle glyph to p2
-# p2.circle('fertility', 'population', source=source)
+# Put plots p1 and p2 in a column: layout
+layout = column(p1, p2)
 
-# # Create row layout of figures p1 and p2: layout
-# layout = row([p1, p2])
+# Specify the name of the output_file and show the result
+output_file('fert_column.html')
+show(layout)
 
-# # Specify the name of the output_file and show the result
-# output_file('linked_brush.html')
-# show(layout)
+###############################
+Using gridplot, same as multiple rows, and columns
+Create a list containing plots p1 and p2: row1
+a2002 = apple.loc['2003':'2006',]
+sp1 = ColumnDataSource(a2002)
+a2007 = ColumnDataSource(apple.loc['2007':'2010',])
+a2011 = ColumnDataSource(apple.loc['2011':'2014',])
+a2015 = ColumnDataSource(apple.loc['2015':'2018',])
+
+
+# Create a figure with x_axis_type="datetime": p
+p1 = figure(x_axis_type='datetime', x_axis_label='Date', y_axis_label='US Dollars')
+p2 = figure(x_axis_type='datetime', x_axis_label='Date', y_axis_label='US Dollars')
+p3 = figure(x_axis_type='datetime', x_axis_label='Date', y_axis_label='US Dollars')
+p4 = figure(x_axis_type='datetime', x_axis_label='Date', y_axis_label='US Dollars')
+
+# Plot date along the x axis and price along the y axis
+p1.line('Date', 'Adj Close', source=sp1)
+p2.line('Date', 'Adj Close', source=a2007 )
+p3.line('Date', 'Adj Close', source=a2011)
+p4.line('Date', 'Adj Close', source=a2015)
+
+# Create a list containing plots p1 and p2: row1
+row1 = [p1, p2]
+
+# Create a list containing plots p3 and p4: row2
+row2 = [p3, p4]
+
+# Create a gridplot using row1 and row2: layout
+layout = gridplot([row1, row2])
+
+# Specify the name of the output_file and show the result
+output_file('grid.html')
+show(layout)
+
+
+################# linked brushing
+Create a ColumnDataSource from xl: source
+source = ColumnDataSource(xl)
+
+# Create the first figure: p1
+p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)',
+            tools='box_select,lasso_select')
+
+# Add a circle glyph to p1
+p1.circle('fertility', 'female literacy', source=source)
+
+# Create the second figure: p2
+p2 = figure(x_axis_label='fertility (children per woman)', y_axis_label='population (millions)',
+            tools='box_select,lasso_select')
+
+# Add a circle glyph to p2
+p2.circle('fertility', 'population', source=source)
+
+# Create row layout of figures p1 and p2: layout
+layout = row([p1, p2])
+
+# Specify the name of the output_file and show the result
+output_file('linked_brush.html')
+show(layout)
 
 
 ############## create legend
