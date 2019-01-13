@@ -266,8 +266,30 @@ show(layout)
 
 
 
+
 ##### linked ranges
-  # Link the x_range of p2 to p1: p2.x_range
+# Link the x_range of p2 to p1: p2.x_range
+
+
+latin_america = ColumnDataSource(xl[xl['Continent'] == 'LAT'])
+africa = ColumnDataSource(xl[xl['Continent'] == 'AF'])
+asia = ColumnDataSource(xl[xl['Continent'] == 'ASI'])
+north_america = ColumnDataSource(xl[xl['Continent'] == 'NAM'])
+
+# Assign the legend to the bottom left: p.legend.location
+p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+p2 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+p3 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+p4 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)')
+
+
+# Add the first circle glyph to the figure p
+p1.circle('fertility', 'female literacy', source=latin_america, size=10, color='red', legend='Latin America')
+p2.circle('fertility', 'female literacy', source=north_america, size=10, color='blue', legend='North America')
+p3.circle('fertility', 'female literacy', source=asia, size=10, color='cyan', legend='Asia')
+p4.circle('fertility', 'female literacy', source=africa, size=10, color='green', legend='Africa')
+
+
 p2.x_range =  p1.x_range
 
 # Link the y_range of p2 to p1: p2.y_range
@@ -278,6 +300,15 @@ p3.x_range =  p1.x_range
 
 # Link the y_range of p4 to p1: p4.y_range
 p4.y_range =  p1.y_range
+
+# Create a list containing plots p1 and p2: row1
+row1 = [p1, p2]
+
+# Create a list containing plots p3 and p4: row2
+row2 = [p3, p4]
+
+# Create a gridplot using row1 and row2: layout
+layout = gridplot([row1, row2])
 
 # Specify the name of the output_file and show the result
 output_file('linked_range.html')
