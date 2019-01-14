@@ -92,8 +92,36 @@ y = a * x + b
 _ = plt.plot(x, y)
 
 # Draw the plot
-plt.show()
+# plt.show()
 # Show the plot
-# plt.pause(2)
+plt.pause(2)
+plt.clf()
 # plt.close()
 # plt.show()
+
+
+# Specify slopes to consider: a_vals
+a_vals = np.linspace(0, 0.7, 200)
+
+# Initialize sum of square of residuals: rss
+rss = np.empty_like(a_vals)
+
+aa, b = np.polyfit(versicolor_pl, versicolor_pw, 1)
+# Compute sum of square of residuals for each value of a_vals
+for i, a in enumerate(a_vals):
+    rss[i] = np.sum((versicolor_pw - a*versicolor_pl - b)**2)
+
+# Plot the RSS
+plt.plot(a_vals, rss, '-')
+plt.xlabel('slope (versicolor Petal Width / percent versicolor Petal Length)')
+plt.ylabel('sum of square of residuals')
+
+plt.show()
+# # Show the plot
+# plt.pause(2)
+# plt.clf()
+# # plt.close()
+# # plt.show()
+
+print(np.min(rss))
+print(a_vals[np.where(rss == np.min(rss))])  # np.where returns the index
