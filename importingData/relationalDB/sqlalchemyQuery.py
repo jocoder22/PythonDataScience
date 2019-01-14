@@ -928,9 +928,6 @@ plt.hist(green_pixels, bins=64, normed=True, color='green', alpha=0.2)
 plt.show()
 
 
-
-
-
 # Load the image into an array: image
 image = plt.imread('hs-2004-32-b-small_web.jpg')
 
