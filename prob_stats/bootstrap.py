@@ -408,3 +408,62 @@ perm_replicates = draw_perm_reps(nht_dead, nht_live, diff_of_means, size=10000)
 p = np.sum(perm_replicates <= nht_diff_obs) / len(perm_replicates)
 print('p-val =', p)
 
+
+# Compute observed correlation: r_obs
+r_obs = pearson_r(illiteracy, fertility)
+
+# Initialize permutation replicates: perm_replicates
+perm_replicates = np.empty(10000)
+
+# Draw replicates
+for i in range(10000):
+    # Permute illiteracy measurments: illiteracy_permuted
+    illiteracy_permuted = np.random.permutation(illiteracy)
+
+    # Compute Pearson correlation
+    perm_replicates[i] = pearson_r(illiteracy_permuted, fertility)
+
+# Compute p-value: p
+p = np.sum(perm_replicates >= r_obs)/len(perm_replicates)
+print('p-val =', p)
+
+
+# Plot the ECDFs
+plt.plot(x_control, y_control, marker='.', linestyle='none')
+plt.plot(x_treated, y_treated, marker='.', linestyle='none')
+
+# Set the margins
+plt.margins(0.02)
+
+# Add a legend
+plt.legend(('control', 'treated'), loc='lower right')
+
+# Label axes and show plot
+plt.xlabel('millions of alive sperm per mL')
+plt.ylabel('ECDF')
+plt.show()
+
+
+# Compute the difference in mean sperm count: diff_means
+diff_means = np.mean(control) - np.mean(treated)
+
+# Compute mean of pooled data: mean_count
+mean_count = np.mean(np.concatenate((control, treated)))
+
+# Generate shifted data sets
+control_shifted = control - np.mean(control) + mean_count
+treated_shifted = treated - np.mean(treated) + mean_count
+
+# Generate bootstrap replicates
+bs_reps_control = draw_bs_reps(control_shifted,
+                               np.mean, size=10000)
+bs_reps_treated = draw_bs_reps(treated_shifted,
+                               np.mean, size=10000)
+
+# Get replicates of difference of means: bs_replicates
+bs_replicates = bs_reps_control - bs_reps_treated
+
+# Compute and print p-value: p
+p = np.sum(bs_replicates >= np.mean(control) - np.mean(treated)) \
+    / len(bs_replicates)
+print('p-value =', p)
