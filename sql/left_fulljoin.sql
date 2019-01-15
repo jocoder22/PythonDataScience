@@ -90,9 +90,10 @@ ORDER BY city, language;
 
 
 
-
+/*
 -- FULL JOIN
 -- The power of the full join is the filtering using WHERE
+*/
 SELECT name AS country, code, region, basic_unit
 FROM countries
     FULL JOIN currencies
