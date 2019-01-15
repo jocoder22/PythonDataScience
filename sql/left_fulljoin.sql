@@ -45,3 +45,57 @@ FROM countries AS c
     ON c.code = l.code
 -- sort by descending country name
 ORDER BY country DESC;
+
+
+
+-- Select region, average gdp_percapita (alias avg_gdp)
+SELECT region, AVG(gdp_percapita) AS avg_gdp
+-- From countries (alias c) on the left
+FROM countries AS c
+    -- Join with economies (alias e)
+    LEFT JOIN economies AS e
+    -- Match on code fields
+    ON e.code = c.code
+-- Focus on 2010 
+WHERE year = 2010
+-- Group by region
+GROUP BY region;
+
+
+
+-- Select region, average gdp_percapita (alias avg_gdp)
+SELECT region, AVG(gdp_percapita) AS avg_gdp
+-- From countries (alias c) on the left
+FROM countries AS c
+    -- Join with economies (alias e)
+    LEFT JOIN economies AS e
+    -- Match on code fields
+    ON e.code = c.code
+-- Focus on 2010 
+WHERE year = 2010
+-- Group by region
+GROUP BY region
+ORDER BY avg_gdp DESC;
+
+
+SELECT cities.name AS city, urbanarea_pop, countries.name AS country,
+    indep_year, languages.name AS language, percent
+FROM languages
+    RIGHT JOIN countries
+    ON languages.code = countries.code
+    RIGHT JOIN cities
+    ON countries.code = cities.country_code
+ORDER BY city, language;
+
+
+
+
+
+-- FULL JOIN
+SELECT name AS country, code, region, basic_unit
+FROM countries
+    FULL JOIN currencies
+USING (code) 
+WHERE region = 'North America' OR region IS NULL
+ORDER BY region;
+
