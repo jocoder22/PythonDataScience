@@ -64,5 +64,12 @@ for chunk in pd.read_csv('people.csv', chunksize=1):
 print(counts)
 
 
-
+SELECT country_code, size,
+CASE WHEN size > 50000000 THEN 'large'
+WHEN size > 1000000 THEN 'medium'
+ELSE 'small' END
+AS popsize_group
+INTO pop_plus -- creates a new table to store the query result
+FROM populations
+WHERE year = 2015;
 
