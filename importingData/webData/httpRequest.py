@@ -54,3 +54,4 @@ r = requests.get(url)
 html_doc = r.text
 s = BeautifulSoup(html_doc, features='lxml')
 print(s.title)
+print(s.prettify())
