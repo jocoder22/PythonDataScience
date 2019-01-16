@@ -55,3 +55,4 @@ FROM countries_plus AS c
     INNER JOIN pop_plus AS p
     ON c.code = p.country_code
 ORDER BY geosize_group;
+
