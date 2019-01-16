@@ -24,11 +24,11 @@ df = pd.DataFrame(x, columns=iris.feature_names)
 print(df.head())
 
 
-_ = pd.scatter_matrix(df, c=y, figsize=[8, 8], s=150, marker='.')
+_ = pd.plotting.scatter_matrix(df, c=y, figsize=[8, 8], s=150, marker='.')
 plt.pause(3)
 plt.clf()
 
-_ = pd.scatter_matrix(df, c=y, figsize=[8, 8], s=150, marker='D')
+_ = pd.plotting.scatter_matrix(df, c=y, figsize=[8, 8], s=150, marker='D')
 plt.pause(3)
 plt.clf()
 
@@ -44,10 +44,7 @@ columnsName = ['party', 'handicapped-infants', 'water-project-cost-sharing',
 
 
 df = pd.read_csv(url, names=columnsName, sep=',')
-sns.countplot(x='education', hue='party', data=df, palette='RdBu')
-plt.xticks([0, 1], ['No', 'Yes'])
-plt.pause(3)
-plt.clf()
+print(df.head())
 
 
 sns.countplot(x='education', hue='party', data=df, palette='RdBu')
@@ -56,7 +53,13 @@ plt.pause(3)
 plt.clf()
 
 
-sns.countplot(x='education', hue='party', data=df, palette='RdBu')
+sns.countplot(x='missile', hue='party', data=df, palette='RdBu')
+plt.xticks([0, 1], ['No', 'Yes'])
+plt.pause(3)
+plt.clf()
+
+
+sns.countplot(x='satellite', hue='party', data=df, palette='RdBu')
 plt.xticks([0, 1], ['No', 'Yes'])
 # plt.pause(3)
 # plt.clf()
