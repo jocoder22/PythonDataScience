@@ -29,11 +29,36 @@ plt.pause(3)
 plt.clf()
 
 _ = pd.scatter_matrix(df, c=y, figsize=[8, 8], s=150, marker='D')
-plt.show()
+plt.pause(3)
+plt.clf()
 
 
-plt.figure()
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/voting-records/house-votes-84.data'
+
+columnsName = ['party', 'handicapped-infants', 'water-project-cost-sharing',
+               'adoption-of-the-budget-resolution', 'physician-fee-freeze',
+               'el-salvador-aid', 'religious-groups-in-schools', 'satellite',
+               'aid-to-nicaraguan-contras', 'missile', 'immigration',
+               'synfuels-corporation-cutback', 'education', 'superfund-right-to-sue',
+               'crime', 'duty-free-exports', 'export-administration-act-south-africa']
+
+
+df = pd.read_csv(url, names=columnsName, sep=',')
 sns.countplot(x='education', hue='party', data=df, palette='RdBu')
 plt.xticks([0, 1], ['No', 'Yes'])
+plt.pause(3)
+plt.clf()
+
+
+sns.countplot(x='education', hue='party', data=df, palette='RdBu')
+plt.xticks([0, 1], ['No', 'Yes'])
+plt.pause(3)
+plt.clf()
+
+
+sns.countplot(x='education', hue='party', data=df, palette='RdBu')
+plt.xticks([0, 1], ['No', 'Yes'])
+# plt.pause(3)
+# plt.clf()
 plt.show()
 
