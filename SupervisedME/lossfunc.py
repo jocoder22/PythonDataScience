@@ -22,6 +22,6 @@ def lossfunc(predProb, observed, clipper=1e-9):
 
 print(lossfunc(predProb=0.9, observed=0))
 print(lossfunc(predProb=0.5, observed=1))
-print('{:.20f}'.format(lossfunc(predProb=0.85, observed=1)), "=> A")
+print('{0:.20f} {1:>6}'.format(lossfunc(predProb=0.85, observed=1), "=> A"))
 print('{:.20f}'.format(lossfunc(predProb=0.99, observed=0)), "=> B")
 print('{:.20f}'.format(lossfunc(predProb=0.51, observed=0)), "=> C")
