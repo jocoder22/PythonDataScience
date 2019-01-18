@@ -91,7 +91,7 @@ print("AUC scores computed using 5-fold cross-validation: {}".format(cv_auc))
 
 # Setup the hyperparameter grid
 c_space = np.logspace(-5, 8, 15)
-param_grid = {'C': c_space}
+param_grid = {'C': c_space, 'penalty': ['l1', 'l2']}
 
 # Instantiate a logistic regression classifier: logreg
 logreg = LogisticRegression()
@@ -105,3 +105,8 @@ logreg_cv.fit(X, y)
 # Print the tuned parameters and score
 print("Tuned Logistic Regression Parameters: {}".format(logreg_cv.best_params_))
 print("Best score is {}".format(logreg_cv.best_score_))
+
+
+
+
+
