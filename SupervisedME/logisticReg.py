@@ -1,3 +1,4 @@
+from sklearn.multiclass import OneVsRestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import cross_val_score
@@ -108,6 +109,19 @@ print("Tuned Logistic Regression Parameters: {}".format(logreg_cv.best_params_))
 print("Best score is {}".format(logreg_cv.best_score_))
 
 
+# Split and select numeric data only, no nans
+X_train, X_test, y_train, y_test = train_test_split(sample_df[['numeric']],
+                                                    pd.get_dummies(
+                                                        sample_df['label']),
+                                                    random_state=22)
 
+# Instantiate Pipeline object: pl
+pl = Pipeline([('clf', OneVsRestClassifier(LogisticRegression()))])
 
+# Fit the pipeline to the training data
+pl.fit(X_train, y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test, y_test)
+print("\nAccuracy on sample data - numeric, no nans: ", accuracy)
 
