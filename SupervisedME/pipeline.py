@@ -12,7 +12,8 @@ import matplotlib.pyplot as plt
 from sklearn import datasets
 plt.style.use('ggplot')
 
-# Import FunctionTransformer
+
+url2 = 'https://github.com/drivendataorg/box-plots-sklearn/blob/master/src/data/multilabel.py'
 
 # Get the dummy encoding of the labels
 dummy_labels = pd.get_dummies(df[LABELS])
@@ -59,7 +60,6 @@ accuracy = pl.score(X_test, y_test)
 print("\nAccuracy on budget dataset: ", accuracy)
 
 
-# Import random forest classifer
 
 # Edit model step in pipeline
 pl = Pipeline([
