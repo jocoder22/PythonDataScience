@@ -27,6 +27,10 @@ df[df == 'n'] = 0
 df.party = df.party.astype('category')
 df.party = pd.get_dummies(df['party'])
 df[df.columns[1:]] = df.drop('party', axis=1).astype('float')
+
+# dummy_label = pd.get_dummies(df[LABELS])
+NON_LABELS = [c for c in df.columns if c != 'party']
+print(NON_LABELS)
 print(df.head())
 print(df.dtypes)
 
@@ -150,3 +154,97 @@ vec_alphanumeric.fit_transform(text_vector)
 print("There are {} alpha-numeric tokens in the dataset".format(len(vec_alphanumeric.get_feature_names())))
 print(df.head())
 print(df.columns)
+
+
+# Split and select numeric data only, no nans
+X_train, X_test, y_train, y_test = train_test_split(sample_df[['numeric']],
+                                                    pd.get_dummies(
+                                                        sample_df['label']),
+                                                    random_state=22)
+
+# Instantiate Pipeline object: pl
+pl = Pipeline([('clf', OneVsRestClassifier(LogisticRegression()))])
+
+# Fit the pipeline to the training data
+pl.fit(X_train, y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test, y_test)
+print("\nAccuracy on sample data - numeric, no nans: ", accuracy)
+
+
+# Import the Imputer object
+
+# Create training and test sets using only numeric data
+X_train, X_test, y_train, y_test = train_test_split(sample_df[['numeric', 'with_missing']],
+                                                    pd.get_dummies(
+                                                        sample_df['label']),
+                                                    random_state=456)
+
+# Insantiate Pipeline object: pl
+pl = Pipeline([
+    ('imp', Imputer()),
+    ('clf', OneVsRestClassifier(LogisticRegression()))
+])
+
+# Fit the pipeline to the training data
+pl.fit(X_train, y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test, y_test)
+print("\nAccuracy on sample data - all numeric, incl nans: ", accuracy)
+
+
+# Obtain the text data: get_text_data
+get_text_data = FunctionTransformer(lambda x: x['text'], validate=False)
+
+# Obtain the numeric data: get_numeric_data
+get_numeric_data = FunctionTransformer(
+    lambda x: x[['numeric', 'with_missing']], validate=False)
+
+# Fit and transform the text data: just_text_data
+just_text_data = get_text_data.fit_transform(sample_df)
+
+# Fit and transform the numeric data: just_numeric_data
+just_numeric_data = get_numeric_data.fit_transform(sample_df)
+
+# Print head to check results
+print('Text Data')
+print(just_text_data.head())
+print('\nNumeric Data')
+print(just_numeric_data.head())
+
+
+# Split using ALL data in sample_df
+X_train, X_test, y_train, y_test = train_test_split(sample_df[['numeric', 'with_missing', 'text']],
+                                                    pd.get_dummies(
+                                                        sample_df['label']),
+                                                    random_state=22)
+
+# Create a FeatureUnion with nested pipeline: process_and_join_features
+process_and_join_features = FeatureUnion(
+    transformer_list=[
+        ('numeric_features', Pipeline([
+            ('selector', get_numeric_data),
+            ('imputer', Imputer())
+        ])),
+        ('text_features', Pipeline([
+            ('selector', get_text_data),
+            ('vectorizer', CountVectorizer())
+        ]))
+    ]
+)
+
+# Instantiate nested pipeline: pl
+pl = Pipeline([
+    ('union', process_and_join_features),
+    ('clf', OneVsRestClassifier(LogisticRegression()))
+])
+
+
+# Fit pl to the training data
+pl.fit(X_train, y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test, y_test)
+print("\nAccuracy on sample data - all data: ", accuracy)
