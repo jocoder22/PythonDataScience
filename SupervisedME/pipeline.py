@@ -1,3 +1,10 @@
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.multiclass import OneVsRestClassifier
+from sklearn.preprocessing import Imputer
+from sklearn.pipeline import FeatureUnion
 from sklearn.preprocessing import FunctionTransformer
 import numpy as np
 import pandas as pd
@@ -50,3 +57,47 @@ pl.fit(X_train, y_train)
 # Compute and print accuracy
 accuracy = pl.score(X_test, y_test)
 print("\nAccuracy on budget dataset: ", accuracy)
+
+
+# Import random forest classifer
+
+# Edit model step in pipeline
+pl = Pipeline([
+    ('union', FeatureUnion(
+        transformer_list=[
+            ('numeric_features', Pipeline([
+                ('selector', get_numeric_data),
+                ('imputer', Imputer())
+            ])),
+            ('text_features', Pipeline([
+                ('selector', get_text_data),
+                ('vectorizer', CountVectorizer())
+            ]))
+        ]
+    )),
+    ('clf', RandomForestClassifier())
+])
+
+# Fit to the training data
+pl.fit(X_train, y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test, y_test)
+print("\nAccuracy on budget dataset: ", accuracy)
+
+
+# Add model step to pipeline: pl
+pl = Pipeline([
+    ('union', FeatureUnion(
+        transformer_list=[
+            ('numeric_features', Pipeline([
+                ('selector', get_numeric_data),
+                ('imputer', Imputer())
+            ])),
+            ('text_features', Pipeline([
+                ('selector', get_text_data),
+                ('vectorizer', CountVectorizer())
+            ]))
+        ]
+    )),
+    ('clf', RandomForestClassifier(n_estimators=15))
