@@ -27,6 +27,7 @@ df[df == 'n'] = 0
 df.party = df.party.astype('category')
 df.party = pd.get_dummies(df['party'])
 df[df.columns[1:]] = df.drop('party', axis=1).astype('float')
+# [x for x in X_train if X_train[x].dtype != 'object']
 
 # dummy_label = pd.get_dummies(df[LABELS])
 NON_LABELS = [c for c in df.columns if c != 'party']
@@ -134,7 +135,7 @@ TOKENS_ALPHANUMERIC = '[A-Za-z0-9]+(?=\\s+)'
 vec_basic = CountVectorizer(token_pattern=TOKENS_BASIC)
 
 # Instantiate alphanumeric CountVectorizer: vec_alphanumeric
-vec_alphanumeric = CountVectorizer(token_pattern=TOKENS_ALPHANUMERIC)
+vec_alphanumeric = CountVectorizer(token_pattern=TOKENS_ALPHANUMERIC, ngram_range=(1, 2))
 
 # Create the text vector
 text_vector = combine_text_columns(df)
