@@ -1,3 +1,18 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+plt.set('ggplot')
+
+
+def relu(input):
+    '''Define your relu activation function here'''
+    # Calculate the value for the output of the relu function: output
+    output = max(0, input)
+    
+    # Return the value just calculated
+    return(output)
+
+
 def predict_with_network(input_data):
     # Calculate node 0 in the first hidden layer
     node_0_0_input = (input_data * weights['node_0_0']).sum()
