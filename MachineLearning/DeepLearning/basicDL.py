@@ -5,6 +5,9 @@ from sklearn import datasets
 plt.style.use('ggplot')
 
 
+input_data = np.array([1, 2, 3])
+weights = np.array([0, 2, 1])
+
 def relu(input):
     '''Define your relu activation function here'''
     # Calculate the value for the output of the relu function: output
@@ -45,3 +48,17 @@ def predict_with_network(input_data):
 
 output = predict_with_network(input_data)
 print(output)
+
+
+
+# Calculate the predictions: preds
+preds = (input_data * weights).sum()
+
+# Calculate the error: error
+error = preds - target
+
+# Calculate the slope: slope
+slope = 2 * input_data * error
+
+# Print the slope
+print(slope)
