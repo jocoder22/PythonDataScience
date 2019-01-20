@@ -7,6 +7,7 @@ plt.style.use('ggplot')
 
 input_data = np.array([1, 2, 3])
 weights = np.array([0, 2, 1])
+target = 0
 
 def relu(input):
     '''Define your relu activation function here'''
@@ -51,8 +52,11 @@ print(output)
 
 
 
+# Set the learning rate: learning_rate
+learning_rate = 0.01
+
 # Calculate the predictions: preds
-preds = (input_data * weights).sum()
+preds = (weights * input_data).sum()
 
 # Calculate the error: error
 error = preds - target
@@ -60,5 +64,70 @@ error = preds - target
 # Calculate the slope: slope
 slope = 2 * input_data * error
 
-# Print the slope
-print(slope)
+# Update the weights: weights_updated
+weights_updated = weights - learning_rate * slope
+
+# Get updated predictions: preds_updated
+preds_updated = (input_data * weights_updated).sum()
+
+# Calculate updated error: error_updated
+error_updated = preds_updated - target
+
+# Print the original error
+print(error)
+
+# Print the updated error
+print(error_updated)
+
+def get_slope(input_data, target, weights):
+
+    # Calculate the predictions: preds
+    preds = (weights * input_data).sum()
+
+    # Calculate the error: error
+    error = preds - target
+
+    # Calculate the slope: slope
+    slope = 2 * input_data * error
+
+    return slope
+
+
+def get_mse(input_data, target, weights):
+
+    # Calculate the predictions: preds
+    preds = (weights * input_data).sum()
+
+    # Calculate the error: error
+    error = preds - target
+
+    # Calculate the mse: mse
+    mse = np.mean(np.square(error))
+
+    return mse
+
+
+n_updates = 20
+mse_hist = []
+
+# Iterate over the number of updates
+for i in range(n_updates):
+    # Calculate the slope: slope
+    slope = get_slope(input_data, target, weights)
+    
+    # Update the weights: weights
+    weights = weights - 0.01 * slope
+    
+    # Calculate mse with new weights: mse
+    mse = get_mse(input_data, target, weights)
+    
+    
+    # Append the mse to mse_hist
+    mse_hist.append(mse)
+
+# Plot the mse history
+plt.plot(mse_hist)
+plt.xlabel('Iterations')
+plt.ylabel('Mean Squared Error')
+plt.show()
+
