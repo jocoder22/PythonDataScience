@@ -40,7 +40,7 @@ terrain, terrain_r, viridis, viridis_r, winter, winter_r
 
 plt.scatter(xplot+2, yplot, c=np.cos(xplot), cmap='inferno')
 plt.scatter(xplot+3, yplot, c=np.cos(xplot), cmap='inferno', edgecolors='none')
-plt.colormaps('inferno')
+plt.colormaps()
 
 plt.scatter(xplot+3, yplot, c=np.cos(xplot), cmap='magma', edgecolors='none',
             s=np.power(xplot, 4))
