@@ -8,6 +8,7 @@ import keras
 from keras.layers import Dense
 from keras.models import Sequential
 from keras.utils import to_categorical
+from keras.callbacks import EarlyStopping
 from keras import losses
 plt.style.use('ggplot')
 
@@ -59,12 +60,10 @@ n_cols = predictors2.shape[1]
 
 print(n_cols)
 
+early_stop_monitor = EarlyStopping(patience=3)
 # Convert the target to categorical: target
 target2 = to_categorical(titan.survived)
 
-# Create training and test sets
-X_train, X_test, y_train, y_test = train_test_split(
-    predictors2, target2, test_size=0.4, random_state=42, stratify=target2)
 
 # Set up the model
 model = Sequential()
@@ -79,16 +78,16 @@ model.add(Dense(2, activation='softmax'))
 model.compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Fit the model
-model.fit(X_train, y_train, epochs=20)
+model.fit(predictors2, target2, validation_split=0.3, epochs=40, callbacks=[early_stop_monitor])
 
-# Calculate predictions: predictions
-predictions = model.predict(X_test)
+# # Calculate predictions: predictions
+# predictions = model.predict(X_test)
 
-# Calculate predicted probability of survival: predicted_prob_true
-predicted_prob_true = predictions[:,1]
+# # Calculate predicted probability of survival: predicted_prob_true
+# predicted_prob_true = predictions[:,1]
 
-# print predicted_prob_true
-print(predicted_prob_true)
+# # print predicted_prob_true
+# print(predicted_prob_true)
 
 
 
