@@ -34,14 +34,11 @@ model.add(Dense(50, activation='relu'))
 model.add(Dense(50, activation='relu'))
 
 
-
-
-
 # Add the output layer
 model.add(Dense(10, activation='softmax'))
 
 # Compile the model
-model.compile(optimizer='Nadam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # model.add(Dense(1))
 
