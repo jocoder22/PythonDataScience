@@ -7,9 +7,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn import datasets
-plt.style.use('ggplot')
+# plt.style.use('ggplot')
 
-filename = 'c:\\Users\\okigboo\\Desktop\\PythonDataScience\\NetworkAnalysis\\ego-twitter.p'
+# filename = 'c:\\Users\\okigboo\\Desktop\\PythonDataScience\\NetworkAnalysis\\ego-twitter.p'
+
+filename = 'C:\\Users\\Jose\\Desktop\\PythonDataScience\\NetworkAnalysis\\ego-twitter.p'
 
 infile = open(filename, 'rb')
 myfile = pickle.load(infile)
