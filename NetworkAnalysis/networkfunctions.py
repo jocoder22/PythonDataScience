@@ -1,3 +1,13 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import datasets
+import networkx as nx
+import nxviz as nz
+plt.style.use('ggplot')
+
+
+
 def nodes_with_m_nbrs(G, m):
     """
     Returns all nodes in graph G that have m neighbors.
@@ -119,3 +129,52 @@ top_bc = find_node_with_highest_bet_cent(T)
 for node in top_bc:
     assert nx.betweenness_centrality(T)[node] == max(
         nx.betweenness_centrality(T).values())
+
+
+from itertools import combinations
+
+# Define is_in_triangle() 
+def is_in_triangle(G, n):
+    """
+    Checks whether a node `n` in graph `G` is in a triangle relationship or not. 
+    
+    Returns a boolean.
+    """
+    in_triangle = False
+    
+    # Iterate over all possible triangle relationship combinations
+    for n1, n2 in combinations(G.neighbors(n), 2):
+    
+        # Check if an edge exists between n1 and n2
+        if G.has_edge(n1, n2):
+            in_triangle = True
+            break
+    return in_triangle
+
+
+
+from itertools import combinations
+
+# Write a function that identifies all nodes in a triangle relationship with a given node.
+def nodes_in_triangle(G, n):
+    """
+    Returns the nodes in a graph `G` that are involved in a triangle relationship with the node `n`.
+    """
+    triangle_nodes = set([n])
+    
+    # Iterate over all possible triangle relationship combinations
+    for n1, n2 in combinations(G.neighbors(n), 2):
+    
+        # Check if n1 and n2 have an edge between them
+        if G.has_edge(n1, n2):
+        
+            # Add n1 to triangle_nodes
+            triangle_nodes.add(n1)
+            
+            # Add n2 to triangle_nodes
+            triangle_nodes.add(n2)
+            
+    return triangle_nodes
+    
+# Write the assertion statement
+assert len(nodes_in_triangle(T, 1)) == 35
