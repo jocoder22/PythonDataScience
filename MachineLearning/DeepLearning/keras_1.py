@@ -60,6 +60,8 @@ n_cols = predictors2.shape[1]
 
 print(n_cols)
 
+
+
 early_stop_monitor = EarlyStopping(patience=3)
 # Convert the target to categorical: target
 target2 = to_categorical(titan.survived)

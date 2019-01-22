@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+#!/usr/bin/env python
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -5,6 +8,7 @@ from sklearn import datasets
 import networkx as nx
 import nxviz as nz
 plt.style.use('ggplot')
+from itertools import combinations
 
 
 
@@ -178,3 +182,56 @@ def nodes_in_triangle(G, n):
     
 # Write the assertion statement
 assert len(nodes_in_triangle(T, 1)) == 35
+
+
+
+
+
+# Define node_in_open_triangle()
+def node_in_open_triangle(G, n):
+    """
+    Checks whether pairs of neighbors of node `n` in graph `G` are in an 'open triangle' relationship with node `n`.
+    """
+    in_open_triangle = False
+    
+    # Iterate over all possible triangle relationship combinations
+    for n1, n2 in combinations(G.neighbors(n), 2):
+    
+        # Check if n1 and n2 do NOT have an edge between them
+        if not G.has_edge(n1, n2):
+        
+            in_open_triangle = True
+            
+            break
+            
+    return in_open_triangle
+
+# Compute the number of open triangles in T
+num_open_triangles = 0
+
+# Iterate over all the nodes in T
+for n in T.nodes():
+
+    # Check if the current node is in an open triangle
+    if node_in_open_triangle(T, n):
+    
+        # Increment num_open_triangles
+        num_open_triangles += 1
+        
+print(num_open_triangles)
+
+
+
+# Define maximal_cliques()
+def maximal_cliques(G, size):
+    """
+    Finds all maximal cliques in graph `G` that are of size `size`.
+    """
+    mcs = []
+    for clique in nx.find_cliques(G):
+        if len(clique) == size:
+            mcs.append(clique)
+    return mcs
+
+# Check that there are 33 maximal cliques of size 3 in the graph T
+assert len(maximal_cliques(T, 3)) == 33
