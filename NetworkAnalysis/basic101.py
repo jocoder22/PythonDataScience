@@ -32,6 +32,8 @@ G.add_edge('Joe', 'Mary', weight=4,
  
 G.add_nodes_from(['Ana', 'Mary'], gender='Female')
 G.add_nodes_from(['Joe', 'David', 'Bob', 'John'], gender='Male')
+G.add_nodes_from(['Joe', 'David', 'Mary'], grouping='Catholics')
+G.add_nodes_from(['Ana', 'Bob', 'John'], grouping='Budists')
 print(G.nodes(data=True))
 
 print(G.node['Ana']['gender'])
@@ -59,11 +61,22 @@ plt.clf()
 
 nx.draw_spectral(G, with_labels=True)
 plt.pause(2)
-plt.clf() 
+plt.close()
 
 
+for n, d in G.nodes(data=True):
 
-circ = nv.CircosPlot(G, node_group='gender', with_labels=True)
+    # Calculate the degree of each node: G.node[n]['degree']
+    G.node[n]['degree'] = nx.degree(G, n)
+
+circ = nv.CircosPlot(G, node_order='degree',
+                     node_grouping='grouping',
+                     node_color='gender',
+                        node_labels=True,
+                     # ["beginning", "middle", "end"]
+                    #  group_label_position="beginning",
+                        group_label_color=True
+                         )
 
 circ.draw()
 plt.show() 
