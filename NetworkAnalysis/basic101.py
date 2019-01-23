@@ -47,7 +47,7 @@ print(G.edges(data=True))
 print(G.edges(data='relation'))
  
 
-nx.draw(G, with_labels=True)
+nx.draw(G, with_labels=True, node_color=[G.degree(v) for v in G])
 plt.pause(2)
 plt.clf()
 
@@ -55,7 +55,16 @@ nx.draw_random(G, with_labels=True)
 plt.pause(2)
 plt.clf()
 
-nx.draw_circular(G, with_labels=True, center='David')
+for n, d in G.nodes(data=True):
+
+    # Calculate the degree of each node: G.node[n]['degree']
+    G.node[n]['degree'] = nx.degree(G, n)
+    
+
+nx.draw_circular(G, with_labels=True, node_color=[G.degree(v) for v in G], edge_color = 'grey')
+edge_labels = dict([((u, v,), d['degree'])
+                    for u, v, d in G.edges(data=True)])
+nx.draw_networkx_edge_labels(G, edge_labels=edge_labels)
 plt.pause(5)
 plt.clf()
 
