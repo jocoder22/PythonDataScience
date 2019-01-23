@@ -58,5 +58,5 @@ print(Gf2.edges(data=True))
 # G.node['B']['role'] = 'engineer'
 
 Gk = nx.karate_club_graph()
-nx.draw(Gk)
-plt.plot
+nx.draw(Gk, with_labels=True)
+plt.show()
