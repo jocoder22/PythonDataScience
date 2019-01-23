@@ -25,6 +25,21 @@ plt.show()
 print(bipartite.is_bipartite(N))
 print(bipartite.sets(N))
 
+
+p0 = set(bipartite.sets(N)[0])
+proj_0 = bipartite.projected_graph(N, p0)
+nx.draw(proj_0, with_labels=True)
+plt.title('Fans Projection')
+plt.show()
+
+
+p1 = set(bipartite.sets(N)[1])
+proj_1 = bipartite.projected_graph(N, p1)
+nx.draw(proj_1, with_labels=True)
+plt.title('Football Team Projection')
+plt.show()
+
+
 gg = nx.Graph()
 gg.add_edges_from([('C', 'F'), ('C', 'E'), ('B', 'F'), ('B', 'E'),
                     ('A', 'E'), ('A', 'G')])
