@@ -13,7 +13,11 @@ nx.info(G)
 nx.draw(G, with_labels=True)
 plt.show()
 
-""" Triadic Closure:
+""" 
+Clustering coefficient: measures the tendency of nodes in a network
+to cluster or form 'closed' triangles
+
+Triadic Closure:
 The tendency of people who shared common social connection to be
 connected. This is measure by looking at open triangles 
 
@@ -45,3 +49,12 @@ print(nx.clustering(G, 11))  # 0.0
 ############### Global clustering, measures the average number of open triangles
 # A. Average of all local clustering -- using nx.average_clustering(Graph)
 print(nx.average_clustering(G)) # 0.57
+
+
+# B. Transitivity: This is a measure of number of triangles that are open
+# i.e the ratio of number of triangles over the num of open triangles in the network
+# use nx.transitivity(Graph)
+# tansitivity weighs noed with high degree higher
+print(nx.transitivity(G))  # 0.26
+        # nx.transitive_closure(G),
+        # nx.transitive_reduction(G))
