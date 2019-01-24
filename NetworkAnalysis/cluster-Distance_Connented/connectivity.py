@@ -9,7 +9,7 @@ import nxviz as nv
 
 G = nx.karate_club_graph()
 
-# Undirected graph: 
+########################### Undirected graph: 
 # Graph is connected is there is a path between pairs of nodes
 print(nx.is_connected(G)) # True
 
@@ -28,7 +28,7 @@ print(sorted(nx.node_connected_component(G, 4)))
 
 
 
-# Directed Graph: connectivity
+#########################  Directed Graph: connectivity
 # Strongly connected, there is path from a -> b and path form b -> a
 # print(nx.is_strongly_connected(G))
 
@@ -36,5 +36,9 @@ print(sorted(nx.node_connected_component(G, 4)))
 print(nx.is_weakly_connected(G))
 
 
-############ connected components
+############ Strongly connected components
 print(sorted(nx.strongly_connected_components(G)))
+
+
+############ Weakly connected components
+print(sorted(nx.weakly_connected_components(G)))
