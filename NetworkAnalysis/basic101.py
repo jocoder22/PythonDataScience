@@ -90,3 +90,23 @@ circ = nv.CircosPlot(G, node_order='degree',
 circ.draw()
 plt.show() 
 
+
+
+
+
+import os
+import networkx as nx
+import nxviz as nv
+import pickle as plk
+import pprint
+
+path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\NetworkAnalysis'
+os.chdir(path)
+
+with open('ego-twitter.p', 'rb') as f:
+   ego = plk.load(f)
+
+with open('newego.txt', 'a') as mme:
+   mme.write(ego.to_string())
+
+
