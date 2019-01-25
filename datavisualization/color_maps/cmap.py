@@ -21,7 +21,7 @@ mylist = ['Accent', 'Accent_r', 'Blues', 'Blues_r', 'BrBG', 'BrBG_r', 'BuGn',
           'YlGn', 'YlGnBu', 'YlGnBu_r', 'YlGn_r', 'YlOrBr', 'YlOrBr_r',
           'YlOrRd', 'YlOrRd_r']
 
-# Accent, set, paired,CMRmap
+# Accent, set, Paired, CMRmap
 for i in mylist:
     plt.title('This is for cmap: ' + i)
     plt.scatter(xplot, yplot, c=np.cos(xplot), cmap=i,
