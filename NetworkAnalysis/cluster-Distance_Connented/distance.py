@@ -89,3 +89,10 @@ plt.show()
 
 ###### Cemter nodes has eccentricity == radius
 print(nx.center(G))  # sensitive to outlier node
+
+
+# pos = nx.get_node_attributes(G, 'class')
+pos = nx.kamada_kawai_layout(G)
+nx.draw_networkx(G, pos)
+plt.axis('off')
+plt.show()
