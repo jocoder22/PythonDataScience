@@ -7,9 +7,11 @@ import nxviz as nv
 
 G = nx.karate_club_graph()
 """ 
-1. most degree
-2. average proximity to other nodes
-3. tend to connect to other nodes : shortest path
+1. most degree :  in_degree_centrality
+2. average proximity to other nodes:  closeness_centrality
+3. tend to connect to other nodes : shortest path: betweeness_centrality
+4. Page rank: ranks pages based on number of links to the node
+5. Hits authority score: important nodes are referrenced most by other nodes
 
 Network Centrality
  -- influential nodes

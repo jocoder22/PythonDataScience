@@ -67,43 +67,44 @@ for k,vv in ahscoresd[1].items():
 # print(nodecolorHub)
 # print(nodesizeHub)
 
-# plt.subplot(121)
-# nx.draw(Gd, with_labels=True, node_size=nodesizeHub,
-#         node_color=nodecolorHub, cmap="coolwarm")
+plt.subplot(221)
+nx.draw(Gd, with_labels=True, node_size=nodesizeHub,
+        node_color=nodecolorHub, cmap="coolwarm")
 
-# plt.title('Showing the HITS Hub scores')
-
-# plt.subplot(122)
-# nx.draw(Gd, with_labels=True, node_size=nodesizeAuth,
-#         node_color=nodecolorAuth, cmap="coolwarm")
-
-# plt.title('Showing the HITS Authority scores')
-
-# plt.show()
+plt.title('Showing the HITS Hub scores')
 
 
+plt.subplot(222)
+nx.draw(Gd, with_labels=True, node_size=nodesizeAuth,
+        node_color=nodecolorAuth, cmap="coolwarm")
 
-
-# plt.subplot(121)
-# nx.draw_circular(Gd, with_labels=True, node_size=nodesizeHub,
-#         node_color=nodecolorHub, cmap="coolwarm")
-
-# plt.title('Showing the HITS Hub scores')
-
-# plt.subplot(122)
-# nx.draw_circular(Gd, with_labels=True, node_size=nodesizeAuth,
-#         node_color=nodecolorAuth, cmap="coolwarm")
-
-# plt.title('Showing the HITS Authority scores')
+plt.title('Showing the HITS Authority scores')
 
 # plt.show()
+
+
+
+
+plt.subplot(223)
+nx.draw_circular(Gd, with_labels=True, node_size=nodesizeHub,
+        node_color=nodecolorHub, cmap="coolwarm")
+
+plt.title('Showing the HITS Hub scores')
+
+
+# plt.show()
+plt.subplot(224)
+nx.draw_spectral(Gd, with_labels=True, node_size=nodesizeHub,
+        node_color=nodecolorHub, cmap="coolwarm")
+
+plt.title('Showing the HITS Hub scores')
 
 
 
 circ = nv.CircosPlot(Gd, node_labels=True, node_order="Auth", 
                 node_color="Auth", node_size='nodesizeAuth')
-
 circ.draw()
+plt.title('Showing the HITS Authority scores')
 plt.show()
 
 print(Gd.nodes['A'])
