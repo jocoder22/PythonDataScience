@@ -6,6 +6,7 @@ from sklearn import datasets
 import os
 import networkx as nx
 import nxviz as nv
+from itertools import combinations
 
 
 G = nx.karate_club_graph()
@@ -31,7 +32,7 @@ local clustering coefficient of a node
 for all possible pairs of node's friends use   eC2 where e is the node's degree
 """
 
-from itertools import combinations
+
 
 
 def p_pairs(n):
