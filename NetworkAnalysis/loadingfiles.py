@@ -49,13 +49,13 @@ Gf2 = nx.from_pandas_edgelist(df2, 'a', 'b', edge_attr=['Weight', 'relation'])
 print(Gf2.edges(data=True))
 
 
-# G = nx.MultiGraph()
-# G.add_node('A', role='manager')
-# G.add_edge('A', 'B', relation='friend')
-# G.add_edge('A', 'C', relation='business partner')
-# G.add_edge('A', 'B', relation='classmate')
-# G.node['A']['role'] = 'team member'
-# G.node['B']['role'] = 'engineer'
+G = nx.MultiGraph()
+G.add_node('A', role='manager')
+G.add_edge('A', 'B', relation='friend')
+G.add_edge('A', 'C', relation='business partner')
+G.add_edge('A', 'B', relation='classmate')
+G.node['A']['role'] = 'team member'
+G.node['B']['role'] = 'engineer'
 
 Gk = nx.karate_club_graph()
 nx.draw(Gk, with_labels=True)
@@ -76,4 +76,8 @@ for n in nodelist['id']:
         T.node[n][col] = pp
 
 T.nodes['y_rt']
+
+nx.draw(T, with_labels=True)
+plt.show()
+
 
