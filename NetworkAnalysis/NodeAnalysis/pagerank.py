@@ -11,9 +11,9 @@ G.add_edges_from([('A', 'B'), ('C', 'A'), ('A', 'E'), ('G', 'A'), ('A', 'N'), ('
                   ('H', 'G'), ('I', 'G'), ('G', 'J'), ('I', 'H'), ('H', 'I'), ('I', 'J'), ('J', 'O'), ('O', 'J'), ('K', 'M'), ('K', 'L'), ('O', 'K'), ('O', 'L'), ('N', 'L'), ('L', 'M'), ('N', 'O')])
 
 
-prank = nx.pagerank(G,alpha=0.9)
-print(prank)
-print(sorted(prank.items(), reverse=True, key=operator.itemgetter(1))[:3])
+prank = nx.pagerank(G, alpha=0.9)
+# print(prank)
+# print(sorted(prank.items(), reverse=True, key=operator.itemgetter(1))[:5])
 
 for k,v in prank.items():
     G.nodes[k]['weight'] = v 
@@ -21,7 +21,7 @@ for k,v in prank.items():
 
 # nodes = [n for n, d in T.nodes(data=True) if d['occupation'] == 'celebrity']
 print(G)
-nodesize = [d.values() for n, d in G.nodes(data=True)]
+# nodesize = [d.values() for n, d in G.nodes(data=True)]
 nodesize = np.array(list(prank.values())) * 40000
 nodecolor = np.array(list(prank.values())) * 100
 print(nodesize)
@@ -51,3 +51,6 @@ plt.show() """
 nx.draw_kamada_kawai(G, with_labels=True, node_size=nodesize,
                      node_color=nodecolor,  cmap='coolwarm')
 plt.show()
+
+
+print(sorted(prank.items(), reverse=True, key=operator.itemgetter(1))[:5])
