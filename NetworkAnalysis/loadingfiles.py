@@ -80,4 +80,3 @@ T.nodes['y_rt']
 nx.draw(T, with_labels=True)
 plt.show()
 
-
