@@ -95,3 +95,11 @@ del df['outcome']
 del df['location']
 df.head()
 
+
+# Form DataFrame using pd Series
+df = pd.DataFrame(index=G.nodes())
+df['location'] = pd.Series(nx.get_node_attributes(G, 'location'))
+df['population'] = pd.Series(nx.get_node_attributes(G, 'population'))
+df['clustering'] = pd.Series(nx.clustering(G))
+df['degree'] = pd.Series(dict(G.degree()))
+df.head()
