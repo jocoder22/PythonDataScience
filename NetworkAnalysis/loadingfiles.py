@@ -6,6 +6,7 @@ from sklearn import datasets
 import os
 import networkx as nx
 import nxviz as nv
+import pickle as pkl
 
 path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\NetworkAnalysis'
 os.chdir(path)
@@ -79,4 +80,18 @@ T.nodes['y_rt']
 
 nx.draw(T, with_labels=True)
 plt.show()
+
+
+G = nx.read_gpickle("major_us_cities")
+print(G.nodes(data=True))
+
+df = pd.DataFrame(G.nodes(data=True), columns=[
+                  'location', 'outcome'], index=G.nodes())
+df.head()
+df['population'] = df['outcome'].map(lambda x: x['population'])
+df['latutude'] = df['outcome'].map(lambda x: x['location'][0])
+df['latutude'] = df['outcome'].map(lambda x: x['location'][1])
+del df['outcome']
+del df['location']
+df.head()
 
