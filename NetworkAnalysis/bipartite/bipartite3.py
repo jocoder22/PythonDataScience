@@ -9,6 +9,8 @@ import nxviz as nv
 from bipartite2 import get_nodes_from_partition
 # from bfunctions import get_nodes_from_partition
 
+print(os.getcwd())
+
 url = 'https://assets.datacamp.com/production/course_3556/datasets/american-revolution.csv'
 
 df = pd.read_csv(url, sep=',', skiprows=1,
@@ -100,4 +102,65 @@ bi_matrix = nx.bipartite.biadjacency_matrix(
 # Compute the user-user projection: user_matrix
 user_matrix = bi_matrix @ bi_matrix.T
 
-print(user_matrix)
+# print(bi_matrix)
+# print(user_matrix)
+# print(bi_matrix.shape)     # (254, 7)
+# print(user_matrix.shape)   # (254, 254)
+
+
+# Find out the names of people who were members of the most number of clubs
+diag = user_matrix.diagonal()
+indices = np.where(diag == diag.max())[0]
+
+# print(diag)
+print(len(diag))
+print(indices)
+
+print('Number of clubs: {0}'.format(diag.max()))
+print('People with the most number of memberships:')
+for i in indices:
+    print('- {0}'.format(people_nodes[i]))
+
+# Set the diagonal to zero and convert it to a coordinate matrix format
+user_matrix.setdiag(0)
+users_coo = user_matrix.tocoo()
+
+# Find pairs of users who shared membership in the most number of clubs
+indices = np.where(users_coo.data == users_coo.data.max())[0]
+print('People with most number of shared memberships:')
+for idx in indices:
+    print('- {0}, {1}'.format(people_nodes[users_coo.row[idx]],
+                              people_nodes[users_coo.col[idx]]))
+
+
+
+
+
+# Graph to pandas DataFrame
+nodelist = []
+for n, d in G.nodes(data=True):
+    node_data = dict()
+    node_data['node'] = n
+    # node_data = {'node': n}
+    node_data.update(d)
+    nodelist.append(node_data)
+
+print(pd.DataFrame(nodelist).head())
+
+pd.DataFrame(nodelist).to_csv('bipartite_node.csv')
+
+
+edgelist = []
+for n1, n2, d in G.edges(data=True):
+    # Initialize a dictionary that shows edge information: edgeinfo
+    edgeinfo = {'node1': n1, 'node2': n2}
+
+    # Update the edgeinfo data with the edge metadata
+    edgeinfo.update(d)
+
+    # Append the edgeinfo to the edgelist
+    edgelist.append(edgeinfo)
+
+# Create a pandas DataFrame of the edgelist: edge_df
+print(pd.DataFrame(edgelist).head())
+pd.DataFrame(edgelist).to_csv('bipartite_edgelist.csv')

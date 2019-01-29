@@ -21,40 +21,6 @@ def get_nodes_from_partition(Graph, partition):
     return nodes
 
 
-# # Print the number of nodes in the 'projects' partition
-# print(len(get_nodes_from_partition(G, 'projects')))
-
-# # Print the number of nodes in the 'users' partition
-# print(len(get_nodes_from_partition(G, 'users')))
-
-
-# # Get the 'users' nodes: user_nodes
-# user_nodes = get_nodes_from_partition(G, 'users')
-
-# # Compute the degree centralities: dcs
-# dcs = nx.degree_centrality(G)
-
-# # Get the degree centralities for user_nodes: user_dcs
-# user_dcs = [dcs[n] for n in user_nodes]
-
-# # Plot the degree distribution of users_dcs
-# plt.yscale('log')
-# plt.hist(user_dcs, bins=20)
-# plt.show()
-
-
-# project_nodes = get_nodes_from_partition(G, 'projects')
-
-# # Compute the degree centralities: dcs
-# dcs = nx.degree_centrality(G)
-
-# # Get the degree centralities for project_nodes: project_dcs
-# project_dcs = [dcs[n] for n in project_nodes]
-
-# # Plot the degree distribution of project_dcs
-# plt.yscale('log')
-# plt.hist(project_dcs, bins=20)
-# plt.show()
 
 
 def shared_partition_nodes(G, node1, node2):
@@ -71,9 +37,6 @@ def shared_partition_nodes(G, node1, node2):
     return overlap
 
 
-# # Print the number of shared repositories between users 'u7909' and 'u2148'
-# print(len(shared_partition_nodes(G, 'u7909', 'u2148')))
-
 
 def user_similarity(G, user1, user2, proj_nodes):
     # Check that the nodes belong to the 'users' partition
@@ -87,11 +50,6 @@ def user_similarity(G, user1, user2, proj_nodes):
     return len(shared_nodes) / len(proj_nodes)
 
 
-# # Compute the similarity score between users 'u4560' and 'u1880'
-# project_nodes = get_nodes_from_partition(G, 'projects')
-# similarity_score = user_similarity(G, 'u4560', 'u1880', project_nodes)
-
-# print(similarity_score)
 
 
 def most_similar_users(G, user, user_nodes, proj_nodes):
@@ -115,10 +73,6 @@ def most_similar_users(G, user, user_nodes, proj_nodes):
     return similarities[max_similarity]
 
 
-# user_nodes = get_nodes_from_partition(G, 'users')
-# project_nodes = get_nodes_from_partition(G, 'projects')
-
-# print(most_similar_users(G, 'u4560', user_nodes, project_nodes))
 
 
 def recommend_repositories(G, from_user, to_user):
@@ -131,5 +85,35 @@ def recommend_repositories(G, from_user, to_user):
     return from_repos.difference(to_repos)
 
 
-# # Print the repositories to be recommended
-# print(recommend_repositories(G, 'u7909', 'u2148'))
+
+
+# Graph to pandas DataFrame
+
+def nodelist(G, filename1)
+    nodelist = []
+    for n, d in G.nodes(data=True):
+        node_data = dict()
+        node_data['node'] = n
+        # node_data = {'node': n}
+        node_data.update(d)
+        nodelist.append(node_data)
+    
+    pd.DataFrame(nodelist).to_csv(filename1)
+
+
+
+def edgelist(G, filename2)
+    edgelist = []
+    for n1, n2, d in G.edges(data=True):
+        # Initialize a dictionary that shows edge information: edgeinfo
+        edgeinfo = {'node1': n1, 'node2': n2}
+
+        # Update the edgeinfo data with the edge metadata
+        edgeinfo.update(d)
+
+        # Append the edgeinfo to the edgelist
+        edgelist.append(edgeinfo)
+
+    # Create a pandas DataFrame of the edgelist: edge_df
+
+    pd.DataFrame(edgelist).to_csv(filename2)
