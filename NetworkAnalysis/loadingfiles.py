@@ -113,3 +113,23 @@ df.head()
 df = pd.DataFrame({'species': ['bear', 'bear', 'marsupial'],
                  'population': [1864, 22000, 80000]},
                 index=['panda', 'polar', 'koala'])
+
+
+hh = dict()
+
+df.to_dict()
+
+for i, nlrow in df.iterrows():
+        nlrow[1:].to_dict()
+
+for i, nlrow in df.iterrows():
+        hh[nlrow[0]] = nlrow[1:].to_dict()
+
+df.reset_index(inplace=True)
+df.to_dict()
+
+for i, nlrow in df.iterrows():
+        nlrow[1:].to_dict()
+
+for i, nlrow in df.iterrows():
+        hh[nlrow[0]] = nlrow[1:].to_dict()
