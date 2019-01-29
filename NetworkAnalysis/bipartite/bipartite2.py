@@ -9,52 +9,16 @@ from sklearn import datasets
 # plt.style.use('ggplot')
 
 
-def get_nodes_from_partition(G, partition):
+def get_nodes_from_partition(Graph, partition):
     # Initialize an empty list for nodes to be returned
     nodes = []
     # Iterate over each node in the graph G
-    for n, d in G.nodes(data=True):
+    for n, d in Graph.nodes(data=True):
         # Check that the node belongs to the particular partition
-        if G.node[n]['bipartite'] == partition:
+        if Graph.node[n]['bipartite'] == partition:
             # If so, append it to the list of nodes
             nodes.append(n)
     return nodes
-
-
-# Print the number of nodes in the 'projects' partition
-print(len(get_nodes_from_partition(G, 'projects')))
-
-# Print the number of nodes in the 'users' partition
-print(len(get_nodes_from_partition(G, 'users')))
-
-
-# Get the 'users' nodes: user_nodes
-user_nodes = get_nodes_from_partition(G, 'users')
-
-# Compute the degree centralities: dcs
-dcs = nx.degree_centrality(G)
-
-# Get the degree centralities for user_nodes: user_dcs
-user_dcs = [dcs[n] for n in user_nodes]
-
-# Plot the degree distribution of users_dcs
-plt.yscale('log')
-plt.hist(user_dcs, bins=20)
-plt.show()
-
-
-project_nodes = get_nodes_from_partition(G, 'projects')
-
-# Compute the degree centralities: dcs
-dcs = nx.degree_centrality(G)
-
-# Get the degree centralities for project_nodes: project_dcs
-project_dcs = [dcs[n] for n in project_nodes]
-
-# Plot the degree distribution of project_dcs
-plt.yscale('log')
-plt.hist(project_dcs, bins=20)
-plt.show()
 
 
 def shared_partition_nodes(G, node1, node2):
@@ -71,10 +35,6 @@ def shared_partition_nodes(G, node1, node2):
     return overlap
 
 
-# Print the number of shared repositories between users 'u7909' and 'u2148'
-print(len(shared_partition_nodes(G, 'u7909', 'u2148')))
-
-
 def user_similarity(G, user1, user2, proj_nodes):
     # Check that the nodes belong to the 'users' partition
     assert G.node[user1]['bipartite'] == 'users'
@@ -85,13 +45,6 @@ def user_similarity(G, user1, user2, proj_nodes):
 
     # Return the fraction of nodes in the projects partition
     return len(shared_nodes) / len(proj_nodes)
-
-
-# Compute the similarity score between users 'u4560' and 'u1880'
-project_nodes = get_nodes_from_partition(G, 'projects')
-similarity_score = user_similarity(G, 'u4560', 'u1880', project_nodes)
-
-print(similarity_score)
 
 
 def most_similar_users(G, user, user_nodes, proj_nodes):
@@ -115,10 +68,6 @@ def most_similar_users(G, user, user_nodes, proj_nodes):
     return similarities[max_similarity]
 
 
-user_nodes = get_nodes_from_partition(G, 'users')
-project_nodes = get_nodes_from_partition(G, 'projects')
-
-print(most_similar_users(G, 'u4560', user_nodes, project_nodes))
 
 
 def recommend_repositories(G, from_user, to_user):
@@ -131,5 +80,66 @@ def recommend_repositories(G, from_user, to_user):
     return from_repos.difference(to_repos)
 
 
-# Print the repositories to be recommended
-print(recommend_repositories(G, 'u7909', 'u2148'))
+if __name__ == "__main__":
+
+
+    # Print the number of nodes in the 'projects' partition
+    print(len(get_nodes_from_partition(G, 'projects')))
+
+    # Print the number of nodes in the 'users' partition
+    print(len(get_nodes_from_partition(G, 'users')))
+
+
+    # Get the 'users' nodes: user_nodes
+    user_nodes = get_nodes_from_partition(G, 'users')
+
+    # Compute the degree centralities: dcs
+    dcs = nx.degree_centrality(G)
+
+    # Get the degree centralities for user_nodes: user_dcs
+    user_dcs = [dcs[n] for n in user_nodes]
+
+    # Plot the degree distribution of users_dcs
+    plt.yscale('log')
+    plt.hist(user_dcs, bins=20)
+    plt.show()
+
+
+    project_nodes = get_nodes_from_partition(G, 'projects')
+
+
+    user_nodes = get_nodes_from_partition(G, 'users')
+    project_nodes = get_nodes_from_partition(G, 'projects')
+
+    print(most_similar_users(G, 'u4560', user_nodes, project_nodes))
+
+    # Compute the degree centralities: dcs
+    dcs = nx.degree_centrality(G)
+
+    # Get the degree centralities for project_nodes: project_dcs
+    project_dcs = [dcs[n] for n in project_nodes]
+
+    # Plot the degree distribution of project_dcs
+    plt.yscale('log')
+    plt.hist(project_dcs, bins=20)
+    plt.show()
+
+
+
+
+
+    # Print the number of shared repositories between users 'u7909' and 'u2148'
+    print(len(shared_partition_nodes(G, 'u7909', 'u2148')))
+
+
+
+    # Compute the similarity score between users 'u4560' and 'u1880'
+    project_nodes = get_nodes_from_partition(G, 'projects')
+    similarity_score = user_similarity(G, 'u4560', 'u1880', project_nodes)
+
+    print(similarity_score)
+
+
+
+    # Print the repositories to be recommended
+    print(recommend_repositories(G, 'u7909', 'u2148'))
