@@ -13,6 +13,7 @@ np.random.seed(83)
 # np.random.seed(183)
 # np.random.seed(3948)
 
+
 G = nx.karate_club_graph()
 
 # Assessing Authority score and Hub scores

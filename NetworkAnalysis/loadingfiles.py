@@ -81,3 +81,4 @@ nx.draw(T, with_labels=True)
 plt.show()
 
 
+# pip install --user networkx==1.11 
