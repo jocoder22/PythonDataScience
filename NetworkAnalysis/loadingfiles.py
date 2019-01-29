@@ -139,13 +139,6 @@ df = pd.DataFrame({'name': ['ada', , 'obi', 'ppp', 'jon'],
                             'club':[0, 1, 1, 0],
                             'club2':[0, 0, 1, 1],
                             'club3':[1, 0, 0, 1]})
-mm = dict()
-df.set_index('name', inplace=True)
-for i, nlrow in df.iterrows():
-        for j in nlrow:
-                if j == 1:
-                        mm['node1'] = 'boy'
-                        mm['node2'] = nlrow
 
 
 node1 = list()

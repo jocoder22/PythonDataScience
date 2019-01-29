@@ -31,3 +31,4 @@ df2 = pd.DataFrame({'node1': node1,
 
 print(df2.head())
 
+G = nx.from_pandas_edgelist(df2, 'node1', 'node2', edge_attr=['weight'])
