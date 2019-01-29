@@ -1,4 +1,4 @@
-import os
+cdimport os
 import networkx as nx
 import nxviz as nv
 import numpy as np

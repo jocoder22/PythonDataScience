@@ -6,10 +6,10 @@ from sklearn import datasets
 import os
 import networkx as nx
 import nxviz as nv
+import pickle as pkl
 
-path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\NetworkAnalysis'
+path = 'C:\\Users\\Jose\\Desktop\\PythonDataScience\\NetworkAnalysis'
 os.chdir(path)
-
 
 ###### loading from Adjacency list
 G = nx.read_adjlist('adjacencylist.txt', nodetype=int)
@@ -63,6 +63,7 @@ plt.show()
 
 
 
+# https://www.datacamp.com/community/tutorials/networkx-python-graph-tutorial#data
 
 nodelist = pd.read_csv('https://gist.githubusercontent.com/brooksandrew/f989e10af17fb4c85b11409fea47895b/raw/a3a8da0fa5b094f1ca9d82e1642b384889ae16e8/nodelist_sleeping_giant.csv')
 
@@ -75,10 +76,40 @@ for n in nodelist['id']:
         pp = int(nodelist[col][nodelist['id'] == n].values)
         T.node[n][col] = pp
 
+for i, nlrow in nodelist.iterrows():
+    T.node[nlrow['id']] = nlrow[1:].to_dict()
+
 T.nodes['y_rt']
 
 nx.draw(T, with_labels=True)
 plt.show()
 
 
+
+G = nx.read_gpickle("major_us_cities")
+print(G.nodes(data=True))
+
+df = pd.DataFrame(G.nodes(data=True), columns=[
+                  'location', 'outcome'], index=G.nodes())
+df.head()
+df['population'] = df['outcome'].map(lambda x: x['population'])
+df['latutude'] = df['outcome'].map(lambda x: x['location'][0])
+df['latutude'] = df['outcome'].map(lambda x: x['location'][1])
+del df['outcome']
+del df['location']
+df.head()
+
+
+# Form DataFrame using pd Series
+df = pd.DataFrame(index=G.nodes())
+df['location'] = pd.Series(nx.get_node_attributes(G, 'location'))
+df['population'] = pd.Series(nx.get_node_attributes(G, 'population'))
+df['clustering'] = pd.Series(nx.clustering(G))
+df['degree'] = pd.Series(dict(G.degree()))
+df.head()
+
 # pip install --user networkx==1.11 
+
+df = pd.DataFrame({'species': ['bear', 'bear', 'marsupial'],
+                 'population': [1864, 22000, 80000]},
+                index=['panda', 'polar', 'koala'])
