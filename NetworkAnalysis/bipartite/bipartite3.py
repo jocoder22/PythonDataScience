@@ -44,3 +44,11 @@ for n, d in G.nodes(data=True):
 # print(G.edges(data=True))
 print(len(G.edges()))
 print(len(G.nodes()))
+
+# Prepare the nodelists needed for computing projections: people, clubs
+people = [n for n in G.nodes() if G.node[n]['bipartite'] == 'people']
+clubs = [n for n, d in G.nodes(data=True) if d['bipartite'] == 'clubs']
+
+# Compute the people and clubs projections: peopleG, clubsG
+peopleG = nx.bipartite.projected_graph(G, people)
+clubsG = nx.bipartite.projected_graph(G, clubs)
