@@ -32,3 +32,15 @@ df2 = pd.DataFrame({'node1': node1,
 print(df2.head())
 
 G = nx.from_pandas_edgelist(df2, 'node1', 'node2', edge_attr=['weight'])
+
+# Assign nodes to 'clubs' or 'people' partitions
+for n, d in G.nodes(data=True):
+    if '.' in n:
+        G.node[n]['bipartite'] = 'people'
+    else:
+        G.node[n]['bipartite'] = 'clubs'
+
+# Print the edges of the graph
+# print(G.edges(data=True))
+print(len(G.edges()))
+print(len(G.nodes()))
