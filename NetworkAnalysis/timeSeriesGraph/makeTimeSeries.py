@@ -55,6 +55,9 @@ for month in months:
 
 print(len(Gs))
 
+with open ('Gs.p', 'wb') as ff:
+    pkl.dump(Gs, ff)
+
 
 # Instantiate a list of graphs that show edges added: added
 added = []
