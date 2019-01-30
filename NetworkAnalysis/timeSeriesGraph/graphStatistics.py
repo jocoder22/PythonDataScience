@@ -1,3 +1,4 @@
+from collections import defaultdict
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,8 +12,11 @@ import pickle as pkl
 path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\NetworkAnalysis\\timeSeriesGraph'
 os.chdir(path)
 
-with open ('Gs.p', 'rb') as f:
-    Gs = pkl.load(f)
+with open('uci-forum.p', 'rb') as f:
+    G = pkl.load(f)
+
+with open ('Gs.p', 'rb') as f2:
+    Gs = pkl.load(f2)
 
 fig = plt.figure()
 
@@ -94,6 +98,30 @@ x, y = ECDF2(data11)
 plt.plot(x, y)
 plt.show()
 
+# Get the top 5 unique degree centrality scores: top_dcs
+top_dcs = sorted(set(nx.degree_centrality(G).values()), reverse=True)[0:5]
 
+# Create list of nodes that have the top 5 highest overall degree centralities
+top_connected = []
+for n, dc in nx.degree_centrality(G).items():
+    if dc in top_dcs:
+        top_connected.append(n)
+
+# Print the number of nodes that share the top 5 degree centrality scores
+print(len(top_connected))
+
+
+# Create a defaultdict in which the keys are nodes and the values are a list of connectivity scores over time
+connectivity = defaultdict(list)
+for n in top_connected:
+    for g in Gs:
+        connectivity[n].append(len(g.neighbors(n)))
+
+# Plot the connectivity for each node
+fig = plt.figure()
+for n, conn in connectivity.items():
+    plt.plot(conn, label=n)
+plt.legend()
+plt.show()
 
 

@@ -89,10 +89,12 @@ ax1 = fig.add_subplot(111)
 
 # Plot the number of edges added over time
 edges_added = [len(g.edges()) for g in added]
+print(edges_added)
 plot1 = ax1.plot(edges_added, label='added', color='orange')
 
 # Plot the number of edges removed over time
 edges_removed = [len(g.edges()) for g in removed]
+print(edges_removed)
 plot2 = ax1.plot(edges_removed, label='removed', color='purple')
 
 # Set yscale to logarithmic scale
