@@ -59,7 +59,7 @@ G_students = nx.bipartite.projected_graph(G, nodes=student_nodes)
 dcs = nx.degree_centrality(G_students)
 
 # Plot the histogram of degree centrality values
-plt.hist(list(dcs.values()))
+plt.hist(list(dcs.values()), edgecolor='black', linewidth=1.2)
 plt.yscale('log')
 plt.show()
 
@@ -74,7 +74,7 @@ G_forum = nx.bipartite.projected_graph(G, nodes=forum_nodes)
 dcg = nx.degree_centrality(G_forum)
 
 # Plot the histogram of degree centrality values
-plt.hist(list(dcg.values()))
+plt.hist(list(dcg.values()), edgecolor='black', linewidth=1.2)
 plt.yscale('log')
 plt.show()
 
@@ -85,14 +85,15 @@ day1 = 10
 day2 = 6
 date1 = datetime(year, month, day1)
 date2 = datetime(year, month, day2)
+print(date1, date2)
 print(date1 > date2)
 
 date3 = datetime(2011, 11, 10, 0, 0)
 print(date3)
 days = 4
 td = timedelta(days)
-print(dt)
-
+date4 = date3 + td
+print(date4)
 # Instantiate a new graph: G_sub
 G_sub = nx.Graph()
 
@@ -118,4 +119,33 @@ c = CircosPlot(G_sub, node_color='bipartite',
 c.draw()
 
 # Display the plot
+plt.show()
+
+
+dayone = datetime(2004, 5, 14, 0, 0)
+lastday = datetime(2004, 10, 26, 0, 0)
+
+# Define current day and timedelta of 2 days
+curr_day = dayone
+td = timedelta(days=2)
+
+# Initialize an empty list of posts by day
+n_posts = []
+while curr_day < lastday:
+    if curr_day.day == 1:
+        print(curr_day)
+    # Filter edges such that they are within the sliding time window: edges
+    edges = [(u, v, d) for u, v, d in G.edges(data=True)
+             if d['date'] >= curr_day and d['date'] < curr_day + td]
+
+    # Append number of edges to the n_posts list
+    n_posts.append(len(edges))
+
+    # Increment the curr_day by the time delta
+    curr_day += td
+
+# Create the plot
+plt.plot(n_posts)
+plt.xlabel('Days elapsed')
+plt.ylabel('Number of posts')
 plt.show()
