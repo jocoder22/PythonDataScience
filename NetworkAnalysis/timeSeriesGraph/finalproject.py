@@ -43,3 +43,19 @@ G.add_nodes_from(data['forum'], bipartite='forum')
 # Add in each edge along with the date the edge was created
 for r, d in data.iterrows():
     G.add_edge(d['student'], d['forum'], date=d['date'])
+
+
+# Get the student partition's nodes: student_nodes
+student_nodes = [n for n, d in G.nodes(
+    data=True) if d['bipartite'] == 'student']
+
+# Create the students nodes projection as a graph: G_students
+G_students = nx.bipartite.projected_graph(G, nodes=student_nodes)
+
+# Calculate the degree centrality using nx.degree_centrality: dcs
+dcs = nx.degree_centrality(G_students)
+
+# Plot the histogram of degree centrality values
+plt.hist(list(dcs.values()))
+plt.yscale('log')
+plt.show()
