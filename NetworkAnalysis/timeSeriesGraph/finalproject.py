@@ -146,6 +146,82 @@ while curr_day < lastday:
 
 # Create the plot
 plt.plot(n_posts)
-plt.xlabel('Days elapsed')
+plt.xlabel('Days elapsed from May 14, 2004')
 plt.ylabel('Number of posts')
+plt.show()
+
+
+# Initialize a new list: mean_dcs
+mean_dcs = []
+curr_day = dayone
+td = timedelta(days=2)
+
+while curr_day < lastday:
+    if curr_day.day == 1:
+        print(curr_day)
+    # Instantiate a new graph containing a subset of edges: G_sub
+    G_sub = nx.Graph()
+    # Add nodes from G
+    G_sub.add_nodes_from(G.nodes(data=True))
+    # Add in edges that fulfill the criteria
+    G_sub.add_edges_from([(u, v, d) for u, v, d in G.edges(
+        data=True) if d['date'] >= curr_day and d['date'] < curr_day + td])
+
+    # Get the students projection
+    G_student_sub = nx.bipartite.projected_graph(G_sub, nodes=student_nodes)
+    # Compute the degree centrality of the students projection
+    dc = nx.degree_centrality(G_student_sub)
+    # Append mean degree centrality to the list mean_dcs
+    mean_dcs.append(np.mean(list(dc.values())))
+    # Increment the time
+    curr_day += td
+
+plt.plot(mean_dcs)
+plt.xlabel('Days elapsed from May 14, 2004')
+plt.ylabel('Degree centrality.')
+plt.show()
+
+# Instantiate a list to hold the list of most popular forums by day: most_popular_forums
+most_popular_forums = []
+# Instantiate a list to hold the degree centrality scores of the most popular forums: highest_dcs
+highest_dcs = []
+curr_day = dayone
+td = timedelta(days=1)
+
+while curr_day < lastday:
+    if curr_day.day == 1:
+        print(curr_day)
+    # Instantiate new graph: G_sub
+    G_sub = nx.Graph()
+
+    # Add in nodes from original graph G
+    G_sub.add_nodes_from(G.nodes(data=True))
+
+    # Add in edges from the original graph G that fulfill the criteria
+    G_sub.add_edges_from([(u, v, d) for u, v, d in G.edges(
+        data=True) if d['date'] >= curr_day and d['date'] < curr_day + td])
+
+    # Get the degree centrality
+    dc = nx.bipartite.degree_centrality(G_sub, nodes=forum_nodes)
+    # Filter the dictionary such that there's only forum degree centralities
+    forum_dcs = {n: dc for n, dc in dc.items() if n in forum_nodes}
+    # Identify the most popular forum(s)
+    most_popular_forum = [n for n, dc in forum_dcs.items(
+    ) if dc == max(forum_dcs.values()) and dc != 0]
+    most_popular_forums.append(most_popular_forum)
+    # Store the highest dc values in highest_dcs
+    highest_dcs.append(max(forum_dcs.values()))
+
+    curr_day += td
+
+plt.figure(1)
+plt.plot([len(forums) for forums in most_popular_forums],
+         color='blue', label='Forums')
+plt.ylabel('Number of Most Popular Forums')
+plt.xlabel('Days elapsed')
+plt.show()
+
+plt.figure(2)
+plt.plot(highest_dcs, color='orange', label='DC Score')
+plt.ylabel('Top Degree Centrality Score')
 plt.show()
