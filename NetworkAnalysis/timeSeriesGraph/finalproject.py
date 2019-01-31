@@ -214,14 +214,17 @@ while curr_day < lastday:
 
     curr_day += td
 
-plt.figure(1)
+# plt.figure(1)
+plt.subplot(121)
 plt.plot([len(forums) for forums in most_popular_forums],
          color='blue', label='Forums')
 plt.ylabel('Number of Most Popular Forums')
-plt.xlabel('Days elapsed')
-plt.show()
+plt.xlabel('Days elapsed from May 14, 2004')
+# plt.show()
 
-plt.figure(2)
+# plt.figure(2)
+plt.subplot(122)
 plt.plot(highest_dcs, color='orange', label='DC Score')
 plt.ylabel('Top Degree Centrality Score')
+plt.xlabel('Days elapsed from May 14, 2004')
 plt.show()
