@@ -9,6 +9,7 @@ from itertools import combinations as comb
 from math import sqrt
 from matplotlib import mlab
 from scipy.stats import norm
+from collections import defaultdict
 
 
 def ecdf(data):
@@ -33,6 +34,18 @@ def dlist(dd):
             pp[value].append(key)
         else:
             pp[value] = [pp[value], key]
+
+    return pp
+
+
+def dlist2(dd):
+    pp = defaultdict(list)
+
+    for key, val in dd.items():
+        if key not in pp:
+            pp[val] = key
+        else:
+            pp[val].append(key)
 
     return pp
 
