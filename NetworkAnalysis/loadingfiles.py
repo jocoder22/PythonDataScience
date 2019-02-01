@@ -163,7 +163,7 @@ for i, row in df.iterrows():
 for i, row in df.iterrows():
         for i in row.keys():
                 if row[i] == 1:
-                        node1.append(row['name'])
+                        node1.append(row.values[0])
                         node2.append(i)
 
 [(i, row, u) for i, row in df.iterrows() for u in row.keys()]
