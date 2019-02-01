@@ -153,3 +153,19 @@ for i, row in df.iterrows():
 for row in df.itertuples(index=False):
         print(row[1])
 
+
+for i, row in df.iterrows():
+        print(i)
+        print(row)
+        print(row.keys())
+        print(row.values)
+
+for i, row in df.iterrows():
+        for i in row.keys():
+                if row[i] == 1:
+                        node1.append(row['name'])
+                        node2.append(i)
+
+[(i, row, u) for i, row in df.iterrows() for u in row.keys()]
+   
+
