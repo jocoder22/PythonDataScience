@@ -7,6 +7,7 @@ import os
 import networkx as nx
 import nxviz as nv
 import pickle as pkl
+from collections import defaultdict
 
 path = 'C:\\Users\\Jose\\Desktop\\PythonDataScience\\NetworkAnalysis'
 os.chdir(path)
@@ -160,11 +161,13 @@ for i, row in df.iterrows():
         print(row.keys())
         print(row.values)
 
+node_dict = defaultdict(list)
+
 for i, row in df.iterrows():
         for i in row.keys():
                 if row[i] == 1:
-                        node1.append(row.values[0])
-                        node2.append(i)
+                        node_dict['node1'].append(row.values[0])
+                        node_dict['node2'].append(i)
 
 [(i, row, u) for i, row in df.iterrows() for u in row.keys()]
    
