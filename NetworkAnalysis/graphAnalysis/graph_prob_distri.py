@@ -38,21 +38,18 @@ def dlist(dd):
     return pp
 
 
+
 def dlist2(dd):
     pp = defaultdict(list)
-
     for key, val in dd.items():
-        if key not in pp:
-            pp[val] = key
-        else:
-            pp[val].append(key)
-
+        pp[val].append(key)
     return pp
 
 
 G = nx.karate_club_graph()
 
 D = dict(G.degree())
+print(D)
 DD = list(D.values())
 Dv = sorted(set(DD))
 Nn = [DD.count(x) for x in Dv]
@@ -128,15 +125,17 @@ plt.xlabel('Degree')
 plt.ylabel('Number of Nodes')
 plt.xticks(Dv)
 
-for key, values in dlist(D).items():
+for key, values in dlist2(D).items():
+    print(type(values))
     if type(values) != int:
         word = ""
         for i in values:
             s = str(i)
             word = word+'\n'+s
-        plt.text(key, 0.5 , word, color='red', va='bottom', ha='center', fontweight='bold',             label='nodes' )
+        plt.text(key, 0.5 , word, color='red', va='bottom', ha='center', fontweight='bold', label='nodes' )
     else:
         plt.text(key, 0.5, values, color='red', va='bottom', ha='center', fontweight='bold' )
+    
 
 plt.legend(loc='upper right')
 plt.show()
