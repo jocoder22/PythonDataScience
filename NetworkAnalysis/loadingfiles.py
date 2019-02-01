@@ -135,10 +135,10 @@ for i, nlrow in df.iterrows():
         hh[nlrow[0]] = nlrow[1:].to_dict()
 
 
-df = pd.DataFrame({'name': ['ada', , 'obi', 'ppp', 'jon'],
-                            'club':[0, 1, 1, 0],
-                            'club2':[0, 0, 1, 1],
-                            'club3':[1, 0, 0, 1]})
+df = pd.DataFrame({'name': ['ada', 'obi', 'ppp', 'jon'],
+                  'club': [0, 1, 1, 0],
+                  'club2': [0, 0, 1, 1],
+                  'club3': [1, 0, 0, 1]})
 
 
 node1 = list()
