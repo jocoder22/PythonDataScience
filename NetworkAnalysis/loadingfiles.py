@@ -170,5 +170,11 @@ for i, row in df.iterrows():
                         node_dict['node2'].append(i)
 
 [(i, row, u) for i, row in df.iterrows() for u in row.keys()]
+
+for row in df.itertuples():
+        for i in row._fields:
+                if getattr(row, i) == 1:
+                        node_dict['node4'].append(i)
+                        node_dict['node5'].append(row.name)
    
 
