@@ -171,6 +171,7 @@ for i, row in df.iterrows():
 
 [(i, row, u) for i, row in df.iterrows() for u in row.keys()]
 
+cd
 for row in df.itertuples():
         for i in row._fields:
                 if getattr(row, i) == 1:
