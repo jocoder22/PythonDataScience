@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 # #####################creating database
 from sklearn import preprocessing
 import pandas as pd
