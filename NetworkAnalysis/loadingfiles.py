@@ -7,6 +7,7 @@ import os
 import networkx as nx
 import nxviz as nv
 import pickle as pkl
+from collections import defaultdict
 
 path = 'C:\\Users\\Jose\\Desktop\\PythonDataScience\\NetworkAnalysis'
 os.chdir(path)
@@ -135,10 +136,10 @@ for i, nlrow in df.iterrows():
         hh[nlrow[0]] = nlrow[1:].to_dict()
 
 
-df = pd.DataFrame({'name': ['ada', , 'obi', 'ppp', 'jon'],
-                            'club':[0, 1, 1, 0],
-                            'club2':[0, 0, 1, 1],
-                            'club3':[1, 0, 0, 1]})
+df = pd.DataFrame({'name': ['ada', 'obi', 'ppp', 'jon'],
+                  'club': [0, 1, 1, 0],
+                  'club2': [0, 0, 1, 1],
+                  'club3': [1, 0, 0, 1]})
 
 
 node1 = list()
@@ -152,4 +153,29 @@ for i, row in df.iterrows():
 
 for row in df.itertuples(index=False):
         print(row[1])
+
+
+for i, row in df.iterrows():
+        print(i)
+        print(row)
+        print(row.keys())
+        print(row.values)
+
+node_dict = defaultdict(list)
+
+for i, row in df.iterrows():
+        for i in row.keys():
+                if row[i] == 1:
+                        node_dict['node1'].append(row.values[0])
+                        node_dict['node2'].append(i)
+
+[(i, row, u) for i, row in df.iterrows() for u in row.keys()]
+
+cd
+for row in df.itertuples():
+        for i in row._fields:
+                if getattr(row, i) == 1:
+                        node_dict['node4'].append(i)
+                        node_dict['node5'].append(row.name)
+   
 
