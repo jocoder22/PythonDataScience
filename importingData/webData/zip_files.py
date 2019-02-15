@@ -3,7 +3,8 @@ from io import BytesIO
 import requests
 import matplotlib.pyplot as plt
 import pandas as pd
-Import pandas
+import gzip, io, csv
+
 
 # Create file path: file_path
 # file_path = 'Summer Olympic medallists 1896 to 2008 - EDITIONS.tsv'
