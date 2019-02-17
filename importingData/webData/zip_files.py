@@ -11,10 +11,10 @@ import gzip, io, csv
 
 url = 'https://assets.datacamp.com/production/repositories/516/datasets/2d14df8d3c6a1773358fa000f203282c2e1107d6/Summer%20Olympic%20medals.zip'
 
+# download all the zip files
 response = requests.get(url)
 
 # unzip the content
-
 zipp = ZipFile(BytesIO(response.content))
 print(zipp.namelist())
 
