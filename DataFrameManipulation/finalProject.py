@@ -1,4 +1,4 @@
-#Import pandas
+#!/usr/bin/env python
 import pandas as pd
 import matplotlib.pyplot as plt
 import requests
