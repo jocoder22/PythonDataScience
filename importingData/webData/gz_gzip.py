@@ -5,6 +5,11 @@ import requests
 import gzip
 import numpy as np
 import pandas as pd
+import os
+
+path = "C:\\Users\\Jose\\Desktop\\TimerSeriesAnalysis\\police_nj\\"
+
+os.chdir(path)
 
 url = 'https://stacks.stanford.edu/file/druid:py883nd2578/WY-clean.csv.gz'
 
