@@ -1,4 +1,4 @@
-import pandas as np 
+import pandas as pd
 
 ######## maths
 # Extract selected columns from weather as new DataFrame: temps_f
