@@ -60,4 +60,11 @@ model.fit(X_train, y_train)
 # Obtain predictions from the test data
 predicted = model.predict(X_test)
 
+# Fit the model to our training set
+model.fit(X_train, y_train)
 
+# Obtain predictions from the test data
+predicted = model.predict(X_test)
+
+# Print the accuracy performance metric
+print(accuracy_score(y_test, predicted))
