@@ -11,7 +11,7 @@ df = pd.read_csv('power.csv', sep=',')
 [s for s in df if df[s].max() == 1]
 
 
-# thi finds the total number that is binary
+# this finds the total number that is binary
 (df.max() == 1).sum()
 len([s for s in df if df[s].max() == 1])
 
