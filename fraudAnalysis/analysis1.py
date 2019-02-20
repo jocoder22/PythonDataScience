@@ -120,14 +120,7 @@ print(confusion_matrix(y_test, predicted))
 
 
 model = RandomForestClassifier(bootstrap=True, class_weight={0: 1, 1: 12}, criterion='entropy',
-
-                               # Change depth of model
-                               max_depth=10,
-
-                               # Change the number of samples in leaf nodes
-                               min_samples_leaf=10,
-
-                               # Change the number of trees to use
+                               max_depth=10,min_samples_leaf=10,
                                n_estimators=20, n_jobs=-1, random_state=5)
 
 
