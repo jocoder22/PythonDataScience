@@ -5,15 +5,18 @@ import matplotlib.pyplot as plt
 import requests
 from zipfile import ZipFile
 from io import BytesIO
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import roc_curve
-from sklearn.metrics import silhouette_score, homogeneity_score
-from sklearn.metrics import confusion_matrix, classification_report
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.cluster import DBSCAN
-import seaborn as sns
+
+import nltk
+from nltk import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem.wordnet import WordNetLemmatizer
+from nltk.stem.snowball import SnowballStemmer
+import string
+import re
 plt.style.use('ggplot')
+
+
+
 
 
 sp = '\n\n'
@@ -31,3 +34,61 @@ mylist = [filename for filename in zipp.namelist()]
 
 
 data = pd.read_csv(zipp.open(mylist[5]))
+
+data2 = data.copy()
+
+print(data2.content.head())
+
+data2['newcontent'] = data2['content'].apply(word_tokenize)
+# data2['newcontent'] = data2.apply(
+    # lambda row: word_tokenize(row['content']), axis=1)
+# data2['newcontent'] = data2['newcontent'].rstrip()
+
+
+
+excludePunt = set(string.punctuation)
+stopword = set(stopwords.words('english'))
+stopword.update(("to", "cc", "subject", "http", "from",
+             "sent", "ect", "u", "fwd", "www", "com"))
+wordlemm = WordNetLemmatizer()
+wordporter = SnowballStemmer("english")
+""" data2['stop_free'] = ' '.join([word for word in data2['newcontent'] if((word not in stopword)
+                    and (not word.isdigit()))])
+
+data2['puntfree'] = ''.join(
+    word for word in data2['stop_free'] if word not in excludePunt)
+
+
+
+
+data2['puntfree'] = " ".joint(wordlemm.lemmatize(word)
+                              for word in data2['puntfree'].split())
+
+wordporter = PorterStemmer()
+data2['cleanedtext'] = " ".join(wordporter.stem(token) for token in data2.puntfree)
+
+print(data2['newcontent', 'cleanedtext'].head())
+ """
+
+# Define word cleaning function
+def cleantext(text, stop):
+    text = str(text).rstrip()
+    stopfree = " ".join([word for word in text.lower().split() if (
+        (word not in stopword) and (not word.isdigit()))])
+
+    puncfree = ''.join(word for word in stopfree if word not in excludePunt)
+    lemmy = " ".join(wordlemm.lemmatize(word)
+                          for word in puncfree.split())
+    result = " ".join(wordporter.stem(word) for word in lemmy.split())
+    return result
+
+
+text_clean = []
+for text in data['clean_content']:
+    text_clean.append(cleantext(text, stopword)) 
+print(text_clean[:2])
+
+data2['cleanedcontent'] = text_clean
+print(data2[['content', 'cleanedcontent']].head())
+
+
