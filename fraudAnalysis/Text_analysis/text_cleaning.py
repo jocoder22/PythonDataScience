@@ -52,23 +52,7 @@ stopword.update(("to", "cc", "subject", "http", "from",
              "sent", "ect", "u", "fwd", "www", "com"))
 wordlemm = WordNetLemmatizer()
 wordporter = SnowballStemmer("english")
-""" data2['stop_free'] = ' '.join([word for word in data2['newcontent'] if((word not in stopword)
-                    and (not word.isdigit()))])
 
-data2['puntfree'] = ''.join(
-    word for word in data2['stop_free'] if word not in excludePunt)
-
-
-
-
-data2['puntfree'] = " ".joint(wordlemm.lemmatize(word)
-                              for word in data2['puntfree'].split())
-
-wordporter = PorterStemmer()
-data2['cleanedtext'] = " ".join(wordporter.stem(token) for token in data2.puntfree)
-
-print(data2['newcontent', 'cleanedtext'].head())
- """
 
 # Define word cleaning function
 def cleantext(text, stop):
