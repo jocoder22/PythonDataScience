@@ -7,7 +7,7 @@ from zipfile import ZipFile
 from io import BytesIO
 
 import nltk
-from nltk import word_tokenize
+from nltk import word_tokenize, wordpunct_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.stem.snowball import SnowballStemmer
@@ -41,8 +41,8 @@ print(data2.content.head())
 
 data2['newcontent'] = data2['content'].apply(word_tokenize)
 data2['newcontent2'] = data2.apply(
-    lambda row: word_tokenize(row['content']), axis=1)
-data2['newcontent2'] = data2['newcontent2'].str.rstrip()
+    lambda row: wordpunct_tokenize(row['content']), axis=1)
+# data2['newcontent2'] = data2[['newcontent2']].rstrip()
 
 
 
@@ -69,10 +69,11 @@ def cleantext(text, stop):
 
 text_clean = []
 for text in data['clean_content']:
-    text_clean.append(cleantext(text, stopword)) 
+    text_clean.append(cleantext(text, stopword).split()) 
 print(text_clean[:2])
 
 data2['cleanedcontent'] = text_clean
 print(data2[['content', 'cleanedcontent']].head())
 
+print(data2[['newcontent2', 'newcontent']].head())
 

@@ -33,6 +33,8 @@ mylist = [filename for filename in zipp.namelist()]
 data = pd.read_csv(zipp.open(mylist[5]))
 print(mylist, data.head(), data.columns, sep=sp)
 
+print(data[['content', 'clean_content']].head())
+
 
 mask = data['clean_content'].str.contains('sell enron stock', na=False)
 
