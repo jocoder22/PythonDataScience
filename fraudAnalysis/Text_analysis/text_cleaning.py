@@ -40,16 +40,16 @@ data2 = data.copy()
 print(data2.content.head())
 
 data2['newcontent'] = data2['content'].apply(word_tokenize)
-# data2['newcontent'] = data2.apply(
-    # lambda row: word_tokenize(row['content']), axis=1)
-# data2['newcontent'] = data2['newcontent'].rstrip()
+data2['newcontent2'] = data2.apply(
+    lambda row: word_tokenize(row['content']), axis=1)
+data2['newcontent2'] = data2['newcontent2'].str.rstrip()
 
 
 
 excludePunt = set(string.punctuation)
 stopword = set(stopwords.words('english'))
-stopword.update(("to", "cc", "subject", "http", "from",
-             "sent", "ect", "u", "fwd", "www", "com"))
+stopword.update(("to", "th", "e", "cc", "subject", "http", "from",
+             "sent", "ect", "u", "fwd", "w", "n", "s", "www", "com"))
 wordlemm = WordNetLemmatizer()
 wordporter = SnowballStemmer("english")
 
