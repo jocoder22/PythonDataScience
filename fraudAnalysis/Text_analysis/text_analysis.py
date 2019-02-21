@@ -9,6 +9,10 @@ from io import BytesIO
 
 import gensim
 from gensim import corpora
+
+import pyLDAvis.gensim as gensimvis
+import pyLDAvis
+
 plt.style.use('ggplot')
 
 # logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -56,12 +60,41 @@ dictionary.filter_extremes(no_below=5, keep_n=50000)
 # [[(0,1), (1,1), (2,1)]]  this is a sparse matrix
 corpus = [dictionary.doc2bow(text) for text in textlist]
 
-
-
+# model for the topics using LdaModel
 model = gensim.models.ldamodel.LdaModel(corpus, num_topics=3, 
                                         id2word=dictionary, passes=15)
-
 
 topics = model.print_topics(num_words=4)
 for topic in topics:
     print(topic, sep=sp)
+
+
+# ds = pyLDAvis.gensim.prepare(model, corpus, dictionary, sort_topics=False)
+# pyLDAvis.display(ds)
+
+
+def get_topic_details(ldamodel, corpus):
+    topic_details_df = pd.DataFrame()
+    for i, row in enumerate(ldamodel[corpus]):
+        row = sorted(row, key=lambda x: (x[1]), reverse=True)
+        for j, (topic_num, prop_topic) in enumerate(row):
+            if j == 0:  # => dominant topic
+                wp = ldamodel.show_topic(topic_num)
+                topic_keywords = ", ".join([word for word, prop in wp])
+                topic_details_df = topic_details_df.append(pd.Series(
+                    [int(topic_num), round(prop_topic, 4), topic_keywords]), ignore_index=True)
+    topic_details_df.columns = ['Dominant_Topic', '% Score', 'Topic_Keywords']
+    return topic_details_df
+
+
+print(get_topic_details(model, corpus).head())
+
+# Add original text to topic details in a dataframe
+contents = pd.DataFrame({'Original text': textlist})
+topic_details = pd.concat(
+    [get_topic_details(model, corpus), contents], axis=1)
+
+# Create flag for text highest associated with topic 3
+topic_details['flag'] = np.where(
+    (topic_details['Dominant_Topic'] == 3.0), 1, 0)
+print(topic_details.head())
