@@ -86,3 +86,19 @@ plt.ylabel('Sentiment Score')
 plt.xlabel('Time: Year 2000')
 plt.legend(('buy', 'sell'))
 plt.show()
+
+
+# Monthly average sentiment scores
+scores = data.content.apply(sid.polarity_scores)
+sentt = scores.apply(lambda y: y['compound'])
+sentt_sell = sentt[data.content.str.contains('sell')].resample('1 m').mean()
+sentt_buy = sentt[data.content.str.contains('buy')].resample('1 m').mean()
+
+
+# plot the monthly average sentiment scores
+sentt_buy.plot(color='blue')
+sentt_sell.plot(color='green')
+plt.ylabel('Sentiment Average Score')
+plt.xlabel('Time: Monthly')
+plt.legend(('buy', 'sell'))
+plt.show()
