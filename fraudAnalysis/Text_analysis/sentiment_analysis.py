@@ -63,20 +63,26 @@ data['scores'] = data.content.apply(sid.polarity_scores).apply(lambda x: x['comp
 print(data.loc[:,['scores']].head())
 
 # subset the dataframe for words: sell or buy
-dfm = data.scores[data.content.str.contains('sell')].resample('1 d').mean()
-dfy = data.scores[data.content.str.contains('buy')].resample('1 d').mean()
+dfsell = data.scores[data.content.str.contains('sell')].resample('1 d').mean()
+dfbuy = data.scores[data.content.str.contains('buy')].resample('1 d').mean()
 
 # fill NaN with previous scores
-dfy.fillna(method='ffill', inplace=True)
-dfm.fillna(method='ffill', inplace=True)
+dfbuy.fillna(method='ffill', inplace=True)
+dfsell.fillna(method='ffill', inplace=True)
 
 # Plot the sentiment over time
-dfy.plot()
-dfm.plot()
+dfbuy.plot()
+dfsell.plot()
 plt.ylabel('Sentiment Score')
 plt.xlabel('Time')
 plt.legend(('buy', 'sell'))
 plt.show()
 
 
-
+# Plot the sentiment year 2000
+dfbuy['2000'].plot()
+dfsell['2000'].plot()
+plt.ylabel('Sentiment Score')
+plt.xlabel('Time: Year 2000')
+plt.legend(('buy', 'sell'))
+plt.show()
