@@ -17,7 +17,7 @@ from functools import reduce
 # plt.style.use('ggplot')
 
 # logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-sp = '\n\n'
+sp = '\n\n\n\n'
 
 url2 = 'https://assets.datacamp.com/production/repositories/2162/datasets/94f2356652dc9ea8f0654b5e9c29645115b6e77f/chapter_4.zip'
 
@@ -169,6 +169,6 @@ ratio['ratio'] = ratio['degree_x'] / ratio['degree_y']
 ratio = ratio[ratio['degree'] >= 5]
 
 # Print out first five with highest ratio
-print(ratio.sort_values('ratio', ascending=False).head(), sep=sp*2)
-print(ratio.sort_values('degree', ascending=False).head(), sep=sp*2)
+print(ratio.sort_values('ratio', ascending=False).head(), sep=sp)
+print(ratio.sort_values('degree', ascending=False).head(), sep=sp)
 print(ratio.sort_values('degree_x', ascending=False).head())
