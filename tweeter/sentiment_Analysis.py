@@ -3,14 +3,16 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import json
 import requests
+import re
+
 
 path = 'C:\\Users\\Jose\\Desktop\\'
 os.chdir(path)
 
 
-
+sp = '\n\n'
+    
 def flatten_tweets(tweets_json):
     tweets = []
     
@@ -52,3 +54,14 @@ def flatten_tweets(tweets_json):
 
 
 
+url = 'http://www.jocoder22.com/medication/all/JSON'
+
+response = requests.get(url)
+
+js = response.json()
+
+data = pd.DataFrame(js['AllMEDS'])
+
+data['Side_Effects'] = data['Adverse Effect'].apply(lambda x: x.split(','))
+
+print(data.head(), data['Side_Effects'], sep=sp)
