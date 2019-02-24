@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
+import requests
 
 path = 'C:\\Users\\Jose\\Desktop\\'
 os.chdir(path)
@@ -40,32 +41,14 @@ def flatten_tweets(tweets_json):
         tweets.append(tweet_obj)
     return tweets
 
-# Flatten the tweets and store in `tweets`
-tweets = flatten_tweets('tweetmm.json')
+# # Flatten the tweets and store in `tweets`
+# tweets = flatten_tweets('tweetmm.json')
 
-# Create a DataFrame from `tweets`
-ds_tweets = pd.DataFrame('tweets')
+# # Create a DataFrame from `tweets`
+# ds_tweets = pd.DataFrame('tweets')
 
-# Print out the first 5 tweets from this dataset
-print(ds_tweets['text'].values[0:5])
+# # Print out the first 5 tweets from this dataset
+# print(ds_tweets['text'].values[0:5])
 
 
-{
-    "maps": [
-        {
-            "id": "blabla",
-            "iscategorical": "0"
-        },
-        {
-            "id": "blabla",
-            "iscategorical": "0"
-        }
-    ],
-    "masks": {
-        "id": "valore"
-    },
-    "om_points": "value",
-    "parameters": {
-        "id": "valore"
-    }
-}
+
