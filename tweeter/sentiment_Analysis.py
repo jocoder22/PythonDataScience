@@ -5,6 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import requests
 import re
+from nltk.tokenize import regexp_tokenize
+from nltk.tokenize import TweetTokenizer
 
 
 path = 'C:\\Users\\Jose\\Desktop\\'
@@ -66,6 +68,7 @@ data['Side_Effects'] = data['Adverse Effect'].apply(lambda x: x.split(','))
 
 kdict = dict()
 
+
 # Most common side effects
 for idx, val in data['Side_Effects'].iteritems():
     for i in val:
@@ -79,6 +82,12 @@ ksort = sorted(kdict.items(), reverse=True, key=lambda x: x[1])
 print(ksort[:5])
 print(data.head(), data['Side_Effects'], sep=sp)
 
+
 # Get a single value
 max_ad = max(kdict, key=kdict.get)
 print(max_ad)
+
+
+german_text = 'Wann gehen wir Pizza essen? 🍕 Und fährst du mit Über? 🚕 :) (-:'
+emoji = "['\U0001F300-\U0001F5FF'|'\U0001F600-\U0001F64F'|'\U0001F680-\U0001F6FF'|'\u2600-\u26FF\u2700-\u27BF']"
+print(regexp_tokenize(german_text, emoji))
