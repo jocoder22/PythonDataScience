@@ -12,7 +12,7 @@ os.chdir(path)
 
 
 sp = '\n\n'
-    
+
 def flatten_tweets(tweets_json):
     tweets = []
     
@@ -64,4 +64,21 @@ data = pd.DataFrame(js['AllMEDS'])
 
 data['Side_Effects'] = data['Adverse Effect'].apply(lambda x: x.split(','))
 
+kdict = dict()
+
+# Most common side effects
+for idx, val in data['Side_Effects'].iteritems():
+    for i in val:
+        if i in kdict:
+            kdict[i] += 1
+        else:
+            kdict[i] = 1
+    
+ksort = sorted(kdict.items(), reverse=True, key=lambda x: x[1])
+
+print(ksort[:5])
 print(data.head(), data['Side_Effects'], sep=sp)
+
+# Get a single value
+max_ad = max(kdict, key=kdict.get)
+print(max_ad)
