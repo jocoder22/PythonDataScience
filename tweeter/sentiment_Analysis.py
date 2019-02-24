@@ -56,38 +56,40 @@ def flatten_tweets(tweets_json):
 
 
 
-url = 'http://www.jocoder22.com/medication/all/JSON'
+# url = 'http://www.jocoder22.com/medication/all/JSON'
 
-response = requests.get(url)
+# response = requests.get(url)
 
-js = response.json()
+# js = response.json()
 
-data = pd.DataFrame(js['AllMEDS'])
+# data = pd.DataFrame(js['AllMEDS'])
 
-data['Side_Effects'] = data['Adverse Effect'].apply(lambda x: x.split(','))
+# data['Side_Effects'] = data['Adverse Effect'].apply(lambda x: x.split(','))
 
-kdict = dict()
+# kdict = dict()
 
 
-# Most common side effects
-for idx, val in data['Side_Effects'].iteritems():
-    for i in val:
-        if i in kdict:
-            kdict[i] += 1
-        else:
-            kdict[i] = 1
+# # Most common side effects
+# for idx, val in data['Side_Effects'].iteritems():
+#     for i in val:
+#         if i in kdict:
+#             kdict[i] += 1
+#         else:
+#             kdict[i] = 1
     
-ksort = sorted(kdict.items(), reverse=True, key=lambda x: x[1])
+# ksort = sorted(kdict.items(), reverse=True, key=lambda x: x[1])
 
-print(ksort[:5])
-print(data.head(), data['Side_Effects'], sep=sp)
-
-
-# Get a single value
-max_ad = max(kdict, key=kdict.get)
-print(max_ad)
+# print(ksort[:5])
+# print(data.head(), data['Side_Effects'], sep=sp)
 
 
-german_text = 'Wann gehen wir Pizza essen? 🍕 Und fährst du mit Über? 🚕 :) (-:'
+# # Get a single value
+# max_ad = max(kdict, key=kdict.get)
+# print(max_ad)
+
+
+# emoji cheatsheet at https://www.webfx.com/tools/emoji-cheat-sheet/
+
+german_text = '😄 Wann 😁 gehen 😂 wir 😝 Pizza 😄 essen? 🍕 Und 😓 fährst 💞 du 😥 mit 🎉 Über? 🚕 :) (-: 😀! 🐍'
 emoji = "['\U0001F300-\U0001F5FF'|'\U0001F600-\U0001F64F'|'\U0001F680-\U0001F6FF'|'\u2600-\u26FF\u2700-\u27BF']"
 print(regexp_tokenize(german_text, emoji))
