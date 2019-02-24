@@ -7,7 +7,7 @@ import requests
 import re
 from nltk.tokenize import regexp_tokenize
 from nltk.tokenize import TweetTokenizer
-
+import emoji
 
 path = 'C:\\Users\\Jose\\Desktop\\'
 os.chdir(path)
@@ -90,6 +90,15 @@ def flatten_tweets(tweets_json):
 
 # emoji cheatsheet at https://www.webfx.com/tools/emoji-cheat-sheet/
 
-german_text = '😄 Wann 😁 gehen 😂 wir 😝 Pizza 😄 essen? 🍕 Und 😓 fährst 💞 du 😥 mit 🎉 Über? 🚕 :) (-: 😀! 🐍'
+german_text = '😄 Wann 😁 gehen 😂 wir 😝 Pizza :stuck_out_tongue_winking_eye: 😄 essen? 🍕 Und 😓 fährst 💞 du 😥 mit 🎉 Über? 🚕 :) (-: 😀! 🐍'
 emoji = "['\U0001F300-\U0001F5FF'|'\U0001F600-\U0001F64F'|'\U0001F680-\U0001F6FF'|'\u2600-\u26FF\u2700-\u27BF']"
 print(regexp_tokenize(german_text, emoji))
+
+
+print(emoji.emojize(":grinning_face_with_big_eyes:")) 
+print(emoji.emojize(":winking_face_with_tongue:")) 
+print(emoji.emojize(":zipper-mouth_face:")) 
+
+# print(emoji.emojize('Python is :thumbs_up:'))
+# print(emoji.emojize('Python is :thumbsup:', use_aliases=True))
+# print(emoji.demojize('Python is 👍'))
