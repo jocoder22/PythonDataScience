@@ -49,7 +49,7 @@ data = pd.read_csv(zipp.open(mylist[5]))
 data['Date'] = pd.to_datetime(data.Date)
 data.set_index('Date', inplace=True)
 
-# print(data.head(), data.columns, sep=sp)
+print(data.head(), data.columns, sep=sp)
 
 # instantiate a sentiment analyser
 sid = SentimentIntensityAnalyzer()
