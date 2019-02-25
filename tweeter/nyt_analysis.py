@@ -3,6 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from collections import Counter
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 from nltk import word_tokenize, wordpunct_tokenize
@@ -23,7 +24,8 @@ wordporter = SnowballStemmer("english")
 
 
 sp = '\n\n'
-path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
+# path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
+path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\tweeter\\'
 os.chdir(path)
 
 data = pd.read_csv('nyt.csv')
@@ -87,3 +89,17 @@ ks.iloc[:20].plot('word', 'freq', kind='barh')
 plt.ylabel(" ")
 plt.xlabel('word frequency')
 plt.show()
+
+
+data['BagsWords'] = data.News_content.apply(word_tokenize)
+
+allword = " "
+
+for idx, val in data['News_content'].iteritems():
+    allword = allword + "  " + val + "  "
+
+countdict = Counter(word_tokenize(allword))
+
+sortcount = sorted(countdict,  reverse=True)
+# print(sortcount, countdict, sep=sp)
+print(type(sortcount), type(countdict), sep=sp)
