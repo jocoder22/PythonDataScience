@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+import text_preprocessing
 
 sp = '\n\n'
 # path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
@@ -12,9 +13,12 @@ os.chdir(path)
 
 data = pd.read_csv('nyt_clean.csv')
 
-allnews = []
+text_clean = []
 
-for text in data['wordList']:
-    allnews.append(text)
 
-print(len(allnews))
+for text in data['News_content']:
+    text_clean.extend(text_preprocessing.preprocessText(text))
+
+    
+
+print(text_clean[:10])

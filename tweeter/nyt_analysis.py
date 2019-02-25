@@ -52,6 +52,15 @@ def cleantext(text, stop):
 
 
 def preprocessText(text, stop):
+
+    excludePunt = set(string.punctuation)
+    excludePunt.update(('"', "'"))
+    stopword = set(stopwords.words("english"))
+    stopword.update(("said", "to", "th", "e", "cc", "subject", "http", "from", "new", "time", "times", "york",
+                    "sent", "ect", "u", "fwd", "w", "n", "s", "www", "com", "de", "one", "may", "home", "u", "la",
+                    "advertisement", "information", "service", "—", "year", "would"))
+    wordlemm = WordNetLemmatizer()
+    wordporter = SnowballStemmer("english")
     # form word tokens
     text2 = word_tokenize(text)
     # Retain alphabetic words: alpha_only
@@ -67,16 +76,17 @@ def preprocessText(text, stop):
 
 text_clean = []
 
-# for text in data['News_content']:
-#     text_clean.append(cleantext(text, stopword).split()) 
-
-
 for text in data['News_content']:
-    text_clean.append(preprocessText(text, stopword))
+    text_clean.append(cleantext(text, stopword).split()) 
+
+
+# for text in data['News_content']:
+#     text_clean.append(preprocessText(text, stopword))
 
 data['wordList'] = text_clean
 
-data.to_csv('nyt_clean.csv', index=False)
+print(data['wordList'].head())
+
 
 kdict = defaultdict(int)
 
