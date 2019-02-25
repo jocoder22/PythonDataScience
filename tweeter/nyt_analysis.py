@@ -76,6 +76,8 @@ for text in data['News_content']:
 
 data['wordList'] = text_clean
 
+data.to_csv('nyt_clean.csv', index=False)
+
 kdict = defaultdict(int)
 
 # Most common used word
