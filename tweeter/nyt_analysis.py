@@ -98,7 +98,9 @@ allword = " "
 for idx, val in data['News_content'].iteritems():
     allword = allword + "  " + val + "  "
 
+# Get Counter object
 countdict = Counter(word_tokenize(allword))
+print(countdict.most_common(10))
 
 sortcount = sorted(countdict,  reverse=True)
 # print(sortcount, countdict, sep=sp)
