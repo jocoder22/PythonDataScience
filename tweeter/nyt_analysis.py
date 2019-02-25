@@ -11,6 +11,7 @@ from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.stem.snowball import SnowballStemmer
 import string
 
+plt.style.use('ggplot')
 excludePunt = set(string.punctuation)
 excludePunt.update(('"', "'"))
 stopword = set(stopwords.words("english"))
@@ -25,7 +26,7 @@ sp = '\n\n'
 path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
 os.chdir(path)
 
-data = pd.read_csv('nyt2.csv')
+data = pd.read_csv('nyt.csv')
 print(data.shape)
 
 # instantiate a sentiment analyser
