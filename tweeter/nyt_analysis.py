@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from collections import Counter
+from collections import Counter, defaultdict
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 from nltk import word_tokenize, wordpunct_tokenize
@@ -76,15 +76,12 @@ for text in data['News_content']:
 
 data['wordList'] = text_clean
 
-kdict = dict()
+kdict = defaultdict(int)
 
 # Most common used word
 for idx, val in data['wordList'].iteritems():
     for i in val:
-        if i in kdict:
-            kdict[i] += 1
-        else:
-            kdict[i] = 1
+        kdict[i] += 1
     
 ksort = sorted(kdict.items(), reverse=True, key=lambda x: x[1])
 ks = pd.DataFrame(ksort,  columns=['word', 'freq'])
@@ -110,7 +107,7 @@ plt.show()
 
 
 data['BagsWords'] = data.News_content.apply(word_tokenize)
-datawordbags = word_tokenize(data.News_content[2])
+datawordbags = word_tokenize(data.News_content[2].lower())
 allword = " "
 
 for idx, val in data['News_content'].iteritems():
