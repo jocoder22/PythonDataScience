@@ -11,6 +11,8 @@ import text_preprocessing
 from gensim.corpora.dictionary import Dictionary
 from gensim.models.tfidfmodel import TfidfModel
 from nltk import word_tokenize, sent_tokenize
+import nltk
+
 
 sp = '\n\n'
 # path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
@@ -30,5 +32,13 @@ for text in data['News_content']:
 mysentences = sent_tokenize(mytext)
 sent_token = [word_tokenize(x) for x in mysentences]
 
+speech_tag = [nltk.pos_tag(y) for y in sent_token]
 
-print(mysentences, sent_token, sep=sp)
+sent_chunk = nltk.ne_chunk_sents(speech_tag, binary=True)
+
+for sentence in sent_chunk:
+    for word in sentence:
+        if hasattr(work, "label") and word.label() == "NE":
+            print(word)
+
+# print(mysentences, sent_token, sep=sp)
