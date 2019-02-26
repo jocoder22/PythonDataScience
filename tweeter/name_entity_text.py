@@ -13,6 +13,7 @@ from gensim.models.tfidfmodel import TfidfModel
 from nltk import word_tokenize, sent_tokenize
 import nltk
 
+# https://www.lfd.uci.edu/~gohlke/pythonlibs/
 
 sp = '\n\n'
 # path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
@@ -42,3 +43,27 @@ for sentence in sent_chunk:
             print(word)
 
 # print(mysentences, sent_token, sep=sp)
+
+# Create the defaultdict: nercat
+nercat = defaultdict(int)
+
+# Create a non-binary sentence chunks
+sent_chunk2 = nltk.ne_chunk_sents(speech_tag)
+
+# Create the nested for loop
+for sentence in sent_chunk2:
+    for word in sentence:
+        if hasattr(word, 'label'):
+            nercat[word.label()] += 1
+
+# Create a list from the dictionary keys for the chart labels: labels
+labels = list(nercat.keys())
+
+# Create a list of the values: values
+values = [nercat.get(l) for l in labels]
+
+# Create the pie chart
+plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=100)
+
+# Display the chart
+plt.show()
