@@ -38,7 +38,7 @@ sent_chunk = nltk.ne_chunk_sents(speech_tag, binary=True)
 
 for sentence in sent_chunk:
     for word in sentence:
-        if hasattr(work, "label") and word.label() == "NE":
+        if hasattr(word, "label") and word.label() == "NE":
             print(word)
 
 # print(mysentences, sent_token, sep=sp)
