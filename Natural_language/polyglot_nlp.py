@@ -17,6 +17,11 @@ from polyglot.text import Text, Word
 
 # colors_summary = colors.groupby('is_trans', as_index=False).count()
 
+# from polyglot.downloader import downloader
+# downloader.download("embeddings2.en")
+# downloader.download("pos2.en")
+# downloader.download("ner2.en")
+
 sp = '\n\n'
 path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
 # path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\tweeter\\'
@@ -24,19 +29,17 @@ os.chdir(path)
 
 data = pd.read_csv('nyt2.csv')
 
-text_clean = []
 
 mytext = str()
 
 for text in data['News_content']:
     mytext += text + " "
     
-# Instantiate the English model: nlp
-nlp = spacy.load('en', tagger=False, parser=False, matcher=False)
+text = Text(mytext)
 
 
-for text in data['News_content']:
-    spacyd = nlp(text)
-    for ent in spacyd.ents:
-        print(ent.label_, ent.text)
+for sent in text.sentences:
+    print(sent, sep=sp)
+    for entity in sent.entities:
+        print(entity.tag, entity)
         print(" ", sep=sp)

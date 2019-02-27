@@ -21,7 +21,7 @@ for text in data['News_content']:
     mytext += text + " "
     
 # Instantiate the English model: nlp
-nlp = spacy.load('en', tagger=False, parser=False, matcher=False)
+nlp = spacy.load('en')
 
 
 for text in data['News_content']:
