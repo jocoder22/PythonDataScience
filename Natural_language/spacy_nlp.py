@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,8 +7,8 @@ import spacy
 
 
 sp = '\n\n'
-# path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
-path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\tweeter\\'
+path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
+# path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\tweeter\\'
 os.chdir(path)
 
 data = pd.read_csv('nyt2.csv')
