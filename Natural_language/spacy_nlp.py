@@ -53,10 +53,7 @@ for sent in sentences:
 
 
 
-text = """But Google is starting from behind. The company made a late push
-into hardware, and Apple’s Siri, available on iPhones, and Amazon’s Alexa
-software, which runs on its Echo and Dot devices, have clear leads in
-consumer adoption."""
+text = """This is new worthy, although Google bought the compnay from behind. The company made a late push into  software and hardware. Samsung, Hawei and Apple, available on iPhones, and Amazon’s Alexa software, are in Washington DC to lobby for the lease which runs on its Echo and Dot devices, have clear leads  and superiority in consumer adoption."""
 
 nlp = spacy.load('en_core_web_sm')
 doc = nlp(text)
