@@ -1,7 +1,11 @@
 # Perform necessary imports
+import os
 from bokeh.io import output_file, show
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource, HoverTool
+
+path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\datavisualization\\bokeh\\outfiles\\'
+os.chdir(path)
 
 # Make the ColumnDataSource: source
 source = ColumnDataSource(data={

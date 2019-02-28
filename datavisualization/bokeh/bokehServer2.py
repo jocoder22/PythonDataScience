@@ -1,4 +1,5 @@
 # Perform necessary imports
+import os
 import numpy as np
 import pandas as pd
 
@@ -13,7 +14,8 @@ from bokeh.io import output_file, show
 from numpy.random import random
 import random
 
-
+path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\datavisualization\\bokeh\\outfiles\\'
+os.chdir(path)
 
 
 # create figure
