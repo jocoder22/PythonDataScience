@@ -1,17 +1,16 @@
 #!/usr/bin/env python
-import spacy
 import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from collections import defaultdict
-import itertools
 import nltk
-nltk.download('punkt')
+import pickle
 
-import text_preprocessing
+from text_preprocessing import preprocessText as pptext
+import pickle
 from gensim.corpora.dictionary import Dictionary
 from gensim.models.tfidfmodel import TfidfModel
+
 
 sp = '\n\n'
 path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
@@ -23,8 +22,14 @@ data = pd.read_csv('nyt.csv')
 text_clean = []
 
 for text in data['News_content']:
-    text_clean.append(text_preprocessing.preprocessText(text))
+    text_clean.append(pptext(text))
 
     
 
 print(text_clean[:3])
+
+
+dictionary = Dictionary(text_clean)
+corpus = [dictionary.doc2bow(text) for text in text_clean]
+pickle.dump(corpus, open('corpus.pkl', 'wb'))
+dictionary.save('dictionary.gensim')
