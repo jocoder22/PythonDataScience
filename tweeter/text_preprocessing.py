@@ -37,6 +37,10 @@ def cleantext(text):
 
 
 def preprocessText(text):
+    from nltk import word_tokenize, wordpunct_tokenize
+    from nltk.corpus import stopwords
+    from nltk.stem.wordnet import WordNetLemmatizer
+    from nltk.stem.snowball import SnowballStemmer
 
     excludePunt = set(string.punctuation)
     excludePunt.update(('"', "'"))
