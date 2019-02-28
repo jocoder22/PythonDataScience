@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import datetime
 import pandas_datareader as pdr
@@ -17,6 +18,9 @@ from bokeh.models import HoverTool
 # Import Panel from bokeh.models.widgets
 from bokeh.models.widgets import Panel
 from bokeh.models.widgets import Tabs
+
+path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\datavisualization\\bokeh\\outfiles\\'
+os.chdir(path)
 
 url = 'https://www.eea.europa.eu/data-and-maps/figures/correlation-between-fertility-and-female-education/trend01-5g-soer2010-xls/at_download/file'
 

@@ -1,4 +1,4 @@
-
+import os
 import pandas as pd
 import datetime
 import pandas_datareader as pdr
@@ -11,6 +11,9 @@ from bokeh.io import output_file, show
 
 # Import the ColumnDataSource class from bokeh.plotting
 from bokeh.plotting import ColumnDataSource
+
+path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\datavisualization\\bokeh\\outfiles\\'
+os.chdir(path)
 
 url = 'https://www.eea.europa.eu/data-and-maps/figures/correlation-between-fertility-and-female-education/trend01-5g-soer2010-xls/at_download/file'
 
