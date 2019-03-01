@@ -16,6 +16,7 @@ class data_analysis(filelink):
     def __init__(self, filename):
         filelink.filename = filename
         self.data = pd.read_csv(self.filename)
+        self.stats = self.data.describe()
 
 
     def get_eda(self):
