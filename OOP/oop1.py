@@ -18,12 +18,6 @@ class data_analysis(filelink):
         self.data = pd.read_csv(self.filename)
 
 
-    def csvdata(self):
-        d = pd.read_csv(self.filename)
-        self.data = d
-        return self.data
-
-
     def get_eda(self):
         shape = self.data.shape
         head = self.data.head()
