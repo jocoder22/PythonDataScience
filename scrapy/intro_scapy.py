@@ -8,5 +8,7 @@ res = requests.get(url)
 html = res.text 
 
 sel = Selector(text=html)
-sll = sel.xpath('//p')[2]
-print(sll)
+sll = sel.xpath('//p')[2]  # extract the 3rd element of the selectorList
+slla = sel.xpath('//p').extract()
+sllf = sel.xpath('//p').extract_first()
+print(sll, slla, sllf, sep=sp)
