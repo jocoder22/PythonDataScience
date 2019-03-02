@@ -34,14 +34,13 @@ session.headers.update(headers)
 try:
     response = session.get(url2, params=parameters)
     data2 = json.loads(response.text)
-    print(data2[:2])
+    print(data2['data'][:2])
 except (ConnectionError, Timeout, TooManyRedirects) as e:
     print(e)
 
 
 
 data = data2['data']
-# mylist = list()
 mydict = defaultdict(list)
 for i, item in enumerate(data):
     for k, v in item.items():
