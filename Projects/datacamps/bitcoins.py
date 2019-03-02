@@ -17,7 +17,7 @@ os.chdir(path)
 url2 = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 
 
-ky = "e8c48d14-p034-8a2a-4c39-870c-8cddf5db70b3"
+key = "e8c48d14-p034-8a2a-4c39-870c-8cddf5db70b3"
 parameters = {
     'start': '1',
     'limit': '5000',
@@ -25,7 +25,7 @@ parameters = {
 }
 headers = {
     'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': ky,
+    'X-CMC_PRO_API_KEY': key,
 }
 
 session = Session()
