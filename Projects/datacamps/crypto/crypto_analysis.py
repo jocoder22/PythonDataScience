@@ -78,7 +78,7 @@ plt.show()
 
 plt.style.use('fivethirtyeight')
 # Colors for the bar plot
-COLORS = ['orange', 'green', 'orange', 'cyan', 'cyan', 'blue', 'silver', 'orange', 'red', 'green']
+COLORS = ['orange', 'green', 'purple', 'red', 'cyan', 'blue', 'silver', 'yellow', 'indigo', 'pink']
 
 # Plotting market_cap_usd as before but adding the colors and scaling the y-axis  
 ax = cap10['market_cap_perc'].plot.bar(title=TOP_CAP_TITLE, color=COLORS, logy=True)
