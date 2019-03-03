@@ -139,14 +139,15 @@ for key, values in dlist2(D).items():
 
 plt.legend(loc='upper right')
 plt.show()
+
+
+
 # plt.subplot(122)
 plt.bar(Dv, Nf)
 plt.xlabel('Degree')
 plt.ylabel('Fraction of Nodes')
 plt.tight_layout()
 plt.xticks(Dv)
-
-
 plt.show()
 
 

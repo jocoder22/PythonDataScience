@@ -19,7 +19,7 @@ plt.show()
 
 
 # Histogram
-plt.hist(x, bin=10)
+plt.hist(x, bins=10)
 plt.show()
 plt.clf()  # this clears the histogram
 
@@ -68,13 +68,19 @@ plt.show()
 # Changing the color and opacity
 # c= sets the color while alpha= sets the opacity(from 0.0 to 1.0)
 # using dictionary to define the colors
-mycolors = {
-    'Placebo': 'red',
-    'IP10mg': 'blue',
-    'IP20mg': 'green',
-    'IP30mg': 'yellow'
-}
+# mycolors = {
+#     'Placebo': 'red',
+#     'IP10mg': 'blue',
+#     'IP20mg': 'green',
+#     'IP30mg': 'yellow'
+# }
 
+mycolors = {
+    'red':'Placebo',
+    'blue': 'IP10mg',
+    'green': 'IP20mg',
+    'yellow': 'IP30mg'
+}
 
 plt.scatter(x, y, s=zSizing, c=mycolors, alpha=6.2)
 plt.text(406, 13, "Failed")
