@@ -66,7 +66,8 @@ cap_10R.head()
 
 
 # Plotting the barplot with the title defined above 
-ax = cap_10R['circulating_supply'].plot.barh(title=LOW_CAP_TITLE)
+ax = cap_10R['market_cap_perc'].plot.barh(title=LOW_CAP_TITLE)
+# 'circulating_supply', 'total_supply', 'max_supply' are varible for future analysis
 
 # Annotating the y axis with the label defined above
 ax.set_xlabel(CAP_LABEL)
@@ -74,5 +75,3 @@ ax.set_ylabel("")
 ax.set_xscale('log')
 plt.show()
 
-# 'circulating_supply', 'total_supply',
-    #    'max_supply'
