@@ -75,3 +75,17 @@ ax.set_ylabel("")
 ax.set_xscale('log')
 plt.show()
 
+
+plt.style.use('fivethirtyeight')
+# Colors for the bar plot
+COLORS = ['orange', 'green', 'orange', 'cyan', 'cyan', 'blue', 'silver', 'orange', 'red', 'green']
+
+# Plotting market_cap_usd as before but adding the colors and scaling the y-axis  
+ax = cap10['market_cap_perc'].plot.bar(title=TOP_CAP_TITLE, color=COLORS, logy=True)
+
+# Annotating the y axis with 'USD'.
+ax.set_ylabel('USD')
+
+# Final touch! Removing the xlabel as it is not very informative
+ax.set_xlabel("")
+plt.show()
