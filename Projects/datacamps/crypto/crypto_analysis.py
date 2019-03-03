@@ -29,7 +29,7 @@ print(cap.count(), end=sp)
 #Declaring these now for later use in the plots
 TOP_CAP_TITLE = 'Top 10 market capitalization'
 LOW_CAP_TITLE = 'Bottom 10 market capitalization'
-TOP_CAP_YLABEL = '% of total cap'
+CAP_LABEL = '% of total cap'
 
 # Selecting the first 10 rows and setting the index
 cap10 = cap.loc[:9,:].set_index('name')
@@ -42,7 +42,7 @@ cap10.head()
 ax = cap10['market_cap_perc'].plot.bar(title=TOP_CAP_TITLE)
 
 # Annotating the y axis with the label defined above
-ax.set_ylabel(TOP_CAP_YLABEL)
+ax.set_ylabel(CAP_LABEL)
 ax.set_xlabel("")
 plt.show()
 
@@ -51,7 +51,7 @@ plt.show()
 ax = cap10['market_cap_perc'].plot.barh(title=TOP_CAP_TITLE)
 
 # Annotating the y axis with the label defined above
-ax.set_xlabel(TOP_CAP_YLABEL)
+ax.set_xlabel(CAP_LABEL)
 ax.set_ylabel("")
 plt.show()
 
@@ -68,6 +68,6 @@ cap_10R.head()
 ax = cap_10R['market_cap_perc'].plot.barh(title=LOW_CAP_TITLE)
 
 # Annotating the y axis with the label defined above
-ax.set_xlabel(TOP_CAP_YLABEL)
+ax.set_xlabel(CAP_LABEL)
 ax.set_ylabel("")
 plt.show()
