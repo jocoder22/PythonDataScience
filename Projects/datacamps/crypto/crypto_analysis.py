@@ -89,3 +89,21 @@ ax.set_ylabel('USD')
 # Final touch! Removing the xlabel as it is not very informative
 ax.set_xlabel("")
 plt.show()
+
+
+# Selecting the id, percent_change_24h and percent_change_7d columns
+volatility = data[['name', 'percent_change_24h', 'percent_change_7d']]
+
+# Setting the index to 'id' and dropping all NaN rows
+volatility = volatility.set_index('name').dropna()
+
+# Sorting the DataFrame by percent_change_24h in ascending order
+volatility = volatility.sort_values('percent_change_24h', ascending=True)
+
+# Checking the first few rows
+print(volatility.head())
+
+
+data2 = list(data['name'].values)
+data2 = sorted(data2)
+print(data2)
