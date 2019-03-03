@@ -107,3 +107,26 @@ print(volatility.head())
 data2 = list(data['name'].values)
 data2 = sorted(data2)
 print(data2)
+
+
+#Defining a function with 2 parameters, the series to plot and the title
+def top10_subplot(volatility_series, title):
+    # Making the subplot and the figure for two side by side plots
+    fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 6))
+    
+    # Plotting with pandas the barchart for the top 10 losers
+    ax = (volatility_series[:10].plot.bar(color="darkred", ax=axes[0]))
+    
+    # Setting the figure's main title to the text passed as parameter
+    # ... YOUR CODE FOR TASK 7 ...
+    fig.suptitle(title)
+    
+    # Setting the ylabel to '% change'
+    # ... YOUR CODE FOR TASK 7 ...
+    ax.set_ylabel('% change')
+    ax.set_xlabel("")
+    
+    # Same as above, but for the top 10 winners
+    ax = (volatility_series[-10:].plot.bar(color="darkblue", ax=axes[1]))
+    ax.set_ylabel('% change')
+    ax.set_xlabel("")
