@@ -82,6 +82,7 @@ _ = plt.plot(x_vers, y_vers, marker='.', linestyle='-', label='Empirical')
 x = np.random.normal(mu, sigma, size=size)
 
 count_, bins  = np.histogram(x, n_bins, density=True)
+
 # Add a line showing the expected distribution.
 y = norm.pdf(bins, mu, sigma).cumsum()
 y /= y[-1]
