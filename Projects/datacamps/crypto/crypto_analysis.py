@@ -13,7 +13,8 @@ data = pd.read_csv('crypto.csv')
 print(data.head(), data.shape, data.columns, data.info(), sep=sp)
 
 # Selecting the 'id' and the 'market_cap' columns
-market_cap = data[['name','market_cap']]
+market_cap = data[['name','market_cap', 'circulating_supply', 'total_supply',
+       'max_supply']]
 print(market_cap.head(), end=sp)
 
 # Counting the number of values
@@ -65,9 +66,13 @@ cap_10R.head()
 
 
 # Plotting the barplot with the title defined above 
-ax = cap_10R['market_cap_perc'].plot.barh(title=LOW_CAP_TITLE)
+ax = cap_10R['circulating_supply'].plot.barh(title=LOW_CAP_TITLE)
 
 # Annotating the y axis with the label defined above
 ax.set_xlabel(CAP_LABEL)
 ax.set_ylabel("")
+ax.set_xscale('log')
 plt.show()
+
+# 'circulating_supply', 'total_supply',
+    #    'max_supply'
