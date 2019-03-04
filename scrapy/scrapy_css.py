@@ -30,3 +30,5 @@ css_locator = 'html > body > span:nth-of-type(1) a'
 # Create the CSS Locator string equivalent to the XPath
 css_locator = 'div#uid > span h4'
 css_locator = 'div.course-block > a'
+# Create the CSS Locator to all children of the element whose id is uid
+css_locator = "#uid > *"
