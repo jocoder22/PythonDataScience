@@ -29,3 +29,4 @@ css_locator = 'html > body > span:nth-of-type(1) a'
 # xpath = '//div[@id="uid"]/span//h4'
 # Create the CSS Locator string equivalent to the XPath
 css_locator = 'div#uid > span h4'
+css_locator = 'div.course-block > a'
