@@ -32,3 +32,13 @@ css_locator = 'div#uid > span h4'
 css_locator = 'div.course-block > a'
 # Create the CSS Locator to all children of the element whose id is uid
 css_locator = "#uid > *"
+
+
+# Select all hyperlinks of div elements belonging to class "course-block"
+course_as = sel.css('div.course-block > a')
+
+# Selecting all href attributes chaining with css
+hrefs_from_css = course_as.css('::attr(href)')
+
+# Selecting all href attributes chaining with xpath
+hrefs_from_xpath = course_as.xpath('./@href')
