@@ -42,3 +42,10 @@ hrefs_from_css = course_as.css('::attr(href)')
 
 # Selecting all href attributes chaining with xpath
 hrefs_from_xpath = course_as.xpath('./@href')
+
+
+# Create an XPath string to the desired text.
+xpath = '//p[@id="p3"]/text()'
+
+# Create a CSS Locator string to the desired text.
+css_locator = 'p#p3::text'
