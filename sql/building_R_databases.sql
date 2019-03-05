@@ -40,3 +40,14 @@ FROM generalworks
 -- Rename the department column
 ALTER TABLE generalworks
 RENAME COLUMN  department TO projects;
+
+
+-- Add data from another table into generalworks table
+-- Insert unique unilever into the new table
+INSERT INTO generalworks 
+SELECT DISTINCT firstname, lastname, shortname 
+FROM unilever;
+
+-- Doublecheck the contents of generalworks
+SELECT * 
+FROM generalworks;
