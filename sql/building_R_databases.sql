@@ -15,3 +15,28 @@ Select *
 From unilever
 LIMIT 5 ;
 
+
+-- Create a table for the generalworks entity type
+CREATE TABLE generalworks
+(
+    firstname text,
+    lastname text
+);
+
+-- Print the contents of this table
+SELECT *
+FROM generalworks
+
+-- Add the department column
+ALTER TABLE generalworks
+ADD COLUMN department text,
+ADD COLUMN shortname text,
+ADD COLUMN unishort text;
+
+-- Print the contents of this table
+SELECT *
+FROM generalworks
+
+-- Rename the department column
+ALTER TABLE generalworks
+RENAME COLUMN  department TO projects;
