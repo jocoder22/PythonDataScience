@@ -42,8 +42,17 @@ ALTER TABLE generalworks
 RENAME COLUMN  department TO projects;
 
 
+-- Create a table for the generalworks entity type
+CREATE TABLE metalworks
+(
+    productID text,
+    manufacturer text,
+    size integer,
+    workcode char(7)
+);
+
 -- Add data from another table into generalworks table
--- Insert unique unilever into the new table
+-- Insert unique unilever into the new table: generalworks
 INSERT INTO generalworks 
 SELECT DISTINCT firstname, lastname, shortname 
 FROM unilever;
@@ -51,3 +60,15 @@ FROM unilever;
 -- Doublecheck the contents of generalworks
 SELECT * 
 FROM generalworks;
+
+-- Insert unique unilever into the new table: metalworks
+INSERT INTO metalworks 
+SELECT DISTINCT productID, manufacturer, workcode, size 
+FROM unilever;
+
+-- Doublecheck the contents of generalworks
+SELECT * 
+FROM metalworks;
+
+-- done with table unilever drop it
+DROP TABLE unilever;
