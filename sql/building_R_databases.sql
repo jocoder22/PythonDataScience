@@ -48,7 +48,9 @@ CREATE TABLE metalworks
     productID text,
     manufacturer text,
     size integer,
-    workcode char(7)
+    workcode char(7),
+    amount text,
+    price float
 );
 
 -- Add data from another table into generalworks table
@@ -72,3 +74,9 @@ FROM metalworks;
 
 -- done with table unilever drop it
 DROP TABLE unilever;
+
+
+-- Calculate the total amount as amount * price
+-- using cast to change the variable attribute
+SELECT productID,  CAST(amount AS float) * price AS total_amount 
+FROM metalworks;
