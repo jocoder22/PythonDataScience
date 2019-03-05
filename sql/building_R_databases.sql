@@ -9,3 +9,9 @@ WHERE table_schema = 'public';
 SELECT column_name, data_type
 FROM information_schema.columns
 WHERE table_name = 'unilever' AND table_schema = 'public';
+
+-- Query the first five rows of our table
+Select *
+From unilever
+LIMIT 5 ;
+
