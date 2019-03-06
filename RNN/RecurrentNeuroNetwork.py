@@ -20,13 +20,15 @@ from sklearn.model_selection import cross_val_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.linear_model import LogisticRegression
+
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 
 import pandas_datareader as pdr
+import seaborn as sns
 
-plt.style.use('ggplot')
+# plt.style.use('ggplot')
 
 
 symbol = 'RELIANCE.NS'
@@ -38,3 +40,12 @@ print(rel.head())
 
 # https://www.youtube.com/watch?v=dNFgRUD2w68
 
+# Visualizations
+pd.plotting.scatter_matrix(rel, alpha = 0.3, figsize = (14,8), diagonal = 'kde')
+plt.show()
+sns.pairplot(rel)
+plt.show()
+
+corr = rel.corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm', cbar=False)
+plt.show()
