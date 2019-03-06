@@ -49,3 +49,11 @@ plt.show()
 corr = rel.corr()
 sns.heatmap(corr, annot=True, cmap='coolwarm', cbar=False)
 plt.show()
+
+# Scale data
+minmaxscaler = MinMaxScaler()
+standscaler = StandardScaler()
+
+# Because the distribution does not approx normal, the MinMaxScaler will be better
+mmdata = minmaxscaler.fit_transform(rel)
+staddata = standscaler.fit_transform(rel)
