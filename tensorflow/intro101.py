@@ -14,3 +14,14 @@ print(f'Pandas: {pd.__version__}')
 a = tf.constant(4.0, dtype=tf.float32)
 b = tf.constant(5.0, dtype=tf.float32)
 total = a+b
+
+print(a)
+print(b)
+print(total)
+
+
+write = tf.summary.FileWriter('Folder_1')
+write.add_graph(tf.get_default_graph())
+
+# on the conda prompt, navigate to the directory: cd C:\Users\okigboo\Desktop\PythonDataScience
+# type: tensorboard --logdir=Folder_1
