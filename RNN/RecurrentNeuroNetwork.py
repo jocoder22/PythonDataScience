@@ -30,6 +30,16 @@ import seaborn as sns
 
 # plt.style.use('ggplot')
 
+def train_validate_test_split(dataset, train_percent=.6, validate_percent=.2):
+    np.random.seed(3456)
+    perm = np.random.permutation(dataset.index)
+    m = len(perm)
+    train_end = int(train_percent * m)
+    validate_end = int(validate_percent * m) + train_end
+    train = dataset.ix[perm[:train_end]]
+    validate = dataset.ix[perm[train_end:validate_end]]
+    test = dataset.ix[perm[validate_end:]]
+    return train, validate, test
 
 symbol = 'RELIANCE.NS'
 starttime = datetime.datetime(1996, 1, 1)
@@ -57,3 +67,9 @@ standscaler = StandardScaler()
 # Because the distribution does not approx normal, the MinMaxScaler will be better
 mmdata = minmaxscaler.fit_transform(rel)
 staddata = standscaler.fit_transform(rel)
+
+X = rel.drop('Close', axis=1)
+y = rel[['Close']]
+# Create training, validataion and test sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42)
