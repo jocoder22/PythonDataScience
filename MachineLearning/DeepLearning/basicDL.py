@@ -131,3 +131,6 @@ plt.xlabel('Iterations')
 plt.ylabel('Mean Squared Error')
 plt.show()
 
+
+
+
