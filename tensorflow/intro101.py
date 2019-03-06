@@ -10,3 +10,7 @@ import matplotlib.pyplot as plt
 print(f'Python: {sys.version}')
 print(f'Numpy: {ny.__version__}')
 print(f'Pandas: {pd.__version__}')
+
+a = tf.constant(4.0, dtype=tf.float32)
+b = tf.constant(5.0, dtype=tf.float32)
+total = a+b
