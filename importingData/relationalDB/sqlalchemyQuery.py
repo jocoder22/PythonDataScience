@@ -4,6 +4,7 @@ import pandas as pd
 from PIL import Image
 import seaborn as sns
 import matplotlib.pyplot as plt
+import matplotlib
 from sqlalchemy import Table, Column, String, Integer, Float, Boolean
 
 # Define a new table with a name, count, amount, and valid column: data

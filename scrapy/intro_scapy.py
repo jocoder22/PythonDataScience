@@ -3,13 +3,11 @@ import requests
 from scrapy import Selector
 
 def number_of_element(Xpath, inputtext):
-    sp = '\n\n'
     sel = Selector(text=inputtext)
     print(f"Number of selected element(s): {len(sel.xpath(Xpath))} elements", end=sp)
 
 
 def preview_result(Xpath, inputtext):
-    sp = '\n\n'
     sel = Selector(text=inputtext)
     result = sel.xpath(Xpath).extract()
     n = len(result)
