@@ -178,10 +178,11 @@ nano =  capcount('market_cap<50000000')
 # Making a list with the 3 counts
 values = [biggish, mid, small, micro, nano]
 
+
 # Plotting them with matplotlib 
 plt.bar(LABELS, values)
 for idx, key in enumerate(values):
        ypoint = key + 10
-       plt.text(idx, ypoint , key, color='black', va='bottom', ha='center', fontweight='bold' )
+       plt.text(idx, ypoint , key, color='black', va='bottom', ha='center', fontweight='bold')
 plt.show()
 print(values, sep=sp)
