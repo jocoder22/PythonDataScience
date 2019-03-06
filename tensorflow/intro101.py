@@ -8,7 +8,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 print(f'Python: {sys.version}')
-print(f'Numpy: {ny.__version__}')
+print(f'Numpy: {np.__version__}')
 print(f'Pandas: {pd.__version__}')
 
 a = tf.constant(4.0, dtype=tf.float32)
@@ -25,3 +25,6 @@ write.add_graph(tf.get_default_graph())
 
 # on the conda prompt, navigate to the directory: cd C:\Users\okigboo\Desktop\PythonDataScience
 # type: tensorboard --logdir=Folder_1
+
+sess = tf.Session()
+print(sess.run(total))
