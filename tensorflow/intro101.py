@@ -28,3 +28,10 @@ write.add_graph(tf.get_default_graph())
 
 sess = tf.Session()
 print(sess.run(total))
+
+# for line equation; y = mx + b
+# declare the constants and placeholder for the variables
+
+m = tf.constant(9.55, name='x')
+b = tf.constant(4,66, name='b')
+x = tf.placeholder(dtype='float32', name='x')
