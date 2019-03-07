@@ -45,6 +45,6 @@ print(data.info(), data.head(), data.shape, data.describe(), sep=sp)
 # drop null values
 data.dropna(axis=0)
 data = data[data.YearsExperience > 0]
-
+data['Race'] = data.Race.astype('category')
 print(data.info(), data.head(), data.shape, data.describe(), sep=sp, end=sp)
-print(data.describe(include=['datetime64']))
+print(data.describe(include=['datetime64', 'category']))
