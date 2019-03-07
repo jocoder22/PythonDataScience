@@ -2,12 +2,13 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 import tensorflow as tf
 from sklearn import datasets
 from datetime import datetime
 
 sp = '\n\n'
-# plt.style.use('ggplot')
+plt.style.use('ggplot')
 
 # 1: set objective
 #  Assess how IQ, Years of Experience, level of Education, Gender, Age affects Income
@@ -47,4 +48,14 @@ data.dropna(axis=0)
 data = data[data.YearsExperience > 0]
 data['Race'] = data.Race.astype('category')
 print(data.info(), data.head(), data.shape, data.describe(), sep=sp, end=sp)
+
+
+# EDA
 print(data.describe(include=['datetime64', 'category']))
+pd.plotting.scatter_matrix(data, figsize=(10, 60),diagonal='kde')
+plt.show()
+
+
+sns.heatmap(data.corr(), annot=True, cbar=False, cmap='coolwarm')  # "YlGnBu" , 'coolwarm'
+plt.xticks(rotation=0)
+plt.show()
