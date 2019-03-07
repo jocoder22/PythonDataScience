@@ -32,6 +32,13 @@ print(sess.run(total))
 # for line equation; y = mx + b
 # declare the constants and placeholder for the variables
 
-m = tf.constant(9.55, name='x')
-b = tf.constant(4,66, name='b')
+m = tf.constant(9.0, name='x')
+b = tf.constant(4.0, name='b')
 x = tf.placeholder(dtype='float32', name='x')
+
+# state the equation
+y = m*x + b
+
+print(y.eval({x: 8.0}, session=sess))
+
+
