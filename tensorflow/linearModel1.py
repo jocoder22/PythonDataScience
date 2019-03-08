@@ -73,13 +73,16 @@ data['Age'] = data.DateBirth.apply(
 data = data[np.logical_and(data.Age > 21.0 , data.Age < 60.0)]
 print(data.info(), data.head(), data.shape, data.describe(), sep=sp, end=sp)
 
-
+# save dataframe to csv
+data.to_csv(r'Array/tensorData.csv', index=False)
 
 # Train and Evaluate Models
 # X = data.drop(['DateBirth', 'Race', 'Income'], axis=1)
 X=data[['IQ', 'YearsExperience', 'Age']]
 y = data['Income']
 
+
+# splitting data
 data_idx = X.sample(frac=0.70).index
 Xtrain = X[X.index.isin(data_idx)].values
 Xtest = X[~X.index.isin(data_idx)].values
