@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -10,6 +11,9 @@ from datetime import datetime
 
 sp = '\n\n'
 plt.style.use('ggplot')
+
+path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\tensorflow\\'
+os.chdir(path)
 
 # 1: set objective
 #  Assess how IQ, Years of Experience, level of Education, Gender, Age affects Income
@@ -93,7 +97,12 @@ print(X.columns)
 # Create parameter
 weight_ = tf.get_variable(name='w', 
                           initializer=[[0.01], [0.01],  [0.01]])
+tf.summary.scalar('Mean_weight', tf.reduce_mean(weight_))
+tf.summary.scalar('sum_weight', tf.reduce_sum(weight_))
+tf.summary.histogram('weights', weight_)
+
 interc_ = tf.get_variable(name='b', initializer=0.0)
+tf.summary.scalar('Intercept', interc_)
 
 # create input placeholders
 x_ = tf.placeholder('float32', name='x')
@@ -106,9 +115,18 @@ yhat = tf.reshape(tf.matmul(x_, weight_) + interc_, [-1, ], name='yhat')
 # create the loss and test score functions
 mse = tf.reduce_mean(tf.square(y_ - yhat), name='mse')
 rmse = tf.sqrt(mse, name='rmse')
+tf.summary.scalar('loss_rmse', rmse)
 
 # create test score
 nrmse = tf.divide(rmse, tf.abs(tf.reduce_mean(y_)), name='nrmse')
+tf.summary.scalar('test_rmse', nrmse)
+
+
+# combine all summary 
+all_summary = tf.summary.merge_all()
+writer = tf.summary.FileWriter(logdir='linearModelSummary', graph=sess.graph)
+
+
 
 # intialise variables
 init = tf.variables_initializer([weight_, interc_])
@@ -121,14 +139,19 @@ train = opt.minimize(rmse)
 
 for i in range(10000):
     if (i % 100 == 0):
-        nrmse_result = sess.run(nrmse, {x_:Xtrain, y_: ytrain})
+        # nrmse_result = sess.run(nrmse, {x_:Xtrain, y_: ytrain})
+        summary_log, nrmse_result = sess.run([all_summary, nrmse], {x_: Xtrain, y_: ytrain})
+        writer.add_summary(summary_log, i)
         print(f'Test NRMSE: {nrmse_result}')
     else:
-        # sess.run([summaries, train], {x_:Xtrain, y_:ytrain})
-        sess.run(train, {x_: Xtrain, y_: ytrain})
+        # sess.run(train, {x_: Xtrain, y_: ytrain})
+        summary_log, _ = sess.run([all_summary, train], {x_: Xtrain, y_: ytrain})
+        writer.add_summary(summary_log, i)
+        
 
 print(sess.run([weight_, interc_]))
-""" 
+
+"""
 [array([[1.6810453],
         [2.3266437],
         [1.3423291]], dtype=float32), 0.051135525]
