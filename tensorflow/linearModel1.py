@@ -74,7 +74,8 @@ data = data[np.logical_and(data.Age > 21.0 , data.Age < 60.0)]
 print(data.info(), data.head(), data.shape, data.describe(), sep=sp, end=sp)
 
 # save dataframe to csv
-data.to_csv(r'Array/tensorData.csv', index=False)
+data2 = data[['IQ', 'YearsExperience', 'Age', 'Income']]
+data2.to_csv(r'Array/tensorData.csv', index=False)
 
 # Train and Evaluate Models
 # X = data.drop(['DateBirth', 'Race', 'Income'], axis=1)
@@ -136,7 +137,7 @@ tf.summary.scalar('test_rmse', nrmse)
 # combine all summary 
 all_summary = tf.summary.merge_all()
 writer = tf.summary.FileWriter(logdir='linearModelSummary', graph=sess.graph)
-write.add_graph(tf.get_default_graph())
+# write.add_graph(tf.get_default_graph())
 # to view the graph
 # on the conda prompt: navigate to the folder where the graph is saved.
 # type: tensorboard --logdir=linearModelSummary
