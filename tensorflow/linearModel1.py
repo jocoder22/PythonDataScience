@@ -95,7 +95,7 @@ Xtest.dump(r'Array\Xtest.npy')
 ytrain.dump(r'Array\ytrain.npy')
 ytest.dump(r'Array\ytest.npy')
 
-""" 
+
 tf.reset_default_graph()
 
 sess = tf.Session()
@@ -161,7 +161,7 @@ for i in range(10000):
         
 
 print(sess.run([weight_, interc_]))
-"""
+
 """
 [array([[1.6810453],
         [2.3266437],
