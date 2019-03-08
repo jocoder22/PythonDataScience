@@ -9,6 +9,37 @@ from sklearn import datasets
 from datetime import datetime
 
 
+def preprocessor(inputfile, featureNames, labelName, noise=True, batch=0):
+    data_1 = pd.read_csv(inputfile)
+    labelName = labelName
+    namelist = list(data_1.columns)
+    featureNames = namelist.remove(labelName)
+    label_idx = data_1.columns.get_loc(labelName)
+    w_ = [[0.1]] * len(namelist)
+    def decodecsv(row, noise=noise):
+        parserow = tf.decode_csv(row, w_):
+        label = parserow[label_idx]
+        del parserow[label_idx]
+        features = parserow
+
+        if noise:
+            features = td.add(features, td.random_normal(shape=[len(features)],
+                                                         mean=0. ,
+                                                         stddev=0.02))
+            dict_ , label_ = dict(zip(featureNames, features)), label
+        return features, label
+
+
+
+
+
+
+
+
+
+
+
+
 sp = '\n\n'
 plt.style.use('ggplot')
 
