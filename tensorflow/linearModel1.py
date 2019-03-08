@@ -128,4 +128,14 @@ for i in range(10000):
         sess.run(train, {x_: Xtrain, y_: ytrain})
 
 print(sess.run([weight_, interc_]))
+""" 
+[array([[1.6810453],
+        [2.3266437],
+        [1.3423291]], dtype=float32), 0.051135525]
 
+array([1.6
+       2.3
+       1.3
+       intercept_y  == 3
+       )])
+"""
