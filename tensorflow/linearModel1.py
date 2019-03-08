@@ -88,6 +88,14 @@ Xtest = X[~X.index.isin(data_idx)].values
 ytrain = y[y.index.isin(data_idx)].values
 ytest = y[~y.index.isin(data_idx)].values
 
+
+# save numpy array
+Xtrain.dump(r'Array\Xtrain.npy')
+Xtest.dump(r'Array\Xtest.npy')
+ytrain.dump(r'Array\ytrain.npy')
+ytest.dump(r'Array\ytest.npy')
+
+""" 
 tf.reset_default_graph()
 
 sess = tf.Session()
@@ -125,8 +133,11 @@ tf.summary.scalar('test_rmse', nrmse)
 # combine all summary 
 all_summary = tf.summary.merge_all()
 writer = tf.summary.FileWriter(logdir='linearModelSummary', graph=sess.graph)
-
-
+write.add_graph(tf.get_default_graph())
+# to view the graph
+# on the conda prompt: navigate to the folder where the graph is saved.
+# type: tensorboard --logdir=linearModelSummary
+# copy the url and paste on the browser!!!
 
 # intialise variables
 init = tf.variables_initializer([weight_, interc_])
@@ -150,7 +161,7 @@ for i in range(10000):
         
 
 print(sess.run([weight_, interc_]))
-
+"""
 """
 [array([[1.6810453],
         [2.3266437],
