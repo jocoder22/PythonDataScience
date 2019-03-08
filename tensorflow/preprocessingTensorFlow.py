@@ -13,6 +13,7 @@ def preprocessor(inputfile, labelName, noise=True, batch=0):
     # namelist = list(data_1.columns)
     # featureNames = namelist.remove(labelName)
     # label_idx = data_1.columns.get_loc(labelName)
+    epoc = 18
     w = [[0.1]] * 4
     def decodecsv(row, noise=noise):
         parserow = tf.decode_csv(row, w)
@@ -32,7 +33,7 @@ def preprocessor(inputfile, labelName, noise=True, batch=0):
     if batch > 0: 
         dataset = dataset.batch(batch)
             
-
+    # dataset = dataset.repeat(epoc)
     iterrr = dataset.make_one_shot_iterator()
     features, label = iterrr.get_next()
 
@@ -84,14 +85,11 @@ for i in range(len(Xtrain) + 3):
         print(f'Out of Range: {i}')
 
 
+data = pd.read_csv(r'Array\tensorData.csv')
+kk = data.columns.tolist()
 
+datav = data.values
 
-
-
-data = pd.read_csv(r'Array\tensofData.csv')
-kk = [data.columns]
-
-ppp = dict([(k, pd.Series(v)) for k, v in zip(kk, datav)])
 
 mydict = defaultdict(list)
 for element in datav:
