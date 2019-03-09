@@ -44,7 +44,20 @@ data.dropna(subset=['V7', 'V17'], inplace=True)
 print(data.isnull().values.any(), end=sp)
 
 
+# Get the features and labels
+xd = data.drop(columns=['Class'])
 ycat = data[['Class']]
+
+
+scaler = MinMaxScaler()
 onehot = OneHotEncoder(sparse=False, categories='auto')
+
+xdata = scaler.fit_transform(xd)
+x = np.array(xdata)
 y = onehot.fit_transform(ycat)
 print(y.shape, type(y), sep=sp)
+
+print(y[:5])
+
+ydata = pd.DataFrame(y, columns=['FF', 'NF'])
+print(ydata.head())
