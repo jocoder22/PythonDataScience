@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import tensorflow as tf
+from keras.utils import plot_model
 from sklearn import datasets
 from sklearn.pipeline import FeatureUnion
 from sklearn.preprocessing import FunctionTransformer
@@ -76,7 +77,7 @@ def tf_modeler(features):
     model_g = tf.keras.models.Sequential()
     model_g.add(tf.keras.layers.BatchNormalization(input_shape=(_nshape,)))
     model_g.add(tf.keras.layers.Dense(1000, activation='relu'))
-    model_g.add(tf.keras.layers.Dropout(0.5))
+    model_g.add(tf.keras.layers.Dropout(0.1))
 
     model_g.add(tf.keras.layers.BatchNormalization())
     model_g.add(tf.keras.layers.Dense(500, activation='relu'))
@@ -86,12 +87,12 @@ def tf_modeler(features):
    
     model_g.add(tf.keras.layers.Dense(250, activation='relu'))
     model_g.add(tf.keras.layers.BatchNormalization())
-    model_g.add(tf.keras.layers.Dropout(0.2))
+    model_g.add(tf.keras.layers.Dropout(0.1))
     
    
     model_g.add(tf.keras.layers.Dense(50, activation='relu'))
     model_g.add(tf.keras.layers.BatchNormalization())
-    model_g.add(tf.keras.layers.Dropout(0.1))
+    model_g.add(tf.keras.layers.Dropout(0.05))
 
 
     model_g.add(tf.keras.layers.Dense(2))
@@ -103,33 +104,35 @@ def tf_modeler(features):
     return model_g
 
 model1= tf_modeler(x)
-model1.fit(x, y, epochs=30, verbose=1, validation_split=0.1)
+model1.fit(x, y, epochs=50, verbose=1, validation_split=0.1, batch_size=16)
 
-# lossValues = pd.DataFrame(list(model1.history.history['val_loss', 'val_acc', 'loss', 'acc']),
-#                 columns=['ValidationLoss', 'Val_Accuray', 'TrainLoss', 'TrainAccuracy'])
+plot_model(model1, to_file='model.png')
 
-# print(lossValues.head())
+lossValues = pd.DataFrame(model1.history.history)
+lossValues = lossValues.rename({'val_loss':'ValidationLoss',  'val_acc':'Val_Accuray', 
+                            'loss':'TrainLoss', 'acc':'TrainAccuracy'}, axis='columns')
 
+print(lossValues.head())
+print(model1.history.history)
 ValidationLoss = model1.history.history['val_loss']
 Val_Accuray = model1.history.history['val_acc']
 TrainLoss = model1.history.history['loss']
 TrainAccuracy = model1.history.history['acc']
 
+# plot loss values
 plt.plot(ValidationLoss)
 plt.plot(TrainLoss)
 plt.xlabel('Epoch')
 plt.ylabel('Loss')
 plt.title('Loss curve')
-plt.legend()
+plt.legend(['Validation Loss', 'Train Loss'])
 plt.show()
 
 
-
-
-
+# plot Accuracy
 plt.plot(Val_Accuray)
 plt.plot(TrainAccuracy)
-plt.xlabel()
-plt.ylabel()
-plt.legend()
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend(['Validation Accuracy', 'Train Accuracy'])
 plt.show()
