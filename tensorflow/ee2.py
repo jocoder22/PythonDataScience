@@ -3,6 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import tensorflow as tf
 from sklearn import datasets
 from sklearn.pipeline import FeatureUnion
 from sklearn.preprocessing import FunctionTransformer
@@ -16,6 +17,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+
 plt.style.use('ggplot')
 
 
@@ -25,20 +27,21 @@ os.chdir(path)
 sp = '\n\n'
 data = pd.read_csv('train.csv')
 
-print(data.columns.tolist())
+# EDA
+print(data.columns.tolist(), data.shape, sep=sp)
 
 print(data.isnull().values.any(), end=sp)
-# print(data.isnull().sum().tolist(), end=sp)
+print(data.isnull().sum().tolist(), end=sp)
 
-# show the rows index with missing values
-# print(data.isnull().index.tolist())
-# print(data.loc[data.isnull().sum(1)>1].index.tolist())
-# print(data.loc[data[['V4', 'V5', 'V6', 'V7', 'V8','V14', 'V15', 'V16','V17', 'V18', 'V19']].isnull().any(1)].index)
+#### show the rows index with missing values
+print(data.isnull().index.tolist())
+print(data.loc[data.isnull().sum(1)>1].index.tolist())
+print(data.loc[data[['V4', 'V5', 'V6', 'V7', 'V8','V14', 'V15', 'V16','V17', 'V18', 'V19']].isnull().any(1)].index)
 
-# print the columns with missing values
-# print(data.columns[data.isnull().any()].tolist())
-# print(data.head(), data.shape, data.info(), sep=sp)
-# print(data[['V8','V14', 'V15', 'V16','V17', 'V18', 'V19']].tail(), end=sp)
+#### print the columns with missing values
+print(data.columns[data.isnull().any()].tolist())
+print(data.head(), data.shape, data.info(), sep=sp)
+print(data[['V8','V14', 'V15', 'V16','V17', 'V18', 'V19']].tail(), end=sp)
 
 data.dropna(subset=['V7', 'V17'], inplace=True)
 print(data.isnull().values.any(), end=sp)
@@ -49,15 +52,81 @@ xd = data.drop(columns=['Class'])
 ycat = data[['Class']]
 
 
+# Initialize the scaler and OneHotEncoder
 scaler = MinMaxScaler()
 onehot = OneHotEncoder(sparse=False, categories='auto')
 
 xdata = scaler.fit_transform(xd)
 x = np.array(xdata)
 y = onehot.fit_transform(ycat)
+
+print(x.shape)
+
 print(y.shape, type(y), sep=sp)
-
 print(y[:5])
-
 ydata = pd.DataFrame(y, columns=['FF', 'NF'])
 print(ydata.head())
+
+# define the model function
+def tf_modeler(features):
+    _nshape = features.shape[1]
+    model_g = tf.keras.models.Sequential()
+    model_g.add(tf.keras.layers.BatchNormalization(input_shape=(_nshape,)))
+    model_g.add(tf.keras.layers.Dense(1000, activation='relu'))
+    model_g.add(tf.keras.layers.Dropout(0.5))
+
+    model_g.add(tf.keras.layers.BatchNormalization())
+    model_g.add(tf.keras.layers.Dense(500, activation='relu'))
+    model_g.add(tf.keras.layers.BatchNormalization())
+    model_g.add(tf.keras.layers.Dropout(0.2))
+
+   
+    model_g.add(tf.keras.layers.Dense(250, activation='relu'))
+    model_g.add(tf.keras.layers.BatchNormalization())
+    model_g.add(tf.keras.layers.Dropout(0.2))
+    
+   
+    model_g.add(tf.keras.layers.Dense(50, activation='relu'))
+    model_g.add(tf.keras.layers.BatchNormalization())
+    model_g.add(tf.keras.layers.Dropout(0.1))
+
+
+    model_g.add(tf.keras.layers.Dense(2))
+    model_g.add(tf.keras.layers.Activation('sigmoid'))
+    model_g.compile(tf.keras.optimizers.Adam(lr=0.001), 
+                    loss='binary_crossentropy',
+                    metrics=['accuracy'])
+
+    return model_g
+
+model1= tf_modeler(x)
+model1.fit(x, y, epochs=30, verbose=1, validation_split=0.1)
+
+# lossValues = pd.DataFrame(list(model1.history.history['val_loss', 'val_acc', 'loss', 'acc']),
+#                 columns=['ValidationLoss', 'Val_Accuray', 'TrainLoss', 'TrainAccuracy'])
+
+# print(lossValues.head())
+
+ValidationLoss = model1.history.history['val_loss']
+Val_Accuray = model1.history.history['val_acc']
+TrainLoss = model1.history.history['loss']
+TrainAccuracy = model1.history.history['acc']
+
+plt.plot(ValidationLoss)
+plt.plot(TrainLoss)
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.title('Loss curve')
+plt.legend()
+plt.show()
+
+
+
+
+
+plt.plot(Val_Accuray)
+plt.plot(TrainAccuracy)
+plt.xlabel()
+plt.ylabel()
+plt.legend()
+plt.show()
