@@ -54,17 +54,20 @@ ycat = data[['Class']]
 
 # Initialize the scaler and OneHotEncoder
 scaler = MinMaxScaler()
-onehot = OneHotEncoder(sparse=False, categories='auto')
+onehot = OneHotEncoder(sparse=False, categories='auto') # spare=False will return an np array
 
+# tranform the features and label
 xdata = scaler.fit_transform(xd)
 x = np.array(xdata)
 y = onehot.fit_transform(ycat)
 
 print(x.shape)
-
 print(y.shape, type(y), sep=sp)
 print(y[:5])
-ydata = pd.DataFrame(y, columns=['FF', 'NF'])
+
+
+# form pandas dataframe of y
+ydata = pd.DataFrame(y, columns=['Fraud', 'NonFraud'])
 print(ydata.head())
 
 # define the model function
