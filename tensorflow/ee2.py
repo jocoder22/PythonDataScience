@@ -44,7 +44,7 @@ print(data.head(), data.shape, data.info(), sep=sp)
 print(data[['V8','V14', 'V15', 'V16','V17', 'V18', 'V19']].tail(), end=sp)
 
 data.dropna(subset=['V7', 'V17'], inplace=True)
-print(data.isnull().values.any(), end=sp)
+print(data.isnull().values.any(), data.shape, data.info(), sep=sp)
 
 
 # Get the features and labels
