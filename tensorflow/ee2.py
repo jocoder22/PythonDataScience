@@ -104,7 +104,7 @@ def tf_modeler(features):
     return model_g
 
 model1= tf_modeler(x)
-model1.fit(x, y, epochs=50, verbose=1, validation_split=0.1, batch_size=16)
+model1.fit(x, y, epochs=25, verbose=1, validation_split=0.2, batch_size=16)
 
 plot_model(model1, to_file='model.png')
 
@@ -113,7 +113,6 @@ lossValues = lossValues.rename({'val_loss':'ValidationLoss',  'val_acc':'Val_Acc
                             'loss':'TrainLoss', 'acc':'TrainAccuracy'}, axis='columns')
 
 print(lossValues.head())
-print(model1.history.history)
 ValidationLoss = model1.history.history['val_loss']
 Val_Accuray = model1.history.history['val_acc']
 TrainLoss = model1.history.history['loss']
