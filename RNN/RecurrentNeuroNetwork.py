@@ -224,20 +224,20 @@ yt4 = np.array(yest)
 
 
 model2 = Sequential()
-model2.add(SimpleRNN(50, return_sequences=True,
+model2.add(SimpleRNN(20, return_sequences=True,
                        input_shape=(len(xt3[0]), 1)))
 model2.add(Dropout(0.2))
 
-model2.add(SimpleRNN(50, return_sequences=True))
+model2.add(SimpleRNN(10, return_sequences=True))
 model2.add(Dropout(0.2))
 
-model2.add(SimpleRNN(50))
+model2.add(SimpleRNN(5))
 
 model2.add(Dense(1, activation='linear'))
 model2.compile(loss='mse', optimizer='Adam', metrics=['accuracy'])
 
 model_history = model2.fit(
-    xt3, yt3, epochs=30, batch_size=50, verbose=1, validation_split=0.2)
+    xt3, yt3, epochs=20, batch_size=50, verbose=1, validation_split=0.2)
 
 
 lossValues = pd.DataFrame(model2.history.history)
