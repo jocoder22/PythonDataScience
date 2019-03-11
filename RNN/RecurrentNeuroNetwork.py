@@ -60,6 +60,7 @@ def train_validate_test_split2(datatt, tx, vx):
 
 
 def data_normalizer(data_t):
+    global scaler_x 
     scaler_x = MinMaxScaler()
     for i in data_t.columns.tolist():
         data_t[i] = scaler_x.fit_transform(data_t[i].values.reshape(-1,1))
@@ -84,7 +85,7 @@ rel['O-C'] = rel['Close'] - rel['Open']
 rel['3day MA'] = rel['Close'].shift(1).rolling(window=3).mean()
 rel['10day MA'] = rel['Close'].shift(1).rolling(window=10).mean()
 rel['30day MA'] = rel['Close'].shift(1).rolling(window=30).mean()
-rel['7dayvol_highest'] = rel['Volume'].shift(1).rolling(window=7).max()
+rel['7dayvol_mean'] = rel['Volume'].shift(1).rolling(window=7).mean()
 rel['Std_dev'] = rel['Close'].rolling(5).std()
 
 rel = rel.dropna()
@@ -134,13 +135,16 @@ xtrain = traindata.drop(columns=['Close'])
 ytrain = traindata[['Close']]
 xtest = testdata.drop(columns=['Close'])
 ytest = testdata[['Close']]
-
+""" 
 print(xtrain.head(), ytrain.head(), xtest.head(), ytest.head(), sep=sp)
 print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape, sep=sp)
 
 
 x = np.array(xtrain).reshape(xtrain.shape[0], xtrain.shape[1], 1)
 y = np.array(ytrain)
+
+xt = np.array(xtest).reshape(xtest.shape[0], xtest.shape[1], 1)
+yt = np.array(ytest)
 
 modelRNN = Sequential()
 modelRNN.add(SimpleRNN(50, return_sequences=True, input_shape=(xtrain.shape[1], 1)))
@@ -168,19 +172,106 @@ plt.plot(lossValues['ValidationLoss'])
 plt.plot(lossValues['TrainLoss'])
 plt.xlabel('Epoch')
 plt.ylabel('Loss')
+plt.yscale('log')
 plt.title('Loss curve')
 plt.legend(['Validation Loss', 'Train Loss'])
 plt.show()
 
 
-# plot Accuracy
-plt.plot(lossValues['Val_Accuray'])
-plt.plot(lossValues['TrainAccuracy'])
-plt.xlabel('Epochs')
-plt.ylabel('Accuracy')
-plt.legend(['Validation Accuracy', 'Train Accuracy'])
+print(modelRNN.summary())
+
+
+ypred = modelRNN.predict(xt)
+ypred = scaler_x.inverse_transform(ypred)
+
+plt.plot(ypred)
+plt.plot(scaler_x.inverse_transform(yt))
+plt.xlabel('Time')
+plt.ylabel('Stock Close')
+plt.title('Prediction vs Actual')
+plt.legend(['Prediction', 'Actual'])
 plt.show()
 
 
+modelAnalysis = np.sqrt(np.mean(
+    np.power((ypred - scaler_x.inverse_transform(yt)), 2)))
 
-print(modelRNN.summary())
+print(modelAnalysis)
+
+
+ """
+
+#################################
+
+def pppp(xd, yd, w):
+    x = []
+    y = []
+    for i in range(w, len(xd)):
+        x.append(xd.iloc[i- w:i, :].values.flatten().tolist())
+        y.append(yd.iloc[i,:])
+
+    return np.array(x), np.array(y)
+
+window = 20
+xt2, yt2 = pppp(xtrain, ytrain, window)
+xest, yest = pppp(xtest, ytest, window)
+
+xt3 = np.array(xt2).reshape(xt2.shape[0], xt2.shape[1], 1)
+yt3 = np.array(yt2)
+
+xt4 = np.array(xest).reshape(xest.shape[0], xest.shape[1], 1)
+yt4 = np.array(yest)
+
+
+model2 = Sequential()
+model2.add(SimpleRNN(50, return_sequences=True,
+                       input_shape=(len(xt3[0]), 1)))
+model2.add(Dropout(0.2))
+
+model2.add(SimpleRNN(50, return_sequences=True))
+model2.add(Dropout(0.2))
+
+model2.add(SimpleRNN(50))
+
+model2.add(Dense(1, activation='linear'))
+model2.compile(loss='mse', optimizer='Adam', metrics=['accuracy'])
+
+model_history = model2.fit(
+    xt3, yt3, epochs=30, batch_size=50, verbose=1, validation_split=0.2)
+
+
+lossValues = pd.DataFrame(model2.history.history)
+lossValues = lossValues.rename({'val_loss': 'ValidationLoss',  'val_acc': 'Val_Accuray',
+                                'loss': 'TrainLoss', 'acc': 'TrainAccuracy'}, axis='columns')
+
+
+# plot loss values
+plt.plot(lossValues['ValidationLoss'])
+plt.plot(lossValues['TrainLoss'])
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.yscale('log')
+plt.title('Loss curve')
+plt.legend(['Validation Loss', 'Train Loss'])
+plt.show()
+
+
+print(model2.summary())
+
+
+ypred2 = model2.predict(xt4)
+ypred2 = scaler_x.inverse_transform(ypred2)
+
+plt.plot(ypred2)
+plt.plot(scaler_x.inverse_transform(yt4))
+plt.xlabel('Time')
+plt.ylabel('Stock Close')
+plt.title('Prediction vs Actual')
+plt.legend(['Prediction', 'Actual'])
+plt.show()
+
+
+modelAnalysis = np.sqrt(np.mean(
+    np.power((ypred2 - scaler_x.inverse_transform(yt4)), 2)))
+
+print(modelAnalysis)
