@@ -124,11 +124,15 @@ print(rel.head(), rel.shape, sep=sp)
 
 traindata = rel[:'2017']
 testdata = rel['2017':]
+
+traindata.reset_index(drop=True, inplace=True)
+testdata.reset_index(drop=True, inplace=True)
+
 print(traindata.head(), testdata.head(), sep=sp)
 
 xtrain = traindata.drop(columns=['Close'])
-xtest = traindata[['Close']]
-ytrain = testdata.drop(columns=['Close'])
+ytrain = traindata[['Close']]
+xtest = testdata.drop(columns=['Close'])
 ytest = testdata[['Close']]
 
 print(xtrain.head(), ytrain.head(), xtest.head(), ytest.head(), sep=sp)
@@ -136,7 +140,8 @@ print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape, sep=sp)
 
 
 x = np.array(xtrain).reshape(xtrain.shape[0], xtrain.shape[1], 1)
-y = np.array(ytrain).reshape(ytrain.shape[0], ytrain.shape[1], 1)
+y = np.array(ytrain)
+
 modelRNN = Sequential()
 modelRNN.add(SimpleRNN(50, return_sequences=True, input_shape=(xtrain.shape[1], 1)))
 modelRNN.add(Dropout(0.2))
