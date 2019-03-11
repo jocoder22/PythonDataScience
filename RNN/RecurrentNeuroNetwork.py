@@ -41,6 +41,15 @@ def train_validate_test_split(dataset, train_percent=.6, validate_percent=.2):
     test = dataset.ix[perm[validate_end:]]
     return train, validate, test
 
+
+def train_validate_test_split2(data,tx, vx):
+    vxx = tx + vx
+    train, validate, test = np.split(
+        data.sample(frac=1), [int(.tx*len(df)), int(.vxx*len(df))])
+
+    return train, validation, test
+    
+
 symbol = 'RELIANCE.NS'
 starttime = datetime.datetime(1996, 1, 1)
 endtime = datetime.datetime(2018, 9, 30)
