@@ -156,3 +156,31 @@ modelRNN.compile(loss='mse', optimizer='Adam', metrics=['accuracy'])
 
 model_history = modelRNN.fit(
     x, y, epochs=30, batch_size=50, verbose=1, validation_split=0.2)
+
+
+lossValues = pd.DataFrame(modelRNN.history.history)
+lossValues = lossValues.rename({'val_loss': 'ValidationLoss',  'val_acc': 'Val_Accuray',
+                                'loss': 'TrainLoss', 'acc': 'TrainAccuracy'}, axis='columns')
+
+
+# plot loss values
+plt.plot(lossValues['ValidationLoss'])
+plt.plot(lossValues['TrainLoss'])
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.title('Loss curve')
+plt.legend(['Validation Loss', 'Train Loss'])
+plt.show()
+
+
+# plot Accuracy
+plt.plot(lossValues['Val_Accuray'])
+plt.plot(lossValues['TrainAccuracy'])
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend(['Validation Accuracy', 'Train Accuracy'])
+plt.show()
+
+
+
+print(modelRNN.summary())
