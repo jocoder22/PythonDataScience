@@ -149,8 +149,8 @@ xtestscaled = scaler.fit_transform(x_test.reshape(-1, 1))
 # # xtest = testdata.drop(columns=['Close'])
 # # ytest = testdata[['Close']]
 
-# # print(xtrain.head(), ytrain.head(), xtest.head(), ytest.head(), sep=sp)
-# # print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape, sep=sp)
+print(xtrain.head(), ytrain.head(), xtest.head(), ytest.head(), sep=sp)
+print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape, sep=sp)
 
 windows = 90
 def prepp(datset, windows):
@@ -172,12 +172,8 @@ print(x_train_new.shape, y_train_new.shape,
 print(x_train_new[0], y_train_new[0], sep=sp)
 
 
-# x = np.array(xtrain).reshape(xtrain.shape[0], xtrain.shape[1], 1)
-# y = np.array(ytrain)
 
-# xt = np.array(xtest).reshape(xtest.shape[0], xtest.shape[1], 1)
-# yt = np.array(ytest)
-
+# build the model
 modelRNN = Sequential()
 modelRNN.add(SimpleRNN(50, return_sequences=True,
                        input_shape=(windows, 1)))
