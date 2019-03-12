@@ -135,7 +135,7 @@ xtrain = traindata.drop(columns=['Close'])
 ytrain = traindata[['Close']]
 xtest = testdata.drop(columns=['Close'])
 ytest = testdata[['Close']]
-""" 
+
 print(xtrain.head(), ytrain.head(), xtest.head(), ytest.head(), sep=sp)
 print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape, sep=sp)
 
@@ -199,10 +199,11 @@ modelAnalysis = np.sqrt(np.mean(
 print(modelAnalysis)
 
 
- """
+ 
 
 #################################
 
+""" 
 def pppp(xd, yd, w):
     x = []
     y = []
@@ -275,3 +276,4 @@ modelAnalysis = np.sqrt(np.mean(
     np.power((ypred2 - scaler_x.inverse_transform(yt4)), 2)))
 
 print(modelAnalysis)
+ """
