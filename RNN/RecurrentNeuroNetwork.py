@@ -37,6 +37,9 @@ import seaborn as sns
 
 # plt.style.use('ggplot')
 
+path = r'C:\Users\okigboo\Desktop\PythonDataScience\RNN'
+
+os.chdir(path)
 
 def train_validate_test_split(rel, train_percent=.6, validate_percent=.2):
     np.random.seed(3456)
