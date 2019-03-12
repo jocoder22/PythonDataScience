@@ -126,39 +126,12 @@ print(rel.head(20), end=sp)
 # # rel['Williams %R'] = talib.WILLR(
 # #     rel['High'].values, rel['Low'].values, rel['Close'].values, 7)
 
-# # pd.plotting.scatter_matrix(rel, alpha = 0.3, figsize = (14,8), diagonal = 'kde')
-# # plt.show()
-# # sns.pairplot(rel)
-# # plt.show()
-
-# # corr = rel.corr()
-# # sns.heatmap(corr, annot=True, cmap='coolwarm', cbar=False)
-# # plt.show()
-
-# # # Scale data
-# # scaler = MinMaxScaler()
-# # standscaler = StandardScaler()
-
-# # # Because the distribution does not approx normal, the MinMaxScaler will be better
-# # mmdata = scaler.fit_transform(rel)
-# # staddata = standscaler.fit_transform(rel)
-
-# # X = rel.drop('Close', axis=1)
-# # y = rel[['Close']]
-# # # Create training, validataion and test sets
-# # X_train, X_test, y_train, y_test = train_test_split(
-# #     X, y, test_size=0.3, random_state=42)
-
-
-# # data_normalizer(rel)
-# # print(rel.head(), rel.shape, sep=sp)
-
 
 traindata = rel[:'2017']
 testdata = rel['2017':]
 
-# traindata.reset_index(drop=True, inplace=True)
-# testdata.reset_index(drop=True, inplace=True)
+traindata.reset_index(drop=True, inplace=True)
+testdata.reset_index(drop=True, inplace=True)
 
 x_train = np.array(traindata)
 x_test = np.array(testdata)
@@ -168,10 +141,6 @@ scaler = MinMaxScaler()
 
 xtrainscaled = scaler.fit_transform(x_train.reshape(-1, 1))
 xtestscaled = scaler.fit_transform(x_test.reshape(-1, 1))
-
-# # traindata.reset_index(drop=True, inplace=True)
-# # testdata.reset_index(drop=True, inplace=True)
-
 
 # # print(traindata.head(), testdata.head(), sep=sp)
 
