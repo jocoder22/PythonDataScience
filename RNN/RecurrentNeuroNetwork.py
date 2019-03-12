@@ -14,7 +14,7 @@ from tensorflow.python.keras.preprocessing import sequence
 from tensorflow.python.keras.optimizers import Adam
 from tensorflow.python.keras.layers import Dense, Embedding
 from tensorflow.python.keras.layers import LSTM, SimpleRNN, Dropout, Flatten
-
+from tensorflow.python.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
 
 
 from sklearn.pipeline import FeatureUnion
@@ -40,6 +40,8 @@ import seaborn as sns
 path = r'C:\Users\okigboo\Desktop\PythonDataScience\RNN'
 
 os.chdir(path)
+
+
 
 def train_validate_test_split(rel, train_percent=.6, validate_percent=.2):
     np.random.seed(3456)
@@ -83,6 +85,8 @@ def RSI(dataset, column, peroid):
     return dataset
 
 
+
+
 sp = '\n\n'
 symbol = 'RELIANCE.NS'
 starttime = datetime.datetime(1996, 1, 1)
@@ -105,7 +109,7 @@ rel['Std_dev'] = rel['Close'].rolling(5).std()
 RSI(rel, 'Adj Close', 9)
 
 rel = rel.dropna()
-rel = rel.drop(columns=['Open', 'High', 'Low', 'Volume'])
+rel = rel.drop(columns=['High', 'Low', 'Volume', 'Open'])
 print(rel.head(), end=sp)
 # rel['RSI'] = talib.RSI(rel['Close'].values, timeperiod=9)
 # rel['Williams %R'] = talib.WILLR(
@@ -174,8 +178,28 @@ modelRNN.add(SimpleRNN(50))
 modelRNN.add(Dense(1, activation='linear'))
 modelRNN.compile(loss='mse', optimizer='Adam', metrics=['accuracy'])
 
+
+# saving my models
+savedir = os.path.join(os.getcwd(), 'models')
+modelname = 'Best.{epoch:03d}.h5'
+
+if not os.path.isdir(savedir):
+    os.makedirs(savedir)
+filepath = os.path.join(savedir, modelname)
+
+
+# Callbacks
+lrchecker = ReduceLROnPlateau(factor = np.sqrt(0.1), cooldown=0,
+                             patient=3, verbose=1,
+                             min_lr=0.4e-6)
+
+monitorbest = ModelCheckpoint(filepath=filepath, monitor='val_loss',
+                             verbose=1,
+                             save_best_only=True)
+
+callbacks = [lrchecker, monitorbest]
 model_history = modelRNN.fit(
-    x, y, epochs=30, batch_size=50, verbose=1, validation_split=0.2)
+    x, y, epochs=50, batch_size=50, verbose=1, validation_split=0.2, callbacks=callbacks)
 
 
 lossValues = pd.DataFrame(modelRNN.history.history)
