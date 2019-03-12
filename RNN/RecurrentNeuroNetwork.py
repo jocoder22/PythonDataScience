@@ -67,12 +67,24 @@ def data_normalizer(data_t):
 
     return data_t
 
+def RSI(dataset, column, peroid):
+    dataset['diffa'] = dataset[column].diff()
+    dataset['noneg'] = dataset.diffa.where(
+        dataset.diffa > 0, 0).shift(1).rolling(window=peroid).mean()
+    dataset['neg'] = dataset.diffa.where(dataset.diffa < 0, 0).abs().shift(
+        1).rolling(window=peroid).mean()
+    
+    dataset['RSI'] = 100 * dataset['noneg'] / (dataset['noneg'] + dataset['neg'])
+    dataset.drop(columns=['diffa', 'noneg', 'neg'], inplace=True)
+    dataset = dataset.dropna()
+    return dataset
+
 
 sp = '\n\n'
 symbol = 'RELIANCE.NS'
 starttime = datetime.datetime(1996, 1, 1)
 endtime = datetime.datetime(2019, 3, 8)
-rel = pdr.get_data_yahoo(symbol, starttime, endtime)[['Open','High', 'Low', 'Close', 'Volume']]
+rel = pdr.get_data_yahoo(symbol, starttime, endtime)[['Open','High', 'Low', 'Close', 'Adj Close', 'Volume']]
 print(rel.head(), end=sp)
 
 
@@ -87,6 +99,7 @@ rel['10day MA'] = rel['Close'].shift(1).rolling(window=10).mean()
 rel['30day MA'] = rel['Close'].shift(1).rolling(window=30).mean()
 rel['7dayvol_mean'] = rel['Volume'].shift(1).rolling(window=7).mean()
 rel['Std_dev'] = rel['Close'].rolling(5).std()
+RSI(rel, 'Adj Close', 9)
 
 rel = rel.dropna()
 rel = rel.drop(columns=['Open', 'High', 'Low', 'Volume'])

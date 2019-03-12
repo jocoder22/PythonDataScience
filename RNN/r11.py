@@ -127,20 +127,28 @@ print(rel.head(20), end=sp)
 # #     rel['High'].values, rel['Low'].values, rel['Close'].values, 7)
 
 
-traindata = rel[:'2017']
-testdata = rel['2017':]
+traindata = rel.loc[:'2017', ['RSI']]
+testdata = rel.loc['2017':, ['RSI']]
+ytraindata = rel.loc[:'2017', ['Close']]
+ytestdata = rel.loc['2017':, ['Close']]
 
 traindata.reset_index(drop=True, inplace=True)
 testdata.reset_index(drop=True, inplace=True)
+ytraindata.reset_index(drop=True, inplace=True)
+ytestdata.reset_index(drop=True, inplace=True)
 
 x_train = np.array(traindata)
 x_test = np.array(testdata)
+y_train = np.array(ytraindata)
+y_test = np.array(ytestdata)
 
 # Scale data
 scaler = MinMaxScaler()
 
 xtrainscaled = scaler.fit_transform(x_train.reshape(-1, 1))
 xtestscaled = scaler.fit_transform(x_test.reshape(-1, 1))
+ytrainscaled = scaler.fit_transform(y_train.reshape(-1, 1))
+ytestscaled = scaler.fit_transform(y_test.reshape(-1, 1))
 
 # # print(traindata.head(), testdata.head(), sep=sp)
 
@@ -149,23 +157,25 @@ xtestscaled = scaler.fit_transform(x_test.reshape(-1, 1))
 # # xtest = testdata.drop(columns=['Close'])
 # # ytest = testdata[['Close']]
 
-print(xtrain.head(), ytrain.head(), xtest.head(), ytest.head(), sep=sp)
-print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape, sep=sp)
+
 
 windows = 90
-def prepp(datset, windows):
+def prepp(datset1, dataset2, windows):
     x = []
     y = []
-    for i in range(windows, len(datset)):
-        x.append(datset[i - windows:i, 0])
-        y.append(datset[i, 0])
+    for i in range(windows, len(datset1)):
+        x.append(datset1[i - windows:i, 0])
+        y.append(dataset2[i, 0])
 
     return np.array(x).reshape(-1, 90, 1), np.array(y).reshape(-1, 1)
 
-x_train_new, y_train_new = prepp(xtrainscaled, windows)
-x_test_new, y_test_new = prepp(xtestscaled, windows)
 
-print(traindata.shape, testdata.shape)
+x_train_new, y_train_new = prepp(xtrainscaled, ytrainscaled, windows)
+x_test_new, y_test_new = prepp(xtestscaled, ytestscaled, windows)
+
+print(traindata.head(), traindata.head(),
+      traindata.shape, traindata.shape, sep=sp)
+
 print(x_train_new.shape, y_train_new.shape,
       x_test_new.shape, y_test_new.shape, sep=sp)
 
