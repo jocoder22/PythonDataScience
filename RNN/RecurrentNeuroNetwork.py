@@ -8,7 +8,15 @@ import sklearn
 import datetime
 import tensorflow as tf
 
-
+# import talib
+# import tensorflow as tf
+from tensorflow.python.keras.datasets import imdb
+from tensorflow.python.keras.models import Sequential
+from tensorflow.python.keras.preprocessing import sequence
+from tensorflow.python.keras.optimizers import Adam
+from tensorflow.python.keras.layers import Dense, Embedding
+from tensorflow.python.keras.layers import LSTM, SimpleRNN, Dropout, Flatten
+from tensorflow.python.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
 
 from sklearn.pipeline import FeatureUnion
 from sklearn.preprocessing import FunctionTransformer
