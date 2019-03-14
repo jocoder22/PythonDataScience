@@ -8,7 +8,7 @@ import sklearn
 import datetime
 # import tensorflow as tf
 
-import talib
+import talib as tb
 from tensorflow.python.keras.datasets import imdb
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.preprocessing import sequence
@@ -36,6 +36,12 @@ import pandas_datareader as pdr
 import seaborn as sns
 
 # plt.style.use('ggplot')
+
+path = r'C:\Users\Jose\Desktop\TimerSeriesAnalysis'
+    
+os.chdir(path)
+
+rel = pd.read_csv('AMZN.csv', parse_dates=True, index_col='Date')
 
 # path = r'C:\Users\okigboo\Desktop\PythonDataScience\RNN'
 path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\RNN\\"
@@ -89,10 +95,13 @@ def RSI(dataset, column, peroid):
 
 
 sp = '\n\n'
-symbol = 'RELIANCE.NS'
-starttime = datetime.datetime(1996, 1, 1)
-endtime = datetime.datetime(2019, 3, 8)
-rel = pdr.get_data_yahoo(symbol, starttime, endtime)[['Open','High', 'Low', 'Close', 'Adj Close', 'Volume']]
+# symbol = 'RELIANCE.NS'
+# starttime = datetime.datetime(1996, 1, 1)
+# endtime = datetime.datetime(2019, 3, 8)
+# rel = pdr.get_data_yahoo(symbol, starttime, endtime)[['Open','High', 'Low', 'Close', 'Adj Close', 'Volume']]
+
+
+
 print(rel.head(), end=sp)
 
 
@@ -108,9 +117,10 @@ rel['30day MA'] = rel['Close'].shift(1).rolling(window=30).mean()
 rel['7dayvol_mean'] = rel['Volume'].shift(1).rolling(window=7).mean()
 rel['Std_dev'] = rel['Close'].rolling(5).std()
 # RSI(rel, 'Adj Close', 9)
-rel['RSI'] = talib.RSI(rel['Close'].values, timeperiod=9)
-rel['Williams %R'] = talib.WILLR(
+rel['RSI'] = tb.RSI(rel['Close'].values, timeperiod=9)
+rel['Williams %R'] = tb.WILLR(
     rel['High'].values, rel['Low'].values, rel['Close'].values, 7)
+
 rel = rel.dropna()
 rel = rel.drop(columns=['High', 'Low', 'Volume', 'Open'])
 print(rel.head(), end=sp)
