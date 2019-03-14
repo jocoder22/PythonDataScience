@@ -133,9 +133,20 @@ print(rel.head(), end=sp)
 # sns.pairplot(rel)
 # plt.show()
 
-# corr = rel.corr()
-# sns.heatmap(corr, annot=True, cmap='coolwarm', cbar=False)
-# plt.show()
+corr = rel.corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm', cbar=False)
+plt.yticks(rotation=0) 
+plt.xticks(rotation=0)  # fix ticklabel directions
+plt.tight_layout()  # fits plot area to the plot, "tightly"
+plt.show()
+
+columnnames = list(corr.columns.values)
+# Create a scatter plot of the most highly correlated variable with the target
+plt.scatter(np.arange(len(corr)), corr['30day MA'])
+for idx, (val, vname) in enumerate(zip(corr['30day MA'], columnnames)):
+    offset = 0.05
+    plt.text(idx+offset, val + offset, vname, ha='center', va='center')
+plt.show()
 
 # # Scale data
 # scaler = MinMaxScaler()
@@ -256,7 +267,7 @@ print(modelAnalysis)
 
 #################################
 
-""" 
+
 def pppp(xd, yd, w):
     x = []
     y = []
@@ -329,4 +340,4 @@ modelAnalysis = np.sqrt(np.mean(
     np.power((ypred2 - scaler_x.inverse_transform(yt4)), 2)))
 
 print(modelAnalysis)
- """
+
