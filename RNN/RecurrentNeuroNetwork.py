@@ -31,17 +31,29 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
+from statsmodels.tsa.stattools import acf
+from statsmodels.graphics.tsaplots import plot_acf
 
 import pandas_datareader as pdr
 import seaborn as sns
 
 # plt.style.use('ggplot')
 
-path = r'C:\Users\Jose\Desktop\TimerSeriesAnalysis'
-    
+path = r'C:\Users\Jose\Desktop\TimerSeriesAnalysis'    
 os.chdir(path)
 
 rel = pd.read_csv('AMZN.csv', parse_dates=True, index_col='Date')
+
+
+for name in rel.columns:
+    acf_array = acf(rel[name])
+    print(acf_array, end=sp)
+    # Plot the acf function
+    plot_acf(rel[name])
+    plt.pause(4)
+    plt.close()
+    # plt.clf()
+
 
 # path = r'C:\Users\okigboo\Desktop\PythonDataScience\RNN'
 path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\RNN\\"
