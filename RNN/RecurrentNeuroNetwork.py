@@ -37,7 +37,8 @@ import seaborn as sns
 
 # plt.style.use('ggplot')
 
-path = r'C:\Users\okigboo\Desktop\PythonDataScience\RNN'
+# path = r'C:\Users\okigboo\Desktop\PythonDataScience\RNN'
+path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\RNN\\"
 
 os.chdir(path)
 
@@ -106,8 +107,10 @@ rel['10day MA'] = rel['Close'].shift(1).rolling(window=10).mean()
 rel['30day MA'] = rel['Close'].shift(1).rolling(window=30).mean()
 rel['7dayvol_mean'] = rel['Volume'].shift(1).rolling(window=7).mean()
 rel['Std_dev'] = rel['Close'].rolling(5).std()
-RSI(rel, 'Adj Close', 9)
-
+# RSI(rel, 'Adj Close', 9)
+rel['RSI'] = talib.RSI(rel['Close'].values, timeperiod=9)
+rel['Williams %R'] = talib.WILLR(
+    rel['High'].values, rel['Low'].values, rel['Close'].values, 7)
 rel = rel.dropna()
 rel = rel.drop(columns=['High', 'Low', 'Volume', 'Open'])
 print(rel.head(), end=sp)

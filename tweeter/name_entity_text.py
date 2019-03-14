@@ -16,8 +16,8 @@ import nltk
 # https://www.lfd.uci.edu/~gohlke/pythonlibs/
 
 sp = '\n\n'
-# path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
-path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\tweeter\\'
+path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
+# path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\tweeter\\'
 os.chdir(path)
 
 data = pd.read_csv('nyt2.csv')
