@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn
 import datetime
-# import tensorflow as tf
+import tensorflow as tf
 
 
 

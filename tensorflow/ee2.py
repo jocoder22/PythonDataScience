@@ -77,34 +77,34 @@ def tf_modeler(features):
     model_g = tf.keras.models.Sequential()
     model_g.add(tf.keras.layers.BatchNormalization(input_shape=(_nshape,)))
     model_g.add(tf.keras.layers.Dense(1000, activation='relu'))
-    model_g.add(tf.keras.layers.Dropout(0.1))
+    model_g.add(tf.keras.layers.Dropout(0.5)) # 0.4
 
     model_g.add(tf.keras.layers.BatchNormalization())
     model_g.add(tf.keras.layers.Dense(500, activation='relu'))
     model_g.add(tf.keras.layers.BatchNormalization())
-    model_g.add(tf.keras.layers.Dropout(0.2))
+    model_g.add(tf.keras.layers.Dropout(0.2)) # 0.5
 
    
-    model_g.add(tf.keras.layers.Dense(250, activation='relu'))
-    model_g.add(tf.keras.layers.BatchNormalization())
-    model_g.add(tf.keras.layers.Dropout(0.1))
+    # model_g.add(tf.keras.layers.Dense(250, activation='relu'))
+    # model_g.add(tf.keras.layers.BatchNormalization())
+    # model_g.add(tf.keras.layers.Dropout(0.1))
     
    
     model_g.add(tf.keras.layers.Dense(50, activation='relu'))
     model_g.add(tf.keras.layers.BatchNormalization())
-    model_g.add(tf.keras.layers.Dropout(0.05))
+    model_g.add(tf.keras.layers.Dropout(0.2))
 
 
     model_g.add(tf.keras.layers.Dense(2))
     model_g.add(tf.keras.layers.Activation('sigmoid'))
     model_g.compile(tf.keras.optimizers.Adam(lr=0.001), 
                     loss='binary_crossentropy',
-                    metrics=['accuracy'])
+                    metrics=['accuracy']) # 95.38
 
     return model_g
 
 model1= tf_modeler(x)
-model1.fit(x, y, epochs=25, verbose=1, validation_split=0.2, batch_size=16)
+model1.fit(x, y, epochs=30, verbose=1, validation_split=0.2)
 
 plot_model(model1, to_file='model.png')
 
@@ -135,3 +135,26 @@ plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend(['Validation Accuracy', 'Train Accuracy'])
 plt.show()
+
+# Evaluate our model
+# import test dataset
+datatest = pd.read_csv('test.csv')
+
+# Get the features and labels
+xtest = datatest.drop(columns=['Class'])
+ytest = datatest[['Class']]
+
+
+# Initialize the scaler and OneHotEncoder
+scalertest = MinMaxScaler()
+onehottest = OneHotEncoder(sparse=False, categories='auto')
+
+x_test = scalertest.fit_transform(xtest)
+y_test = onehottest.fit_transform(ytest)
+
+ypred = model1.predict(x_test)
+
+ypred = np.argmax(ypred, 1)
+y_real = np.argmax(y_test, 1)
+
+print(classification_report(y_real, ypred), confusion_matrix(y_real, ypred), sep=sp)
