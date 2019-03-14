@@ -6,10 +6,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn
 import datetime
-import tensorflow as tf
-
-# import talib
 # import tensorflow as tf
+
+import talib
 from tensorflow.python.keras.datasets import imdb
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.preprocessing import sequence
