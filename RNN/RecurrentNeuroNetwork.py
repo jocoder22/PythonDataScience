@@ -45,13 +45,13 @@ os.chdir(path)
 rel = pd.read_csv('AMZN.csv', parse_dates=True, index_col='Date')
 
 
-for name in rel.columns:
+""" for name in rel.columns:
     acf_array = acf(rel[name])
     print(acf_array, end=sp)
     # Plot the acf function
     plot_acf(rel[name])
     plt.pause(4)
-    plt.close()
+    plt.close() """
     # plt.clf()
 
 
@@ -122,6 +122,7 @@ print(rel.head(), end=sp)
 # Visualizations
 
 rel['H-L'] = rel['High'] - rel['Low']
+rel['MidHL'] = sum(rel['High'], rel['Low'], axis=1)/ 2
 rel['O-C'] = rel['Close'] - rel['Open']
 rel['3day MA'] = rel['Close'].shift(1).rolling(window=3).mean()
 rel['10day MA'] = rel['Close'].shift(1).rolling(window=10).mean()
