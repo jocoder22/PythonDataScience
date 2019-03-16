@@ -111,3 +111,9 @@ for pred_idx in range(window_size, N):
     std_avg_x.append(date)
 
 print('MSE error for standard averaging: %.5f'%(0.5*np.mean(mse_errors)))
+data2 = pd.DataFrame(std_avg_predictions)
+# data1 = np.concatenate(std_avg_predictions, stock)
+# Plotting:
+plt.plot(all_mid_data)
+plt.plot(std_avg_predictions)
+plt.show()
