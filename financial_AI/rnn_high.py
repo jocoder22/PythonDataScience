@@ -54,7 +54,7 @@ print(train_data.shape, test_data.shape, train_data.size)
 
 print(train_data[:5])
 print(train_data[-5:])
-smoothing_window_size = 500
+smoothing_window_size = 500 # around 25% of the size
 for i in range(0, train_data.shape[0] ,smoothing_window_size):
     window = i+smoothing_window_size
     if window < train_data.shape[0] or window == train_data.shape[0]:
@@ -73,3 +73,41 @@ print(train_data.shape, test_data.shape, train_data.size)
 train_data = train_data.reshape(-1)
 print(train_data[:5])
 print(train_data[-5:])
+
+# Reshape both train and test data
+train_data = train_data.reshape(-1)
+
+# Normalize test data
+test_data = scalerMM.transform(test_data).reshape(-1)
+
+# Now perform exponential moving average smoothing
+# So the data will have a smoother curve than the original ragged data
+EMA = 0.0
+gamma = 0.1
+for i in range(train_data.shape[0]):
+  EMA = gamma*train_data[i] + (1-gamma)*EMA
+  train_data[i] = EMA
+
+# Used for visualization and test purposes
+all_mid_data = np.concatenate([train_data,test_data],axis=0)
+
+###############################################################################
+# One-Step Ahead Prediction via Averaging
+window_size = 20  # around 10% of size
+N = train_data.size
+std_avg_predictions = []
+std_avg_x = []
+mse_errors = []
+
+for pred_idx in range(window_size, N):
+
+    if pred_idx >= N:
+        date = datetime.datetime.strptime(k, '%Y-%m-%d').date() + datetime.timedelta(days=1)
+    else:
+        date = stock.loc[pred_idx,'Date']
+
+    std_avg_predictions.append(np.mean(train_data[pred_idx-window_size:pred_idx]))
+    mse_errors.append((std_avg_predictions[-1]-train_data[pred_idx])**2)
+    std_avg_x.append(date)
+
+print('MSE error for standard averaging: %.5f'%(0.5*np.mean(mse_errors)))
