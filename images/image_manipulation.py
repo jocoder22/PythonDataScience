@@ -16,3 +16,11 @@ plt.show()
 img.shape
 
 # show the three channels
+for i in range(3):
+    onechannel = img[..., i]
+    plt.imshow(onechannel)
+    plt.axis('off')
+    plt.pause(2)
+    plt.clf()
+
+plt.close()
