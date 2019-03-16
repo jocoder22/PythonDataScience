@@ -52,18 +52,24 @@ train_data = train_data.reshape(-1,1)
 test_data = test_data.reshape(-1,1)
 print(train_data.shape, test_data.shape, train_data.size)
 
-
+print(train_data[:5])
+print(train_data[-5:])
 smoothing_window_size = 500
-for i in range(0, train_data.size ,smoothing_window_size):
+for i in range(0, train_data.shape[0] ,smoothing_window_size):
     window = i+smoothing_window_size
-    if window <= train_data.size:
+    if window < train_data.shape[0] or window == train_data.shape[0]:
         scalerMM.fit(train_data[i:i+smoothing_window_size,:])
         train_data[i:i+smoothing_window_size,:] = scalerMM.transform(train_data[i:i+smoothing_window_size,:])
+    else:
+        # # You normalize the last bit of remaining data
+        scalerMM.fit(train_data[i:,:])
+        train_data[i:,:] = scalerMM.transform(train_data[i:,:])
 
-# # You normalize the last bit of remaining data
-# scalerMM.fit(train_data[i+smoothing_window_size:,:])
-# train_data[i+smoothing_window_size:,:] = scalerMM.transform(train_data[i+smoothing_window_size:,:])
+
+
 print(train_data.shape, test_data.shape, train_data.size)
 # Reshape both train and test data
+
 train_data = train_data.reshape(-1)
+print(train_data[:5])
 print(train_data[-5:])
