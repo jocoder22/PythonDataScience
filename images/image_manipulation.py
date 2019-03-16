@@ -24,3 +24,13 @@ for i in range(3):
     plt.clf()
 
 plt.close()
+
+# reverse the channels
+rev_color = img[..., ::-1]
+plt.subplot(121)
+plt.imshow(img)
+plt.axis('off')
+plt.subplot(122)
+plt.imshow(rev_color)
+plt.axis('off')
+plt.show()
