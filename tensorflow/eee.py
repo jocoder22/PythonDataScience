@@ -87,20 +87,3 @@ mble = tf.get_variable("mble", [1, 2, 3])
 
 
 print(tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES))
-
-# https://www.tensorflow.org/guide/eager
-# https://developers.google.com/machine-learning/crash-course/exercises
-# https://www.ritchieng.com/neural-networks-learning/
-
-
-# conda list
-# conda --version
-# Creating conda evironment
-# on windows command prompt: C:\User\Joses
-#  => conda create --name tf-env
-# activate the enviroment
-# => activate tf-env
-# install jupyter
-# => conda install jupyter
-# open jupyter notebook
-# => jupyter notebook
