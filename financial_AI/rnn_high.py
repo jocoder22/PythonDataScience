@@ -32,7 +32,8 @@ stock = pdr.get_data_yahoo(stocksname, startdate, enddate)
 
 # Feature engineering
 stock['MidPrice'] = (stock.High + stock.Low) / 2.0
-stock.reset_index(inplace=True)
+allstock = stock.copy()
+
 # print(stock.head(), stock.tail(), stock.shape, sep=sp)
 
 # EDA:
@@ -42,6 +43,7 @@ stock.reset_index(inplace=True)
 stock['MidPrice'].plot()
 plt.show()
 
+stock.reset_index(inplace=True)
 train_data = stock.loc[:2770, 'MidPrice'].values
 test_data = stock.loc[2770:, 'MidPrice'].values
 
@@ -54,7 +56,7 @@ print(train_data.shape, test_data.shape, train_data.size)
 
 print(train_data[:5])
 print(train_data[-5:])
-smoothing_window_size = 500 # around 25% of the size
+smoothing_window_size = 1500 # around 25% of the size
 for i in range(0, train_data.shape[0] ,smoothing_window_size):
     window = i+smoothing_window_size
     if window < train_data.shape[0] or window == train_data.shape[0]:
@@ -111,9 +113,28 @@ for pred_idx in range(window_size, N):
     std_avg_x.append(date)
 
 print('MSE error for standard averaging: %.5f'%(0.5*np.mean(mse_errors)))
-data2 = pd.DataFrame(std_avg_predictions)
+
+
+std_avg_predictions = scalerMM.inverse_transform(np.array(std_avg_predictions).reshape(-1, 1))
+all_mid_data = scalerMM.inverse_transform(all_mid_data.reshape(-1, 1))
+data2 = pd.DataFrame(std_avg_predictions, columns=['Prediction'])
+data3 = pd.DataFrame(all_mid_data, columns=['Original'])
+result = pd.concat([stock, data2, data3], axis=1, sort=False)
+
+result.set_index('Date', inplace=True)
+result.dropna()
+print(result.head(), data2.head(), data3.head(), sep=sp)
+
+
+result['Prediction'].plot(label="Predictions", color='black')
+result['Original'].plot(label="Original", color='red')
+allstock['MidPrice'].plot(label='Real', color='blue')
+plt.legend()
+plt.show()
+
 # data1 = np.concatenate(std_avg_predictions, stock)
 # Plotting:
-plt.plot(all_mid_data)
-plt.plot(std_avg_predictions)
+plt.plot(all_mid_data, label="Original")
+plt.plot(std_avg_predictions, label="Predictions")
+plt.legend()
 plt.show()
