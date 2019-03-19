@@ -6,6 +6,15 @@ import pandas_datareader as pdr
 from datetime import datetime
 import tensorflow as tf
 
+import talib as tb
+from tensorflow.python.keras.datasets import imdb
+from tensorflow.python.keras.models import Sequential
+from tensorflow.python.keras.preprocessing import sequence
+from tensorflow.python.keras.optimizers import Adam
+from tensorflow.python.keras.layers import Dense, Embedding
+from tensorflow.python.keras.layers import LSTM, SimpleRNN, Dropout, Flatten
+from tensorflow.python.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
+
 from sklearn import datasets
 from sklearn.pipeline import FeatureUnion
 from sklearn.preprocessing import FunctionTransformer
@@ -138,3 +147,80 @@ plt.plot(all_mid_data, label="Original")
 plt.plot(std_avg_predictions, label="Predictions")
 plt.legend()
 plt.show()
+
+
+
+
+
+def pppp(xd, yd, w):
+    x = []
+    y = []
+    for i in range(w, len(xd)):
+        x.append(xd.iloc[i- w:i, :].values.flatten().tolist())
+        y.append(yd.iloc[i,:])
+
+    return np.array(x), np.array(y)
+
+window = 60
+xt2, yt2 = pppp(train_data, test_data, window)
+xest, yest = pppp(xtest, ytest, window)
+
+xt3 = np.array(xt2).reshape(xt2.shape[0], xt2.shape[1], 1)
+yt3 = np.array(yt2)
+
+xt4 = np.array(xest).reshape(xest.shape[0], xest.shape[1], 1)
+yt4 = np.array(yest)
+
+
+model2 = Sequential()
+model2.add(LSTM(200, return_sequences=True,
+                       input_shape=(len(xt3[0]), 1)))
+model2.add(Dropout(0.2))
+
+model2.add(LSTM(100, return_sequences=True))
+model2.add(Dropout(0.2))
+
+model2.add(LSTM(50))
+
+model2.add(Dense(1, activation='linear'))
+model2.compile(loss='mse', optimizer='Adam')
+
+model_history = model2.fit(
+    xt3, yt3, epochs=20, batch_size=100, verbose=1, validation_split=0.2)
+
+
+lossValues = pd.DataFrame(model2.history.history)
+lossValues = lossValues.rename({'val_loss': 'ValidationLoss',  'val_acc': 'Val_Accuray',
+                                'loss': 'TrainLoss', 'acc': 'TrainAccuracy'}, axis='columns')
+
+
+# plot loss values
+plt.plot(lossValues['ValidationLoss'])
+plt.plot(lossValues['TrainLoss'])
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.yscale('log')
+plt.title('Loss curve')
+plt.legend(['Validation Loss', 'Train Loss'])
+plt.show()
+
+
+print(model2.summary())
+
+
+ypred2 = model2.predict(xt4)
+ypred2 = scaler_x.inverse_transform(ypred2)
+
+plt.plot(ypred2)
+plt.plot(scaler_x.inverse_transform(yt4))
+plt.xlabel('Time')
+plt.ylabel('Stock Close')
+plt.title('Prediction vs Actual')
+plt.legend(['Prediction', 'Actual'])
+plt.show()
+
+
+modelAnalysis = np.sqrt(np.mean(
+    np.power((ypred2 - scaler_x.inverse_transform(yt4)), 2)))
+
+print(modelAnalysis)

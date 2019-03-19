@@ -122,7 +122,7 @@ print(rel.head(), end=sp)
 # Visualizations
 
 rel['H-L'] = rel['High'] - rel['Low']
-rel['MidHL'] = sum(rel['High'], rel['Low'], axis=1)/ 2
+rel['MidHL'] = (rel.loc[:,['High', 'Low']].sum(axis=1))/ 2
 rel['O-C'] = rel['Close'] - rel['Open']
 rel['3day MA'] = rel['Close'].shift(1).rolling(window=3).mean()
 rel['10day MA'] = rel['Close'].shift(1).rolling(window=10).mean()
@@ -230,7 +230,7 @@ lrchecker = ReduceLROnPlateau(factor = np.sqrt(0.1), cooldown=0,
                              patient=3, verbose=1,
                              min_lr=0.4e-6)
 
-monitorbest = ModelCheckpoint(filepath=filepath, monitor='val_loss',
+monitorbest = ModelCheckpoint(filepath=filepath, monitor='loss',
                              verbose=1,
                              save_best_only=True)
 
