@@ -46,7 +46,7 @@ sp = '\n\n'
 symbol = 'RELIANCE.NS'
 starttime = datetime(1996, 1, 1)
 endtime = date.today()
-rel = pdr.get_data_yahoo(symbol, starttime, endtime)[['Open','High', 'Low', 'Close', 'Adj Close', 'Volume']]
+rel = pdr.get_data_yahoo(symbol, starttime, endtime)
 
 print(rel.head(), rel.shape, sep=sp)
 
