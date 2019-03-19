@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import pandas_datareader as pdr
-from datetime import datetime
+from datetime import datetime, date
 import tensorflow as tf
 
 import talib as tb
@@ -34,7 +34,7 @@ sp ='\n\n'
 stocksname ='AAL'
 
 startdate = datetime(1990, 1, 1)
-enddate = datetime(2019, 3, 16)
+enddate = date.today()
 
 stock = pdr.get_data_yahoo(stocksname, startdate, enddate)
 
@@ -194,12 +194,12 @@ yt4 = np.array(yest)
 
 
 model2 = Sequential()
-model2.add(LSTM(200, return_sequences=True,
+model2.add(LSTM(100, return_sequences=True,
                        input_shape=(len(xt3[0]), 1)))
 model2.add(Dropout(0.2))
 
-model2.add(LSTM(100, return_sequences=True))
-model2.add(Dropout(0.2))
+# model2.add(LSTM(100, return_sequences=True))
+# model2.add(Dropout(0.2))
 
 model2.add(LSTM(50))
 
