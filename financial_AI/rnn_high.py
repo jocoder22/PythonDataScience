@@ -202,8 +202,9 @@ model2.add(Dropout(0.2))
 # model2.add(Dropout(0.2))
 
 model2.add(LSTM(50))
-
+model2.add(Dropout(0.2))
 model2.add(Dense(1, activation='linear'))
+
 model2.compile(loss='mse', optimizer='Adam')
 
 model_history = model2.fit(
