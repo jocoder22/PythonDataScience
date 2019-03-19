@@ -158,12 +158,33 @@ def pppp(xd, yd, w):
     for i in range(w, len(xd)):
         x.append(xd.iloc[i- w:i, :].values.flatten().tolist())
         y.append(yd.iloc[i,:])
+        # x.append(xd[i- w:i, :].values.flatten().tolist())
+        # y.append(yd[i,:])
 
     return np.array(x), np.array(y)
 
-window = 60
-xt2, yt2 = pppp(train_data, test_data, window)
-xest, yest = pppp(xtest, ytest, window)
+print("########################################", end=sp)
+print(train_data.shape, test_data.shape, train_data.size)
+
+windows = 90
+def prepp(datset1, windows):
+    datset1 = datset1.reshape(-1, 1)
+    x = []
+    y = []
+    for i in range(windows, len(datset1)):
+        x.append(datset1[i - windows:i, 0])
+        y.append(datset1[i, 0])
+
+    return np.array(x).reshape(-1, 90, 1), np.array(y).reshape(-1, 1)
+
+
+xt2, yt2= prepp(train_data, windows)
+xest, yest = prepp(test_data, windows)
+print(xt2.shape, yt2.shape, xest.shape, yest.shape)
+
+# window = 60
+# xt2, yt2 = pppp(pd.DataFrame(train_data), pd.DataFrame(test_data), window)
+# xest, yest = pppp(xtest, ytest, window)
 
 xt3 = np.array(xt2).reshape(xt2.shape[0], xt2.shape[1], 1)
 yt3 = np.array(yt2)
@@ -209,10 +230,10 @@ print(model2.summary())
 
 
 ypred2 = model2.predict(xt4)
-ypred2 = scaler_x.inverse_transform(ypred2)
+ypred2 = scalerMM.inverse_transform(ypred2)
 
 plt.plot(ypred2)
-plt.plot(scaler_x.inverse_transform(yt4))
+plt.plot(scalerMM.inverse_transform(yt4))
 plt.xlabel('Time')
 plt.ylabel('Stock Close')
 plt.title('Prediction vs Actual')
@@ -221,6 +242,6 @@ plt.show()
 
 
 modelAnalysis = np.sqrt(np.mean(
-    np.power((ypred2 - scaler_x.inverse_transform(yt4)), 2)))
+    np.power((ypred2 - scalerMM.inverse_transform(yt4)), 2)))
 
 print(modelAnalysis)
