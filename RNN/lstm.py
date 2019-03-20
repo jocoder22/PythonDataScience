@@ -203,19 +203,20 @@ yt3 = np.array(yt2)
 xt4 = np.array(xest).reshape(xest.shape[0], xest.shape[1], 1)
 yt4 = np.array(yest)
 
+print(xt3.shape, yt3.shape, sep=sp)
 
 model2 = Sequential()
 model2.add(LSTM(200, return_sequences=True,
                        input_shape=(len(xt3[0]), 1)))
 model2.add(Dropout(0.2))
 
-model2.add(LSTM(100, return_sequences=True))
-model2.add(Dropout(0.2))
+# model2.add(LSTM(100, return_sequences=True))
+# model2.add(Dropout(0.2))
 
 model2.add(LSTM(50))
 
 model2.add(Dense(1, activation='linear'))
-model2.compile(loss='mse', optimizer='Adam')
+model2.compile(loss='mse', optimizer='Adam', metrics=['mape'])
 
 model_history = model2.fit(
     xt3, yt3, epochs=20, batch_size=100, verbose=1, validation_split=0.2)
