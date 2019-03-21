@@ -68,7 +68,7 @@ print(relnorm.head(), relnorm.shape, sep=sp)
 # spliting data
 vsize_percent = 10
 tsize_percent = 10
-slen = 20
+slen = 91
 
 def lldata(dtaa, sslen):
     data2 = dtaa.values
