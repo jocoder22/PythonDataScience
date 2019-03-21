@@ -50,9 +50,9 @@ rel['O-C'] = rel['Close'] - rel['Open']
 # rel['7dayvol_mean'] = rel['Volume'].shift(1).rolling(window=7).mean()
 # rel['Std_dev'] = rel['Close'].rolling(5).std()
 # RSI(rel, 'Adj Close', 9)
-rel['RSI'] = tb.RSI(rel['Close'].values, timeperiod=9)
-rel['Williams %R'] = tb.WILLR(
-    rel['High'].values, rel['Low'].values, rel['Close'].values, 7)
+# rel['RSI'] = tb.RSI(rel['Close'].values, timeperiod=9)
+# rel['Williams %R'] = tb.WILLR(
+#     rel['High'].values, rel['Low'].values, rel['Close'].values, 7)
 # rel['Close2'] = rel['Close']
 
 rel = rel.dropna()
@@ -68,7 +68,7 @@ print(relnorm.head(), relnorm.shape, sep=sp)
 # spliting data
 vsize_percent = 10
 tsize_percent = 10
-slen = 91
+slen = 15
 
 def lldata(dtaa, sslen):
     data2 = dtaa.values
@@ -99,7 +99,7 @@ nneurons = 200
 nlayers = 2
 lrate = 0.001
 batchsize = 120
-nepochs = 480
+nepochs = 10
 trainsize = x_train.shape[0]
 testsize = x_test.shape[0]
 tf.reset_default_graph()
