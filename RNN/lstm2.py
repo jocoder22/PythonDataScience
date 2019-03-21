@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from math import ceil
 import sklearn
-import datetime
+from datetime import datetime, date
 import tensorflow as tf
 
 import talib as tb
@@ -36,8 +36,8 @@ def data_normalizer(data_t):
 sp = '\n\n'
 # symbol = 'AAL'
 symbol = 'RELIANCE.NS'
-starttime = datetime.datetime(1996, 1, 1)
-endtime = datetime.datetime(2019, 3, 8)
+starttime = datetime(1996, 1, 1)
+endtime = date.today()
 rel = pdr.get_data_yahoo(symbol, starttime, endtime)
 
 
@@ -87,16 +87,16 @@ def lldata(dtaa, sslen):
     y_test = data[train + vsize:, -1, :]
     return [x_train, y_trian, x_valid, y_valid, x_test, y_test]
 
-x_train, y_trian, x_valid, y_valid, x_test, y_test = lldata(relnorm, slen)
+x_train, y_train, x_valid, y_valid, x_test, y_test = lldata(relnorm, slen)
 
 print('x_train.shape = ', x_train.shape, '   x_valid.shape = ', x_valid.shape, '  x_test.shape = ',x_test.shape, end=sp, sep ="")
-print('y_trian.shape = ',y_trian.shape, '   y_valid.shape = ', y_valid.shape, '   y_test.shape = ', y_test.shape, end=sp, sep="")
+print('y_trian.shape = ',y_train.shape, '   y_valid.shape = ', y_valid.shape, '   y_test.shape = ', y_test.shape, end=sp, sep="")
 
 # create parameters and placeholders
 nsteps = slen - 1
 ninput = rel.shape[1]
 nneurons = 200
-nlayers = 4
+nlayers = 2
 lrate = 0.001
 batchsize = 60
 nepochs = 120
@@ -119,7 +119,7 @@ def iter_batch(batch_size):
         start = 0
         index_epoch = batch_size
     end = index_epoch
-    return x_train[permArray[start:end]], y_trian[permArray[start:end]]
+    return x_train[permArray[start:end]], y_train[permArray[start:end]]
 
 """
 # RNN
@@ -171,17 +171,63 @@ with tf.Session() as sess:
         x_batch, y_batch = iter_batch(batchsize)
         sess.run(train_op, feed_dict={X: x_batch, y: y_batch})
         if iteration % int(12 * trainsize/batchsize) == 0:
-            mse_train = loss.eval(feed_dict={X: x_train, y: y_trian})
+            mse_train = loss.eval(feed_dict={X: x_train, y: y_train})
             mse_valid = loss.eval(feed_dict={X: x_valid, y: y_valid})
             print('%.2f epochs: MSE train/valid = %.6f/%.6f'%(
               iteration*batchsize/trainsize, mse_train, mse_valid  
             ))
-    ypred = sess.run(outputs, feed_dict={X: x_test})
+    y_train_pred = sess.run(outputs, feed_dict={X: x_train})
+    y_valid_pred = sess.run(outputs, feed_dict={X: x_valid})
+    y_test_pred = sess.run(outputs, feed_dict={X: x_test})
 
 # plotting
-results = pd.DataFrame({'Actual': y_test[:,-1], 'Predictions': ypred[:,-1]})
+results = pd.DataFrame({'Actual': y_test[:,-1], 'Predictions': y_test_pred[:,-1]})
 
 plt.plot(results['Actual'], label='Actual', color='red')
 plt.plot(results['Predictions'], label='Prediction', color='blue')
 plt.legend()
+plt.show()
+
+
+
+
+ft = 0
+plt.subplot(1,2,1)
+
+plt.plot(np.arange(y_train.shape[0]), y_train[:,ft], color='blue', label='train target')
+
+plt.plot(np.arange(y_train.shape[0], y_train.shape[0]+y_valid.shape[0]), y_valid[:,ft],
+         color='gray', label='valid target')
+
+plt.plot(np.arange(y_train.shape[0]+y_valid.shape[0],
+                   y_train.shape[0]+y_test.shape[0]+y_test.shape[0]),
+         y_test[:,ft], color='black', label='test target')
+
+plt.plot(np.arange(y_train_pred.shape[0]),y_train_pred[:,ft], color='red',
+         label='train prediction')
+
+plt.plot(np.arange(y_train_pred.shape[0], y_train_pred.shape[0]+y_valid_pred.shape[0]),
+         y_valid_pred[:,ft], color='orange', label='valid prediction')
+
+plt.plot(np.arange(y_train_pred.shape[0]+y_valid_pred.shape[0],
+                   y_train_pred.shape[0]+y_valid_pred.shape[0]+y_test_pred.shape[0]),
+         y_test_pred[:,ft], color='green', label='test prediction')
+
+plt.title('past and future stock prices')
+plt.xlabel('time [days]')
+plt.ylabel('normalized price')
+plt.legend(loc='best')
+
+plt.subplot(1,2,2)
+
+plt.plot(np.arange(y_train.shape[0], y_train.shape[0]+y_test.shape[0]),
+         y_test[:,ft], color='black', label='test target')
+
+plt.plot(np.arange(y_train_pred.shape[0], y_train_pred.shape[0]+y_test_pred.shape[0]),
+         y_test_pred[:,ft], color='green', label='test prediction')
+
+plt.title('future stock prices')
+plt.xlabel('time [days]')
+plt.ylabel('normalized price')
+plt.legend(loc='best')
 plt.show()

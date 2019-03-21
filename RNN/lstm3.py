@@ -52,7 +52,7 @@ print(rel.head(), rel.shape, sep=sp)
 
 
 rel["Close"].plot(label="Close Price")
-rel["High"].plot(label="High Price", color='white')
+rel["High"].plot(label="High Price", color='green')
 plt.legend()
 plt.show()
 
