@@ -98,8 +98,8 @@ ninput = rel.shape[1]
 nneurons = 200
 nlayers = 2
 lrate = 0.001
-batchsize = 60
-nepochs = 120
+batchsize = 120
+nepochs = 480
 trainsize = x_train.shape[0]
 testsize = x_test.shape[0]
 tf.reset_default_graph()
