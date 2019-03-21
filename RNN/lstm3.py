@@ -47,7 +47,7 @@ symbol = 'RELIANCE.NS'
 starttime = datetime(1996, 1, 1)
 endtime = date.today()
 rel = pdr.get_data_yahoo(symbol, starttime, endtime)
-
+rel = rel.drop(columns=['Volume', 'Adj Close'])
 print(rel.head(), rel.shape, sep=sp)
 
 
