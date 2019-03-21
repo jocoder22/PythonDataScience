@@ -44,19 +44,19 @@ rel = pdr.get_data_yahoo(symbol, starttime, endtime)
 rel['H-L'] = rel['High'] - rel['Low']
 rel['MidHL'] = (rel['High'] + rel['Low'])/ 2
 rel['O-C'] = rel['Close'] - rel['Open']
-rel['3day MA'] = rel['Close'].shift(1).rolling(window=3).mean()
-rel['10day MA'] = rel['Close'].shift(1).rolling(window=10).mean()
-rel['30day MA'] = rel['Close'].shift(1).rolling(window=30).mean()
-rel['7dayvol_mean'] = rel['Volume'].shift(1).rolling(window=7).mean()
-rel['Std_dev'] = rel['Close'].rolling(5).std()
+# rel['3day MA'] = rel['Close'].shift(1).rolling(window=3).mean()
+# rel['10day MA'] = rel['Close'].shift(1).rolling(window=10).mean()
+# rel['30day MA'] = rel['Close'].shift(1).rolling(window=30).mean()
+# rel['7dayvol_mean'] = rel['Volume'].shift(1).rolling(window=7).mean()
+# rel['Std_dev'] = rel['Close'].rolling(5).std()
 # RSI(rel, 'Adj Close', 9)
 rel['RSI'] = tb.RSI(rel['Close'].values, timeperiod=9)
 rel['Williams %R'] = tb.WILLR(
     rel['High'].values, rel['Low'].values, rel['Close'].values, 7)
-rel['Close2'] = rel['Close']
+# rel['Close2'] = rel['Close']
 
 rel = rel.dropna()
-# rel = rel.drop(columns=['High', 'Low', 'Volume', 'Open'])
+rel = rel.drop(columns=['High', 'Low', 'Volume', 'Open', 'Adj Close'])
 print(rel.head(), end=sp)
 
 relnorm = rel.copy()
