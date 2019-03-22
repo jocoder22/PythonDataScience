@@ -66,9 +66,9 @@ print(datas[:6])
 def pppp(dat, w):
     x = []
     y = []
-    for i in range(w, len(xd)):
-        x.append(xd[i-w:i, 0])
-        y.append(yd[i, 0])
+    for i in range(w, len(dat)):
+        x.append(dat[i-w:i, 0])
+        y.append(dat[i, 0])
 
     return np.array(x), np.array(y)
 
@@ -82,4 +82,4 @@ def train_validate_test_split2(datatt, tx, vx):
 
 
 w = 60 
-x, y = pppp(xd, yd, w)
+x, y = pppp(datas, w)
