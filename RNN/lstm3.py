@@ -38,8 +38,8 @@ import pandas_datareader as pdr
 import seaborn as sns
 
 import matplotlib
-print(matplotlib.style.available)
-print(matplotlib.style.library)
+# print(matplotlib.style.available)
+# print(matplotlib.style.library)
 plt.style.use('dark_background')
 
 sp = '\n\n'
