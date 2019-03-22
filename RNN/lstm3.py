@@ -81,5 +81,10 @@ def train_validate_test_split2(datatt, tx, vx):
     return train, validate, test
 
 
-w = 60 
-x, y = pppp(datas, w)
+window = 60 
+x, y = pppp(datas, window)
+print(x.shape, y.shape, sep=sp)
+
+xtrain, xval, xtest = train_validate_test_split2(x, )
+
+
