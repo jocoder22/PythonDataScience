@@ -63,4 +63,23 @@ scaler = MinMaxScaler()
 datas = scaler.fit_transform(data)
 print(datas[:6])
 
+def pppp(dat, w):
+    x = []
+    y = []
+    for i in range(w, len(xd)):
+        x.append(xd[i-w:i, 0])
+        y.append(yd[i, 0])
 
+    return np.array(x), np.array(y)
+
+
+def train_validate_test_split2(datatt, tx, vx):
+    vxx = tx + vx
+    train, validate, test = np.split(
+        datatt.sample(frac=1), [int(tx*len(datatt)), int(vxx*len(datatt))])
+
+    return train, validate, test
+
+
+w = 60 
+x, y = pppp(xd, yd, w)
