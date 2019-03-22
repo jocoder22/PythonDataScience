@@ -98,8 +98,8 @@ ninput = rel.shape[1]
 nneurons = 200
 nlayers = 2
 lrate = 0.001
-batchsize = 120
-nepochs = 10
+batchsize = 60
+nepochs = 50
 trainsize = x_train.shape[0]
 testsize = x_test.shape[0]
 tf.reset_default_graph()
@@ -126,7 +126,7 @@ def iter_batch(batch_size):
 layers = [tf.contrib.rnn.BasicRNNCell(num_units=nneurons,
                                   activation=tf.nn.elu)
                                    for layer in range(nlayers)]
-"""
+
 #  Basic LSTM
 layers = [tf.contrib.rnn.BasicLSTMCell(num_units=nneurons,
                                   activation=tf.nn.elu)
@@ -139,7 +139,7 @@ layers = [tf.contrib.rnn.LSTMCell(num_units=nneurons,
                                   activation=tf.nn.leaky_relu,
                                   use_peepholes = True)
                                   for layer in range(nlayers)]
-
+"""
 #  GRU
 layers = [tf.contrib.GRUCell(num_units=nneurons,
                                   activation=tf.nn.leaky_relu)
@@ -170,7 +170,7 @@ with tf.Session() as sess:
     for iteration in range(int(nepochs*trainsize/ batchsize)):
         x_batch, y_batch = iter_batch(batchsize)
         sess.run(train_op, feed_dict={X: x_batch, y: y_batch})
-        if iteration % int(12 * trainsize/batchsize) == 0:
+        if iteration % int(6 * trainsize/batchsize) == 0:
             mse_train = loss.eval(feed_dict={X: x_train, y: y_train})
             mse_valid = loss.eval(feed_dict={X: x_valid, y: y_valid})
             print('%.2f epochs: MSE train/valid = %.6f/%.6f'%(

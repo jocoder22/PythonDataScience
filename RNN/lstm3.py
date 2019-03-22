@@ -56,3 +56,8 @@ rel["High"].plot(label="High Price", color='green')
 plt.legend()
 plt.show()
 
+
+data = rel['Close']
+scaler = MinMaxScaler()
+
+
