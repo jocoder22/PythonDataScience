@@ -56,8 +56,9 @@ rel["High"].plot(label="High Price", color='green')
 plt.legend()
 plt.show()
 
-
-data = rel['Close'].values
+rel.reset_index(drop=True, inplace=True)
+data = rel[['Close']]
+print(data.head())
 scaler = MinMaxScaler()
 datas = scaler.fit_transform(data)
 print(datas[:6])
