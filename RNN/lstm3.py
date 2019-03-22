@@ -57,7 +57,9 @@ plt.legend()
 plt.show()
 
 
-data = rel['Close']
+data = rel['Close'].values
 scaler = MinMaxScaler()
+datas = scaler.fit_transform(data)
+print(datas[:6])
 
 
