@@ -51,7 +51,32 @@ stock.reset_index(inplace=True)
 print(stock.head(), stock.shape, sep=sp)
 
 scaler = MinMaxScaler()
-closeprice = stock['Close']
+closeprice = stock[['Close']]
 closeprice = scaler.fit_transform(closeprice)
 print(closeprice)
 
+window = 14
+val = 0.1
+test = 0.1
+
+def preprocess(data, wdw):
+    feature, target = [], []
+    for idx in range(len(data) - wdw - 1):
+        feature.append(data[idx: idx + wdw, 0])
+        target.append(data[idx + wdw, 0])
+
+    return np.array(feature), np.array(target)
+
+
+def train_validate_test_split2(datatt, tx, vx, ww):
+    vxx = tx + vx
+    test, validate, train = np.split(datatt, [int(tx*len(datatt)), int(vxx*len(datatt))])
+    return np.expand_dims(train, axis=-1), np.expand_dims(validate, axis=-1), np.expand_dims(test, axis=-1)
+
+xdata, ydata = preprocess(closeprice, window)
+
+xtrain, xval, xtest = train_validate_test_split2(xdata, val, test, window)
+ytrain, yval, ytest = train_validate_test_split2(ydata, val, test, window)
+
+print(xtrain.shape, xval.shape, xtest.shape, sep=sp)
+print(ytrain.shape, yval.shape, ytest.shape, sep=sp)
