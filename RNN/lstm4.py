@@ -42,6 +42,9 @@ import matplotlib
 # print(matplotlib.style.library)
 plt.style.use('dark_background')
 
+path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
+os.chdir(path)
+
 sp = '\n\n'
 symbol = 'AAL'
 starttime = datetime(1996, 1, 1)
@@ -81,13 +84,32 @@ ytrain, yval, ytest = train_validate_test_split2(ydata, val, test, window)
 print(xtrain.shape, xval.shape, xtest.shape, sep=sp)
 print(ytrain.shape, yval.shape, ytest.shape, sep=sp)
 
+# saving my models
+savedir = os.path.join(os.getcwd(), 'models')
+modelname = 'Best.{epoch:03d}_Loss:{loss:05f}.h5'
 
+if not os.path.isdir(savedir):
+    os.makedirs(savedir)
+filepath = os.path.join(savedir, modelname)
+
+monitorbest = ModelCheckpoint(filepath=filepath, monitor='loss',
+                             verbose=1,
+                             save_best_only=True)
+
+callbacks=[monitorbest]
 model = Sequential()
-model.add(LSTM(256, stateful=True, input_shape=(window, 1)))
+model.add(LSTM(256,  input_shape=(window, 1)))
 model.add(Dense(1))
 model.compile(optimizer='adam', loss='mse')
-history = model.fit(xtrain, ytrain, epochs=300, validation_data=(xval, yval), shuffle=False)
+history = model.fit(xtrain, ytrain, epochs=300, validation_data=(xval, yval), 
+            callbacks=callbacks, shuffle=False)
 
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
+plt.show()
 
+
+
+
+# save model
+model.save_weights('model_lstm.h5')
