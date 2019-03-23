@@ -108,6 +108,17 @@ plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
 plt.show()
 
+pred = model.predict(xtest)
+actual, prediction = [], []
+prediction.append(scaler.inverse_transform(pred.reshape(-1)))
+actual.append(scaler.inverse_transform(ytest.reshape(-1)))
+df = pd.DataFrame({'Actual': actual, 'Prediction': prediction})
+
+
+plt.plot(scaler.inverse_transform(ytest.reshape(-1, 1)))
+plt.plot(scaler.inverse_transform(pred))
+plt.show()
+
 
 
 
