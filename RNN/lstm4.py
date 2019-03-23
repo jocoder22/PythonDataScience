@@ -117,14 +117,16 @@ model.load_weights('weights\Best.223_0.000160.h5')
 # plt.show()
 
 pred = model.predict(xtest)
-actual, prediction = [], []
-prediction.append(scaler.inverse_transform(pred))
-actual.append(scaler.inverse_transform(ytest.reshape(-1, 1)))
-df = pd.DataFrame({'Actual': actual, 'Prediction': prediction})
+print(type(pred), ytest.shape, sep=sp, end=sp)
+# actual, prediction = [], []
+prediction = scaler.inverse_transform(pred).reshape(-1)
+actual= scaler.inverse_transform(ytest).reshape(-1)
+df = pd.DataFrame({'Actual': actual, 'Predictions': prediction})
 
-
-plt.plot(scaler.inverse_transform(ytest.reshape(-1, 1)))
-plt.plot(scaler.inverse_transform(pred))
+print(df.shape, df.head(), sep=sp, end=sp)
+plt.plot(scaler.inverse_transform(ytest.reshape(-1, 1)), label='Actual')
+plt.plot(scaler.inverse_transform(pred), label='Prediction')
+plt.legend()
 plt.show()
 
 
