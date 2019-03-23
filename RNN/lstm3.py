@@ -57,10 +57,9 @@ plt.legend()
 plt.show()
 
 rel.reset_index(drop=True, inplace=True)
-data = rel[['Close']]
-print(data.head())
+data = rel[['Close']].values
 scaler = MinMaxScaler()
-datas = scaler.fit_transform(data)
+datas = scaler.fit_transform(data.reshape(-1, 1))
 print(datas[:6])
 
 def pppp(dat, w):
@@ -70,21 +69,86 @@ def pppp(dat, w):
         x.append(dat[i-w:i, 0])
         y.append(dat[i, 0])
 
-    return np.array(x), np.array(y)
+    return np.array(x).reshape(-1, w), np.array(y).reshape(-1)
 
 
 def train_validate_test_split2(datatt, tx, vx):
+    datatt = pd.DataFrame(datatt)
+    ww = datatt.shape[1]
     vxx = tx + vx
-    train, validate, test = np.split(
+    test, validate, train = np.split(
         datatt.sample(frac=1), [int(tx*len(datatt)), int(vxx*len(datatt))])
 
-    return train, validate, test
+    return np.array(train), np.array(validate), np.array(test)
+    # return np.array(train).reshape(-1, ww, 1), np.array(validate).reshape(-1, ww, 1),np.array(test).reshape(-1, ww, 1) 
 
 
-window = 60 
-x, y = pppp(datas, window)
-print(x.shape, y.shape, sep=sp)
+wd = 60 
+val = 0.1
+test = 0.1
+x, y = pppp(datas, wd)
 
-xtrain, xval, xtest = train_validate_test_split2(x, )
+
+xtrain, xval, xtest = train_validate_test_split2(x, val, test)
+ytrain, yval, ytest = train_validate_test_split2(y, val, test)
+
+xtrain, xval, xtest = xtrain.reshape(-1, wd, 1), xval.reshape(-1, wd, 1), xtest.reshape(-1, wd, 1)
+
+ytrain, yval, ytest = ytrain.reshape(-1, 1), yval.reshape(-1, 1), ytest.reshape(-1, 1)
+
+print(xtrain.shape, xval.shape, xtest.shape, sep=sp)
+print(ytrain.shape, yval.shape, ytest.shape, sep=sp)
 
 
+# build the model
+model = Sequential()
+model.add(LSTM(50, return_sequences=True,
+                       input_shape=(len(xtrain[0]), 1)))
+# model.add(Dropout(0.2))
+
+# model.add(LSTM(150, return_sequences=True))
+# model.add(Dropout(0.2))
+
+model.add(LSTM(5))
+
+model.add(Dense(1, activation='linear'))
+model.compile(loss='mse', optimizer='Adam')
+
+model_history = model.fit(
+    xtrain, ytrain, epochs=30, batch_size=100, verbose=1, validation_data=(xval, yval), shuffle=False)
+
+lossValues = pd.DataFrame(model.history.history)
+lossValues = lossValues.rename({'val_loss': 'ValidationLoss',  'val_acc': 'Val_Accuray',
+                                'loss': 'TrainLoss', 'acc': 'TrainAccuracy'}, axis='columns')
+
+
+# plot loss values
+plt.plot(lossValues['ValidationLoss'])
+plt.plot(lossValues['TrainLoss'])
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.yscale('log')
+plt.title('Loss curve')
+plt.legend(['Validation Loss', 'Train Loss'])
+plt.show()
+
+
+print(model.summary())
+
+
+ypred1 = model.predict(xtest)
+ypred = scaler.inverse_transform(ypred1)
+
+plt.plot(ypred)
+plt.plot(scaler.inverse_transform(ytest))
+plt.xlabel('Time')
+plt.ylabel('Stock Close')
+plt.title('Prediction vs Actual')
+plt.legend(['Prediction', 'Actual'])
+plt.show()
+
+
+modelAnalysis = np.sqrt(np.mean(
+    np.power((ypred - scaler.inverse_transform(ytest)), 2)))
+
+print(modelAnalysis)

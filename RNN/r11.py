@@ -52,7 +52,7 @@ def train_validate_test_split(rel, train_percent=.6, validate_percent=.2):
 
 def train_validate_test_split2(datatt, tx, vx):
     vxx = tx + vx
-    train, validate, test = np.split(
+    train, validation, test = np.split(
         datatt.sample(frac=1), [int(tx*len(datatt)), int(vxx*len(datatt))])
 
     return train, validation, test
