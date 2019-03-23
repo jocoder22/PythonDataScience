@@ -16,6 +16,7 @@ from tensorflow.python.keras.optimizers import Adam
 from tensorflow.python.keras.layers import Dense, Embedding
 from tensorflow.python.keras.layers import LSTM, SimpleRNN, Dropout, Flatten
 from tensorflow.python.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
+from keras.models import load_model
 
 from sklearn.pipeline import FeatureUnion
 from sklearn.preprocessing import FunctionTransformer
@@ -84,8 +85,9 @@ ytrain, yval, ytest = train_validate_test_split2(ydata, val, test, window)
 print(xtrain.shape, xval.shape, xtest.shape, sep=sp)
 print(ytrain.shape, yval.shape, ytest.shape, sep=sp)
 
-# saving my models
-savedir = os.path.join(os.getcwd(), 'models')
+""" 
+# saving weights
+savedir = os.path.join(os.getcwd(), 'weights')
 modelname = 'Best.{epoch:03d}_Loss:{loss:05f}.h5'
 
 if not os.path.isdir(savedir):
@@ -97,21 +99,27 @@ monitorbest = ModelCheckpoint(filepath=filepath, monitor='loss',
                              save_best_only=True)
 
 callbacks=[monitorbest]
+"""
 model = Sequential()
 model.add(LSTM(256,  input_shape=(window, 1)))
 model.add(Dense(1))
 model.compile(optimizer='adam', loss='mse')
-history = model.fit(xtrain, ytrain, epochs=300, validation_data=(xval, yval), 
-            callbacks=callbacks, shuffle=False)
 
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.show()
+"""
+history = model.fit(xtrain, ytrain, epochs=300, validation_data=(xval, yval), 
+            callbacks=callbacks, shuffle=False) 
+"""
+
+model.load_weights('weights\Best.223_0.000160.h5')
+
+# plt.plot(history.history['loss'])
+# plt.plot(history.history['val_loss'])
+# plt.show()
 
 pred = model.predict(xtest)
 actual, prediction = [], []
-prediction.append(scaler.inverse_transform(pred.reshape(-1)))
-actual.append(scaler.inverse_transform(ytest.reshape(-1)))
+prediction.append(scaler.inverse_transform(pred))
+actual.append(scaler.inverse_transform(ytest.reshape(-1, 1)))
 df = pd.DataFrame({'Actual': actual, 'Prediction': prediction})
 
 
@@ -123,4 +131,6 @@ plt.show()
 
 
 # save model
-model.save_weights('model_lstm.h5')
+# model.save_weights('model_lstm.h5')
+# model.save(f"model_{datetime.now()}")
+# model = load_model('models\Best.223_0.000160.h5')
