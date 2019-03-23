@@ -85,10 +85,14 @@ ytrain, yval, ytest = train_validate_test_split2(ydata, val, test, window)
 print(xtrain.shape, xval.shape, xtest.shape, sep=sp)
 print(ytrain.shape, yval.shape, ytest.shape, sep=sp)
 
-""" 
+
+now = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
 # saving weights
 savedir = os.path.join(os.getcwd(), 'weights')
-modelname = 'Best.{epoch:03d}_Loss:{loss:05f}.h5'
+# modelname = 'Best.{epoch:03d}_Loss:{loss:05f}.h5'
+modelname = 'Best_{0}.h5'.format(now)
+""" 
+name_yskd = 900
 
 if not os.path.isdir(savedir):
     os.makedirs(savedir)
@@ -99,16 +103,20 @@ monitorbest = ModelCheckpoint(filepath=filepath, monitor='loss',
                              save_best_only=True)
 
 callbacks=[monitorbest]
-"""
+""" 
 model = Sequential()
-model.add(LSTM(256,  input_shape=(window, 1)))
+model.add(LSTM(256, input_shape=(window, 1)))
+# model.add(Dropout(0.2))
+
 model.add(Dense(1))
-model.compile(optimizer='adam', loss='mse')
+model.compile(optimizer='adam', loss='mse') 
 
 """
-history = model.fit(xtrain, ytrain, epochs=300, validation_data=(xval, yval), 
-            callbacks=callbacks, shuffle=False) 
-"""
+
+
+history = model.fit(xtrain, ytrain, epochs=30, validation_data=(xval, yval), 
+            callbacks=callbacks, shuffle=False)  """
+
 
 model.load_weights('weights\Best.223_0.000160.h5')
 

@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn
-import datetime
+from datetime import datetime 
 # import tensorflow as tf
 
 import talib as tb
@@ -181,8 +181,32 @@ print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape, sep=sp)
 
  
 
-# #################################
+# ##################################################################
+# ##################################################################
+# ##################################################################
+# ##################################################################
 
+plt.style.use('dark_background')
+
+path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
+os.chdir(path)
+
+now = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
+
+
+# saving weights
+savedir = os.path.join(os.getcwd(), 'weights')
+modelname = 'Best_{0}.h5'.format(now)
+
+if not os.path.isdir(savedir):
+    os.makedirs(savedir)
+filepath = os.path.join(savedir, modelname)
+
+monitorbest = ModelCheckpoint(filepath=filepath, monitor='loss',
+                             verbose=1,
+                             save_best_only=True)
+
+callbacks=[monitorbest]
 
 def pppp(xd, yd, w):
     x = []
@@ -215,11 +239,11 @@ model2.add(Dropout(0.2))
 
 model2.add(LSTM(50))
 
-model2.add(Dense(1, activation='linear'))
-model2.compile(loss='mse', optimizer='Adam', metrics=['mape'])
+model2.add(Dense(1, activation='relu'))
+model2.compile(loss='mse', optimizer='Adam')
 
 model_history = model2.fit(
-    xt3, yt3, epochs=20, batch_size=100, verbose=1, validation_split=0.2)
+    xt3, yt3, epochs=120, batch_size=100, verbose=1, validation_split=0.2, callbacks=callbacks)
 
 
 lossValues = pd.DataFrame(model2.history.history)
@@ -242,9 +266,9 @@ print(model2.summary())
 
 
 ypred2 = model2.predict(xt4)
-ypred2 = scaler_x.inverse_transform(ypred2)
+# ypred2 = scaler_x.inverse_transform(ypred2)
 
-plt.plot(ypred2)
+plt.plot(scaler_x.inverse_transform(ypred2))
 plt.plot(scaler_x.inverse_transform(yt4))
 plt.xlabel('Time')
 plt.ylabel('Stock Close')
