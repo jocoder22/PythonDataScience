@@ -88,3 +88,6 @@ model.add(Dense(1))
 model.compile(optimizer='adam', loss='mse')
 history = model.fit(xtrain, ytrain, epochs=300, validation_data=(xval, yval), shuffle=False)
 
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+
