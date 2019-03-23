@@ -80,3 +80,11 @@ ytrain, yval, ytest = train_validate_test_split2(ydata, val, test, window)
 
 print(xtrain.shape, xval.shape, xtest.shape, sep=sp)
 print(ytrain.shape, yval.shape, ytest.shape, sep=sp)
+
+
+model = Sequential()
+model.add(LSTM(256, stateful=True, input_shape=(window, 1)))
+model.add(Dense(1))
+model.compile(optimizer='adam', loss='mse')
+history = model.fit(xtrain, ytrain, epochs=300, validation_data=(xval, yval), shuffle=False)
+
