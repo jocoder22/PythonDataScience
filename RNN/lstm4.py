@@ -49,3 +49,9 @@ endtime = date.today()
 stock = pdr.get_data_yahoo(symbol, starttime, endtime)
 stock.reset_index(inplace=True)
 print(stock.head(), stock.shape, sep=sp)
+
+scaler = MinMaxScaler()
+closeprice = stock['Close']
+closeprice = scaler.fit_transform(closeprice)
+print(closeprice)
+
