@@ -26,6 +26,7 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN\model2'   
 os.chdir(path)
+savedir = os.path.join(os.getcwd(), 'model2')
 
 def data_normalizer(data_t):
     global scaler_x 
@@ -179,7 +180,7 @@ with tf.Session() as sess:
             print('%.2f epochs: MSE train/valid = %.6f/%.6f'%(
               iteration*batchsize/trainsize, mse_train, mse_valid  
             ))
-        saver.save(sess, 'my_test_model')
+        saver.save(sess, savedir)
     y_train_pred = sess.run(outputs, feed_dict={X: x_train})
     y_valid_pred = sess.run(outputs, feed_dict={X: x_valid})
     y_test_pred = sess.run(outputs, feed_dict={X: x_test})
