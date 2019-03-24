@@ -33,6 +33,8 @@ starttime = datetime(1996, 1, 1)
 endtime = date.today()
 ALL = pdr.get_data_yahoo(symbol, starttime, endtime)[['Close']]
 ALL['maxClose'] = ALL.Close.max()
+ALL['minClose'] = ALL.Close.min()
+ALL['%Change'] = ALL.Clsoe.pct_change()
 print(ALL.head())
 
 
