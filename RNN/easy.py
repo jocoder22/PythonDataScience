@@ -47,4 +47,4 @@ plt.style.use('dark_background')
 path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
 os.chdir(path)
 
-model = load_model('models\Best.223_0.000160.h5')
+model = load_model('model_lstm .h5')

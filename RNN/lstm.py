@@ -33,12 +33,14 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 
 # plt.style.use('ggplot')
+global scaler_x 
+scaler_x = MinMaxScaler()
 
 def data_normalizer(data_t):
-    global scaler_x 
-    scaler_x = MinMaxScaler()
     for i in data_t.columns.tolist():
+        # print(i)
         data_t[i] = scaler_x.fit_transform(data_t[i].values.reshape(-1,1))
+        # data_t[i+'1'] = scaler_x.fit_transform(data_t.loc[:, [i]].values.reshape(-1,1)).reshape(-1)
 
     return data_t
 
@@ -52,21 +54,21 @@ rel = pd.read_csv('AMZN.csv', parse_dates=True, index_col='Date')
 print(rel.head(), end=sp)
 
 
-rel['H-L'] = rel['High'] - rel['Low']
-rel['MidHL'] = (rel['High'] + rel['Low'])/ 2
-rel['O-C'] = rel['Close'] - rel['Open']
-rel['3day MA'] = rel['Close'].shift(1).rolling(window=3).mean()
-rel['10day MA'] = rel['Close'].shift(1).rolling(window=10).mean()
-rel['30day MA'] = rel['Close'].shift(1).rolling(window=30).mean()
-rel['7dayvol_mean'] = rel['Volume'].shift(1).rolling(window=7).mean()
-rel['Std_dev'] = rel['Close'].rolling(5).std()
-# RSI(rel, 'Adj Close', 9)
-rel['RSI'] = tb.RSI(rel['Close'].values, timeperiod=9)
-rel['Williams %R'] = tb.WILLR(
-    rel['High'].values, rel['Low'].values, rel['Close'].values, 7)
+# rel['H-L'] = rel['High'] - rel['Low']
+# rel['MidHL'] = (rel['High'] + rel['Low'])/ 2
+# rel['O-C'] = rel['Close'] - rel['Open']
+# rel['3day MA'] = rel['Close'].shift(1).rolling(window=3).mean()
+# rel['10day MA'] = rel['Close'].shift(1).rolling(window=10).mean()
+# rel['30day MA'] = rel['Close'].shift(1).rolling(window=30).mean()
+# rel['7dayvol_mean'] = rel['Volume'].shift(1).rolling(window=7).mean()
+# rel['Std_dev'] = rel['Close'].rolling(5).std()
+# # RSI(rel, 'Adj Close', 9)
+# rel['RSI'] = tb.RSI(rel['Close'].values, timeperiod=9)
+# rel['Williams %R'] = tb.WILLR(
+#     rel['High'].values, rel['Low'].values, rel['Close'].values, 7)
 
 rel = rel.dropna()
-rel = rel.drop(columns=['High', 'Low', 'Volume', 'Open'])
+rel = rel.drop(columns=['High', 'Low', 'Adj Close'])
 print(rel.head(), end=sp)
 
 
@@ -75,14 +77,20 @@ print(rel.head(), end=sp)
 print(rel.head(), rel.shape, sep=sp)
 
 
-traindata = rel[:'2017']
-testdata = rel['2017':]
+traindata = rel[:'2018']
+testdata = rel['2018':]
 
+print(traindata.head(), testdata.head(), end=sp, sep=sp)
 traindata.reset_index(drop=True, inplace=True)
 testdata.reset_index(drop=True, inplace=True)
 
+test222 = scaler_x.fit_transform(testdata)
+train222 = scaler_x.fit_transform(traindata)
+
 traindata = data_normalizer(traindata)
 testdata = data_normalizer(testdata)
+
+
 
 print(traindata.head(), testdata.head(), sep=sp)
 
@@ -91,8 +99,11 @@ ytrain = traindata[['Close']]
 xtest = testdata.drop(columns=['Close'])
 ytest = testdata[['Close']]
 
-print(xtrain.head(), ytrain.head(), xtest.head(), ytest.head(), sep=sp)
+print(xtrain.head(), ytrain.head(), xtest.head(), ytest.head(), sep=sp, end=sp)
 print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape, sep=sp)
+
+print('#################################################')
+print(test222[:5], testdata.head(), sep=sp)
 
 
 # x = np.array(xtrain).reshape(xtrain.shape[0], xtrain.shape[1], 1)
@@ -243,7 +254,8 @@ model2.add(Dense(1, activation='relu'))
 model2.compile(loss='mse', optimizer='Adam')
 
 model_history = model2.fit(
-    xt3, yt3, epochs=120, batch_size=100, verbose=1, validation_split=0.2, callbacks=callbacks)
+    xt3, yt3, epochs=20, batch_size=100, verbose=1, 
+    validation_split=0.2, callbacks=callbacks, shuffle=False)
 
 
 lossValues = pd.DataFrame(model2.history.history)

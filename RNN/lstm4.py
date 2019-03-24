@@ -10,13 +10,13 @@ from datetime import datetime, date
 
 import talib as tb
 from tensorflow.python.keras.datasets import imdb
-from tensorflow.python.keras.models import Sequential
+from tensorflow.python.keras.models import Sequential, load_model
 from tensorflow.python.keras.preprocessing import sequence
 from tensorflow.python.keras.optimizers import Adam
 from tensorflow.python.keras.layers import Dense, Embedding
 from tensorflow.python.keras.layers import LSTM, SimpleRNN, Dropout, Flatten
 from tensorflow.python.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
-from keras.models import load_model
+
 
 from sklearn.pipeline import FeatureUnion
 from sklearn.preprocessing import FunctionTransformer
@@ -86,11 +86,14 @@ print(xtrain.shape, xval.shape, xtest.shape, sep=sp)
 print(ytrain.shape, yval.shape, ytest.shape, sep=sp)
 
 
-now = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
+""" now = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
 # saving weights
 savedir = os.path.join(os.getcwd(), 'weights')
 # modelname = 'Best.{epoch:03d}_Loss:{loss:05f}.h5'
 modelname = 'Best_{0}.h5'.format(now)
+"""
+
+
 """ 
 name_yskd = 900
 
@@ -104,12 +107,15 @@ monitorbest = ModelCheckpoint(filepath=filepath, monitor='loss',
 
 callbacks=[monitorbest]
 """ 
+""" 
+
 model = Sequential()
 model.add(LSTM(256, input_shape=(window, 1)))
 # model.add(Dropout(0.2))
 
 model.add(Dense(1))
-model.compile(optimizer='adam', loss='mse') 
+model.compile(optimizer='adam', loss='mse')  
+"""
 
 """
 
@@ -118,12 +124,14 @@ history = model.fit(xtrain, ytrain, epochs=30, validation_data=(xval, yval),
             callbacks=callbacks, shuffle=False)  """
 
 
-model.load_weights('weights\Best.223_0.000160.h5')
+# model.load_weights('weights\Best.223_0.000160.h5')
 
+
+model = load_model(f"model\model55.h5")
 # plt.plot(history.history['loss'])
 # plt.plot(history.history['val_loss'])
 # plt.show()
-
+print(model.summary())
 pred = model.predict(xtest)
 print(type(pred), ytest.shape, sep=sp, end=sp)
 # actual, prediction = [], []
@@ -137,10 +145,7 @@ plt.plot(scaler.inverse_transform(pred), label='Prediction')
 plt.legend()
 plt.show()
 
-
-
-
+now = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
 # save model
 # model.save_weights('model_lstm.h5')
-# model.save(f"model_{datetime.now()}")
-# model = load_model('models\Best.223_0.000160.h5')
+# model.save(f"model\model55.h5")
