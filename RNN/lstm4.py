@@ -140,8 +140,8 @@ actual= scaler.inverse_transform(ytest).reshape(-1)
 df = pd.DataFrame({'Actual': actual, 'Predictions': prediction})
 
 print(df.shape, df.head(), sep=sp, end=sp)
-plt.plot(scaler.inverse_transform(ytest.reshape(-1, 1)), label='Actual', color='black')
-plt.plot(scaler.inverse_transform(pred), label='Prediction')
+plt.plot(scaler.inverse_transform(ytest.reshape(-1, 1)), label='Actual', color='red')
+plt.plot(scaler.inverse_transform(pred), label='Prediction', color='yellow')
 plt.legend()
 plt.show()
 

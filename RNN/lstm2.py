@@ -24,6 +24,8 @@ import pandas_datareader as pdr
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
+path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN\model2'   
+os.chdir(path)
 
 def data_normalizer(data_t):
     global scaler_x 
@@ -62,7 +64,7 @@ print(rel.head(), end=sp)
 relnorm = rel.copy()
 relnorm.reset_index(drop=True, inplace=True)
 relnorn = data_normalizer(relnorm)
-print(relnorm.head(), relnorm.shape, sep=sp)
+print(relnorm.head(), relnorm.shape, relnorm.columns, sep=sp)
 
 
 # spliting data
@@ -99,14 +101,14 @@ nneurons = 200
 nlayers = 2
 lrate = 0.001
 batchsize = 60
-nepochs = 50
+nepochs = 500
 trainsize = x_train.shape[0]
 testsize = x_test.shape[0]
 tf.reset_default_graph()
 X = tf.placeholder(tf.float32, [None, nsteps, ninput])
 y = tf.placeholder(tf.float32, [None, ninput])
 
-index_epoch = 0
+index_epoch = 0 
 permArray = np.arange(x_train.shape[0])
 np.random.shuffle(permArray)
 
@@ -163,10 +165,11 @@ loss = tf.reduce_mean(tf.square(outputs - y))
 optimizer = tf.train.AdamOptimizer(learning_rate=lrate)
 train_op = optimizer.minimize(loss)
 
-
+saver = tf.train.Saver()
 # fitting model
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
+    
     for iteration in range(int(nepochs*trainsize/ batchsize)):
         x_batch, y_batch = iter_batch(batchsize)
         sess.run(train_op, feed_dict={X: x_batch, y: y_batch})
@@ -176,6 +179,7 @@ with tf.Session() as sess:
             print('%.2f epochs: MSE train/valid = %.6f/%.6f'%(
               iteration*batchsize/trainsize, mse_train, mse_valid  
             ))
+        saver.save(sess, 'my_test_model')
     y_train_pred = sess.run(outputs, feed_dict={X: x_train})
     y_valid_pred = sess.run(outputs, feed_dict={X: x_valid})
     y_test_pred = sess.run(outputs, feed_dict={X: x_test})
@@ -191,7 +195,7 @@ plt.show()
 
 
 
-ft = 0
+ft = 0   ###### 0 = 'Close', 1 = 'H-L', 2 = 'MidHL', 3 = 'O-C'
 plt.subplot(1,2,1)
 
 plt.plot(np.arange(y_train.shape[0]), y_train[:,ft], color='blue', label='train target')
