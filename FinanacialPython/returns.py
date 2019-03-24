@@ -31,5 +31,9 @@ symbol = 'AAL'
 # symbol = 'RELIANCE.NS'
 starttime = datetime(1996, 1, 1)
 endtime = date.today()
-rel = pdr.get_data_yahoo(symbol, starttime, endtime)[['Close']]
+ALL = pdr.get_data_yahoo(symbol, starttime, endtime)[['Close']]
+ALL['maxClose'] = ALL.Close.max()
+print(ALL.head())
+
+
 
