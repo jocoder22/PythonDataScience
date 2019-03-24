@@ -145,7 +145,7 @@ plt.plot(scaler.inverse_transform(pred), label='Prediction')
 plt.legend()
 plt.show()
 
-now = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
+# now = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
 # save model
 # model.save_weights('model_lstm.h5')
 # model.save(f"model\model55.h5")
