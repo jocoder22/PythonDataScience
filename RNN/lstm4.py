@@ -41,7 +41,7 @@ import seaborn as sns
 import matplotlib
 # print(matplotlib.style.available)
 # print(matplotlib.style.library)
-plt.style.use('dark_background')
+# plt.style.use('dark_background')
 
 path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
 os.chdir(path)
@@ -140,7 +140,7 @@ actual= scaler.inverse_transform(ytest).reshape(-1)
 df = pd.DataFrame({'Actual': actual, 'Predictions': prediction})
 
 print(df.shape, df.head(), sep=sp, end=sp)
-plt.plot(scaler.inverse_transform(ytest.reshape(-1, 1)), label='Actual')
+plt.plot(scaler.inverse_transform(ytest.reshape(-1, 1)), label='Actual', color='black')
 plt.plot(scaler.inverse_transform(pred), label='Prediction')
 plt.legend()
 plt.show()
