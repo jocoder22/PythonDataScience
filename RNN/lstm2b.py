@@ -26,7 +26,7 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN\model2'   
 os.chdir(path)
-savedir = os.path.join(os.getcwd(), 'model2')
+# savedir = os.path.join(os.getcwd(), 'model2')
 
 def data_normalizer(data_t):
     global scaler_x 
@@ -105,7 +105,7 @@ batchsize = 60
 nepochs = 500
 trainsize = x_train.shape[0]
 testsize = x_test.shape[0]
-tf.reset_default_graph()
+
 X = tf.placeholder(tf.float32, [None, nsteps, ninput])
 y = tf.placeholder(tf.float32, [None, ninput])
 
@@ -124,3 +124,124 @@ def iter_batch(batch_size):
     end = index_epoch
     return x_train[permArray[start:end]], y_train[permArray[start:end]]
 
+sess =  tf.Session()
+
+#  LSTM with peephole
+layers = [tf.contrib.rnn.LSTMCell(num_units=nneurons,
+                                  activation=tf.nn.leaky_relu,
+                                  use_peepholes = True)
+                                  for layer in range(nlayers)]
+
+multilayercell = tf.contrib.rnn.MultiRNNCell(layers)
+rnn_output, states = tf.nn.dynamic_rnn(multilayercell, X, dtype=tf.float32)
+stackedrnn = tf.reshape(rnn_output, [-1, nneurons])
+stackedout = tf.layers.dense(stackedrnn, ninput)
+outputs2 = tf.reshape(stackedout, [-1, nsteps, ninput])
+outputs = outputs2[:, nsteps -1, :]
+
+
+# Cost function
+loss = tf.reduce_mean(tf.square(outputs - y))
+
+# Optimizer
+optimizer = tf.train.AdamOptimizer(learning_rate=lrate)
+train_op = optimizer.minimize(loss)
+
+
+# RNN\model2\checkpoint
+tf.reset_default_graph()
+saver = tf.train.import_meta_graph('model2.meta')
+# for tensor in tf.get_default_graph().get_operations():
+#     print(tensor.name)
+
+# trainable_var = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
+# for var in trainable_var:
+#     print(var.name)
+
+names=[tensor.name for tensor in tf.get_default_graph().as_graph_def().node]
+print(len(names))
+
+""" with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())    
+    finalmodel = saver.restore(sess,tf.train.latest_checkpoint('./'))
+    graph = tf.get_default_graph()
+    output5 = graph.get_tensor_by_name(rnn_output)
+    # outputs = ['outputs:0']
+    y_train_pred = sess.run(output5, feed_dict={X: x_train})
+    y_valid_pred = sess.run(output5, feed_dict={X: x_valid})
+    y_test_pred = sess.run(output5, feed_dict={X: x_test}) """
+
+
+sess.run(tf.global_variables_initializer())    
+saver.restore(sess,tf.train.latest_checkpoint('./'))
+# graph = tf.get_default_graph()
+# output5 = graph.get_tensor_by_name(rnn_output)
+
+
+# outputs = ['outputs:0']
+y_train_pred = sess.run(outputs, feed_dict={X: x_train})
+y_valid_pred = sess.run(outputs, feed_dict={X: x_valid})
+y_test_pred = sess.run(outputs, feed_dict={X: x_test})
+
+# plotting
+results = pd.DataFrame({'Actual': y_test[:,-1], 'Predictions': y_test_pred[:,-1]})
+
+plt.plot(results['Actual'], label='Actual', color='red')
+plt.plot(results['Predictions'], label='Prediction', color='blue')
+plt.legend()
+plt.show()
+
+
+
+
+ft = 0   ###### 0 = 'Close', 1 = 'H-L', 2 = 'MidHL', 3 = 'O-C'
+plt.subplot(1,2,1)
+
+plt.plot(np.arange(y_train.shape[0]), y_train[:,ft], color='blue', label='train target')
+
+plt.plot(np.arange(y_train.shape[0], y_train.shape[0]+y_valid.shape[0]), y_valid[:,ft],
+         color='gray', label='valid target')
+
+plt.plot(np.arange(y_train.shape[0]+y_valid.shape[0],
+                   y_train.shape[0]+y_test.shape[0]+y_test.shape[0]),
+         y_test[:,ft], color='black', label='test target')
+
+plt.plot(np.arange(y_train_pred.shape[0]),y_train_pred[:,ft], color='red',
+         label='train prediction')
+
+plt.plot(np.arange(y_train_pred.shape[0], y_train_pred.shape[0]+y_valid_pred.shape[0]),
+         y_valid_pred[:,ft], color='orange', label='valid prediction')
+
+plt.plot(np.arange(y_train_pred.shape[0]+y_valid_pred.shape[0],
+                   y_train_pred.shape[0]+y_valid_pred.shape[0]+y_test_pred.shape[0]),
+         y_test_pred[:,ft], color='green', label='test prediction')
+
+plt.title('past and future stock prices')
+plt.xlabel('time [days]')
+plt.ylabel('normalized price')
+plt.legend(loc='best')
+
+plt.subplot(1,2,2)
+
+plt.plot(np.arange(y_train.shape[0], y_train.shape[0]+y_test.shape[0]),
+         y_test[:,ft], color='black', label='test target')
+
+plt.plot(np.arange(y_train_pred.shape[0], y_train_pred.shape[0]+y_test_pred.shape[0]),
+         y_test_pred[:,ft], color='green', label='test prediction')
+
+plt.title('future stock prices')
+plt.xlabel('time [days]')
+plt.ylabel('normalized price')
+plt.legend(loc='best')
+plt.show()
+
+
+
+"""
+
+from tensorflow.python.tools.inspect_checkpoint import print_tensors_in_checkpoint_file
+
+
+# latest_ckp = tf.train.latest_checkpoint('./')
+# print_tensors_in_checkpoint_file(latest_ckp, all_tensors=False, tensor_name='')
+"""

@@ -24,9 +24,9 @@ import pandas_datareader as pdr
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
-path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN\model2'   
+path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN\model33\model44\modelfinal'   
 os.chdir(path)
-savedir = os.path.join(os.getcwd(), 'model2')
+savedir = os.path.join(os.getcwd(), 'model_final')
 
 def data_normalizer(data_t):
     global scaler_x 
@@ -180,7 +180,7 @@ with tf.Session() as sess:
             print('%.2f epochs: MSE train/valid = %.6f/%.6f'%(
               iteration*batchsize/trainsize, mse_train, mse_valid  
             ))
-        saver.save(sess, savedir)
+    saver.save(sess, savedir)
     y_train_pred = sess.run(outputs, feed_dict={X: x_train})
     y_valid_pred = sess.run(outputs, feed_dict={X: x_valid})
     y_test_pred = sess.run(outputs, feed_dict={X: x_test})

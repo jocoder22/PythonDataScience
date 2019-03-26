@@ -47,7 +47,7 @@ path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
 os.chdir(path)
 
 sp = '\n\n'
-symbol = 'AAL'
+symbol = 'AAPL' #'AMZN'  #'AAL'
 starttime = datetime(1996, 1, 1)
 endtime = date.today()
 stock = pdr.get_data_yahoo(symbol, starttime, endtime)
@@ -124,7 +124,9 @@ history = model.fit(xtrain, ytrain, epochs=30, validation_data=(xval, yval),
             callbacks=callbacks, shuffle=False)  """
 
 
+# to load only the weights you must define the model as above
 # model.load_weights('weights\Best.223_0.000160.h5')
+# model.fit with callbacks save only the weights
 
 
 model = load_model(f"model\model55.h5")
