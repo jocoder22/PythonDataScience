@@ -37,5 +37,7 @@ ALL['minClose'] = ALL.Close.min()
 ALL['%Change'] = ALL.Close.pct_change()
 print(ALL.head())
 
+# https://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/
+
 
 
