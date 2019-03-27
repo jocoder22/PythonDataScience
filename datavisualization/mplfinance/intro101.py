@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import pandas_datareader as pdr
 from datetime import datetime, date
 from mpl_finance import candlestick2_ohlc
+from matplotlib.dates import MonthLocator, date2num, DateFormatter
 
 
 # https://www.lfd.uci.edu/~gohlke/pythonlibs/
@@ -23,14 +24,27 @@ stock = stock['2017':]
 print(stock.head())
 
 fig, ax = plt.subplots()
+fig.subplots_adjust(bottom=0.5)
+
+loc = MonthLocator()
+fmt = DateFormatter('%b')
+
+ax.xaxis.set_major_locator(loc)
+ax.xaxis.set_major_formatter(fmt)
+
 candlestick2_ohlc(ax,
                   opens=stock.Open,
                   closes=stock.Close,
                   highs=stock.High,
                   lows=stock.Low,
+                  width=0.3,
                   colordown='red',
                   colorup='green')
 
 plt.tight_layout()
 plt.legend()
+plt.show()
+
+
+stock.Close.plot()
 plt.show()
