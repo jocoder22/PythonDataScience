@@ -18,6 +18,7 @@ startdate = datetime(2000, 4, 15)
 enddate = date.today()
 
 stock = pdr.get_data_yahoo(stocksname, startdate, enddate)
+stock = stock['2017':]
 
 print(stock.head())
 
