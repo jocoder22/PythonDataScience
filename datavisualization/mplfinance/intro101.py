@@ -13,10 +13,23 @@ from mpl_finance import candlestick2_ohlc
 # http://codetheory.in/how-to-convert-a-video-with-python-and-ffmpeg/
 
 
-stocksname = ['LNG']
+stocksname = 'LNG'
 startdate = datetime(2000, 4, 15)
 enddate = date.today()
 
-lng_df = pdr.get_data_yahoo(stocksname, startdate, enddate)
+stock = pdr.get_data_yahoo(stocksname, startdate, enddate)
 
+print(stock.head())
 
+fig, ax = plt.subplots()
+candlestick2_ohlc(ax,
+                  opens=stock.Open,
+                  closes=stock.Close,
+                  highs=stock.High,
+                  lows=stock.Low,
+                  colordown='red',
+                  colorup='green')
+
+plt.tight_layout()
+plt.legend()
+plt.show()
