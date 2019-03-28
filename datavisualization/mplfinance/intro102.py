@@ -85,3 +85,9 @@ def train_validate_test_split2(datatt, tx, vx, ww):
     return np.expand_dims(train, axis=-1), np.expand_dims(validate, axis=-1), np.expand_dims(test, axis=-1)
 
 xdata, ydata = preprocess(closeprice, voll, window)
+
+xtrain, xval, xtest = train_validate_test_split2(xdata, val, test, window)
+ytrain, yval, ytest = train_validate_test_split2(ydata, val, test, window)
+
+print(xtrain.shape, xval.shape, xtest.shape, sep=sp)
+print(ytrain.shape, yval.shape, ytest.shape, sep=sp)
