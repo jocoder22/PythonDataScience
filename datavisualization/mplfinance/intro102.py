@@ -1,10 +1,12 @@
-from datetime import datetime, date
-import matplotlib.pyplot as plt
-from matplotlib import style
-from mpl_finance import candlestick_ohlc
-import matplotlib.dates as mdates
+import os
+import numpy as np 
 import pandas as pd
 import pandas_datareader as pdr
+from datetime import datetime, date
+import matplotlib.pyplot as plt
+from mpl_finance import candlestick_ohlc
+import matplotlib.dates as mdates
+
 
 from tensorflow.python.keras.models import Sequential, load_model
 from tensorflow.python.keras.preprocessing import sequence
@@ -18,7 +20,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 
-style.use('ggplot')
+plt.style.use('ggplot')
 
 stocksname = 'TSLA'
 startdate = datetime(1990, 4, 15)
