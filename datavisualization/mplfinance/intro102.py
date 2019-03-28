@@ -27,7 +27,7 @@ ax1.set_xticklabels([])
 
 candlestick_ohlc(ax1, df_ohlc.values, width=2, colorup='g')
 ax2.fill_between(df_volume.index.map(mdates.date2num), df_volume.values, 0)
-# plt.tight_layout()
+plt.tight_layout()
 plt.show()
 
 # https://pythonprogramming.net/sp500-company-price-data-python-programming-for-finance/?completed=/sp500-company-list-python-programming-for-finance/
