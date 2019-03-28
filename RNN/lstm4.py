@@ -47,7 +47,7 @@ path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
 os.chdir(path)
 
 sp = '\n\n'
-symbol = 'AAPL' #'AMZN'  #'AAL'
+symbol = 'AAL' # 'AAPL' #'AMZN'  
 starttime = datetime(1996, 1, 1)
 endtime = date.today()
 stock = pdr.get_data_yahoo(symbol, starttime, endtime)
