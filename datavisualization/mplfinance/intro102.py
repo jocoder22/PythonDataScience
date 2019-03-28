@@ -48,3 +48,32 @@ plt.show()
 
 # https://pythonprogramming.net/sp500-company-price-data-python-programming-for-finance/?completed=/sp500-company-list-python-programming-for-finance/
 
+path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
+os.chdir(path)
+
+sp = '\n\n'
+symbol = 'AAL' # 'AAPL' #'AMZN'  
+starttime = datetime(1996, 1, 1)
+endtime = date.today()
+stock = pdr.get_data_yahoo(symbol, starttime, endtime)
+stock.reset_index(inplace=True)
+print(stock.head(), stock.shape, sep=sp)
+
+scaler = MinMaxScaler()
+voll = stock[['Volume']]
+closeprice = stock[['Close']]
+closeprice = scaler.fit_transform(closeprice)
+voll = scaler.fit_transform(voll)
+print(closeprice, voll, sep=sp)
+
+window = 14
+val = 0.1
+test = 0.1
+
+def preprocess(data, data2, wdw):
+    feature, target = [], []
+    for idx in range(len(data) - wdw - 1):
+        feature.append(data[idx: idx + wdw, 0])
+        target.append(data2[idx + wdw, 0])
+
+    return np.array(feature), np.array(target)
