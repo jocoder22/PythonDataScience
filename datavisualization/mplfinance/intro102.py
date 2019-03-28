@@ -77,3 +77,11 @@ def preprocess(data, data2, wdw):
         target.append(data2[idx + wdw, 0])
 
     return np.array(feature), np.array(target)
+
+
+def train_validate_test_split2(datatt, tx, vx, ww):
+    vxx = tx + vx
+    test, validate, train = np.split(datatt, [int(tx*len(datatt)), int(vxx*len(datatt))])
+    return np.expand_dims(train, axis=-1), np.expand_dims(validate, axis=-1), np.expand_dims(test, axis=-1)
+
+xdata, ydata = preprocess(closeprice, voll, window)
