@@ -8,7 +8,7 @@ import pandas_datareader as pdr
 style.use('ggplot')
 
 stocksname = 'TSLA'
-startdate = datetime(2000, 4, 15)
+startdate = datetime(1990, 4, 15)
 enddate = date.today()
 
 df = pdr.get_data_yahoo(stocksname, startdate, enddate)
