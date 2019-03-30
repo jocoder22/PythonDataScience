@@ -95,7 +95,8 @@ def train_validate_test_split2(datatt, tx, vx, ww):
     test, validate, train = np.split(datatt, [int(tx*len(datatt)), int(vxx*len(datatt))])
     return np.expand_dims(train, axis=-1), np.expand_dims(validate, axis=-1), np.expand_dims(test, axis=-1)
 
-xdata, ydata = preprocess(voll, closeprice, window)
+# xdata, ydata = preprocess(voll, closeprice, window)
+xdata, ydata = preprocess(closeprice, closeprice, window)
 # xdata, ydata = preprocess(closeprice, closeprice, window)
 xtrain, xval, xtest = train_validate_test_split2(xdata, val, test, window)
 ytrain, yval, ytest = train_validate_test_split2(ydata, val, test, window)
@@ -134,22 +135,22 @@ adam = Adam(lr=lrate, beta_1=0.9, beta_2=0.999, epsilon=None, decay=decay_rate, 
 model.compile(optimizer='adam', loss='mse')  
 
 
-# history = model.fit(xtrain, ytrain, epochs=epoch, validation_data=(xval, yval), 
-#             callbacks=callbacks, shuffle=False)
+history = model.fit(xtrain, ytrain, epochs=epoch, validation_data=(xval, yval), 
+            callbacks=callbacks, shuffle=False)
 
 # to load only the weights you must define the model as above
 
-model.load_weights('weights\Best_2019_03_28 02_07_59.h5') # for both vol and closing price
+# model.load_weights('weights\Best_2019_03_28 02_07_59.h5') # for both vol and closing price
 # model.fit with callbacks save only the weights
 
 
 # model = load_model(f"model\model55.h5")
-# plt.plot(history.history['loss'], label='loss')
-# plt.plot(history.history['val_loss'], label='Val_loss')
-# plt.legend()
-# plt.pause(2)
-# plt.clf()
-# plt.show()
+plt.plot(history.history['loss'], label='loss')
+plt.plot(history.history['val_loss'], label='Val_loss')
+plt.legend()
+plt.pause(2)
+plt.clf()
+plt.show()
 
 print(model.summary())
 pred = model.predict(xtest)
