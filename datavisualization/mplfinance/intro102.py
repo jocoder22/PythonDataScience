@@ -74,11 +74,11 @@ voll = scaler2.fit_transform(voll)
 print(closeprice[:2], voll[:2], sep=sp, end=sp)
 print(closeprice.shape, voll.shape, sep=sp, end=sp)
 
-window = 30
-val = 0.1
+window = 90
+val = 0.2
 test = 0.1
 lrate = 0.001
-epoch = 10
+epoch = 30
 decay_rate = lrate / epoch
 
 def preprocess(data, data2, wdw):
@@ -165,7 +165,6 @@ plt.plot(df.Actual.values, label='Actual', color='red')
 plt.plot(df.Predictions.values, label='Prediction', color='yellow')
 plt.legend()
 plt.show()
-
 # now = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
 # save model
 # model.save_weights('model_lstm.h5')
