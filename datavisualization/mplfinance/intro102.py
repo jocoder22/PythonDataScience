@@ -74,11 +74,11 @@ voll = scaler2.fit_transform(voll)
 print(closeprice[:2], voll[:2], sep=sp, end=sp)
 print(closeprice.shape, voll.shape, sep=sp, end=sp)
 
-window = 14
+window = 30
 val = 0.1
 test = 0.2
 lrate = 0.001
-epoch = 100
+epoch = 10
 decay_rate = lrate / epoch
 
 def preprocess(data, data2, wdw):
@@ -120,11 +120,13 @@ monitorbest = ModelCheckpoint(filepath=filepath, monitor='val_loss',
 callbacks=[monitorbest]
 
 model = Sequential()
-model.add(LSTM(256,  return_sequences=True, input_shape=(window, 1)))
+model.add(LSTM(256, return_sequences=True, input_shape=(window, 1)))
 model.add(Dropout(0.3))
 
 model.add(LSTM(190))
 model.add(Dropout(0.3))
+
+model.add(Dense(5))
 
 model.add(Dense(1))
 
@@ -132,20 +134,21 @@ adam = Adam(lr=lrate, beta_1=0.9, beta_2=0.999, epsilon=None, decay=decay_rate, 
 model.compile(optimizer='adam', loss='mse')  
 
 
-history = model.fit(xtrain, ytrain, epochs=epoch, validation_data=(xval, yval), 
-            callbacks=callbacks, shuffle=False)
+# history = model.fit(xtrain, ytrain, epochs=epoch, validation_data=(xval, yval), 
+#             callbacks=callbacks, shuffle=False)
 
 # to load only the weights you must define the model as above
-# model.load_weights('weights\Best_2019_03_28 00_48_24.h5') for both vol and closing price
+
+model.load_weights('weights\Best_2019_03_28 02_07_59.h5') # for both vol and closing price
 # model.fit with callbacks save only the weights
 
 
 # model = load_model(f"model\model55.h5")
-plt.plot(history.history['loss'], label='loss')
-plt.plot(history.history['val_loss'], label='Val_loss')
-plt.legend()
-plt.pause(2)
-plt.clf()
+# plt.plot(history.history['loss'], label='loss')
+# plt.plot(history.history['val_loss'], label='Val_loss')
+# plt.legend()
+# plt.pause(2)
+# plt.clf()
 # plt.show()
 
 print(model.summary())
