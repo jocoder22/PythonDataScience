@@ -76,7 +76,7 @@ print(closeprice.shape, voll.shape, sep=sp, end=sp)
 
 window = 30
 val = 0.1
-test = 0.2
+test = 0.1
 lrate = 0.001
 epoch = 10
 decay_rate = lrate / epoch
