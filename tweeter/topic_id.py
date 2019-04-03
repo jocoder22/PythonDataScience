@@ -25,7 +25,6 @@ text_clean = []
 for text in data['News_content']:
     text_clean.append(pptext(text).split())
 
-    
 
 print(text_clean[:3])
 
