@@ -128,7 +128,7 @@ std_avg_predictions = scalerMM.inverse_transform(np.array(std_avg_predictions).r
 all_mid_data = scalerMM.inverse_transform(all_mid_data.reshape(-1, 1))
 data2 = pd.DataFrame(std_avg_predictions, columns=['Prediction'])
 data3 = pd.DataFrame(all_mid_data, columns=['Original'])
-result = pd.concat([stock, data2, data3], axis=1, sort=False)
+result = pd.concat([stock, data2, data3], axis=1)
 
 result.set_index('Date', inplace=True)
 result.dropna()

@@ -46,9 +46,9 @@ ax1.set_xticklabels([])
 candlestick_ohlc(ax1, df_ohlc.values, width=4, colorup='g')
 ax2.fill_between(df_volume.index.map(mdates.date2num), df_volume.values, 0)
 plt.tight_layout()
-plt.pause(2)
-plt.clf()
-# plt.show()
+# plt.pause(2)
+# plt.clf()
+plt.show()
 
 # https://pythonprogramming.net/sp500-company-price-data-python-programming-for-finance/?completed=/sp500-company-list-python-programming-for-finance/
 
@@ -64,21 +64,21 @@ stock.reset_index(inplace=True)
 print(stock.head(), stock.shape, sep=sp)
 
 scaler = MinMaxScaler()
-voll = stock[['Volume']]
 # closeprice = stock[['Close']].values.reshape(-1, 1)
 closeprice = stock[['Close']]
 closeprice = scaler.fit_transform(closeprice)
 
 scaler2 = MinMaxScaler()
+voll = stock[['Volume']]
 voll = scaler2.fit_transform(voll)
 print(closeprice[:2], voll[:2], sep=sp, end=sp)
 print(closeprice.shape, voll.shape, sep=sp, end=sp)
 
 window = 90
-val = 0.2
-test = 0.1
+val = 0.1
+test = 0.2
 lrate = 0.001
-epoch = 30
+epoch = 200
 decay_rate = lrate / epoch
 
 def preprocess(data, data2, wdw):
@@ -95,9 +95,9 @@ def train_validate_test_split2(datatt, tx, vx, ww):
     test, validate, train = np.split(datatt, [int(tx*len(datatt)), int(vxx*len(datatt))])
     return np.expand_dims(train, axis=-1), np.expand_dims(validate, axis=-1), np.expand_dims(test, axis=-1)
 
-# xdata, ydata = preprocess(voll, closeprice, window)
-xdata, ydata = preprocess(closeprice, closeprice, window)
+xdata, ydata = preprocess(voll, closeprice, window)
 # xdata, ydata = preprocess(closeprice, closeprice, window)
+
 xtrain, xval, xtest = train_validate_test_split2(xdata, val, test, window)
 ytrain, yval, ytest = train_validate_test_split2(ydata, val, test, window)
 
@@ -114,7 +114,7 @@ if not os.path.isdir(savedir):
     os.makedirs(savedir)
 filepath = os.path.join(savedir, modelname)
 
-monitorbest = ModelCheckpoint(filepath=filepath, monitor='val_loss',
+monitorbest = ModelCheckpoint(filepath=filepath, monitor='loss',
                              verbose=1,
                              save_best_only=True)
 
@@ -131,26 +131,26 @@ model.add(Dense(5))
 
 model.add(Dense(1))
 
-adam = Adam(lr=lrate, beta_1=0.9, beta_2=0.999, epsilon=None, decay=decay_rate, amsgrad=False)
+# adam = Adam(lr=lrate, beta_1=0.9, beta_2=0.999, epsilon=None, decay=decay_rate, amsgrad=False)
 model.compile(optimizer='adam', loss='mse')  
 
 
-history = model.fit(xtrain, ytrain, epochs=epoch, validation_data=(xval, yval), 
-            callbacks=callbacks, shuffle=False)
+# history = model.fit(xtrain, ytrain, epochs=epoch, validation_data=(xval, yval), 
+#             callbacks=callbacks, batch_size=200, shuffle=False)
 
 # to load only the weights you must define the model as above
 
 # model.load_weights('weights\Best_2019_03_28 02_07_59.h5') # for both vol and closing price
 # model.fit with callbacks save only the weights
+model.load_weights('weights\Best_2019_03_30 07_13_54.h5') 
 
-
-# model = load_model(f"model\model55.h5")
-plt.plot(history.history['loss'], label='loss')
-plt.plot(history.history['val_loss'], label='Val_loss')
-plt.legend()
-plt.pause(2)
-plt.clf()
-plt.show()
+# # model = load_model(f"model\model55.h5")
+# plt.plot(history.history['loss'], label='loss')
+# plt.plot(history.history['val_loss'], label='Val_loss')
+# plt.legend()
+# # plt.pause(2)
+# # plt.clf()
+# plt.show()
 
 print(model.summary())
 pred = model.predict(xtest)
@@ -169,3 +169,7 @@ plt.show()
 # save model
 # model.save_weights('model_lstm.h5')
 # model.save(f"model\model55.h5")
+# https://www.youtube.com/watch?v=J4LTIixReMA
+# https://datatofish.com/upgrade-pip/
+# https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
+

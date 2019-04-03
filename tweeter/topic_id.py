@@ -41,7 +41,6 @@ topics = ldamodel.print_topics(num_words=4)
 for topic in topics:
     print(topic)
 
-
 # Visaulization works only on Jupyter Notebook
 # type jupyter notebook or jupyter console
 dictionary = Dictionary.load('topicModels//dictionary2.gensim')
