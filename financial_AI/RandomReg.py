@@ -23,4 +23,11 @@ for d in range(1, 41):
     dd = 'day' + str(d)
     stock[dd] = stock['Close'].shift(-1 * d)
 
-print(stock.head())
+stock.dropna(inplace=True)
+
+print(stock.head(), stock.tail(), sep=sp, end=sp)
+
+X = stock.iloc[:, :33]
+y = stock.iloc[:, 33:]
+
+print(X.shape, y.shape, sep=sp, end=sp)
