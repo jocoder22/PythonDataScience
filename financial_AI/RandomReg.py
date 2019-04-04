@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import pandas_datareader as pdr
 import pickle as pkl
 
+from joblin import dump
 from datetime import datetime, date
 
 from sklearn.ensemble import RandomForestRegressor as regg
@@ -67,15 +68,15 @@ ax.plot(y_test.index, ypred[:, 7], 'bo', label='Prediction')
 plt.legend()
 plt.show()
 
-
-y_test['pred'] = ypred[:, 7]
+y_test2 = y_test.copy()
+y_test2['pred'] = ypred[:, 7]
 fig, ax = plt.subplots()
 
 fig.set_figwidth(24)
 fig.set_figheight(15)
 
 y_test['day40'].plot(label='Actual')
-y_test['pred'].plot(label='Prediction')
+y_test2['pred'].plot(label='Prediction')
 plt.legend()
 plt.show()
 
@@ -84,8 +85,11 @@ plt.show()
 filename = f'model_{datenow}.sav'
 pkl.dump(model, open(filename, 'wb'))
 
+dump(model, f'model2_{datenow}.joblin')
+
 
 # loading the model
 model2 = pkl.load(open(filename, 'rb'))
-result = loaded_model.score(X_test, y_test)
+result = model2.score(X_test, y_test)
 print(result)
+
