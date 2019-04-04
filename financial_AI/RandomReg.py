@@ -21,6 +21,6 @@ stock = pdr.get_data_yahoo(symbol, start, end)[['Close']]
 
 for d in range(1, 41):
     dd = 'day' + str(d)
-    stock[dd] = stock['Close'].shift(-d)
+    stock[dd] = stock['Close'].shift(-1 * d)
 
 print(stock.head())
