@@ -40,3 +40,8 @@ regressor = regg(bootstrap=True, criterion='mse', max_depth=None,
            min_samples_leaf=1, min_samples_split=2,
            min_weight_fraction_leaf=0.0, n_estimators=100, n_jobs=16,
            oob_score=True, random_state=None, verbose=1, warm_start=False)
+
+regressor.fit(X_train, y_train)
+score = regressor.score(X_test, y_test)
+print(score, sep=sp, end=sp)
+
