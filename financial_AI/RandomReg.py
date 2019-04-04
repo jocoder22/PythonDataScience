@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import pandas_datareader as pdr
 import pickle as pkl
 
-from joblin import dump
+from joblib import dump
 from datetime import datetime, date
 
 from sklearn.ensemble import RandomForestRegressor as regg
@@ -84,8 +84,7 @@ plt.show()
 # Save the model
 filename = f'model_{datenow}.sav'
 pkl.dump(model, open(filename, 'wb'))
-
-dump(model, f'model2_{datenow}.joblin')
+dump(model, f'model2_{datenow}.joblib')
 
 
 # loading the model
