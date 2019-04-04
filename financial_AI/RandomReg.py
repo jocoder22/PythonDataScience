@@ -18,3 +18,9 @@ end = datetime(2018, 3, 27)
 symbol = 'TSLA'
 
 stock = pdr.get_data_yahoo(symbol, start, end)[['Close']]
+
+for d in range(1, 41):
+    dd = 'day' + str(d)
+    stock[dd] = stock['Close'].shift(-d)
+
+print(stock.head())
