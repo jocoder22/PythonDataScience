@@ -21,7 +21,7 @@ sp = '\n\n'
 dat1 = date.today()
 datenow = dat1.strftime('%b_%d_%y')
 
-start = datetime(2010, 6, 29)
+start = datetime(2000, 6, 29)
 # end = datetime(2018, 3, 27)
 end = date.today()
 symbol = 'AAPL'
@@ -84,9 +84,9 @@ plt.show()
 
 
 # Save the model
-filename = f'model_{datenow}.sav'
+filename = f'model_{symbol}_{datenow}.sav'
 pkl.dump(model, open(filename, 'wb'))
-dump(model, f'model2_{datenow}.joblib')
+dump(model, f'model2_{symbol}_{datenow}.joblib')
 
 
 # loading the model
