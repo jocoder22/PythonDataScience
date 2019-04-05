@@ -24,8 +24,8 @@ datenow = dat1.strftime('%b_%d_%y')
 start = datetime(2000, 6, 29)
 # end = datetime(2018, 3, 27)
 end = date.today()
-# symbol = 'AAPL'
-symbol = 'TSLA'
+symbol = 'AAPL'
+# symbol = 'AMZN'
 
 stock = pdr.get_data_yahoo(symbol, start, end)[['Close']]
 
@@ -42,7 +42,7 @@ y = stock.iloc[:, 33:]
 
 print(X.shape, y.shape, sep=sp, end=sp)
 
-X_train, X_test, y_train, y_test = tts(X, y, test_size=0.3)
+X_train, X_test, y_train, y_test = tts(X, y, test_size=0.3, shuffle=False)
 
 # loading the model
 symbol = 'AAPL'
@@ -89,7 +89,8 @@ y_test2['pred'].plot(label='Prediction')
 plt.legend()
 plt.show()
 
-
+y_test2.sort_index(inplace=True)
+print(y_test2.tail(10))
 # # Save the model
 # filename = f'model_{symbol}_{datenow}.sav'
 # pkl.dump(model, open(filename, 'wb'))
