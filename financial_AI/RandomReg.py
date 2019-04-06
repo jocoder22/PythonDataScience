@@ -24,8 +24,9 @@ datenow = dat1.strftime('%b_%d_%y')
 start = datetime(2000, 6, 29)
 # end = datetime(2018, 3, 27)
 end = date.today()
-symbol = 'AAPL'
+# symbol = 'AAPL'
 # symbol = 'AMZN'
+symbol = 'NYT'
 
 stock = pdr.get_data_yahoo(symbol, start, end)[['Close']]
 
@@ -45,20 +46,20 @@ print(X.shape, y.shape, sep=sp, end=sp)
 X_train, X_test, y_train, y_test = tts(X, y, test_size=0.3, shuffle=False)
 
 # loading the model
-symbol = 'AAPL'
-filename = f'model_{symbol}_{datenow}.sav'
-model = pkl.load(open(filename, 'rb'))
-result = model.score(X_test, y_test)
-print(result)
+# symbol = 'AAPL'
+# filename = f'model_{symbol}_{datenow}.sav'
+# model = pkl.load(open(filename, 'rb'))
+# result = model.score(X_test, y_test)
+# print(result)
 
-# model = regg(bootstrap=True, criterion='mse', max_depth=None,
-#            max_features='auto', max_leaf_nodes=None,
-#            min_impurity_decrease=0.0, min_impurity_split=None,
-#            min_samples_leaf=1, min_samples_split=2,
-#            min_weight_fraction_leaf=0.0, n_estimators=100, n_jobs=16,
-#            oob_score=True, random_state=None, verbose=1, warm_start=False)
+model = regg(bootstrap=True, criterion='mse', max_depth=None,
+           max_features='auto', max_leaf_nodes=None,
+           min_impurity_decrease=0.0, min_impurity_split=None,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, n_estimators=100, n_jobs=16,
+           oob_score=True, random_state=None, verbose=1, warm_start=False)
 
-# model.fit(X_train, y_train)
+model.fit(X_train, y_train)
 score = model.score(X_test, y_test)
 print(score, sep=sp, end=sp)
 
@@ -91,10 +92,11 @@ plt.show()
 
 y_test2.sort_index(inplace=True)
 print(y_test2.tail(10))
+
 # # Save the model
-# filename = f'model_{symbol}_{datenow}.sav'
-# pkl.dump(model, open(filename, 'wb'))
-# dump(model, f'model2_{symbol}_{datenow}.joblib')
+filename = f'model_{symbol}_{datenow}.sav'
+pkl.dump(model, open(filename, 'wb'))
+dump(model, f'model2_{symbol}_{datenow}.joblib')
 
 
 # # loading the model
