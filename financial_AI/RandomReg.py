@@ -21,13 +21,13 @@ sp = '\n\n'
 dat1 = date.today()
 datenow = dat1.strftime('%b_%d_%y')
 
-start = datetime(2000, 6, 29)
+start = datetime(2010, 6, 29)
 # end = datetime(2018, 3, 27)
 end = date.today()
 # symbol = 'AAPL'
-# symbol = 'AMZN'
+symbol = 'AMZN'
 # symbol = 'NYT'
-symbol = 'GOOG'
+# symbol = 'GOOG'
 
 stock = pdr.get_data_yahoo(symbol, start, end)[['Close']]
 
