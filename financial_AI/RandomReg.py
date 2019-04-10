@@ -25,8 +25,8 @@ start = datetime(2010, 6, 29)
 # end = datetime(2018, 3, 27)
 end = date.today()
 # symbol = 'AAPL'
-symbol = 'AMZN'
-# symbol = 'NYT'
+# symbol = 'AMZN'
+symbol = 'NYT'
 # symbol = 'GOOG'
 
 stock = pdr.get_data_yahoo(symbol, start, end)[['Close']]
