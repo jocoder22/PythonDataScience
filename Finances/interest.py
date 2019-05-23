@@ -18,3 +18,7 @@ a, b = interest(320000, 0.04, 360)
 print(f'Interest paid is ${a:.2f}, and total amount is ${b:.2f}')
 print(f'Monthly payment is {b/360:.2f}')
 
+
+a, b = interest(320000, 0.03, 360)
+print(f'Interest paid is ${a:.2f}, and total amount is ${b:.2f}')
+print(f'Monthly payment is {b/360:.2f}')
