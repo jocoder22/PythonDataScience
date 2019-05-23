@@ -12,3 +12,9 @@ def interest(amt, rate, timet):
 
 a, b = interest(46000, 0.03, 48)
 print(f'Interest paid is ${a:.2f}, and total amount is ${b:.2f}')
+
+
+a, b = interest(320000, 0.04, 360)
+print(f'Interest paid is ${a:.2f}, and total amount is ${b:.2f}')
+print(f'Monthly payment is {b/360:.2f}')
+
