@@ -9,6 +9,7 @@ plt.style.use('ggplot')
 y = np.arange(10)
 z = np.random.rand(len(y), 6)*1000
 
+print(z)
 fig, axes = plt.subplots(2,3, sharex=True, sharey=True)
 axesr = axes.ravel()
 print(axesr)
