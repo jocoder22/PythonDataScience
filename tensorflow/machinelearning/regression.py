@@ -33,12 +33,13 @@ for i in [urlname, urlindex]:
 colname = '''MPG Cylinders Displacement Horsepower Weight Acceleration 
              Model_year Origin Car_name'''.split()
 
-mytypes = ({cname: float if cname != 'Car_name' else  object for cname in colname})
+mytypes = ({cname: float if cname != 'Car_name' else str for cname in colname})
 
-dataset = pd.read_csv(url, names=colname, dtype=mytypes,
-                skipinitialspace=True, na_values="?", comment='\t', sep=" ")
+dataset = pd.read_csv(url, names=colname, dtype=mytypes, na_values=['na','Na', '?'],
+                skipinitialspace=True, comment='\t', sep=" ", quotechar='"')
 
 dataset.drop(columns='Car_name', inplace=True)
+print(dataset.isna().sum())
 print(dataset.head(), dataset.shape, dataset.info(), sep=sp)
 
 
