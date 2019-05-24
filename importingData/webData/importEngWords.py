@@ -28,3 +28,5 @@ def formWord(word):
     print(permutlist)
 
 formWord('sicd')
+
+formWord('olm')
