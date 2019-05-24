@@ -53,6 +53,7 @@ data4 = dataset.copy()
 
 encoder = OneHotEncoder(categorical_features = [7])
 dataset = encoder.fit_transform(dataset).toarray()
+
 newcolumns = colname[:-2]
 origin_name.extend(newcolumns)
 dataset = pd.DataFrame(dataset, columns=origin_name)
@@ -77,4 +78,5 @@ dumnames = ['USA', 'Europe', 'Japan']
 for idx, ele in enumerate(dumnames, 1):
     data4[ele] = (data4['Origin'] == idx) * 1.0
 
-print(data4.head())
+data4.drop(columns="Origin", inplace=True)
+print(data4.head(), data4.info())
