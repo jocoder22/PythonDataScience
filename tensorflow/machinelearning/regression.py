@@ -60,9 +60,11 @@ dataset = pd.DataFrame(dataset, columns=origin_name)
 
 originmap = {1.0 : 'USA', 2.0: 'Europe', 3.0: 'Japan'}
 dataset2['Origin'] = dataset2['Origin'].map(originmap)
-dataset2["Origin"] = dataset2["Origin"].astype('category')
+# dataset2["Origin"] = dataset2["Origin"].astype('category')
+# newcolumns.extend(['Europe', 'Japan', 'USA'])
+
 data3 = pd.get_dummies(dataset2)
 print(dataset2.head())
 print(dataset2.info())
 
-print(data3.head())
+print(data3.head(), data3.shape)
