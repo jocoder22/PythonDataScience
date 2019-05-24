@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import requests 
 # from sklearn import datasets
 # from sklearn.pipeline import FeatureUnion
+from sklearn.preprocessing import OneHotEncoder
 # from sklearn.preprocessing import FunctionTransformer
 # from sklearn.preprocessing import Imputer
 # from sklearn.multiclass import OneVsRestClassifier
@@ -24,23 +25,44 @@ urlname = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/au
 urlindex = "https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/Index"
 
 
-for i in [urlname, urlindex]:
-    respond = requests.get(i)
-    text = respond.text
-    print(text, end=sp)
+# for i in [urlname, urlindex]:
+#     respond = requests.get(i)
+#     text = respond.text
+#     print(text, end=sp)
 
 
 colname = '''MPG Cylinders Displacement Horsepower Weight Acceleration 
              Model_year Origin Car_name'''.split()
+
+origin_name = ['USA', 'Europe', 'Japan']
 
 mytypes = ({cname: float if cname != 'Car_name' else str for cname in colname})
 
 dataset = pd.read_csv(url, names=colname, dtype=mytypes, na_values=['na','Na', '?'],
                 skipinitialspace=True, comment='\t', sep=" ", quotechar='"')
 
+# print(dataset.head())
+
 dataset.drop(columns='Car_name', inplace=True)
-print(dataset.isna().sum())
-dataset.dropna()
-print(dataset.head(), dataset.shape, dataset.info(), sep=sp)
+# print(dataset.isna().sum())
+dataset.dropna(inplace=True)
+dataset2 = dataset.copy()
+# print(dataset.head(), dataset.shape, dataset.info(), sep=sp, end=sp)
 
 
+encoder = OneHotEncoder(categorical_features = [7])
+dataset = encoder.fit_transform(dataset).toarray()
+newcolumns = colname[:-2]
+origin_name.extend(newcolumns)
+dataset = pd.DataFrame(dataset, columns=origin_name)
+
+# print(dataset.head(), dataset.shape, dataset.info(), sep=sp)
+
+originmap = {1.0 : 'USA', 2.0: 'Europe', 3.0: 'Japan'}
+dataset2['Origin'] = dataset2['Origin'].map(originmap)
+dataset2["Origin"] = dataset2["Origin"].astype('category')
+data3 = pd.get_dummies(dataset2)
+print(dataset2.head())
+print(dataset2.info())
+
+print(data3.head())
