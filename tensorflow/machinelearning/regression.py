@@ -40,6 +40,7 @@ dataset = pd.read_csv(url, names=colname, dtype=mytypes, na_values=['na','Na', '
 
 dataset.drop(columns='Car_name', inplace=True)
 print(dataset.isna().sum())
+dataset.dropna()
 print(dataset.head(), dataset.shape, dataset.info(), sep=sp)
 
 
