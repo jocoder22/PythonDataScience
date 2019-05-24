@@ -18,7 +18,7 @@ for idx, ax in enumerate(axes.flatten()):
     ax.set_title(f'Plot_{idx}')
     if idx == 0 : ax.set_ylabel('Height (cm)')
     if idx == 3 : ax.set_ylabel('Weight (kg)')
-    if idx > 2:
+    if idx > 2 :
         ax.set_xlabel(f'Cohort 200{idx}')
 
 plt.show()
