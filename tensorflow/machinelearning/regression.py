@@ -47,6 +47,7 @@ dataset.drop(columns='Car_name', inplace=True)
 # print(dataset.isna().sum())
 dataset.dropna(inplace=True)
 dataset2 = dataset.copy()
+data4 = dataset.copy()
 # print(dataset.head(), dataset.shape, dataset.info(), sep=sp, end=sp)
 
 
@@ -68,3 +69,12 @@ print(dataset2.head())
 print(dataset2.info())
 
 print(data3.head(), data3.shape)
+
+
+
+data4['Origin'] = data4['Origin'].astype(int)
+dumnames = ['USA', 'Europe', 'Japan']
+for idx, ele in enumerate(dumnames, 1):
+    data4[ele] = (data4['Origin'] == idx) * 1.0
+
+print(data4.head())
