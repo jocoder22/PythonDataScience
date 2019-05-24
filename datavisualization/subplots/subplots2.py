@@ -17,5 +17,7 @@ print(axesr)
 for idx in range(len(axesr)):
     axesr[idx].bar(y, z[:,idx], color=plt.cm.Paired(idx/6.))
     axesr[idx].set_title(f'Plot_{idx}')
+    if idx in [0,3]:
+        axesr[idx].set_ylabel('Height (cm)')
 
 plt.show()
