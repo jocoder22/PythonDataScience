@@ -15,5 +15,6 @@ print(flataxes)
 
 for idx, ax in enumerate(axes.flatten()):
     ax.bar(x, y[:,idx], color=plt.cm.Paired(idx/6.))
+    ax.set_title(f'Plot_{idx}')
 
 plt.show()
