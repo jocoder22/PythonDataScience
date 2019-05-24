@@ -19,5 +19,6 @@ for idx in range(len(axesr)):
     axesr[idx].set_title(f'Plot_{idx}')
     if idx in [0,3]:
         axesr[idx].set_ylabel('Height (cm)')
-
+    if idx > 2:
+        axesr[idx].set_xlabel('Length (cm)')
 plt.show()
