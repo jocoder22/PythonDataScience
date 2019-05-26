@@ -127,3 +127,7 @@ for features in data4.columns:
     sns.kdeplot(data4s[features].values, ax=ax2, label=features)
 plt.legend()
 plt.show()
+
+
+sns.pairplot(data4, diag_kind='kde')
+plt.show()
