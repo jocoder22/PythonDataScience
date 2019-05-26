@@ -228,3 +228,18 @@ plt.plot(hist['epoch'], hist['val_mean_absolute_error'], label='Validation Error
 plt.legend()
 plt.show()
 
+
+
+model1 = tf_modeler(xtrainscaled)
+model1.fit(xtrainscaled, ytrain, epochs=Epoch, verbose=0, 
+        validation_split=0.2, callbacks=[PrintDD()])
+
+lossValues = pd.DataFrame(model1.history.history)
+lossValues['epoch'] = model1.history.epoch
+print(' ', end=sp)
+print(lossValues.head())
+loss, mae, mse = model1.evaluate(xtestscaled, ytest, verbose=0)
+print(f'Mean absolute error = {mae:.2f}')
+
+
+
