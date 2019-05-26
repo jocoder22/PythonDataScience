@@ -131,3 +131,31 @@ plt.show()
 
 sns.pairplot(data4, diag_kind='kde')
 plt.show()
+
+
+
+# define the model function
+def tf_modeler(features):
+    _nshape = features.shape[1]
+    model_g = tf.keras.models.Sequential()
+    model_g.add(tf.keras.layers.BatchNormalization(input_shape=(_nshape,)))
+    model_g.add(tf.keras.layers.Dense(1000, activation='relu'))
+    model_g.add(tf.keras.layers.Dropout(0.5)) # 0.4
+
+    model_g.add(tf.keras.layers.BatchNormalization())
+    model_g.add(tf.keras.layers.Dense(500, activation='relu'))
+    model_g.add(tf.keras.layers.BatchNormalization())
+    model_g.add(tf.keras.layers.Dropout(0.2)) # 0.5
+    
+   
+    model_g.add(tf.keras.layers.Dense(50, activation='relu'))
+    model_g.add(tf.keras.layers.BatchNormalization())
+    model_g.add(tf.keras.layers.Dropout(0.2))
+
+
+    model_g.add(tf.keras.layers.Dense(1))
+    model_g.compile(tf.keras.optimizers.Adam(lr=0.001), 
+                    loss='mse',
+                    metrics=['mae', 'mse']) # 95.38
+
+    return model_g
