@@ -241,5 +241,12 @@ print(lossValues.head())
 loss, mae, mse = model1.evaluate(xtestscaled, ytest, verbose=0)
 print(f'Mean absolute error = {mae:.2f}')
 
-
+# plot loss values
+plt.plot(lossValues['epoch'], lossValues['mean_absolute_error'], label='Train Error')
+plt.plot(lossValues['epoch'], lossValues['val_mean_absolute_error'], label='Validation Error')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.title('Loss curve')
+plt.legend()
+plt.show()
 
