@@ -35,7 +35,7 @@ print(election.columns)
 #        'other_votes', 'dem_share', 'east_west'],
 #       dtype='object') 
 
-print(election.info)
+print(election.info())
 
 
 opfl = election.query("state in ['FL', 'PA', 'OH']") # returns complete data

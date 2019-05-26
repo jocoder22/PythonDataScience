@@ -15,9 +15,15 @@ from sklearn.preprocessing import OneHotEncoder
 # from sklearn.metrics import roc_curve
 # from sklearn.metrics import confusion_matrix, classification_report
 # from sklearn.linear_model import LogisticRegression
-# from sklearn.model_selection import train_test_split
-# from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler, RobustScaler, StandardScaler
+import seaborn as sns
 # plt.style.use('ggplot')
+
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
 
 sp = '\n\n'
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data'
@@ -25,7 +31,7 @@ urlname = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/au
 urlindex = "https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/Index"
 
 
-# for i in [urlname, urlindex]:
+# for i in [urlname, urlindex, url]:
 #     respond = requests.get(i)
 #     text = respond.text
 #     print(text, end=sp)
@@ -36,15 +42,20 @@ colname = '''MPG Cylinders Displacement Horsepower Weight Acceleration
 
 origin_name = ['USA', 'Europe', 'Japan']
 
-mytypes = ({cname: float if cname != 'Car_name' else str for cname in colname})
+# mytypes = ({cname: float if cname != 'Car_name' else str for cname in colname})
+# mytypes = ({cname: str for cname in colname})
 
-dataset = pd.read_csv(url, names=colname, dtype=mytypes, na_values=['na','Na', '?'],
+# dataset = pd.read_csv(url, names=colname, dtype=mytypes, na_values=['na','Na', '?'],
+#                 skipinitialspace=True, comment='\t', sep=" ", quotechar='"')
+
+
+dataset = pd.read_csv(url, names=colname, na_values=['na','Na', '?'],
                 skipinitialspace=True, comment='\t', sep=" ", quotechar='"')
 
-# print(dataset.head())
+
 
 dataset.drop(columns='Car_name', inplace=True)
-# print(dataset.isna().sum())
+print(dataset.isna().sum())
 dataset.dropna(inplace=True)
 dataset2 = dataset.copy()
 data4 = dataset.copy()
@@ -62,21 +73,40 @@ dataset = pd.DataFrame(dataset, columns=origin_name)
 
 originmap = {1.0 : 'USA', 2.0: 'Europe', 3.0: 'Japan'}
 dataset2['Origin'] = dataset2['Origin'].map(originmap)
-# dataset2["Origin"] = dataset2["Origin"].astype('category')
+dataset2["Origin"] = dataset2["Origin"].astype('category')
 # newcolumns.extend(['Europe', 'Japan', 'USA'])
 
-data3 = pd.get_dummies(dataset2)
-print(dataset2.head())
-print(dataset2.info())
-
-print(data3.head(), data3.shape)
+data3 = pd.get_dummies(dataset2, columns=['Origin'])
+# print(data3.head(), data3.shape, sep=sp, end=sp)
 
 
 
-data4['Origin'] = data4['Origin'].astype(int)
+# data4['Origin'] = data4['Origin'].astype(int)
 dumnames = ['USA', 'Europe', 'Japan']
 for idx, ele in enumerate(dumnames, 1):
     data4[ele] = (data4['Origin'] == idx) * 1.0
 
+# data4.drop(columns="Origin", inplace=True)
+data4["Origin2"] = data4["Origin"].astype('category')
 data4.drop(columns="Origin", inplace=True)
-print(data4.head(), data4.info())
+data5 = data4.copy()
+data4j = data4.copy()
+# print(data4.head(), data4.info(), sep=sp, end=sp)
+
+
+# Exploratory data analysis
+fig, ax = plt.subplots()
+toplot = []
+for features in data4.columns:
+    toplot.append(data4[features])
+
+ax.boxplot(toplot)
+ax.set_xticklabels(data4.columns)
+plt.show()
+
+fig, ax = plt.subplots(ncols=data4.shape[1])
+
+for idx, ax in enumerate(ax.flatten()):
+    ax.boxplot(data4.iloc[:, idx])
+    ax.set_xlabel(data4.columns[idx])
+plt.show()
