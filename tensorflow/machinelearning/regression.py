@@ -196,3 +196,12 @@ print(model.summary())
 examaples = xtrainscaled[:10]
 results1 = model.predict(examaples)
 print(results1)
+
+
+class PrintDD(keras.callbacks.Callback):
+    def on_epoch_end(self, epoch, logs):
+        if epoch % 100 == 0 : print('Next 100 ')
+        print("...", end='')
+        
+
+Epochs = 1000
