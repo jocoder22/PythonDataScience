@@ -219,3 +219,12 @@ hist = pd.DataFrame(history.history)
 hist['epoch'] = history.epoch
 print(hist.tail())
 
+loss, mae, mse = model.evaluate(xtestscaled, ytest, verbose=0)
+print(f'Mean absolute error = {mae:.2f}')
+
+
+plt.plot(hist['epoch'], hist['mean_absolute_error'], label='Train Error')
+plt.plot(hist['epoch'], hist['val_mean_absolute_error'], label='Validation Error')
+plt.legend()
+plt.show()
+
