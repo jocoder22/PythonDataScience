@@ -207,7 +207,7 @@ class PrintDD(keras.callbacks.Callback):
 Epochs = 1000
 
 
-stoppage = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
+stoppage = keras.callbacks.EarlyStopping(monitor='val_loss', patience=100)
 
 history = model.fit(xtrainscaled, ytrain,
                     epochs=Epochs,
@@ -231,8 +231,8 @@ plt.show()
 
 
 model1 = tf_modeler(xtrainscaled)
-model1.fit(xtrainscaled, ytrain, epochs=Epoch, verbose=0, 
-        validation_split=0.2, callbacks=[PrintDD()])
+model1.fit(xtrainscaled, ytrain, epochs=Epochs, verbose=0, 
+        validation_split=0.2, callbacks=[stoppage, PrintDD()])
 
 lossValues = pd.DataFrame(model1.history.history)
 lossValues['epoch'] = model1.history.epoch
