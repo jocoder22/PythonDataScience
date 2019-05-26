@@ -159,3 +159,14 @@ def tf_modeler(features):
                     metrics=['mae', 'mse']) # 95.38
 
     return model_g
+
+
+
+# # split the dataset
+xtrain, xtest, ytrain, ytest = train_test_split(data5.iloc[:, 1:-1], data5.iloc[:, 0], 
+                                test_size=0.2, random_state=45, stratify=data5.Origin2)
+
+scaler =  StandardScaler()
+xtrainscaled = scaler.fit_transform(xtrain)
+xtestscaled = scaler.fit_transform(xtest)
+
