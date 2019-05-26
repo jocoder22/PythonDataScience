@@ -110,3 +110,20 @@ for idx, ax in enumerate(ax.flatten()):
     ax.boxplot(data4.iloc[:, idx])
     ax.set_xlabel(data4.columns[idx])
 plt.show()
+
+
+
+data4.drop(columns=["Origin2","Model_year", "USA", "Europe", "Japan"], inplace=True)
+print(data4.info(), data4.shape, sep=sp)
+scaler2 = MinMaxScaler()
+data4sb = scaler2.fit_transform(data4)
+data4s = pd.DataFrame(data4sb, columns=data4.columns)
+fig, (ax1, ax2) = plt.subplots(ncols=2)
+ax1.set_title('Before Scaling')
+ax1.set_xticklabels(data4.columns, rotation=90)
+ax2.set_title('After MinMax Scaler')
+for features in data4.columns:
+    sns.kdeplot(data4[features].values, ax=ax1, label=features)
+    sns.kdeplot(data4s[features].values, ax=ax2, label=features)
+plt.legend()
+plt.show()
