@@ -205,3 +205,14 @@ class PrintDD(keras.callbacks.Callback):
         
 
 Epochs = 1000
+
+
+stoppage = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
+
+history = model.fit(xtrainscaled, ytrain,
+                    epochs=Epochs,
+                    validation_split=0.2,
+                    verbose=0,
+                    callbacks=[stoppage, PrintDD()])
+
+
