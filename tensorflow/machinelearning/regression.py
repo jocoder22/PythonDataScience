@@ -215,4 +215,7 @@ history = model.fit(xtrainscaled, ytrain,
                     verbose=0,
                     callbacks=[stoppage, PrintDD()])
 
+hist = pd.DataFrame(history.history)
+hist['epoch'] = history.epoch
+print(hist.tail())
 
