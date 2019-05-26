@@ -189,3 +189,10 @@ def regmodel():
     return modeler
 
 
+model = regmodel()
+
+print(model.summary())
+
+examaples = xtrainscaled[:10]
+results1 = model.predict(examaples)
+print(results1)
