@@ -170,3 +170,22 @@ scaler =  StandardScaler()
 xtrainscaled = scaler.fit_transform(xtrain)
 xtestscaled = scaler.fit_transform(xtest)
 
+
+def regmodel():
+    modeler = keras.Sequential([
+        # layers.Dense(124, activation=tf.nn.relu, input_shape=[len(xtrainscaleddf.keys())]),
+        layers.Dense(124, activation=tf.nn.relu, input_shape=[xtrainscaled.shape[1]]),
+        layers.Dense(64, activation=tf.nn.relu),
+        layers.Dense(16, activation=tf.nn.relu),
+        layers.Dense(1)
+    ])
+
+    optimizer = tf.keras.optimizers.RMSprop(0.01)
+
+    modeler.compile(loss='mse',
+                  optimizer=optimizer,
+                  metrics=['mae', 'mse'])
+    
+    return modeler
+
+
