@@ -4,6 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import requests
 
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 sp = '\n\n'
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data'
@@ -17,4 +19,9 @@ dataset = pd.read_csv(url, names=colname, na_values=['na','Na', '?'],
 
 dataset.drop(columns='Car_name', inplace=True)
 print(dataset.isna().sum())
-dataset.dropna(inplace=True)                  
+dataset.dropna(inplace=True) 
+
+
+scaler =  StandardScaler()
+feature = dataset.pop('MPG')
+dataset = scaler.fit_transform(dataset)
