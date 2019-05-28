@@ -6,6 +6,7 @@ import requests
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+from sklearn.pipeline import Pipeline
 import seaborn as sns
 
 sp = '\n\n'
@@ -40,3 +41,13 @@ plt.show()
 # Inspect the explained variance ratio per component
 print(pcompf.explained_variance_ratio_)
 print(pca.explained_variance_ratio_.cumsum())
+
+
+
+# Using Pipeline
+pipe1 = Pipeline([('scaler', StandardScaler()),
+        		 ('reducer', PCA(n_components=4))])
+
+# Fit it to the dataset and extract the component vectors
+pipe1.fit(dataset)
+vectors = pipe1.steps[1][1].components_.round(2)
