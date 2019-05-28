@@ -15,4 +15,6 @@ colname = '''MPG Cylinders Displacement Horsepower Weight Acceleration
 dataset = pd.read_csv(url, names=colname, na_values=['na','Na', '?'],
                 skipinitialspace=True, comment='\t', sep=" ", quotechar='"')
 
-                    
+dataset.drop(columns='Car_name', inplace=True)
+print(dataset.isna().sum())
+dataset.dropna(inplace=True)                  
