@@ -50,7 +50,7 @@ pipe1 = Pipeline([('scaler', StandardScaler()),
 
 # Fit it to the dataset and extract the component vectors
 pipe1.fit(dataset)
-vectors = pipe1.steps[1][1].components_.round(2)
+vectors = pipe1.steps[1][1].components_.round(3)
 
 
 # Print feature effects
