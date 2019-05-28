@@ -51,3 +51,10 @@ pipe1 = Pipeline([('scaler', StandardScaler()),
 # Fit it to the dataset and extract the component vectors
 pipe1.fit(dataset)
 vectors = pipe1.steps[1][1].components_.round(2)
+
+
+# Print feature effects
+print('PC 1 effects = ' + str(dict(zip(colname[1:8], vectors[0]))))
+print('PC 2 effects = ' + str(dict(zip(colname[1:8], vectors[1]))))
+print('PC 3 effects = ' + str(dict(zip(colname[1:8], vectors[2]))))
+print('PC 4 effects = ' + str(dict(zip(colname[1:8], vectors[3]))))
