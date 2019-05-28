@@ -46,7 +46,7 @@ print(pca.explained_variance_ratio_.cumsum())
 
 # Using Pipeline
 pipe1 = Pipeline([('scaler', StandardScaler()),
-        		 ('reducer', PCA(n_components=5))])
+        		 ('pca', PCA(n_components=5))])
 
 # Fit it to the dataset and extract the component vectors
 pipe1.fit(dataset)
@@ -58,3 +58,4 @@ print('PC 1 effects = ' + str(dict(zip(colname[1:8], vectors[0]))))
 print('PC 2 effects = ' + str(dict(zip(colname[1:8], vectors[1]))))
 print('PC 3 effects = ' + str(dict(zip(colname[1:8], vectors[2]))))
 print('PC 4 effects = ' + str(dict(zip(colname[1:8], vectors[3]))))
+print('PC 5 effects = ' + str(dict(zip(colname[1:8], vectors[4]))))
