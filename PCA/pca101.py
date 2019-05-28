@@ -46,7 +46,7 @@ print(pca.explained_variance_ratio_.cumsum())
 
 # Using Pipeline
 pipe1 = Pipeline([('scaler', StandardScaler()),
-        		 ('reducer', PCA(n_components=4))])
+        		 ('reducer', PCA(n_components=5))])
 
 # Fit it to the dataset and extract the component vectors
 pipe1.fit(dataset)
