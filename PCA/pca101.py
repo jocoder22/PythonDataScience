@@ -30,8 +30,13 @@ dataset = scaler.fit_transform(dataset)
 
 pca = PCA()
 pcomp = pca.fit_transform(dataset)
+pcompf= pca.fit(dataset)
 pcomp_df = pd.DataFrame(pcomp, columns=colname[1:8])
 
 # Create a pairplot
 sns.pairplot(pcomp_df)
 plt.show()
+
+# Inspect the explained variance ratio per component
+print(pcompf.explained_variance_ratio_)
+print(pca.explained_variance_ratio_.cumsum())
