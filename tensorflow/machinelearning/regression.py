@@ -171,6 +171,7 @@ xtrainscaled = scaler.fit_transform(xtrain)
 xtestscaled = scaler.fit_transform(xtest)
 
 
+
 def regmodel():
     modeler = keras.Sequential([
         # layers.Dense(124, activation=tf.nn.relu, input_shape=[len(xtrainscaleddf.keys())]),

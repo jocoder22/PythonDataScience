@@ -6,6 +6,7 @@ import requests
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+import seaborn as sns
 
 sp = '\n\n'
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data'
@@ -25,3 +26,12 @@ dataset.dropna(inplace=True)
 scaler =  StandardScaler()
 feature = dataset.pop('MPG')
 dataset = scaler.fit_transform(dataset)
+
+
+pca = PCA()
+pcomp = pca.fit_transform(dataset)
+pcomp_df = pd.DataFrame(pcomp, columns=colname[1:8])
+
+# Create a pairplot
+sns.pairplot(pcomp_df)
+plt.show()
