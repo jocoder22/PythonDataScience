@@ -23,8 +23,7 @@ url2 = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00488/Live.csv
 
 df = pd.read_csv(url2)
 df_int = df.select_dtypes(include='object')
-
-print(df_int['status_type'].value_counts())
+print(df_int['status_type'].value_counts(), df.head(), sep=sp, end=sp)
 
 
 # One Hot coding
@@ -42,3 +41,13 @@ mask = df['status_type'].isin(['status', 'link'])
 df['status_type'][mask] = 'Others'
 counts = df['status_type'].value_counts()
 print(counts)
+print(df['num_shares'].value_counts(), sep=sp, end=sp)
+
+
+# creating categories
+# Binning feature
+cut_points = [-np.inf, 100, 500, 1000,  np.inf]
+minn, maxx = (df["num_shares"].min(), df["num_shares"].max())
+labels = ["low","medium","high","very high"]
+df["num_shares_Bin"] = pd.cut(df["num_shares"], bins=cut_points, labels=labels)
+print(df['num_shares_Bin'].value_counts(), sep=sp, end=sp)
