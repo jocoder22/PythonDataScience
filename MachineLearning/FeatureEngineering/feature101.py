@@ -19,18 +19,14 @@ import matplotlib.pyplot as plt
 
 
 sp = '\n\n'
-url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data'
+url2 = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00488/Live.csv'
 
-colname = '''MPG Cylinders Displacement Horsepower Weight Acceleration 
-             Model_year Origin Car_name'''.split()
+df = pd.read_csv(url2)
+df_int = df.select_dtypes(include='object')
 
-origin_name = ['USA', 'Europe', 'Japan']
-
-
-dataset = pd.read_csv(url, names=colname, na_values=['na','Na', '?'],
-                skipinitialspace=True, comment='\t', sep=" ", quotechar='"')
+print(df_int['status_type'].value_counts())
 
 
-
-dataset.drop(columns='Car_name', inplace=True)
-print(dataset.isna().sum())
+# One Hot coding
+df_hot = pd.get_dummies(df, columns=['status_type'], prefix='S')
+print(df_hot.head())
