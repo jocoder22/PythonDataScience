@@ -46,8 +46,9 @@ print(df['num_shares'].value_counts(), sep=sp, end=sp)
 
 # creating categories
 # Binning feature
-cut_points = [-np.inf, 100, 500, 1000,  np.inf]
+# cut_points = [-np.inf, 100, 500, 1000,  np.inf]
 minn, maxx = (df["num_shares"].min(), df["num_shares"].max())
+cut_points = [minn, 100, 500, 1000, maxx]
 labels = ["low","medium","high","very high"]
 df["num_shares_Bin"] = pd.cut(df["num_shares"], bins=cut_points, labels=labels)
 print(df['num_shares_Bin'].value_counts(), sep=sp, end=sp)
