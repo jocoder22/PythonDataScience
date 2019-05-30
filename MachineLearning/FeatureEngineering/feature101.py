@@ -34,9 +34,11 @@ print(df_hot.head())
 # Dummy coding
 df_dummy = pd.get_dummies(df, columns=['status_type'], prefix='D', drop_first=True)
 print(df_dummy.head())
-
-
-print(df.columns, df_dummy.columns, sep=sp)
+print(df.columns, df_dummy.columns, sep=sp, end=sp)
 
 
 # Collapsing values
+mask = df['status_type'].isin(['status', 'link'])
+df['status_type'][mask] = 'Others'
+counts = df['status_type'].value_counts()
+print(counts)
