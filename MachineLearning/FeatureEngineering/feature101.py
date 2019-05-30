@@ -30,3 +30,10 @@ print(df_int['status_type'].value_counts())
 # One Hot coding
 df_hot = pd.get_dummies(df, columns=['status_type'], prefix='S')
 print(df_hot.head())
+
+# One Hot coding
+df_dummy = pd.get_dummies(df, columns=['status_type'], prefix='D', drop_first=True)
+print(df_dummy.head())
+
+
+print(df.columns, df_dummy.columns, sep=sp)
