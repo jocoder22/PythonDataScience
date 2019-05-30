@@ -31,9 +31,12 @@ print(df_int['status_type'].value_counts())
 df_hot = pd.get_dummies(df, columns=['status_type'], prefix='S')
 print(df_hot.head())
 
-# One Hot coding
+# Dummy coding
 df_dummy = pd.get_dummies(df, columns=['status_type'], prefix='D', drop_first=True)
 print(df_dummy.head())
 
 
 print(df.columns, df_dummy.columns, sep=sp)
+
+
+# Collapsing values
