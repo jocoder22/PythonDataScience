@@ -26,7 +26,11 @@ print([name for name in colname if name not in df.columns])
 
 # fill in values
 df2['Chol'] = df2['Chol'].fillna(round(df2['Chol'].mean()))
+df2['Fbs'] = df2['Fbs'].fillna(round(df2['Fbs'].mean()))
 print(df2.info(), sep=sp, end=sp)
+
+
+
 
 
 
