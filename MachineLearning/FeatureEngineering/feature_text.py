@@ -8,7 +8,9 @@ sp = '\n\n'
 path = r'C:\Users\Jose\Desktop\PythonDataScience\tweeter'
 os.chdir(path)
 
-data = pd.read_csv('nyt.csv')
+
+data2 = pd.read_csv('nyt.csv')
+data = data2[:50]
 
 # remove unusual characters
 data['News_content'] = data['News_content'].str.replace('\r\n', '')
