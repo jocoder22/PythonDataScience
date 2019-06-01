@@ -23,3 +23,8 @@ print(data.shape, data.head(), sep=sp, end=sp)
 # turn textst to lower case
 data['News_content'] = data['News_content'].str.lower()
 print(data.shape, data.head(), sep=sp, end=sp)
+
+# Calculate the length of each textline
+data['textLenght'] = data['News_content'].str.len()
+print(data.shape, data.head(), sep=sp, end=sp)
+
