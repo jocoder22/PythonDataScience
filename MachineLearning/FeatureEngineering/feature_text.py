@@ -28,3 +28,12 @@ print(data.shape, data.head(), sep=sp, end=sp)
 data['textLenght'] = data['News_content'].str.len()
 print(data.shape, data.head(), sep=sp, end=sp)
 
+
+# Number of words in each textline
+data['wordNumber'] = data['News_content'].str.split().str.len()
+print(data.shape, data.head(), sep=sp, end=sp)
+
+
+
+
+
