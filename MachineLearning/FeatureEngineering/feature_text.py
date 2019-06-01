@@ -10,6 +10,11 @@ os.chdir(path)
 
 data = pd.read_csv('nyt.csv')
 
-
+# remove unusual characters
 data['News_content'] = data['News_content'].str.replace('\r\n', '')
+print(data.shape, data.head(), sep=sp, end=sp)
+
+
+# remove not alphabetic character
+data['News_content'] = data['News_content'].str.replace('[^a-zA-Z]', ' ')
 print(data.shape, data.head(), sep=sp, end=sp)
