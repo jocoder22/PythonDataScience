@@ -18,3 +18,8 @@ print(data.shape, data.head(), sep=sp, end=sp)
 # remove not alphabetic character
 data['News_content'] = data['News_content'].str.replace('[^a-zA-Z]', ' ')
 print(data.shape, data.head(), sep=sp, end=sp)
+
+
+# turn textst to lower case
+data['News_content'] = data['News_content'].str.lower()
+print(data.shape, data.head(), sep=sp, end=sp)
