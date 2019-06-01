@@ -34,6 +34,8 @@ data['wordNumber'] = data['News_content'].str.split().str.len()
 print(data.shape, data.head(), sep=sp, end=sp)
 
 
-
+# Find the average length of word
+data['average_length'] = data['textLenght'] / data['wordNumber']
+print(data.shape, data.head(), sep=sp, end=sp)
 
 
