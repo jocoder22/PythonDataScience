@@ -8,13 +8,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 from nltk import word_tokenize, wordpunct_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
-from nltk.stem.snowball import SnowballStemmer
+from nltk.stem.snowball import SnowballStemmer, PorterStemmer
 import string 
 
-sp = '\n\n'
-path = r'C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\FeatureEngineering'
-os.chdir(path)
-data = pd.read_csv('textdata.csv', compression='gzip')
 
 def xprint(d):
     for arg in (d.head(), d.info(), d.shape, d. columns):
@@ -22,7 +18,6 @@ def xprint(d):
 
 
 def preprocessText(text):
-
     excludePunt = set(string.punctuation)
     excludePunt.update(('"', "'"))
     stopword = set(stopwords.words("english"))
@@ -31,8 +26,11 @@ def preprocessText(text):
                     "advertisement", "information", "service", "—", "year", "would"))
     wordlemm = WordNetLemmatizer()
     wordporter = SnowballStemmer("english")
+    
+    # wordporter = PorterStemmer(ignore_stopwords=False)
     # form word tokens
     text2 = word_tokenize(text)
+    
     # Retain alphabetic words: alpha_only
     alpha_only = [t.lower() for t in text2 if t.isalpha()]
 
@@ -41,22 +39,35 @@ def preprocessText(text):
 
     # Lemmatize all tokens into a new list: lemmatized
     lemmat = [wordlemm.lemmatize(t) for t in no_stops]
-    
-    return lemmat
+    result = " ".join(word for word in lemmat)
+    return result
 
+
+sp = '\n\n'
+path = r'C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\FeatureEngineering'
+os.chdir(path)
+data = pd.read_csv('textdata.csv', compression='gzip')
+
+# preprocess the text
+text_clean = []
+
+for text in data['News_content']:
+    text_clean.append(preprocessText(text)) 
+
+data['cleanText'] = text_clean
 
 # Instantiate the sklearn countvectorizer
 # and limit the number of features generated
-cvect = CountVectorizer(min_df=0.2 ,max_df=0.7)
+cvect = CountVectorizer(min_df=0.1 ,max_df=0.7)
 
 # fit the sklearn countvectorizer
-cvect.fit(data['News_content'])
+cvect.fit(data['cleanText'])
 
 # print feature names
 print(len(cvect.get_feature_names()), cvect.get_feature_names(), sep=sp, end=sp)
 
 # Transform the text content
-News_content_vectorized = cvect.transform(data['News_content'])
+News_content_vectorized = cvect.transform(data['cleanText'])
 
 # convert to array
 News_content_Varray = News_content_vectorized.toarray()
@@ -65,16 +76,5 @@ print(News_content_Varray)
 
 
 
-
-text_clean = []
-
-for text in data['News_content']:
-    text_clean.append(preprocessText(text).split()) 
-
-
-# for text in data['News_content']:
-#     text_clean.append(preprocessText(text, stopword))
-
-data['cleanText'] = text_clean
 
 xprint(data)
