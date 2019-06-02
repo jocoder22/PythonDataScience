@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+import pickle
+
 sp = '\n\n'
 path = r'C:\Users\Jose\Desktop\PythonDataScience\tweeter'
 os.chdir(path)
@@ -39,5 +41,13 @@ print(data.shape, data.head(), sep=sp, end=sp)
 # Find the average length of word
 data['average_length'] = data['textLenght'] / data['wordNumber']
 print(data.shape, data.head(), sep=sp, end=sp)
+
+# Save data to compressed csv
+path = r'C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\FeatureEngineering'
+os.chdir(path)
+data.to_csv('textdata.csv', index=False, compression='gzip')
+
+
+
 
 
