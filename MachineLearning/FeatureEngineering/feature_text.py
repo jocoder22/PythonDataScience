@@ -4,8 +4,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-import pickle
-
 sp = '\n\n'
 path = r'C:\Users\Jose\Desktop\PythonDataScience\tweeter'
 os.chdir(path)

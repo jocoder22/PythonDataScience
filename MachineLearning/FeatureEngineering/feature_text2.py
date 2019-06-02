@@ -4,8 +4,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from collections import defaultdict
+
 from sklearn.feature_extraction.text import CountVectorizer
-from nltk import word_tokenize, wordpunct_tokenize
+from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.stem.snowball import SnowballStemmer, PorterStemmer
@@ -40,7 +42,7 @@ def preprocessText(text):
     # Lemmatize all tokens into a new list: lemmatized
     lemmat = [wordlemm.lemmatize(t) for t in no_stops]
     result = " ".join(word for word in lemmat)
-    return result
+    return (result, lemmat)
 
 
 sp = '\n\n'
@@ -49,12 +51,25 @@ os.chdir(path)
 data = pd.read_csv('textdata.csv', compression='gzip')
 
 # preprocess the text
-text_clean = []
+text_cleanList = []
+text_cleanstring = []
 
 for text in data['News_content']:
-    text_clean.append(preprocessText(text)) 
+    text_cleanstring.append(preprocessText(text)[0])
+    text_cleanList.extend(preprocessText(text)[1])  
 
-data['cleanText'] = text_clean
+data['cleanText'] = text_cleanstring
+
+# Most common used word
+kdict = defaultdict(int)
+for val in text_cleanList:
+    kdict[val] += 1
+    
+ksort = sorted(kdict.items(), reverse=True, key=lambda x: x[1])
+ks = pd.DataFrame(ksort,  columns=['word', 'freq'])
+
+xprint(ks)
+
 
 # Instantiate the sklearn countvectorizer
 # and limit the number of features generated
