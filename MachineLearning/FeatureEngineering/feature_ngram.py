@@ -41,3 +41,13 @@ News_content_vectorized = cvect.transform(data['cleanText'])
 # convert to array
 News_content_Varray = News_content_vectorized.toarray()
 print(News_content_Varray)
+
+
+# convert to dataframe
+News_content_df = pd.DataFrame(News_content_Varray, 
+                     columns=cvect.get_feature_names()).add_prefix('Ngram_')
+
+# inspect dataframe
+print(News_content_df.iloc[0].sort_values(ascending=False), end=sp)
+
+
