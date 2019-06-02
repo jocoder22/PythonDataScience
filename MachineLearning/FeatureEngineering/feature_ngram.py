@@ -7,11 +7,6 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 
 from sklearn.feature_extraction.text import CountVectorizer
-from nltk import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem.wordnet import WordNetLemmatizer
-from nltk.stem.snowball import SnowballStemmer, PorterStemmer
-import string 
 
 
 def xprint(d):
