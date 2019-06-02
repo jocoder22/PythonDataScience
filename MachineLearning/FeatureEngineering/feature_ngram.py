@@ -51,3 +51,8 @@ News_content_df = pd.DataFrame(News_content_Varray,
 print(News_content_df.iloc[0].sort_values(ascending=False), end=sp)
 
 
+# concat the data tables
+data2 = pd.concat([data, News_content_df], axis=1)
+
+
+xprint(data2)
