@@ -27,7 +27,7 @@ data = pd.read_csv('textdata.csv', compression='gzip')
 
 # Instantiate the sklearn countvectorizer
 # and limit the number of features generated
-cvect = CountVectorizer(max_features=10, ngram_range=(2,2), stop_words='english')
+cvect = CountVectorizer(max_features=20, ngram_range=(2,2), stop_words='english')
 
 # fit the sklearn countvectorizer
 cvect.fit(data['News_content'])
