@@ -19,7 +19,7 @@ data = pd.read_csv('textdata.csv', compression='gzip')
 
 # Instantiate the sklearn countvectorizer
 # and limit the number of features generated
-Tfidvect = TfidfVectorizer(max_features=20, stop_words='english')
+Tfidvect = TfidfVectorizer(max_features=10, stop_words='english')
 
 # fit the sklearn countvectorizer
 Tfidvect .fit(data['News_content'])
@@ -38,7 +38,12 @@ print(News_content_Varray)
 News_content_df = pd.DataFrame(News_content_Varray, 
                      columns=Tfidvect .get_feature_names()).add_prefix('Tf_')
 
+# inspect dataframe
+print(News_content_df.loc[0].sort_values(ascending=False), end=sp)
+
 # concat the data tables
 data2 = pd.concat([data, News_content_df], axis=1)
 
+
 xprint(data2)
+
