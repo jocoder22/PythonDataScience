@@ -9,10 +9,10 @@ path = r'C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\FeatureEngineer
 os.chdir(path)
 data = pd.read_csv('textdata.csv', compression='gzip')
 
-def p(*args):
-    for arg in args:
+def xprint(d):
+    for arg in (d.head(), d.info(), d.shape, d. columns):
         print(arg, end='\n\n')
 
-p(data.head(),data.shape, data.columns)
+xprint(data)
 
 
