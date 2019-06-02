@@ -29,7 +29,7 @@ data['News_content'] = data['News_content'].str.lower()
 print(data.shape, data.head(), sep=sp, end=sp)
 
 # Calculate the length of each textline
-data['textLenght'] = data['News_content'].str.len()
+data['textLength'] = data['News_content'].str.len()
 print(data.shape, data.head(), sep=sp, end=sp)
 
 
@@ -39,7 +39,7 @@ print(data.shape, data.head(), sep=sp, end=sp)
 
 
 # Find the average length of word
-data['average_length'] = data['textLenght'] / data['wordNumber']
+data['average_length'] = data['textLength'] / data['wordNumber']
 print(data.shape, data.head(), sep=sp, end=sp)
 
 # Save data to compressed csv
