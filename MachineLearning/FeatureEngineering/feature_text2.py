@@ -4,7 +4,12 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from sklearn.feature_extraction.text import CountVectorizer 
+from sklearn.feature_extraction.text import CountVectorizer
+from nltk import word_tokenize, wordpunct_tokenize
+from nltk.corpus import stopwords
+from nltk.stem.wordnet import WordNetLemmatizer
+from nltk.stem.snowball import SnowballStemmer
+import string 
 
 sp = '\n\n'
 path = r'C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\FeatureEngineering'
@@ -39,10 +44,6 @@ def preprocessText(text):
     
     return lemmat
 
-text_clean = []
-
-for text in data['News_content']:
-    text_clean.append(cleantext(text, stopword).split()) 
 
 # Instantiate the sklearn countvectorizer
 # and limit the number of features generated
@@ -61,6 +62,19 @@ News_content_vectorized = cvect.transform(data['News_content'])
 News_content_Varray = News_content_vectorized.toarray()
 print(News_content_Varray)
 
+
+
+
+
+text_clean = []
+
+for text in data['News_content']:
+    text_clean.append(preprocessText(text).split()) 
+
+
+# for text in data['News_content']:
+#     text_clean.append(preprocessText(text, stopword))
+
+data['cleanText'] = text_clean
+
 xprint(data)
-
-
