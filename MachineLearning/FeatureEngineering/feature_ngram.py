@@ -30,17 +30,18 @@ data = pd.read_csv('textdata.csv', compression='gzip')
 cvect = CountVectorizer(max_features=10, ngram_range=(2,2), stop_words='english')
 
 # fit the sklearn countvectorizer
-cvect.fit(data['cleanText'])
+cvect.fit(data['News_content'])
 
 # print feature names
 print(len(cvect.get_feature_names()), cvect.get_feature_names(), sep=sp, end=sp)
 
+
 # Transform the text content
-News_content_vectorized = cvect.transform(data['cleanText'])
+News_content_vectorized = cvect.transform(data['News_content'])
 
 # convert to array
 News_content_Varray = News_content_vectorized.toarray()
-print(News_content_Varray)
+print(News_content_Varray, sep=sp, end=sp)
 
 
 # convert to dataframe
@@ -50,6 +51,8 @@ News_content_df = pd.DataFrame(News_content_Varray,
 # inspect dataframe
 print(News_content_df.iloc[0].sort_values(ascending=False), end=sp)
 
+# print 5 top words 
+print(News_content_df.sum().sort_values(ascending=False).head(), end=sp)
 
 # concat the data tables
 data2 = pd.concat([data, News_content_df], axis=1)
