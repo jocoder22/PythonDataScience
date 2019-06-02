@@ -11,8 +11,7 @@ path = r'C:\Users\Jose\Desktop\PythonDataScience\tweeter'
 os.chdir(path)
 
 
-data2 = pd.read_csv('nyt2.csv')
-data = data2[:50]
+data = pd.read_csv('nyt2.csv')
 
 # remove unusual characters
 data['News_content'] = data['News_content'].str.replace('\r\n', '')

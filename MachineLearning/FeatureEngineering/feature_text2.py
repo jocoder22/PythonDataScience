@@ -78,7 +78,7 @@ News_content_df = pd.DataFrame(News_content_Varray,
                      columns=cvect.get_feature_names()).add_prefix('C_')
 
 # concat the data tables
-data2 = pd.concat([data, News_content_df], axis=1, sort=False)
+data2 = pd.concat([data, News_content_df], axis=1)
 
 
 
