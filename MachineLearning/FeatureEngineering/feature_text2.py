@@ -19,7 +19,7 @@ def xprint(d):
 
 # Instantiate the sklearn countvectorizer
 # and limit the number of features generated
-cvect = CountVectorizer(min_df=0.2 ,max_df=0.9)
+cvect = CountVectorizer()
 
 # fit the sklearn countvectorizer
 cvect.fit(data['News_content'])
