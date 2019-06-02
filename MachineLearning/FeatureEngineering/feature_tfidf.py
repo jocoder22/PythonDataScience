@@ -39,7 +39,7 @@ News_content_df = pd.DataFrame(News_content_Varray,
                      columns=Tfidvect .get_feature_names()).add_prefix('Tf_')
 
 # inspect dataframe
-print(News_content_df.loc[0].sort_values(ascending=False), end=sp)
+print(News_content_df.iloc[0].sort_values(ascending=False), end=sp)
 
 # concat the data tables
 data2 = pd.concat([data, News_content_df], axis=1)
