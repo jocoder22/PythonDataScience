@@ -75,6 +75,7 @@ sns.scatterplot(x='MPG', y='Horsepower',
 plt.show()
 
 
+# Hierarchical clustering
 # Generate cluster centers
 K_cluster, _ = kmeans(dataset2[['MPG', 'Horsepower']], 3)
 
