@@ -36,3 +36,6 @@ dataset = pd.read_csv(url, names=colname, na_values=['na','Na', '?'],
                 skipinitialspace=True, comment='\t', sep=" ", quotechar='"')
 
 
+dataset.drop(columns='Car_name', inplace=True)
+
+print(dataset.head(), dataset.shape, sep=sp, end=sp)
