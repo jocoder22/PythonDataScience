@@ -53,13 +53,14 @@ plt.legend()
 plt.show()
 
 
+
+
+
 # Kmeans clustering
 # Number of cluster investigation
 distance = linkage(dataset2[['MPG', 'Horsepower']], method='ward')
 dnn = dendrogram(distance)
 plt.show()
-
-
 
 # define the cluster labels
 dataset2['labels'] = fcluster(distance, 3, criterion='maxclust')
