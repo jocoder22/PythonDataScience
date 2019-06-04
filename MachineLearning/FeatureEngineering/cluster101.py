@@ -45,8 +45,6 @@ dataset.dropna(inplace=True)
 dataset2 = whiten(dataset)
 dataset2 = pd.DataFrame(dataset2, columns=colname[:8])
 
-# Number of cluster investigation
-
 print(dataset.head(), dataset.shape, dataset2.head(), sep=sp, end=sp)
 
 
@@ -64,4 +62,14 @@ plt.show()
 # Number of cluster investigation
 distance = linkage(dataset2[['MPG', 'Horsepower']], method='ward')
 dnn = dendrogram(distance)
+plt.show()
+
+
+
+# Assign cluster labels
+dataset2['labels'] = fcluster(distance, 3, criterion='maxclust')
+
+# Plot clusters
+sns.scatterplot(x='MPG', y='Horsepower', 
+                hue='labels', data=dataset2)
 plt.show()
