@@ -45,20 +45,17 @@ dataset.dropna(inplace=True)
 dataset2 = whiten(dataset)
 dataset2 = pd.DataFrame(dataset2, columns=colname[:8])
 
-print(dataset.head(), dataset.shape, dataset2.head(), sep=sp, end=sp)
-
-
-
-# Plot original data
+# plot the original data
 plt.plot(dataset['MPG'], label='original')
 
-# Plot scaled data
+# plot the scaled data
 plt.plot(dataset2['MPG'], label='scaled')
 
 plt.legend()
 plt.show()
 
 
+# Kmeans clustering
 # Number of cluster investigation
 distance = linkage(dataset2[['MPG', 'Horsepower']], method='ward')
 dnn = dendrogram(distance)
@@ -66,23 +63,25 @@ plt.show()
 
 
 
-# Assign cluster labels
+# define the cluster labels
 dataset2['labels'] = fcluster(distance, 3, criterion='maxclust')
 
-# Plot clusters
+# plot the clusters
 sns.scatterplot(x='MPG', y='Horsepower', 
                 hue='labels', data=dataset2)
 plt.show()
 
 
+
+
 # Hierarchical clustering
-# Generate cluster centers
+# Define the cluster centers
 K_cluster, _ = kmeans(dataset2[['MPG', 'Horsepower']], 3)
 
-# Assign cluster labels
+# Define the cluster labels
 dataset2['k_labels'], _ = vq(dataset2[['MPG', 'Horsepower']], K_cluster)
 
-# Plot clusters
+# plot the clusters
 sns.scatterplot(x='MPG', y='Horsepower', 
                 hue='k_labels', data=dataset2)
 plt.show()
