@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, RobustScaler, StandardScaler
 import seaborn as sns
 
-from scipy.cluster.hierarchy import linkage, fcluster
+from scipy.cluster.hierarchy import linkage, fcluster, dendrogram
 from scipy.cluster.vq import vq, kmeans, whiten
 
 # plt.style.use('ggplot')
@@ -44,6 +44,9 @@ dataset.dropna(inplace=True)
 
 dataset2 = whiten(dataset)
 dataset2 = pd.DataFrame(dataset2, columns=colname[:8])
+
+# Number of cluster investigation
+
 print(dataset.head(), dataset.shape, dataset2.head(), sep=sp, end=sp)
 
 
@@ -55,4 +58,10 @@ plt.plot(dataset['MPG'], label='original')
 plt.plot(dataset2['MPG'], label='scaled')
 
 plt.legend()
+plt.show()
+
+
+# Number of cluster investigation
+distance = linkage(dataset2[['MPG', 'Horsepower']], method='ward')
+dnn = dendrogram(distance)
 plt.show()
