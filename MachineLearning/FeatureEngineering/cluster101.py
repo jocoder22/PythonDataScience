@@ -73,3 +73,15 @@ dataset2['labels'] = fcluster(distance, 3, criterion='maxclust')
 sns.scatterplot(x='MPG', y='Horsepower', 
                 hue='labels', data=dataset2)
 plt.show()
+
+
+# Generate cluster centers
+K_cluster, _ = kmeans(dataset2[['MPG', 'Horsepower']], 3)
+
+# Assign cluster labels
+dataset2['k_labels'], _ = vq(dataset2[['MPG', 'Horsepower']], K_cluster)
+
+# Plot clusters
+sns.scatterplot(x='MPG', y='Horsepower', 
+                hue='k_labels', data=dataset2)
+plt.show()
