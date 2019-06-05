@@ -87,7 +87,7 @@ plt.show()
 
 # finding number of clusters
 distortions = []
-n_clusters = range(1, 9)
+n_clusters = range(1, 5)
 
 # Create a list of distortions 
 for idx in n_clusters:
