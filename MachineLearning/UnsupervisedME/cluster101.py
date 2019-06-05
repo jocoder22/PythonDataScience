@@ -94,10 +94,3 @@ for idx in n_clusters:
     _ , distortion = kmeans(dataset2[['MPG', 'Horsepower']], idx)
     distortions.append(distortion)
 
-# Create a data frame with two lists
-_plot = pd.DataFrame({'n_clusters': n_clusters, 'distortions': distortions})
-
-
-# Creat a line plot of num_clusters and distortions
-sns.lineplot(x='n_clusters', y='distortions', data=_plot)
-plt.show()
