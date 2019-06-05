@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,6 +12,9 @@ from scipy.cluster.vq import vq, kmeans, whiten
 
 # plt.style.use('ggplot')
 
+
+path = r"C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\UnsupervisedME"
+os.chdir(path)
 
 sp = '\n\n'
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data'
@@ -36,6 +40,8 @@ dataset = pd.read_csv(url, names=colname, na_values=['na','Na', '?'],
 
 dataset.drop(columns='Car_name', inplace=True)
 dataset.dropna(inplace=True)
+
+dataset.to_csv('car.csv', index=False, compression='gzip')
 
 # data3 = dataset.loc[:, ['MPG', 'Horsepower']]
 # print(data3.head())
