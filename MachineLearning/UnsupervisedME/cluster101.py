@@ -56,7 +56,7 @@ plt.show()
 
 
 
-# Kmeans clustering
+# Hierarchical clustering
 # Number of cluster investigation
 distance = linkage(dataset2[['MPG', 'Horsepower']], method='ward')
 dnn = dendrogram(distance)
@@ -72,8 +72,7 @@ plt.show()
 
 
 
-
-# Hierarchical clustering
+# Kmeans clustering
 # Define the cluster centers
 K_cluster, _ = kmeans(dataset2[['MPG', 'Horsepower']], 3)
 
