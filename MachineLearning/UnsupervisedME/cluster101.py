@@ -104,6 +104,6 @@ for idx in n_clusters:
 _plot = pd.DataFrame({'n_clusters': n_clusters, 'distortions': distortions})
 
 
-# Creat a line plot of num_clusters and distortions
+# Create a line plot of num_clusters and distortions
 sns.lineplot(x='n_clusters', y='distortions', data=_plot)
 plt.show()
