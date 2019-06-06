@@ -45,6 +45,6 @@ print(pd.pivot_table(dataset2, index='k_labels', columns='Model_year', fill_valu
 
 groups = pd.crosstab(index=dataset2["k_labels"], 
                             columns=dataset2["Model_year"],
-                             margins=True).add_prefix('year_')
-groups.index = ['Group_1', 'Group_2', 'Group_3', 'Total']c
+                             margins=True, margins_name='Total').add_prefix('year_')
+groups.index = ['Group_1', 'Group_2', 'Group_3', 'Total']
 print(groups) 
