@@ -33,4 +33,9 @@ dataset2['k_labels'], _ = vq(dataset2, k_cluster)
 
 print(dataset2.groupby('k_labels').mean(), end=sp)
 print(dataset2.groupby('k_labels').count(), end=sp)
-print(dataset2.head())
+
+
+# Pivot table of clusters
+dataset2['Origin'] = origin
+dataset2['Model_year'] = modelyear
+print(dataset2.groupby('k_labels')['Model_year'].count(), end=sp)
