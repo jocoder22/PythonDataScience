@@ -31,5 +31,6 @@ dataset2 = pd.DataFrame(data2, columns=data.columns)
 k_cluster, _ = kmeans(dataset2, 3)
 dataset2['k_labels'], _ = vq(dataset2, k_cluster)
 
-
+print(dataset2.groupby('k_labels').mean(), end=sp)
+print(dataset2.groupby('k_labels').count(), end=sp)
 print(dataset2.head())
