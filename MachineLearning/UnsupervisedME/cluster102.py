@@ -38,4 +38,8 @@ print(dataset2.groupby('k_labels').count(), end=sp)
 # Pivot table of clusters
 dataset2['Origin'] = origin
 dataset2['Model_year'] = modelyear
-print(dataset2.groupby('k_labels')['Model_year'].count(), end=sp)
+print(dataset2.groupby('k_labels')['Model_year', 'Origin'].count(), end=sp)
+print(pd.pivot_table(dataset2, index='k_labels', columns='Model_year', fill_value=0,
+            values="MPG", aggfunc='count', margins=True, margins_name='Total'))
+
+
