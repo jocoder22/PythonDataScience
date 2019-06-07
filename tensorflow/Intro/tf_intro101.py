@@ -28,3 +28,10 @@ def lossfunc(intercept, slope, feature, target):
     return tf.keras.losses.mse(target, predictions)
 
 
+# Run the linear model
+for batch in pd.read_csv('car.csv', compression='gzip', chunksize=150):
+    feature = tf.cast(batch['Horsepower'], float32)
+    targets = tf.cast(batch['MPG'], float32)
+    opt.minimize()
+
+print(data.head())
