@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from tensorflow import Variable, float32
 import tensorflow as tf
+from tensorflow.keras.optimizers import Adam
 import matplotlib.pyplot as plt
 
 
@@ -20,7 +21,7 @@ data = data.drop(columns=['Origin','Model_year'])
 
 # define the variables
 intercept = Variable(0.1, float32)
-slope = Variable(1.0, float32)
+slope = Variable(0.1, float32)
 
 # define loss function
 def lossfunc(intercept, slope, feature, target):
@@ -28,10 +29,12 @@ def lossfunc(intercept, slope, feature, target):
     return tf.keras.losses.mse(target, predictions)
 
 
+# Initialize the Adam optimizer
+optimizer = Adam(0.1)
 # Run the linear model
 for batch in pd.read_csv('car.csv', compression='gzip', chunksize=150):
     feature = tf.cast(batch['Horsepower'], float32)
     targets = tf.cast(batch['MPG'], float32)
-    opt.minimize()
+    optimizer.minimize()
 
 print(data.head())
