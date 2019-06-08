@@ -68,10 +68,13 @@ targets_c = data_class3.pop("Origin")
 inputlayer_class2 = constant(data_class3.values, float)
 
 # Add dense1, the first dense layer
-dense1c = keras.layers.Dense(18, activation='relu')(inputlayer_class2)
+dense1c = keras.layers.Dense(50, activation='relu')(inputlayer_class2)
+
+# Add dropouts
+dropout1 = keras.layers.Dropout(0.2)(dense1c)
 
 # Add dense2, the second dense layer
-dense2c = keras.layers.Dense(7, activation='relu')(dense1c)
+dense2c = keras.layers.Dense(20, activation='relu')(dropout1)
 
 # Add output layer, the final layer
 output_c = keras.layers.Dense(3, activation='softmax')(dense2c)
