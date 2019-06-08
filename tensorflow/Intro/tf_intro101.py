@@ -5,9 +5,6 @@ import pandas as pd
 from tensorflow import Variable, float32, keras
 import tensorflow as tf
 import matplotlib.pyplot as plt
-
-
-
 # plt.style.use('ggplot')
 
 
@@ -20,7 +17,7 @@ data = pd.read_csv('car.csv', compression='gzip')
 data = data.drop(columns=['Origin','Model_year'])
 
 # define the trainable variables
-intercept = Variable(0.1, float32)
+intercept = Variable(10.0, float32)
 slope = Variable(0.1, float32)
 
 # define loss function
@@ -30,7 +27,7 @@ def lossfunc(intercept, slope, feature, target):
 
 
 # Initialize the Adam optimizer
-optim = keras.optimizers.Adam()
+optim = keras.optimizers.Adam(0.001)
 
 
 # Run the linear model
