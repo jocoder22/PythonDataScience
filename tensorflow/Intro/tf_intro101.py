@@ -33,7 +33,7 @@ def lossfunc(intercept, slope, feature, target):
 
 
 # Initialize the Adam optimizer
-optim = keras.optimizers.Adam(lr=0.1)
+optim = keras.optimizers.Adam(lr=0.1, beta_1=0.9)
 
 
 # Run the linear model
