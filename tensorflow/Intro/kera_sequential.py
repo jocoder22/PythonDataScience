@@ -27,7 +27,7 @@ model = keras.Sequential()
 _nshape = data_reg.values.flatten().shape
 
 # Define the first dense hidden layer
-model.add(keras.layers.Dense(200, activation='relu', input_shape = _nshape))
+model.add(keras.layers.Dense(200, activation='relu', input_shape=_nshape))
 
 # Define the second dense hidden layer
 model.add(keras.layers.Dense(25, activation='relu'))
