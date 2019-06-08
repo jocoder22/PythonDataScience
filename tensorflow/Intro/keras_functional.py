@@ -16,6 +16,7 @@ sp = '\n\n'
 data = pd.read_csv('car.csv', compression='gzip')
 data_reg = data.drop(columns=['Origin','Model_year'])
 data_class = data.drop(columns=['Model_year'])
+targets_r = data_reg.pop('MPG')
 
 print(data_class.groupby('Origin')['MPG'].mean())
 
