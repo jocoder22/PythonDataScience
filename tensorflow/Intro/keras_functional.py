@@ -33,22 +33,45 @@ dense2 = keras.layers.Dense(6, activation='relu')(dense1)
 output = keras.layers.Dense(1)(dense2)
 
 
+#############################################################################
 # Define binary Origin
 data_class2 = data_class.copy()
 data_class2['Origin'] = data_class2['Origin'].map({1:0, 2:1, 3:1})
 print(data_class2.groupby('Origin')['MPG'].mean())
 
-targets = data_class2.pop("Origin")
+targets_b = data_class2.pop("Origin")
 
 # define input layer, for binary category
 # tf parameters must be ndarray
 inputlayer_class1 = constant(data_class2.values, float)
 
 # Add dense1, the first dense layer
-dense1c = keras.layers.Dense(18, activation='relu')(inputlayer_class1)
+dense1b = keras.layers.Dense(18, activation='relu')(inputlayer_class1)
 
 # Add dense2, the second dense layer
-dense2c = keras.layers.Dense(6, activation='relu')(dense1c)
+dense2b = keras.layers.Dense(6, activation='relu')(dense1b)
 
 # Add output layer, the final layer
-output = keras.layers.Dense(1, activation='sigmoid')(dense2c)
+output_b = keras.layers.Dense(1, activation='sigmoid')(dense2b)
+
+
+
+#######################################################################
+# Define multiclass Origin
+data_class3 = data_class.copy()
+data_class3['Origin'] = data_class3['Origin'].map({1:0, 2:1, 3:2})
+print(data_class3.groupby('Origin')['MPG'].mean())
+
+targets_c = data_class3.pop("Origin")
+# define input layer, for binary category
+# tf parameters must be ndarray
+inputlayer_class2 = constant(data_class3.values, float)
+
+# Add dense1, the first dense layer
+dense1c = keras.layers.Dense(18, activation='relu')(inputlayer_class2)
+
+# Add dense2, the second dense layer
+dense2c = keras.layers.Dense(7, activation='relu')(dense1c)
+
+# Add output layer, the final layer
+output_c = keras.layers.Dense(3, activation='softmax')(dense2c)
