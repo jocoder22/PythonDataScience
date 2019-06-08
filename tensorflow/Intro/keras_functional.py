@@ -2,8 +2,8 @@
 import os
 import numpy as np
 import pandas as pd
-from tensorflow import Variable, float32, keras
-import tensorflow as tf
+from tensorflow import Variable, float32, keras, constant
+# import tensorflow as tf
 import matplotlib.pyplot as plt
 # plt.style.use('ggplot')
 
@@ -18,3 +18,13 @@ data_reg = data.drop(columns=['Origin','Model_year'])
 data_class = data.drop(columns=['Model_year'])
 
 print(data_class.groupby('Origin')['MPG'].mean())
+
+# define input layer
+# tf parameters must be ndarray
+inputlayer_reg = constant(data_reg.iloc[1:].values, float)
+
+# Add dense1, the first dense layer
+dense1 = keras.layers.Dense(18, activation='relu')(inputlayer_reg)
+
+# Add dense2, the second dense layer
+dense2 = keras.layers.Dense(6, activation='relu')(dense1)
