@@ -37,3 +37,25 @@ model.add(keras.layers.Dense(1))
 
 
 
+
+#############################################################################
+# Define binary Origin
+data_class2 = data_class.copy()
+data_class2['Origin'] = data_class2['Origin'].map({1:0, 2:1, 3:1})
+print(data_class2.groupby('Origin')['MPG'].mean())
+
+targets_b = data_class2.pop("Origin")
+
+# Define the sequential model
+model2 = keras.Sequential()
+
+# Add the first dense hidden layer
+model2.add(keras.layers.Dense(300, activation='relu', input_shape=_nshape))
+
+# Add the second dense layer
+model2.add(keras.layers.Dense(100, activation='relu'))
+
+# Add output layer, the final layer
+model2.add(keras.layers.Dense(1, activation='sigmoid'))
+
+
