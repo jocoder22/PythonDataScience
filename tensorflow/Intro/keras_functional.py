@@ -19,7 +19,7 @@ data_class = data.drop(columns=['Model_year'])
 
 print(data_class.groupby('Origin')['MPG'].mean())
 
-# define input layer
+# define input layer, for regression
 # tf parameters must be ndarray
 inputlayer_reg = constant(data_reg.iloc[1:].values, float)
 
@@ -28,3 +28,12 @@ dense1 = keras.layers.Dense(18, activation='relu')(inputlayer_reg)
 
 # Add dense2, the second dense layer
 dense2 = keras.layers.Dense(6, activation='relu')(dense1)
+
+# Add output layer, the final layer
+output = keras.layers.Dense(1)(dense2)
+
+
+# Prepare binary Origin
+data_class2 = data_class.copy()
+data_class2['Origin'] = data_class2['Origin'].map({1:0, 2:1, 3:1})
+print(data_class2.groupby('Origin')['MPG'].mean())
