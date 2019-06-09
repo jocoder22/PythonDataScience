@@ -90,3 +90,18 @@ merged = tf.keras.layers.Dense(1)(merged)
 
 # Define functional model
 model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=merged)
+
+
+# # Compile the model
+# model.compile('adam', loss='categorical_crossentropy')
+model.compile('adam', loss='mse', metrics=['mae', 'mse'])
+
+# # Print a model summary
+print(model.summary())
+
+# Add the number of epochs and the validation split
+history = model.fit([data1, data2], targets_r, epochs=500, validation_split=0.2)
+
+hist = pd.DataFrame(history.history)
+hist['epoch'] = history.epoch
+print(hist.tail())
