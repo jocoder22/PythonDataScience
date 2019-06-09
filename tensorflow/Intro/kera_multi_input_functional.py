@@ -89,12 +89,13 @@ merged = tf.keras.layers.Dense(1)(merged)
 # merged = tf.keras.layers.Dense(1, activation='softmax')(merged)
 
 # Define functional model
+# pass in input tensor and merged output layer
 model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=merged)
 
 
 # # Compile the model
 # model.compile('adam', loss='categorical_crossentropy')
-model.compile('adam', loss='mse', metrics=['mae', 'mse'])
+model.compile('adam', loss='mse', metrics=['mae'])
 
 # # Print a model summary
 print(model.summary())
@@ -108,12 +109,13 @@ print(hist.tail())
 
 
 
-# plt.plot(hist['epoch'], hist['mae'], label='Train Error_mae')
-# plt.plot(hist['epoch'], hist['val_mae'], label='Validation Error_mae')
+plt.plot(hist['epoch'], hist['mae'], label='Train Error_mae')
+plt.plot(hist['epoch'], hist['val_mae'], label='Validation Error_mae')
 plt.plot(hist['epoch'], hist['loss'], label='Train loss')
 plt.plot(hist['epoch'], hist['val_loss'], label='Validation loss')
 plt.xlabel('Epoch')
 plt.ylabel('Loss')
+plt.ylim([0, 200])
 plt.title('Loss curve')
 plt.legend()
 plt.show()
