@@ -55,3 +55,26 @@ dropout = tf.keras.layers.Dropout(0.1)(dense22)
 # Add dense2, the second dense layer for first dataset
 dense2 = tf.keras.layers.Dense(12, activation='relu')(dropout)
 
+
+
+# define input layer, for second dataset
+# tf parameters must be ndarray
+# inputlayer22 = constant(data_reg.values, float)
+inputlayer2 = tf.keras.Input(shape=(_nshape2[1],))
+
+# Model the second dataset
+# using functional API, define first hidden layer for second dataset
+dense1b = tf.keras.layers.Dense(80, activation='relu')(inputlayer2)
+
+# Add dropouts
+dropout1 = tf.keras.layers.Dropout(0.2)(dense1b)
+
+# Add dense2, the second dense layer for first dataset
+dense22b = tf.keras.layers.Dense(35, activation='relu')(dropout1)
+
+# Add dropouts
+dropout2 = tf.keras.layers.Dropout(0.1)(dense22b)
+
+# Add dense2b, the second dense layer for second dataset
+dense2b = tf.keras.layers.Dense(12, activation='relu')(dropout2)
+# dense2b = tf.keras.layers.Dense(3, activation='softmax')(dense22b)
