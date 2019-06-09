@@ -32,3 +32,13 @@ targets_r = tf.constant(data.pop('MPG').values, tf.float32)
 # _nshape1 = data_class.values.shape
 _nshape1 = df_dummy.values.shape
 _nshape2 = data_reg.values.shape
+
+
+# define input layer, for first dataset
+# tf parameters must be ndarray
+inputlayer1 = tf.keras.Input(shape=(_nshape1[1],))
+
+# Model the first dataset
+# using functional API, define first hidden layer for first dataset
+dense1 = tf.keras.layers.Dense(60, activation='relu')(inputlayer1)
+
