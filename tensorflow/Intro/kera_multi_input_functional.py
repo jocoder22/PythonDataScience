@@ -105,3 +105,15 @@ history = model.fit([data1, data2], targets_r, epochs=500, validation_split=0.2)
 hist = pd.DataFrame(history.history)
 hist['epoch'] = history.epoch
 print(hist.tail())
+
+
+
+# plt.plot(hist['epoch'], hist['mae'], label='Train Error_mae')
+# plt.plot(hist['epoch'], hist['val_mae'], label='Validation Error_mae')
+plt.plot(hist['epoch'], hist['loss'], label='Train loss')
+plt.plot(hist['epoch'], hist['val_loss'], label='Validation loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.title('Loss curve')
+plt.legend()
+plt.show()
