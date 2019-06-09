@@ -42,3 +42,16 @@ inputlayer1 = tf.keras.Input(shape=(_nshape1[1],))
 # using functional API, define first hidden layer for first dataset
 dense1 = tf.keras.layers.Dense(60, activation='relu')(inputlayer1)
 
+
+# Add dropouts
+dropout = tf.keras.layers.Dropout(0.2)(dense1)
+
+# Add dense2, the second dense layer for first dataset
+dense22 = tf.keras.layers.Dense(31, activation='relu')(dropout)
+
+# Add dropouts
+dropout = tf.keras.layers.Dropout(0.1)(dense22)
+
+# Add dense2, the second dense layer for first dataset
+dense2 = tf.keras.layers.Dense(12, activation='relu')(dropout)
+
