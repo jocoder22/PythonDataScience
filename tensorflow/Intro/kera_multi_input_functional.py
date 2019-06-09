@@ -78,3 +78,15 @@ dropout2 = tf.keras.layers.Dropout(0.1)(dense22b)
 # Add dense2b, the second dense layer for second dataset
 dense2b = tf.keras.layers.Dense(12, activation='relu')(dropout2)
 # dense2b = tf.keras.layers.Dense(3, activation='softmax')(dense22b)
+
+
+# Merge model outputs
+merged = tf.keras.layers.add([dense2, dense2b])
+
+merged = tf.keras.layers.Dense(1)(merged)
+
+# binary classification, use sigmoid activation
+# merged = tf.keras.layers.Dense(1, activation='softmax')(merged)
+
+# Define functional model
+model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=merged)
