@@ -4,10 +4,12 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 import matplotlib.pyplot as plt
+from keras.utils.vis_utils import plot_model
 # plt.style.use('ggplot')
 
 
 path = r"C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\UnsupervisedME"
+path2 = r'C:\Users\Jose\Desktop\PythonDataScience\tensorflow\Intro'
 os.chdir(path)
 sp = '\n\n'
 
@@ -60,7 +62,7 @@ dense2 = tf.keras.layers.Dense(12, activation='relu')(dropout)
 # define input layer, for second dataset
 # tf parameters must be ndarray
 # inputlayer22 = constant(data_reg.values, float)
-inputlayer2 = tf.keras.Input(shape=(_nshape2[1],))
+inputlayer2 = tf.keras.Input(shape=(_nshape2[1], ))
 
 # Model the second dataset
 # using functional API, define first hidden layer for second dataset
@@ -79,10 +81,13 @@ dropout2 = tf.keras.layers.Dropout(0.1)(dense22b)
 dense2b = tf.keras.layers.Dense(12, activation='relu')(dropout2)
 # dense2b = tf.keras.layers.Dense(3, activation='softmax')(dense22b)
 
+# Add output1 layers
+output1 = tf.keras.layers.Dense(1)(dense2b)
 
 # Merge model outputs
 merged = tf.keras.layers.add([dense2, dense2b])
 
+merged = tf.keras.layers.Dense(3, activation='relu')(merged)
 merged = tf.keras.layers.Dense(1)(merged)
 
 # binary classification, use sigmoid activation
@@ -90,7 +95,7 @@ merged = tf.keras.layers.Dense(1)(merged)
 
 # Define functional model
 # pass in input tensor and merged output layer
-model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=merged)
+model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=[merged, output1])
 
 
 # # Compile the model
@@ -100,6 +105,16 @@ model.compile('adam', loss='mse', metrics=['mae'])
 # # Print a model summary
 print(model.summary())
 
+# Plot the model
+os.chdir(path2)
+plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
+graph = plt.imread('model.png')
+plt.figure(figsize=(5, 5))
+plt.imshow(graph)
+plt.axis('off')
+plt.show()
+
+'''
 # Add the number of epochs and the validation split
 history = model.fit([data1, data2], targets_r, epochs=500, validation_split=0.2)
 
@@ -119,3 +134,5 @@ plt.ylim([0, 200])
 plt.title('Loss curve')
 plt.legend()
 plt.show()
+
+'''
