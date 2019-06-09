@@ -24,10 +24,10 @@ model = keras.Sequential()
 
 # Define the dimensions of the data
 # Use the flatten() on the ndarray
-_nshape = data_reg.values.flatten().shape
+_nshape = data_reg.values.shape[1]
 
 # Define the first dense hidden layer
-model.add(keras.layers.Dense(200, activation='relu', input_shape=_nshape))
+model.add(keras.layers.Dense(200, activation='relu', input_shape=(_nshape,)))
 
 # Define the second dense hidden layer
 model.add(keras.layers.Dense(25, activation='relu'))
@@ -56,7 +56,7 @@ targets_b = data_class2.pop("Origin")
 model2 = keras.Sequential()
 
 # Add the first dense hidden layer
-model2.add(keras.layers.Dense(300, activation='relu', input_shape=_nshape))
+model2.add(keras.layers.Dense(300, activation='relu', input_shape=(_nshape,)))
 
 # Add the second dense layer
 model2.add(keras.layers.Dense(100, activation='relu'))
@@ -83,7 +83,7 @@ targets_c = data_class3.pop("Origin")
 model3 = keras.Sequential()
 
 # Add the first dense hidden layer
-model3.add(keras.layers.Dense(600, activation='relu', input_shape=_nshape))
+model3.add(keras.layers.Dense(600, activation='relu', input_shape=(_nshape,)))
 
 # Add the second dense layer
 model3.add(keras.layers.Dense(100, activation='relu'))
