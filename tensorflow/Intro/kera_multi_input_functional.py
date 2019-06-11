@@ -175,7 +175,7 @@ plt.show()
 
 # Add the number of epochs and the validation split
 # history = model.fit([data1, data2], [ytrain, ytrain], epochs=500, steps_per_epoch=20)
-history = model.fit([xtrain, xtrain2], [ytrain, ytrain], epochs=200, validation_split=0.2)
+history = model.fit([xtrain, xtrain2], [ytrain, ytrain], epochs=200, validation_split=0.1)
 # history = model.fit([xtrain, xtrain2], ytrain, epochs=350, validation_split=0.2)
 # colnames = 'loss output2_loss output1_loss output2_mae output1_mae'.split()
 
