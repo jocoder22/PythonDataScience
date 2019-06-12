@@ -35,7 +35,7 @@ target = data.pop('MPG')
 
 # colnames = data.columns
 print(data.head())
-data = pd.get_dummies(data, columns=['Origin'], prefix='D', 
+data = pd.get_dummies(data, columns=['Origin'], prefix='Dummy', 
                     drop_first=True)
 colnames = data.columns
 scaler =  StandardScaler()
