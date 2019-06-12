@@ -30,10 +30,13 @@ target = data.pop('MPG')
 #                     drop_first=True)
 
 # Unique categories of Model year
-print(np.unique(data.Model_year).shape)
-print(target.shape)
+unique_shape = np.unique(data.Model_year).shape
 
 
+# Check dimensionality ratio
+dimen_ratio = data.shape[0] / unique_shape[0] 
+print(unique_shape, dimen_ratio, sep=sp, end=sp)
+'''
 
 # colnames = data.columns
 print(data.head())
@@ -212,3 +215,4 @@ loss, loss2, loss1, mae2, mae1 = model.evaluate([xtest, xtest2], [ytest, ytest],
 print(f'Mean absolute error = {mae2:.2f}')
 
 
+'''
