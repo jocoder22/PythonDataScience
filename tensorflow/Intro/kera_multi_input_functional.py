@@ -21,8 +21,9 @@ data = pd.read_csv('car.csv', compression='gzip')
 # print(data.groupby('Model_year')['MPG'].count(), end=sp)
 
 
-# Define target
+# Define target and model year
 target = data.pop('MPG')
+modelyear = data.pop('Model_year')
 
 
 # define dummies for categorical variables
@@ -30,7 +31,7 @@ target = data.pop('MPG')
 #                     drop_first=True)
 
 # Unique categories of Model year
-unique_shape = np.unique(data.Model_year).shape
+unique_shape = np.unique(modelyear).shape
 
 
 # Check cardinality ratio
@@ -39,6 +40,12 @@ print(unique_shape, dimen_ratio, sep=sp, end=sp)
 
 
 # Embedding for model year
+_myshape = modelyear.values.reshape(-1, 1).shape
+model_year_input = tf.keras.Input(shape=(_myshape[1],))
+
+
+
+
 '''
 
 # colnames = data.columns
