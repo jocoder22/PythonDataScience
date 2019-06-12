@@ -29,9 +29,11 @@ target = data.pop('MPG')
 # data = pd.get_dummies(data, columns=['Origin','Model_year','Cylinders'], prefix='D', 
 #                     drop_first=True)
 
-# from numpy import unique
-# print(unique(data.Model_year).shape)
-# print(target.shape)
+# Unique categories of Model year
+print(np.unique(data.Model_year).shape)
+print(target.shape)
+
+
 
 # colnames = data.columns
 print(data.head())
@@ -142,9 +144,10 @@ dense2b = tf.keras.layers.Dense(12, activation='relu')(dropout2)
 output1 = tf.keras.layers.Dense(1)(dense2b)
 
 # Merge model outputs
-merged = tf.keras.layers.add([dense2, dense2b])
+# merged = tf.keras.layers.add([dense2, dense2b])
+merged = tf.keras.layers.concatenate([dense2, dense2b])
 
-merged = tf.keras.layers.Dense(3, activation='relu')(merged)
+merged = tf.keras.layers.Dense(6, activation='relu')(merged)
 merged = tf.keras.layers.Dense(1)(merged)
 
 # binary classification, use sigmoid activation
