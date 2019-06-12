@@ -43,6 +43,13 @@ print(unique_shape, dimen_ratio, sep=sp, end=sp)
 _myshape = modelyear.values.reshape(-1, 1).shape
 model_year_input = tf.keras.Input(shape=(_myshape[1],))
 
+modelyear_embed = tf.keras.layers.Embedding(input_dim=unique_shape[0],
+                                            input_length=1,
+                                            output_dim=1,
+                                            name='Year_Embedding')
+
+modelyear_tensor = modelyear_embed(model_year_input)
+
 
 
 
