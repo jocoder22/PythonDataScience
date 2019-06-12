@@ -40,6 +40,7 @@ data = pd.get_dummies(data, columns=['Origin'], prefix='Dummy',
 colnames = data.columns
 scaler =  StandardScaler()
 data2 = scaler.fit_transform(data)
+data3 = data2.copy()
 lasso = Lasso(alpha=0.1)
 
 lass_coef = lasso.fit(data2, target).coef_
@@ -58,7 +59,7 @@ plt.show()
 # scaler =  StandardScaler()
 # scaler2 = MinMaxScaler()
 # data2 = scaler.fit_transform(data)
-data = pd.DataFrame(data2, columns=data.columns)
+data = pd.DataFrame(data3, columns=data.columns)
 
 # split the data to tran and test
 xtrain, xtest, ytrain, ytest = train_test_split(data, target, test_size=0.2, random_state=45)
@@ -175,7 +176,7 @@ plt.show()
 # Add the number of epochs and the validation split
 # history = model.fit([data1, data2], [ytrain, ytrain], epochs=500, steps_per_epoch=20)
 # history = model.fit([xtrain, xtrain2], [ytrain, ytrain], epochs=200, validation_split=0.1)
-history = model.fit([xtrain, xtrain2], ytrain, epochs=350, validation_split=0.1)
+history = model.fit([xtrain, xtrain2], ytrain, epochs=350, validation_split=0.2)
 # colnames = 'loss output2_loss output1_loss output2_mae output1_mae'.split()
 
 hist = pd.DataFrame(history.history)
