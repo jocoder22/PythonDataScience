@@ -50,7 +50,9 @@ modelyear_embed = tf.keras.layers.Embedding(input_dim=unique_shape[0],
 
 modelyear_tensor = modelyear_embed(model_year_input)
 
+year_flatten = tf.keras.layers.Flatten()(modelyear_tensor)
 
+year_model = tf.keras.Model(inputs=[model_year_input], outputs=[year_flatten])
 
 
 '''
