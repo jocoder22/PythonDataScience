@@ -5,7 +5,7 @@ import pandas as pd
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from keras.utils.vis_utils import plot_model
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Lasso
 # plt.style.use('ggplot')
@@ -39,7 +39,6 @@ data = pd.get_dummies(data, columns=['Origin'], prefix='D',
                     drop_first=True)
 colnames = data.columns
 scaler =  StandardScaler()
-scaler2 = MinMaxScaler()
 data2 = scaler.fit_transform(data)
 lasso = Lasso(alpha=0.1)
 
