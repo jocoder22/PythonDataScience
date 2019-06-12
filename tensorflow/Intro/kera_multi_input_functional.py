@@ -139,7 +139,7 @@ dense2b = tf.keras.layers.Dense(12, activation='relu')(dropout2)
 # dense2b = tf.keras.layers.Dense(3, activation='softmax')(dense22b)
 
 # Add output1 layers
-# output1 = tf.keras.layers.Dense(1)(dense2b)
+output1 = tf.keras.layers.Dense(1)(dense2b)
 
 # Merge model outputs
 merged = tf.keras.layers.add([dense2, dense2b])
@@ -152,8 +152,8 @@ merged = tf.keras.layers.Dense(1)(merged)
 
 # Define functional model
 # pass in input tensor and merged output layer
-# model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=[merged, output1])
-model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=merged)
+model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=[merged, output1])
+# model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=merged)
 
 
 # # Compile the model
@@ -175,8 +175,8 @@ plt.show()
 
 # Add the number of epochs and the validation split
 # history = model.fit([data1, data2], [ytrain, ytrain], epochs=500, steps_per_epoch=20)
-# history = model.fit([xtrain, xtrain2], [ytrain, ytrain], epochs=200, validation_split=0.1)
-history = model.fit([xtrain, xtrain2], ytrain, epochs=350, validation_split=0.2)
+history = model.fit([xtrain, xtrain2], [ytrain, ytrain], epochs=200, validation_split=0.1)
+# history = model.fit([xtrain, xtrain2], ytrain, epochs=350, validation_split=0.1)
 # colnames = 'loss output2_loss output1_loss output2_mae output1_mae'.split()
 
 hist = pd.DataFrame(history.history)
@@ -203,9 +203,9 @@ plt.show()
 
 
 # Evaluate the model
-loss, mae = model.evaluate([xtest, xtest2], ytest, verbose=0)
-# loss, loss2, loss1, mae2, mae1 = model.evaluate([xtest, xtest2], [ytest, ytest], verbose=0)
-print(f'Mean absolute error = {mae:.2f}')
-# print(f'Mean absolute error = {mae2:.2f}')
+# loss, mae = model.evaluate([xtest, xtest2], ytest, verbose=0)
+loss, loss2, loss1, mae2, mae1 = model.evaluate([xtest, xtest2], [ytest, ytest], verbose=0)
+# print(f'Mean absolute error = {mae:.2f}')
+print(f'Mean absolute error = {mae2:.2f}')
 
 
