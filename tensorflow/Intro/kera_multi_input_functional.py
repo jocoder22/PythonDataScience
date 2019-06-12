@@ -33,9 +33,12 @@ target = data.pop('MPG')
 unique_shape = np.unique(data.Model_year).shape
 
 
-# Check dimensionality ratio
+# Check cardinality ratio
 dimen_ratio = data.shape[0] / unique_shape[0] 
 print(unique_shape, dimen_ratio, sep=sp, end=sp)
+
+
+# Embedding for model year
 '''
 
 # colnames = data.columns
