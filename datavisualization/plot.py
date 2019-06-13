@@ -38,6 +38,7 @@ Linestyle:
 
 plt.plot(xplot+2, yplot, color='b', linestyle=':')
 plt.plot(xplot+3, yplot, color='m', linestyle='-.')
+plt.show()
 
 '''
 Markers:
