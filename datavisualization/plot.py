@@ -37,7 +37,7 @@ Linestyle:
 """
 
 plt.plot(xplot+2, yplot, color='b', linestyle=':')
-plt.plot(xplot+3, yplot, color='m', linestyle='-.')
+plt.plot(xplot+3, yplot, color='m', linestyle='-.:')
 plt.plot(xplot+2, yplot, color='y', linestyle='--')
 plt.plot(xplot+3, yplot, color='k', linestyle='-.--')
 plt.show()
