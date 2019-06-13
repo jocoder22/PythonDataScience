@@ -20,6 +20,7 @@ print(data.head())
 
 # Plot scatter plot
 sns.scatterplot(x=data['MPG'], y=data['Horsepower'])
+plt.xlabel('Miles per Gallon')
 plt.show()
 
 # count plot
