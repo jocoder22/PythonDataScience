@@ -32,8 +32,8 @@ print(np.unique(cardata['Model_year']))
 
 # Relationship plot: continous features
 color_palette = 'Blue Green Red Yellow White'.split()
-size_l = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82]
 with plt.style.context(('dark_background')):
-    sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='scatter', 
+    g = sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='scatter', 
             hue='Cylinders', col='Origin', palette=color_palette)
+    g.fig.suptitle('')
 plt.show()
