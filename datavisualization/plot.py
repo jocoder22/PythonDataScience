@@ -72,6 +72,7 @@ plt.plot(xplot, yplot, color='g', marker='>', markevery=10)
 plt.plot(xplot+2, yplot, color='r', marker='^', markevery=10)
 
 plt.plot(xplot+2.5, yplot, color='b', linestyle=':', marker='^', markevery=10)
+plt.show()
 
 # markersize affects the markers, while linewith affects the linestyle
 plt.plot(xplot+5, yplot, color='g', marker='p', markersize=0.5,
