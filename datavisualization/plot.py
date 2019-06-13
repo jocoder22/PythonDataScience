@@ -25,22 +25,21 @@ Colors:
 '''
 
 plt.plot(xplot, yplot, color='r')
-
+plt.show()
 
 """
 Linestyle:
 
-'-'	solid line style
+'-'	    solid line style
 '--'	dashed line style
 '-.'	dash-dot line style
-':'	dotted line style
+':'	    dotted line style
 """
 
 plt.plot(xplot+2, yplot, color='b', linestyle=':')
-
 plt.plot(xplot+3, yplot, color='m', linestyle='-.')
-plt.plot(xplot+2, yplot, color='y', linestyle='--')
-plt.plot(xplot+3, yplot, color='k', linestyle='-.')
+plt.plot(xplot+1.5, yplot, color='y', linestyle='--')
+plt.plot(xplot+3.5, yplot, color='k', linestyle='-')
 plt.show()
 
 '''
@@ -78,6 +77,7 @@ plt.plot(xplot+2, yplot, color='r', marker='^', markevery=10)
 plt.plot(xplot+2.5, yplot, color='b', linestyle=':', marker='^', markevery=10)
 plt.show()
 
+
 # markersize affects the markers, while linewith affects the linestyle
 plt.plot(xplot+5, yplot, color='g', marker='p', markersize=0.5,
          linewidth=3, markevery=10)
@@ -88,6 +88,7 @@ plt.show()
 plt.plot(xplot+3, yplot, color='b', linewidth=10, zorder=8, alpha=0.8)
 plt.plot(xplot, yplot, color='g', linewidth=10, zorder=15, alpha=0.3)
 plt.plot(xplot+7, yplot, color='g', linewidth=10, zorder=15, alpha=0.3)
+plt.show()
 
 # Remember to close the pyplot
-plt.close()
+# plt.close()
