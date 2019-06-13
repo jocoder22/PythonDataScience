@@ -22,10 +22,14 @@ data = pd.read_csv('car.csv', compression='gzip')
 
 
 # Define target and model year
-target = data.pop('MPG')
-modelyear = data.pop('Model_year')
+target = data[['MPG']]
+target1 = data.pop('MPG')
+
+modelyear = data['Model_year']
 
 
+
+print(data.head(), target.head(), sep=sp, end=sp)
 # define dummies for categorical variables
 # data = pd.get_dummies(data, columns=['Origin','Model_year','Cylinders'], prefix='D', 
 #                     drop_first=True)
@@ -39,9 +43,17 @@ dimen_ratio = data.shape[0] / unique_shape[0]
 print(unique_shape, dimen_ratio, sep=sp, end=sp)
 
 
+
+
+
+
 # Embedding for model year
 _myshape = modelyear.values.reshape(-1, 1).shape
-model_year_input = tf.keras.Input(shape=(_myshape[1],))
+print(_myshape[1], unique_shape[0], sep=sp, end=sp)
+
+
+
+model_year_input = tf.keras.Input(shape=(_myshape[1],), name='Embedding')
 
 modelyear_embed = tf.keras.layers.Embedding(input_dim=unique_shape[0],
                                             input_length=1,
@@ -55,7 +67,7 @@ year_flatten = tf.keras.layers.Flatten()(modelyear_tensor)
 year_model = tf.keras.Model(inputs=[model_year_input], outputs=[year_flatten])
 
 
-'''
+
 
 # colnames = data.columns
 print(data.head())
@@ -93,7 +105,9 @@ xtrain, xtest, ytrain, ytest = train_test_split(data, target, test_size=0.2, ran
 # xtrain2 = pd.DataFrame([xtrain.pop(x) for x in xtrain.columns[0:4]]).T
 # xtest2 = pd.DataFrame([xtest.pop(x) for x in xtest.columns[0:4]]).T
 xtrain2 = pd.DataFrame([xtrain.pop(x) for x in xtrain.columns[0:6]]).T
+# xtrain_year = xtrain2.pop('Model_year')
 xtest2 = pd.DataFrame([xtest.pop(x) for x in xtest.columns[0:6]]).T
+# xtest_year = xtest2.pop('Model_year')
 # print(xtrain.shape, xtrain2.shape,  sep=sp, end=sp)
 
 # define constant variables
@@ -119,11 +133,17 @@ _nshape2 = xtrain2.values.shape
 
 # define input layer, for first dataset
 # tf parameters must be ndarray
-inputlayer1 = tf.keras.Input(shape=(_nshape1[1],))
+inputlayer1 = tf.keras.Input(shape=(_nshape1[1],), name='Continous')
+
+# Define layer1 embeddings
+outputlayer1 = year_model(inputlayer1)
+
+# output_embed = tf.keras.layers.concatenate([outputlayer1, dense2b])
 
 # Model the first dataset
 # using functional API, define first hidden layer for first dataset
-dense1 = tf.keras.layers.Dense(60, activation='relu')(inputlayer1)
+dense1 = tf.keras.layers.Dense(60, activation='relu')(outputlayer1)
+# dense1 = tf.keras.layers.Dense(60, activation='relu')(inputlayer1)
 
 
 # Add dropouts
@@ -143,11 +163,15 @@ dense2 = tf.keras.layers.Dense(12, activation='relu')(dropout)
 # define input layer, for second dataset
 # tf parameters must be ndarray
 # inputlayer22 = constant(data_reg.values, float)
-inputlayer2 = tf.keras.Input(shape=(_nshape2[1], ))
+inputlayer2 = tf.keras.Input(shape=(_nshape2[1], ), name='Category')
+
+# Define layer1 embeddings
+outputlayer2 = year_model(inputlayer2)
 
 # Model the second dataset
 # using functional API, define first hidden layer for second dataset
-dense1b = tf.keras.layers.Dense(80, activation='relu')(inputlayer2)
+dense1b = tf.keras.layers.Dense(80, activation='relu')(outputlayer2)
+# dense1b = tf.keras.layers.Dense(80, activation='relu')(inputlayer2)
 
 # Add dropouts
 dropout1 = tf.keras.layers.Dropout(0.2)(dense1b)
@@ -177,7 +201,8 @@ merged = tf.keras.layers.Dense(1)(merged)
 
 # Define functional model
 # pass in input tensor and merged output layer
-model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=[merged, output1])
+# model = tf.keras.Model(inputs=[ model_year_input, inputlayer1, inputlayer2], outputs=[merged, output1])
+model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=merged)
 # model = tf.keras.Model(inputs=[inputlayer1, inputlayer2], outputs=merged)
 
 
@@ -200,8 +225,9 @@ plt.show()
 
 # Add the number of epochs and the validation split
 # history = model.fit([data1, data2], [ytrain, ytrain], epochs=500, steps_per_epoch=20)
-history = model.fit([xtrain, xtrain2], [ytrain, ytrain], epochs=200, validation_split=0.1)
-# history = model.fit([xtrain, xtrain2], ytrain, epochs=350, validation_split=0.1)
+# history = model.fit([xtrain_year, xtrain, xtrain2], [ytrain, ytrain], epochs=200, validation_split=0.1)
+# history = model.fit([xtrain, xtrain2], [ytrain, ytrain], epochs=200, validation_split=0.1)
+history = model.fit([xtrain, xtrain2], ytrain, epochs=350, validation_split=0.1)
 # colnames = 'loss output2_loss output1_loss output2_mae output1_mae'.split()
 
 hist = pd.DataFrame(history.history)
@@ -228,10 +254,12 @@ plt.show()
 
 
 # Evaluate the model
-# loss, mae = model.evaluate([xtest, xtest2], ytest, verbose=0)
-loss, loss2, loss1, mae2, mae1 = model.evaluate([xtest, xtest2], [ytest, ytest], verbose=0)
-# print(f'Mean absolute error = {mae:.2f}')
-print(f'Mean absolute error = {mae2:.2f}')
+loss, mae = model.evaluate([xtest, xtest2], ytest, verbose=0)
+# loss, loss2, loss1, mae2, mae1 = model.evaluate([xtest, xtest2], [ytest, ytest], verbose=0)
+# loss, loss2, loss1, mae2, mae1 = model.evaluate([xtest, xtest2], [ytest, ytest], verbose=0)
+print(f'Mean absolute error = {mae:.2f}')
+# print(f'Mean absolute error = {mae2:.2f}')
 
 
-'''
+
+
