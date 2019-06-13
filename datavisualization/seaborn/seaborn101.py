@@ -13,17 +13,17 @@ os.chdir(path)
 sp = '\n\n'
 
 # load the dataset, 
-data = pd.read_csv('car.csv', compression='gzip')
+cardata = pd.read_csv('car.csv', compression='gzip')
 
-print(data.head())
+print(cardata.head())
 
 
 # Plot scatter plot
-sns.scatterplot(x=data['MPG'], y=data['Horsepower'])
+sns.scatterplot(x='MPG', y='Horsepower', data=cardata)
 plt.xlabel('Miles per Gallon')
 plt.show()
 
 # count plot
-sns.countplot(x=data['Origin'])
-plt.xticks(np.arange(3), 'USA Europe Asia'.split())
+sns.countplot(x='Origin', data=cardata)
+plt.xticks(np.arange(3), 'USA Europe Japan'.split())
 plt.show()
