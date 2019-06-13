@@ -3,12 +3,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.ion()
+# plt.ion()
 
 xplot = np.linspace(0, 10, 1000)
 yplot = np.sin(xplot)
 
 plt.plot(xplot, yplot)
+plt.show()
 
 '''
 Colors:
@@ -75,8 +76,8 @@ plt.plot(xplot+2.5, yplot, color='b', linestyle=':', marker='^', markevery=10)
 # markersize affects the markers, while linewith affects the linestyle
 plt.plot(xplot+5, yplot, color='g', marker='p', markersize=0.5,
          linewidth=3, markevery=10)
-
-
+plt.axis('off')
+plt.show()
 # zorder is the ordering of overlayed plot, higher number are in front
 # alpha affects transparency of the plot
 plt.plot(xplot+3, yplot, color='b', linewidth=10, zorder=8, alpha=0.8)
@@ -84,4 +85,4 @@ plt.plot(xplot, yplot, color='g', linewidth=10, zorder=15, alpha=0.3)
 plt.plot(xplot+7, yplot, color='g', linewidth=10, zorder=15, alpha=0.3)
 
 # Remember to close the pyplot
-# plt.close()
+plt.close()
