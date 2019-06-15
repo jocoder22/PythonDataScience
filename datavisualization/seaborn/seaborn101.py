@@ -41,6 +41,14 @@ with plt.style.context(('dark_background')):
 plt.show()
 
 
+with plt.style.context(('dark_background')):
+    g = sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='scatter', 
+            hue='Cylinders', row='Origin2', palette=color_palette)
+    g.fig.suptitle('')
+    g.set_titles('{col_name} Origin')
+plt.show()
+
+
 
 # g.set_title() => for titles for AxesSubplot
 
