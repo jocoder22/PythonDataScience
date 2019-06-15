@@ -65,8 +65,8 @@ with plt.style.context(('dark_background')):
     g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='box', 
               palette=color_palette, col='Origin2')
     g.fig.suptitle('Cylinders vs. Horsepower', y=1.03)
-    g.set_titles('This is {col_name}', y=0.000000001)
+    g.set_titles('This is {col_name}', y=0.0)
     g.set(xlabel='Number of Cyclinders')
-plt.xticks(rotation=30)
+    plt.xticks(rotation=30)
 plt.show()
  
