@@ -55,7 +55,7 @@ with plt.style.context(('dark_background')):
     g = sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='scatter', 
             col='Cylinders', row='Origin2', palette=color_palette)
     g.fig.suptitle('')
-    g.set_titles('{row_name} {col_name}s ')
+    g.set_titles('{row_name} {col_name} Cylinders', y=0.000000001)
 plt.show()
 
 # g.set_title() => for titles for AxesSubplot
@@ -65,7 +65,7 @@ with plt.style.context(('dark_background')):
     g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='box', 
               palette=color_palette, col='Origin2')
     g.fig.suptitle('Cylinders vs. Horsepower', y=1.03)
-    g.set_titles('This is {col_name}')
+    g.set_titles('This is {col_name}', y=0.000000001)
     g.set(xlabel='Number of Cyclinders')
 plt.xticks(rotation=30)
 plt.show()
