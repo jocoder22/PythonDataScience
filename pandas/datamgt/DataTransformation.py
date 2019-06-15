@@ -4,25 +4,26 @@ import numpy as np
 from numpy.random import randn
 import matplotlib.pyplot as plt
 
-os.chdir("C:/Users/okigboo/Documents/Code/Code/Code/Section 1")
-
+path = r'C:\Users\Jose\Documents\PythonDataScience1\Code\Code\Section 1'
+os.chdir(path)
+sp = '\n\n'
 pyramids_data = pd.read_csv("PopPyramids.csv",
                             index_col=["Country", "Age", "Year"])
 
 
 # Explore the data
-pyramids_data.head()
+print(pyramids_data.head(), end=sp)
 pyramids_data.columns
 pyramids_data.columns.tolist()
 
 # Drop column region
 pyramids_data.drop("Region", 1, inplace=True)
-pyramids_data.head()
+print(pyramids_data.head(), end=sp)
 
 # select two columns and change index
 pyramids_data = pyramids_data.loc[:, ['Male Population', 'Female Population']]
 pyramids_data.columns = pd.Index(["Male", "Female"])
-pyramids_data.head()
+print(pyramids_data.head(), end=sp)
 
 
 # Bining data

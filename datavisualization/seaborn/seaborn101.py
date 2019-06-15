@@ -15,8 +15,12 @@ sp = '\n\n'
 # load the dataset, 
 cardata = pd.read_csv('car.csv', compression='gzip')
 
-print(cardata.head())
+print(cardata.head(), end=sp)
+print(pd.unique(cardata['Model_year']), end=sp)
+print(cardata['Model_year'].value_counts(), end=sp)
 
+
+'''
 
 # Plot scatter plot
 sns.scatterplot(x='MPG', y='Horsepower', data=cardata)
@@ -28,7 +32,6 @@ sns.countplot(x='Origin', data=cardata)
 plt.xticks(np.arange(3), 'USA Europe Japan'.split())
 plt.show()
 
-print(np.unique(cardata['Model_year']).sum)
 
 # Relationship plot: continous features
 color_palette = 'Blue Green Red Yellow White'.split()
@@ -70,3 +73,5 @@ with plt.style.context(('dark_background')):
     plt.xticks(rotation=30)
 plt.show()
  
+
+ '''
