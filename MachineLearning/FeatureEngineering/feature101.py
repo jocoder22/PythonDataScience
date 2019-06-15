@@ -37,12 +37,16 @@ print(df.columns, df_dummy.columns, sep=sp, end=sp)
 
 
 # Collapsing values
+df['status_type2'] = df['status_type']
 mask = df['status_type'].isin(['status', 'link'])
 df['status_type'][mask] = 'Others'
 counts = df['status_type'].value_counts()
-print(counts)
-print(df['num_shares'].value_counts(), sep=sp, end=sp)
+print(counts, end=sp)
+# print(df['num_shares'].value_counts(), sep=sp, end=sp)
 
+# pandas.where => Replace values where the condition is False.
+df['status_type2'] = df['status_type2'].where(lambda x: ~x.isin(['status', 'link']), 'Others')
+print(df['status_type2'].value_counts(), end=sp)
 
 # creating categories
 # Binning feature

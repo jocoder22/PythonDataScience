@@ -24,6 +24,11 @@ cardata.loc[cardata['Model_year'] >= 75, 'Year'] = 'Late 70s'
 cardata.loc[cardata['Model_year'] >= 80, 'Year'] = 'Early 80s'
 print(cardata['Year'].value_counts(), end=sp)
 
+cardata['Year2'] = np.where(cardata['Year'].isin(['Early 70s', 'Early 80s']),'Olddata', 'NewData')
+print(cardata['Year2'].value_counts(), end=sp)
+
+cardata['Year3'] = cardata['Year'].where(lambda x: x.isin(['Early 70s', 'Early 80s']), 'NewData')
+print(cardata['Year3'].value_counts(), end=sp)
 '''
 
 # Plot scatter plot
