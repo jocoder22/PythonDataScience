@@ -33,6 +33,8 @@ print(np.unique(cardata['Model_year']).sum)
 # Relationship plot: continous features
 color_palette = 'Blue Green Red Yellow White'.split()
 cardata['Origin2'] = cardata['Origin'].map({1: 'USA', 2: 'Europe', 3:'Japan'})
+
+# arrange plots in columns
 with plt.style.context(('dark_background')):
     g = sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='scatter', 
             hue='Cylinders', col='Origin2', palette=color_palette)
@@ -40,7 +42,7 @@ with plt.style.context(('dark_background')):
     g.set_titles('{col_name} Origin')
 plt.show()
 
-
+# arrange plots in rows
 with plt.style.context(('dark_background')):
     g = sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='scatter', 
             hue='Cylinders', row='Origin2', palette=color_palette)
