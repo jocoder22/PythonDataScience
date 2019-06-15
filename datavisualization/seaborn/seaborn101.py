@@ -19,6 +19,10 @@ print(cardata.head(), end=sp)
 print(pd.unique(cardata['Model_year']), end=sp)
 print(cardata['Model_year'].value_counts(), end=sp)
 
+cardata.loc[cardata['Model_year'] >= 70, 'Year'] = 'Early 70s'
+cardata.loc[cardata['Model_year'] >= 75, 'Year'] = 'Late 70s'
+cardata.loc[cardata['Model_year'] >= 80, 'Year'] = 'Early 80s'
+print(cardata['Year'].value_counts(), end=sp)
 
 '''
 
