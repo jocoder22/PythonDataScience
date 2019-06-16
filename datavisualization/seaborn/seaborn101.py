@@ -32,7 +32,7 @@ print(cardata['Year2'].value_counts(), end=sp)
 # pandas.where => Replace values where the condition is False.
 cardata['Year3'] = cardata['Year'].where(lambda x: x.isin(['Early 70s', 'Early 80s']), 'NewData')
 print(cardata['Year3'].value_counts(), end=sp)
-'''
+
 
 # Plot scatter plot
 sns.scatterplot(x='MPG', y='Horsepower', data=cardata)
@@ -68,12 +68,13 @@ plt.show()
 
 with plt.style.context(('dark_background')):
     g = sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='scatter', 
-            col='Cylinders', row='Origin2', palette=color_palette)
-    g.fig.suptitle('')
+            col='Year', row='Origin2', size='Cylinders', palette=color_palette)
+    g.fig.suptitle('')  # g.set_title() => for titles for AxesSubplot
     g.set_titles('{row_name} {col_name} Cylinders', y=0.000000001)
 plt.show()
 
-# g.set_title() => for titles for AxesSubplot
+
+
 
 # category chat
 with plt.style.context(('dark_background')):
@@ -85,5 +86,3 @@ with plt.style.context(('dark_background')):
     plt.xticks(rotation=30)
 plt.show()
  
-
- '''
