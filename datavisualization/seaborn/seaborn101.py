@@ -105,6 +105,13 @@ g.set(xlabel='Model Year')
 plt.xticks(rotation=30)
 plt.show()
 
+
+sns.catplot(x='Origin2', y='MPG', data=cardata, kind='bar')
+plt.xlabel('Country of Origin')
+plt.show()
+
+
+print(cardata.head(), end=sp)
 '''
 with plt.style.context(('dark_background')):
     g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='box', 
