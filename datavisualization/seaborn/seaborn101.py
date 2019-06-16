@@ -94,7 +94,7 @@ plt.show()
 '''
 
 # category chat
-
+# count plot
 g = sns.catplot(x='Year', data=cardata, kind='count')
 g.set(xlabel='Model Year')
 plt.show()
@@ -106,12 +106,14 @@ plt.xticks(rotation=30)
 plt.show()
 
 
+# Bar plot
 sns.catplot(x='Origin2', y='MPG', data=cardata, kind='bar', ci=None)
 plt.xlabel('Country of Origin')
 plt.show()
 
 
-'''
+
+# Box plot
 with plt.style.context(('dark_background')):
     g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='box', 
               palette=color_palette, col='Origin2')
@@ -121,4 +123,3 @@ with plt.style.context(('dark_background')):
     plt.xticks(rotation=30)
 plt.show()
  
-'''
