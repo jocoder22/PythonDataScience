@@ -128,7 +128,7 @@ plt.show()
 
 #  Point plot
 with plt.style.context(('dark_background')):
-    g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='piont')
+    g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='point')
 plt.show()
  
 
