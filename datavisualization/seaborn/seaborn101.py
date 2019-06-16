@@ -93,7 +93,9 @@ sns.relplot(x="Model_year", y="Horsepower",
 plt.show()
 '''
 
-# category chat
+################### category chat ######################
+########################################################
+########################################################
 # count plot
 g = sns.catplot(x='Year', data=cardata, kind='count')
 g.set(xlabel='Model Year')
@@ -116,10 +118,17 @@ plt.show()
 # Box plot
 with plt.style.context(('dark_background')):
     g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='box', 
-              palette=color_palette, col='Origin2')
+              palette=color_palette, col='Origin2', whis=0.5)
     g.fig.suptitle('Cylinders vs. Horsepower', y=1.03)
     g.set_titles('This is {col_name}', y=0.0)
     g.set(xlabel='Number of Cyclinders')
     plt.xticks(rotation=30)
 plt.show()
  
+
+#  Point plot
+with plt.style.context(('dark_background')):
+    g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='piont')
+plt.show()
+ 
+
