@@ -91,7 +91,7 @@ plt.show()
 sns.relplot(x="Model_year", y="Horsepower", 
             data=cardata, kind="line", ci=None)
 plt.show()
-'''
+
 
 ################### category chat ######################
 ########################################################
@@ -131,4 +131,13 @@ with plt.style.context(('dark_background')):
     g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='point')
 plt.show()
  
+'''
+
+with plt.style.context(('dark_background')):
+    g = sns.catplot(x='Year', y='Horsepower', data=cardata, kind='point', 
+               capsize=0.05, hue='Origin2')
+    g.fig.suptitle('Year vs. Horsepower')
+    g.set(xlabel='Year of Manufacture')
+    plt.xticks(rotation=30)
+plt.show()
 
