@@ -35,7 +35,6 @@ print(cardata['Year3'].value_counts(), end=sp)
 
 
 
-'''
 
 # Plot scatter plot
 sns.scatterplot(x='MPG', y='Horsepower', data=cardata)
@@ -47,12 +46,12 @@ sns.countplot(x='Origin', data=cardata)
 plt.xticks(np.arange(3), 'USA Europe Japan'.split())
 plt.show()
 
-'''
+
 
 # Relationship plot: continous features
 color_palette = 'Blue Green Red Yellow White'.split()
 cardata['Origin2'] = cardata['Origin'].map({1: 'USA', 2: 'Europe', 3:'Japan'})
-'''
+
 # arrange plots in columns
 with plt.style.context(('dark_background')):
     g = sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='scatter', 
@@ -77,8 +76,7 @@ with plt.style.context(('dark_background')):
     g.set_titles('{row_name} {col_name} Cylinders', y=0.000000001)
 plt.show()
 
-'''
-'''
+
 # Line plots: use kind='line'
 with plt.style.context(('dark_background')):
     g = sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='line', 
@@ -97,6 +95,7 @@ plt.show()
 ########################################################
 ########################################################
 # count plot
+sns.set_style('whitegrid')
 g = sns.catplot(x='Year', data=cardata, kind='count')
 g.set(xlabel='Model Year')
 plt.show()
@@ -131,7 +130,7 @@ with plt.style.context(('dark_background')):
     g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='point')
 plt.show()
  
-'''
+
 
 with plt.style.context(('dark_background')):
     g = sns.catplot(x='Year', y='Horsepower', data=cardata, kind='point', 
