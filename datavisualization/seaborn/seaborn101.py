@@ -34,6 +34,9 @@ cardata['Year3'] = cardata['Year'].where(lambda x: x.isin(['Early 70s', 'Early 8
 print(cardata['Year3'].value_counts(), end=sp)
 
 
+
+'''
+
 # Plot scatter plot
 sns.scatterplot(x='MPG', y='Horsepower', data=cardata)
 plt.xlabel('Miles per Gallon')
@@ -44,11 +47,12 @@ sns.countplot(x='Origin', data=cardata)
 plt.xticks(np.arange(3), 'USA Europe Japan'.split())
 plt.show()
 
+'''
 
 # Relationship plot: continous features
 color_palette = 'Blue Green Red Yellow White'.split()
 cardata['Origin2'] = cardata['Origin'].map({1: 'USA', 2: 'Europe', 3:'Japan'})
-
+'''
 # arrange plots in columns
 with plt.style.context(('dark_background')):
     g = sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='scatter', 
@@ -73,10 +77,35 @@ with plt.style.context(('dark_background')):
     g.set_titles('{row_name} {col_name} Cylinders', y=0.000000001)
 plt.show()
 
+'''
+'''
+# Line plots: use kind='line'
+with plt.style.context(('dark_background')):
+    g = sns.relplot(x='MPG', y='Horsepower', data=cardata, kind='line', 
+             palette=color_palette, ci='sd') # col='Year', size='Cylinders',
+    g.fig.suptitle('')  # g.set_title() => for titles for AxesSubplot
+    g.set_titles('{col_name} Cylinders', y=0.000000001)
+plt.show()
 
 
+sns.relplot(x="Model_year", y="Horsepower", 
+            data=cardata, kind="line", ci=None)
+plt.show()
+'''
 
 # category chat
+
+g = sns.catplot(x='Year', data=cardata, kind='count')
+g.set(xlabel='Model Year')
+plt.show()
+
+
+g = sns.catplot(x='Model_year', data=cardata, kind='count')
+g.set(xlabel='Model Year')
+plt.xticks(rotation=30)
+plt.show()
+
+'''
 with plt.style.context(('dark_background')):
     g = sns.catplot(x='Cylinders', y='Horsepower', data=cardata, kind='box', 
               palette=color_palette, col='Origin2')
@@ -86,3 +115,4 @@ with plt.style.context(('dark_background')):
     plt.xticks(rotation=30)
 plt.show()
  
+'''
