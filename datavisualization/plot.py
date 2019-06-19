@@ -91,5 +91,5 @@ plt.plot(xplot+7, yplot, color='g', linewidth=10, zorder=15, alpha=0.3)
 plt.show()
 
 # Remember to close the pyplot
-# plt.close()
+plt.close()
 
