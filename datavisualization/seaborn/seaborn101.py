@@ -24,7 +24,7 @@ cardata.loc[cardata['Model_year'] >= 75, 'Year'] = 'Late 70s'
 cardata.loc[cardata['Model_year'] >= 80, 'Year'] = 'Early 80s'
 print(cardata['Year'].value_counts(), end=sp)
 
-# numpy.where => replace for true and false
+# numpy.where => replace for true and false conditions
 # numpy.where is a binary replacement method
 cardata['Year2'] = np.where(cardata['Year'].isin(['Early 70s', 'Early 80s']),'Olddata', 'NewData')
 print(cardata['Year2'].value_counts(), end=sp)
