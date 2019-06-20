@@ -26,5 +26,21 @@ plt.show()
 
 
 sns.set()
+# bar plot
 cyc.plot(kind='bar')
 plt.show()
+
+# distplot 
+sns.distplot(car['MPG'])
+plt.show()
+
+# # pairplot
+# car2 = car.iloc[:, :4]
+# sns.pairplot(car2)
+# plt.show()
+
+
+# lmplot
+sns.lmplot(x='Displacement', y='MPG', data=car)
+plt.show()
+
