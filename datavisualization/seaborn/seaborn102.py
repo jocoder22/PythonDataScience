@@ -50,3 +50,11 @@ sns.jointplot(x='Displacement', y='MPG', data=car)
 plt.show()
 
 
+
+car.loc[car['Model_year'] >= 70, 'Year'] = 'Early 70s'
+car.loc[car['Model_year'] >= 75, 'Year'] = 'Late 70s'
+car.loc[car['Model_year'] >= 80, 'Year'] = 'Early 80s'
+
+# boxplot
+gg = sns.boxplot(x='Year', y='MPG', data=car)
+plt.show()
