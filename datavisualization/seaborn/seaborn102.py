@@ -23,3 +23,8 @@ cyc = car['Cylinders'].value_counts()
 
 cyc.plot(kind='bar')
 plt.show()
+
+
+sns.set()
+cyc.plot(kind='bar')
+plt.show()
