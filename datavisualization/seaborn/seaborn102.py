@@ -44,3 +44,9 @@ plt.show()
 sns.lmplot(x='Displacement', y='MPG', data=car)
 plt.show()
 
+
+# jointplot
+sns.jointplot(x='Displacement', y='MPG', data=car)
+plt.show()
+
+
