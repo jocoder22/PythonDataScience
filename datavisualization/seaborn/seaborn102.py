@@ -67,5 +67,6 @@ plt.show()
 
 # heatmap
 df = car.pivot_table(index='Cylinders', columns='Displacement', values='MPG', aggfunc='mean')
+print(df)
 sns.heatmap(df)
 plt.show()
