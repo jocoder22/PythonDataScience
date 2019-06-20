@@ -58,3 +58,14 @@ car.loc[car['Model_year'] >= 80, 'Year'] = 'Early 80s'
 # boxplot
 gg = sns.boxplot(x='Year', y='MPG', data=car)
 plt.show()
+
+
+# swarmplot
+gs = sns.swarmplot(x='Year', y='MPG', data=car)
+gs.set_xticklabels(gs.get_xticklabels(), rotation=45)
+plt.show()
+
+# heatmap
+df = car.pivot_table(index='Cylinders', columns='Displacement', values='MPG', aggfunc='mean')
+sns.heatmap(df)
+plt.show()
