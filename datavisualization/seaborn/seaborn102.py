@@ -76,6 +76,6 @@ plt.show()
 
 # heatmap 2
 df2 = car.pivot_table('Cylinders', 'Year', 'Origin', 'median')
-sns.heatmap(df2, annot=True,  linewidths=.5, 
+sns.heatmap(df2, annot=True, linewidths=.5, fmt="d",
         cmap="YlGnBu", xticklabels='USA Europe Japan'.split())
 plt.show()
