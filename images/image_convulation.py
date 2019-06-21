@@ -7,6 +7,9 @@ import matplotlib.image as mpimg
 import cv2
 from skimage import io
 
+path = r'C:\Users\Jose\Desktop\PythonDataScience\images'
+os.chdir(path)
+
 url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdYoq9p_F3wQRMFzCN60eCXJhSfPq4daFMQqV4zVhK6f_IGye1'
 sp = '\n\n'
 
@@ -25,3 +28,15 @@ plt.imshow(img_gray, cmap='gray')
 plt.axis('off')
 plt.show()
 print(img_gray.shape, img_gray.size, sep=sp, end=sp)
+
+# save the image
+# cv2.imwrite('gray_image.jpg', img_gray)
+# plt.imsave('gray_image2.jpg', img_gray)
+
+# detect white line in gray image
+gray2 = img_gray.copy()
+gray2[gray2 < 230] = 0
+plt.imshow(gray2, cmap='gray')
+plt.axis('off')
+plt.show()
+
