@@ -24,7 +24,6 @@ plt.show()
 print(img.shape, img.size, sep=sp, end=sp)
 
 print(list(range(1,5)))
-'''
 
 # Create gray image
 img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
@@ -32,12 +31,12 @@ plt.imshow(img_gray, cmap='gray')
 plt.axis('off')
 plt.show()
 print(img_gray.shape, img_gray.size, sep=sp, end=sp)
-'''
+
 # save the image
 # cv2.imwrite('gray_image.jpg', img_gray)
 plt.imsave('color22.jpg', img)
 
-'''
+
 # detect white line in gray image
 gray2 = img_gray.copy()
 gray2[gray2 < 230] = 0
@@ -56,7 +55,6 @@ plt.show()
 
 
 
-'''
 
 url2 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mzaXhllnV5VHCEUp9zuqbEoRbe_OihMvPJ4TBxoeyClofw4x'
 url3 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNiMDQkAVuH2P-OPl3ZUaQQW369h4ZquHxeLdeRht13DDBEf27'
@@ -79,10 +77,11 @@ plt.show()
 
 
 # load the images
-mp = io.imread(url5)
+mp = io.imread(url4)
 plt.imshow(mp)
+plt.axis('off')
 plt.show()
-R, G, B = mp[200, 234]
+R, G, B = mp[110, 234]
 print(R,G,B)
 
 
@@ -95,3 +94,15 @@ for i in range(0, 6):
     plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
     plt.show()
 
+
+
+# Create HSV image
+imgg = cv2.imread('color22.jpg')
+cv2.imshow('Original Image', mp)
+img_hsv = cv2.cvtColor(mp, cv2.COLOR_BGR2HSV)
+cv2.imshow('HSV Image', img_hsv)
+cv2.imshow('Hue Channel', img_hsv[..., 0])
+cv2.imshow('Value Channel', img_hsv[..., 1])
+cv2.imshow('Saturation Channel', img_hsv[..., 2])
+cv2.waitKey()
+cv2.destroyAllWindows()
