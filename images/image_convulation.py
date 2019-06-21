@@ -17,3 +17,11 @@ plt.imshow(img)
 plt.show()
 
 print(img.shape, img.size, sep=sp, end=sp)
+
+
+# Create gray image
+img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+plt.imshow(img_gray, cmap='gray')
+plt.axis('off')
+plt.show()
+print(img_gray.shape, img_gray.size, sep=sp, end=sp)
