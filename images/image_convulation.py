@@ -40,3 +40,12 @@ plt.imshow(gray2, cmap='gray')
 plt.axis('off')
 plt.show()
 
+
+
+# detect white line in color image
+color = img.copy()
+color[(color[..., 0] < 230) | (color[..., 1] < 230) | (color[..., 2] < 230)] = 0
+plt.imshow(color)
+plt.axis('off')
+plt.show()
+
