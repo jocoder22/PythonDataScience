@@ -66,11 +66,24 @@ url6 = 'https://www.mercedes-benz.com/wp-content/uploads/sites/3/2015/01/10-Merc
 
 
 # read the image
-meds = cv2.imread('color22.jpg', 0)
+meds = cv2.imread('car22.jpg')
 img4 = cv2.resize(meds,(860,980))
 cv2.imshow('mercedes', img4)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+# show with matplotlib
+plt.axis('off')
+plt.imshow(meds)
+plt.show()
+
+
+# load the images
+mp = io.imread(url5)
+plt.imshow(mp)
+plt.show()
+R, G, B = mp[200, 234]
+print(R,G,B)
 
 
 lkk = [url1, url2, url3, url4, url5, url6]
