@@ -26,13 +26,11 @@ cv2.destroyAllWindows()
 
 # perform rotation
 height, width = img.shape[:2]
-rot = cv2.getRotationMatrix2D((width/2, height/2), 180, 0.4)
+rot = cv2.getRotationMatrix2D((width/2, height/2), 90, 0.4)
 image_r = cv2.warpAffine(img, rot,(width, height))
 cv2.imshow('lamborghini_rotated_45', image_r)
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-
 
 
 # turn image upside down
@@ -62,3 +60,12 @@ plt.imshow(mirror_image)
 plt.axis('off')
 plt.title('mirror_image')
 plt.show()
+
+# shifting image
+shift_matrix = np.float32([[1, 0, -100],   # shifting left(minus) or right
+                           [0, 1, 0]])    # shifting up(minus) or down
+
+shift_right = cv2.warpAffine(img, shift_matrix, (width, height))
+cv2.imshow('lamborghini_shifted_right', shift_right)
+cv2.waitKey()
+cv2.destroyAllWindows()
