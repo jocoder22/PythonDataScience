@@ -19,7 +19,46 @@ url = 'https://timedotcom.files.wordpress.com/2015/01/the-mercedes-benz-f-015.jp
 # plt.show()
 
 meds = cv2.imread('car22.jpg')
-img = cv2.resize(meds,(1200,700))
-cv2.imshow('mercedes', img)
+img = cv2.resize(meds,(1250,650))
+cv2.imshow('lamborghini', img)
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+# perform rotation
+height, width = img.shape[:2]
+rot = cv2.getRotationMatrix2D((width/2, height/2), 180, 0.4)
+image_r = cv2.warpAffine(img, rot,(width, height))
+cv2.imshow('lamborghini_rotated_45', image_r)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+
+
+# turn image upside down
+updown = img[::-1]
+invert_mirror = img[::-1,::-1,:]
+mirror_image = img[:,::-1,:]
+# mirror_image = img[::-1,::-1,::-1]
+
+
+plt.subplot(221)
+plt.imshow(img)
+plt.title('original')
+plt.axis('off')
+
+plt.subplot(223)
+plt.imshow(updown)
+plt.axis('off')
+plt.title('upsidedown')
+
+plt.subplot(224)
+plt.imshow(invert_mirror)
+plt.axis('off')
+plt.title('invert_mirror')
+
+plt.subplot(222)
+plt.imshow(mirror_image)
+plt.axis('off')
+plt.title('mirror_image')
+plt.show()
