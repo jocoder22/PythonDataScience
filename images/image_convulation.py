@@ -67,7 +67,7 @@ url6 = 'https://www.mercedes-benz.com/wp-content/uploads/sites/3/2015/01/10-Merc
 meds = cv2.imread('car22.jpg')
 img4 = cv2.resize(meds,(860,980))
 cv2.imshow('mercedes', img4)
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 # show with matplotlib
