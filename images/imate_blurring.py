@@ -28,3 +28,14 @@ cv2.imshow('lamborghini_GRAY_direct', img23)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+
+# Sharpen image
+kernel1 = np.float32([[0, -1, 0],
+                      [-1, 5, -1],
+                      [0, -1, 0]])
+
+sharpen_image = cv2.filter2D(img23, -1, kernel1)
+
+cv2.imshow('sharpen_image', sharpen_image)
+cv2.waitKey()
+cv2.destroyAllWindows()
