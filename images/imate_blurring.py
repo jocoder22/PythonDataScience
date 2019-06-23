@@ -11,18 +11,20 @@ path = r'C:\Users\Jose\Desktop\PythonDataScience\images'
 os.chdir(path)
 
 # load image
-img4 = plt.imread('car22.jpg')
-plt.imshow(img4)
+img = plt.imread('car22.jpg')
+plt.imshow(img)
 plt.show()
 
 # load image
-img = cv2.imread('car22.jpg')
-img2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-img3 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+img22 = cv2.imread('car22.jpg')
+img23 = cv2.imread('car22.jpg', 0)  # load as gray directly
+img2 = cv2.cvtColor(img22, cv2.COLOR_BGR2GRAY)
+img3 = cv2.cvtColor(img22, cv2.COLOR_BGR2RGB)
 height, width = img.shape[:2]
-cv2.imshow('lamborghini', img)
+cv2.imshow('lamborghini', img22)
 cv2.imshow('lamborghini_GRAY', img2)
 cv2.imshow('lamborghini_RGB', img3)
+cv2.imshow('lamborghini_GRAY_direct', img23)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
