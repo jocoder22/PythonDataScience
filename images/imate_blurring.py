@@ -49,3 +49,28 @@ sharpen_image2 = cv2.filter2D(img23, -1, kernel12)
 cv2.imshow('sharpen_image', sharpen_image2)
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+
+# Blurring images
+blur_kernel = np.ones((3, 3))
+blur_image = cv2.filter2D(img23, -1, blur_kernel)
+
+cv2.imshow('blur_image', blur_image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+# Blurring images with normalization
+blur_kernel2 = np.ones((3, 3)) * 1/9
+blur_image2 = cv2.filter2D(img23, -1, blur_kernel2)
+
+cv2.imshow('blur_image_normalized', blur_image2)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+# Blurring images with more powerful normalization
+blur_kernel3 = np.ones((10, 10)) * 1/100
+blur_image22 = cv2.filter2D(img23, -1, blur_kernel3)
+
+cv2.imshow('blur_image_Powerful', blur_image22)
+cv2.waitKey()
+cv2.destroyAllWindows()
