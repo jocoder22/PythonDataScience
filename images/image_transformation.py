@@ -125,3 +125,9 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 
+erosion_img = cv2.erode(img, kernel, iterations=5)
+dilate_img = cv2.dilate(img, kernel, iterations=5)
+cv2.imshow('erosion_img', erosion_img)
+cv2.imshow('dilate_img', dilate_img)
+cv2.waitKey()
+cv2.destroyAllWindows()
