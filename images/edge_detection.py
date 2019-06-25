@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import cv2
 from skimage import io
 
-path = r'C:\Users\Jose\Desktop\PythonDataScience\images'
+path = r'C:\Users\Jose\Desktop\Holder'
 os.chdir(path)
 
 
@@ -78,9 +78,11 @@ def edge_detectionCam(image, x=None):
     # remove noise
     img = cv2.GaussianBlur(Img_gray,(3,3),0)
 
-    t01, t02 = (200, 240)
-    t11, t12 = (120, 200)
+    # t01, t02 = (200, 240)
+    # t11, t12 = (120, 200)
 
+    t01, t02 = (20, 240)
+    t11, t12 = (10, 200)
 
     if x == 'lap':
         Laplacian_image = cv2.Laplacian(img,cv2.CV_64F)
@@ -116,7 +118,7 @@ cap = cv2.VideoCapture(filepath)
 
 while True:
     ret, frame = cap.read()
-    cv2.imshow('Live Edge Detection', edge_detectionCam(frame, 'lap'))
+    cv2.imshow('Live Edge Detection', edge_detectionCam(frame))
     cv2.imshow('Original Video', frame)
     # if cv2.waitKey(1) == 13: # enter key to terminate
     if cv2.waitKey(25) == 13: # enter key to terminate
@@ -136,6 +138,7 @@ out = cv2.VideoWriter('output.mp4',fourcc, 20.0, (640,480))
 while(cap.isOpened()):
     ret, frame = cap.read()
     if ret==True:
+        # flip the frame
         frame = cv2.flip(frame,0)
 
         # write the flipped frame
