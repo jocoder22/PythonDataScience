@@ -18,7 +18,7 @@ imgg = cv2.imread('car22.jpg')
 Img_gray = cv2.cvtColor(imgg, cv2.COLOR_BGR2GRAY)
 
 # remove noise
-img = cv2.GaussianBlur(Img_gray,(3,3),0)
+img = cv2.GaussianBlur(Img_gray,(7,7),0)
 
 
 # Output dtype = cv2.CV_8U
