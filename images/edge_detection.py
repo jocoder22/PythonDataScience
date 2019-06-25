@@ -34,7 +34,7 @@ Sobel_X_image = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=9)
 Sobel_Y_image = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=9)
 
 t01, t02 = (20, 240)
-t11, t12 = (100, 170)
+t11, t12 = (10, 200)
 Canny_image = cv2.Canny(img, t01, t02)
 Canny_image2 = cv2.Canny(img, t11, t12)
 
