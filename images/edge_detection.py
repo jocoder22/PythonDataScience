@@ -126,7 +126,6 @@ cap.release()
 cv2.destroyAllWindows()
 
 
-'''
 # create a VideoCapture object
 cap = cv2.VideoCapture(0)
 
@@ -152,4 +151,3 @@ while(cap.isOpened()):
 cap.release()
 out.release()
 cv2.destroyAllWindows()
-'''
