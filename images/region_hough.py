@@ -20,3 +20,5 @@ img = io.imread(url1)
 plt.axis('off')
 plt.imshow(img)
 plt.show()
+
+
