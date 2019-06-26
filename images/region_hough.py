@@ -91,3 +91,8 @@ line_image = cv2.addWeighted(img, alpha, blanks, beta, gamma)
 
 
 
+cv2.imshow('line_image', line_image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+print(line_image.shape, end=sp)
+
