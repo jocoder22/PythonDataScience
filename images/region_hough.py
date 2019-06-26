@@ -17,8 +17,13 @@ sp = '\n\n'
 
 # img = mpimg.imread(url, format='jpeg')
 img = io.imread(url1)
-plt.axis('off')
+# plt.axis('off')
 plt.imshow(img)
 plt.show()
+
+gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+cv2.imshow('gray_img', gray_img)
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 
