@@ -34,7 +34,7 @@ Sobel_X_image = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=9)
 Sobel_Y_image = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=9)
 
 t01, t02 = (20, 240)
-t11, t12 = (10, 200)
+t11, t12 = (40, 200)
 Canny_image = cv2.Canny(img, t01, t02)
 Canny_image2 = cv2.Canny(img, t11, t12)
 
@@ -82,7 +82,7 @@ def edge_detectionCam(image, x=None):
     # t11, t12 = (120, 200)
 
     t01, t02 = (20, 240)
-    t11, t12 = (10, 200)
+    t11, t12 = (40, 200)
 
     if x == 'lap':
         Laplacian_image = cv2.Laplacian(img,cv2.CV_64F)
