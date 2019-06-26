@@ -71,30 +71,34 @@ th0 = 20
 line_l = 10
 line_gap = 5
 
+# Define Hough transformation
 houg_img = cv2.HoughLinesP(region_img2,rho, theta, th0, 
                 np.array([]),minLineLength=line_l, maxLineGap=line_gap)
 
 blanks = np.zeros_like(img)
 
+# Draw the lines on blank image
 for lines in houg_img:
     for x0,y0,x1,y1 in lines:
         cv2.line(blanks,(x0, y0), (x1, y1), (255,0, 0), 5)
+
 
 cv2.imshow('blanks', blanks)
 cv2.waitKey()
 cv2.destroyAllWindows()
 print(blanks.shape, end=sp)
 
+# Add lines to color image
 alpha, beta, gamma = 1, 1, 0
 
 line_image = cv2.addWeighted(img, alpha, blanks, beta, gamma)
-
 
 
 cv2.imshow('line_image', line_image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 print(line_image.shape, end=sp)
+
 
 plt.imshow(line_image)
 plt.show()
