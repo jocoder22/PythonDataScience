@@ -96,3 +96,5 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 print(line_image.shape, end=sp)
 
+plt.imshow(line_image)
+plt.show()
