@@ -20,10 +20,20 @@ img = io.imread(url1)
 # plt.axis('off')
 plt.imshow(img)
 plt.show()
+print(img.shape, end=sp)
 
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 cv2.imshow('gray_img', gray_img)
 cv2.waitKey()
 cv2.destroyAllWindows()
+print(gray_img.shape, end=sp)
 
+
+# select point of interest
+x0, x1, x2, x3, x4 = 0, 50, 140, 260, 0
+y0, y1, y2, y3, y4 = 110, 60, 60, 160, 160
+
+
+region_matrix = np.float32([[x0, y0],[x1 ,y1], 
+                          [x2, y2], [x3, y3], [x4, y4]])
 
