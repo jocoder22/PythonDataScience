@@ -80,3 +80,14 @@ for lines in houg_img:
     for x0,y0,x1,y1 in lines:
         cv2.line(blanks,(x0, y0), (x1, y1), (255,0, 0), 5)
 
+cv2.imshow('blanks', blanks)
+cv2.waitKey()
+cv2.destroyAllWindows()
+print(blanks.shape, end=sp)
+
+alpha, beta, gamma = 1, 1, 0
+
+line_image = cv2.addWeighted(img, alpha, blanks, beta, gamma)
+
+
+
