@@ -46,3 +46,37 @@ cv2.imshow('region_image', region_img)
 cv2.waitKey()
 cv2.destroyAllWindows()
 print(region_img.shape, end=sp)
+
+# Hough transformation
+# remove noise
+img = cv2.GaussianBlur(gray_img, (7, 7),0)
+
+# define threshold
+t11, t12 = (20, 200)
+
+Canny_image = cv2.Canny(img, t11, t12)
+
+# Define region of Interest
+region_img2 = cv2.bitwise_and(Canny_image, mask)
+
+# show the image
+cv2.imshow('region_image', region_img2)
+cv2.waitKey()
+cv2.destroyAllWindows()
+print(region_img.shape, end=sp)
+
+rho = 2
+theta = np.pi/180
+th0 = 20
+line_l = 10
+line_gap = 5
+
+houg_img = cv2.HoughLinesP(region_img2,rho, theta, th0, 
+                np.array([]),minLineLength=line_l, maxLineGap=line_gap)
+
+blanks = np.zeros_like(img)
+
+for lines in houg_img:
+    for x0,y0,x1,y1 in lines:
+        cv2.line(blanks,(x0, y0), (x1, y1), (255,0, 0), 5)
+
