@@ -5,17 +5,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 # import matplotlib.image as mpimg
 import cv2
-from skimage import io
+from skimage import io, exposure
+from skimage.feature import hog
 
 path = r'C:\Users\Jose\Desktop\Holder'
 os.chdir(path)
 sp = '\n\n'
 
-url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEc92kYxyNsx6ZxWYF6KJJz-QZWUj0jXBleB2tEg6yBekggb28'
+# url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEc92kYxyNsx6ZxWYF6KJJz-QZWUj0jXBleB2tEg6yBekggb28'
+# url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSESxr13ODvh5lfb1TxT8LgDbzWP44sD5n1z_Nf-697su_jona3zw'
 
 # load image
-# imgg = cv2.imread('car22.jpg') 
-imgg = io.imread(url)
+imgg = cv2.imread('car22.jpg') 
+# imgg = io.imread(url)
 
 # converting to gray scale
 Img_gray = cv2.cvtColor(imgg, cv2.COLOR_BGR2GRAY)
@@ -36,5 +38,13 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 plt.imshow(Img_gray2)
+plt.axis('off')
+plt.show()
+
+
+features, hog_img = hog(Img_gray,visualize=True, 
+                pixels_per_cell=(9, 9), cells_per_block=(2, 2))
+img_hog = exposure.rescale_intensity(hog_img, in_range=(0, 2))
+plt.imshow(img_hog)
 plt.axis('off')
 plt.show()
