@@ -16,3 +16,10 @@ imgg = cv2.imread('car22.jpg')
 
 # converting to gray scale
 Img_gray = cv2.cvtColor(imgg, cv2.COLOR_BGR2GRAY)
+
+# remove noise
+img = cv2.GaussianBlur(Img_gray,(7,7),0)
+
+cv2.imshow('lamborghini_GRAY', img)
+cv2.waitKey()
+cv2.destroyAllWindows()
