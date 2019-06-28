@@ -24,6 +24,9 @@ img_c = cv2.cornerHarris(img, 8, 5, 0.1)
 img_dilate = cv2.dilate(img_c, np.ones((7,7), np.uint8), iterations=2)
 
 
-cv2.imshow('lamborghini_GRAY', img_dilate)
+Img_gray2 = Img_gray.copy()
+Img_gray2[img_dilate > 0.02 * img_dilate.max()] = [255, 0, 0]
+
+cv2.imshow('lamborghini_with_Corners', Img_gray2)
 cv2.waitKey()
 cv2.destroyAllWindows()
