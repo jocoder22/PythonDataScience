@@ -20,6 +20,10 @@ Img_gray = cv2.cvtColor(imgg, cv2.COLOR_BGR2GRAY)
 # remove noise
 img = cv2.GaussianBlur(Img_gray,(7,7),0)
 
-cv2.imshow('lamborghini_GRAY', img)
+img_c = cv2.cornerHarris(img, 8, 5, 0.1)
+img_dilate = cv2.dilate(img_c, np.ones((7,7), np.uint8), iterations=2)
+
+
+cv2.imshow('lamborghini_GRAY', img_dilate)
 cv2.waitKey()
 cv2.destroyAllWindows()
