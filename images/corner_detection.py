@@ -9,10 +9,13 @@ from skimage import io
 
 path = r'C:\Users\Jose\Desktop\Holder'
 os.chdir(path)
+sp = '\n\n'
 
+url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEc92kYxyNsx6ZxWYF6KJJz-QZWUj0jXBleB2tEg6yBekggb28'
 
 # load image
-imgg = cv2.imread('car22.jpg')  
+# imgg = cv2.imread('car22.jpg') 
+imgg = io.imread(url)
 
 # converting to gray scale
 Img_gray = cv2.cvtColor(imgg, cv2.COLOR_BGR2GRAY)
@@ -20,13 +23,18 @@ Img_gray = cv2.cvtColor(imgg, cv2.COLOR_BGR2GRAY)
 # remove noise
 img = cv2.GaussianBlur(Img_gray,(7,7),0)
 
-img_c = cv2.cornerHarris(img, 8, 5, 0.1)
-img_dilate = cv2.dilate(img_c, np.ones((7,7), np.uint8), iterations=2)
+img_c = cv2.cornerHarris(img, 3, 5, 0.1)
+img_dilate = cv2.dilate(img_c, np.ones((5, 5), np.uint8), iterations=1)
 
 
-Img_gray2 = Img_gray.copy()
+print(img_dilate.max(), end=sp)
+Img_gray2 = imgg.copy()
 Img_gray2[img_dilate > 0.02 * img_dilate.max()] = [255, 0, 0]
 
 cv2.imshow('lamborghini_with_Corners', Img_gray2)
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+plt.imshow(Img_gray2)
+plt.axis('off')
+plt.show()
