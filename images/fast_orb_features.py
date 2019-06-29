@@ -12,7 +12,7 @@ sp = '\n\n'
 # url = 'https://live.staticflickr.com/7856/47133183871_52540009ac_b.jpg'
 url = 'https://live.staticflickr.com/3900/14288309597_d7bfd2bab6_b.jpg'
 
-# imgg = cv2.imread('car22.jpg') 
+# Download image
 imgg = io.imread(url)
 
 # converting to gray scale
@@ -54,3 +54,19 @@ cv2.imshow('Walgreens Truck_fast', fast_image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+
+# ORB feature detection
+# create fast object
+_orb = cv2.ORB_create()
+keypoints = _orb.detect(Img_gray, None)
+
+
+# compute descriptor and keypoints
+keypoints, _desc = _orb.compute(Img_gray, keypoints)
+print(len(keypoints))
+
+orb_image = cv2.drawKeypoints(imgg, keypoints, None,
+            flags=cv2.DrawMatchesFlags_DRAW_RICH_KEYPOINTS)
+cv2.imshow('Walgreens Truck_fast', orb_image)
+cv2.waitKey()
+cv2.destroyAllWindows()
