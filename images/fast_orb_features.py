@@ -26,15 +26,17 @@ cv2.imshow('Walgreens Truck', img)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+
 # blur image
 # Blurring images with more powerful normalization
 blur_kernel = np.ones((4, 4)) * 1/16
 blur_image = cv2.filter2D(img, -1, blur_kernel)
 
+
 # Perform canny's transformation
 lower_threshold, upper_threshold = (40, 200)
 Canny_image = cv2.Canny(blur_image, lower_threshold, upper_threshold)
-img_dilate = cv2.erode(Canny_image, np.ones((3, 3), np.uint8), iterations=1)
+
 cv2.imshow('Walgreens Truck', Canny_image)
 cv2.waitKey()
 cv2.destroyAllWindows()
