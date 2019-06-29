@@ -25,3 +25,10 @@ img = cv2.GaussianBlur(Img_gray,(7,7),0)
 cv2.imshow('Walgreens Truck', img)
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+# Perform canny's transformation
+lower_threshold, upper_threshold = (40, 200)
+Canny_image = cv2.Canny(img, lower_threshold, upper_threshold)
+cv2.imshow('Walgreens Truck', Canny_image)
+cv2.waitKey()
+cv2.destroyAllWindows()
