@@ -35,6 +35,9 @@ model.add(keras.layers.Dense(25, activation='relu'))
 # Define the output layer
 model.add(keras.layers.Dense(1))
 
+sgd = keras.optimizers.SGD(lr=0.01, decat=1e-6, momentum=0.9, nesterov=True)
+
+
 # Compile the model
 model.compile('adam', loss='mse')
 
