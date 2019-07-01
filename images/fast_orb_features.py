@@ -65,6 +65,7 @@ keypoints = _orb.detect(Img_gray, None)
 keypoints, _desc = _orb.compute(Img_gray, keypoints)
 print(len(keypoints))
 
+
 orb_image = cv2.drawKeypoints(imgg, keypoints, None,
             flags=cv2.DrawMatchesFlags_DRAW_RICH_KEYPOINTS)
 cv2.imshow('Walgreens Truck_fast', orb_image)
