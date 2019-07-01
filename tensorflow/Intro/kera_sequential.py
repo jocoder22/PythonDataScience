@@ -67,7 +67,7 @@ model2.add(keras.layers.Dense(100, activation='relu'))
 model2.add(keras.layers.Dense(1, activation='sigmoid'))
 
 # Compile the model
-model2.compile('adam', loss='categorical_crossentropy')
+model2.compile('adam', loss='binary_crossentropy')
 
 # Print a model summary
 print(model2.summary())
