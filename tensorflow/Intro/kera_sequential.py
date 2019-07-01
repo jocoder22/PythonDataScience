@@ -82,6 +82,10 @@ print(data_class3.groupby('Origin')['MPG'].mean())
 
 targets_c = data_class3.pop("Origin")
 
+# Add one-hot encoding
+yy = keras.utils.to_categorical(targets_c)
+print(targets_c.head(), yy[11:25], sep=sp, end=sp)
+
 # Define the sequential model
 model3 = keras.Sequential()
 
