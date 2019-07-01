@@ -68,6 +68,7 @@ model2.add(keras.layers.Dense(1, activation='sigmoid'))
 
 # Compile the model
 model2.compile('adam', loss='binary_crossentropy', metrics=['accuracy'])
+# model2.compile('rmsprop', loss='binary_crossentropy', metrics=['accuracy'])
 
 # Print a model summary
 print(model2.summary())
