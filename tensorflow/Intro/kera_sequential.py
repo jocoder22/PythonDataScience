@@ -94,10 +94,11 @@ model3.add(keras.layers.Dense(100, activation='relu'))
 model3.add(keras.layers.Dense(3, activation='softmax'))
 
 
-sgd = keras.optimizers.SGD(lr=0.01, decat=1e-6, momentum=0.9, nesterov=True)
+sgd = keras.optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
 # Compile the model
-model3.compile('adam', loss='categorical_crossentropy')
+# model3.compile('adam', loss='categorical_crossentropy')
+model3.compile(optimizer=sgd, loss='categorical_crossentropy')
 
 # Print a model summary
 print(model3.summary())
