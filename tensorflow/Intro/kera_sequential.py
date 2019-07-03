@@ -7,6 +7,11 @@ from tensorflow import Variable, float32, keras, constant
 import matplotlib.pyplot as plt
 # plt.style.use('ggplot')
 
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+plt.style.use('ggplot')
 
 path = r"C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\UnsupervisedME"
 os.chdir(path)
@@ -82,9 +87,21 @@ print(data_class3.groupby('Origin')['MPG'].mean())
 
 targets_c = data_class3.pop("Origin")
 
+_nshape = data_class3.values.shape[1]
+
 # Add one-hot encoding
 yy = keras.utils.to_categorical(targets_c)
 print(targets_c.head(), yy[11:25], sep=sp, end=sp)
+
+# """
+# Normalize the dataset
+scaler = MinMaxScaler()
+X_scaled = scaler.fit_transform(data_class3)
+
+# split the dataset
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, yy, test_size=0.2, stratify=targets_c)
+
+
 
 # Define the sequential model
 model3 = keras.Sequential()
@@ -93,7 +110,7 @@ model3 = keras.Sequential()
 model3.add(keras.layers.Dense(600, activation='relu', input_shape=(_nshape,)))
 
 # Add the second dense layer
-model3.add(keras.layers.Dense(100, activation='relu'))
+model3.add(keras.layers.Dense(300, activation='relu'))
 
 # Add output layer, the final layer
 model3.add(keras.layers.Dense(3, activation='softmax'))
@@ -102,8 +119,15 @@ model3.add(keras.layers.Dense(3, activation='softmax'))
 sgd = keras.optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
 # Compile the model
-# model3.compile('adam', loss='categorical_crossentropy')
-model3.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy'])
+model3.compile('adam', loss='categorical_crossentropy', metrics=['accuracy'])
+# model3.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Print a model summary
 print(model3.summary())
+
+history = model3.fit(X_train, y_train,
+                    batch_size=100, epochs=150,
+                    # validation_data=(X_test, y_test)
+                    validation_split=0.2)
+
+
