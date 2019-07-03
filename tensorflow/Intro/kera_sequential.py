@@ -112,6 +112,9 @@ model3.add(keras.layers.Dense(600, activation='relu', input_shape=(_nshape,)))
 # Add the second dense layer
 model3.add(keras.layers.Dense(300, activation='relu'))
 
+# # Add the second dense layer
+# model3.add(keras.layers.Dense(60, activation='relu'))
+
 # Add output layer, the final layer
 model3.add(keras.layers.Dense(3, activation='softmax'))
 
@@ -126,8 +129,9 @@ model3.compile('adam', loss='categorical_crossentropy', metrics=['accuracy'])
 print(model3.summary())
 
 history = model3.fit(X_train, y_train,
-                    batch_size=100, epochs=150,
+                    batch_size=100, epochs=250,
                     # validation_data=(X_test, y_test)
                     validation_split=0.2)
 
-
+score = model3.evaluate(X_test, y_test)
+print(f'\n\nTest Loss: {score[0]}\nTest Accuracy: {score[1]}')
