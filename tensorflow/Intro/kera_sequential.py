@@ -5,10 +5,11 @@ import pandas as pd
 from tensorflow import Variable, float32, keras, constant
 # import tensorflow as tf
 import matplotlib.pyplot as plt
+import seaborn as sns
 # plt.style.use('ggplot')
 
 from sklearn.model_selection import cross_val_score
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix, classification_report, multilabel_confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 plt.style.use('ggplot')
@@ -99,7 +100,7 @@ scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(data_class3)
 
 # split the dataset
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, yy, test_size=0.2, stratify=targets_c)
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, targets_c, test_size=0.2, stratify=targets_c)
 
 
 
@@ -122,16 +123,34 @@ model3.add(keras.layers.Dense(3, activation='softmax'))
 sgd = keras.optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
 # Compile the model
-model3.compile('adam', loss='categorical_crossentropy', metrics=['accuracy'])
+# model3.compile('adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model3.compile('adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 # model3.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Print a model summary
 print(model3.summary())
 
 history = model3.fit(X_train, y_train,
-                    batch_size=100, epochs=250,
+                    batch_size=100, epochs=50,
                     # validation_data=(X_test, y_test)
                     validation_split=0.2)
 
 score = model3.evaluate(X_test, y_test)
 print(f'\n\nTest Loss: {score[0]}\nTest Accuracy: {score[1]}')
+
+ypred = model3.predict_classes(X_test)
+print(ypred)
+commatrix = confusion_matrix(y_test, ypred)
+
+cm = multilabel_confusion_matrix(y_test, ypred)
+
+print(commatrix, cm, end=sp, sep=sp)
+
+# Draw heatmap
+classes=['Cat', 'Dog', 'Rabbit']
+sns.heatmap(commatrix, annot=True, fmt='d', cbar=False, linewidths=.5, cmap="YlGnBu")
+plt.ylabel('True label')
+plt.xlabel('Predicted label')
+plt.xticks(np.arange(3) + 0.5, classes, rotation=45)
+plt.yticks(np.arange(3) + 0.5, classes)
+plt.show()
