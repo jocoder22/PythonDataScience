@@ -155,5 +155,7 @@ plt.xticks(np.arange(3) + 0.5, classes, rotation=45)
 plt.yticks(np.arange(3) + 0.5, classes)
 plt.show()
 
+from sklearn.metrics import precision_recall_fscore_support
 # define classification_report
-print(classification_report(y_test, ypred, target_names=classes))
+print(classification_report(y_test, ypred, target_names=classes), end=sp)
+print(precision_recall_fscore_support(y_test, ypred))
