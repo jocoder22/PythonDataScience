@@ -147,10 +147,13 @@ cm = multilabel_confusion_matrix(y_test, ypred)
 print(commatrix, cm, end=sp, sep=sp)
 
 # Draw heatmap
-classes=['Cat', 'Dog', 'Rabbit']
+classes = 'USA Europe Japan'.split()
 sns.heatmap(commatrix, annot=True, fmt='d', cbar=False, linewidths=.5, cmap="YlGnBu")
 plt.ylabel('True label')
 plt.xlabel('Predicted label')
 plt.xticks(np.arange(3) + 0.5, classes, rotation=45)
 plt.yticks(np.arange(3) + 0.5, classes)
 plt.show()
+
+# define classification_report
+print(classification_report(y_test, ypred, target_names=classes))
