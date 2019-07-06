@@ -110,9 +110,10 @@ model3 = keras.Sequential()
 # Add the first dense hidden layer
 model3.add(keras.layers.Dense(600, activation='relu', input_shape=(_nshape,)))
 
+model3.add(keras.layers.Dropout(0.2))
 # Add the second dense layer
 model3.add(keras.layers.Dense(300, activation='relu'))
-
+model3.add(keras.layers.Dropout(0.2))
 # # Add the second dense layer
 # model3.add(keras.layers.Dense(60, activation='relu'))
 
