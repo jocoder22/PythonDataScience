@@ -71,6 +71,15 @@ html = """
   </body>
 
 """
+
+text4 = """
+        This is awesome (although new to me) I have to try to engage commpletely (don't mind
+        listening carely) throughout the demo Good stuffs to learn (I keep learning always!)
+        You can beat this (Remember the Music!).
+        """
+
+text5 = "This is awesome (although new to me) I have (to try to engage) commpletely"
+
 # Non greedy Match (Lazy Match)
 html_r = re.compile(r'<.+?>')
 no_html = html_r.sub(" ", html)
@@ -79,7 +88,19 @@ print(no_html)
 no_html2 = html_r.findall(html)
 print(no_html2, end=sp)
 
+speech = re.compile(r'\(.+?\)')
+add_speech = speech.findall(text4)
+print(add_speech, end=sp)
+
 # Greedy Match
 html_r3 = re.compile(r'<.+>')
 no_html3 = html_r3.findall(html)
 print(no_html3)
+
+# Dont work on multiline text
+speech2 = re.compile(r'\(.+\)')
+add_speech2 = speech2.findall(text4)
+print(add_speech2, end=sp)
+
+add_speech3 = speech2.findall(text5)
+print(add_speech3, end=sp)
