@@ -76,4 +76,10 @@ html_r = re.compile(r'<.+?>')
 no_html = html_r.sub(" ", html)
 print(no_html)
 
+no_html2 = html_r.findall(html)
+print(no_html2, end=sp)
 
+# Greedy Match
+html_r3 = re.compile(r'<.+>')
+no_html3 = html_r3.findall(html)
+print(no_html3)
