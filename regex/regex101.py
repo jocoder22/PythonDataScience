@@ -60,3 +60,20 @@ for address in findemail2:
         print(f'\033[31m{address} is NOT a valid email address') # red coloured letters
         # print(f'\33[48;5;47m\033[31m{address} is NOT a valid email address')  # white background on red letters
 
+
+html = """
+  <body>
+    <div class="longbox row">
+        <h2>Hi! I am the Base Project</h2>
+        <p> This is the last day of work before christmas. I'm so exited to work today. Although the office might be scanty because some staffs are on holiday off, there are lots of funs and good tidings around the office. This is a wonderful day indeed.</p>
+        <p> While working on the last day of the week before christmas, sweet melody playing in the background; sweet christmas choral, the quietness and serenity of the day is so gentle and soathing. Oh wonderful christmas again!</p>
+    </div>
+  </body>
+
+"""
+# Non greedy Match (Lazy Match)
+html_r = re.compile(r'<.+?>')
+no_html = html_r.sub(" ", html)
+print(no_html)
+
+
