@@ -32,7 +32,7 @@ print(noncharacter)
 # metacharacters
 # . (dot) => any character
 
-emails2 = re.compile(r'\w+@\w+\.com')
+emails2 = re.compile(r'\w+@.+?\.com')
 findemail2 = emails2.findall(text)
 print(findemail2)
 
