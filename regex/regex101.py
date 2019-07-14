@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import re
 from colorama import init
-init()
+init(autoreset=True)
 
 sp = '\n\n'
 
@@ -54,11 +54,12 @@ print(decode)
 valid = re.compile(r'[a-zA-Z]+@\w+\.com')
 for address in findemail2:
     if valid.match(address):
+        # 033[(forground);(background);(transparency)
         # print(f'\33[48;5;42m{address} is a valid email address')
         print(f'\033[32m{address} is a valid email address') # green letter
     else:
-        print(f'\033[31m{address} is NOT a valid email address') # red coloured letters
-        # print(f'\33[48;5;47m\033[31m{address} is NOT a valid email address')  # white background on red letters
+        # print(f'\033[36;45;1m{address} is NOT a valid email address\033[0m') # red coloured letters
+        print(f'\33[31;47;1m{address} is NOT a valid email address')  # white background on red letters
 
 
 html = """
@@ -73,7 +74,7 @@ html = """
 """
 
 text4 = """
-        This is awesome (although new to me) I have to try to engage commpletely (don't mind
+        This is awesome (although new to me) I have to (try to engage) commpletely (don't mind
         listening carely) throughout the demo Good stuffs to learn (I keep learning always!)
         You can beat this (Remember the Music!).
         """
@@ -97,7 +98,7 @@ html_r3 = re.compile(r'<.+>')
 no_html3 = html_r3.findall(html)
 print(no_html3)
 
-# Dont work on multiline text
+## Dont work on multiline text
 speech2 = re.compile(r'\(.+\)')
 add_speech2 = speech2.findall(text4)
 print(add_speech2, end=sp)
