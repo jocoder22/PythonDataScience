@@ -49,6 +49,7 @@ coded = re.compile(r'[\W]+')
 decode = coded.sub(" ", text3)
 print(decode)
 
+
 # check valid email address => don't start with numbers
 valid = re.compile(r'[a-zA-Z]+@\w+\.com')
 for address in findemail2:
