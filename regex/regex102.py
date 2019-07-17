@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import re
 import os
+from collections import defaultdict
 
 path = r"C:\Users\Jose\Desktop\PythonDataScience\regex"
 os.chdir(path)
@@ -33,10 +34,18 @@ printt(endsum, startwith, startwith2, numbers)
 
 
 # Searching file without implicit opening
-with open('lorem.txt', 'r') as text:
-    print(re.findall(r'\d+', text.read()))
+with open('lorem.txt', 'r') as doc:
+    text = doc.read()
+    printt(re.findall(r'\d+', text))
+    
+    d = defaultdict(int)
+    for word in re.split(" |\n|,|'", text):
+        d[word] += 1
+    printt(d.items())
 
 path2 = r'C:\Users\Jose\Desktop\PythonDataScience\datavisualization'
 os.chdir(path2)
 with open('matplotlibrc_copy.txt', 'r') as mplt:
-    print(re.findall(r'\d+', mplt.read()))
+    text = mplt.read()
+    print(re.findall(r'\d+', text))
+    
