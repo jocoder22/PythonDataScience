@@ -24,5 +24,6 @@ printt(beginword, endword)
 endsum = re.findall(r'\w+ing\b', lorem)
 startwith = re.findall(r'\bun\w+', lorem)
 startwith2 = re.findall(r'\AL\w+', lorem)
-printt(endsum, startwith, startwith2)
+numbers = re.findall(r'\d+', lorem)
+printt(endsum, startwith, startwith2, numbers)
 
