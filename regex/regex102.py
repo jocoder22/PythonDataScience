@@ -39,4 +39,4 @@ with open('lorem.txt', 'r') as text:
 path2 = r'C:\Users\Jose\Desktop\PythonDataScience\datavisualization'
 os.chdir(path2)
 with open('matplotlibrc_copy.txt', 'r') as mplt:
-    print(re.findall(r'\d+', mplt.read()))c
+    print(re.findall(r'\d+', mplt.read()))
