@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 import re
+import os
+
+path = r"C:\Users\Jose\Desktop\PythonDataScience\regex"
+os.chdir(path)
 
 def printt(*args):
     for a in args:
@@ -27,3 +31,12 @@ startwith2 = re.findall(r'\AL\w+', lorem)
 numbers = re.findall(r'\d+', lorem)
 printt(endsum, startwith, startwith2, numbers)
 
+
+# Searching file without implicit opening
+with open('lorem.txt', 'r') as text:
+    print(re.findall(r'\d+', text.read()))
+
+path2 = r'C:\Users\Jose\Desktop\PythonDataScience\datavisualization'
+os.chdir(path2)
+with open('matplotlibrc_copy.txt', 'r') as mplt:
+    print(re.findall(r'\d+', mplt.read()))c
