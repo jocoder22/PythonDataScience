@@ -32,5 +32,7 @@ print(re.findall(words, friends))
 
 print(re.findall(r"\s(\d[A-Za-z])\1", friends))
 print(re.findall(r'\s(\d{2,})\s', num))
-
+print(re.search(r'\w*(\d)\1\w*', num).group(0))
+print(re.findall(r'(\d+)', num))
+print(re.findall(r'(\d)+', num))
 
