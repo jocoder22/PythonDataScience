@@ -28,8 +28,9 @@ numbers = r'\d+\s\d+\s'
 readpdf(words)
 print(re.findall(words, friends))
 
-# Repeatations
 
+
+# Repeatations
 print(re.findall(r"\s(\d[A-Za-z])\1", friends))
 print(re.findall(r'\s(\d{2,})\s', num))
 print(re.search(r'\w*(\d)\1\w*', num).group(0))
@@ -47,3 +48,9 @@ pwords = re.findall(find_words, p_tags)
 for i in pwords:
     print(i[1])
 
+
+luckynumbers = '2345, 7e7e56, 88e24t, 44r9h8, 86n9k6 and 5509'
+num2 = 'There are too much 5578 and 33'
+print(re.findall(r'\w([a-z]\d)+\w', luckynumbers))
+print(re.findall(r'(\d)+', luckynumbers))
+print(re.findall(r'(\d{2,})', luckynumbers))
