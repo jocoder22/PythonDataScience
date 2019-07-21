@@ -26,6 +26,7 @@ printt(repeated, consecutive_num)
 
 mywords = 'It is priced 200 dollars, soled for 220 euros or mintes'
 print(re.findall(r'\d+\s(?:dollars|euros|mintes)', mywords))
+print(re.findall(r'(\d+)\s(dollars|euros|mintes)', mywords))
 
 ### if more than 1 group, the non-capturing group has no number
 ### the non-capturing group is not captured and therefore not returned
