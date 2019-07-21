@@ -46,5 +46,5 @@ p_tags = '''
 find_words = re.compile(r'<(\w+)>(.*?)</\1>')
 pwords = re.findall(find_words, p_tags)
 for i in pwords:
-    print(i[1])c
+    print(i[1])
 
