@@ -24,6 +24,9 @@ repeated = regex.findall(luckynumbers)
 consecutive_num = regex2.findall(luckynumbers)
 printt(repeated, consecutive_num)
 
+mywords = 'It is priced 200 dollars, soled for 220 euros or mintes'
+print(re.findall(r'\d+\s(?:dollars|euros|mintes)', mywords))
+
 ### if more than 1 group, the non-capturing group has no number
 ### the non-capturing group is not captured and therefore not returned
 sales = ''' Books 100 $200 is the total cost of books
@@ -35,5 +38,3 @@ sales = ''' Books 100 $200 is the total cost of books
 items = re.compile(r'(\w+)(?:\s\d+\s)(\$\d+)')
 print(items.findall(sales))
 
-mywords = 'It is priced 200 dollars, soled for 220 euros or mintes'
-print(re.findall(r'\d+\s(?:dollars|euros|mintes)', mywords))
