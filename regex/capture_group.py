@@ -54,3 +54,9 @@ num2 = 'There are too much 5578 and 33'
 print(re.findall(r'\w([a-z]\d)+\w', luckynumbers))
 print(re.findall(r'(\d)+', luckynumbers))
 print(re.findall(r'(\d{2,})', luckynumbers))
+
+
+# Non capturing group
+regex = re.compile(r'(?:[a-z]\d){2,}')
+repeated = regex.findall(luckynumbers)
+print(repeated)
