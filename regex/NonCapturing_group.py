@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import re
 import os
+import PyPDF2
 from collections import defaultdict
 
 path = r"C:\Users\Jose\Desktop\PythonDataScience\regex"
@@ -39,3 +40,14 @@ sales = ''' Books 100 $200 is the total cost of books
 items = re.compile(r'(\w+)(?:\s\d+\s)(\$\d+)')
 print(items.findall(sales))
 
+
+
+# Searching file without implicit opening
+with open('lorem.txt', 'r') as doc:
+    text = doc.read()
+    printt(re.findall(r'(\d+)(?:th|st|rd|nd)', text))
+        
+
+news = """From the 30th day of March to the 1st day of April, the
+        rain will fall for 42nd times the in 3rd year"""
+print(re.findall(r'(\d+)(?:th|st|rd|nd)', news))
