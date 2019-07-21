@@ -75,7 +75,7 @@ html = """
 
 text4 = """
         This is awesome (although new to me) I have to (try to engage) commpletely (don't mind
-        listening carely) throughout the demo Good stuffs to learn (I keep learning always!)
+listening carefully) throughout the demo Good stuffs to learn (I keep learning always!)
         You can beat this (Remember the Music!).
         """
 
@@ -99,7 +99,8 @@ no_html3 = html_r3.findall(html)
 print(no_html3)
 
 ## Dont work on multiline text
-speech2 = re.compile(r'\(.+\)')
+print('################################')
+speech2 = re.compile(r'\(.+\)', flags = re.MULTILINE)
 add_speech2 = speech2.findall(text4)
 print(add_speech2, end=sp)
 
