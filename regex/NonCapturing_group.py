@@ -23,3 +23,13 @@ repeated = regex.findall(luckynumbers)
 consecutive_num = regex2.findall(luckynumbers)
 printt(repeated, consecutive_num)
 
+### if more than 1 group, the non-capturing group has no number
+### the non-capturing group is not captured and therefore not returned
+sales = ''' Books 100 $200 is the total cost of books
+            CPU 30 $30000 total delayed payment
+            Lamps 10 $400 found in stores
+            Acs 3 $2010 awaiting returns
+            Beds 10 $8000 for clearance'''
+
+items = re.compile(r'(\w+)(?:\s\d+\s)(\$\d+)')
+print(items.findall(sales))
