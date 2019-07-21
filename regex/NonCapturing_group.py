@@ -17,6 +17,7 @@ num2 = 'There are too much 5578 and 33'
 
 # Non capturing group
 ### if only one group, return the non-capturing group
+### in this case, return the match which is the group zero
 regex = re.compile(r'(?:[a-z]\d){2,}')
 regex2 = re.compile(r'(\d)\1')
 repeated = regex.findall(luckynumbers)
@@ -33,3 +34,6 @@ sales = ''' Books 100 $200 is the total cost of books
 
 items = re.compile(r'(\w+)(?:\s\d+\s)(\$\d+)')
 print(items.findall(sales))
+
+mywords = 'It is priced 200 dollars, soled for 220 euros or mintes'
+print(re.findall(r'\d+\s(?:dollars|euros|mintes)', mywords))
