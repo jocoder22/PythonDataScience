@@ -16,6 +16,10 @@ num2 = 'There are too much 5578 and 33'
 
 
 # Non capturing group
+### if only one group, return the non-capturing group
 regex = re.compile(r'(?:[a-z]\d){2,}')
+regex2 = re.compile(r'(\d)\1')
 repeated = regex.findall(luckynumbers)
-print(repeated)
+consecutive_num = regex2.findall(luckynumbers)
+printt(repeated, consecutive_num)
+
