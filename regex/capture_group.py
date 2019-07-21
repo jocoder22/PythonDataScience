@@ -38,9 +38,8 @@ print(re.findall(r'(\d)+', num))
 
 p_tags = '''
         <p>this is the first tag</p><p>this is the second tag</p>
-        <p>this is the 3rd tag</p>
-        <p>this is the 4th tag</p>
-        <p>this is the first tag</p><p>this is the last tag</p>
+        <p>this is the 3rd tag</p><p>this is the 4th tag</p>
+        <p>this is the 5th tag</p><p>this is the last tag</p>
         '''
 
 find_words = re.compile(r'<(\w+)>(.*?)</\1>')
