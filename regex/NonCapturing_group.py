@@ -46,8 +46,8 @@ print(items.findall(sales))
 with open('lorem.txt', 'r') as doc:
     text = doc.read()
     printt(re.findall(r'(\d+)(?:th|st|rd|nd)', text))
-        
+
 
 news = """From the 30th day of March to the 1st day of April, the
-        rain will fall for 42nd times the in 3rd year"""
+          rain will fall for 42nd times the in 3rd year"""
 print(re.findall(r'(\d+)(?:th|st|rd|nd)', news))
