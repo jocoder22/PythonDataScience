@@ -9,7 +9,7 @@ print(world.head(), world.shape, world.columns, sep=sp, end=sp)
 
 
 # Visualize the whole world
-world.plot()
+world.plot(column = 'name', legend = True)
 # plt.axis("off")
 plt.xticks([]),
 plt.yticks([])
