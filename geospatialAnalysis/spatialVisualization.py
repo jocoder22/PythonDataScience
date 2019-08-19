@@ -7,21 +7,21 @@ print(gpd.datasets.available)
 world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 print(world.head())
 
-
+# Visualize the whole world
 world.plot()
 # plt.axis("off")
 plt.xticks([]),
 plt.yticks([])
 plt.show()
 
-
+# Visualize African
 world.loc[world.continent=='Africa'].plot()
 # plt.axis("off")
 plt.xticks([]),
 plt.yticks([])
 plt.show()
 
-
+# Visualize the Americans
 world.loc[world.continent.str.contains('America')].plot()
 plt.tick_params(
     axis='both',                    # changes apply to the both-axis, may be x or y
