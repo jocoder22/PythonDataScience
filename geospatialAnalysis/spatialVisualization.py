@@ -20,3 +20,15 @@ world.loc[world.continent=='Africa'].plot()
 plt.xticks([]),
 plt.yticks([])
 plt.show()
+
+
+world.loc[world.continent.str.contains('America')].plot()
+plt.tick_params(
+    axis='both',                    # changes apply to the both-axis, may be x or y
+    which='both',                   # both major and minor ticks are affected
+    bottom=False,                   # ticks along the bottom edge are off
+    left=False, right= False,      
+    top=False,                      # ticks along the top edge are off
+    labelbottom=False,
+    labeltop=False, labelleft=False, labelright=False)
+plt.show()
