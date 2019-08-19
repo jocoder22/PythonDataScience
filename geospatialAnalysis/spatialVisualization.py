@@ -1,11 +1,12 @@
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import pandas as pd
-
+sp = '\n\n'
 
 print(gpd.datasets.available)
 world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-print(world.head())
+print(world.head(), world.shape, world.columns, sep=sp, end=sp)
+
 
 # Visualize the whole world
 world.plot()
@@ -31,4 +32,14 @@ plt.tick_params(
     top=False,                      # ticks along the top edge are off
     labelbottom=False,
     labeltop=False, labelleft=False, labelright=False)
+plt.show()
+
+
+africa = world.loc[world.continent=='Africa']
+print(africa.loc[:,['pop_est', 'name']].sort_values('pop_est', ascending=False))
+
+# Visualize one country: Nigeria
+africa.loc[africa.name=='Nigeria'].plot()
+plt.xticks([]),
+plt.yticks([])
 plt.show()
