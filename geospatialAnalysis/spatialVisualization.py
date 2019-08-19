@@ -7,13 +7,21 @@ print(gpd.datasets.available)
 world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 print(world.head(), world.shape, world.columns, sep=sp, end=sp)
 
+# Set legend styles
+lgnd_kwds = {'title': 'World Map', 'fontsize': 'small',
+               'loc': 'upper left', 'bbox_to_anchor': (0.013, 0),'ncol': 8}
 
+
+fig, ax = plt.subplots(figsize=(8, 26), dpi=80)
 # Visualize the whole world
-world.plot(column = 'name', legend = True)
+world.plot(column = 'name', cmap='Set3', legend = True, ax=ax,  
+            alpha=0.5, legend_kwds = lgnd_kwds)
 # plt.axis("off")
 plt.xticks([]),
 plt.yticks([])
 plt.show()
+
+
 
 # Visualize African
 world.loc[world.continent=='Africa'].plot()
@@ -43,3 +51,18 @@ africa.loc[africa.name=='Nigeria'].plot()
 plt.xticks([]),
 plt.yticks([])
 plt.show()
+
+'''
+best
+        upper right
+        upper left
+        lower left
+        lower right
+        right
+        center left
+        center right
+        lower center
+        upper center
+        center
+
+'''
