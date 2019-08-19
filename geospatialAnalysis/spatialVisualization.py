@@ -15,3 +15,8 @@ plt.yticks([])
 plt.show()
 
 
+world.loc[world.continent=='Africa'].plot()
+# plt.axis("off")
+plt.xticks([]),
+plt.yticks([])
+plt.show()
