@@ -42,3 +42,34 @@ downtown_map = folium.Map(location= VaticanCityR, zoom_start = 15)
 # Save the HTML map
 downtown_map.create_map(path='VaticanCity.html')
 
+
+############ Plot North American City with Markers and attributes
+# Select North America continent from world map
+northAmerica = world[world['continent'] == 'North America']
+usa = world.loc[world['iso_a3'] == 'USA', 'geometry'].squeeze()
+
+# cities in North America
+northAmericaCities = worldcity[worldcity.within(northAmerica)]
+usCities = worldcity[worldcity.within(usa)]
+print(northAmericaCities, usCities, sep=sp, end=sp)
+
+
+newgeo = gpd.GeoDataFrame()
+
+
+for row in northAmerica.itertuples():
+    member = world.loc[world['iso_a3'] == row.iso_a3, 'geometry'].squeeze()
+    newdata = worldcity[worldcity.within(member)]
+
+    if not (newdata.empty):
+        for i, row in newdata.iterrows():        
+            newgeo.loc[i, 'name'] = row['name']
+            newgeo['geometry'] = row['geometry']
+
+
+print(newgeo)
+
+
+
+
+
