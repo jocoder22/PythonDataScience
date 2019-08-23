@@ -1,8 +1,13 @@
 #!/usr/bin/env python
-# import os
+import os
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import pandas as pd
+import folium
+from IPython.display import HTML
+
+path = r'C:\Users\Jose\Desktop\PythonDataScience\geospatialAnalysis'
+os.chdir(path)
 sp = '\n\n'
 
 print(gpd.datasets.available)
@@ -24,3 +29,16 @@ world.plot(ax=ax)
 worldcity.plot(ax=ax, color='red', markersize=1)
 ax.set_axis_off()
 plt.show()
+
+
+# using folium map
+VaticanCity = worldcity.geometry[0]
+VaticanCityR = [VaticanCity.y, VaticanCity.x] 
+print(VaticanCity)
+
+# Construct a folium map with Vatican City
+downtown_map = folium.Map(location= VaticanCityR, zoom_start = 15)
+
+# Save the HTML map
+downtown_map.create_map(path='VaticanCity.html')
+
