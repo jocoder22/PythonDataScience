@@ -21,8 +21,8 @@ nigeria = world[world['name'] == 'Nigeria']
 nigeria.plot()
 plt.show()
 
-usa = world.loc[world['iso_a3'] == 'USA', 'geometry'].squeeze()
 
 # cities in Nigeria
-nigeriaCities = worldcity[worldcity.within(nigeria)]
+nigeriaGeo = nigeria['geometry'].squeeze()
+nigeriaCities = worldcity[worldcity.within(nigeriaGeo)]
 print(nigeriaCities, sep=sp, end=sp)
