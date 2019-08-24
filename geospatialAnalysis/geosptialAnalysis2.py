@@ -80,7 +80,7 @@ for t, row in newgeo.iterrows():
     test = f"City: {row['name']}\nLongitude: {location[1]:.5f}\nLatitude: {location[0]:.5f}"
     popup = folium.Popup(test, max_width=120,min_width=100, color='red')
     icon = folium.Icon(color='red', icon='info-sign')
-    folium.Marker(location, fill_color='#FF334C', icon=icon,
+    folium.Marker(location, icon=icon,
         popup=popup).add_to(map22)
 
 # Save the HTML map
