@@ -35,3 +35,12 @@ abujaMap.add_child(folium.LatLngPopup())
 
 # save the map
 abujaMap.save('AbujaMap.html')
+
+
+# plot Awaka map
+loca = [6.2020, 7.0834]
+awkaMap = folium.Map(location=loca, zoom_start = 10)
+awkaMap.add_child(folium.LatLngPopup())
+
+# save the map
+awkaMap.save('AwkaMap.html')
