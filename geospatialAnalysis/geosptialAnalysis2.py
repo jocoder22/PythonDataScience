@@ -77,7 +77,8 @@ map22 = folium.Map(location=VatR, zoom_start = 5)
 for t, row in newgeo.iterrows():
     geometry = row['geometry']
     location = [geometry.y, geometry.x]
-    folium.Marker(location, popup=row['name']).add_to(map22)
+    folium.Marker(location, 
+        popup=f"City: {row['name']}\nLongitude: {location[1]:.5f} Latitude: {location[0]:.5f}").add_to(map22)
 
 # Save the HTML map
 map22.save('americaCities.html')
