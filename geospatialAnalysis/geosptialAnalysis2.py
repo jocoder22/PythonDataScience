@@ -64,7 +64,7 @@ for row in northAmerica.itertuples():
     if not (newdata.empty):
         for i, row in newdata.iterrows(): 
             newgeo.loc[i, 'name'] = row['name']
-            geo_list.append(row.geometry[1])
+            geo_list.append(newdata.geometry[i])
 
 newgeo.geometry = geo_list
 
