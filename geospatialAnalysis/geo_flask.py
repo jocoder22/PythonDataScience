@@ -26,3 +26,12 @@ plt.show()
 nigeriaGeo = nigeria['geometry'].squeeze()
 nigeriaCities = worldcity[worldcity.within(nigeriaGeo)]
 print(nigeriaCities, sep=sp, end=sp)
+
+
+# plot Abuja map
+locat = [nigeriaCities.geometry.y, nigeriaCities.geometry.x] 
+abujaMap = folium.Map(location=locat, tiles='Stamen Terrain', zoom_start = 10)
+abujaMap.add_child(folium.LatLngPopup())
+
+# save the map
+abujaMap.save('AbujaMap.html')
