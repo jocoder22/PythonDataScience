@@ -72,14 +72,15 @@ print(newgeo)
 
 Vat = newgeo.geometry[80]
 VatR = [Vat.y, Vat.x] 
-map22 = folium.Map(location=VatR, zoom_start = 5)
+map22 = folium.Map(location=VatR, tiles='Stamen Terrain', zoom_start = 5)
 
 for t, row in newgeo.iterrows():
     geometry = row['geometry']
     location = [geometry.y, geometry.x]
     test = f"City: {row['name']}\nLongitude: {location[1]:.5f}\nLatitude: {location[0]:.5f}"
-    popup = folium.Popup(test, max_width=120,min_width=100)
-    folium.Marker(location, fill_color='#ff5050',
+    popup = folium.Popup(test, max_width=120,min_width=100, color='red')
+    icon = folium.Icon(color='red', icon='info-sign')
+    folium.Marker(location, fill_color='#FF334C', icon=icon,
         popup=popup).add_to(map22)
 
 # Save the HTML map
