@@ -55,6 +55,7 @@ print(northAmericaCities, usCities, sep=sp, end=sp)
 
 
 newgeo = gpd.GeoDataFrame()
+geo_list = list()
 
 for row in northAmerica.itertuples():
     member = world.loc[world['iso_a3'] == row.iso_a3, 'geometry'].squeeze()
@@ -62,25 +63,21 @@ for row in northAmerica.itertuples():
 
     if not (newdata.empty):
         for i, row in newdata.iterrows(): 
-            geom = row['geometry']
-            print(geom)
-
             newgeo.loc[i, 'name'] = row['name']
-            newgeo.'geometry'] = geom
+            geo_list.append(row.geometry[1])
 
-    # print(newdata.geometry)
+newgeo.geometry = geo_list
+
 print(newgeo)
 
 Vat = newgeo.geometry[80]
 VatR = [Vat.y, Vat.x] 
-map22 = folium.Map(location= VatR, zoom_start = 2)
+map22 = folium.Map(location=VatR, zoom_start = 5)
 
 for t, row in newgeo.iterrows():
     geometry = row['geometry']
     location = [geometry.y, geometry.x]
     folium.Marker(location, popup=row['name']).add_to(map22)
-    
-    
 
 # Save the HTML map
 map22.save('americaCities.html')
