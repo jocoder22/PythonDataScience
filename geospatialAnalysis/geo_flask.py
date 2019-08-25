@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import folium
 from shapely.geometry import Point
+from flask import Flask
 
 
 path = r'C:\Users\Jose\Desktop\PythonDataScience\geospatialAnalysis'
@@ -39,18 +40,30 @@ abujaMap.add_child(folium.LatLngPopup())
 # save the map
 abujaMap.save('AbujaMap.html')
 
+app = Flask(__name__)
 
-# plot Awaka map
-loca = [6.2020, 7.0834]
-ploc = [2.1653113509801, 4.66518765021497]
-awkaMap = folium.Map(location=ploc, zoom_start = 10)
 
-popup = f'Name: ThirdP\nLatitude: {ploc[0]}\nLongitude: {ploc[1]}'
-folium.Marker(location=ploc, popup=popup).add_to(awkaMap)
-# awkaMap.add_child(folium.LatLngPopup())
+@app.route('/')
+def index():
+    # plot Awaka map
+    loca = [6.2020, 7.0834]
+    ploc = [2.1653113509801, 4.66518765021497]
+    ploc2 = [11.08107922457628, 13.65226835094211]
+    awkaMap = folium.Map(location=loca, zoom_start = 5)
+
+    popup = f'Name: Survey\nLatitude: {ploc[0]}\nLongitude: {ploc[1]}'
+    popup2 = f'Name: SurveyM1\nLatitude: {ploc2[0]}\nLongitude: {ploc[1]}'
+    popup3 = f'Name: Awka\nLatitude: {loca[0]}\nLongitude: {loca[1]}'
+    folium.Marker(location=ploc, popup=popup).add_to(awkaMap)
+    folium.Marker(location=ploc2, popup=popup2).add_to(awkaMap)
+    folium.Marker(location=loca, popup=popup3).add_to(awkaMap)
+    
+    awkaMap.add_child(folium.LatLngPopup())
+
+    return awkaMap._repr_html_()
 
 # save the map
-awkaMap.save('AwkaMap.html')
+# awkaMap.save('AwkaMap.html')
 
 
 
@@ -71,6 +84,15 @@ geo_data.geometry = geometry
 geo_data2.geometry = geometry2
 
 print(geo_data, geo_data.crs, geo_data2, geo_data2.crs, end=sp, sep=sp)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+# Start the flask server by running:
+
+# $ python geo_flask.py
 
 
 
