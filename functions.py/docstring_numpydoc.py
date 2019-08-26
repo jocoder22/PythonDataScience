@@ -45,5 +45,4 @@ def printdocstring(func):
     return docstring
     
 
-
 print(printdocstring(amaxr))
