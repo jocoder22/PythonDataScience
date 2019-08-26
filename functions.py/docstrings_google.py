@@ -29,11 +29,18 @@ def passwordgen(n):
         password = ''.join(choice(string.ascii_letters + string.digits) for i in range(n))
         return password
 
+    # except Exception as e: 
+    #     print(f'{e}, argument must be an integer.')
+
     except Exception as e: 
-        print(f'{e}, argument must be an integer.')
+
+        if hasattr(e, 'message'):
+            print(e.message)
+        else:
+            print(e)
 
 
-passwordgen(12.0)
+print(passwordgen(12.0))
 print(passwordgen(12))
 
 # print the docstring

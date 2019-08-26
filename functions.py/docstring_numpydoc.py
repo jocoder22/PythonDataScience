@@ -25,7 +25,25 @@ def printdocstring(func):
         The function docstring
 
     """
+    
+    try: 
+        docstring = inspect.getdoc(func)
 
-    print(inspect.getdoc(func))
 
-printdocstring(np.amax)
+    except Exception as e: 
+        print(sys.exc_value)
+
+    except ValueError as e: 
+        print(e, file=sys.stderr)
+    
+    except (NameError, AttributeError):
+        print(f'NameError: name {func} is not defined.')
+       
+    except:
+        print(f'NameError: name {func} is not defined.')
+
+    return docstring
+    
+
+
+print(printdocstring(amaxr))
