@@ -19,4 +19,14 @@ def passwordgen(n):
 
     Raises:
         ValueError: if n is not an integer
+
     """
+
+    if not isinstance(n, int):
+        print('n must be an integer')
+
+    print('password')
+
+
+
+passwordgen('ppp')
