@@ -25,8 +25,11 @@ def passwordgen(n):
     if not isinstance(n, int):
         print('n must be an integer')
 
-    print('password')
+    else:
+        password = ''.join(choice(string.ascii_letters + string.digits) for i in range(n))
+        return password
 
 
 
 passwordgen('ppp')
+print(passwordgen(12))
