@@ -30,11 +30,12 @@ def passwordgen(n):
         return password
 
     except Exception as e: 
-        print(e, 'argument must be an integer', sep='\n')
+        print(f'{e}, argument must be an integer.')
 
 
-
-
-
-passwordgen('ppp')
+passwordgen(12.0)
 print(passwordgen(12))
+
+# print the docstring
+print(passwordgen.__doc__)
+print(inspect.getdoc(passwordgen))
