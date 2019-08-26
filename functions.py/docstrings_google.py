@@ -1,10 +1,12 @@
 #!/usr/bin/env python
+import sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from random import randint, choices
 from secrets import choice
 import string
+
 
 
 def passwordgen(n):
@@ -28,6 +30,7 @@ def passwordgen(n):
 
     except Exception as e: 
         print(e)
+        print('n must be an integer')
 
 
 
