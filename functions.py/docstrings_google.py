@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from random import randint, choices
 from secrets import choice
 import string
+import inspect
 
 
 
@@ -29,8 +30,8 @@ def passwordgen(n):
         return password
 
     except Exception as e: 
-        print(e)
-        print('n must be an integer')
+        print(e, 'argument must be an integer', sep='\n')
+
 
 
 
