@@ -43,3 +43,9 @@ print(myfunc.__closure__[2].cell_contents)
 numb = 123
 myfunc = parentFunct(numb)
 print([cell.cell_contents for cell in myfunc.__closure__])
+
+# delete the global variable
+del numb
+myfunc()
+print([cell.cell_contents for cell in myfunc.__closure__])
+print(numb)
