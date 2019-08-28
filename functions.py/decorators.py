@@ -26,4 +26,10 @@ myfunc = parentFunct(34)
 
 print(myfunc())
 
+# closures
+print(type(myfunc.__closure__))
+print(len(myfunc.__closure__))
+closure_values = [myfunc.__closure__[i].cell_contents for i in range(len(myfunc.__closure__))]
+print(closure_values)
+
 
