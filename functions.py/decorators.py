@@ -2,7 +2,7 @@
 # import os
 
 def parentFunct(s):
-    """
+    """This will demostrate function closure in python
 
     """
     # Nonlocal variables
