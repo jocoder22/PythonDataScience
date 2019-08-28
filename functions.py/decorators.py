@@ -16,9 +16,10 @@ def parentFunct(s):
         print(bet)
         print(mylist)
         print(mydict)
-        return bet_draw
+        return bet_draw + s
     
     return childFunct
+
 
 
 
@@ -36,3 +37,9 @@ print([cell.cell_contents for cell in myfunc.__closure__])
 print(myfunc.__closure__)
 print(myfunc.__closure__[0])
 print(myfunc.__closure__[2].cell_contents)
+
+
+# gobal variables
+numb = 123
+myfunc = parentFunct(numb)
+print([cell.cell_contents for cell in myfunc.__closure__])
