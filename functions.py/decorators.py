@@ -32,4 +32,7 @@ print(len(myfunc.__closure__))
 closure_values = [myfunc.__closure__[i].cell_contents for i in range(len(myfunc.__closure__))]
 print(closure_values)
 
-
+print([cell.cell_contents for cell in myfunc.__closure__])
+print(myfunc.__closure__)
+print(myfunc.__closure__[0])
+print(myfunc.__closure__[2].cell_contents)
