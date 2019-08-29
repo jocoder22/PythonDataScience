@@ -48,7 +48,6 @@ def memoize_arg(func):
 
     def wrapper(*args):
 
-
         if (args) not in cache:
 
             time.sleep(3)
@@ -66,7 +65,7 @@ def memoize(func2):
 
     def wrapper2(*args2, **kwargs):
 
-        value = tuple((val, kwargs[val]) for val in sorted(kwargs))
+        value = tuple(f'{val}{kwargs[val]}' for val in sorted(kwargs))
         value2 = tuple(sorted(kwargs.items(), key = lambda kv_pair:(kv_pair[0], kv_pair[1])))
 
         if (args2 + value) not in cache:
@@ -81,10 +80,16 @@ def memoize(func2):
     return wrapper2
 
 @mytimer
-@memoize
-def longmult(a, b, c, d=8):
+@memoize_arg
+def longmult(a, b, c):
     print('sleeping .......')
-    return a * b * c * d
+    return a * b * c 
+
+longmult(10, 4, 5)
+print('starting second call for decorator without kwargs')
+longmult(10, 4, 5)
+print('starting third call for decorator without kwargs with new args')
+longmult(4, 10, 5)
 
 
 
@@ -97,6 +102,12 @@ def longmult2(a, b, c, **kwargs):
         result *= k
     return result
 
+
+longmult2(10, 4, 5)
+print('starting second call')
+longmult2(10, 4, 5, d=10)
+print('starting third call with new args')
+longmult2(4, 10, 5, d=10)
 print('starting fourth call with 2 kwargs')
 longmult2(10, 4, 5, d=10, e=10)
 print('starting fifth call with 2 kwargs interchanged')
