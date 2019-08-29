@@ -30,7 +30,7 @@ def mytimer(func):
         # find the elapse time
         duration = finish_time - start_time
 
-        print(f'{func.__name__} took {duration} seconds')
+        print(f'{func.__name__} took {duration} seconds', end='\n\n')
 
         return result
 
@@ -66,7 +66,8 @@ def memoize(func2):
 
     def wrapper2(*args2, **kwargs):
 
-        value = tuple(val for val in kwargs.values())
+        value = tuple((val, kwargs[val]) for val in sorted(kwargs))
+        value2 = tuple(sorted(kwargs.items(), key = lambda kv_pair:(kv_pair[0], kv_pair[1])))
 
         if (args2 + value) not in cache:
 
@@ -74,6 +75,7 @@ def memoize(func2):
             cache[(args2 + value)] = func2(*args2, **kwargs)
 
         print(cache)
+
         return cache[(args2 + value)]
 
     return wrapper2
@@ -84,8 +86,20 @@ def longmult(a, b, c, d=8):
     print('sleeping .......')
     return a * b * c * d
 
-longmult(10, 4, 5, d=10)
-print('starting second call', end='\n\n')
-longmult(10, 10, 5, d=10)
-print('starting third call with new args', end='\n\n')
-longmult(4, 10, 5, d=10)
+
+
+@mytimer
+@memoize
+def longmult2(a, b, c, **kwargs):
+    print('sleeping .......')
+    result = a * b * c 
+    for k in kwargs.values():
+        result *= k
+    return result
+
+print('starting fourth call with 2 kwargs')
+longmult2(10, 4, 5, d=10, e=10)
+print('starting fifth call with 2 kwargs interchanged')
+longmult2(10, 4, 5, e=10, d=10)
+print('starting sixth call with  args and 2 kwargs interchanged')
+longmult2(4, 10, 5, e=10, d=10)
