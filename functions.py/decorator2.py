@@ -78,3 +78,14 @@ def memoize(func2):
 
     return wrapper2
 
+@mytimer
+@memoize
+def longmult(a, b, c, d=8):
+    print('sleeping .......')
+    return a * b * c * d
+
+longmult(10, 4, 5, d=10)
+print('starting second call', end='\n\n')
+longmult(10, 10, 5, d=10)
+print('starting third call with new args', end='\n\n')
+longmult(4, 10, 5, d=10)
