@@ -35,3 +35,46 @@ def mytimer(func):
         return result
 
     return wrapper
+
+@mytimer
+def runtimefunc(n):
+    time.sleep(n)
+    print(f'sleeping ..... for {n} seconds')
+
+
+def memoize_arg(func):
+
+    cache = {}
+
+    def wrapper(*args):
+
+
+        if (args) not in cache:
+
+            time.sleep(3)
+            cache[(args)] = func(*args)
+
+        print(cache)
+        return cache[(args)]
+
+    return wrapper
+
+
+def memoize(func2):
+
+    cache = {}
+
+    def wrapper2(*args2, **kwargs):
+
+        value = tuple(val for val in kwargs.values())
+
+        if (args2 + value) not in cache:
+
+            time.sleep(3)
+            cache[(args2 + value)] = func2(*args2, **kwargs)
+
+        print(cache)
+        return cache[(args2 + value)]
+
+    return wrapper2
+
