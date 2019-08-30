@@ -44,3 +44,7 @@ def square(n=1):
 print(f'Called {square.__name__} function {square.count} times')
 
 print(square.__doc__, square.__defaults__, square.__wrapped__, sep=sp, end=sp)
+
+# Accessing the original undecorated function using originalfunction.__wrapped__
+print(square.__wrapped__(6), end=sp)
+print(square.__wrapped__.__doc__, end=sp)
