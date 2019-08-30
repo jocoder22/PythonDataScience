@@ -11,7 +11,7 @@ def mycounter(func):
 
         mywrapper.count += 1
 
-        print(f'The square of {args, kwargs} is {result}')
+        print(f'The square of {(args, kwargs)} is {result}')
 
 
     mywrapper.count = 0
