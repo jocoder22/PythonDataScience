@@ -21,7 +21,10 @@ from sklearn.ensemble import VotingClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 sp = '\n\n'
+pp = '#'*80
 
 url = 'https://assets.datacamp.com/production/course_1939/datasets/gm_2008_region.csv'
 
@@ -40,8 +43,8 @@ df.loc[df['life'] >= 76, 'lifeCat'] = 'High'
 print(df.head(), df.info(), sep=sp, end=sp)
 print(df['lifeCat'].value_counts())
 
-# mapper = {'veryLow':0, 'Low':1, 'Medium':2, 'High':3}
-# df['lifeCat'] = df.lifeCat.map(mapper)
+mapper = {'veryLow':0, 'Low':1, 'Medium':2, 'High':3}
+df['lifeCat'] = df.lifeCat.map(mapper)
 # # print(df['lifeCat2'].value_counts())
 # Using sklearn
 label1 = LabelEncoder()
@@ -49,7 +52,7 @@ hot1 = OneHotEncoder()
 
 # df['Rcoded'] = label1.fit_transform(df['Region'])
 # Form dummies from the Region category, return new dataset with Region drop
-df_dummy = pd.get_dummies(df, columns=['Region'], prefix='R',  drop_first=True)
+df_dummy = pd.get_dummies(df, columns=['Region'], prefix='R')
 y = df_dummy['lifeCat'].values
 X = df_dummy.drop(['life','lifeCat'], axis=1).values
 
@@ -78,6 +81,72 @@ for n in range(2,36):
         nc = accuracy
 
 k_neClas = KNeighborsClassifier(7)
+
+
+
+
+# fit the DecisionTreeClassifier
+mytree3 = DecisionTreeClassifier(criterion='gini', max_depth=5, 
+                            random_state=1)
+
+mytree3.fit(X_train, y_train)
+
+treescore = mytree3.score(X_test,y_test)
+print(f'Accuracy score for DecisionTree Classifier: {treescore:.02f}')
+
+print(f'{pp}', end=sp)
+print(mytree3.get_params().keys())
+"""
+'criterion', 'max_depth', 'max_features', 'max_leaf_nodes', 'min_impurity_decrease',
+'min_impurity_split', 'min_samples_leaf', 'min_samples_split', 'min_weight_fraction_leaf', 'presort', 'random_state', 'splitter'
+"""
+param_grid2 = {'max_features': ['auto', 'log2'],  'max_depth': [3, 4, 5, 7], 
+                "min_samples_split": [2, 3, 5, 7, 10], 'criterion': ['gini', 'entropy']}
+
+
+# Define the model to use
+model_d = DecisionTreeClassifier(random_state=5)
+
+# Combine the parameter sets with the defined model
+CV_model2 = GridSearchCV(
+    estimator=model_d, param_grid=param_grid2, cv=5, scoring='f1_micro', n_jobs=-1)
+
+ # Fit the model to our training data and obtain best parameters
+CV_model2.fit(X_train, y_train)
+print('################      this is printing for Decision Tree Model       ###########')
+print(CV_model2.best_params_, CV_model2.best_score_, sep=sp, end=sp)
+
+# fit a randomforest tree model
+forest = RandomForestClassifier(criterion='gini', n_estimators=50,
+                                 random_state=1, n_jobs=2)
+
+forest.fit(X_train, y_train)
+
+fscore = forest.score(X_test,y_test)
+print(f'Accuracy score for RandomForest Classifier: {fscore:.02f}')
+
+
+# Do parameter search
+# Define the parameter sets to test
+param_grid = {'n_estimators': range(1,36), 'max_features': ['auto', 'log2'],  
+                'max_depth': [3, 4, 5, 7], "bootstrap": [True, False], 
+                "min_samples_split": [2, 3, 5, 7, 10], 'criterion': ['gini', 'entropy']}
+
+# Define the model to use
+model7 = RandomForestClassifier(random_state=5)
+print(model7.get_params().keys())
+
+# Combine the parameter sets with the defined model
+CV_model = GridSearchCV(
+    estimator=model7, param_grid=param_grid, cv=5, scoring='f1_micro', n_jobs=-1)
+
+ # Fit the model to our training data and obtain best parameters
+CV_model.fit(X_train, y_train)
+print('################     this is printing for RandomForest Model     ###########')
+print(CV_model.best_params_, CV_model.best_score_, sep=sp, end=sp)
+
+
+
 
 
 pp = '#'
