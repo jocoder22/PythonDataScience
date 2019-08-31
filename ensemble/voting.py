@@ -69,13 +69,13 @@ with changepath(mypath):
     df.to_csv('lifeExp.csv', index=False)
 
 
-y = df['lifeCat'].values
+y = df['lifecat'].values
 X = df.drop(['life','lifeCat', 'lifecat'], axis=1).values
 
 # print(y.shape,y.head(), X.head(), X.shape, sep=sp, end=sp)
 # Create training and test set
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2)
+    X, y, test_size=0.2, random_state=1, stratify=y)
 
 nc = 0
 
@@ -183,7 +183,7 @@ best_rf = RandomForestClassifier(rfp, random_state=5)
 
 # Add the logistic model
 # Create the classifier: logreg
-logReg = LogisticRegression(solver = 'lbfgs')
+logReg = LogisticRegression(multi_class='multinomial', solver = 'lbfgs')
 
 # scale the dataset
 scaler = StandardScaler()

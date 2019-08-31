@@ -34,18 +34,54 @@ mypath = r'C:\Users\Jose\Desktop\PythonDataScience\ensemble'
 
 
 with changepath(mypath):
-    df3 = pd.read_csv('lifeExp.csv')
+    df = pd.read_csv('lifeExp.csv')
 
-print(df3.head(), end=sp)
+print(df.head(), df.shape, end=sp)
 
+y = df['lifecat'].values
+X = df.drop(['life','lifeCat', 'lifecat'], axis=1).values
+
+# print(y.shape,y.head(), X.head(), X.shape, sep=sp, end=sp)
+# Create training and test set
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1,
+                                    stratify=y)
 
 # Best kneighbors model
-k_neClas = KNeighborsClassifier(12)
+k_neClas = KNeighborsClassifier(7)
 
 # Best parameters for decisison Tree
 bdtp = {'criterion':'gini', 'max_depth': 4, 'max_features': 'auto', 'min_samples_split': 2}
+bdtp2 = {'criterion': 'entropy', 'max_depth': 7, 'max_features': 'auto', 'min_samples_split': 5}
 best_dt = DecisionTreeClassifier(bdtp, random_state=5)
 
 # best model parameters for RandomForest model
 rfp = {'bootstrap': True, 'criterion': 'entropy', 'max_depth': 5, 'max_features': 'auto', 'min_samples_split': 3, 'n_estimators': 27}
 best_rf = RandomForestClassifier(rfp, random_state=5)
+
+# logistic regression
+logReg = LogisticRegression(multi_class='multinomial', solver = 'lbfgs')
+
+
+# scale the dataset
+scaler = StandardScaler()
+
+# First fit on training set only.
+scaler.fit(X)
+
+# then transform to both the training set and the test set.
+XtrainScaled = scaler.transform(X_train)
+XtestScaled= scaler.transform(X_test)
+
+# Fit the classifier to the training data
+logReg.fit(XtrainScaled, y_train)
+
+# Predict the labels of the test set: y_pred
+y_pred = logReg.predict(XtestScaled)
+
+
+# how did our model perform?
+count_misclassified = (y_test != y_pred).sum()
+print('Misclassified samples: {}'.format(count_misclassified))
+accuracy = accuracy_score(y_test, y_pred)
+print('Accuracy: {:.2f}'.format(accuracy))
+print('score test accuracy: ', logReg.score(XtestScaled, y_test))
