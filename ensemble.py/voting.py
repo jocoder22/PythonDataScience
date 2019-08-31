@@ -27,6 +27,7 @@ k_neClas = KNeighborsClassifier(5)
 d_treeClas = DecisionTreeClassifier()
 logregClas = LogisticRegression()
 
+# Create the voting classification model
 voting_clf = votingClassifier(
     estimators = [
         ('k_ne', k_neClas),
@@ -34,3 +35,9 @@ voting_clf = votingClassifier(
         ('logreg', logregClas)
     ]
 )
+
+# fit the model
+voting_clf.fit(X_train, y_train)
+
+# Predict with the model
+ypred = voting_clf.predict(X_test)
