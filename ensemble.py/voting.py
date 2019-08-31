@@ -19,6 +19,8 @@ plt.style.use('ggplot')
 
 from sklearn.ensemble import VotingClassifier
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
 sp = '\n\n'
 
 url = 'https://assets.datacamp.com/production/course_1939/datasets/gm_2008_region.csv'
@@ -38,27 +40,70 @@ df.loc[df['life'] >= 76, 'lifeCat'] = 'High'
 print(df.head(), df.info(), sep=sp, end=sp)
 print(df['lifeCat'].value_counts())
 
-y = df['lifeCat'].values
-X = df.drop(['life', 'Region', 'lifeCat'], axis=1).values
+# mapper = {'veryLow':0, 'Low':1, 'Medium':2, 'High':3}
+# df['lifeCat'] = df.lifeCat.map(mapper)
+# # print(df['lifeCat2'].value_counts())
+# Using sklearn
+label1 = LabelEncoder()
+hot1 = OneHotEncoder()
 
-print(y.shape, X.shape, sep=sp, end=sp)
+# df['Rcoded'] = label1.fit_transform(df['Region'])
+# Form dummies from the Region category, return new dataset with Region drop
+df_dummy = pd.get_dummies(df, columns=['Region'], prefix='R',  drop_first=True)
+y = df_dummy['lifeCat'].values
+X = df_dummy.drop(['life','lifeCat'], axis=1).values
 
+# print(y.shape,y.head(), X.head(), X.shape, sep=sp, end=sp)
 # Create training and test set
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
+    X, y, test_size=0.2)
 
-# Instantiate a k-NN classifier: knn
-knn = KNeighborsClassifier(n_neighbors=4)
+nc = 0
 
-# Fit the classifier to the training data
-knn.fit(X_train, y_train)
+# search for k with highest accuracy
+for n in range(2,36):
+    # Instantiate a k-NN classifier: knn
+    knn = KNeighborsClassifier(n_neighbors=n)
 
-# Predict the labels of the test data: y_pred
-ypred = knn.predict(X_test)
+    # Fit the classifier to the training data
+    knn.fit(X_train, y_train)
 
-accuracy = accuracy_score(y_test, ypred)
-print(f'Accuracy score: {accuracy:.02f}')
+    # Predict the labels of the test data: y_pred
+    ypred = knn.predict(X_test)
 
+    
+    accuracy = accuracy_score(y_test, ypred)
+    if accuracy > nc:
+        print(f'Accuracy score for {n} neighbors: {accuracy:.02f}')
+        nc = accuracy
+
+k_neClas = KNeighborsClassifier(7)
+
+
+pp = '#'
+print(f'{pp*40}', end=sp)
+wine = datasets.load_wine()
+
+X_train, X_test, y_train, y_test = train_test_split(wine.data, wine.target, test_size=0.3)
+
+nc = 0
+
+# search for k with highest accuracy
+for n in range(2,36):
+    # Instantiate a k-NN classifier: knn
+    knn2 = KNeighborsClassifier(n_neighbors=n)
+
+    # Fit the classifier to the training data
+    knn2.fit(X_train, y_train)
+
+    # Predict the labels of the test data: y_pred
+    y_pred = knn2.predict(X_test)
+
+    
+    accuracy = accuracy_score(y_test, y_pred)
+    if accuracy > nc:
+        print(f'Accuracy score for {n} neighbors: {accuracy:.02f}')
+        nc = accuracy
 
 
 '''
