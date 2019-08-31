@@ -193,13 +193,13 @@ scaler.fit(X_train)
 
 # then transform to both the training set and the test set.
 XtrainScaled = scaler.transform(X_train)
-XtestScaled= scaler.transform(X_test)
+XtestScaled = scaler.transform(X_test)
 
 # Fit the classifier to the training data
 logReg.fit(XtrainScaled, y_train)
 
 # Predict the labels of the test set: y_pred
-y_pred = logReg.predict(X_test)
+y_pred = logReg.predict(XtestScaled)
 
 
 # how did our model perform?

@@ -52,25 +52,21 @@ k_neClas = KNeighborsClassifier(7)
 # Best parameters for decisison Tree
 bdtp = {'criterion':'gini', 'max_depth': 4, 'max_features': 'auto', 'min_samples_split': 2}
 bdtp2 = {'criterion': 'entropy', 'max_depth': 7, 'max_features': 'auto', 'min_samples_split': 5}
-best_dt = DecisionTreeClassifier(bdtp, random_state=5)
+best_dt = DecisionTreeClassifier(**bdtp, random_state=5)
 
 # best model parameters for RandomForest model
 rfp = {'bootstrap': True, 'criterion': 'entropy', 'max_depth': 5, 'max_features': 'auto', 'min_samples_split': 3, 'n_estimators': 27}
-best_rf = RandomForestClassifier(rfp, random_state=5)
+rfp2 = {'bootstrap': False, 'criterion': 'gini', 'max_depth': 5, 'max_features': 'auto', 'min_samples_split': 3, 'n_estimators': 28}
+best_rf = RandomForestClassifier(**rfp, random_state=5)
+
+best_rf.fit(X_train, y_train)
+
+fscore = best_rf.score(X_test,y_test)
+print(f'Accuracy score for RandomForest Classifier: {fscore:.02f}', end=sp)
 
 # logistic regression
-logReg = LogisticRegression(multi_class='multinomial', solver = 'lbfgs')
+logReg = LogisticRegression(multi_class='multinomial', solver='lbfgs')
 
-
-# scale the dataset
-scaler = StandardScaler()
-
-# First fit on training set only.
-scaler.fit(X)
-
-# then transform to both the training set and the test set.
-XtrainScaled = scaler.transform(X_train)
-XtestScaled= scaler.transform(X_test)
 
 # Fit the classifier to the training data
 logReg.fit(XtrainScaled, y_train)
