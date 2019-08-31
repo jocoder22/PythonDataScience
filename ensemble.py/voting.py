@@ -35,7 +35,8 @@ df.loc[df['life'] >= 62, 'lifeCat'] = 'Low'
 df.loc[df['life'] >= 72, 'lifeCat'] = 'Medium'
 df.loc[df['life'] >= 76, 'lifeCat'] = 'High'
 
-
+print(df.head(), df.info(), sep=sp, end=sp)
+print(df['lifeCat'].value_counts())
 
 y = df[['lifeCat']].values
 X = df.drop(['life', 'Region', 'lifeCat'], axis=1).values
