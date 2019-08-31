@@ -38,12 +38,14 @@ df.loc[df['life'] >= 76, 'lifeCat'] = 'High'
 print(df.head(), df.info(), sep=sp, end=sp)
 print(df['lifeCat'].value_counts())
 
-y = df[['lifeCat']].values
+y = df['lifeCat'].values
 X = df.drop(['life', 'Region', 'lifeCat'], axis=1).values
+
+print(y.shape, X.shape, sep=sp, end=sp)
 
 # Create training and test set
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.4, random_state=42)
+    X, y, test_size=0.2, random_state=42)
 
 # Instantiate a k-NN classifier: knn
 knn = KNeighborsClassifier(n_neighbors=4)
