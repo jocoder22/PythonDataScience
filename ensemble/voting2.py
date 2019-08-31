@@ -27,7 +27,7 @@ from sklearn.tree import DecisionTreeClassifier
 # from contextlib import contextmanager
 from functionX import changepath
 
-sp = '\n\n'
+sp = {'sep':'\n\n', 'end':'\n\n'}
 pp = '#'*80
 
 mypath = r'C:\Users\Jose\Desktop\PythonDataScience\ensemble'
@@ -36,7 +36,7 @@ mypath = r'C:\Users\Jose\Desktop\PythonDataScience\ensemble'
 with changepath(mypath):
     df = pd.read_csv('lifeExp.csv')
 
-print(df.head(), df.shape, end=sp)
+print(df.head(), df.shape, **sp)
 
 y = df['lifecat'].values
 X = df.drop(['life','lifeCat', 'lifecat'], axis=1).values
@@ -63,7 +63,7 @@ k_neClas = KNeighborsClassifier(7)
 # Fit the classifier to the training data
 k_neClas.fit(XtrainScaled, y_train)
 kscore = k_neClas.score(XtestScaled, y_test)
-print(f'Accuracy score for KNeighhors Classifier: {kscore:.02f}', end=sp)
+print(f'Accuracy score for KNeighhors Classifier: {kscore:.02f}', **sp)
 
 # Best parameters for decisison Tree
 bdtp = {'criterion':'gini', 'max_depth': 4, 'max_features': 'auto', 'min_samples_split': 2}
@@ -71,7 +71,7 @@ bdtp2 = {'criterion': 'entropy', 'max_depth': 7, 'max_features': 'auto', 'min_sa
 best_dt = DecisionTreeClassifier(**bdtp, random_state=5)
 best_dt.fit(XtrainScaled, y_train)
 dscore = best_dt.score(XtestScaled, y_test)
-print(f'Accuracy score for Decision Tree Classifier: {dscore:.02f}', end=sp)
+print(f'Accuracy score for Decision Tree Classifier: {dscore:.02f}', **sp)
 
 # best model parameters for RandomForest model
 rfp = {'bootstrap': True, 'criterion': 'entropy', 'max_depth': 5, 'max_features': 'auto', 'min_samples_split': 3, 'n_estimators': 27}
@@ -79,7 +79,7 @@ rfp2 = {'bootstrap': False, 'criterion': 'gini', 'max_depth': 5, 'max_features':
 best_rf = RandomForestClassifier(**rfp, random_state=5)
 best_rf.fit(XtrainScaled, y_train)
 fscore = best_rf.score(XtestScaled, y_test)
-print(f'Accuracy score for RandomForest Classifier: {fscore:.02f}', end=sp)
+print(f'Accuracy score for RandomForest Classifier: {fscore:.02f}', **sp)
 
 
 # logistic regression
@@ -92,21 +92,23 @@ logReg.fit(XtrainScaled, y_train)
 y_pred = logReg.predict(XtestScaled)
 
 lscore = logReg.score(XtestScaled, y_test)
-print(f'Accuracy score for logistic Regression Classifier: {lscore:.02f}', end=sp)
+print(f'Accuracy score for logistic Regression Classifier: {lscore:.02f}', **sp)
 
 # how did our model perform?
 count_misclassified = (y_test != y_pred).sum()
 print('Misclassified samples: {}'.format(count_misclassified))
 accuracy = accuracy_score(y_test, y_pred)
 print('Accuracy: {:.2f}'.format(accuracy))
-print(f'Score test accuracy: {logReg.score(XtestScaled, y_test):.02f}')
+print(f'Score test accuracy: {logReg.score(XtestScaled, y_test):.02f}', **sp)
 
 
 
 # Create and fit the voting classifier
 clf_vote = VotingClassifier(
-    estimators=[('knn', k_neClas), ('lr', logReg), ('dt', best_dt)]
+    estimators=[('knn', k_neClas), ('dt', best_dt), ('lr', logReg)],
+    voting='soft',
+    weights=[1,1,2]
 )
 clf_vote.fit(XtrainScaled, y_train)
 vscore = clf_vote.score(XtestScaled, y_test)
-print(f'Accuracy score for voting Classifier: {vscore:.02f}', end=sp)
+print(f'Accuracy score for voting Classifier: {vscore:.02f}', **sp)
