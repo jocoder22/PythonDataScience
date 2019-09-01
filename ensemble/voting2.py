@@ -33,7 +33,7 @@ pp = '#'*80
 
 mypath = r'C:\Users\Jose\Desktop\PythonDataScience\ensemble'
 
-
+"""
 with changepath(mypath):
     df = pd.read_csv('lifeExp.csv')
 
@@ -55,27 +55,34 @@ scaler = StandardScaler()
 scaler.fit(X)
 
 # then transform to both the training set and the test set.
-XtrainScaled = scaler.transform(X_train)
-XtestScaled= scaler.transform(X_test)
+X_train = scaler.transform(X_train)
+X_test= scaler.transform(X_test)
 
 with changepath(mypath):
-    np.savez('mydata', X_train=XtrainScaled, X_test=XtestScaled, 
+    np.savez('mydata', X_train=X_train, X_test=X_test, 
                 y_train=y_train, y_test=y_test)
+
+"""
+
+with changepath(mypath):
+    npzfile = np.load('mydata.npz')
+    X_train, X_test =  npzfile['X_train'], npzfile['X_test']
+    y_train, y_test =npzfile['y_train'], npzfile['y_test']
 
 
 # Best kneighbors model
 k_neClas = KNeighborsClassifier(7)
 # Fit the classifier to the training data
-k_neClas.fit(XtrainScaled, y_train)
-kscore = k_neClas.score(XtestScaled, y_test)
+k_neClas.fit(X_train, y_train)
+kscore = k_neClas.score(X_test, y_test)
 print(f'Accuracy score for KNeighhors Classifier: {kscore:.02f}', **sp)
 
 # Best parameters for decisison Tree
 bdtp = {'criterion':'gini', 'max_depth': 4, 'max_features': 'auto', 'min_samples_split': 2}
 bdtp2 = {'criterion': 'entropy', 'max_depth': 7, 'max_features': 'auto', 'min_samples_split': 5}
 best_dt = DecisionTreeClassifier(**bdtp, random_state=5)
-best_dt.fit(XtrainScaled, y_train)
-dscore = best_dt.score(XtestScaled, y_test)
+best_dt.fit(X_train, y_train)
+dscore = best_dt.score(X_test, y_test)
 print(f'Accuracy score for Decision Tree Classifier: {dscore:.02f}', **sp)
 
 # best model parameters for RandomForest model
@@ -83,8 +90,8 @@ rfp = {'bootstrap': True, 'criterion': 'entropy', 'max_depth': 5, 'max_features'
 rfp2 = {'bootstrap': False, 'criterion': 'gini', 'max_depth': 5, 'max_features': 'auto', 'min_samples_split': 3, 'n_estimators': 28}
 best_rf = RandomForestClassifier(**rfp, random_state=5, class_weight="balanced_subsample")
 print(best_rf.get_params().keys(), **sp)
-best_rf.fit(XtrainScaled, y_train)
-fscore = best_rf.score(XtestScaled, y_test)
+best_rf.fit(X_train, y_train)
+fscore = best_rf.score(X_test, y_test)
 print(f'Accuracy score for RandomForest Classifier: {fscore:.02f}', **sp)
 
 
@@ -92,12 +99,12 @@ print(f'Accuracy score for RandomForest Classifier: {fscore:.02f}', **sp)
 logReg = LogisticRegression(multi_class='multinomial', solver='lbfgs')
 
 # Fit the classifier to the training data
-logReg.fit(XtrainScaled, y_train)
+logReg.fit(X_train, y_train)
 
 # Predict the labels of the test set: y_pred
-y_pred = logReg.predict(XtestScaled)
+y_pred = logReg.predict(X_test)
 
-lscore = logReg.score(XtestScaled, y_test)
+lscore = logReg.score(X_test, y_test)
 print(f'Accuracy score for logistic Regression Classifier: {lscore:.02f}', **sp)
 
 # how did our model perform?
@@ -105,7 +112,7 @@ count_misclassified = (y_test != y_pred).sum()
 print('Misclassified samples: {}'.format(count_misclassified))
 accuracy = accuracy_score(y_test, y_pred)
 print('Accuracy: {:.2f}'.format(accuracy))
-print(f'Score test accuracy: {logReg.score(XtestScaled, y_test):.02f}', **sp)
+print(f'Score test accuracy: {logReg.score(X_test, y_test):.02f}', **sp)
 
 bsvm = SVC(probability=True, class_weight='balanced', gamma='scale', random_state=500)
 
@@ -117,6 +124,6 @@ clf_vote = VotingClassifier(
     weights=[1,1,3,1,1]
 )
 
-clf_vote.fit(XtrainScaled, y_train)
-vscore = clf_vote.score(XtestScaled, y_test)
+clf_vote.fit(X_train, y_train)
+vscore = clf_vote.score(X_test, y_test)
 print(f'Accuracy score for voting Classifier: {vscore:.02f}', **sp)
