@@ -24,6 +24,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
 # from contextlib import contextmanager
 from functionX import changepath
 
@@ -57,6 +58,10 @@ scaler.fit(X)
 XtrainScaled = scaler.transform(X_train)
 XtestScaled= scaler.transform(X_test)
 
+with changepath(mypath):
+    np.savez('mydata', X_train=XtrainScaled, X_test=XtestScaled, 
+                y_train=y_train, y_test=y_test)
+
 
 # Best kneighbors model
 k_neClas = KNeighborsClassifier(7)
@@ -76,7 +81,8 @@ print(f'Accuracy score for Decision Tree Classifier: {dscore:.02f}', **sp)
 # best model parameters for RandomForest model
 rfp = {'bootstrap': True, 'criterion': 'entropy', 'max_depth': 5, 'max_features': 'auto', 'min_samples_split': 3, 'n_estimators': 27}
 rfp2 = {'bootstrap': False, 'criterion': 'gini', 'max_depth': 5, 'max_features': 'auto', 'min_samples_split': 3, 'n_estimators': 28}
-best_rf = RandomForestClassifier(**rfp, random_state=5)
+best_rf = RandomForestClassifier(**rfp, random_state=5, class_weight="balanced_subsample")
+print(best_rf.get_params().keys(), **sp)
 best_rf.fit(XtrainScaled, y_train)
 fscore = best_rf.score(XtestScaled, y_test)
 print(f'Accuracy score for RandomForest Classifier: {fscore:.02f}', **sp)
@@ -101,14 +107,16 @@ accuracy = accuracy_score(y_test, y_pred)
 print('Accuracy: {:.2f}'.format(accuracy))
 print(f'Score test accuracy: {logReg.score(XtestScaled, y_test):.02f}', **sp)
 
-
+bsvm = SVC(probability=True, class_weight='balanced', gamma='scale', random_state=500)
 
 # Create and fit the voting classifier
 clf_vote = VotingClassifier(
-    estimators=[('knn', k_neClas), ('dt', best_dt), ('lr', logReg)],
+    estimators=[('knn', k_neClas), ('dt', best_dt), ('lr', logReg) ,
+         ('svc', bsvm), ('brf', best_rf)],
     voting='soft',
-    weights=[1,1,2]
+    weights=[1,1,3,1,1]
 )
+
 clf_vote.fit(XtrainScaled, y_train)
 vscore = clf_vote.score(XtestScaled, y_test)
 print(f'Accuracy score for voting Classifier: {vscore:.02f}', **sp)
