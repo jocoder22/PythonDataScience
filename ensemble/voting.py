@@ -89,7 +89,7 @@ with changepath(mypath):
 nc = 0
 
 # search for k with highest accuracy
-for n in range(2,36):
+for n in range(2,20):
     # Instantiate a k-NN classifier: knn
     knn = KNeighborsClassifier(n_neighbors=n)
 
@@ -121,10 +121,13 @@ print(f'Accuracy score for DecisionTree Classifier: {treescore:.02f}')
 
 print(f'{pp}', end=sp)
 print(mytree3.get_params().keys())
+
 """
 'criterion', 'max_depth', 'max_features', 'max_leaf_nodes', 'min_impurity_decrease',
-'min_impurity_split', 'min_samples_leaf', 'min_samples_split', 'min_weight_fraction_leaf', 'presort', 'random_state', 'splitter'
+'min_impurity_split', 'min_samples_leaf', 'min_samples_split', 'min_weight_fraction_leaf', 
+'presort', 'random_state', 'splitter'
 """
+
 param_grid2 = {'max_features': ['auto', 'log2'],  'max_depth': [3, 4, 5, 7], 
                 "min_samples_split": [2, 3, 5, 7, 10], 'criterion': ['gini', 'entropy']}
 
@@ -219,7 +222,8 @@ print('Accuracy: {:.2f}'.format(accuracy))
 
 
 
-
+#################################################################################################
+#################################################################################################
 # using the wine dataset
 print(f'{pp}', end=sp)
 wine = datasets.load_wine()
