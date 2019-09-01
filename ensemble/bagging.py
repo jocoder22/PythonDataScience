@@ -53,3 +53,15 @@ pred = _bag.predict(X_test)
 # Show the F1-score
 print('F1-Score: {:.2f}'.format(accuracy_score(y_test, pred)))
 print(f'Score for the BaggingClasifier: {_bag.score(X_test, y_test):.2f}')
+
+
+
+# This is the LogisticRegression model
+# Build a balanced logistic regression
+clf_baselr = LogisticRegression(multi_class='multinomial', solver='lbfgs',
+                    class_weight='balanced', random_state=42)
+
+# Build and fit a bagging classifier with custom parameters
+clf_baglr = BaggingClassifier(base_estimator=clf_baselr, max_features=10, max_samples=0.65,
+             bootstrap=False, n_estimators=500, random_state=500)
+clf_baglr.fit(X_train, y_train)
