@@ -38,7 +38,7 @@ with changepath(path):
 #  for linear model, we use normalized=False argument
 _dt = DecisionTreeClassifier(max_depth=4)
 
-# Build and train the Bagging classifier
+# Then build and train the Baggingclassifier with parameters
 _bag = BaggingClassifier(
   base_estimator=_dt,
   n_estimators=21,
@@ -50,7 +50,7 @@ _bag.fit(X_train, y_train)
 # Predict the labels of the test set
 pred = _bag.predict(X_test)
 
-# Show the F1-score
+# Print the F1-score
 print('F1-Score: {:.2f}'.format(accuracy_score(y_test, pred)))
 print(f'Score for the BaggingClasifier: {_bag.score(X_test, y_test):.2f}')
 
@@ -58,10 +58,10 @@ print(f'Score for the BaggingClasifier: {_bag.score(X_test, y_test):.2f}')
 
 # This is the LogisticRegression model
 # Build a balanced logistic regression
-clf_baselr = LogisticRegression(multi_class='multinomial', solver='lbfgs',
+_baselr = LogisticRegression(multi_class='multinomial', solver='lbfgs',
                     class_weight='balanced', random_state=42)
 
-# Build and fit a bagging classifier with custom parameters
-clf_baglr = BaggingClassifier(base_estimator=clf_baselr, max_features=10, max_samples=0.65,
-             bootstrap=False, n_estimators=500, random_state=500)
-clf_baglr.fit(X_train, y_train)
+# Build and fit a baggingclassifier with custom parameters
+_baglr = BaggingClassifier(base_estimator=_baselr, max_features=20, max_samples=0.65,
+             bootstrap=False, n_estimators=500, random_state=450)
+_baglr.fit(X_train, y_train)
