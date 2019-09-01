@@ -32,6 +32,7 @@ mypath = r'C:\Users\Jose\Desktop\PythonDataScience\ensemble'
 sp = '\n\n'
 pp = '#'*80
 
+'''
 url = 'https://assets.datacamp.com/production/course_1939/datasets/gm_2008_region.csv'
 
 colname = ['population', 'fertility', 'HIV', 'CO2', 'BMI_male',
@@ -76,6 +77,14 @@ X = df.drop(['life','lifeCat', 'lifecat'], axis=1).values
 # Create training and test set
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=1, stratify=y)
+
+'''
+
+with changepath(mypath):
+    npzfile = np.load('mydata.npz')
+    X_train, X_test =  npzfile['X_train'], npzfile['X_test']
+    y_train, y_test =npzfile['y_train'], npzfile['y_test']
+
 
 nc = 0
 
