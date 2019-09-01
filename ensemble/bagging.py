@@ -65,3 +65,13 @@ _baselr = LogisticRegression(multi_class='multinomial', solver='lbfgs',
 _baglr = BaggingClassifier(base_estimator=_baselr, max_features=20, max_samples=0.65,
              bootstrap=False, n_estimators=500, random_state=450)
 _baglr.fit(X_train, y_train)
+
+# # Print the out-of-bag score
+# print('OOB-Score for logistic Regression: {:.3f}'.format(_baglr.oob_score_))
+# obb_score is possible only when bootstrap=True
+
+# Calculate predictions and evaluate the accuracy on the test set
+y_predlr = _baglr.predict(X_test)
+
+print('Accuracy for logistic Regression:  {:.02f}'.format(accuracy_score(y_test, y_predlr)))
+print(f'Accuracy for logistic reg: {_baglr.score(X_test, y_test):.02f}')
