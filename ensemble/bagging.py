@@ -62,7 +62,7 @@ _baselr = LogisticRegression(multi_class='multinomial', solver='lbfgs',
                     class_weight='balanced', random_state=42)
 
 # Build and fit a baggingclassifier with custom parameters
-_baglr = BaggingClassifier(base_estimator=_baselr, max_features=20, max_samples=0.65,
+_baglr = BaggingClassifier(base_estimator=_baselr, max_features=10, max_samples=0.65,
              bootstrap=False, n_estimators=500, random_state=450)
 _baglr.fit(X_train, y_train)
 
