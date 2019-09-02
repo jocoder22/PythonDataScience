@@ -11,12 +11,16 @@ class filelink:
         self.filename = filename
 
 
+
 class data_analysis(filelink):
     """   """
     def __init__(self, filename):
-        filelink.filename = filename
+        super().__init__(filename)
+        # filelink.filename = filename
+        # filelink.__init__(self, filename) # for multiple inheritance
         self.data = pd.read_csv(self.filename)
         self.stats = self.data.describe()
+
 
 
     def get_eda(self):
@@ -25,7 +29,7 @@ class data_analysis(filelink):
         colnames =  self.data.columns
         return shape, head, colnames
 
-sp = '\n\n'
+sp = {'sep':'\n\n', 'end':'\n\n'}
 url = 'https://assets.datacamp.com/production/repositories/2097/datasets/5dd3a8250688a4f08306206fa1d40f63b66bc8a9/us_life_expectancy.csv'
 
 # data = pd.read_csv(url)
@@ -33,5 +37,9 @@ url = 'https://assets.datacamp.com/production/repositories/2097/datasets/5dd3a82
 data1 = data_analysis(url)
 # data1.csvdata()
 s, h, c = data1.get_eda()
-print(s, h, c, sep=sp)
+print(s, h, c, **sp)
+print(f'Method Resolution Order (MRO) is:\n {data_analysis.__mro__}', **sp)
+
+print(data1.stats, **sp)
+
 

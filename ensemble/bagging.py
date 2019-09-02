@@ -10,24 +10,22 @@ from sklearn.svm import SVC
 from sklearn.ensemble import BaggingClassifier
 from contextlib import contextmanager
 
-@contextmanager
-def changepath(path):
-    currentpath = os.getcwd()
-    os.chdir(path)
+import sys
+path = r'C:\Users\Jose\Desktop\PythonDataScience\ensemble'
 
-    try:
-        yield 
+sys.path.insert(0, path)
 
-    finally:
-        os.chdir(currentpath)
+from ctmanager import functionX as mgt
+
+print(dir(mgt))
 
 plt.style.use('ggplot')
 sp = {'sep':'\n\n', 'end':'\n\n'}
 
-path = r'C:\Users\Jose\Desktop\PythonDataScience\ensemble'
 
 
-with changepath(path):
+
+with mgt.changepath(path):
     npzfile = np.load('mydata.npz')
     X_train, X_test =  npzfile['X_train'], npzfile['X_test']
     y_train, y_test =npzfile['y_train'], npzfile['y_test']
