@@ -49,13 +49,16 @@ print(f'RMSE: {rmse:.02f}\nAccuracy: {score:.02f}%', **sp)
 
 
 
+#############################################################################
+# Add AdaBoost model
+# Initialize the model with parameters
 lm_adaB = AdaBoostRegressor(lreg_model, n_estimators=12, random_state=500)
 lm_adaB.fit(X_train, y_train)
 
-# Calculate the predictions on the test set
+# Predict using the AdaBoost model
 pred_adaB = lm_adaB.predict(X_test)
 
-# Evaluate the performance using the RMSE
+# Evaluate the performance using the RMSE and Accuracy score
 score_adaB = lm_adaB.score(X_test, y_test)
 rmsea = np.sqrt(mean_squared_error(y_test, pred_adaB))
 print(f'RMSE: {rmsea:.02f}\nAccuracy: {score_adaB:.02f}%', **sp)
