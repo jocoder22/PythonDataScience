@@ -45,13 +45,14 @@ score = lreg_model.score(X_test, y_test)
 rmse = np.sqrt(mean_squared_error(y_test, pred))
 
 # print the rmse and accuracy score
-print(f'RMSE: {rmse:.02f}\nAccuracy: {score:.02f}%', **sp)
+print(f'''RMSE simple Linear Regression model: {rmse:.02f}\nAccuracy 
+        simple Linear Regression model: {score:.02f}%''', **sp)
 
 
 
 #############################################################################
 # Add AdaBoost model
-# Initialize the model with parameters
+# Initialize the model with linearRegression parameters
 lm_adaB = AdaBoostRegressor(lreg_model, n_estimators=12, random_state=500)
 lm_adaB.fit(X_train, y_train)
 
@@ -61,4 +62,20 @@ pred_adaB = lm_adaB.predict(X_test)
 # Evaluate the performance using the RMSE and Accuracy score
 score_adaB = lm_adaB.score(X_test, y_test)
 rmsea = np.sqrt(mean_squared_error(y_test, pred_adaB))
-print(f'RMSE: {rmsea:.02f}\nAccuracy: {score_adaB:.02f}%', **sp)
+print(f'''RMSE AdaBoost Linear Regression model: {rmsea:.02f}
+        \nAccuracy AdaBoost Linear Regression model: {score_adaB:.02f}%''', **sp)
+
+
+
+# Add AdaBoost model
+# Initialize the model with default Tree based regression model
+lm_adaBT = AdaBoostRegressor( n_estimators=12, random_state=500)
+lm_adaBT.fit(X_train, y_train)
+
+# Predict using the AdaBoost model
+pred_adaBT = lm_adaBT.predict(X_test)
+
+# Evaluate the performance using the RMSE and Accuracy score
+score_adaBT = lm_adaBT.score(X_test, y_test)
+rmseaT = np.sqrt(mean_squared_error(y_test, pred_adaBT))
+print(f'RMSE Tree based(Defualt): {rmseaT:.02f}\nAccuracy Tree based(Defualt): {score_adaBT:.02f}%', **sp)
