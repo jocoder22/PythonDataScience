@@ -52,3 +52,11 @@ class Grades:
   def average_score(self):
     return sum(self.scores)/self.number
 
+
+class Student:
+  """ """
+  def __init__(self, name, age, *scores, **kwargs):
+    self.name = name
+    self.age = age
+    self.grades = Grades(*scores)
+    self.kwargs = kwargs
