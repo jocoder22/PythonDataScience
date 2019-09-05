@@ -54,19 +54,19 @@ class Grades:
 
 
 class Student:
-  """ """
-  def __init__(self, name, age, *scores, **kwargs):
-    self.name = name
-    self.age = age
-    self.grades = Grades(*scores)
-    self.kwargs = kwargs
+    """ """
+    def __init__(self, name, age, *scores, **kwargs):
+        self.name = name
+        self.age = age
+        self.grades = Grades(*scores)
+        self.kwargs = kwargs
 
     def reportcard(self):
         print(f'{self.name}, {self.age} years old, scored on average {self.grades.average_score():.02f}%')
 
-  def details(self):
-    for k, v in self.kwargs.items():
-      print(f'{self.name} {k} is {v}')
+    def details(self):
+        for k, v in self.kwargs.items():
+            print(f'{self.name} {k} is {v}')
 
 
 obiscore = Grades(50, 80, 90, 40, 40)
@@ -79,21 +79,21 @@ obiagu.details()
 
 
 class StudentAgg:
-  """ """
-  def __init__(self, name, age, grades, **kwargs):
-    self.name = name
-    self.age = age
-    self.grades = grades
-    self.kwargs = kwargs
+    """ """
+    def __init__(self, name, age, grades, **kwargs):
+        self.name = name
+        self.age = age
+        self.grades = grades
+        self.kwargs = kwargs
 
 
+    def reportcard(self):
+        print(f'{self.name}, {self.age} years old, scored on average {self.grades.average_score():.02f}%')
 
-  def reportcard(self):
-    print(f'{self.name}, {self.age} years old, scored on average {self.grades.average_score():.02f}%')
+    def details(self):
+        for k, v in self.kwargs.items():
+            print(f'{self.name} {k} is {v}')
 
-  def details(self):
-    for k, v in self.kwargs.items():
-      print(f'{self.name} {k} is {v}')
 
 obiscore = Grades(70, 80, 90, 50, 80)
 obiagu2 = StudentAgg('Ben Obi', 35, obiscore, sister='Ann', state='Florida', gender='Male')
