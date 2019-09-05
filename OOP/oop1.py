@@ -76,3 +76,22 @@ obiagu = Student('Obi Agu', 23, 50, 80, 90, 40, 40,sister='Ann', state='Florida'
 obiagu.reportcard()
 obiagu.details()
 
+
+
+class StudentAgg:
+  """ """
+  def __init__(self, name, age, grades, **kwargs):
+    self.name = name
+    self.age = age
+    self.grades = grades
+    self.kwargs = kwargs
+
+
+
+  def reportcard(self):
+    print(f'{self.name}, {self.age} years old, scored on average {self.grades.average_score():.02f}%')
+
+  def details(self):
+    for k, v in self.kwargs.items():
+      print(f'{self.name} {k} is {v}')
+      
