@@ -94,4 +94,10 @@ class StudentAgg:
   def details(self):
     for k, v in self.kwargs.items():
       print(f'{self.name} {k} is {v}')
-      
+
+obiscore = Grades(70, 80, 90, 50, 80)
+obiagu2 = StudentAgg('Ben Obi', 35, obiscore, sister='Ann', state='Florida', gender='Male')
+obiagu2.reportcard()
+obiagu2.details()
+
+
