@@ -43,3 +43,12 @@ print(f'Method Resolution Order (MRO) is:\n {data_analysis.__mro__}', **sp)
 print(data1.stats, **sp)
 
 
+class Grades:
+  """ """
+  def __init__(self, *scores):
+    self.number = len(scores)
+    self.scores = scores 
+
+  def average_score(self):
+    return sum(self.scores)/self.number
+

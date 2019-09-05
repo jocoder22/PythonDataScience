@@ -24,7 +24,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
-from functionX import changepath
+from ctmanager.functionX import changepath
 
 
 mypath = r'C:\Users\Jose\Desktop\PythonDataScience\ensemble'
@@ -32,7 +32,7 @@ mypath = r'C:\Users\Jose\Desktop\PythonDataScience\ensemble'
 sp = '\n\n'
 pp = '#'*80
 
-'''
+
 url = 'https://assets.datacamp.com/production/course_1939/datasets/gm_2008_region.csv'
 
 colname = ['population', 'fertility', 'HIV', 'CO2', 'BMI_male',
@@ -61,6 +61,7 @@ hot1 = OneHotEncoder()
 
 df['lifecat'] = label1.fit_transform(df['lifeCat'])
 
+df['rc'] =  df.Region
 
 # df['Rcoded'] = label1.fit_transform(df['Region'])
 # Form dummies from the Region category, return new dataset with Region drop
@@ -71,12 +72,31 @@ with changepath(mypath):
 
 
 y = df['lifecat'].values
-X = df.drop(['life','lifeCat', 'lifecat'], axis=1).values
+X = df.drop(['life','lifeCat', 'lifecat', 'rc'], axis=1).values
+
+
+
+# scale the dataset
+scaler = StandardScaler()
+
+# First fit on training set only.
+scaler.fit(X)
+
+# then transform to both the training set and the test set.
+
+
 
 # print(y.shape,y.head(), X.head(), X.shape, sep=sp, end=sp)
 # Create training and test set
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=1, stratify=y)
+
+X_train = scaler.transform(X_train)
+X_test= scaler.transform(X_test)
+
+with changepath(mypath):
+    np.savez('mydata', X_train=X_train, X_test=X_test, 
+                y_train=y_train, y_test=y_test)
 
 '''
 
@@ -250,3 +270,4 @@ for n in range(2,36):
         nc = accuracy
 
 
+'''
