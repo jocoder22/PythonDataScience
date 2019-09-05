@@ -60,3 +60,19 @@ class Student:
     self.age = age
     self.grades = Grades(*scores)
     self.kwargs = kwargs
+
+    def reportcard(self):
+        print(f'{self.name}, {self.age} years old, scored on average {self.grades.average_score():.02f}%')
+
+  def details(self):
+    for k, v in self.kwargs.items():
+      print(f'{self.name} {k} is {v}')
+
+
+obiscore = Grades(50, 80, 90, 40, 40)
+print(obiscore.average_score())
+
+obiagu = Student('Obi Agu', 23, 50, 80, 90, 40, 40,sister='Ann', state='Florida', gender='Male')
+obiagu.reportcard()
+obiagu.details()
+
