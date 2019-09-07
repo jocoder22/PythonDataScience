@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 import os
 import numpy as np
-import pandas as pd StratifiedKFold
-from sklearn.model_selection import KFold
+import pandas as pd 
+from sklearn.model_selection import StratifiedKFold
 from kfold_nonserial import changepath
 
-
-plt.style.use('ggplot')
 path = 'C:\\Users\\Jose\\Desktop\\TimerSeriesAnalysis'
 sp = {'sep':'\n\n', 'end':'\n\n'}
 

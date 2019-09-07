@@ -27,11 +27,8 @@ sp = {'sep':'\n\n', 'end':'\n\n'}
 with changepath(path):
     df = pd.read_csv('AMZN.csv')
 
-df['Date'] = pd.to_datetime(df['Date'])
-df["year"] =  df.Date.dt.year
 
 print(df.head(), df.info(), **sp)
-print(df.year.value_counts(), **sp)
 
 
 kf_object = KFold(n_splits=5, shuffle=False, random_state=1973)
