@@ -28,7 +28,6 @@ with changepath(path):
     df = pd.read_csv('AMZN.csv')
 
 
-
 kf_object = KFold(n_splits=5, shuffle=True, random_state=1973)
 
 k_fold = 0
