@@ -55,3 +55,9 @@ df2['TotalArea'] = df['TotalBsmtSF'] + df['1stFlrSF'] + df['2ndFlrSF']
 # df2.drop(columns=['TotalBsmtSF', '1stFlrSF', '2ndFlrSF'], inplace=True)
 print('RMSE with total area:', get_kfold_rmse(df2))
 
+
+
+# Add garden area of the property
+df2['GardenArea'] = df['LotArea'] - df['1stFlrSF']
+# df2.drop(columns=['LotArea'], inplace=True)
+print('RMSE with garden area:', get_kfold_rmse(df2))
