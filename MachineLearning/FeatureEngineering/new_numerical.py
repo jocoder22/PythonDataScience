@@ -44,3 +44,7 @@ def get_kfold_rmse(train):
         
     return round(np.mean(mse_scores) + np.std(mse_scores), 2)
 
+
+# Look at the initial RMSE
+print('RMSE before feature engineering:', get_kfold_rmse(df))
+
