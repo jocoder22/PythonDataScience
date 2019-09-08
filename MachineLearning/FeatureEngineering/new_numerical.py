@@ -48,3 +48,10 @@ def get_kfold_rmse(train):
 # Look at the initial RMSE
 print('RMSE before feature engineering:', get_kfold_rmse(df))
 
+
+# Add total area of the house
+df2 = df.copy()
+df2['TotalArea'] = df['TotalBsmtSF'] + df['1stFlrSF'] + df['2ndFlrSF']
+# df2.drop(columns=['TotalBsmtSF', '1stFlrSF', '2ndFlrSF'], inplace=True)
+print('RMSE with total area:', get_kfold_rmse(df2))
+
