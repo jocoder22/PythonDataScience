@@ -61,3 +61,9 @@ print('RMSE with total area:', get_kfold_rmse(df2))
 df2['GardenArea'] = df['LotArea'] - df['1stFlrSF']
 # df2.drop(columns=['LotArea'], inplace=True)
 print('RMSE with garden area:', get_kfold_rmse(df2))
+
+
+# Add total number of bathrooms
+df2['TotalBath'] = df['FullBath']  + df['HalfBath']
+# df2.drop(columns=['FullBath', 'HalfBath'], inplace=True)
+print('RMSE with number of bathrooms:', get_kfold_rmse(df2))
