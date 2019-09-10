@@ -18,3 +18,20 @@ df = pd.read_csv('housing.csv')
 
 kf = KFold(n_splits=4, shuffle=True, random_state=23)
 
+
+
+def test_encoding(train, test, target, cat, alpha=7):
+    # global mean on the train data
+    mean_global = train[target].mean()
+    
+    # Get categorical feature sum and size
+    cat_sum = train.groupby(cat)[target].sum()
+    cat_size = train.groupby(cat).size()
+    
+    # smoothed  statistics
+    train_smoothed = (cat_sum + mean_global * alpha) / (cat_size + alpha)
+    
+    # get encodings for  test data
+    test_encoded = test[cat].map(train_smoothed).fillna(mean_global)
+    return test_encoded.values
+
