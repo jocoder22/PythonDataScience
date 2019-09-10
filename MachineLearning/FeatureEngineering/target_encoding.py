@@ -50,11 +50,24 @@ def train_encoding(train, target, cat, alpha=7):
         cv_test_feature = test_encoding(cv_train, cv_test, target, cat, alpha)
         
         # create new train feature for the fold
-        feature_t.iloc[test_index] = cv_test_feature 
-
+        feature_t.iloc[test_index] = cv_test_feature
+        
     return feature_t.values
 
+
+def target_encoding(train, test, target, cat, alpha=7):
     
+    # test data mean target coded feature
+    test_mean_coded = test_encoding(train, test, target, cat, alpha)
+
+    # train data mean target coded feature
+    train_mean_coded = train_encoding(train, target, cat, alpha)
+
+    
+    # Return new features to add to the model
+    return train_mean_coded, test_mean_coded
+
+
 
 
 
