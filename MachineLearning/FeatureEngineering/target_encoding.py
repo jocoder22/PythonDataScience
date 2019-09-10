@@ -16,7 +16,7 @@ path = r'C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\FeatureEngineer
 os.chdir(path)
 df = pd.read_csv('housing.csv')
 
-kf = KFold(n_splits=4, shuffle=True, random_state=23)
+kfold = KFold(n_splits=4, shuffle=True, random_state=1973)
 
 
 
@@ -34,4 +34,27 @@ def test_encoding(train, test, target, cat, alpha=7):
     # get encodings for  test data
     test_encoded = test[cat].map(train_smoothed).fillna(mean_global)
     return test_encoded.values
+
+
+
+def train_encoding(train, target, cat, alpha=7):
+    # 4-fold cross-validation
+    k_fold = KFold(n_splits=4, random_state=1973, shuffle=True)
+    feature_t = pd.Series(index=train.index)
+    
+    # train k-fold encoding
+    for train_index, test_index in k_fold.split(train):
+        cv_train, cv_test = train.iloc[train_index], train.iloc[test_index]
+      
+        # out-of-fold statistics and apply to cv_test
+        cv_test_feature = test_encoding(cv_train, cv_test, target, cat, alpha)
+        
+        # create new train feature for the fold
+        feature_t.iloc[test_index] = cv_test_feature 
+
+    return feature_t.values
+
+    
+
+
 
