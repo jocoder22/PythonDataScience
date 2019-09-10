@@ -18,22 +18,26 @@ import matplotlib.pyplot as plt
 # plt.style.use('ggplot')
 
 
-sp = '\n\n'
+sp = {'sep':'\n\n', 'end':'\n\n'}
 url2 = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00488/Live.csv'
 
 df = pd.read_csv(url2)
 df_int = df.select_dtypes(include='object')
-print(df_int['status_type'].value_counts(), df.head(), sep=sp, end=sp)
+print(df.head(), df.columns, **sp)
+print(df_int['status_type'].value_counts(),  **sp)
 
 
 # One Hot coding
 df_hot = pd.get_dummies(df, columns=['status_type'], prefix='S')
-print(df_hot.head())
+print(df_hot.head(), df_hot.columns, **sp)
+print(df.head(), **sp)
+
+
 
 # Dummy coding
 df_dummy = pd.get_dummies(df, columns=['status_type'], prefix='D', drop_first=True)
 print(df_dummy.head())
-print(df.columns, df_dummy.columns, sep=sp, end=sp)
+print(df.columns, df_dummy.columns, **sp)
 
 
 # Collapsing values
@@ -42,11 +46,11 @@ mask = df['status_type'].isin(['status', 'link'])
 df['status_type'][mask] = 'Others'
 counts = df['status_type'].value_counts()
 print(counts, end=sp)
-# print(df['num_shares'].value_counts(), sep=sp, end=sp)
+# print(df['num_shares'].value_counts(), **sp)
 
 # pandas.where => Replace values where the condition is False.
 df['status_type2'] = df['status_type2'].where(lambda x: ~x.isin(['status', 'link']), 'Others')
-print(df['status_type2'].value_counts(), end=sp)
+print(df['status_type2'].value_counts(), **sp)
 
 # creating categories
 # Binning feature
@@ -55,4 +59,4 @@ minn, maxx = (df["num_shares"].min(), df["num_shares"].max())
 cut_points = [minn, 100, 500, 1000, maxx]
 labels = ["low", "medium", "high", "very high"]
 df["num_shares_Bin"] = pd.cut(df["num_shares"], bins=cut_points, labels=labels)
-print(df['num_shares_Bin'].value_counts(), sep=sp, end=sp)
+print(df['num_shares_Bin'].value_counts(), **sp)

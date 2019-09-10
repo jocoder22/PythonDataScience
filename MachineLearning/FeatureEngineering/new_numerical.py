@@ -12,10 +12,15 @@ from sklearn.ensemble import RandomForestRegressor
 
 
 sp = {'sep':'\n\n', 'end':'\n\n'}
-url = 'https://assets.datacamp.com/production/repositories/4443/datasets/40af41a3b8739d0ac4b3f9f85ee43630ecbe7f0c/house_prices_train.csv'
-df = pd.read_csv(url)
+# url = 'https://assets.datacamp.com/production/repositories/4443/datasets/40af41a3b8739d0ac4b3f9f85ee43630ecbe7f0c/house_prices_train.csv'
+# df = pd.read_csv(url)
 
+# df.to_csv('housing.csv', index=False)
 
+path = r'C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\FeatureEngineering'
+
+os.chdir(path)
+df = pd.read_csv('housing.csv')
 kf = KFold(n_splits=4, shuffle=True)
 
 
@@ -43,7 +48,7 @@ def get_kfold_rmse(train):
         
     return round(np.mean(mse_scores) + np.std(mse_scores), 2)
 
-
+'''
 # Look at the initial RMSE
 print('RMSE before feature engineering:', get_kfold_rmse(df))
 
@@ -66,3 +71,7 @@ print('RMSE with garden area:', get_kfold_rmse(df2))
 df2['TotalBath'] = df['FullBath']  + df['HalfBath']
 # df2.drop(columns=['FullBath', 'HalfBath'], inplace=True)
 print('RMSE with number of bathrooms:', get_kfold_rmse(df2))
+'''
+
+
+print(df["CentralAir"].value_counts())
