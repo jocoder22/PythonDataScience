@@ -9,6 +9,9 @@ def print2(*args):
 
 
 
+def describe2(x):
+    print2(x.head(), x.shape, x.info())
+
 
 params = {"sp":"\n\n", "end":"\n\n"}
 # charge working directory
@@ -18,6 +21,8 @@ os.chdir(path)
 # load the csv file
 data = pd.read_csv("portfolios.csv")
 print(data.head())
+
+
 
 colnames = list(data)
 colnames2 = data.columns
@@ -39,3 +44,6 @@ data = pd.read_csv("portfolios.csv", skiprows=2000,
                     nrows=300, header=None, names=colnames)
 
 print2(data.head(), data.shape)
+
+# use the describe2 function
+describe2(data)
