@@ -44,9 +44,9 @@ for shname, ddict in data.items():
     ddict.insert(1, "OC_diff", ddict["Open"] - ddict["Close"])
     stocks = stocks.append(ddict)
 
+print2(stocks)
 # new_order = [-1,0,1,2,3,4,5]
 # stocks = stocks[stocks.columns[new_order]]
 # print2(stocks)
 
 # stocks.insert(0, "NewAdj", stocks.Adjusted)
-print2(stocks)
