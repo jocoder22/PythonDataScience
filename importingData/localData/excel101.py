@@ -29,7 +29,7 @@ print(data.head())
 print2(data)
 
 
-# import multiple sheets
+# import multiple sheets, imported as defaultdict
 data = pd.read_excel("portfolioSheet.xlsx",  sheet_name=None)
 for sheetname, obj in data.items():
     print(sheetname, type(obj), end=sp)
