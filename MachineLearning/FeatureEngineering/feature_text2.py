@@ -46,7 +46,7 @@ def preprocessText(text):
 
 
 sp = '\n\n'
-path = r'C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\FeatureEngineering'
+path = r'D:\PythonDataScience\MachineLearning\FeatureEngineering'
 os.chdir(path)
 data = pd.read_csv('textdata.csv', compression='gzip')
 
@@ -59,6 +59,10 @@ for text in data['News_content']:
     text_cleanList.extend(preprocessText(text)[1])  
 
 data['cleanText'] = text_cleanstring
+
+print(text_cleanstring, sep='\n\n')
+print(text_cleanList, sep='\n\n')
+
 
 # Most common used word
 kdict = defaultdict(int)
