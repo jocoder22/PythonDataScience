@@ -35,6 +35,7 @@ for text in data['News_content']:
     text_cleanstring.append(Counter(mypackage.tokenize(text)))
     text_cleanList.extend(mypackage.tokenize(text)) 
 
+
 print(text_cleanstring, sep='\n\n')
 print(text_cleanList, sep='\n\n')
 print(mypackage.wordcounter(text_cleanList))

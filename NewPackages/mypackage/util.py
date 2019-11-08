@@ -35,6 +35,7 @@ def tokenize(text):
     # Lemmatize all tokens into a new list: lemmatized
     lemmat = [wordlemm.lemmatize(t) for t in wordtokens]
 
+    # return list of words
     return lemmat
 
 
