@@ -13,6 +13,14 @@ def print2(*args):
 
 
 def tokenize(text):
+    """
+    This is a function to form tokens of text passages:
+
+    Input: Text
+
+    Output: List of words
+
+    """
 
     excludePunt = set(string.punctuation)
     excludePunt.update(('"', "'"))

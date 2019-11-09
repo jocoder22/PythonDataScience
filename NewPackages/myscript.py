@@ -33,12 +33,19 @@ text_cleanstring = []
 
 for text in data['News_content']:
     text_cleanstring.append(Counter(mypackage.tokenize(text)))
-    text_cleanList.extend(mypackage.tokenize(text)) 
+    text_cleanList.extend(mypackage.tokenize(text))
+    
+result = " ".join(text.strip() for text in data['News_content'])
 
 
-print(text_cleanstring, sep='\n\n')
-print(text_cleanList, sep='\n\n')
-print(mypackage.wordcounter(text_cleanList))
+wordanalysed = mypackage.TextTokenizer(result)
+print(wordanalysed.wordcount)
+wordanalysed.plot_count(n_common=7)
+
+
+# print(text_cleanstring, sep='\n\n')
+# print(text_cleanList, sep='\n\n')
+
 
 # Sum word_counts using countwordtokens
 wordcounts = mypackage.countwordtokens(text_cleanstring)
