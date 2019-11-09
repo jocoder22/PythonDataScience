@@ -7,7 +7,14 @@ from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 import string 
 
+
+
 def print2(*args):
+    """
+    Function that print descriptive summary
+
+    """
+
     for memb in args:
         print(memb.head(), memb.info(), memb.describe(), sep = '\n\n', end = '\n\n')
 
