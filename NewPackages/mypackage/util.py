@@ -54,6 +54,10 @@ def countwordtokens(counters):
 
 
 def plotcount(countObject, n_common=6):
+    """
+    Function to compute most common words
+
+    """
     
     # Get the most common n words
     topx = countObject.most_common(n_common)
@@ -65,6 +69,10 @@ def plotcount(countObject, n_common=6):
 
 
 def plot_most_common(tops):
+    """"
+    Function to plot histogram of the most common words
+
+    """
 
     # form dict from list of tuple
     top_items_dict = dict(tops)
