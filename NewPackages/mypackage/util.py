@@ -48,7 +48,15 @@ def tokenize(text):
 
 
 def countwordtokens(counters):
+    """
+    Function to count number of words in a list
 
+    Input: List of words
+
+    Output: tuple of words and number of occurane
+
+    """
+    
     # sum the counts
     return sum(counters, Counter())
 
