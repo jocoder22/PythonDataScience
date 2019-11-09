@@ -38,6 +38,7 @@ for text in data['News_content']:
 result = " ".join(text.strip() for text in data['News_content'])
 
 
+# form a TextTokenizer Object
 wordanalysed = mypackage.TextTokenizer(result)
 print(wordanalysed.wordcount)
 wordanalysed.plot_count(n_common=7)
