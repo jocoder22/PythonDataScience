@@ -56,7 +56,7 @@ def countwordtokens(counters):
     Output: tuple of words and number of occurane
 
     """
-    
+
     # sum the counts
     return sum(counters, Counter())
 
@@ -64,6 +64,12 @@ def countwordtokens(counters):
 def plotcount(countObject, n_common=6):
     """
     Function to compute most common words
+
+    Input:
+        1. countObject: tuple of words and number of occurance
+        2. n_common: int
+
+    Output: Histogram 
 
     """
     
