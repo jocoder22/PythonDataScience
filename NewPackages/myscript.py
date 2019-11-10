@@ -4,9 +4,10 @@ import mypackage
 from collections import Counter
 
 path = "D:\PythonDataScience\importingData\localData"
+sp = {"sep":"\n\n", "end":"\n\n"}
 
 os.chdir(path)
-print(os.getcwd())
+print(os.getcwd(), **sp)
 
 data = pd.read_csv("portfolios.csv", parse_dates = True, index_col= 0)
 
@@ -17,12 +18,9 @@ mypackage.print2(data)
 word = 'pope francis end landmark meeting calling battle fight sexual abuse'
 
 wtt = mypackage.TextTokenizer(word)
-print(wtt.wordcount)
-print(wtt.greet)
-print(mypackage.tokenize(word))
-
-
-sp = '\n\n'
+print(wtt.wordcount, **sp)
+print(wtt.greet, **sp)
+print(mypackage.tokenize(word), **sp)
 path = r'D:\PythonDataScience\MachineLearning\FeatureEngineering'
 os.chdir(path)
 data = pd.read_csv('textdata.csv', compression='gzip')
@@ -40,7 +38,7 @@ result = " ".join(text.strip() for text in data['News_content'])
 
 # form a TextTokenizer Object
 wordanalysed = mypackage.TextTokenizer(result)
-print(wordanalysed.wordcount)
+print(wordanalysed.wordcount, **sp)
 wordanalysed.plot_count(n_common=7)
 
 
@@ -53,4 +51,4 @@ wordcounts = mypackage.countwordtokens(text_cleanstring)
 
 # Plot wordcounts using plotcount 
 mml = mypackage.plotcount(wordcounts)
-print(mml)
+print(mml, **sp)

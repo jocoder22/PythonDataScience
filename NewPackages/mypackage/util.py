@@ -14,9 +14,10 @@ def print2(*args):
     Function that print descriptive summary
 
     """
-
+    sp = {"sep":"\n\n", "end":"\n\n"}
+    
     for memb in args:
-        print(memb.head(), memb.info(), memb.describe(), sep = '\n\n', end = '\n\n')
+        print(memb.head(), memb.info(), memb.describe(), **sp)
 
 
 def tokenize(text):

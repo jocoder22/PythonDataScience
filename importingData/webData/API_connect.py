@@ -1,11 +1,18 @@
 import pandas as pd
 from requests import get
+import sys
 
+pathtk = r"D:\PPP"
+sys.path.insert(0, pathtk)
+
+import bfsearch
+
+sp = {"sep":"\n\n", "end":"\n\n"}
 
 base_url = "http://api.census.gov/data/timeseries/idb/5year"
 
 
-secret_key = "34a25d4f997aea1ccb52474dc8a7ba4"
+secret_key = bfsearch.key
 parameters = {"key": secret_key,
               "get": ",".join(["NAME", "POP", "CBR", "CDR", "E0", "AREA_KM2"]),
               "time": "from 2013 to 2017",
@@ -13,17 +20,18 @@ parameters = {"key": secret_key,
 
 response = get(base_url, params=parameters)
 
-response.status_code
+print(response.status_code, response.url, **sp)
 response.url
 response.content
 
 resp_obj = response.json()
-type(resp_obj)  # <class 'list'>
+# type(resp_obj)  # <class 'list'>
 
 popdata = pd.DataFrame(resp_obj[1:], columns=resp_obj[0])
-popdata.head()
-popdata.tail()
+print(popdata.head(), popdata.tail(), **sp)
 
+
+["NAME","POP","CBR","CDR","E0","AREA_KM2","time","FIPS"]
 
 col = ["NAME", "POP", "AREA_KM2", "ASFR15_19", "ASFR20_24", "ASFR25_29",
        "ASFR40_44", "ASFR40_44", "ASFR45_49", "CBR", "E0", "E0_F", "FIPS",
@@ -55,14 +63,14 @@ par2 = {'key': secret_key,
         'FIPS': '*'}
 
 resp2 = get(base_url, params=par2)
-resp2.status.code
+print(resp2.status_code, **sp)
 resp2_obj = resp2.json()
 ppdata = pd.DataFrame(resp2_obj[1:], columns=resp2_obj[0])
-ppdata.tail()
+print(ppdata.head(), ppdata.tail(), **sp)
 
 
 # Using url directly;
 response2 = get("https://api.census.gov/data/timeseries/idb/5year?get=NAME,POP,CBR,CDR,E0,AREA_KM2&FIPS=%2A&time=2012")
 response2 = response2.json()
 ppdata2 = pd.DataFrame(response2[1:], columns=response2[0])
-ppdata2.tail()
+print(ppdata2.head(), ppdata2.tail(), **sp)
