@@ -94,6 +94,8 @@ def plot_most_common(tops):
     """"
     Function to plot histogram of the most common words
 
+    Input: words
+
     """
 
     # form dict from list of tuple
