@@ -57,6 +57,8 @@ def tokenize(text):
     return lemmat
 
 
+
+
 def countwordtokens(counters):
     """
     Function to count number of words in a list
