@@ -98,6 +98,8 @@ def plot_most_common(tops):
 
     Input: words
 
+    Output: Histogram
+
     """
 
     # form dict from list of tuple
