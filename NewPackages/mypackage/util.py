@@ -13,6 +13,8 @@ def print2(*args):
     """
     Function that print descriptive summary
 
+    Input: DataFrame
+
     """
     sp = {"sep":"\n\n", "end":"\n\n"}
     
