@@ -17,6 +17,7 @@ mypackage.print2(data)
 
 word = 'pope francis end landmark meeting calling battle fight sexual abuse'
 
+
 wtt = mypackage.TextTokenizer(word)
 print(wtt.wordcount, **sp)
 print(wtt.greet, **sp)
