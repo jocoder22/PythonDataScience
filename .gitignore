@@ -24,3 +24,6 @@ _*
 *.csv
 *.xlsx
 *.gz
+*.aux
+*.log
+*.bak
