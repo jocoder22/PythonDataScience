@@ -27,3 +27,5 @@ _*
 *.aux
 *.log
 *.bak
+*.dvi
+*.db
