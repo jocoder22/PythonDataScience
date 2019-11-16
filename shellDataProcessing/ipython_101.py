@@ -57,11 +57,16 @@ mylist.p  ## list of file path
 # split the string into columns delimited by space
 # you can do now do further slicing using indices, (1,4) for columns and [1:3] for rows
 myls = !ls -l 
+all_folder_sub = !ls -R
 myls.fields(2,4)[1:3]
 
 
 # grep search for patterns
 myls.grep('kill')
+
+# search for file ending in .py
+all_folder_sub.grep('(\.py)$')
+
 
 
 # sort the output by column index (first argument) and optional numerical (nums=True)
