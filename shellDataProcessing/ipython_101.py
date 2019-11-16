@@ -42,3 +42,33 @@ output
 # below is unix command
 # ls -l | awk '{ SUM+=$5} END {print SUM}'
 # ls -l | grep .py| awk '{ SUM+=$5} END {print SUM}'
+
+
+# SLIST DATATYPE #################################################
+# SLIST METHODS: fields, grep, sort
+mylist = !ls -h
+mylist ## the same as mylist.l, the default, list
+mylist.s ## space separated string
+mylist.n ## newline, \n separated string
+mylist.p  ## list of file path
+
+# fields splits the output into whitespace delimited columns 
+# and returns the values of columns, specified by their indices, as space-separated strings.
+# split the string into columns delimited by space
+# you can do now do further slicing using indices, (1,4) for columns and [1:3] for rows
+myls = !ls -l 
+myls.fields(2,4)[1:3]
+
+
+# grep search for patterns
+myls.grep('kill')
+
+
+# sort the output by column index (first argument) and optional numerical (nums=True)
+myls.sort(5, nums=True)
+
+# convert to other datatypes
+myset = set(myls)
+mylist2 = [myls]
+mydict1 = dict(vals=myls)
+mydict2 = {"vals2":myls}
