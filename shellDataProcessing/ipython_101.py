@@ -13,15 +13,25 @@ var = !ls -h *.csv
 print(len(ls))
 
 
-# using the bash to give the output of series of commands
+ls_list = !ls -l |grep .py| awk '{ SUM+=$5} END {print SUM }'
+type(ls_list)
+ls_list
+
+####################################################################
+# using the bash to give the output  to stdoutof series of commands
 %%bash --out output
 ls -l |grep .py| awk '{ SUM+=$5} END {print SUM}'
 
 
+# captur the error to stderr
+%%bash --out output --err outerr
+ls -l |grep .py| awk '{ SUM+=$5} END {print SUM}'
+echo 'No error ' >&2
 
 # get the output
 type(output)
 output
+########################################################################################
 
 
 # # below is python intepreter throuch the shell
