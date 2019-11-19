@@ -41,5 +41,12 @@ bucketList = s3.list_buckets()
 # Print each Buckets Name
 for bucket in bucketList['Buckets']:
     print(bucket['Name'])
+    
+    
+# Delete all the buckets with 'bucketStaging'
+for bucket in bucketList['Buckets']:
+  if 'bucketStaging' in bucket['Name']:
+      s3.delete_bucket(Bucket=bucket['Name'])
+    
 
 
