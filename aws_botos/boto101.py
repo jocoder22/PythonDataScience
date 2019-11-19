@@ -18,8 +18,12 @@ sns = boto3.client('sns', region_name='us-east-2',
 myBuckets = s3.list_buckets()
 nyTopics = sns.list_topics()
 
-# Print out the list of SNS topics
-# print(nyTopics)
+
+# Iterate over Buckets from .list_buckets() response
+for bucket in myBuckets['Buckets']:
+  
+  	# Print the Name for each bucket
+    print(bucket['Name'])
 
 
 # Create the buckets
