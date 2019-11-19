@@ -19,5 +19,13 @@ myBuckets = s3.list_buckets()
 nyTopics = sns.list_topics()
 
 # Print out the list of SNS topics
-print(nyTopics)
+# print(nyTopics)
+
+
+# Create the buckets
+rstaging = s3.create_bucket(Bucket='bucketStaging')
+rprocessed = s3.create_bucket(Bucket='bucketProcessed')
+rtest = s3.create_bucket(Bucket='bucketTest')
+
+
 
