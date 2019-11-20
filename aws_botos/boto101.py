@@ -26,6 +26,8 @@ for bucket in myBuckets['Buckets']:
     print(bucket['Name'])
 
 
+
+
 # Create the buckets
 rstaging = s3.create_bucket(Bucket='bucketStaging')
 rprocessed = s3.create_bucket(Bucket='bucketProcessed')
