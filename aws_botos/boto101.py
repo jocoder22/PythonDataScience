@@ -37,7 +37,7 @@ rtest = s3.create_bucket(Bucket='bucketTest')
 # Delete the gim-test bucket
 s3.delete_bucket(Bucket='bucketStaging')
 
-# Get the list_buckets response
+# Get the names of buckets
 bucketList = s3.list_buckets()
 
 # Print each Buckets Name
