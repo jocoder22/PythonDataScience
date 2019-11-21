@@ -21,3 +21,35 @@ s3.download_file(
 
 # convert to pandas dataframe
 df = pd.read_csv("./jonah.csv")
+
+
+# using get_object(). return JSON with streaming Body 
+response = s3.get_object(Key='jonah_final.csv', Bucket=BucketName)
+
+# convert to pandas dataframe
+df2 = pd.read_csv(response['Body'])
+
+
+###################################################################
+#################### using presigned URLs #########################
+# to grant temporary access, that expires after predefined time ###
+# you can shared this generated presigned url with other coworker #
+###################################################################
+sharedURL = s3.generate_presigned_url(
+    ClientMethod = "get_object",
+    ExpiresIn = 3600,
+    params = {"Key": "jonah_final.csv", 
+              "Bucket": BucketName})
+
+df3 = pd.read_csv(sharedURL)
+
+
+# downloading multiple file with same structure
+# first get the list of files
+df4 = []
+fileList = s3.list_object(Bucket=BucketName, Prefix="Jan")["Content"]
+
+# loop over the file list
+for file in fileList:
+    # download the file
+    s3.get_object(Bucket=BucketName, Key=file['Key'])
