@@ -12,6 +12,7 @@ s3 = boto3.client('s3', region_name='us-east-2',
 # Create the buckets
 rstaging = s3.create_bucket(Bucket='bucketStaging')
 
+
 # Upload file to the bucket
 s3.upload_file(
     # Complete the filename where the file is located locally
