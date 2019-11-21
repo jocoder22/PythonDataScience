@@ -1,3 +1,4 @@
+import pandas as pd
 import boto3
 
 AWS_KEY_ID = "keep off this"
@@ -17,3 +18,6 @@ s3.download_file(
     # Set the key and bucket, default setting is private
     Key='jonah_final.csv', 
     Bucket=BucketName)
+
+# convert to pandas dataframe
+df = pd.read_csv("./jonah.csv")
