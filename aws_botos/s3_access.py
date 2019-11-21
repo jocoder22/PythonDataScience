@@ -21,10 +21,15 @@ s3.upload_file(
     Bucket='bucketStaging' )
 
 
+# change object acl
+s3.put_object_acl(
+    # Set the key and bucket, default setting is private
+    Key='jonah_final.csv', 
+    Bucket='bucketStaging',
+    ACL = "public-read")
 
 
-
-# Upload file to the bucket
+# Upload file to the bucket and modify the acl simultaneously
 s3.upload_file(
     # Complete the filename where the file is located locally
     Filename='./jonah.csv', 
