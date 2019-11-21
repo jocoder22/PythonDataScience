@@ -46,10 +46,16 @@ df3 = pd.read_csv(sharedURL)
 
 # downloading multiple file with same structure
 # first get the list of files
-df4 = []
+df4 = pd.DataFrame()
 fileList = s3.list_object(Bucket=BucketName, Prefix="Jan")["Content"]
 
 # loop over the file list
 for file in fileList:
     # download the file
-    s3.get_object(Bucket=BucketName, Key=file['Key'])
+    result = s3.get_object(Bucket=BucketName, Key=file['Key'])
+    
+    # form pandas dataframe
+    df4_ = pd.read_csv(result)
+    
+    # concatenate to final dataset
+    df4 = pd.concat([df4, df4_], axis=0)
