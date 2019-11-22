@@ -70,4 +70,3 @@ df.to_html('./people_border.html',render_links=True,
            border=1)
 
 
-print(df.loc[2,["Low"]])
