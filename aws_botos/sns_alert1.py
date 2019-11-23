@@ -13,7 +13,7 @@ sns = boto3.client('sns', region_name='us-east-2',
 # Create the health_alerts topic
 response = sns.create_topic(Name="health_alerts")
 
-# print topic Arn
+# print topic Arn, Amazon Resource Name
 health_alerts_arn = response['TopicArn']
 print(health_alerts_arn)
 
