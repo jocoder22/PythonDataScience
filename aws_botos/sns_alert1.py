@@ -35,4 +35,17 @@ for topic in topics:
 response = sns.list_topics()
 print(response['Topics'])
 
-Delete Topics
+# Delete Topics
+# Delete one Topic
+sns.delete_topic(TopicArn = health_alerts_arn)
+
+
+# Delete multiple Topics, use looping on list of topics
+# first get the list of topics
+topicList = sns.list_topics()['Topic']
+
+# Iterate over the topicList and delete selected topic using TopicArn
+for topic in topicList:
+   if "generalNews" in topic['TopicArn']:
+     sns.delete_topic(TopicArn = topic['TopicArn'])
+     
