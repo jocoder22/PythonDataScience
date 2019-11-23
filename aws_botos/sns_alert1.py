@@ -17,4 +17,15 @@ health_alerts_arn = response['TopicArn']
 print(health_alerts_arn)
 
 
+# Create list of topic
+topics = ['music', 'news', 'politics', 'health', 'vacation', 'religion']
+
+for topic in topics:
+  	# create topic for every issues
+    sns.create_topic(Name=f"{topic}_generalNews")
+    
+    # create topic for every breaking News
+    sns.create_topic(Name="{topic}_breakingNews")
+
+
 
