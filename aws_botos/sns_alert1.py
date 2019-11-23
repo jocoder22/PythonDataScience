@@ -12,6 +12,7 @@ sns = boto3.client('sns', region_name='us-east-2',
 
 # Create the health_alerts topic
 response = sns.create_topic(Name="health_alerts")
+response = sns.create_topic(Name="health_alerts")['TopicArn']
 
 # print topic Arn, Amazon Resource Name
 health_alerts_arn = response['TopicArn']
@@ -34,3 +35,4 @@ for topic in topics:
 response = sns.list_topics()
 print(response['Topics'])
 
+Delete Topics
