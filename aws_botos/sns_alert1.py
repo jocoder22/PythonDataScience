@@ -28,6 +28,7 @@ for topic in topics:
     # create topic for every breaking News
     sns.create_topic(Name="{topic}_breakingNews")
 
+
 # Print all the topics in SNS
 response = sns.list_topics()
 print(response['Topics'])
