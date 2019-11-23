@@ -50,3 +50,20 @@ for topic in topicList:
      sns.delete_topic(TopicArn = topic['TopicArn'])
      
 print(sns.list_topics()['Topics'])
+
+
+# subscribe to individual to topic, using phone number and email
+phoneNumbers = ["+12128953490", "+1262863490", "+14188953490", "+13128953490"]
+emails = ["butks@gmail.com", "monmm@yahoo.com", "yonaf@soft.com", "honye@gmail.com"]
+
+
+# subscribe members to all topics
+for topic in topicList:
+  for i, phoneNumber in enumerate(phoneNumber):
+    sns.subscribe(TopicArn = topic['TopicArn'],
+            Protocol = "sms", # check for list ["email, sns"]
+            Endpoint = phoneNumber ) # check Endpoint = [emails[i], phonenumber] 
+      
+    sns.subscribe(TopicArn = topic['TopicArn'],
+                  Protocol = "email", # check for list ["email, sns"]
+                  Endpoint = emails[i]) # check Endpoint = [emails[i], phonenumber]
