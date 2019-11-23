@@ -49,3 +49,4 @@ for topic in topicList:
    if "generalNews" in topic['TopicArn']:
      sns.delete_topic(TopicArn = topic['TopicArn'])
      
+print(sns.list_topics()['Topics'])
