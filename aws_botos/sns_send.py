@@ -23,13 +23,13 @@ temperature = 48
 
 
 if temperature <= 25:
-    # # The message should contain the number of potholes.
+    # # The message should contain the number of temperature.
     message = f"The temperature is {temperature}F, please prepare to take action!"
     
-    # The email subject should also contain number of potholes
+    # The email subject should also contain the temperature
     subject = f"Latest is {temperature}"
 
-    # Publish the email to the streets_critical topic
+    # Publish the email to the Health Alert topic
     sns.publish(
         TopicArn = respArn,
         # Set subject and message
