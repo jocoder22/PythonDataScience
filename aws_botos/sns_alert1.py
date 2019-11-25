@@ -74,3 +74,14 @@ for topic in topicList:
       if "generalNews" in topic['TopicArn']:
             response = sns.list_subscriptions_by_topic(TopicArn = topic['TopicArn'])
 
+# For each subscription, if the protocol is SMS, unsubscribe
+for subject in response['Subscriptions']:
+  if subject['Protocol'] == 'sms':
+	  sns.unsubscribe(SubscriptionArn=subject['SubscriptionArn'])
+
+# List subscriptions for health alerts topic in one line
+alerts = sns.list_subscriptions_by_topic(
+  TopicArn=health_alerts_arn)['Subscriptions']
+
+# Print the subscriptions
+print(alerts)
