@@ -9,3 +9,4 @@ BucketName = "htmlObjects"
 sns = boto3.client('sns', region_name='us-east-2', 
                         aws_access_key_id=AWS_KEY_ID, 
                         aws_secret_access_key=AWS_SECRET)
+
