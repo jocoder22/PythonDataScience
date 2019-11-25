@@ -67,3 +67,10 @@ for topic in topicList:
     sns.subscribe(TopicArn = topic['TopicArn'],
                   Protocol = "email", # check for list ["email, sns"]
                   Endpoint = emails[i]) # check Endpoint = [emails[i], phonenumber]
+
+
+# List subscriptions for each topic.
+for topic in topicList:
+      if "generalNews" in topic['TopicArn']:
+            response = sns.list_subscriptions_by_topic(TopicArn = topic['TopicArn'])
+
