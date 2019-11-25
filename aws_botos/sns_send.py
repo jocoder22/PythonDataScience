@@ -10,3 +10,29 @@ sns = boto3.client('sns', region_name='us-east-2',
                         aws_access_key_id=AWS_KEY_ID, 
                         aws_secret_access_key=AWS_SECRET)
 
+
+# Create the health_alerts topic
+respArn = sns.create_topic(Name="health_alerts")['TopicArn']
+
+# send single sms
+sns.publish(PhoneNumber="+13234569086",
+            Message="Hello World")
+
+# send to multiple subscriber
+temperature = 48
+
+
+if temperature <= 25:
+    # # The message should contain the number of potholes.
+    message = f"The temperature is {temperature}F, please prepare to take action!"
+    
+    # The email subject should also contain number of potholes
+    subject = f"Latest is {temperature}"
+
+    # Publish the email to the streets_critical topic
+    sns.publish(
+        TopicArn = respArn,
+        # Set subject and message
+        Message = message,
+        Subject = subject)
+    
