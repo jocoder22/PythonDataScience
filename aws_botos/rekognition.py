@@ -6,6 +6,16 @@ BucketName = "htmlObjects"
 
 
 # Create the boto3 client for interacting SNS
-sns = boto3.client('sns', region_name='us-east-2', 
+recog = boto3.client('rekognition', region_name='us-east-2', 
                         aws_access_key_id=AWS_KEY_ID, 
                         aws_secret_access_key=AWS_SECRET)
+
+
+myImages = ["image1", "image2"]
+
+# Use Rekognition client to detect labels
+image1recog = recog.detect_labels(
+    Image=myImages[0], MaxLabels=1)
+
+# Print the labels
+print(image1recog['Labels'])
