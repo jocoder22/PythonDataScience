@@ -27,7 +27,7 @@ image2recog = recog.detect_labels(
 
 
 # Print the labels
-print(image2recog = recog.detect_labels(['Labels']))
+print(image2recog['Labels'])
       
       
 # Use Rekognition client to detect images
