@@ -41,3 +41,31 @@ image1recogBucket = recog.detect_labels(
 
 # Print the labels
 print(image1recogBucket['Labels'])
+
+
+
+###############################################################################
+######################## Detect words #########################################
+###############################################################################
+
+# Use Rekognition client to detect text in images
+textrecog = recog.detect_text(
+    Image={"S3Object":{
+        "Bucket": "ImageBucket",
+        "Name": "image1.jpg"
+            }
+        }, MaxLabels=6,
+           MinConfidence=95)
+
+# Create empty list of words
+words = []
+
+# Iterate over the TextDetections in the textrecog dictionary
+for text in textrecog['TextDetections']:
+  	# If TextDetection type is WORD, append it to words list
+    if text['Type'] == 'WORD':  # other type == LINE
+        # Append the detected text
+        words.append(text['DetectedText'])
+        
+# Print out the words list
+print(words)
