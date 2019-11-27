@@ -19,3 +19,13 @@ image1recog = recog.detect_labels(
 
 # Print the labels
 print(image1recog['Labels'])
+
+
+# Use Rekognition client to detect labels
+image2recog = recog.detect_labels(
+    Image=myImages[1], MaxLabels=1)
+
+
+# Print the labels
+print(image2recog = recog.detect_labels(['Labels'])
+
