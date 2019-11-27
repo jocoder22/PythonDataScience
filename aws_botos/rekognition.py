@@ -35,7 +35,8 @@ image1recogBucket = recog.detect_labels(
     Image={"S3Object":{
         "Bucket": "ImageBucket",
         "Name": "image1.jpg"
-    }}, MaxLabels=6,
+            }
+        }, MaxLabels=6,
            MinConfidence=95)
 
 # Print the labels
