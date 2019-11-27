@@ -13,7 +13,7 @@ recog = boto3.client('rekognition', region_name='us-east-2',
 
 myImages = ["image1", "image2"]
 
-# Use Rekognition client to detect labels
+# Use Rekognition client to detect images
 image1recog = recog.detect_labels(
     Image=myImages[0], MaxLabels=1)
 
@@ -29,3 +29,14 @@ image2recog = recog.detect_labels(
 # Print the labels
 print(image2recog = recog.detect_labels(['Labels']))
       
+      
+# Use Rekognition client to detect images
+image1recogBucket = recog.detect_labels(
+    Image={"S3Object":{
+        "Bucket": "ImageBucket",
+        "Name": "image1.jpg"
+    }}, MaxLabels=6,
+           MinConfidence=95)
+
+# Print the labels
+print(image1recogBucket['Labels'])
