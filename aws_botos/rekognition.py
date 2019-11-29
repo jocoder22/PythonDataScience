@@ -51,7 +51,7 @@ print(image1recogBucket['Labels'])
 # Use Rekognition client to detect text in images
 textrecog = recog.detect_text(
     Image={"S3Object":{
-        "Bucket": "ImageBucket",
+        "Bucket": BucketName,
         "Name": "image1.jpg"
             }
         }, MaxLabels=6,
