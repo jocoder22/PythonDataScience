@@ -2,7 +2,7 @@ import boto3
 
 AWS_KEY_ID = "keep off this"
 AWS_SECRET = "never used this"
-BucketName = "htmlObjects"
+BucketName = "ImageBucket"
 
 
 # Create the boto3 client for interacting SNS
@@ -33,7 +33,7 @@ print(image2recog['Labels'])
 # Use Rekognition client to detect images
 image1recogBucket = recog.detect_labels(
     Image={"S3Object":{
-        "Bucket": "ImageBucket",
+        "Bucket": BucketName,
         "Name": "image1.jpg"
             }
         }, MaxLabels=6,
