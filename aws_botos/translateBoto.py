@@ -18,9 +18,9 @@ translateMe = transL.translate_text(
     SourceLanguageCode = 'auto',
     TargetLanguageCode = 'es')
 
+
+# get the translated test
 translateMe['TranslatedText']
-
-
 
 
 # Create the boto3 client for comprehension
