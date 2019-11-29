@@ -46,8 +46,8 @@ topicList = sns.list_topics()['Topic']
 
 # Iterate over the topicList and delete selected topic using TopicArn
 for topic in topicList:
-   if "generalNews" in topic['TopicArn']:
-     sns.delete_topic(TopicArn = topic['TopicArn'])
+    if "generalNews" in topic['TopicArn']:
+        sns.delete_topic(TopicArn = topic['TopicArn'])
      
 print(sns.list_topics()['Topics'])
 
@@ -59,12 +59,14 @@ emails = ["butks@gmail.com", "monmm@yahoo.com", "yonaf@soft.com", "honye@gmail.c
 
 # subscribe members to all topics
 for topic in topicList:
-  for i, phoneNumber in enumerate(phoneNumber):
-    sns.subscribe(TopicArn = topic['TopicArn'],
+      # subscribe to sms
+    for i, phoneNumber in enumerate(phoneNumber):
+        sns.subscribe(TopicArn = topic['TopicArn'],
             Protocol = "sms", # check for list ["email, sns"]
             Endpoint = phoneNumber ) # check Endpoint = [emails[i], phonenumber] 
       
-    sns.subscribe(TopicArn = topic['TopicArn'],
+      # subscribe to email
+        sns.subscribe(TopicArn = topic['TopicArn'],
                   Protocol = "email", # check for list ["email, sns"]
                   Endpoint = emails[i]) # check Endpoint = [emails[i], phonenumber]
 
