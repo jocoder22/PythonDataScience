@@ -28,10 +28,16 @@ compreh = boto3.client('comprehend', region_name='us-east-2',
                         aws_access_key_id=AWS_KEY_ID, 
                         aws_secret_access_key=AWS_SECRET)
 
+
+# Detect the language
 outcome = compreh.detect_dominant_language(
     Text = 'son de le homine d los')
 
+# Analyse the sentiment of the word
 senti = compreh.detect_sentiment(
     Text = text,
     LanguageCode = 'es')['Sentiment']
+
+
+
 
