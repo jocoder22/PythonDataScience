@@ -3,6 +3,7 @@ import pandas as pd
 import h5py, sqlite3
 from urllib.request import urlopen
 
+sp = {'sep':'\n\n', 'end':'\n\n'}
 
 droptable = "DROP TABLE IF EXISTS WeatherData;"
 createtable = "CREATE TABLE WeatherData \
@@ -32,9 +33,7 @@ connection.close()
 
 workingdata.Date.dtype
 workingdata['Date'] = pd.to_datetime(workingdata['Date'].astype(str), format='%Y%m%d')
-workingdata.head()
-workingdata.shape
-workingdata.Date.dtype
+print(workingdata.head(), workingdata.shape, workingdata.Date.dtype, **sp)
 
 
 # Using h5py

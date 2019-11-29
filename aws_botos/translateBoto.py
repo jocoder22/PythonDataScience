@@ -5,7 +5,7 @@ AWS_SECRET = "never used this"
 BucketName = "htmlObjects"
 
 
-# Create the boto3 client for interacting SNS
+# Create the boto3 client for translation
 transL = boto3.client('translate', region_name='us-east-2', 
                         aws_access_key_id=AWS_KEY_ID, 
                         aws_secret_access_key=AWS_SECRET)
@@ -19,3 +19,19 @@ translateMe = transL.translate_text(
     TargetLanguageCode = 'es')
 
 translateMe['TranslatedText']
+
+
+
+
+# Create the boto3 client for comprehension
+compreh = boto3.client('comprehend', region_name='us-east-2', 
+                        aws_access_key_id=AWS_KEY_ID, 
+                        aws_secret_access_key=AWS_SECRET)
+
+outcome = compreh.detect_dominant_language(
+    Text = 'son de le homine d los')
+
+senti = compreh.detect_sentiment(
+    Text = text,
+    LanguageCode = 'es')['Sentiment']
+

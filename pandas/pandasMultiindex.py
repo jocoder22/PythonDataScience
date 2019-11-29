@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 from pandas import Series, DataFrame
 
+
+sp = {'sep':'\n\n', 'end':'\n\n'}
+
 multiindex = pd.MultiIndex([['AA', 'BB'], ['Male', 'Female'],
                             ['Youth', 'Old']],
                            [[0, 0, 0, 0, 1, 1, 1, 1],
@@ -25,18 +28,24 @@ ser10.loc['AA', :, :]
 
 # multiindex dataframe;
 data = DataFrame(np.random.randn(8, 3), index=multiindex,
+              #    index = ["bgroup", "sex", "Agecat"],
                  columns=['Age', 'Weight', 'Height'])
 
-data.loc['AA']
-data.loc[('AA', 'Female')]
-data.loc[('AA', 'Female', 'Old')]
+print(data.index, data, data.loc['AA'],
+data.loc[('AA', 'Female')],
+data.loc[('AA', 'Female', 'Old')], **sp)
 
 
 # Using slicer;
-data.loc[('AA', slice(None), 'Old')]
-data.loc[('AA', slice(None), 'Old'), :]
-data.loc[('AA', slice(None), 'Old'), 'Age']
-data.loc[('AA', slice(None, 'Male'), 'Old')]
-data.loc[('AA', slice(None, 'Male'), 'Old'), 'Age']
-data.loc[(slice(None), slice(None), 'Old'), 'Age']
-data.loc[(slice(None, 'BB'), slice(None, 'Male'), 'Old'), 'Age']
+print(
+data.loc[('AA', slice(None), 'Old')],
+data.loc[('AA', slice(None), 'Old'), :],
+data.loc[('AA', slice(None), 'Old'), 'Age'],
+data.loc[('AA', slice(None, 'Male'), 'Old')],
+data.loc[('AA', slice(None, 'Male'), 'Old'), 'Age'],
+data.loc[(slice(None), slice(None), 'Old'), 'Age'],
+data.loc[(slice(None, 'BB'), slice(None, 'Male'), 'Old'), 'Age'], **sp)
+
+
+
+print(data.loc['AA']['Age'].sum)
