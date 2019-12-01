@@ -67,5 +67,6 @@ for text in textrecog['TextDetections']:
         # Append the detected text
         words.append(text['DetectedText'])
         
+        
 # Print out the words list
 print(words)
