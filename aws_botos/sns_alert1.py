@@ -91,4 +91,4 @@ alerts = sns.list_subscriptions_by_topic(
   TopicArn=health_alerts_arn)['Subscriptions']
 
 # Print the subscriptions
-print(alerts)
+print(alerts, **sp)
