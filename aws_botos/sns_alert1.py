@@ -4,6 +4,11 @@ AWS_KEY_ID = "keep off this"
 AWS_SECRET = "never used this"
 BucketName = "htmlObjects"
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+        
+
 
 # Create the boto3 client for interacting SNS
 sns = boto3.client('sns', region_name='us-east-2', 
