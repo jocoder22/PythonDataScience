@@ -92,3 +92,4 @@ alerts = sns.list_subscriptions_by_topic(
 
 # Print the subscriptions
 print(alerts, **sp)
+
