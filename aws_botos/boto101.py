@@ -7,7 +7,8 @@ AWS_SECRET = "never used this"
 def print2(*args):
     for arg in args:
         print(arg, end='\n\n')
-        
+  
+sp = {"sep":"\n\n", "end":"\n\n"}      
 
 # Create the boto3 client for interacting with S3 and SNS
 s3 = boto3.client('s3', region_name='us-east-2', 
@@ -25,9 +26,8 @@ nyTopics = sns.list_topics()
 
 # Iterate over Buckets from .list_buckets() response
 for bucket in myBuckets['Buckets']:
-  
   	# Print the Name for each bucket
-    print(bucket['Name'])
+    print(bucket['Name'], **sp)
 
 
 
@@ -46,7 +46,7 @@ bucketList = s3.list_buckets()
 
 # Print each Buckets Name
 for bucket in bucketList['Buckets']:
-    print(bucket['Name'])
+    print(bucket['Name'], **sp)
     
     
 # Delete all the buckets with 'bucketStaging'
