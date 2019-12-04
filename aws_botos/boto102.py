@@ -15,7 +15,7 @@ s3 = boto3.client('s3', region_name='us-east-2',
                          aws_secret_access_key=AWS_SECRET)
 
 
-
+# Upload file to the bucket
  s3.upload_file(Filename="image1.jpg", 
             # Set the bucket name
             Bucket='htmlObjects', Key="image1.jpg",
@@ -24,4 +24,4 @@ s3 = boto3.client('s3', region_name='us-east-2',
                 # Set proper content type
                 'ContentType':'jpg',
                 # Set proper ACL
-                'ACL': 'public-read'})   
+                'ACL': 'public-read'})
