@@ -16,4 +16,12 @@ s3 = boto3.client('s3', region_name='us-east-2',
 
 
 
-    
+ s3.upload_file(Filename="image1.jpg", 
+            # Set the bucket name
+            Bucket='htmlObjects', Key="image1.jpg",
+            # Configure uploaded file
+            ExtraArgs = {
+                # Set proper content type
+                'ContentType':'jpg',
+                # Set proper ACL
+                'ACL': 'public-read'})   
