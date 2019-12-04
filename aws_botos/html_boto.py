@@ -3,6 +3,11 @@ import boto3
 
 import os
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+        
+
 print(os.getcwd())
 path = r"D:\PythonDataScience\aws_botos\html"
 os.chdir(path)
