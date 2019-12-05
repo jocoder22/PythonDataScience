@@ -8,6 +8,8 @@ def print2(*args):
     for arg in args:
         print(arg, end='\n\n')
 
+sp = {"sep":"\n\n", "end":"\n\n"}
+
 
 # Create the boto3 client for interacting SNS
 sns = boto3.client('sns', region_name='us-east-2', 
