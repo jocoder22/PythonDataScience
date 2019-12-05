@@ -16,7 +16,7 @@ os.chdir(path)
 with open("D:\TimerSeriesAnalysis\AMZN.csv") as file:
     df = pd.read_csv(file)
 
-print(df.head())
+print(df.head(), **sp)
 
 # Generate an HTML table with no border and selected columns
 df.to_html('./people_No_border.html', render_links=True,
@@ -63,7 +63,7 @@ for i, file in enumerate(filelist):
     # generate public url
     publicUrl = f"http://htmlObjects.s3.amazonaws.com/{keylist[i]}"
     publicUrlList.append(publicUrl)
-    print(publicUrl)
+    print(publicUrl, **sp)
     
     # add dataset to df
     if i > 0:
