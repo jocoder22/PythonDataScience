@@ -9,6 +9,7 @@ def print2(*args):
     for arg in args:
         print(arg, end='\n\n')
 
+sp = {"sep":"\n\n", "end":"\n\n"}
 
 # Create the boto3 client for interacting with S3 and SNS
 s3 = boto3.client('s3', region_name='us-east-2', 
