@@ -4,6 +4,11 @@ AWS_KEY_ID = "keep off this"
 AWS_SECRET = "never used this"
 BucketName = "htmlObjects"
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+        
+        
 
 # Create the boto3 client for translation
 transL = boto3.client('translate', region_name='us-east-2', 
