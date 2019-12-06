@@ -8,7 +8,9 @@ def print2(*args):
     for arg in args:
         print(arg, end='\n\n')
         
-        
+ 
+sp = {"sep":"\n\n", "end":"\n\n"}
+       
 
 # Create the boto3 client for translation
 transL = boto3.client('translate', region_name='us-east-2', 
