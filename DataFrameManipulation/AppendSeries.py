@@ -76,4 +76,4 @@ for medal in medal_types:
 medals = pd.concat(medals, axis='columns')
 
 # Print medals
-print(medals)
+print(medals, **sp)
