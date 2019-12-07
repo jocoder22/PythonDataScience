@@ -32,7 +32,7 @@ quarter1 = jan_units.append(feb_units).append(mar_units)
 print(quarter1.loc['jan 27, 2015':'feb 2, 2015'])
 
 # Print the second slice from quarter1
-print(quarter1.loc['feb 26, 2015':'mar 7, 2015'])
+print(quarter1.loc['feb 26, 2015':'mar 7, 2015'], **sp)
 
 # Compute & print total sales in quarter1
 print(quarter1.sum())
