@@ -1,6 +1,12 @@
 ############ appending series
 import pandas as pd
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
+
+
 # Load 'sales-jan-2015.csv' into a DataFrame: jan
 jan = pd.read_csv('sales-jan-2015.csv', parse_dates=True, index_col='Date')
 
