@@ -4,6 +4,10 @@ import numpy as np
 from numpy.random import randn
 import matplotlib.pyplot as plt
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
 
 os.chdir("C:/Users/okigboo/Documents/Code/Code/Code/Section 1")
 pyramids_data = pd.read_csv("PopPyramids.csv",
