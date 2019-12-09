@@ -8,6 +8,7 @@ def print2(*args):
     for arg in args:
         print(arg, end='\n\n')
   
+sp = {"sep":"\n\n", "end":"\n\n"} 
 
 os.chdir("C:/Users/Jose/Documents/PythonDataScience1/Code/Code/Section 1")
 pyramids_data = pd.read_csv("PopPyramids.csv")
