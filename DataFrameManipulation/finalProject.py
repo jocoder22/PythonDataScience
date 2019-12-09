@@ -24,7 +24,7 @@ zipp = ZipFile(BytesIO(response.content))
 print(zipp.namelist())
 
 mylist = [filename for filename in zipp.namelist()]
-print2(mylist)
+print(mylist)
 mymedal2 = pd.read_csv(zipp.open(mylist[8]), sep='\t')
 # mymedal2 = pd.read_csv(zipp.open(file_path), sep='\t')
 
