@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 from sklearn import datasets
 plt.style.use('ggplot')
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
 
 input_data = np.array([1, 2, 3])
 weights = np.array([0, 2, 1])
