@@ -8,6 +8,10 @@ import folium
 from shapely.geometry import Point
 from flask import Flask
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
 
 path = r'C:\Users\Jose\Desktop\PythonDataScience\geospatialAnalysis'
 os.chdir(path)
