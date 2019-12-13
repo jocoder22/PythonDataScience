@@ -14,7 +14,8 @@ def print2(*args):
   
 sp = {"sep":"\n\n", "end":"\n\n"} 
 
-path = r'C:\Users\Jose\Desktop\PythonDataScience\geospatialAnalysis'
+# path = r'C:\Users\Jose\Desktop\PythonDataScience\geospatialAnalysis'
+path = r'D:\PythonDataScience\geospatialAnalysis'
 os.chdir(path)
 sp = '\n\n'
 

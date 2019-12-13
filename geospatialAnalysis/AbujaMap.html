@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_2429c95a192d4f01ad8795b62be5caa7 {
+                #map_0ad11cd1c1e34eb29b3226c8676d8265 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -35,13 +35,13 @@
 </head>
 <body>    
     
-            <div class="folium-map" id="map_2429c95a192d4f01ad8795b62be5caa7" ></div>
+            <div class="folium-map" id="map_0ad11cd1c1e34eb29b3226c8676d8265" ></div>
         
 </body>
 <script>    
     
-            var map_2429c95a192d4f01ad8795b62be5caa7 = L.map(
-                "map_2429c95a192d4f01ad8795b62be5caa7",
+            var map_0ad11cd1c1e34eb29b3226c8676d8265 = L.map(
+                "map_0ad11cd1c1e34eb29b3226c8676d8265",
                 {
                     center: [9.085279007754195, 7.53138214293233],
                     crs: L.CRS.EPSG3857,
@@ -55,20 +55,20 @@
 
         
     
-            var tile_layer_bcf9d1af13024c69b81849b29b12dd2e = L.tileLayer(
+            var tile_layer_327b214a94bd48e7b41fd4a0d0798c1e = L.tileLayer(
                 "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg",
                 {"attribution": "Map tiles by \u003ca href=\"http://stamen.com\"\u003eStamen Design\u003c/a\u003e, under \u003ca href=\"http://creativecommons.org/licenses/by/3.0\"\u003eCC BY 3.0\u003c/a\u003e. Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://creativecommons.org/licenses/by-sa/3.0\"\u003eCC BY SA\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_2429c95a192d4f01ad8795b62be5caa7);
+            ).addTo(map_0ad11cd1c1e34eb29b3226c8676d8265);
         
     
-                var lat_lng_popup_96bac0bea340448ea901c4b0cabda0f4 = L.popup();
+                var lat_lng_popup_e4294572e88d4440821f411b126bf649 = L.popup();
                 function latLngPop(e) {
-                    lat_lng_popup_96bac0bea340448ea901c4b0cabda0f4
+                    lat_lng_popup_e4294572e88d4440821f411b126bf649
                         .setLatLng(e.latlng)
                         .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
                                     "<br>Longitude: " + e.latlng.lng.toFixed(4))
-                        .openOn(map_2429c95a192d4f01ad8795b62be5caa7);
+                        .openOn(map_0ad11cd1c1e34eb29b3226c8676d8265);
                     }
-                map_2429c95a192d4f01ad8795b62be5caa7.on('click', latLngPop);
+                map_0ad11cd1c1e34eb29b3226c8676d8265.on('click', latLngPop);
             
 </script>
