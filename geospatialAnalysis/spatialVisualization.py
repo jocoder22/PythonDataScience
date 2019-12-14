@@ -11,9 +11,9 @@ def print2(*args):
 sp = {"sep":"\n\n", "end":"\n\n"} 
 
 
-print(gpd.datasets.available)
+print(gpd.datasets.available, **sp)
 world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-print(world.head(), world.shape, world.columns, sep=sp, end=sp)
+print(world.head(), world.shape, world.columns, **sp)
 
 # Set legend styles
 lgnd_kwds = {'title': 'World Map', 'fontsize': 'small',
@@ -52,7 +52,7 @@ plt.show()
 
 
 africa = world.loc[world.continent=='Africa']
-print(africa.loc[:,['pop_est', 'name']].sort_values('pop_est', ascending=False))
+print(africa.loc[:,['pop_est', 'name']].sort_values('pop_est', ascending=False), **sp)
 
 # Visualize one country: Nigeria
 africa.loc[africa.name=='Nigeria'].plot()
