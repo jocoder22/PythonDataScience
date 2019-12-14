@@ -8,8 +8,8 @@ def print2(*args):
     for arg in args:
         print(arg, end='\n\n')
   
+sp = {"sep":"\n\n", "end":"\n\n"} 
 
-sp = '\n\n'
 
 print(gpd.datasets.available)
 world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
