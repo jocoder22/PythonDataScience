@@ -3,6 +3,12 @@
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import pandas as pd
+
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
+
 sp = '\n\n'
 
 print(gpd.datasets.available)
