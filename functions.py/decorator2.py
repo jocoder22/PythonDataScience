@@ -3,6 +3,11 @@
 
 import time
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
+
 
 def mytimer(func):
     """Calculate time in seconds to run a program
