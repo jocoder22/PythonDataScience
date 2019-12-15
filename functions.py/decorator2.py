@@ -4,7 +4,6 @@
 import time
 
 
-import time
 def mytimer(func):
     """Calculate time in seconds to run a program
 
