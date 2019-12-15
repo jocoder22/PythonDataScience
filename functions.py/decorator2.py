@@ -108,7 +108,7 @@ def longmult2(a, b, c, **kwargs):
 
 
 longmult2(10, 4, 5)
-print('starting second call')
+print('starting second call', **sp)
 longmult2(10, 4, 5, d=10)
 print('starting third call with new args')
 longmult2(4, 10, 5, d=10)
