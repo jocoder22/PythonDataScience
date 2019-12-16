@@ -17,11 +17,16 @@ print(os.walk(path), **sp) # this create a generator of tuple (dirpath, dirname,
 
 for index, (dirpath, dirname, filenames) in enumerate(os.walk(path)):
     print(index, (dirpath, dirname, filenames), end='\n\n')
- 
 
+
+mylist = []
 n = 1   
 for index, (dirpath, dirname, filenames) in enumerate(os.walk(path)):
     for filename in filenames:
-        print(index, n, os.path.join(dirpath,filename), end='\n\n')
+        # fullpath = '/'.join([dirpath, filename])
+        fullpath = os.path.join(dirpath, filename)
+        print(index, n, fullpath, end='\n\n')
+        mylist.append(fullpath)
         n += 1
 
+# print(mylist)
