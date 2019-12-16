@@ -17,5 +17,11 @@ print(os.walk(path), **sp) # this create a generator of tuple (dirpath, dirname,
 
 for index, (dirpath, dirname, filenames) in enumerate(os.walk(path)):
     print(index, (dirpath, dirname, filenames), end='\n\n')
-    
+ 
+
+n = 1   
+for index, (dirpath, dirname, filenames) in enumerate(os.walk(path)):
+    for filename in filenames:
+        print(index, n, os.path.join(dirpath,filename), end='\n\n')
+        n += 1
 
