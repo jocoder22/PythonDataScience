@@ -8,6 +8,11 @@ import cv2
 from skimage import io, exposure
 from skimage.feature import hog
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
+
 path = r'C:\Users\Jose\Desktop\Holder'
 os.chdir(path)
 sp = '\n\n'
