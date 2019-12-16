@@ -17,10 +17,11 @@ sp = {"sep":"\n\n", "end":"\n\n"}
 
 # url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEc92kYxyNsx6ZxWYF6KJJz-QZWUj0jXBleB2tEg6yBekggb28'
 url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSESxr13ODvh5lfb1TxT8LgDbzWP44sD5n1z_Nf-697su_jona3zw'
+url2 = "https://avatars2.githubusercontent.com/u/31042629?s=400&v=4"
 
 # load image
 # imgg = cv2.imread('car22.jpg') 
-imgg = io.imread(url)
+imgg = io.imread(url2)
 
 # converting to gray scale
 Img_gray = cv2.cvtColor(imgg, cv2.COLOR_BGR2GRAY)
