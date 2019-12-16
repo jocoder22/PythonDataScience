@@ -13,3 +13,9 @@ path = r"D:\PythonDataScience"
 os.chdir(path)
 
 print(os.getcwd(), os.listdir(), **sp)
+print(os.walk(path), **sp) # this create a generator of tuple (dirpath, dirname, filenames)
+
+for index, (dirpath, dirname, filenames) in enumerate(os.walk(path)):
+    print(index, (dirpath, dirname, filenames), end='\n\n')
+    
+
