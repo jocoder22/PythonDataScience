@@ -14,16 +14,13 @@ def print2(*args):
   
 sp = {"sep":"\n\n", "end":"\n\n"} 
 
-path = r'C:\Users\Jose\Desktop\Holder'
-os.chdir(path)
-sp = '\n\n'
 
 # url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEc92kYxyNsx6ZxWYF6KJJz-QZWUj0jXBleB2tEg6yBekggb28'
-# url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSESxr13ODvh5lfb1TxT8LgDbzWP44sD5n1z_Nf-697su_jona3zw'
+url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSESxr13ODvh5lfb1TxT8LgDbzWP44sD5n1z_Nf-697su_jona3zw'
 
 # load image
-imgg = cv2.imread('car22.jpg') 
-# imgg = io.imread(url)
+# imgg = cv2.imread('car22.jpg') 
+imgg = io.imread(url)
 
 # converting to gray scale
 Img_gray = cv2.cvtColor(imgg, cv2.COLOR_BGR2GRAY)
