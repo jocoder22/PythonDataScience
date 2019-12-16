@@ -35,7 +35,7 @@ img_c = cv2.cornerHarris(img, 3, 5, 0.1)
 img_dilate = cv2.dilate(img_c, np.ones((5, 5), np.uint8), iterations=1)
 
 
-print(img_dilate.max(), end=sp)
+print(img_dilate.max(), **sp)
 Img_gray2 = imgg.copy()
 Img_gray2[img_dilate > 0.02 * img_dilate.max()] = [255, 0, 0]
 
