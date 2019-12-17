@@ -29,4 +29,4 @@ for index, (dirpath, dirname, filenames) in enumerate(os.walk(path)):
         mylist.append(fullpath)
         n += 1
 
-# print(mylist)
+print(mylist, **sp)
