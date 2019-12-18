@@ -5,6 +5,7 @@ def print2(*args):
     for arg in args:
         print(arg, end='\n\n')
   
+sp = {"sep":"\n\n", "end":"\n\n"}
 
 gapminder = pd.read_csv('gapminder.csv')
 g1800s = pd.read_csv('g1800s')
