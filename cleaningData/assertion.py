@@ -1,6 +1,10 @@
 import numpy as np 
 import pandas as pd 
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
 
 gapminder = pd.read_csv('gapminder.csv')
 g1800s = pd.read_csv('g1800s')
