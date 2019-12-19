@@ -30,8 +30,10 @@ if set3 > set4: # set3.issuperset(set4)
     print("Set3 is superset of Set4", **params) 
 elif set3 < set4: # set3.issubset(set4) 
     print("Set3 is subset of Set4", **params) 
-else : # set3 == set4 
+elif set3 == set4: # set3.issubset(set4) 
     print("Set3 is same as Set4", **params) 
+else : # set3 == set4 
+    print("Set3 is not the same as Set4", **params) 
   
 
 
