@@ -8,12 +8,12 @@ def print2(*args):
         print(obj, end="\n\n")
 
 
-
 def describe2(x):
     print2(x.head(), x.shape, x.info())
 
 
 params = {"sp":"\n\n", "end":"\n\n"}
+
 # charge working directory
 path = f"D:\PythonDataScience\importingData\localData"
 os.chdir(path)
@@ -25,14 +25,14 @@ print(data.head())
 # select rows and columns
 names = ["AMZN", "MSFT", "AGG", "VNQ"]
 data = pd.read_excel("portfolioxx.xlsx", nrows=1000, skiprows=100, usecols="A,C,E:F", names=names)
-print(data.head())
+print(data.head(), **params)
 print2(data)
 
 
 # import multiple sheets, imported as defaultdict
 data = pd.read_excel("portfolioSheet.xlsx",  sheet_name=None)
 for sheetname, obj in data.items():
-    print(sheetname, type(obj), end=sp)
+    print(sheetname, type(obj), **params)
 
 
 # append multiple columns
