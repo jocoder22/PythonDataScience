@@ -3,9 +3,12 @@ params = {"sep":"\n\n", "end":"\n\n"}
 
 # Creating two sets 
 set1 = set(list('kmangokileuyrt')) 
-set2 = set(list('Mango banana Usuer pretend score cure tap tip toppit going down reef tree').split()) 
+wordlist = 'Mango banana Usuer pretend score cure tap tip toppit going down reef tree'.split() 
+set2 = set(list('Mango'))
 set3 = set()
 set4 = set()
+
+print(set1, set2, set3, set4, wordlist, **params)
 
 # Adding elements to set3 
 for i in range(1, 10): 
