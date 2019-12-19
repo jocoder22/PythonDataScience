@@ -26,11 +26,11 @@ print("Intersection of Set3 & Set4: Set6 = ", set6)
   
 # Checking relation between set3 and set4 
 if set3 > set4: # set3.issuperset(set4) 
-    print("Set3 is superset of Set4") 
+    print("Set3 is superset of Set4", **params) 
 elif set3 < set4: # set3.issubset(set4) 
-    print("Set3 is subset of Set4") 
+    print("Set3 is subset of Set4", **params) 
 else : # set3 == set4 
-    print("Set3 is same as Set4") 
+    print("Set3 is same as Set4", **params) 
   
 
 
