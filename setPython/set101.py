@@ -6,21 +6,22 @@ set1 = set(list('kmangokileuyrt'))
 set2 = set(list('Mango banana Usuer pretend score cure tap tip toppit going down reef tree').split()) 
 set3 = set()
 set4 = set()
-# Adding elements to set1 
+
+# Adding elements to set3 
 for i in range(1, 10): 
     set3.add(i) 
   
-# Adding elements to set2 
+# Adding elements to set4 
 for i in range(34, 56): 
     set4.add(i) 
 
   
-# Union of set1 and set2 
-set5 = set3 | set4 # set1.union(set2) 
+# Union of set3 and set4 
+set5 = set3 | set4 # set3.union(set4) 
 print("Union of Set3 & Set4: Set5 = ", set5, **params) 
   
-# Intersection of set1 and set2 
-set6 = set4 & set3 # set1.intersection(set2) 
+# Intersection of set3 and set4 
+set6 = set4 & set3 # set3.intersection(set4) 
 print("Intersection of Set3 & Set4: Set6 = ", set6, **params) 
 
   
