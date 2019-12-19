@@ -20,7 +20,7 @@ os.chdir(path)
 
 # load the excel file
 data = pd.read_excel("portfolioxx.xlsx")
-print(data.head())
+print(data.head(), **params)
 
 # select rows and columns
 names = ["AMZN", "MSFT", "AGG", "VNQ"]
