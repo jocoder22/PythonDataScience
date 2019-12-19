@@ -17,11 +17,11 @@ for i in range(34, 56):
   
 # Union of set1 and set2 
 set5 = set3 | set4 # set1.union(set2) 
-print("Union of Set3 & Set4: Set5 = ", set5) 
+print("Union of Set3 & Set4: Set5 = ", set5, **params) 
   
 # Intersection of set1 and set2 
 set6 = set4 & set3 # set1.intersection(set2) 
-print("Intersection of Set3 & Set4: Set6 = ", set6) 
+print("Intersection of Set3 & Set4: Set6 = ", set6, **params) 
 
   
 # Checking relation between set3 and set4 
