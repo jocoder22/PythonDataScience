@@ -6,7 +6,7 @@ def print2(*args):
         print(arg, end='\n\n')
         
        
-params = {"sp":"\n\n", "end":"\n\n"}
+params = {"sep":"\n\n", "end":"\n\n"}
 
 
 with open('myfile.json', 'r') as json_file:

@@ -12,7 +12,7 @@ def describe2(x):
     print2(x.head(), x.shape, x.info())
 
 
-params = {"sp":"\n\n", "end":"\n\n"}
+params = {"sep":"\n\n", "end":"\n\n"}
 
 # charge working directory
 path = f"D:\PythonDataScience\importingData\localData"
