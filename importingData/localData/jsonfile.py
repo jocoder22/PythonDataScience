@@ -8,6 +8,7 @@ def print2(*args):
        
 params = {"sp":"\n\n", "end":"\n\n"}
 
+
 with open('myfile.json', 'r') as json_file:
     jsonData = json.load(json_file)
 
