@@ -2,7 +2,7 @@
 params = {"sep":"\n\n", "end":"\n\n"}
 
 # Creating two sets 
-set1 = set(list('kmangokileuyrt')) 
+set1 = set(list('kmangokileuyrspt')) 
 wordlist = 'Mango banana Usuer pretend score cure tap tip toppit going down reef tree'.split() 
 set2 = set(list('Mango'))
 set3 = set()
