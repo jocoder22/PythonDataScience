@@ -8,15 +8,19 @@ set2 = set(list('Mango'))
 set3 = set()
 set4 = set()
 
+
 print(set1, set2, set3, set4, wordlist, **params)
+
 
 # Adding elements to set3 
 for i in range(1, 25): 
     set3.add(i) 
+ 
   
 # Adding elements to set4 
 for i in range(18, 36): 
     set4.add(i) 
+
 
 print(set1, set2, set3, set4, wordlist, **params)
  
