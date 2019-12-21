@@ -11,21 +11,22 @@ set4 = set()
 print(set1, set2, set3, set4, wordlist, **params)
 
 # Adding elements to set3 
-for i in range(1, 10): 
+for i in range(1, 25): 
     set3.add(i) 
   
 # Adding elements to set4 
-for i in range(34, 56): 
+for i in range(18, 36): 
     set4.add(i) 
 
-  
+print(set1, set2, set3, set4, wordlist, **params)
+ 
 # Union of set3 and set4 
 set5 = set3 | set4 # set3.union(set4) 
-print("Union of Set3 & Set4: Set5 = ", set5, **params) 
+print("Union of Set3 & Set4: Set5 = ", set5) 
   
 # Intersection of set3 and set4 
 set6 = set4 & set3 # set3.intersection(set4) 
-print("Intersection of Set3 & Set4: Set6 = ", set6, **params) 
+print("Intersection of Set3 & Set4: Set6 = ", set6) 
 
   
 # Checking relation between set3 and set4 
@@ -40,8 +41,8 @@ else : # set3 == set4
   
 
 
-for word in set2:
-    set7 = set(list(word))
-    if set5 < set6: # set5.issubset(set6) 
+for word in wordlist:
+    set7 = set(list((word.lower())))
+    if set7 < set1: # set7.issubset(set1) 
         print(f"{word} can be made from the letter", **params)
     
