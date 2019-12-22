@@ -6,19 +6,26 @@ from datetime import date
 import pandas as pd
 
 mydir = r"D:\PythonDataScience\ExportSave"
+
 with open(r'D:\PythonDataScience\ensemble\lifeExp.csv') as f:
     mydata = pd.read_csv(f)
     
 # save pickle file
-# method 1
-with open(r'D:\PythonDataScience\ExportSave\lifeExp.pkl', 'wb') as ppk:
+with open(os.path.join(mydir, "lifeExp.pkl"), 'wb') as ppk:
     pickle.dump(mydata, ppk)
     
-# method 2
-filename = f'D:\PythonDataScience\ExportSave\picke_{date.today()}.pkl'
-pickle.dump(mydata, open(filename, 'wb'))
+# loading the pickle file
+with open(os.path.join(mydir, "lifeExp.pkl"), 'rb') as ppk:
+    mydatanew = pickle.load(ppk)
 
+print(mydatanew.head())
 
+# Using pandas methods
+# save pickle
+pandas_save = pd.to_pickle(mydata, os.path.join(mydir, "lifeExp2.pkl"))
+# import pickle file
+pandas_pickle = pd.read_pickle(os.path.join(mydir, "lifeExp2.pkl"))
+print(pandas_pickle.head())
 
 
 filespath = os.path.join(mydir, "*.pkl")
