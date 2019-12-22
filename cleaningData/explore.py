@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # Import pandas
+import re 
 import pandas as pd
 import matplotlib.pyplot as plt
 
