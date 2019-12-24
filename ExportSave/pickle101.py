@@ -38,14 +38,14 @@ print2(pandas_pickle.head())
 
 filespath = os.path.join(mydir, "*.pkl")
 filelist1 = glob(filespath, recursive=True)
-print(filelist1, filespath)
+print2(filelist1, filespath)
 
 for file in filelist1:
     if os.path.exists(file):
         sleep(4)
         os.remove(file)
     else:
-        print("The file does not exist")
+        print2("The file does not exist")
         
         
 
