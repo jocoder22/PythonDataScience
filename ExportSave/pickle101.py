@@ -38,3 +38,6 @@ for file in filelist1:
         os.remove(file)
     else:
         print("The file does not exist")
+        
+        
+
