@@ -10,6 +10,8 @@ def print2(*args):
         print(arg, end='\n\n')
   
 
+sp = {"sep":"\n\n", "end":"\n\n"} 
+
 
 mydir = r"D:\PythonDataScience\ExportSave"
 
@@ -24,14 +26,14 @@ with open(os.path.join(mydir, "lifeExp.pkl"), 'wb') as ppk:
 with open(os.path.join(mydir, "lifeExp.pkl"), 'rb') as ppk:
     mydatanew = pickle.load(ppk)
 
-print(mydatanew.head())
+print2(mydatanew.head())
 
 # Using pandas methods
 # save pickle
 pandas_save = pd.to_pickle(mydata, os.path.join(mydir, "lifeExp2.pkl"))
 # import pickle file
 pandas_pickle = pd.read_pickle(os.path.join(mydir, "lifeExp2.pkl"))
-print(pandas_pickle.head())
+print2(pandas_pickle.head())
 
 
 filespath = os.path.join(mydir, "*.pkl")
