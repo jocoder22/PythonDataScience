@@ -5,6 +5,12 @@ from time import sleep
 from datetime import date
 import pandas as pd
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
+
+
 mydir = r"D:\PythonDataScience\ExportSave"
 
 with open(r'D:\PythonDataScience\ensemble\lifeExp.csv') as f:
