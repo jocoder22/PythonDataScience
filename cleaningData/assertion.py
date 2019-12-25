@@ -11,6 +11,7 @@ with open(r"D:\Wqu_Datascience\gapminder.csv") as file1:
     gapminder = pd.read_csv(file1)
     # g1800s = pd.read_csv('g1800s')
 
+
 print2(gapminder.columns)
 # Convert the year column to numeric
 gapminder.year = pd.to_numeric(gapminder['Year'])
@@ -25,10 +26,17 @@ assert gapminder.year.dtypes == np.int64
 assert gapminder.life.dtypes == np.float64
 
 # Assert that country does not contain any missing values
-assert pd.notnull(gapminder.country).all()
+assert pd.notnull(gapminder.Country).all()
 
 # Assert that year does not contain any missing values
-assert pd.notnull(gapminder.year).all()
+assert pd.notnull(gapminder.Year).all()
+
+
+
+with open(r"D:\PythonDataScience\pandas\people.csv") as file2:
+    people = pd.read_csv(file2)
+    
+print2(people.head, people.columns)
 
 
 # Check whether the first column is 'Life expectancy'
