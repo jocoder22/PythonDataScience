@@ -7,20 +7,22 @@ def print2(*args):
   
 sp = {"sep":"\n\n", "end":"\n\n"}
 
-gapminder = pd.read_csv('gapminder.csv')
-g1800s = pd.read_csv('g1800s')
+with open(r"D:\Wqu_Datascience\gapminder.csv") as file1:
+    gapminder = pd.read_csv(file1)
+    # g1800s = pd.read_csv('g1800s')
 
+print2(gapminder.columns)
 # Convert the year column to numeric
-gapminder.year = pd.to_numeric(gapminder.year)
+gapminder.year = pd.to_numeric(gapminder['Year'])
 
 # Test if country is of type object
-assert gapminder.country.dtypes == np.object
+assert gapminder.Country.dtypes == np.object
 
 # Test if year is of type int64
 assert gapminder.year.dtypes == np.int64
 
 # Test if life_expectancy is of type float64
-assert gapminder.life_expectancy.dtypes == np.float64
+assert gapminder.life.dtypes == np.float64
 
 # Assert that country does not contain any missing values
 assert pd.notnull(gapminder.country).all()

@@ -35,7 +35,6 @@ pandas_save = pd.to_pickle(mydata, os.path.join(mydir, "lifeExp2.pkl"))
 pandas_pickle = pd.read_pickle(os.path.join(mydir, "lifeExp2.pkl"))
 print2(pandas_pickle.head())
 
-
 filespath = os.path.join(mydir, "*.pkl")
 filelist1 = glob(filespath, recursive=True)
 print2(filelist1, filespath)
