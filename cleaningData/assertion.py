@@ -39,11 +39,11 @@ with open(r"D:\PythonDataScience\pandas\people.csv") as file2:
 print2(people.head, people.columns)
 
 
-# Check whether the first column is 'Life expectancy'
-assert g1800s.columns[0] == 'Life expectancy'
+# # Check whether the first column is 'Life expectancy'
+# assert g1800s.columns[0] == 'Life expectancy'
 
-# Check whether the values in the row are valid
-assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
+# # Check whether the values in the row are valid
+# assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
 
-# Check that there is only one instance of each country
-assert g1800s['Life expectancy'].value_counts()[0] == 1
+# # Check that there is only one instance of each country
+# assert g1800s['Life expectancy'].value_counts()[0] == 1
