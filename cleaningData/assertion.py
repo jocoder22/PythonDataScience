@@ -15,7 +15,7 @@ with open(r"D:\Wqu_Datascience\gapminder.csv") as file1:
 print2(gapminder.columns)
 # Convert the year column to numeric
 gapminder['year'] = pd.to_numeric(gapminder['Year'])
-print2(gapminder.columns)
+print2(gapminder.columns, gapminder.info(), gapminder.head())
 
 # Test if country is of type object
 assert gapminder.Country.dtypes == np.object
