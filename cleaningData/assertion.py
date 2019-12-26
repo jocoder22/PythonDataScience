@@ -14,7 +14,7 @@ with open(r"D:\Wqu_Datascience\gapminder.csv") as file1:
 
 print2(gapminder.columns)
 # Convert the year column to numeric
-gapminder.year = pd.to_numeric(gapminder['Year'])
+gapminder['year'] = pd.to_numeric(gapminder['Year'])
 
 # Test if country is of type object
 assert gapminder.Country.dtypes == np.object
@@ -36,7 +36,7 @@ assert pd.notnull(gapminder.Year).all()
 with open(r"D:\PythonDataScience\pandas\people.csv") as file2:
     people = pd.read_csv(file2)
     
-print2(people.head, people.columns)
+print2(people.head, people.columns, people.info())
 
 
 # # Check whether the first column is 'Life expectancy'
