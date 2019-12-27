@@ -16,7 +16,7 @@ uber1, uber2, uber3 = pd.read_csv(['uber1.csv', 'uber2.csv', 'uber3.csv'])
 row_concat = pd.concat([uber1, uber2, uber3])
 
 # Print the shape of row_concat
-print(row_concat.shape)
+print(row_concat.shape, **sp)
 
 # Print the head of row_concat
 print(row_concat.head())
