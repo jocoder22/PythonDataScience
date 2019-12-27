@@ -7,6 +7,8 @@ def print2(*args):
   
 sp = {"sep":"\n\n", "end":"\n\n"}
 
+
+
 with open(r"D:\Wqu_Datascience\gapminder.csv") as file1:
     gapminder = pd.read_csv(file1, index_col=0)
     # g1800s = pd.read_csv('g1800s')
