@@ -37,7 +37,7 @@ assert pd.notnull(gapminder.Year).all()
 with open(r"D:\PythonDataScience\pandas\people.csv") as file2:
     people = pd.read_csv(file2)
     
-print2(people.head, people.columns, people.info())
+print2(people.head, people.columns, people.info(), people.tail())
 
 
 # # Check whether the first column is 'Life expectancy'
@@ -48,3 +48,6 @@ print2(people.head, people.columns, people.info())
 
 # # Check that there is only one instance of each country
 # assert g1800s['Life expectancy'].value_counts()[0] == 1
+
+from pyspark import SparkContext as sc 
+y = sc.textFile(name="read.md")
