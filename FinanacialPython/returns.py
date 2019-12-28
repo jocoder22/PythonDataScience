@@ -56,6 +56,8 @@ import pip
 df = pd.read_csv("D:\PythonDataScience\listt.txt", delim_whitespace=True, 
                  skiprows=2, names=['Modules', 'Version'])
                 # can use delimiter=r"\s+"
+df2 = pd.read_csv("D:\PythonDataScience\listt2.txt", delimiter="==", 
+                 names=['Modules', 'Version'])
 
 mylist = list(df['Modules'])
-print(mylist, df.head(), **sp)
+print(mylist, df2.head(), **sp)
