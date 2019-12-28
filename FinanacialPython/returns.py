@@ -40,7 +40,7 @@ ALL['minClose'] = ALL.Close.min()
 ALL['%Change'] = ALL.Close.pct_change()
 print(ALL.head())
 
-import pip
+# import pip
 # sorted(["%s==%s" % (i.key, i.version) for i in pip.get_installed_distributions()])
 
 # https://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/
@@ -53,11 +53,33 @@ import pip
 # print(in_list, len(in_list))
 
 
-df = pd.read_csv("D:\PythonDataScience\listt.txt", delim_whitespace=True, 
-                 skiprows=2, names=['Modules', 'Version'])
-                # can use delimiter=r"\s+"
-df2 = pd.read_csv("D:\PythonDataScience\listt2.txt", delimiter="==", 
-                 names=['Modules', 'Version'])
+# df = pd.read_csv("D:\PythonDataScience\listt.txt", delim_whitespace=True, 
+#                  skiprows=2, names=['Modules', 'Version'])
+#                 # can use delimiter=r"\s+"
+# df2 = pd.read_csv("D:\PythonDataScience\listt2.txt", delimiter="==", 
+#                  names=['Modules', 'Version'])
 
-mylist = list(df['Modules'])
-print(mylist, df2.head(), **sp)
+# mylist = list(df['Modules'])
+# print(mylist, df2.head(), **sp)
+
+# help('modules')
+
+import sqlite3
+with sqlite3.connect('D:\PythonDataScience\sql\survey.db') as con:
+    cursor = con.cursor()
+    res = cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+    # print(cursor.fetchall())
+    for name in res:
+        print(name[0])
+        
+
+
+
+import MySQLdb
+db = MySQLdb.connect(user="my-username",passwd="my-password",host="localhost",db="my-databasename")
+cursor = db.cursor()
+cursor.execute("SELECT * from my-table-name")
+data=cursor.fetchall()
+for row in data :
+    print (row)
+db.close()

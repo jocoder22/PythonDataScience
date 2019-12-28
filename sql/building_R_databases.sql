@@ -42,6 +42,7 @@ ALTER TABLE generalworks
 RENAME COLUMN  department TO projects;
 
 
+
 -- Create a table for the generalworks entity type
 CREATE TABLE metalworks
 (

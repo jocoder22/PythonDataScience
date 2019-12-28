@@ -16,6 +16,7 @@
 # cursor = db.cursor()
 
 import pymysql as sql
+# import MySQLdb as sqlm
 import mysql.connector
 
 conn = sql.connect(host='localhost',
