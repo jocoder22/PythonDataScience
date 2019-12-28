@@ -28,6 +28,7 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 sp = '\n\n'
 symbol = 'AAL'
+
 # symbol = 'RELIANCE.NS'
 starttime = datetime(1996, 1, 1)
 endtime = date.today()
