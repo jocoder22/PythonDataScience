@@ -54,6 +54,7 @@ import pip
 
 df = pd.read_csv("D:\PythonDataScience\listt.txt", delim_whitespace=True, 
                  skiprows=2, names=['Modules', 'Version'])
+                # can use delimiter=r"\s+"
 print(df.head())
 
 mylist = list(df['Modules'])
