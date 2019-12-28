@@ -26,7 +26,8 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 
 
-sp = '\n\n'
+sp = {"sep":"\n\n", "end":"\n\n"}
+
 symbol = 'AAL'
 
 # symbol = 'RELIANCE.NS'
@@ -55,7 +56,6 @@ import pip
 df = pd.read_csv("D:\PythonDataScience\listt.txt", delim_whitespace=True, 
                  skiprows=2, names=['Modules', 'Version'])
                 # can use delimiter=r"\s+"
-print(df.head())
 
 mylist = list(df['Modules'])
-print(mylist)
+print(mylist, df.head(), **sp)
