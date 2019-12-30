@@ -19,3 +19,17 @@ BEGIN TRAN;
 -- Commit the transaction
 COMMIT TRAN;
 
+
+-- Use the appropriate setting
+SET XACT_ABORT On;
+-- Begin the transaction
+BEGIN tran; 
+	UPDATE accounts set current_balance = current_balance - 2000
+		WHERE current_balance > 5000000;
+	IF @@ROWCOUNT < 10	
+    	-- Throw the error
+		THROW 50000, 'there is error!', 1;
+	ELSE		
+    	-- Commit the transaction
+		COMMIT tran; 
+
