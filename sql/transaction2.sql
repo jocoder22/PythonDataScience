@@ -33,3 +33,20 @@ BEGIN tran;
     	-- Commit the transaction
 		COMMIT tran; 
 
+
+-- Use the appropriate setting
+SET XACT_ABORT ON;
+BEGIN TRY
+	BEGIN TRAN;
+		INSERT INTO customers VALUES (988456, 10450, GETDATE());
+		INSERT INTO customers VALUES (988467, 23450, GETDATE());
+	COMMIT TRAN;
+END TRY
+BEGIN CATCH
+	-- Check if there is an open transaction
+	IF XACT_STATE() <> 0
+    	-- Rollback the transaction
+		ROLLBACK tran;
+    -- Select the message of the error
+    SELECT ERROR_MESSAGE() AS Error_message;
+END CATCH
