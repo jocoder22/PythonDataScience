@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup as Bs
 
+sp = {"sep":"\n\n", "end":"\n\n"}  
+
 # Begin a session
 session = requests.Session()
 # to see more https://www.whatismybrowser.com/
