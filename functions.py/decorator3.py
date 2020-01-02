@@ -2,7 +2,11 @@
 # import os
 from functools import wraps
 
-sp = '\n\n'
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n') 
+
+
 
 def mycounter(func):
     """
