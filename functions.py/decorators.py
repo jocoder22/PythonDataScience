@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # import os
 
+sp = {"sep":"\n\n", "end":"\n\n"}  
+
 def parentFunct(s):
     """This will demostrate function closure in python
 
