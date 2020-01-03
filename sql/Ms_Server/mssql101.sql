@@ -2,6 +2,7 @@
 -- Connect to the 'master' database to run this snippet
 -- F1 localhost master localhostmaster
 -- https://docs.microsoft.com/en-us/sql/visual-studio-code/sql-server-develop-use-vscode?view=sql-server-ver15
+
 USE master
 GO
 IF NOT EXISTS (
@@ -52,6 +53,9 @@ SELECT e.EmployeesId, e.[First Name], e.[Last Name], e.Age, e.Gender, e.Location
 FROM dbo.Employees as e
 GO
 
-IF OBJECT_ID('dbo.Employees', 'U') IS NOT NULL
-DROP TABLE dbo.Employees
+-- IF OBJECT_ID('dbo.Employees', 'U') IS NOT NULL
+-- DROP TABLE dbo.Employees
+-- GO
+
+SELECT * FROM dbo.Employees
 GO
