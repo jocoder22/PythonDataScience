@@ -3,6 +3,11 @@ import pandas as pd
 import numpy as np 
 from numpy import NaN
 
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
+
 
 tips = pd.read_csv('tips.csv')
 df = pd.read_csv('dob_job_application_filings_subset.csv')
