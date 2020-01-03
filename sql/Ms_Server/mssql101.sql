@@ -53,9 +53,9 @@ SELECT e.EmployeesId, e.[First Name], e.[Last Name], e.Age, e.Gender, e.Location
 FROM dbo.Employees as e
 GO
 
-IF OBJECT_ID('dbo.Employees', 'U') IS NOT NULL
-DROP TABLE dbo.Employees
-GO
+-- IF OBJECT_ID('dbo.Employees', 'U') IS NOT NULL
+-- DROP TABLE dbo.Employees
+-- GO
 
 SELECT * FROM dbo.Employees
 GO
