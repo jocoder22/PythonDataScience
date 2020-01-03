@@ -7,7 +7,7 @@ def print2(*args):
     for arg in args:
         print(arg, end='\n\n')
   
-
+sp = {"sep":"\n\n", "end":"\n\n"}
 
 tips = pd.read_csv('tips.csv')
 df = pd.read_csv('dob_job_application_filings_subset.csv')
