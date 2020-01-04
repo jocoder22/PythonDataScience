@@ -79,12 +79,20 @@ GO
 -- -- SELECT * FROM dbo.Employees
 -- -- GO
 
-INSERT INTO Employees(EmployeesId, [First Name],[Last Name], Age ,Gender, Location)
-  VALUES(1234, 'Peter', 'Johson', 34, 'Male', 'Newark'),
-        (3456, 'Jane ', 'Skagen', 27, 'Female', 'Boston'),
-        (6700, 'Flom ', 'Mongy', 31, 'Female', 'Norway'),
-        (9024, 'Anthony ', 'Lowrn', 25, 'Male', 'Baltimore'),
-        (1478, 'John ', 'Nokia', 32, 'Male', 'Houston'),
-        (2501, 'Mary ', 'Oley', 35, 'Female', 'Atlanta'),
-        (5578, 'Suaan ', 'Romey', 44, 'Female', 'India'),
-        (1089, 'Kate ', 'Paoul', 21, 'Female', 'Canada');
+-- INSERT INTO Employees(EmployeesId, [First Name],[Last Name], Age ,Gender, Location)
+--   VALUES(1234, 'Peter', 'Johson', 34, 'Male', 'Newark'),
+--         (3456, 'Jane ', 'Skagen', 27, 'Female', 'Boston'),
+--         (6700, 'Flom ', 'Mongy', 31, 'Female', 'Norway'),
+--         (9024, 'Anthony ', 'Lowrn', 25, 'Male', 'Baltimore'),
+--         (1478, 'John ', 'Nokia', 32, 'Male', 'Houston'),
+--         (2501, 'Mary ', 'Oley', 35, 'Female', 'Atlanta'),
+--         (5578, 'Suaan ', 'Romey', 44, 'Female', 'India'),
+--         (1089, 'Kate ', 'Paoul', 21, 'Female', 'Canada');
+
+
+-- Query the total count of employees
+SELECT COUNT(*) as EmployeeCount FROM dbo.Employees;
+-- Query all employee information
+SELECT e.EmployeesId, e.[First Name], e.[Last Name], e.Age, e.Gender, e.Location
+FROM dbo.Employees as e
+GO
