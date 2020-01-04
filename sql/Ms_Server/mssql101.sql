@@ -15,16 +15,16 @@ GO
 
 -- use ctrl+shift+E
 
--- Create a new table called 'Employes' in schema 'dbo'
--- Drop the table if it already exists
-IF OBJECT_ID('dbo.TablesChangeLog', 'U') IS NOT NULL
-DROP TABLE dbo.TablesChangeLog
-GO
+
+-- -- Drop the table if it already exists
+-- IF OBJECT_ID('dbo.TablesChangeLog', 'U') IS NOT NULL
+-- DROP TABLE dbo.TablesChangeLog
+-- GO
 
 
 -- Create the table in the specified schema
-IF NOT EXISTS (SELECT name FROM sysobjects WHERE name='TablesChangeLog' and xtype='U')
-    CREATE TABLE TablesChangeLog(
+IF NOT EXISTS (SELECT name FROM sysobjects WHERE name='TablesChangeLogT' and xtype='U')
+    CREATE TABLE TablesChangeLogT(
       EventData NVARCHAR(MAX) NOT NULL, 
       ServerName NVARCHAR(MAX) NOT NULL, 
       Object NVARCHAR(MAX) NOT NULL, 
@@ -34,14 +34,14 @@ IF NOT EXISTS (SELECT name FROM sysobjects WHERE name='TablesChangeLog' and xtyp
     )
 GO
 
-ALTER TABLE TablesChangeLog   
+ALTER TABLE TablesChangeLogT   
   ALTER COLUMN EventData xml;
-ALTER TABLE TablesChangeLog 
+ALTER TABLE TablesChangeLogT 
   ALTER COLUMN ChangedBy xml;
-ALTER TABLE TablesChangeLog 
+ALTER TABLE TablesChangeLogT 
   ALTER COLUMN ChangeDate DATETIME;
 
-
+-- Create a new table called 'Employes' in schema 'dbo'
 IF NOT EXISTS (SELECT name FROM sysobjects WHERE name='Employees' and xtype='U')
       CREATE TABLE dbo.Employees(
          EmployeesId INT NOT NULL, -- primary key column
@@ -69,15 +69,15 @@ CREATE TABLE dbo.EmployeesupdateLog
 GO
 
 
--- IF OBJECT_ID('dbo.Employees', 'U') IS NOT NULL
--- DROP TABLE dbo.Employees
--- GO
+-- -- IF OBJECT_ID('TablesChangeLog', 'U') IS NOT NULL
+-- -- DROP TABLE TablesChangeLog
+-- -- GO
 
 -- IF OBJECT_ID('dbo.EmployeesupdateLog', 'U') IS NOT NULL
 -- DROP TABLE dbo.EmployeesupdateLog
 -- GO
--- -- SELECT * FROM dbo.Employees
--- -- GO
+-- -- -- SELECT * FROM dbo.Employees
+-- -- -- GO
 
 -- INSERT INTO Employees(EmployeesId, [First Name],[Last Name], Age ,Gender, Location)
 --   VALUES(1234, 'Peter', 'Johson', 34, 'Male', 'Newark'),
