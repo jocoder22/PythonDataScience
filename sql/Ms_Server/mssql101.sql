@@ -92,6 +92,7 @@ GO
 
 -- Query the total count of employees
 SELECT COUNT(*) as EmployeeCount FROM dbo.Employees;
+
 -- Query all employee information
 SELECT e.EmployeesId, e.[First Name], e.[Last Name], e.Age, e.Gender, e.Location
 FROM dbo.Employees as e
