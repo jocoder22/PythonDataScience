@@ -1,4 +1,3 @@
-
 -- Create trigger to log logins
 IF NOT EXISTS ( SELECT  name
             FROM    sys.server_triggers
