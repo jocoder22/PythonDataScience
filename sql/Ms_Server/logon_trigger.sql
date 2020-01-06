@@ -1,7 +1,7 @@
 
 -- Create trigger to log logins
 IF NOT EXISTS ( SELECT  name
-            FROM    sys.triggers
+            FROM    sys.server_triggers
             WHERE   type = 'TR'
                     AND name = 'logonTrigger' ) 
 BEGIN
