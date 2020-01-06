@@ -69,6 +69,17 @@ CREATE TABLE dbo.EmployeesupdateLog
 GO
 
 
+-- Create the table in the specified schema
+IF NOT EXISTS (SELECT name FROM sysobjects WHERE name='LogonLog' and xtype='U')
+CREATE TABLE dbo.LogonLog
+(
+    LogonName [NVARCHAR](250) NOT NULL , -- primary key column
+    LogonDate  DATETIME,
+    SessionID [NVARCHAR](250) NOT NULL,
+    SourceIPAddress [NVARCHAR](250) NOT NULL
+);
+GO
+
 -- -- IF OBJECT_ID('TablesChangeLog', 'U') IS NOT NULL
 -- -- DROP TABLE TablesChangeLog
 -- -- GO
@@ -97,3 +108,4 @@ SELECT COUNT(*) as EmployeeCount FROM dbo.Employees;
 SELECT e.EmployeesId, e.[First Name], e.[Last Name], e.Age, e.Gender, e.Location
 FROM dbo.Employees as e
 GO
+
