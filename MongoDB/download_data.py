@@ -8,23 +8,32 @@ client = MongoClient()
 db = client["nobelprizes"]
 print(db.name)
 
-# for collections_m in ["prizes", "laureates"]:
-#     db[collections_m].delete_many({})
+for collections_m in ["prizes", "laureates", "countries"]:
+    db[collections_m].delete_many({})
 
 
-# for collections_m in ["prizes", "laureates", "countrys"]:
-#     response = requests.get(
-#         "http://api.nobelprize.org/v1/{}.json".format(collections_m[:-1])
-#     )
+for collections_m in ["prizes" , "countrys" , "laureates"]:
+    response = requests.get(
+        "http://api.nobelprize.org/v1/{}.json".format(collections_m[:-1])
+    )
     
-#     if collections_m == "countrys":
-#         documents = response.json()["countries"]
-#         db["countries"].insert_many(documents)
+    if collections_m == "countrys":
+        documents = response.json()["countries"]
+        db["countries"].insert_many(documents)
+        continue
         
-#     else:
-#         documents = response.json()[collections_m]
-#         db[collections_m].insert_many(documents)
+    
+    documents = response.json()[collections_m]
+    db[collections_m].insert_many(documents)
 
+
+# Save a list of names of the databases managed by client
+db_names = client.list_database_names()
+print(db_names)
+
+# Save a list of names of the collections managed by the "nobel" database
+nobel_coll_names = client.nobelprizes.list_collection_names()
+print(nobel_coll_names)
 
 filter = {}
 
