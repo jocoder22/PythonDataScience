@@ -27,16 +27,12 @@ print(db.name)
 
 
 filter = {}
-print(db.prizes.count_documents({}))
+
+for collections_m in ["prizes", "laureates", "countries"]:
+    bb = db[collections_m].count_documents({})
+    print(f'The {collections_m} has {bb} rows', end="\n\n")
 
 doc = db.prizes.find_one(filter)
 print(doc)
 
 
-# Save a list of names of the databases managed by client
-db_names = client.list_database_names()
-print(db_names)
-
-# Save a list of names of the collections managed by the "nobel" database
-nobel_coll_names = client.nobelprizes.list_collection_names()
-print(nobel_coll_names)
