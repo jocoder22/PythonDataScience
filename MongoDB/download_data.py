@@ -47,7 +47,7 @@ doc = db.prizes.find_one(filter)
 print(doc, **sp)
 
 
-# Retrieve sample prize and laureate documents
+# Retrieve sample prize, countries, and laureate documents
 prize_doc = db.prizes.find_one()
 laureate_doc = db.laureates.find_one()
 
