@@ -14,7 +14,7 @@ print(nobel_coll_names, **sp)
 
 # Retrieve sample prize, countries, and laureate documents
 prize_doc = db.prizes.find_one()
-country_doc = db.countries.find_one()
+country_doc = db.country.find_one()
 laureate_doc = db.laureates.find_one()
 
 # Print the sample prize, countries, and laureate documents
