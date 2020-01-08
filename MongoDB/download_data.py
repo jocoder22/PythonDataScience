@@ -48,12 +48,12 @@ print(doc, **sp)
 
 
 # Retrieve sample prize and laureate documents
-prize_one = db.prizes.find_one()
-laureate_one = db.laureates.find_one()
+prize_doc = db.prizes.find_one()
+laureate_doc = db.laureates.find_one()
 
 # Print the sample prize and laureate documents
-print(prize_one, **sp)
-print(laureate_one, **sp)
-print(type(laureate_one), type(laureate_one), **sp)
+print(prize_doc, **sp)
+print(laureate_doc, **sp)
+print(type(prize_doc), type(laureate_doc), **sp)
 
 
