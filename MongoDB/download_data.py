@@ -10,8 +10,8 @@ client = MongoClient()
 db = client["nobelprizes"]
 print(db.name, **sp)
 
-for collections_m in ["prizes", "laureates", "countries"]:
-    db[collections_m].delete_many({})
+# for collections_m in ["prizes", "laureates", "country"]:
+#     db[collections_m].delete_many({})
 
 
 for collections_m in ["prizes" , "countrys" , "laureates"]:
@@ -21,7 +21,7 @@ for collections_m in ["prizes" , "countrys" , "laureates"]:
     
     if collections_m == "countrys":
         documents = response.json()["countries"]
-        db["countries"].insert_many(documents)
+        db["country"].insert_many(documents)
         continue
         
     
@@ -39,7 +39,7 @@ print(nobel_coll_names, **sp)
 
 filter = {}
 
-for collections_m in ["prizes", "laureates", "countries"]:
+for collections_m in ["prizes", "laureates", "country"]:
     bb = db[collections_m].count_documents({})
     print(f'The {collections_m} has {bb} rows', **sp)
 
@@ -47,13 +47,5 @@ doc = db.prizes.find_one(filter)
 print(doc, **sp)
 
 
-# Retrieve sample prize, countries, and laureate documents
-prize_doc = db.prizes.find_one()
-laureate_doc = db.laureates.find_one()
-
-# Print the sample prize and laureate documents
-print(prize_doc, **sp)
-print(laureate_doc, **sp)
-print(type(prize_doc), type(laureate_doc), **sp)
 
 

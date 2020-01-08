@@ -12,9 +12,11 @@ nobel_coll_names = client.nobelprizes.list_collection_names()
 print(nobel_coll_names, **sp)
 
 
-# Get the fields present in each type of document
-prize_fields = ____(____.keys())
-laureate_fields = ____(____.keys())
+# Retrieve sample prize, countries, and laureate documents
+prize_doc = db.prizes.find_one()
+country_doc = db.countries.find_one()
+laureate_doc = db.laureates.find_one()
 
-print(prize_fields)
-print(laureate_fields)
+# Print the sample prize, countries, and laureate documents
+print(prize_doc, country_doc, laureate_doc, **sp)
+print(type(prize_doc), type(country_doc), type(laureate_doc), **sp)
