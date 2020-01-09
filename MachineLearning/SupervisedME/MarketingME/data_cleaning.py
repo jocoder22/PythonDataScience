@@ -1,8 +1,18 @@
+import sys
 import pandas as pd 
 import numpy as np 
 
-url = "https://assets.datacamp.com/production/repositories/4976/datasets/252c7d50740da7988d71174d15184247463d975c/telco.csv"
+pathtk = r"D:\PPP"
+sys.path.insert(0, pathtk)
+import wewebs
 
-data = pd.read_csv(url)
+def print2(*args):
+    for arg in args:
+        print(arg, end='\n\n')
+  
+sp = {"sep":"\n\n", "end":"\n\n"} 
+
+marketing = wewebs.market
+data = pd.read_csv(marketing)
 
 print(data.head())
