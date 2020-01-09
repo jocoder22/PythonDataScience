@@ -21,7 +21,7 @@ data = pd.read_csv(marketing)
 
 
 print2(data.dtypes, data.nunique(), data.info(), data.head(), data.shape, data.columns)
-
+print(data.isna().sum())
 
 data['TotalCharges'] = pd.to_numeric(data['TotalCharges'], errors='coerce')
 cust_id = ["customerID"]
@@ -39,3 +39,6 @@ num_df = pd.DataFrame(scaled_num, columns=num_features)
 clean_data = data_dummy.merge(right = num_df, how="left", left_index=True, right_index=True)
 
 print2(data_dummy.head(), scaled_num[:10], clean_data.head())
+
+
+print(data.isna().sum())
