@@ -19,11 +19,9 @@ sp = {"sep":"\n\n", "end":"\n\n"}
 marketing = wewebs.market
 data = pd.read_csv(marketing)
 
-print(data.head())
 
 print2(data.dtypes, data.nunique(), data.info(), data.head(), data.shape, data.columns)
 
-print(data.iloc[480:490,:])
 
 data['TotalCharges'] = pd.to_numeric(data['TotalCharges'], errors='coerce')
 cust_id = ["customerID"]
