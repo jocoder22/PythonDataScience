@@ -26,7 +26,7 @@ print2(data.dtypes, data.nunique(), data.info(), data.head(), data.shape, data.c
 data['TotalCharges'] = pd.to_numeric(data['TotalCharges'], errors='coerce')
 cust_id = ["customerID"]
 target = ["Churn"]
-cat_features = data.nunique()[data.nunique() < 5].keys().tolist()
+cat_features = data.nunique()[data.nunique() < 6].keys().tolist()
 
 cat_features.remove(target[0])
 num_features = [col for col in data.columns if col not in cust_id + target + cat_features]
