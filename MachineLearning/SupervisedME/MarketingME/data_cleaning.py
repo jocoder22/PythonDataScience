@@ -1,7 +1,9 @@
 import sys
+import os
 import pandas as pd 
 import numpy as np 
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import LabelBinarizer
 
 
 pathtk = r"D:\PPP"
@@ -36,18 +38,19 @@ data_dummy = pd.get_dummies(data=data[cat_features],  drop_first=True)
 scaled_num = scaler.fit_transform(data[num_features])
 num_df = pd.DataFrame(scaled_num, columns=num_features)
 
-clean_data = data_dummy.merge(right = num_df, how="left", left_index=True, right_index=True)
+features = data_dummy.merge(right = num_df, how="left", left_index=True, right_index=True)
 
-print2(data_dummy.head(), scaled_num[:10], clean_data.head())
+print2(data_dummy.head(), scaled_num[:10], features.head())
 
 
-from sklearn.preprocessing import LabelBinarizer
 
+# Transform the target variable
 lb = LabelBinarizer()
-
 target1 = lb.fit_transform(data[target[0]])
-print2(data[target[0]], target1)
+target = pd.DataFrame(target1, columns=["Churn"])
 
-target22 = pd.DataFrame(target1, columns=["Churn"])
 
-print2(data[target[0]], target1, target22)
+# saving as pickle file
+mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
+features.to_pickle(os.path.join(mydir, "features.pkl"))
+pd.to_pickle(target, os.path.join(mydir, "target.pkl"))

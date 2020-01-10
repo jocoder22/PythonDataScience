@@ -30,7 +30,7 @@ print2(mydatanew.head())
 
 # Using pandas methods
 # save pickle
-pandas_save = pd.to_pickle(mydata, os.path.join(mydir, "lifeExp2.pkl"))
+pd.to_pickle(mydata, os.path.join(mydir, "lifeExp2.pkl"))
 # import pickle file
 pandas_pickle = pd.read_pickle(os.path.join(mydir, "lifeExp2.pkl"))
 print2(pandas_pickle.head())
