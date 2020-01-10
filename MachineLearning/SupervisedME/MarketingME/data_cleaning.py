@@ -40,5 +40,7 @@ clean_data = data_dummy.merge(right = num_df, how="left", left_index=True, right
 
 print2(data_dummy.head(), scaled_num[:10], clean_data.head())
 
+print2(data[target[0]])
+
 
 
