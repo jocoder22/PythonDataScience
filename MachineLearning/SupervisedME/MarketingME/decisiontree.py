@@ -1,5 +1,7 @@
 import pandas as pd
 import os 
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
 
 
 def print2(*args):
