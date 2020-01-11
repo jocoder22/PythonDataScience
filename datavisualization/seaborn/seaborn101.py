@@ -8,7 +8,8 @@ import seaborn as sns
 # plt.style.use('seaborn-whitegrid')
 
 
-path = r"C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\UnsupervisedME"
+# path = r"\d\PythonDataScience\MachineLearning\UnsupervisedME"
+path = r"D:\PythonDataScience\MachineLearning\UnsupervisedME"
 os.chdir(path)
 sp = '\n\n'
 
