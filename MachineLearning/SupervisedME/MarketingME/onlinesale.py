@@ -14,6 +14,7 @@ def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
 
+mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00352/Online%20Retail.xlsx"
 
 # import excel file from web
@@ -27,7 +28,6 @@ url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00352/Online%20
 
 # print2(data.head())
 # # saving as pickle file
-mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
 # data.to_pickle(os.path.join(mydir, "onlinedata.pkl"))
 
 
