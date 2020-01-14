@@ -56,8 +56,8 @@ print2("{} accuracy score : {:.2f}".format("Test", accuracyscoreTest),
 
 
 # find the best C
-# depth = np.linspace(1, 0.0002, 200).tolist()
-depth = np.arange(0.0025, 1, 0.05).tolist()
+depth = np.linspace(1, 0.0005, 40).tolist()
+# depth = np.arange(0.0025, 1, 0.005).tolist()
 depthList = np.zeros((len(depth), 5))
 depthList[:, 0] =  depth
 
@@ -83,7 +83,7 @@ AssessTable["R/P Ratio"] =  AssessTable.RecallScore / AssessTable.PrecisionScore
 print(AssessTable.head())
 
 plt.plot(AssessTable["C_value"], AssessTable.loc[:, "AccuracyScore": "R/P Ratio"])
-plt.xticks(AssessTable["C_value"])
+plt.xticks(AssessTable["C_value"], rotation=45)
 plt.legend(labels=("NonZero_count", 'AccuracyScore', 'PrecisionScore','RecallScore' , 'R/P Ratio'), loc='upper right')
 plt.grid()
 plt.show()
