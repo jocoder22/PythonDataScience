@@ -27,7 +27,7 @@ df = pd.read_csv(url, sep=';')
 print(df.head())
 
 # Plot first column of df
-pd.DataFrame.hist(df.ix[:, 0:1])
+pd.DataFrame.hist(df.iloc[:, 0:1])
 plt.xlabel('fixed acidity (g(tartaric acid)/dm$^3$)')
 plt.ylabel('count')
 plt.show()
@@ -42,6 +42,6 @@ url = 'http://s3.amazonaws.com/assets.datacamp.com/course/importing_data_into_r/
 
 # Read in all sheets of Excel file: xl
 
-xl = pd.read_excel(url,sheetname=None)
+xl = pd.read_excel(url,sheet_name=None)
 # Print the sheetnames to the shell
 print(xl.keys())

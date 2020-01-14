@@ -20,6 +20,8 @@ mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
 features = pd.read_pickle(os.path.join(mydir, "features.pkl"))
 target= pd.read_pickle(os.path.join(mydir, "target.pkl"))
 
+print2(features.head())
+
 features.fillna(features.mean(),inplace=True)
 target = target.loc[:, "Churn"]
 
