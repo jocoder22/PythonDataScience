@@ -56,4 +56,5 @@ cust_Stats = df.groupby('custCat').agg(
                 MonetaryValue_count  = ('MonetaryValue', 'count')
 )
 
+
 print2(onlinedata, df, _ , cust_Stats)
