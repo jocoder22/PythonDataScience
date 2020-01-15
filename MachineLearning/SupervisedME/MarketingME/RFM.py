@@ -38,3 +38,9 @@ dlabels = list(range(1,5))
 df['R'] = pd.qcut(df.Recency, q=4, labels=nlabels)
 df['F'] = pd.qcut(df.Frequency, q=4, labels=dlabels)
 df['M'] = pd.qcut(df.MonetaryValue, q=4, labels=dlabels)
+
+df['rfm_Segment'] = df.apply(lambda x: str(x['R']) + str(x['F']) + str(x['M']), axis=1)
+df['rfm_Score'] = df.loc[:, 'R':'M'].sum(axis=1)
+
+
+print2(onlinedata, df, _ )
