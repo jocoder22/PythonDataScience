@@ -42,5 +42,11 @@ df['M'] = pd.qcut(df.MonetaryValue, q=4, labels=dlabels)
 df['rfm_Segment'] = df.apply(lambda x: str(x['R']) + str(x['F']) + str(x['M']), axis=1)
 df['rfm_Score'] = df.loc[:, 'R':'M'].sum(axis=1)
 
+def custLevels(dataa):
+    if dataa['rfm_Score'] < 6 :  return "LowClass"
+    elif dataa['rfm_Score'] < 10 : return "MiddleClass"
+    else: return "TopClass"
+    
+df['rfm_Levels'] = df.apply(custLevels, axis=1)
 
 print2(onlinedata, df, _ )
