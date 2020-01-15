@@ -27,5 +27,5 @@ df = onlinedata.groupby('CustomerID').agg(
                     Frequency = ('InvoiceNo', 'count'),
                     MonetaryValue = ('Totalcost', 'sum'))
 
-
-print2(onlinedata, df )
+_ = onlinedata[onlinedata["CustomerID"] == 12346.0]
+print2(onlinedata, df, _ )
