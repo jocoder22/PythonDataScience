@@ -30,3 +30,11 @@ df = onlinedata.groupby('CustomerID').agg(
 
 _ = onlinedata[onlinedata["CustomerID"] == 12346.0]
 print2(onlinedata, df, _ )
+
+nlabels = list(range(4, 0, -1))
+dlabels = list(range(1,5))
+
+
+df['R'] = pd.qcut(df.Recency, q=4, labels=nlabels)
+df['F'] = pd.qcut(df.Frequency, q=4, labels=dlabels)
+df['M'] = pd.qcut(df.MonetaryValue, q=4, labels=dlabels)
