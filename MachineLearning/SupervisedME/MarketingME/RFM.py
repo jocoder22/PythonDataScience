@@ -22,4 +22,10 @@ onlinedata = pd.read_pickle(os.path.join(mydir, "onlinedata.pkl"))
 refDate = max(onlinedata.InvoiceDate) + dt.timedelta(days=1)
 onlinedata["Totalcost"] = onlinedata["Quantity"].mul(onlinedata["UnitPrice"], axis=0)
 
+df = onlinedata.groupby('CustomerID').agg(
+                    Recency = ('InvoiceDate', lambda x : (refDate - x.max()).days),
+                    Frequency = ('InvoiceNo', 'count'),
+                    MonetaryValue = ('Totalcost', 'sum'))
 
+
+print2(onlinedata, df )
