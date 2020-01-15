@@ -47,6 +47,13 @@ def custLevels(dataa):
     elif dataa['rfm_Score'] < 10 : return "MiddleClass"
     else: return "TopClass"
     
-df['rfm_Levels'] = df.apply(custLevels, axis=1)
+df['custCat'] = df.apply(custLevels, axis=1)
 
-print2(onlinedata, df, _ )
+cust_Stats = df.groupby('custCat').agg(
+                Recency_mean = ('Recency', 'mean'),
+                Frequency_mean = ('Frequency', 'mean'),
+                MonetaryValue_mean = ('MonetaryValue', 'mean'),
+                MonetaryValue_count  = ('MonetaryValue', 'count')
+)
+
+print2(onlinedata, df, _ , cust_Stats)
