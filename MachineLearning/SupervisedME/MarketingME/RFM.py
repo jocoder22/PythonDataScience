@@ -58,3 +58,7 @@ cust_Stats = df.groupby('custCat').agg(
 
 
 print2(onlinedata, df, _ , cust_Stats)
+
+# saving as pickle file
+mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
+df.to_pickle(os.path.join(mydir, "RFM.pkl"))
