@@ -60,12 +60,13 @@ df['custCat'] = df.apply(custLevels, args=['rfm_Score'], axis=1)
 # 2nd method for multilevel columns
 cust_Stats = df.groupby('custCat').agg({
                 'Recency' : 'mean',
-                'Frequency': 'mean',
-                'MonetaryValue': ['mean', 'count'] })
+                'Frequency' : 'mean',
+                'MonetaryValue' : ['mean', 'count']})
 
 cust_Stats.columns = ["_".join(yy) for yy in cust_Stats.columns.ravel()]
 
 print2(onlinedata, df, _ , cust_Stats)
+
 
 # saving as pickle file
 mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
