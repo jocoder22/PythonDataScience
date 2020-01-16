@@ -63,6 +63,8 @@ cust_Stats = df.groupby('custCat').agg({
                 'Frequency': 'mean',
                 'MonetaryValue': ['mean', 'count'] })
 
+cust_Stats.columns = ["_".join(yy) for yy in cust_Stats.columns.ravel()]
+
 print2(onlinedata, df, _ , cust_Stats)
 
 # saving as pickle file
