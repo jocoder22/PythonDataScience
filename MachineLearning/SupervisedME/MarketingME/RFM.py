@@ -49,13 +49,19 @@ def custLevels(dataa, col):
     
 df['custCat'] = df.apply(custLevels, args=['rfm_Score'], axis=1)
 
-cust_Stats = df.groupby('custCat').agg(
-                Recency_mean = ('Recency', 'mean'),
-                Frequency_mean = ('Frequency', 'mean'),
-                MonetaryValue_mean = ('MonetaryValue', 'mean'),
-                MonetaryValue_count  = ('MonetaryValue', 'count')
-)
+# cust_Stats = df.groupby('custCat').agg(
+#                 Recency_mean = ('Recency', 'mean'),
+#                 Frequency_mean = ('Frequency', 'mean'),
+#                 MonetaryValue_mean = ('MonetaryValue', 'mean'),
+#                 MonetaryValue_count  = ('MonetaryValue', 'count')
+# )
 
+
+# 2nd method for multilevel columns
+cust_Stats = df.groupby('custCat').agg({
+                'Recency' : 'mean',
+                'Frequency': 'mean',
+                'MonetaryValue': ['mean', 'count'] })
 
 print2(onlinedata, df, _ , cust_Stats)
 
