@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
-# plt.style.use('ggplot')
+plt.style.use('ggplot')
 # plt.style.use('seaborn-whitegrid')
 
 def print2(*args):
@@ -35,3 +35,14 @@ data = scaler.transform(data)
 
 
 print2(RFMdata, data)
+
+logg = {}
+
+for k in range(1,12):
+    kms = KMeans(n_clusters=k)
+    kms.fit(data)
+    logg[k] = kms.inertia_
+    
+    
+sns.pointplot(x=list(logg.keys()), y=list(logg.values()))
+plt.show()
