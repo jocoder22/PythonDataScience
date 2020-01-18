@@ -57,20 +57,20 @@ print2(data22)
 
 
 # Group by the segment label and calculate average column values
-kms3_averages = data22.groupby(['segment']).mean().round(0)
+kms4_averages = data22.groupby(['segment']).mean().round(0)
 
 # Print the average column values per each segment
-print(kms3_averages)
+print(kms4_averages)
 
 # Create a heatmap on the average column values per each segment
-sns.heatmap(kms3_averages.T, cmap='YlGnBu')
+sns.heatmap(kms4_averages.T, cmap='YlGnBu')
 
 # Display the chart
 plt.show()
 
 
-# Initialize NMF instance with 4 components
-nmf = NMF(4)
+# Initialize NMF instance with 3 components
+nmf = NMF(3)
 
 # Fit the model on the wholesale sales data
 nmf.fit(data2)
@@ -88,60 +88,15 @@ print2("thosos", W.head())
 W.index = data2.index
 
 # Assign the column name where the corresponding value is the largest
-nmf4 = data2.assign(segment = W.idxmax(axis=1))
-print2("thosos", W.head(), nmf4.head())
+nmf3 = data2.assign(segment = W.idxmax(axis=1))
+print2("thosos", W.head(), nmf3.head())
 
 # Calculate the average column values per each segment
-nmf4_ave = nmf4.groupby('segment').mean().round(0)
+nmf3_ave = nmf3.groupby('segment').mean().round(0)
 
+print2(nmf3_ave)
 # Plot the average values as heatmap
-sns.heatmap(nmf4_ave.T, cmap='YlGnBu')
-
-# Display the chart
-plt.show()
-
-
-
-# Group by the segment label and calculate average column values
-kmeans3_averages = data22.groupby(['segment']).mean().round(0)
-
-# Print the average column values per each segment
-print(kmeans3_averages)
-
-# Create a heatmap on the average column values per each segment
-sns.heatmap(kmeans3_averages.T, cmap='YlGnBu')
-
-# Display the chart
-plt.show()
-
-
-# Initialize NMF instance with 4 components
-nmf = NMF(4)
-
-# Fit the model on the wholesale sales data
-nmf.fit(data2)
-
-# Extract the components 
-components = pd.DataFrame(data=nmf.components_, columns=data2.columns)
-
-print2(components.head())
-
-
-
-# Create the W matrix
-W = pd.DataFrame(data=nmf.transform(data2), columns=components.index)
-print2("thosos", W.head())
-W.index = data2.index
-
-# Assign the column name where the corresponding value is the largest
-nmf4 = data2.assign(segment = W.idxmax(axis=1))
-print2("thosos", W.head(), nmf4.head())
-
-# Calculate the average column values per each segment
-nmf4_ave = nmf4.groupby('segment').mean().round(0)
-
-# Plot the average values as heatmap
-sns.heatmap(nmf4_ave.T, cmap='YlGnBu')
+sns.heatmap(nmf3_ave.T, cmap='YlGnBu')
 
 # Display the chart
 plt.show()
