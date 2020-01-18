@@ -5,6 +5,7 @@ import datetime as dt
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
 # plt.style.use('ggplot')
 # plt.style.use('seaborn-whitegrid')
 
