@@ -4,6 +4,7 @@ import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.preprocessing import StandardScaler
 # plt.style.use('ggplot')
 # plt.style.use('seaborn-whitegrid')
 
@@ -17,5 +18,18 @@ mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
 RFMdata = pd.read_pickle(os.path.join(mydir, "RFM.pkl"))
 
 data = RFMdata.loc[:, ["Recency" ,"Frequency",  "MonetaryValue"]]
+print2(data.describe(), data.head(), data.shape)
+
+
+data = data[data["MonetaryValue"] > 0.00]
+print2(data.head(), data.shape)
+
+data = np.log(data)
+
+
+scaler = StandardScaler()
+scaler.fit(data)
+data = scaler.transform(data)
+
 
 print2(RFMdata, data)
