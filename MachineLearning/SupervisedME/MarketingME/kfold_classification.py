@@ -20,10 +20,11 @@ RFMdata = pd.read_pickle(os.path.join(mydir, "RFM.pkl"))
 data = RFMdata.loc[:, ["Recency" ,"Frequency",  "MonetaryValue"]]
 print2(data.describe(), data.head(), data.shape)
 
-
+# Remove zero and negative values
 data = data[data["MonetaryValue"] > 0.00]
 print2(data.head(), data.shape)
 
+# Log transformation
 data = np.log(data)
 
 
