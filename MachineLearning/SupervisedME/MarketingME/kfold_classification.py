@@ -63,7 +63,7 @@ kms3_averages = data22.groupby(['segment']).mean().round(0)
 print(kms3_averages)
 
 # Create a heatmap on the average column values per each segment
-sns.heatmap(kmeans3_averages.T, cmap='YlGnBu')
+sns.heatmap(kms3_averages.T, cmap='YlGnBu')
 
 # Display the chart
 plt.show()
@@ -145,3 +145,4 @@ sns.heatmap(nmf4_ave.T, cmap='YlGnBu')
 
 # Display the chart
 plt.show()
+
