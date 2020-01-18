@@ -99,3 +99,31 @@ sns.heatmap(nmf4_ave.T, cmap='YlGnBu')
 
 # Display the chart
 plt.show()
+
+
+
+# Group by the segment label and calculate average column values
+kmeans3_averages = data22.groupby(['segment']).mean().round(0)
+
+# Print the average column values per each segment
+print(kmeans3_averages)
+
+# Create a heatmap on the average column values per each segment
+sns.heatmap(kmeans3_averages.T, cmap='YlGnBu')
+
+# Display the chart
+plt.show()
+
+
+# Initialize NMF instance with 4 components
+nmf = NMF(4)
+
+# Fit the model on the wholesale sales data
+nmf.fit(data2)
+
+# Extract the components 
+components = pd.DataFrame(data=nmf.components_, columns=data2.columns)
+
+print2(components.head())
+
+
