@@ -29,7 +29,7 @@ def linearLoss(w):
 # choose the initial values
 x0 = np.linspace(-2, 2, diabetes_X[0].size)
 
-# # Returns the w that makes my_loss(w) smallest
+# # Returns the w that makes  that minimizes linearLoss(w) 
 lossWeights = minimize(linearLoss, x0).x
 
 # Fit linear regression using scipy LinearRegression
@@ -39,7 +39,6 @@ print2(lossWeights, lr.coef_)
 
 
 # Load the load_breast_cancer dataset
-
 breast_X, breast_y = datasets.load_breast_cancer(return_X_y=True)
 
 print2(breast_X, breast_y, breast_X[0].size)
@@ -73,10 +72,10 @@ def classificationLoss(w):
 # choose the initial values
 x0 = breast_X[0]
 
-# # Returns the w that makes my_loss(w) smallest
+# # Returns the w that makes minimizes classificationLoss(w) 
 classWeights = minimize(classificationLoss, x0).x
 
 
-# Fit linear regression using scipy LinearRegression
+# Fit logtistic regression using scipy LogisticRegression
 llogic = linear_model.LogisticRegression(fit_intercept=False, max_iter = 10000).fit(breast_X, breast_y)
 print2(classWeights, llogic.coef_, classWeights - llogic.coef_)
