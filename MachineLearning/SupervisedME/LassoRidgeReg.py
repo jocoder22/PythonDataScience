@@ -24,7 +24,9 @@ colname = ['population', 'fertility', 'HIV', 'CO2', 'BMI_male',
 
 df = pd.read_csv(url, sep=',')
 
+
 y = df['life'].values
+y2 = df['Region'].values
 X = df.drop(['life', 'Region'], axis=1).values
 
 
@@ -101,6 +103,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # Instantiate a k-NN classifier: knn
 knn = KNeighborsClassifier(n_neighbors=6)
+
 
 # Fit the classifier to the training data
 knn.fit(X_train, y_train)
