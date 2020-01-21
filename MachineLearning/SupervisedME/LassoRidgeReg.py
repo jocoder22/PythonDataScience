@@ -125,7 +125,7 @@ l1_space = np.linspace(0, 1, 30)
 param_grid = {'l1_ratio': l1_space}
 
 # Instantiate the ElasticNet regressor: elastic_net
-elastic_net = ElasticNet()
+elastic_net = ElasticNet(max_iter=10000, normalize=True, iter)
 
 # Setup the GridSearchCV object: gm_cv
 gm_cv = GridSearchCV(elastic_net, param_grid, cv=5)
