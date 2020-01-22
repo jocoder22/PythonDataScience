@@ -31,6 +31,7 @@ parameters = {'alpha':[0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 100],
              'loss': loss, 'penalty':['l1','l2']}
 
 
+# Fit gridsearch 
 search = GridSearchCV(sgdclassifier, parameters, cv=6)
 search.fit(X_train, y_train)
 
