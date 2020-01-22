@@ -23,6 +23,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 sgdclassifier = SGDClassifier(max_iter=6000)
 
 
+# List of loss function
 loss = ['hinge', 'log', 'modified_huber', 'squared_hinge', 'perceptron']
 
 # Instantiate the GridSearchCV object and run the search
