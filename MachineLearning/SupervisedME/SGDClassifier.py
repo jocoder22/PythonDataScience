@@ -19,7 +19,7 @@ breast_X, breast_y = datasets.load_breast_cancer(return_X_y=True)
 X_train, X_test, y_train, y_test = train_test_split(
     breast_X, breast_y, test_size=0.2, random_state=42)
 
-# We set random_state=0 for reproducibility 
+# We set random_state=6000 for reproducibility 
 sgdclassifier = SGDClassifier(max_iter=6000)
 
 
