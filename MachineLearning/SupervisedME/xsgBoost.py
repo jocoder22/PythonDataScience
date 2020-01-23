@@ -38,17 +38,17 @@ print2(f"Accuracy: {accuracy:.2f}%")
 # Create the DMatrix from X and y: xgbdmatrix
 xgbdmatrix = xgb.DMatrix(data=breast_X, label=breast_y)
 
-# Update the parameter dictionary
+# Update the parameters dictionary
 parameters["objective"] = "reg:logistic"
 
 # Perform cross-validation: results
 results = xgb.cv(dtrain=xgbdmatrix, params=parameters, 
-                    nfold=3, num_boost_round=5, 
+                    nfold=4, num_boost_round=10, 
                     metrics=["error", "auc"], as_pandas=True)
 
 # Print results
 print2(results)
 
 # Print the accuracy, Area Under Receiver Operating Characteristic Curve
-print2(f'Accuracy : {1-results["test-error-mean"].iloc[-1]:.2f}')
+print2(f'Accuracy : {1-results["test-error-mean"].iloc[-1]:.4f}')
 print2(f'AUC : {results["test-auc-mean"].iloc[-1]:.2f}')
