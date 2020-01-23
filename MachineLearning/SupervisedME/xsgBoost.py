@@ -32,4 +32,23 @@ yhat = xgbooster.predict(X_test)
 
 # Compute the accuracy: accuracy
 accuracy = float(np.sum(yhat==y_test))/y_test.shape[0] *100
-print(f"Accuracy: {accuracy:.2f}%")
+print2(f"Accuracy: {accuracy:.2f}%")
+
+
+# Create the DMatrix from X and y: xgbdmatrix
+xgbdmatrix = xgb.DMatrix(data=breast_X, label=breast_y)
+
+# Update the parameter dictionary
+parameters["objective"] = "reg:logistic"
+
+# Perform cross-validation: results
+results = xgb.cv(dtrain=xgbdmatrix, params=parameters, 
+                    nfold=3, num_boost_round=5, 
+                    metrics=["error", "auc"], as_pandas=True)
+
+# Print results
+print2(results)
+
+# Print the accuracy, Area Under Receiver Operating Characteristic Curve
+print2(f'Accuracy : {1-results["test-error-mean"].iloc[-1]:.2f}')
+print2(f'AUC : {results["test-auc-mean"].iloc[-1]:.2f}')
