@@ -109,3 +109,14 @@ plt.show()
 # Plot the ninth tree
 xgb.plot_tree(_reg, num_trees=8)
 plt.show()
+
+
+
+# Plot the last tree sideways
+xgb.plot_tree(_reg, num_trees=9, rankdir="LR")
+plt.show()
+
+
+# Plot the feature importances
+xgb.plot_importance(_reg)
+plt.show()
