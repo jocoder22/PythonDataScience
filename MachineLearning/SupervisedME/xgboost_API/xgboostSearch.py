@@ -4,7 +4,7 @@ import time
 import matplotlib.pyplot as plt
 
 import xgboost as xgb
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split, GridSearchCV, RandomizedSearchCV
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn import datasets
 
@@ -39,9 +39,21 @@ tlater = time.time()
 print(f'Elapsed time: {round(tlater - tnow, 3)} seconds')
 
 # Print the best parameters and lowest RMSE
-print("Best parameters found: ", gridsearcher.best_params_)
-print("Lowest RMSE found: ", np.sqrt(np.abs(gridsearcher.best_score_)))
+print(f"Best parameters found: {gridsearcher.best_params_}")
+print(f"Lowest RMSE found: {np.sqrt(np.abs(gridsearcher.best_score_))}")
 
 
 
 #########    Using Random search    ####################### 
+# Perform random search: 
+tnow = time.time()
+randomsearcher = RandomizedSearchCV(estimator=xgbReg, param_distributions=_grid, n_iter=100,
+                        scoring='neg_mean_squared_error', cv=4, verbose=1, n_jobs=-1)
+randomsearcher.fit(X, y)
+tlater = time.time()
+print(f'Elapsed time: {round(tlater - tnow, 3)} seconds')
+
+# Print the best parameters and lowest RMSE
+print(f"Best parameters found: {randomsearcher.best_params_}")
+print(f"Lowest RMSE found: {np.sqrt(np.abs(randomsearcher.best_score_))}")
+
