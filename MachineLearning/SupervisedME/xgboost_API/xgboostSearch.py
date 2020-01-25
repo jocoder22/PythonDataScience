@@ -39,8 +39,8 @@ tlater = time.time()
 print(f'Elapsed time: {round(tlater - tnow, 3)} seconds')
 
 # Print the best parameters and lowest RMSE
-print(f"Best parameters found: {gridsearcher.best_params_}")
-print(f"Lowest RMSE found: {np.sqrt(np.abs(gridsearcher.best_score_))}")
+print2(f"Best parameters found: {gridsearcher.best_params_}")
+print2(f"Lowest RMSE found: {np.sqrt(np.abs(gridsearcher.best_score_))}")
 
 
 
@@ -54,6 +54,6 @@ tlater = time.time()
 print(f'Elapsed time: {round(tlater - tnow, 3)} seconds')
 
 # Print the best parameters and lowest RMSE
-print(f"Best parameters found: {randomsearcher.best_params_}")
-print(f"Lowest RMSE found: {np.sqrt(np.abs(randomsearcher.best_score_))}")
+print2(f"Best parameters found: {randomsearcher.best_params_}")
+print2(f"Lowest RMSE found: {np.sqrt(np.abs(randomsearcher.best_score_))}")
 
