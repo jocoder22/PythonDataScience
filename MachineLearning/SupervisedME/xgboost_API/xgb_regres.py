@@ -90,3 +90,22 @@ for reg in regparams:
 df = pd.DataFrame(list(zip(regparams, rmses)), columns=["l2","rmse"])
 print2(df)
 
+# Plotting the trees for visualization
+# Train the model: _reg
+_reg = xgb.train(params=params, dtrain=_dmatrix, num_boost_round=12)
+
+# Plot the first tree
+xgb.plot_tree(_reg, num_trees=0)
+plt.show()
+
+# Plot the second tree
+xgb.plot_tree(_reg, num_trees=1)
+plt.show()
+
+# Plot the fifth tree
+xgb.plot_tree(_reg, num_trees=4)
+plt.show()
+
+# Plot the ninth tree
+xgb.plot_tree(_reg, num_trees=8)
+plt.show()
