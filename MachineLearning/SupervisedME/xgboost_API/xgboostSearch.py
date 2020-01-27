@@ -44,8 +44,9 @@ print2(f"Best parameters found: {gridsearcher.best_params_}")
 print2(f"Lowest RMSE found: {np.sqrt(np.abs(gridsearcher.best_score_)):.3f}")
 
 
-
+###########################################################
 #########    Using Random search    ####################### 
+###########################################################
 # Perform random search: 
 tnow = time.time()
 randomsearcher = RandomizedSearchCV(estimator=xgbReg, param_distributions=_grid, n_iter=100,
