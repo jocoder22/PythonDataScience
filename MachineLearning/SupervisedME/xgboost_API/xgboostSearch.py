@@ -29,7 +29,8 @@ _grid = {
 xgbReg = xgb.XGBRegressor(objective='reg:squarederror')
 
 #########################################################
-#########    Using Grid search    #######################    
+#########    Using Grid search    #######################
+#########################################################    
 # Perform grid search: 
 tnow = time.time()
 gridsearcher = GridSearchCV(estimator=xgbReg, param_grid=_grid,
