@@ -18,3 +18,9 @@ X = pd.DataFrame(calhousing.data, columns=calhousing.feature_names)
 y = calhousing.target
 
 print2(X[:6], y[:6], X.dtypes)
+
+mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
+
+# load pickle file
+onlinedata = pd.read_pickle(os.path.join(mydir, "onlinedata.pkl"))
+print2(onlinedata.head(), onlinedata.info())
