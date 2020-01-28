@@ -17,5 +17,4 @@ calhousing = datasets.fetch_california_housing()
 X = pd.DataFrame(calhousing.data, columns=calhousing.feature_names)
 y = calhousing.target
 
-
 print2(X[:6], y[:6], X.dtypes)
