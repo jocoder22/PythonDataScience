@@ -12,6 +12,15 @@ from sklearn import datasets
 def print2(*args):
     for arg in  args:
         print(arg, end="\n\n")
+        
+def catvalues2(ddtt, *args):
+    for arg in  args:
+        print(ddtt[arg].value_counts(), end="\n\n")
+        
+def catvalues2(ddtt):
+    for col in ddtt.columns:
+        if ddtt[col].dtypes == 'object':
+            print(ddtt[col].value_counts(), end="\n\n")
 
 mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
 
@@ -30,3 +39,4 @@ newpath = "D:\PythonDataScience\MachineLearning\FeatureEngineering"
 houseData = pd.read_csv(os.path.join(newpath, "housing.csv"))
 print2(houseData.info(), houseData.dtypes, houseData.head(), houseData.YearBuilt.value_counts(), houseData.shape)
 
+print22(houseData, "RoofStyle", "CentralAir")
