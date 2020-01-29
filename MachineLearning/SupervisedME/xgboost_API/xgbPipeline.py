@@ -24,4 +24,9 @@ print2(X[:6], y[:6], X.dtypes)
 
 # load pickle file
 onlinedata = pd.read_pickle(os.path.join(mydir, "onlinedata.pkl"))
-print2(onlinedata.head(), onlinedata.info())
+print2(onlinedata.head(), onlinedata.info(), y[:10])
+
+newpath = "D:\PythonDataScience\MachineLearning\FeatureEngineering"
+houseData = pd.read_csv(os.path.join(newpath, "housing.csv"))
+print2(houseData.info(), houseData.dtypes, houseData.head(), houseData.YearBuilt.value_counts(), houseData.shape)
+
