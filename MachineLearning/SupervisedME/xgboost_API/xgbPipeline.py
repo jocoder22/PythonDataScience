@@ -13,7 +13,7 @@ def print2(*args):
     for arg in  args:
         print(arg, end="\n\n")
         
-def catvalues2(ddtt, *args):
+def catvalues(ddtt, *args):
     for arg in  args:
         print(ddtt[arg].value_counts(), end="\n\n")
         
@@ -37,6 +37,7 @@ print2(onlinedata.head(), onlinedata.info(), y[:10])
 
 newpath = "D:\PythonDataScience\MachineLearning\FeatureEngineering"
 houseData = pd.read_csv(os.path.join(newpath, "housing.csv"))
-print2(houseData.info(), houseData.dtypes, houseData.head(), houseData.YearBuilt.value_counts(), houseData.shape)
+print2(houseData.info(), houseData.dtypes, houseData.head(), houseData.shape)
 
-print22(houseData, "RoofStyle", "CentralAir")
+catvalues(houseData, "RoofStyle", "CentralAir")
+catvalues2(houseData)
