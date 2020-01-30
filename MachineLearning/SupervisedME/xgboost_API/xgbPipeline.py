@@ -62,3 +62,15 @@ for key, value in dataData.items():
     else:
         houseData.loc[houseData['YearBuilt'] == key, 'Catt'] =  "Cat" + str(value)
     
+    
+catvalues(houseData, "YearBuilt", "Catt")
+print2(houseData.info(), houseData.dtypes, houseData.head(), houseData.shape)
+print2(houseData[["YearBuilt", "Catt"]].head(20))
+catvalues(houseData, "YearBuilt", "Catt")
+datacat = houseData["Catt"].value_counts()
+print2(datacat.head(35), datacat.tail(35))
+
+
+
+                
+                      
