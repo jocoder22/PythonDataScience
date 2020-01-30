@@ -21,8 +21,17 @@ def catvalues2(ddtt):
     for col in ddtt.columns:
         if ddtt[col].dtypes == 'object':
             print(ddtt[col].value_counts(), end="\n\n")
-
+            
+sp = "\n\n"
 mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
+mytt = r"D:\PythonDataScience\MachineLearning\UnsupervisedME"
+
+# load the dataset, 
+cardata = pd.read_csv(os.path.join(mytt, "car.csv"), compression='gzip')
+
+
+
+
 
 # Load the California Housing Data     
 calhousing = datasets.fetch_california_housing()
@@ -39,5 +48,5 @@ newpath = "D:\PythonDataScience\MachineLearning\FeatureEngineering"
 houseData = pd.read_csv(os.path.join(newpath, "housing.csv"))
 print2(houseData.info(), houseData.dtypes, houseData.head(), houseData.shape)
 
-catvalues(houseData, "RoofStyle", "CentralAir")
+catvalues(houseData, "RoofStyle", "CentralAir", "YearBuilt")
 catvalues2(houseData)
