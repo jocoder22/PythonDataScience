@@ -75,5 +75,6 @@ print2(datacat.head(35), datacat.tail(35))
 print(cardata.head(), end=sp)
 print(pd.unique(cardata['Model_year']), end=sp)
 print(cardata['Model_year'].value_counts(), end=sp)
+print2(houseData[["YearBuilt", "Catt"]].head(20))
                       
                       
