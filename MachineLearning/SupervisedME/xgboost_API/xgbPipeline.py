@@ -50,3 +50,15 @@ print2(houseData.info(), houseData.dtypes, houseData.head(), houseData.shape)
 
 catvalues(houseData, "RoofStyle", "CentralAir", "YearBuilt")
 catvalues2(houseData)
+
+
+dataData = houseData["YearBuilt"].value_counts()
+myy = houseData["YearBuilt"].unique()
+print2(dataData, myy)
+for key, value in dataData.items():
+    print(key, value)
+    if value >= 10:
+        houseData.loc[houseData['YearBuilt'] == key, 'Catt'] = str(key)
+    else:
+        houseData.loc[houseData['YearBuilt'] == key, 'Catt'] =  "Cat" + str(value)
+    
