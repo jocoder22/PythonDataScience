@@ -62,6 +62,7 @@ for key, value in dataData.items():
         houseData.loc[houseData['YearBuilt'] == key, 'Catt'] =  "Cat" + str(value)
     
     
+    
 catvalues(houseData, "YearBuilt", "Catt")
 print2(houseData.info(), houseData.dtypes, houseData.head(), houseData.shape)
 print2(houseData[["YearBuilt", "Catt"]].head(20))
