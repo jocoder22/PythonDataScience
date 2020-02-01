@@ -22,7 +22,7 @@ y = calhousing.target
 _grid = {
     'colsample_bytree': np.arange(0.2, 0.8, 0.1),
     'n_estimators': np.arange(20, 100, 10),
-    'max_depth': np.arange(2,6,1)
+    'max_depth': np.arange(2,5,1)
 }
 
 # Instantiate the XGBClassifier: xgbReg
