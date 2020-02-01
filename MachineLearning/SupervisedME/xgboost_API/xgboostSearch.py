@@ -28,6 +28,7 @@ _grid = {
 # Instantiate the XGBClassifier: xgbReg
 xgbReg = xgb.XGBRegressor(objective='reg:squarederror')
 
+
 #########################################################
 #########    Using Grid search    #######################
 #########################################################    
