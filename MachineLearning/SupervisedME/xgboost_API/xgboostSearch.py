@@ -68,9 +68,9 @@ snake_string = """
 Welcome to Python3!
 
              ____
-            / . .\\
+            / . .\\   Hello Python
             \  ---<
-             \  /
+             \  /     Ninga!!!
    __________/ /
 -=:___________/
 
