@@ -12,6 +12,8 @@ def print2(*args):
     for arg in  args:
         print(arg, end="\n\n")
 
+
+"""
 # Load the California Housing Data     
 calhousing = datasets.fetch_california_housing()
 X = pd.DataFrame(calhousing.data, columns=calhousing.feature_names)
@@ -59,4 +61,22 @@ print(f'Elapsed time: {round(tlater - tnow, 3)} seconds')
 # Print the best parameters and lowest RMSE
 print2(f"Best parameters found: {randomsearcher.best_params_}")
 print2(f"Lowest RMSE found: {np.sqrt(np.abs(randomsearcher.best_score_)):.3f}")
+
+"""
+how_many_snakes = 14
+snake_string = """
+Welcome to Python3!
+
+             ____
+            / . .\\
+            \  ---<
+             \  /
+   __________/ /
+-=:___________/
+
+<3, Juno
+"""
+
+
+print(snake_string * how_many_snakes)
 
