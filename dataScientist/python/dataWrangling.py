@@ -4,6 +4,7 @@ import pandas as pd
 def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
+
         
 def countInline(dataframe, c1, c3, lookuplist):
     from collections import defaultdict
