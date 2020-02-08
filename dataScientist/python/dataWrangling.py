@@ -6,13 +6,13 @@ def print2(*args):
         print(arg, end="\n\n")
 
         
-def countInline(dataframe, c1, c3, lookuplist):
+def countInline(dataframe, c1, c2, lookuplist):
     from collections import defaultdict
     mydict = defaultdict(int)
     
     for i in range(dataframe.shape[0]):
         for answer in lookuplist:
-            if dataframe[c1][i].split("; "):
+            if answer in dataframe[c1][i].split("; "):
                 mydict[answer] += int(dataframe[c2][i])
     
     mydata = pd.DataFrame(pd.Series(mydict)).reset_index()
@@ -41,4 +41,8 @@ for i in range(df2.shape[0]):
             answerlist.append(k)
             
 print2(answerlist)
+
+data2 = countInline(df2, "Method", "Count", answerlist)
+
+print2(data2)
 
