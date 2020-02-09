@@ -94,3 +94,21 @@ print2(answerlist)
 data4 = countInline(df, "CousinEducation")
 
 
+
+factors = ["CareerSatisfaction", "JobSatisfaction","StackOverflowSatisfaction", "CousinEducation"]
+print2( data4, df[factors].describe(), data4.Count.sum())
+
+# for i in range(5):
+#     print2(df.loc[i ,factors].sum())
+
+print2(sum(pd.notnull(df['Salary'])), df.shape)
+data2 = df[pd.notnull(df['Salary'])]
+print2(data2["Salary"].sum())
+print2(data2.loc[2, "Salary"], data2[["Salary", 'CousinEducation']].head(), data2.shape)
+
+print2(df.dropna(subset=factors).shape)
+
+data44 = salaryFactor(df, "CousinEducation",  "Salary")
+print2(data44, data4)
+
+print2(df.dropna(subset=factors).shape, df2)
