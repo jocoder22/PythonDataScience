@@ -28,3 +28,12 @@ ejdata.sort_values("percent", ascending=False, inplace=True)
 
 
 
+
+dfff = df.groupby("CompanySize")["JobSatisfaction"].sum().reset_index()
+dff2 = df.groupby("CompanySize")["JobSatisfaction"].count().reset_index()
+dff2.columns = ["CompanySize", "Count"]
+alldata = pd.merge(dff2,dfff)
+alldata["percent"] = alldata.JobSatisfaction / alldata.Count
+alldata.sort_values("percent", ascending=False, inplace=True)
+print2(alldata, ejdata)
+
