@@ -37,3 +37,11 @@ alldata["percent"] = alldata.JobSatisfaction / alldata.Count
 alldata.sort_values("percent", ascending=False, inplace=True)
 print2(alldata, ejdata)
 
+
+df2 = df.groupby("CompanySize").mean()["JobSatisfaction"].sort_values(ascending=False)
+ej2 = df.groupby("EmploymentStatus").mean()["JobSatisfaction"].sort_values(ascending=False)
+homeRemote = df.groupby("HomeRemote").mean()["JobSatisfaction"].sort_values(ascending=False)
+progHobby = df.groupby("ProgramHobby").mean()["JobSatisfaction"].sort_values(ascending=False)
+formalEdu = df.groupby("FormalEducation").mean()["JobSatisfaction"].sort_values(ascending=False)
+
+print2(df2, ej2, homeRemote, progHobby, formalEdu)
