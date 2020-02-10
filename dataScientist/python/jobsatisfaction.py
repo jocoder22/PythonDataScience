@@ -19,3 +19,12 @@ prop2 = df.JobSatisfaction.isnull().mean()
 prop3 = (df.JobSatisfaction.isnull() == False).mean()
 print2(question, prop, prop2, prop3)
 
+ej_sum = df.groupby("EmploymentStatus")["JobSatisfaction"].sum().reset_index()
+ej_count = df.groupby("EmploymentStatus")["JobSatisfaction"].count().reset_index()
+ej_count.columns = ["EmploymentStatus", "Count"]
+ejdata = pd.merge(ej_sum, ej_count)
+ejdata["percent"] = ejdata.JobSatisfaction / ejdata.Count
+ejdata.sort_values("percent", ascending=False, inplace=True)
+
+
+
