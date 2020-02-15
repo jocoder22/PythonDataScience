@@ -45,3 +45,13 @@ progHobby = df.groupby("ProgramHobby").mean()["JobSatisfaction"].sort_values(asc
 formalEdu = df.groupby("FormalEducation").mean()["JobSatisfaction"].sort_values(ascending=False)
 
 print2(df2, ej2, homeRemote, progHobby, formalEdu)
+
+print(df.notnull().all().sum(), df.shape[1], sep="\n\n")
+# print(df.notnull().all().values)
+
+lls = []
+for i,v  in enumerate(df.notnull().all().values):
+    if v == True:
+        lls.append(df.notnull().all().index[i])
+
+print(lls)
