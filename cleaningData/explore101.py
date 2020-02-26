@@ -17,6 +17,8 @@ print2(worldpop.shape, worldpop[worldpop.isnull().any(axis=1)], worldpop.columns
 
 worldpop2 = worldpop.drop(columns=["2019"])
 
-print2(worldpop2.info(), worldpop2.isnull().sum())
+print2(worldpop2.info(), worldpop2.isnull().sum(), worldpop2[worldpop2.isnull().any(axis=1)])
 
 print("China" in worldpop['Country Name'].values)
+
+chinadata = worldpop.loc[worldpop['Country Name'] == "China", :]
