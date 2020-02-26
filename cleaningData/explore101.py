@@ -16,6 +16,34 @@ worldpop = pd.read_excel("http://api.worldbank.org/v2/en/indicator/SP.POP.TOTL?d
 # explore the data
 print2(worldpop.shape, worldpop[worldpop.isnull().any(axis=1)], worldpop.columns, worldpop.info())
 
+
+# columns with at least one missing value
+# explore the data
+print2(worldpop.isnull().any().sum(), worldpop.shape[1])
+
+
+# show the column with any missing value
+print2(worldpop2[worldpop2.isnull().any(axis=1)])
+
+
+# Number of columns with all missing value
+print2(worldpop.isnull().all().sum(), worldpop.shape[1])
+
+
+# show the column with all missing value
+print2(worldpop[worldpop.isnull().all(axis=1)])
+
+
+
+# Number of rows with all missing value
+print2(worldpop.isnull().all(axis=1).sum(), worldpop.shape[1])
+# show the column with all missing value
+print2(worldpop[worldpop.isnull().all(axis=1)])
+
+
+# explore the data
+print2(worldpop.shape, worldpop[worldpop.isnull().all(axis=1)], worldpop.columns, worldpop.info())
+
 # No data for 2019, so drop the column
 worldpop2 = worldpop.drop(columns=["2019"])
 
@@ -32,3 +60,6 @@ plt.plot(chinadata.columns, chinadata.values[0])
 plt.xticks(rotation=45)
 plt.grid()
 plt.show()
+
+
+
