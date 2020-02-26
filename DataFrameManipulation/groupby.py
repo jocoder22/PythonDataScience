@@ -1,6 +1,8 @@
 from scipy.stats import zscore
 import pandas as pd 
 
+# https://www.shanelynn.ie/summarising-aggregation-and-grouping-data-in-python-pandas/
+
 # download titanic dataset
 url = 'https://assets.datacamp.com/production/repositories/502/datasets/e280ed94bf4539afb57d8b1cbcc14bcf660d3c63/titanic.csv'
 titan = pd.read_csv(url, sep=',')

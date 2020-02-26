@@ -67,7 +67,7 @@ gapminder = pd.read_csv('gapminder.csv')
 # Drop the missing values
 # Drop the rows in the data where any observation in life_expectancy is missing. 
 # As confirmed that country and year don't have missing values, we can 
-# use the .dropna() method on the entire gapminder DataFrame, because any missing 
+# use the .() method on the entire gapminder DataFrame, because any missing 
 # values would have to be in the life_expectancy column. The .dropna() method has 
 # the default keyword arguments axis=0 and how='any', which specify that rows 
 # with any missing values should be dropped.

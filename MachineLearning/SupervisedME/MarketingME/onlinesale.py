@@ -42,42 +42,43 @@ customergroups = onlinedata.groupby('CustomerID')['InvoiceMonth']
 onlinedata['CohortMonth'] = customergroups.transform('min')
 onlinedata['CohortMonth2'] = onlinedata.groupby('CustomerID')['InvoiceDate'].transform('min')
 
-# Extract year and month for each invoiceDate and cohort group
-customerYear, customerMonth = onlinedata['InvoiceMonth'].dt.year, onlinedata['InvoiceMonth'].dt.month
-cohortYear, cohortMonth =  onlinedata['CohortMonth'].dt.year, onlinedata['CohortMonth'].dt.month
+print2(onlinedata)
+# # Extract year and month for each invoiceDate and cohort group
+# customerYear, customerMonth = onlinedata['InvoiceMonth'].dt.year, onlinedata['InvoiceMonth'].dt.month
+# cohortYear, cohortMonth =  onlinedata['CohortMonth'].dt.year, onlinedata['CohortMonth'].dt.month
 
-yeardiff = customerYear - cohortYear
-monthdiff = customerMonth - cohortMonth
-onlinedata['cohortIndex'] = yeardiff * 12 + monthdiff + 1
+# yeardiff = customerYear - cohortYear
+# monthdiff = customerMonth - cohortMonth
+# onlinedata['cohortIndex'] = yeardiff * 12 + monthdiff + 1
 
-# Anothe method to extract cohortIndex
-onlinedata['cohortIndex2'] = onlinedata["InvoiceDate"] - onlinedata['CohortMonth2'] 
-onlinedata['cohortIndex2'] = round(onlinedata['cohortIndex2']/np.timedelta64(1, "M") + 1)
+# # Anothe method to extract cohortIndex
+# onlinedata['cohortIndex2'] = onlinedata["InvoiceDate"] - onlinedata['CohortMonth2'] 
+# onlinedata['cohortIndex2'] = round(onlinedata['cohortIndex2']/np.timedelta64(1, "M") + 1)
 
-cohortgroups = onlinedata.groupby(["CohortMonth", "cohortIndex"])
-cohortNumber = cohortgroups["CustomerID"].apply(pd.Series.nunique).reset_index()
-
-
-cohortTable = cohortNumber.pivot(index = "CohortMonth",
-                                 columns = "cohortIndex",
-                                 values = "CustomerID")
-
-Retention = cohortTable.divide(cohortTable.iloc[:, 0], axis=0).round(3) 
-
-print2(onlinedata.loc[:, "InvoiceDate": ].tail(), onlinedata.info(), onlinedata.columns, cohortNumber, cohortTable, Retention)
-Retention.index = Retention.index.strftime("%Y-%m-%d")
+# cohortgroups = onlinedata.groupby(["CohortMonth", "cohortIndex"])
+# cohortNumber = cohortgroups["CustomerID"].apply(pd.Series.nunique).reset_index()
 
 
-plt.figure(figsize=(12, 10))
-sns.heatmap(data = Retention,
-            annot = True,
-            fmt = '.0%',
-            vmin = 0.0, vmax = 0.5,
-            # cmap = "BuGn")
-            )
+# cohortTable = cohortNumber.pivot(index = "CohortMonth",
+#                                  columns = "cohortIndex",
+#                                  values = "CustomerID")
 
-# plt.yticks(rotation=0)
-plt.title("Retention Ratio")
-plt.show()
+# Retention = cohortTable.divide(cohortTable.iloc[:, 0], axis=0).round(3) 
 
-print2(Retention.info(), Retention.index)
+# print2(onlinedata.loc[:, "InvoiceDate": ].tail(), onlinedata.info(), onlinedata.columns, cohortNumber, cohortTable, Retention)
+# Retention.index = Retention.index.strftime("%Y-%m-%d")
+
+
+# plt.figure(figsize=(12, 10))
+# sns.heatmap(data = Retention,
+#             annot = True,
+#             fmt = '.0%',
+#             vmin = 0.0, vmax = 0.5,
+#             # cmap = "BuGn")
+#             )
+
+# # plt.yticks(rotation=0)
+# plt.title("Retention Ratio")
+# plt.show()
+
+# print2(Retention.info(), Retention.index)
