@@ -64,10 +64,26 @@ plt.grid()
 plt.show()
 
 
+######################################################################
+# working with json files
 # download json file using API
 url = 'http://api.worldbank.org/v2/countries/br;cn;us;de/indicators/SP.POP.TOTL/?format=json&per_page=1000'
 r = requests.get(url)
-print2(r.json())
+print2(r.json()[1][218])
+
+# create pandas dataframe, bad way
+df = pd.DataFrame(r.json()[1])
+print2(df.head())
 
 
+# create pandas dataframe, good way
+mydict = {"Indicator": [], "Country": [], "Year": [], "Population": []}
 
+for i in r.json()[1]:
+    mydict["Indicator"].append(i["indicator"]["value"].split(",")[0]+"_Total")
+    mydict["Country"].append(i["country"]["value"])
+    mydict["Year"].append(i["date"])
+    mydict["Population"].append(i["value"])
+
+df2 = pd.DataFrame.from_dict(mydict)
+print2(df2.head())
