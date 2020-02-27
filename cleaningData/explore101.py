@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
+from bs4 import BeautifulSoup
+from io import BytesIO
+from zipfile import ZipFile
+from collections import defaultdict
 import requests
 
 
@@ -66,6 +70,17 @@ plt.show()
 
 ######################################################################
 # working with json files
+# 'split' : dict like {index -> [index], columns -> [columns], data -> [values]}
+
+# 'records' : list like [{column -> value}, ... , {column -> value}]
+
+# 'index' : dict like {index -> {column -> value}}
+
+# 'columns' : dict like {column -> {index -> value}}
+
+# 'values' : just the values array
+
+
 # download json file using API
 url = 'http://api.worldbank.org/v2/countries/br;cn;us;de/indicators/SP.POP.TOTL/?format=json&per_page=1000'
 r = requests.get(url)
@@ -87,3 +102,33 @@ for i in r.json()[1]:
 
 df2 = pd.DataFrame.from_dict(mydict)
 print2(df2.head())
+
+
+
+# Working with XML file
+url = "http://api.worldbank.org/v2/en/indicator/SP.POP.TOTL?downloadformat=xml"
+
+response = requests.get(url)
+print2(response.headers['content-type']) # very important line ############################
+
+# This is a zip file, so we have to unzip it
+zipp = ZipFile(BytesIO(response.content))
+print2(zipp.namelist())
+mylist = [filename for filename in zipp.namelist()]
+print(mylist[0])
+
+
+soup = BeautifulSoup(zipp.open(mylist[0]), "lxml") 
+# print2(soup)
+   
+
+
+df = defaultdict(list)
+
+for record in soup.find_all('record'):
+    for record in record.find_all('field'):
+        df[record['name']].append(record.text)
+        
+
+dp = pd.DataFrame.from_dict(df)
+dp
