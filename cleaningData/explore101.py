@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
+import requests
 
 
 def print2(*args):
@@ -60,6 +61,12 @@ plt.plot(chinadata.columns, chinadata.values[0])
 plt.xticks(rotation=45)
 plt.grid()
 plt.show()
+
+
+# download json file using API
+url = 'http://api.worldbank.org/v2/countries/br;cn;us;de/indicators/SP.POP.TOTL/?format=json&per_page=1000'
+r = requests.get(url)
+print2(r.json())
 
 
 
