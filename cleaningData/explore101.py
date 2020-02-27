@@ -122,13 +122,21 @@ soup = BeautifulSoup(zipp.open(mylist[0]), "lxml")
 # print2(soup)
    
 
-
+# Create default dictionary
 df = defaultdict(list)
 
 for record in soup.find_all('record'):
-    for record in record.find_all('field'):
-        df[record['name']].append(record.text)
+    for field in record.find_all('field'):
+        if field['name'] == "Item":
+            df[field['name']].append(field.text.split(",")[0]+"_Total")
+        else:
+            df[field['name']].append(field.text)
         
 
 dp = pd.DataFrame.from_dict(df)
-dp
+print2(dp.head(), dp.columns.tolist())
+
+df = dp.pivot(index='Country or Area', columns='Year', values='Value')
+df.reset_index(level=0, inplace=True)
+df.columns.name = None
+print2(df.head())
