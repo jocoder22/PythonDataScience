@@ -151,3 +151,16 @@ def model_pipeline():
     
 
     return pipeline
+  
+  
+  def main3():
+    X, y = load_data()
+    X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+    model = model_pipeline()
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+
+    display_results(y_test, y_pred)
+
+main3()
