@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import nltk
 nltk.download(['punkt', 'wordnet', 'stopwords'])
@@ -7,6 +8,11 @@ import re
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
+
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 
 
