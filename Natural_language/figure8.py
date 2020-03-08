@@ -56,3 +56,49 @@ for message in X[:5]:
     tokens = tokenize(message)
     print(message)
     print(tokens, '\n')
+    
+    
+    
+def display_results(y_test, y_pred):
+    # insert step 4 here
+    
+    labels = np.unique(y_pred)
+    confusion_mat = confusion_matrix(y_test, y_pred, labels=labels)
+    accuracy = (y_pred == y_test).mean()
+
+    print("Labels:", labels)
+    print("Confusion Matrix:\n", confusion_mat)
+    print("Accuracy:", accuracy)
+
+
+def main():
+    # insert steps 1 through 3 here
+    # load data
+    X, y = load_data()
+
+    # perform train test split
+    X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+    
+    # Instantiate transformers and classifier
+    vect = CountVectorizer(tokenizer=tokenize)
+    tfidf = TfidfTransformer()
+    clf = RandomForestClassifier()
+
+    # Fit and/or transform each to the data
+    Xtrain_counts = vect.fit_transform(X_train)
+    Xtrain_tfidf = tfidf.fit_transform(Xtrain_counts)
+    clf.fit(Xtrain_tfidf, y_train)
+
+
+    X_test_counts = vect.transform(X_test)
+    X_test_tfidf = tfidf.transform(X_test_counts)
+ 
+
+    # Predict test labels
+    y_pred = clf.predict(X_test_tfidf)
+    
+    display_results(y_test, y_pred)
+    
+    
+main()
