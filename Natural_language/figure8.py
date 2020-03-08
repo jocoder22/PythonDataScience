@@ -24,3 +24,30 @@ def load_data():
   return x, y
 
 
+regfind = "http:.*"
+
+def tokenize(text):
+    urlmatch = re.findall(regfind, text)
+    
+    for url in urlmatch:
+        text = text.replace(url, " ")
+
+    stop_words = stopwords.words("english")
+    tokens = word_tokenize(text)
+    tokens = [word for word in tokens if word not in stop_word]
+    lemmatizer = WordNetLemmatizer()
+
+    clean_words = []
+    
+    for token in tokens:
+        _token = lemmatizer.lemmatize(token).lower().strip()
+        clean_words.append(_token)
+
+    return clean_words
+
+
+X, y = load_data()
+for message in X[:5]:
+    tokens = tokenize(message)
+    print(message)
+    print(tokens, '\n')
