@@ -1,12 +1,12 @@
 import pandas as pd
 import nltk
-nltk.download(['punkt', 'wordnet'])
+nltk.download(['punkt', 'wordnet', 'stopwords'])
 
 
 import re
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
-from nlkt.corpus import stopwords
+from nltk.corpus import stopwords
 
 
 
@@ -18,8 +18,8 @@ def load_data():
 
   mess = message[(message['category'] != "Exclude") & (message[ 'category:confidence'] == 1)]
   
-  x = message.text.values()
-  y = message.category.values()
+  x = message.text.values
+  y = message.category.values
   
   return x, y
 
@@ -27,20 +27,25 @@ def load_data():
 regfind = "http:.*"
 
 def tokenize(text):
-    urlmatch = re.findall(regfind, text)
+    # urlmatch = re.findall(regfind, text)
     
-    for url in urlmatch:
-        text = text.replace(url, " ")
+    # for url in urlmatch:
+    #     text = text.replace(url, " ")
 
-    stop_words = stopwords.words("english")
+    regfind = r"http:.*"
+    text = re.sub(regfind, " ", text)
+
+    stop_words = set(stopwords.words('english'))
+    stop_words.add(":")
     tokens = word_tokenize(text)
-    tokens = [word for word in tokens if word not in stop_word]
+    tokens = [word for word in tokens if word not in stop_words]
     lemmatizer = WordNetLemmatizer()
 
     clean_words = []
     
     for token in tokens:
         _token = lemmatizer.lemmatize(token).lower().strip()
+        _token = lemmatizer.lemmatize(_token, pos="v")
         clean_words.append(_token)
 
     return clean_words
