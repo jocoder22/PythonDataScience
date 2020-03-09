@@ -57,6 +57,17 @@ def tokenize(text):
 
     return clean_words
 
+  def display_results(y_test, y_pred):
+    # insert step 4 here
+    
+    labels = np.unique(y_pred)
+    confusion_mat = confusion_matrix(y_test, y_pred, labels=labels)
+    accuracy = (y_pred == y_test).mean()
+
+    print("Labels:", labels)
+    print("Confusion Matrix:\n", confusion_mat)
+    print("Accuracy:", accuracy)
+    
 def main2():
     X, y = load_data()
     X_train, X_test, y_train, y_test = train_test_split(X, y)
