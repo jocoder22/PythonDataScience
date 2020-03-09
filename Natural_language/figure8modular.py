@@ -57,3 +57,27 @@ def tokenize(text):
 
     return clean_words
 
+def main2():
+    X, y = load_data()
+    X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+    # build pipeline
+    pipeline = Pipeline([
+        ("vect", CountVectorizer(tokenizer=tokenize)),
+        ("tfidf", TfidfTransformer()),
+        ("clf", RandomForestClassifier())  
+    ])
+
+      
+        
+    # train classifier
+    pipeline.fit(X_train, y_train)
+    
+    # predict on test data
+    y_pred = pipeline.predict(X_test)
+    
+    # display results
+    display_results(y_test, y_pred)
+
+
+main2()
