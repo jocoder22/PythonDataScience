@@ -13,14 +13,14 @@ def print2(*args):
         print(arg, end="\n\n")
 
 
-"""
 # Load the California Housing Data     
 calhousing = datasets.fetch_california_housing()
 X = pd.DataFrame(calhousing.data, columns=calhousing.feature_names)
 y = calhousing.target
 
+print2(y[:10], X.head())
 
-
+"""
 _grid = {
     'colsample_bytree': np.arange(0.2, 0.8, 0.1),
     'n_estimators': np.arange(20, 100, 10),

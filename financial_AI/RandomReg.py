@@ -14,8 +14,9 @@ from sklearn.model_selection import train_test_split as tts
 
 plt.style.use('ggplot')
 
-path = r'C:\Users\Jose\Desktop\PythonDataScience\financial_AI'
-os.chdir(path)
+# path = r'C:\Users\Jose\Desktop\PythonDataScience\financial_AI'
+# path = r'C:\Users\Jose\Desktop\PythonDataScience\financial_AI'
+# os.chdir(path)
 
 sp = '\n\n'
 dat1 = date.today()
@@ -95,9 +96,9 @@ y_test2.sort_index(inplace=True)
 print(y_test2.tail(10))
 
 # # Save the model
-filename = f'model_{symbol}_{datenow}.sav'
-pkl.dump(model2, open(filename, 'wb'))
-dump(model2, f'model2_{symbol}_{datenow}.joblib')
+# filename = f'model_{symbol}_{datenow}.sav'
+# pkl.dump(model2, open(filename, 'wb'))
+# dump(model2, f'model2_{symbol}_{datenow}.joblib')
 
 
 # # loading the model
