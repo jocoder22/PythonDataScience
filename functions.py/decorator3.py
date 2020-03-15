@@ -1,12 +1,15 @@
 #!/usr/bin/env python
-# import os
+import os
 from functools import wraps
+
 
 def print2(*args):
     for arg in args:
-        print(arg, end='\n\n') 
+        print(arg, end='\n\n')
 
-sp = {"sep":"\n\n", "end":"\n\n"}  
+
+sp = {"sep": "\n\n", "end": "\n\n"}
+
 
 def mycounter(func):
     """
@@ -23,10 +26,10 @@ def mycounter(func):
 
         return result
 
-
     mywrapper.count = 0
 
     return mywrapper
+
 
 @mycounter
 def square(n=1):

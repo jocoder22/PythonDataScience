@@ -2,6 +2,8 @@
 
 import numpy as np 
 import matplotlib.pyplot as plt
+# plt.rc('figure', figsize=[10,8], dpi=200)
+# plt.rcParams.keys()
 
 # plt.ion()
 

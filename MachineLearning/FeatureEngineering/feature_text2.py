@@ -101,4 +101,5 @@ data2 = pd.concat([data, News_content_df], axis=1)
 
 
 
-xprint(data2)
+xprint(data2) 
+print(data[['cleanText']].head())

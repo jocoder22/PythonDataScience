@@ -3,11 +3,14 @@
 
 import time
 
+
 def print2(*args):
     for arg in args:
         print(arg, end='\n\n')
-  
-sp = {"sep":"\n\n", "end":"\n\n"} 
+
+
+sp = {"sep": "\n\n", "end": "\n\n"}
+
 
 def mytimer(func):
     """Calculate time in seconds to run a program
@@ -40,6 +43,7 @@ def mytimer(func):
 
     return wrapper
 
+
 @mytimer
 def runtimefunc(n):
     time.sleep(n)
@@ -70,7 +74,8 @@ def memoize(func2):
     def wrapper2(*args2, **kwargs):
 
         value = tuple(f'{val}{kwargs[val]}' for val in sorted(kwargs))
-        value2 = tuple(sorted(kwargs.items(), key = lambda kv_pair:(kv_pair[0], kv_pair[1])))
+        value2 = tuple(
+            sorted(kwargs.items(), key=lambda kv_pair: (kv_pair[0], kv_pair[1])))
 
         if (args2 + value) not in cache:
 
@@ -83,11 +88,13 @@ def memoize(func2):
 
     return wrapper2
 
+
 @mytimer
 @memoize_arg
 def longmult(a, b, c):
     print('sleeping .......')
-    return a * b * c 
+    return a * b * c
+
 
 longmult(10, 4, 5)
 print('starting second call for decorator without kwargs')
@@ -96,12 +103,11 @@ print('starting third call for decorator without kwargs with new args')
 longmult(4, 10, 5)
 
 
-
 @mytimer
 @memoize
 def longmult2(a, b, c, **kwargs):
     print('sleeping .......')
-    result = a * b * c 
+    result = a * b * c
     for k in kwargs.values():
         result *= k
     return result
