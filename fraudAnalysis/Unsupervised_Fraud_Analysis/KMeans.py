@@ -8,7 +8,7 @@ from io import BytesIO
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import FeatureUnion
 from sklearn.preprocessing import FunctionTransformer
-from sklearn.preprocessing import Imputer
+from sklearn.impute import SimpleImputer
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import roc_auc_score

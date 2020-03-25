@@ -5,8 +5,9 @@ import os
 from sqlalchemy import create_engine, MetaData, Table, select
 
 
-path = 'C:/Users/okigboo/Desktop/PythonDataScience/importingData/webData'
+path = 'D:\PythonDataScience\importingData\webData'
 os.chdir(path)
+
 # Create engine: engine
 engine = create_engine('sqlite:///survey.db')
 connection = engine.connect()
@@ -15,6 +16,9 @@ metadata = MetaData()
 
 print(engine.table_names())  # ['Person', 'Site', 'Survey', 'Visited']
 
+
+
+"""
 survey = Table('Survey', metadata, autoload=True, autoload_with=engine)
 
 ssmt = select([survey])
@@ -46,3 +50,5 @@ ssmt = ssmt.where(survey.columns.person == 'lake')
 # Execute the query to retrieve all the data returned: results
 results = connection.execute(ssmt).fetchall()
 print(results)
+
+"""

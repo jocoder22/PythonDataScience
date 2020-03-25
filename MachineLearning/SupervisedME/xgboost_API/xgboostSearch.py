@@ -80,3 +80,4 @@ Welcome to Python3!
 
 print(snake_string * how_many_snakes)
 
+print(20,)

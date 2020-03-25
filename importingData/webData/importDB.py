@@ -3,7 +3,10 @@
 import os
 from urllib.request import urlretrieve
 
-os.chdir('c:/Users/Jose/Desktop/PythonDataScience/importingData/webData/')
+path = 'D:\PythonDataScience\importingData\webData'
+
+os.chdir(path)
+
 
 url = 'http://swcarpentry.github.io/sql-novice-survey/files/survey.db'
 
