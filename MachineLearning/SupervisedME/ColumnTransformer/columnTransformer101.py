@@ -44,13 +44,18 @@ class columndropper(BaseEstimator, TransformerMixin):
         return col_
 
 
+# create FunctionTransformer
 f_dummy = FunctionTransformer(lambda x : pd.get_dummies(x, columns=['neighbourhood_group', 'room_type']), validate=False)
 
 sp = {"end":'\n\n', "sep":'\n\n'}
 
+
+# download online data
 airbnb = "http://data.insideairbnb.com/united-states/ny/new-york-city/2020-03-13/visualisations/listings.csv"
 df = pd.read_csv(airbnb)
 
+
+# select columns for further analysis
 select_col = ['neighbourhood_group',
         'latitude', 'longitude', 'room_type', 'price',
        'minimum_nights', 'number_of_reviews', 
