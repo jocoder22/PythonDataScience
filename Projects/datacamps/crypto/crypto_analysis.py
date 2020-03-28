@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
 sp = '\n\n'
-path = 'C:\\Users\\Jose\\Desktop\\PythonDataScience\\Projects\\datacamps\\crypto\\'
+# path = 'C:\\Users\\Jose\\Desktop\\PythonDataScience\\Projects\\datacamps\\crypto\\'
+path = "D:\PythonDataScience\Projects\datacamps\crypto"
 os.chdir(path)
 data = pd.read_csv('crypto.csv')
 

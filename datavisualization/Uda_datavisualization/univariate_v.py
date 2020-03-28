@@ -14,21 +14,78 @@ airbnb = pd.read_csv(url)
 
 print2(airbnb.head(), airbnb.columns)
 
+
+"""
 # Bar chart, for qualitative, categorical data
 g = sns.countplot(data=airbnb, x="neighbourhood_group", color=sns.color_palette()[0])
 plt.xlabel("NYC Boroughs")
 plt.ylabel("Counts")
 plt.title("Counts of NYC Airbnb Listing")
+plt.show()
 
 
-# sorted bar plots
+# sorted bar plots on counts
+bcolor = sns.color_palette()[0]
+cat_order = airbnb["neighbourhood_group"].value_counts().index
+sns.countplot(data=airbnb, x="neighbourhood_group", color = bcolor, order = cat_order)
+plt.xlabel("NYC Boroughs")
+plt.ylabel("Counts")
+plt.title("Counts of NYC Airbnb Listing")
+plt.show()
 
+# sorted bar chart on ordinal categories
+# this method requires pandas v0.21 or later
+ordering_ = ['Entire home/apt', 'Hotel room', 'Private room', 'Shared room']
+cat_ordered = pd.api.types.CategoricalDtype(ordered = True, categories = ordering_)
+airbnb['room_type'] = airbnb['room_type'].astype(cat_ordered)
+
+sns.countplot(data=airbnb, x="room_type", color = bcolor)
+plt.xlabel("Room Types")
+plt.ylabel("Counts")
+plt.xticks(rotation = 30)
+plt.title("Counts of NYC Airbnb Listing Room Types")
+plt.show()
+
+"""
+# horizontal bars, pass y values instead, remember to label appropriately
+# sorted bar plots on counts
+bcolor = sns.color_palette()[0]
+plt.figure(facecolor='white')
+plt.axes(frameon=False)
+cat_order = airbnb["neighbourhood_group"].value_counts().index
+g = sns.countplot(data=airbnb, y="neighbourhood_group", color = bcolor, order = cat_order)
+plt.ylabel("NYC Boroughs")
+plt.xlabel(" ")
+# plt.axis('off')
+plt.xticks([])
+plt.title("Counts of NYC Airbnb Listing")
+
+for i, v in enumerate(airbnb["neighbourhood_group"].value_counts()):
+    plt.text(v, i, " "+str(v), color=bcolor, va='center', fontweight='bold')
+    # g.text(v + 3, i + .25, str(v), color='blue', fontweight='bold')
 
 plt.show()
 
 
 
 
+
+
+
+
+fig1 = plt.figure(facecolor='white')
+ax1 = plt.axes(frameon=False)
+# ax1.set_frame_on(False)
+ax1.get_xaxis().tick_bottom()
+ax1.axes.get_yaxis().set_visible(False)
+# ax1.axes.get_xaxis().set_visible(False)
+sns.countplot(data=airbnb, x="neighbourhood_group", color = bcolor, order = cat_order)
+
+for idx, key in enumerate(airbnb["neighbourhood_group"].value_counts()):
+    #    ypoint = key + 390
+       plt.text(idx, key , str(key)+"\n", color='black', va='bottom', ha='center', fontweight='bold')
+
+plt.show()
 
 
 """
