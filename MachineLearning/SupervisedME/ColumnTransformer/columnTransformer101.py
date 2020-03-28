@@ -68,12 +68,12 @@ dups = ['neighbourhood_group',
        'reviews_per_month', 'calculated_host_listings_count']
 
 
-
+# drop duplicates rows
 df.drop_duplicates(subset = dups, keep = False, inplace = True)
 data = df[select_col]
 
 
-print(data['neighbourhood_group'].value_counts().index.tolist())
+# print(data['neighbourhood_group'].value_counts().index.tolist())
 data["strata"] = data['neighbourhood_group'].map(
     {
        'Manhattan': "M",
