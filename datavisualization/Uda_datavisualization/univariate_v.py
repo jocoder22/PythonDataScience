@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -54,11 +55,11 @@ plt.figure(facecolor='white')
 plt.axes(frameon=False)
 cat_order = airbnb["neighbourhood_group"].value_counts().index
 g = sns.countplot(data=airbnb, y="neighbourhood_group", color = bcolor, order = cat_order)
-plt.ylabel("NYC Boroughs")
+plt.ylabel(" ")
 plt.xlabel(" ")
 # plt.axis('off')
 plt.xticks([])
-plt.title("Counts of NYC Airbnb Listing")
+plt.title("Counts of NYC Airbnb Listing among the Boroughs")
 
 for i, v in enumerate(airbnb["neighbourhood_group"].value_counts()):
     plt.text(v, i, " "+str(v), color=bcolor, va='center', fontweight='bold')
@@ -68,7 +69,8 @@ plt.show()
 
 
 
-
+path2 = r"C:\Users\HP\Desktop"
+os.chdir(path2)
 
 
 
@@ -80,12 +82,16 @@ ax1.get_xaxis().tick_bottom()
 ax1.axes.get_yaxis().set_visible(False)
 # ax1.axes.get_xaxis().set_visible(False)
 sns.countplot(data=airbnb, x="neighbourhood_group", color = bcolor, order = cat_order)
+plt.title("Counts of NYC Airbnb Listing among the Boroughs")
+plt.xlabel(" ")
 
 for idx, key in enumerate(airbnb["neighbourhood_group"].value_counts()):
     #    ypoint = key + 390
        plt.text(idx, key , str(key)+"\n", color='black', va='bottom', ha='center', fontweight='bold')
 
+plt.savefig("plot1.png")
 plt.show()
+
 
 
 """
