@@ -8,7 +8,7 @@ def print2(*args):
     for arg in args:
         print(arg, sep="\n\n", end="\n\n")
 
-path = "D:\PythonDataScience\datavisualization\Uda_datavisualization"
+path = r"D:\PythonDataScience\datavisualization\Uda_datavisualization"
 os.chdir(path)
 
 fcon = pd.read_csv('fuel-econ.csv')
@@ -23,11 +23,29 @@ print2(airbnb.head(), airbnb.columns, airbnb.info())
 plt.scatter(data=airbnb, x="latitude", y="longitude")
 plt.show()
 
-plt.scatter(data=airbnb, x="price", y="longitude")
+tips = sns.load_dataset("tips")
+ax = sns.regplot(x="total_bill", y="tip", data=tips)
 plt.show()
 
 
+plt.scatter(data=airbnb, x="price", y="longitude")
+plt.show()
+
+sns.regplot(x="displ", y="comb", data=fcon)
+plt.show()
+
+
+sns.regplot(x="year", y="comb", data=fcon, x_jitter=0.04, scatter_kws={
+                    "alpha": 1\20
+            })
+plt.show()
+.
 airbnb2 = airbnb.loc[airbnb.price < 200]
 airbnb2['logprice'] = np.log10(airbnb2['price'])
 sns.regplot(data=airbnb2, x="logprice", y="number_of_reviews")
 plt.show()
+
+
+
+print2(tips.head())
+
