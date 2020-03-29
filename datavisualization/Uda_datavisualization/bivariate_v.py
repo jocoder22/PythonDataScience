@@ -91,6 +91,8 @@ fcon['VClass'] = fcon['VClass'].astype(cat_ordered)
 ax = sns.violinplot(x="VClass", y="comb", data=fcon,
         color=sns.color_palette()[0], inner=None)
 plt.xticks(rotation=15)
+plt.xlabel('Vehicle Class')
+plt.ylabel('CO2 (g\l)')
 plt.show()
 
 
