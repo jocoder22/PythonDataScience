@@ -43,6 +43,8 @@ plt.show()
 sns.regplot(x="displ", y="comb", data=fcon, x_jitter=0.03, scatter_kws={
                     "alpha": 1/20
             })
+plt.xlabel('displacement (l)')
+plt.ylabel('CO2 (g\l)')
 plt.show()
 
 
