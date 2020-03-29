@@ -39,11 +39,12 @@ plt.show()
 
 plt.scatter(data=airbnb, x="price", y="longitude")
 plt.show()
-
+"""
 sns.regplot(x="displ", y="comb", data=fcon, x_jitter=0.03, scatter_kws={
                     "alpha": 1/20
             })
 plt.show()
+
 
 
 print2(fcon[['displ','comb']].describe())
@@ -68,7 +69,7 @@ for i in range(counts.shape[0]):
                      ha = 'center', va = 'center', color = 'black')
 plt.show()
 
-
+"""
 sns.regplot(x="year", y="comb", data=fcon, x_jitter=0.34, scatter_kws={
                     "alpha": 1/20
             })
@@ -121,4 +122,57 @@ ax1.get_yaxis().tick_left()
 ax1 = sns.countplot(x="VClass", hue="trans_type", data=fcon)
 # plt.xticks(rotation=15)
 ax1.legend(loc = 8, ncol = 3, framealpha = 1, title = 'Transmission Type')
+plt.show()
+
+
+ax1 = plt.subplot(111)
+cat_count = fcon.groupby(["VClass", "trans_type"]).size()
+cat_count = cat_count.reset_index(name = "Counts")
+cat_count = cat_count.pivot(index = 'VClass', columns = 'trans_type', values="Counts")
+ax1 = sns.heatmap(cat_count, annot=True, fmt='d')
+plt.show()
+
+
+# facetting, categorical and numeric variables
+group_means = fcon.groupby(['VClass']).mean()
+group_order = group_means.sort_values(['comb'], ascending = False).index
+bin_ = np.arange(fcon.comb.min(), fcon.comb.max()+3, 3)
+g = sns.FacetGrid(data=fcon, col = 'VClass', col_wrap=3,  col_order = group_order)
+g.map(plt.hist, 'comb', bins=bin_)
+g.set_titles('{col_name}')
+plt.show()
+
+
+
+ax = sns.barplot(x="VClass", y="comb", data=fcon,
+        color=sns.color_palette()[0], ci="sd") # errwidth = 0
+plt.xticks(rotation=15)
+plt.ylabel("Average combined fuel efficiency (mgp)")
+plt.show()
+
+ax = sns.pointplot(x="VClass", y="comb", data=fcon) # linestyple = " "
+plt.xticks(rotation=15)
+plt.ylabel("Average combined fuel efficiency (mgp)")
+plt.show()
+
+
+
+
+
+
+
+# set bin edges, compute centers
+bin_size = 0.25
+xbin_edges = np.arange(0.5, fcon['displ'].max()+bin_size, bin_size)
+xbin_centers = (xbin_edges + bin_size/2)[:-1]
+
+# compute statistics in each bin
+data_xbins = pd.cut(fcon['displ'], xbin_edges, right = False, include_lowest = True)
+y_means = fcon['comb'].groupby(data_xbins).mean()
+# y_sems = fcon['comb'].groupby(data_xbins).sem()
+
+# plot the summarized data
+plt.errorbar(x = xbin_centers, y = y_means)
+plt.xlabel('displacement (l)')
+plt.ylabel('CO2 (g\l)')
 plt.show()
