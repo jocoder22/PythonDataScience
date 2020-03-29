@@ -75,9 +75,14 @@ os.chdir(path2)
 
 
 
-fig1 = plt.figure(facecolor='white')
-ax1 = plt.axes(frameon=False)
+# fig1 = plt.figure(facecolor='white')
+# ax1 = plt.axes(frameon=False)
 # ax1.set_frame_on(False)
+ax1 = plt.subplot(111)
+# ax1.set_frame_on(True)
+ax1.spines['left'].set_visible(False)
+ax1.spines['right'].set_visible(False)
+ax1.spines['top'].set_visible(False)
 ax1.get_xaxis().tick_bottom()
 ax1.axes.get_yaxis().set_visible(False)
 # ax1.axes.get_xaxis().set_visible(False)
