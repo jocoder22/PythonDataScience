@@ -69,3 +69,9 @@ movies['century'].value_counts()
 # and a few more below, which you can use as necessary
 pd.get_dummies(movies, columns=['century']).head()
 
+
+# movies['genre'] = movies['genre'].astype('str')
+movies['genre2'] = movies['genre'].apply(lambda x: x.split("|")[0])
+movies.dropna(subset=['genre2'], inplace=True)
+df = movies[movies["genre2"] != "nan"]
+df.head()
