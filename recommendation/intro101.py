@@ -1,8 +1,12 @@
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import tests as t
 from datetime import datetime
+
+path = r"D:\PythonDataScience\recommendation"
+os.chdir(path)
 
 def print2(*args):
     for arg in args:
@@ -77,3 +81,4 @@ movies = movies[movies["genre2"] != "nan"]
 
 pd.get_dummies(movies, columns=['genre2'])
 print2(movies.head())
+
