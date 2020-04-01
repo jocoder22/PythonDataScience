@@ -65,3 +65,7 @@ print2(reviews.head(), movies.head(10))
 movies['century'] = movies['movie'].apply(lambda x: x[-5:-3] + "00")
 movies.tail(20)
 movies['century'].value_counts()
+
+# and a few more below, which you can use as necessary
+pd.get_dummies(movies, columns=['century']).head()
+
