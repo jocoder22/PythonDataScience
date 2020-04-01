@@ -44,4 +44,24 @@ reviews = pd.read_csv(
 )
 
 reviews['date'] = reviews['timestamp'].apply(lambda x: pd.Timestamp(x, unit="s").date())
+
+
+dict_sol1 = {
+'The number of movies in the dataset': movies.shape[0],
+'The number of ratings in the dataset': reviews.shape[0],
+'The number of different genres': movies['genre'].nunique(),
+'The number of unique users in the dataset': reviews["user_id"].nunique(),
+'The number missing ratings in the reviews dataset': reviews.rating.isna().sum(),
+'The average rating given across all ratings': reviews.rating.mean(),
+'The minimum rating given across all ratings': reviews.rating.min(),
+'The maximum rating given across all ratings': reviews.rating.max()
+}
+
 print2(reviews.head(), movies.head(10))
+
+
+# movies['century'] = movies['movie'].str.extract(r'(\d+)', expand=False)
+# movies['century'] = movies['century'].apply(lambda x: x[:2] + "00")
+movies['century'] = movies['movie'].apply(lambda x: x[-5:-3] + "00")
+movies.tail(20)
+movies['century'].value_counts()
