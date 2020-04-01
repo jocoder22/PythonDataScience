@@ -63,15 +63,17 @@ print2(reviews.head(), movies.head(10))
 # movies['century'] = movies['movie'].str.extract(r'(\d+)', expand=False)
 # movies['century'] = movies['century'].apply(lambda x: x[:2] + "00")
 movies['century'] = movies['movie'].apply(lambda x: x[-5:-3] + "00")
-movies.tail(20)
-movies['century'].value_counts()
+print2(movies.tail(20), movies['century'].value_counts())
 
 # and a few more below, which you can use as necessary
 pd.get_dummies(movies, columns=['century']).head()
 
 
-# movies['genre'] = movies['genre'].astype('str')
+movies['genre'] = movies['genre'].astype('str')
 movies['genre2'] = movies['genre'].apply(lambda x: x.split("|")[0])
 movies.dropna(subset=['genre2'], inplace=True)
-df = movies[movies["genre2"] != "nan"]
-df.head()
+movies = movies[movies["genre2"] != "nan"]
+
+
+pd.get_dummies(movies, columns=['genre2'])
+print2(movies.head())
