@@ -2,7 +2,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import tests as t
-from io import StringIO
+
+def print2(*args):
+    for arg in args:
+        print(arg, sep="\n\n", end="\n\n")
 
 # Read in the datasets
 movies = pd.read_csv(
@@ -38,4 +41,4 @@ reviews = pd.read_csv(
     engine="python"
 )
 
-print(reviews.head())
+print2(reviews.head(), movies.head())
