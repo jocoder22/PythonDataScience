@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import tests as t
+from datetime import datetime
 
 def print2(*args):
     for arg in args:
@@ -37,8 +38,10 @@ reviews = pd.read_csv(
     dtype={
         "movie_id": object,
         "user_id": object,
-        "timestamp": object},
+        "timestamp": int},
+    parse_dates=True,
     engine="python"
 )
 
-print2(reviews.head(), movies.head())
+reviews['date'] = reviews['timestamp'].apply(lambda x: pd.Timestamp(x, unit="s").date())
+print2(reviews.head(), movies.head(10))
