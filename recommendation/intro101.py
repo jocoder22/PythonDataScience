@@ -48,6 +48,7 @@ reviews = pd.read_csv(
 )
 
 reviews['date'] = reviews['timestamp'].apply(lambda x: pd.Timestamp(x, unit="s").date())
+reviews['year'] = reviews['timestamp'].apply(lambda x: pd.Timestamp(x, unit="s").year)
 
 
 dict_sol1 = {
@@ -67,6 +68,7 @@ print2(reviews.head(), movies.head(10))
 # movies['century'] = movies['movie'].str.extract(r'(\d+)', expand=False)
 # movies['century'] = movies['century'].apply(lambda x: x[:2] + "00")
 movies['century'] = movies['movie'].apply(lambda x: x[-5:-3] + "00")
+movies['year'] = movies['movie'].apply(lambda x: x[-5:-1])
 print2(movies.tail(20), movies['century'].value_counts())
 
 # and a few more below, which you can use as necessary
