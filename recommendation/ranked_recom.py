@@ -100,7 +100,7 @@ def filter_rank_recommed(user_id, ranked, ranking, year_, genre_):
     return (
         filtered_top_movies,
         filtered2.head(ranked).movie.tolist(),
-    )  
+    )
 
 
 rank_df = movieRanks(reviews, movies, "movie_id", "rating")
