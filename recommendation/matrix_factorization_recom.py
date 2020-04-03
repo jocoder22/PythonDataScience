@@ -73,6 +73,7 @@ def accuracy_score(data, n):
  
     """
     
+    # do svd
     upre, sigmap, vtp = np.linalg.svd(user_movies)
     
     upred = upre[:, :n]
@@ -81,8 +82,11 @@ def accuracy_score(data, n):
 
     vtpred = vtp[:n, :]
 
+    # calculate the dot product
     pred = np.dot(np.dot(upred, sigmapred), vtpred)
 
+
+    # calculate measurement metrics
     sum_squared_error = np.sum(np.sum(data - pred) ** 2)
 
     accuracy = (pred - data).mean().mean()
@@ -94,4 +98,4 @@ def accuracy_score(data, n):
     return sum_squared_error, rmse, accuracy, mse
 
 
-print2(pred_mat(user_movies, 2))
+print2(accuracy_score(user_movies, 2))
