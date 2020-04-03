@@ -84,5 +84,9 @@ movies = movies[movies["genre2"] != "nan"]
 pd.get_dummies(movies, columns=['genre2'])
 print2(movies.head())
 
+
+del movies["Unnamed: 0"]
+del reviews["Unnamed: 0"]
+
 movies.to_csv("movies.csv")
 reviews.to_csv("reviews.csv")

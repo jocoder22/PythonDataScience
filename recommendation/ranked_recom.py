@@ -16,8 +16,7 @@ def print2(*args):
 
 movies = pd.read_csv("movies.csv")
 reviews = pd.read_csv("reviews.csv")
-del movies["Unnamed: 0"]
-del reviews["Unnamed: 0"]
+
 
 
 def movieRanks(data1, data2, col, col2):
