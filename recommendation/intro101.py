@@ -85,8 +85,8 @@ pd.get_dummies(movies, columns=['genre2'])
 print2(movies.head())
 
 # remove unwanted columns
-del movies["Unnamed: 0"]
-del reviews["Unnamed: 0"]
+# del movies["Unnamed: 0"]
+# del reviews["Unnamed: 0"]
 
 movies.to_csv("movies.csv")
 reviews.to_csv("reviews.csv")
