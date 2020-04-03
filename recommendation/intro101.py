@@ -88,5 +88,5 @@ print2(movies.head())
 # del movies["Unnamed: 0"]
 # del reviews["Unnamed: 0"]
 
-movies.to_csv("movies.csv")
-reviews.to_csv("reviews.csv")
+movies.to_csv("movies.csv", index=False)
+reviews.to_csv("reviews.csv", index=False)
