@@ -70,23 +70,26 @@ def accuracy_score(data, n):
         rmse: root mean square of sum of error
         accuracy: total mean of sum of error 
         mse: mean square of the sum of error
+        percentage_explained: percentage of the variability explained by factors
  
     """
     
     # do svd
     upre, sigmap, vtp = np.linalg.svd(user_movies)
 
-    # percentage explained by number of factors n
 
+    # calculate total variability
     total_variability = np.sum(sigmap**2)
 
     variability_ = 0
     
+    # iterate over sigma to calculate variance
     for i in range(n):
-        
-        variability_ += sigma[i]**2 
 
-    percentage_explained = variability_comp1_comp2 / total_variability
+        variability_ += sigmap[i]**2 
+
+    # percentage explained by number of factors n
+    percentage_explained = round(variability_ / total_variability, 2)
     
     upred = upre[:, :n]
 
@@ -99,15 +102,15 @@ def accuracy_score(data, n):
 
 
     # calculate measurement metrics
-    sum_squared_error = np.sum(np.sum(data - pred) ** 2)
+    sum_squared_error = round(np.sum(np.sum(data - pred) ** 2), 2)
 
-    accuracy = (pred - data).mean().mean()
+    accuracy = round((pred - data).mean().mean(), 3)
 
-    rmse = np.sqrt(mean_squared_error(data, pred))
+    rmse = round(np.sqrt(mean_squared_error(data, pred)), 3)
 
-    mse = mean_squared_error(data, pred)
+    mse = round(mean_squared_error(data, pred), 2)
 
-    return sum_squared_error, rmse, accuracy, mse
+    return sum_squared_error, rmse, accuracy, mse, percentage_explained
 
 
 print2(accuracy_score(user_movies, 2))
