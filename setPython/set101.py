@@ -49,4 +49,9 @@ for word in wordlist:
     set7 = set(list((word.lower())))
     if set7 < set1: # set7.issubset(set1) 
         print(f"{word} can be made from the letter", **params)
-    
+
+
+genre_ = ["Short", "Comedy", "Adventure", "Fantasy"]
+y = "Horror|Adventure|Fantasy|Sci-Fi"
+
+bool(set(y.split("|")) & set(genre_))
