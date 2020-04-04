@@ -75,6 +75,18 @@ def accuracy_score(data, n):
     
     # do svd
     upre, sigmap, vtp = np.linalg.svd(user_movies)
+
+    # percentage explained by number of factors n
+
+    total_variability = np.sum(sigmap**2)
+
+    variability_ = 0
+    
+    for i in range(n):
+        
+        variability_ += sigma[i]**2 
+
+    percentage_explained = variability_comp1_comp2 / total_variability
     
     upred = upre[:, :n]
 
