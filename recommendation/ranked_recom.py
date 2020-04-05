@@ -132,4 +132,5 @@ print2(movies.genre[:6])
 print2(movies.head())
 
 
-pp = ["mand", ]
+pp = ["mand", "gppg", "iddd", "pppp"]
+
