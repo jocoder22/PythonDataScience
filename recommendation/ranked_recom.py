@@ -134,3 +134,10 @@ print2(movies.head())
 
 pp = ["mand", "gppg", "iddd", "pppp"]
 
+tt = ['mand', "lldd", "kkk"]
+
+hh = []
+
+mm = np.random.choice(pp,2,replace=False)
+bb = set(pp) & set(tt) & set(hh)
+print2(mm, bb)
