@@ -101,7 +101,7 @@ def filter_rank_recommed(user_id, ranked, ranking, year_, genre_):
         filtered2.head(ranked).movie.tolist(),
     )
 
-
+"""
 rank_df = movieRanks(reviews, movies, "movie_id", "rating")
 
 genre_group = ["Short", "Comedy", "Adventure", "Fantasy"]
@@ -131,13 +131,18 @@ print2(movies.genre[:6])
 
 print2(movies.head())
 
-
+"""
 pp = ["mand", "gppg", "iddd", "pppp"]
-
+pp2 = ["mand", "gppg", "iddd", "pppp"]
 tt = ['mand', "lldd", "kkk"]
 
 hh = []
+hh.extend(pp)
 
 mm = np.random.choice(pp,2,replace=False)
-bb = set(pp) & set(tt) & set(hh)
-print2(mm, bb)
+
+bb = set(pp) - set(tt)
+
+yy = list(bb)
+
+print2(mm, bb, bool(bb), hh, len(bb), yy)
