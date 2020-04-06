@@ -145,4 +145,6 @@ bb = set(pp) - set(tt)
 
 yy = list(bb)
 
+np.intersect1d()
+np.setdiff1d()
 print2(mm, bb, bool(bb), hh, len(bb), yy)
