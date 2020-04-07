@@ -24,6 +24,8 @@ mlistt = [73486, 75314, 68646, 99685]
 user_item = reviews[reviews["movie_id"].isin(mlistt)]
 user_movies = user_item.groupby(["user_id", "movie_id"])["rating"].max().unstack().dropna(axis=0)
 
+# user_movies = pd.pivot(reviews["user_id"], reviews["movie_id"])
+# user_movies = pd.crosstab(reviews["user_id"], reviews["movie_id"], margins = False).fillna(0)
 print2(user_movies, user_item.shape, reviews.shape)
 print2(user_movies.mean(axis=1).sort_values(ascending=False).head(1), user_movies.mean(axis=0).sort_values(ascending=False).iloc[0])
 print2(movies[movies.movie_id == user_movies.mean(axis=0).index[0]]['movie'])
