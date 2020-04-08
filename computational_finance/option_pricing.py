@@ -42,27 +42,6 @@ print(allstocks.head())
 
 
 
-def sharpe(returns, rf, days=252):
-    volatility = returns.std() * np.sqrt(days) 
-    sharpe_ratio = (returns.mean() - rf) / volatility
-    return sharpe_ratio
-
-
-
-def information_ratio(returns, benchmark_returns, days=252):
-    return_difference = returns - benchmark_returns 
-    volatility = return_difference.std() * np.sqrt(days) 
-    information_ratio = return_difference.mean() / volatility
-    return information_ratio
-
-
-def modigliani_ratio(returns, benchmark_returns, rf, days=252):
-    volatility = returns.std() * np.sqrt(days) 
-    sharpe_ratio = (returns.mean() - rf) / volatility 
-    benchmark_volatility = benchmark_returns.std() * np.sqrt(days)
-    m2_ratio = (sharpe_ratio * benchmark_volatility) + rf
-    return m2_ratio
-
 
 mcos_estimates = [None]*50
 mcos_std = [None]*50
@@ -133,3 +112,26 @@ plt.xlabel("Sample Size")
 plt.ylabel("Value")
 
 
+
+
+
+def sharpe(returns, rf, days=252):
+    volatility = returns.std() * np.sqrt(days) 
+    sharpe_ratio = (returns.mean() - rf) / volatility
+    return sharpe_ratio
+
+
+
+def information_ratio(returns, benchmark_returns, days=252):
+    return_difference = returns - benchmark_returns 
+    volatility = return_difference.std() * np.sqrt(days) 
+    information_ratio = return_difference.mean() / volatility
+    return information_ratio
+
+
+def modigliani_ratio(returns, benchmark_returns, rf, days=252):
+    volatility = returns.std() * np.sqrt(days) 
+    sharpe_ratio = (returns.mean() - rf) / volatility 
+    benchmark_volatility = benchmark_returns.std() * np.sqrt(days)
+    m2_ratio = (sharpe_ratio * benchmark_volatility) + rf
+    return m2_ratio
