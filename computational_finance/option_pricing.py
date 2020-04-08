@@ -7,47 +7,20 @@ import matplotlib.pyplot as plt
 import pandas_datareader as pdr
 from datetime import datetime, date, timedelta
 
-# from iexfinance.refdata import get_symbols
-# from iexfinance.stocks import Stock, get_historical_intraday, get_historical_data
+from scipy.stats import norm
+from scipy.stats import uniform
 
-# pathtk = r"D:\PPP"
-# sys.path.insert(0, pathtk)
 
-# import wewebs
 
+#Code to estimate the value of the cos integral
+np.random.seed(0)
 
 def print2(*args):
     for arg in args:
         print(arg, sep="\n\n", end="\n\n")
 
 
-# sp = {'sep': '\n\n', 'end': '\n\n'}
-
-# path = r"D:\Intradays"
-
-# ttt = wewebs.token
-
-# stock = "NFLX"
-
-# startdate = datetime(2016, 2, 2)
-# enddate = datetime(2018, 5, 30)
-# stdate = date.today() - timedelta(days=456)
-
-
-# # allstocks = pdr.get_data_yahoo(stock, startdate)['Adj Close']
-# # print(allstocks.head())
-# get_symbols(output_format='pandas', token=ttt)
-
-# neflex = Stock(stock, token=ttt)
-# print2(neflex.get_quote()['close'])
-
-# start = datetime(2017, 1, 1)
-# end = datetime(2018, 1, 1)
-
-# df = get_historical_data("TSLA", start, end, token=ttt, output_format='pandas')
-
-# print2(df.close.var())
-
+sp = {'sep': '\n\n', 'end': '\n\n'}
 
 startdate = datetime(2013, 2, 2)
 # enddate = datetime(2018, 5, 30)
@@ -91,20 +64,6 @@ def modigliani_ratio(returns, benchmark_returns, rf, days=252):
     return m2_ratio
 
 
-
-
-import numpy as np
-from scipy.stats import norm
-from scipy.stats import uniform
-import matplotlib.pyplot as plt
-import math
-import random
-
-
-
-#Code to estimate the value of the cos integral
-random.seed(0)
-
 mcos_estimates = [None]*50
 mcos_std = [None]*50
 
@@ -126,12 +85,6 @@ plt.xlabel("Sample Size")
 plt.ylabel("Value")
 plt.show()
 
-
-# In[5]:
-
-
-#Code for the put option
-random.seed(0)
 
 #Share information
 sigma = 0.3
