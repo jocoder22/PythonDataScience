@@ -162,47 +162,86 @@ def discounted_putpayoff(terminal_price, strikeprice, riskfree, T):
 
 
 numb = 50
-mput_estimates = [None]*numb
-mput_std = [None]*numb
+
 
 # 3. Write a for loop which cycles through sample size (1000, 2000, ..., 50000), and calculates the 
 # Monte Carlo estimate of a European put option, and well as the standard deviation of 
 # the Monte Carlo estimator.
-for i in range(1, numb+1):
-    mput_norm = norm.rvs(size=1000*i)
-    terminalVals = terminal_shareprice(current_price, risk_free, sigma,mput_norm, T - current_time)
-    mputvals = discounted_putpayoff(terminalVals, strike_price, risk_free, T - current_time)
-    mput_estimates[i-1] = np.mean(mputvals)
-    mput_std[i-1] = np.std(mputvals)/np.sqrt(1000*i)
-    
-    
+def option_prices(current_price, risk_free, sigma, term, current_time, type="call", plot=False):
+    """The option_prices function calculate both analytical and monte carlo simulation of
+        either call or put option
+ 
+    Args: 
+        present_price (float/int): initial share price
+        riskfree (float/int): risk free rate
+        sigma (float/int): share volatility
+        Z (float/int): normal random variables
+        T (float/int): term of share price
+        type (str): type of option, "call" or "put"
+        plot (bool): False or True, whether to plot graph or not
+ 
+ 
+    Returns: 
+        price (float/int): price of the option
+ 
+    """
+    # number of simulations
+    numb = 50
 
-d1_numerator = np.log(current_price/strike_price) + (risk_free + sigma**2/2) * (T - current_time)
-d1_denominator = sigma * np.sqrt(T - current_time)
+    mput_estimates = np.zeros(numb)
+    mput_std = np.zeros(numb)
+        
 
-d1 = d1_numerator / d1_denominator
-d2 =  d1 - d1_denominator
+    for i in range(1, numb+1):
+        mput_norm = norm.rvs(size=1000*i)
+        terminalVals = terminal_shareprice(current_price, risk_free, sigma,mput_norm, T - current_time)
+        mputvals = discounted_putpayoff(terminalVals, strike_price, risk_free, T - current_time)
+        mput_estimates[i-1] = np.mean(mputvals)
+        mput_std[i-1] = np.std(mputvals)/np.sqrt(1000*i)
+        
+        
 
-analytic_putprice = -current_price*norm.cdf(-d1) + (norm.cdf(-d2)*strike_price*np.exp(-risk_free *(T - current_time)))
+    d1_numerator = np.log(current_price/strike_price) + (risk_free + sigma**2/2) * (T - current_time)
+    d1_denominator = sigma * np.sqrt(T - current_time)
 
-print("Analytical European put option value: ", analytic_putprice)
-print("Monte carlo European put option value: ", mput_estimates[numb-1])
+    d1 = d1_numerator / d1_denominator
+    d2 =  d1 - d1_denominator
+
+    analytic_putprice = -current_price*norm.cdf(-d1) + (norm.cdf(-d2)*strike_price*np.exp(-risk_free *(T - current_time)))
 
 
-# 4. Plot the Monte Carlo estimates, the analytical European put option value, 
-# and three standard deviation error bounds.
-plt.figure(figsize = [11, 6])
-plt.plot([analytic_putprice]*numb)
-plt.plot(mput_estimates, ".")
-plt.plot(analytic_putprice + np.array(mput_std)*3)
-plt.plot(analytic_putprice - np.array(mput_std)*3)
-plt.fill_between(np.arange(num), analytic_putprice + np.array(mput_std)*3, 
-                 analytic_putprice - np.array(mput_std)*3,facecolor='whitesmoke', interpolate=True)
-plt.ylabel("Put option prices")
-plt.xlabel("Number of simulations")
-plt.title("Monte carlo estimation of European put option value")
-plt.show()
+    # if type == "put":
+    #     print(" ", end="\n\n")
+    #     print("Analytical European put option value: ", analytic_putprice)
+    #     print("Monte carlo European put option value: ", mput_estimates[numb-1])
+    # else:
+    #     print(" ", end="\n\n")
+    #     print("Analytical European call option value: ", analytic_putprice)
+    #     print("Monte carlo European call option value: ", mput_estimates[numb-1])
 
+    print(" ", end="\n\n")
+    print(f"Analytical European {type} option value: {analytic_putprice}")
+    print(f"Monte carlo European {type} option value: {mput_estimates[numb-1]}")
+
+    # 4. Plot the Monte Carlo estimates, the analytical European put option value, 
+    # and three standard deviation error bounds.
+    if plot:
+        plt.figure(figsize = [11, 6])
+        plt.plot([analytic_putprice]*numb)
+        plt.plot(mput_estimates, ".")
+        plt.plot(analytic_putprice + np.array(mput_std)*3)
+        plt.plot(analytic_putprice - np.array(mput_std)*3)
+        plt.fill_between(np.arange(num), analytic_putprice + np.array(mput_std)*3, 
+                        analytic_putprice - np.array(mput_std)*3,facecolor='whitesmoke', interpolate=True)
+        plt.ylabel(f"{type.capitalize()} option prices")
+        plt.xlabel("Number of simulations")
+        plt.title(f"Monte carlo estimation of European {type.capitalize()} option value")
+        plt.show()
+
+
+
+
+option_prices(current_price, risk_free, sigma, T, current_time, type="call", plot=True)
 
 #Share information
 sigma = 0.3
@@ -214,14 +253,14 @@ T = 0.5
 K = 110
 
 #Function for terminal share valuation
-def terminal_shareprice(S_0, risk_free_rate,sigma,Z,T):
+def terminal_shareprice2(S_0, risk_free_rate,sigma,Z,T):
     """Generates the terminal share price given some random normal values, Z"""
     return S_0*np.exp((risk_free_rate-sigma**2/2)*T+sigma*np.sqrt(T)*Z)
 
 #Function for put valuations
 def put_price(S_0,K,risk_free_rate,sigma,Z,T):
     """Function for evaluating the call price in Monte Carlo Estimation"""
-    share_terminal = terminal_shareprice(S_0, risk_free_rate, sigma, Z, T)
+    share_terminal = terminal_shareprice2(S_0, risk_free_rate, sigma, Z, T)
     return np.exp(-risk_free_rate*T)*np.maximum(K-share_terminal,0)
 
 #Empty vectors to be filled later
