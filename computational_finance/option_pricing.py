@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pandas_datareader as pdr
 from datetime import datetime, date, timedelta
-
+from scipy.integrate import quad
 from scipy.stats import norm
 from scipy.stats import uniform
 import math
@@ -62,6 +62,145 @@ plt.plot(mcos_analytic+np.array(mcos_std)*3, 'r')
 plt.plot(mcos_analytic-np.array(mcos_std)*3, 'r')
 plt.xlabel("Sample Size")
 plt.ylabel("Value")
+plt.show()
+
+
+#########################################################################################################
+#########################################################################################################
+# set the seed
+np.random.seed(0)
+
+# calculate the analytical values of the integral, anal_val
+anal_val, err = quad(lambda x: np.cos(x), 0, 2)
+print("Analytical value: ", anal_val)
+
+# we do 50 number of stimulations
+num = 50
+
+mt_estimates = [None]*num
+mt_std = [None]*num
+
+#  2. Estimate the value of the integral as a function of sample size. 
+# Use sample sizes of 1000, 2000, ..., 50000. 
+for i in range(1, num+1):
+    un_array = uniform.rvs(size = i*1000)*2
+    sim_val = np.cos(un_array)*2
+    mt_estimates[i-1] = np.mean(sim_val)
+    mt_std[i-1] = np.std(sim_val)/np.sqrt(i*1000)
+    
+print("Monte Carlo estimate: ", mt_estimates[num-1])
+
+# 3. Plot the estimates against the analytical value of the integral.
+plt.figure(figsize = [11, 6])
+plt.plot([anal_val]*num)
+plt.plot(mt_estimates, ".")
+plt.plot(anal_val + np.array(mt_std)*3)
+plt.plot(anal_val - np.array(mt_std)*3)
+plt.fill_between(np.arange(num), anal_val + np.array(mt_std)*3, 
+                 anal_val - np.array(mt_std)*3,facecolor='whitesmoke', interpolate=True)
+plt.ylabel("Monte carlo estimates")
+plt.xlabel("Number of simulations")
+plt.title("Monte carlo estimation of integral of cos(X)")
+plt.show()
+
+
+
+
+#######################################################################################################
+#######################################################################################################
+# stock features information
+sigma = 0.3
+risk_free = 0.1
+current_price = 100
+T = 0.5
+
+strike_price = 110
+current_time = 0
+
+
+# 1. Write a function which takes a risk-free rate, the initial share price, the share volatility, 
+# and term as inputs, and determines the terminal value of a share price, 
+# assuming geometric Brownian Motion. Note, you should vectorize this function where possible. 
+
+def terminal_shareprice(present_price, risk_free, sigma, Z, T):
+    """ terminal_shareprice function gives the terminal value of a share price,
+        assuming geometric Brownian Motion and vectorization where possible.
+        
+    Inputs: 
+        present_price(float/int): initial share price
+        riskfree(float/int): risk free rate
+        sigma: share volatility
+        Z: normal random variables
+        T(float/int): term of share price
+        
+    Output:
+        terminal value of a share price
+    
+    """
+    
+    return present_price*np.exp((risk_free - sigma**2/2)*T + sigma*np.sqrt(T)*Z)
+
+
+
+# 2. Write a function which takes terminal share prices, a strike price, 
+# a risk-free rate and term as inputs, and gives out the discounted value of a European put option. 
+def discounted_putpayoff(terminal_price, strikeprice, riskfree, T):
+    """ discounted_putpayoff function gives out the discounted value of a European put option.
+    
+    Inputs: 
+        terminal_price(float/int): terminal price of European put option
+        strikeprice(float/int): strike price European put option
+        riskfree(float/int): risk free rate
+        T(float/int): term of European put option
+        
+    Output:
+        discounted value of a European put option
+    
+    """
+    
+    return np.exp(-riskfree*(T - current_time))*np.maximum(strikeprice - terminal_price, 0)
+
+
+numb = 50
+mput_estimates = [None]*numb
+mput_std = [None]*numb
+
+# 3. Write a for loop which cycles through sample size (1000, 2000, ..., 50000), and calculates the 
+# Monte Carlo estimate of a European put option, and well as the standard deviation of 
+# the Monte Carlo estimator.
+for i in range(1, numb+1):
+    mput_norm = norm.rvs(size=1000*i)
+    terminalVals = terminal_shareprice(current_price, risk_free, sigma,mput_norm, T - current_time)
+    mputvals = discounted_putpayoff(terminalVals, strike_price, risk_free, T - current_time)
+    mput_estimates[i-1] = np.mean(mputvals)
+    mput_std[i-1] = np.std(mputvals)/np.sqrt(1000*i)
+    
+    
+
+d1_numerator = np.log(current_price/strike_price) + (risk_free + sigma**2/2) * (T - current_time)
+d1_denominator = sigma * np.sqrt(T - current_time)
+
+d1 = d1_numerator / d1_denominator
+d2 =  d1 - d1_denominator
+
+analytic_putprice = -current_price*norm.cdf(-d1) + (norm.cdf(-d2)*strike_price*np.exp(-risk_free *(T - current_time)))
+
+print("Analytical European put option value: ", analytic_putprice)
+print("Monte carlo European put option value: ", mput_estimates[numb-1])
+
+
+# 4. Plot the Monte Carlo estimates, the analytical European put option value, 
+# and three standard deviation error bounds.
+plt.figure(figsize = [11, 6])
+plt.plot([analytic_putprice]*numb)
+plt.plot(mput_estimates, ".")
+plt.plot(analytic_putprice + np.array(mput_std)*3)
+plt.plot(analytic_putprice - np.array(mput_std)*3)
+plt.fill_between(np.arange(num), analytic_putprice + np.array(mput_std)*3, 
+                 analytic_putprice - np.array(mput_std)*3,facecolor='whitesmoke', interpolate=True)
+plt.ylabel("Put option prices")
+plt.xlabel("Number of simulations")
+plt.title("Monte carlo estimation of European put option value")
 plt.show()
 
 
