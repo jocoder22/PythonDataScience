@@ -9,10 +9,10 @@ from datetime import datetime, date, timedelta
 
 from scipy.stats import norm
 from scipy.stats import uniform
+import math
 
 
-
-#Code to estimate the value of the cos integral
+# set random seed
 np.random.seed(0)
 
 def print2(*args):
