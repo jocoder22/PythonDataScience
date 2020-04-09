@@ -63,6 +63,7 @@ def text_similarity(text1, text2):
 df33 = text_similarity(data.loc[:5, "News_content"], data.loc[:, "News_content"])
 all_data = pd.DataFrame()
 
+
 df33.columns = [f'type{i}' for i in range(len(df33.columns))]
 print2(df33)
 for lee in df33.columns:
