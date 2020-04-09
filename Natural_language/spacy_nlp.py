@@ -11,8 +11,11 @@ from pathlib import Path
 
 
 sp = '\n\n'
-path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
+largge = 'en_core_web_lg'
+small_ = 'en_core_web_sm'
+# path = "C:\\Users\\Jose\\Desktop\\PythonDataScience\\tweeter\\"
 # path = 'C:\\Users\\okigboo\\Desktop\\PythonDataScience\\tweeter\\'
+path = r"D:\PythonDataScience\tweeter"
 os.chdir(path)
 
 data = pd.read_csv('nyt2.csv')
@@ -25,7 +28,7 @@ for text in data['News_content']:
     mytext += text + " "
     
 # Instantiate the English model: nlp
-nlp = spacy.load('en_core_web_sm')
+nlp = spacy.load(largge)
 
 
 for text in data['News_content']:
@@ -39,10 +42,10 @@ for text in data['News_content']:
  
 
 
-pp = 'C:\\Users\\Jose\\Desktop\\PythonDataScience\\Natural_language\\'
+# pp = 'C:\\Users\\Jose\\Desktop\\PythonDataScience\\Natural_language\\'
+pp = r"D:\PythonDataScience\Natural_language"
 
-
-nlp = spacy.load('en_core_web_sm')
+nlp = spacy.load(largge)
 sentences = ["This is an example.", "This is another one."]
 for sent in sentences:
     doc = nlp(sent)
@@ -55,6 +58,6 @@ for sent in sentences:
 
 text = """This is new worthy, although Google bought the compnay from behind. The company made a late push into  software and hardware. Samsung, Hawei and Apple, available on iPhones, and Amazon’s Alexa software, are in Washington DC to lobby for the lease which runs on its Echo and Dot devices, have clear leads  and superiority in consumer adoption."""
 
-nlp = spacy.load('en_core_web_sm')
+nlp = spacy.load(largge)
 doc = nlp(text)
 displacy.serve(doc, style='ent')
