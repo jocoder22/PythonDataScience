@@ -208,20 +208,20 @@ def option_prices(current_price, risk_free, sigma, term, current_time, type="cal
     d2 =  d1 - d1_denominator
 
     if type == "call":
-        analytic_callprice = -current_price*norm.cdf(-d1) + (norm.cdf(-d2)*strike_price*np.exp(-risk_free *(T - current_time)))
+        analytic_callprice = current_price*norm.cdf(d1) - (norm.cdf(d2)*strike_price*np.exp(-risk_free * (T - current_time)))
 
     else:
-        analytic_putprice = -current_price*norm.cdf(-d1) + (norm.cdf(-d2)*strike_price*np.exp(-risk_free *(T - current_time)))
+        analytic_putprice = -current_price*norm.cdf(-d1) + (norm.cdf(-d2)*strike_price*np.exp(-risk_free * (T - current_time)))
 
 
-    # if type == "put":
-    #     print(" ", end="\n\n")
-    #     print("Analytical European put option value: ", analytic_putprice)
-    #     print("Monte carlo European put option value: ", mput_estimates[numb-1])
-    # else:
-    #     print(" ", end="\n\n")
-    #     print("Analytical European call option value: ", analytic_putprice)
-    #     print("Monte carlo European call option value: ", mput_estimates[numb-1])
+    if type == "put":
+        print(" ", end="\n\n")
+        print("Analytical European put option value: ", analytic_putprice)
+        print("Monte carlo European put option value: ", mput_estimates[numb-1])
+    else:
+        print(" ", end="\n\n")
+        print("Analytical European call option value: ", analytic_putprice)
+        print("Monte carlo European call option value: ", mput_estimates[numb-1])
 
     print(" ", end="\n\n")
     print(f"Analytical European {type} option value: {analytic_putprice}")
