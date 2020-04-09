@@ -42,29 +42,6 @@ print(allstocks.head())
 
 
 
-
-mcos_estimates = [None]*50
-mcos_std = [None]*50
-
-for i in range(1,51):
-    unif_array = uniform.rvs(size = 1000*i)*2
-    mcos_val = np.cos(unif_array)*2
-    mcos_estimates[i-1] = np.mean(mcos_val)
-    mcos_std[i-1] = np.std(mcos_val)/np.sqrt(1000*i)
-    
-#For the analytic solution
-mcos_analytic = np.sin(2) - np.sin(0)
-
-#Plotting the graphs
-plt.plot([mcos_analytic]*50)
-plt.plot(mcos_estimates,'.')
-plt.plot(mcos_analytic+np.array(mcos_std)*3, 'r')
-plt.plot(mcos_analytic-np.array(mcos_std)*3, 'r')
-plt.xlabel("Sample Size")
-plt.ylabel("Value")
-plt.show()
-
-
 #########################################################################################################
 #########################################################################################################
 # set the seed
@@ -144,7 +121,7 @@ def terminal_shareprice(present_price, risk_free, sigma, Z, T):
 
 # 2. Write a function which takes terminal share prices, a strike price, 
 # a risk-free rate and term as inputs, and gives out the discounted value of a European put option. 
-def discounted_putpayoff(terminal_price, strikeprice, riskfree, T):
+def discounted_putpayoff(terminal_price, strikeprice, riskfree, T, type="call"):
     """ discounted_putpayoff function gives out the discounted value of a European put option.
     
     Inputs: 
@@ -158,7 +135,12 @@ def discounted_putpayoff(terminal_price, strikeprice, riskfree, T):
     
     """
     
-    return np.exp(-riskfree*(T - current_time))*np.maximum(strikeprice - terminal_price, 0)
+    if type == "call":
+        difff = terminal_price - strikeprice
+    else:
+        difff = strikeprice - terminal_price
+
+    return np.exp(-riskfree*(T - current_time))*np.maximum(difff, 0)
 
 
 numb = 50
@@ -167,7 +149,7 @@ numb = 50
 # 3. Write a for loop which cycles through sample size (1000, 2000, ..., 50000), and calculates the 
 # Monte Carlo estimate of a European put option, and well as the standard deviation of 
 # the Monte Carlo estimator.
-def option_prices(current_price, risk_free, sigma, term, current_time, type="call", plot=False):
+def option_prices(current_price, risk_free, sigma, term, current_time=0, type="call", plot=False):
     """The option_prices function calculate both analytical and monte carlo simulation of
         either call or put option
  
@@ -195,7 +177,7 @@ def option_prices(current_price, risk_free, sigma, term, current_time, type="cal
     for i in range(1, numb+1):
         mput_norm = norm.rvs(size=1000*i)
         terminalVals = terminal_shareprice(current_price, risk_free, sigma,mput_norm, T - current_time)
-        mputvals = discounted_putpayoff(terminalVals, strike_price, risk_free, T - current_time)
+        mputvals = discounted_putpayoff(terminalVals, strike_price, risk_free, T - current_time, type=type)
         mput_estimates[i-1] = np.mean(mputvals)
         mput_std[i-1] = np.std(mputvals)/np.sqrt(1000*i)
         
@@ -222,12 +204,12 @@ def option_prices(current_price, risk_free, sigma, term, current_time, type="cal
     # and three standard deviation error bounds.
     if plot:
         plt.figure(figsize = [11, 6])
-        plt.plot([analytic_putprice]*numb)
+        plt.plot([analytic_price]*numb)
         plt.plot(mput_estimates, ".")
-        plt.plot(analytic_putprice + np.array(mput_std)*3)
-        plt.plot(analytic_putprice - np.array(mput_std)*3)
-        plt.fill_between(np.arange(num), analytic_putprice + np.array(mput_std)*3, 
-                        analytic_putprice - np.array(mput_std)*3,facecolor='whitesmoke', interpolate=True)
+        plt.plot(analytic_price + np.array(mput_std)*3)
+        plt.plot(analytic_price - np.array(mput_std)*3)
+        plt.fill_between(np.arange(num), analytic_price + np.array(mput_std)*3, 
+                        analytic_price - np.array(mput_std)*3,facecolor='whitesmoke', interpolate=True)
         plt.ylabel(f"{type.capitalize()} option prices")
         plt.xlabel("Number of simulations")
         plt.title(f"Monte carlo estimation of European {type.capitalize()} option value")
@@ -238,56 +220,12 @@ def option_prices(current_price, risk_free, sigma, term, current_time, type="cal
 
 option_prices(current_price, risk_free, sigma, T, current_time, type="call", plot=True)
 
-#Share information
-sigma = 0.3
-r = 0.1
-S0 = 100
-
-#Option information
-T = 0.5
-K = 110
-
-#Function for terminal share valuation
-def terminal_shareprice2(S_0, risk_free_rate,sigma,Z,T):
-    """Generates the terminal share price given some random normal values, Z"""
-    return S_0*np.exp((risk_free_rate-sigma**2/2)*T+sigma*np.sqrt(T)*Z)
-
-#Function for put valuations
-def put_price(S_0,K,risk_free_rate,sigma,Z,T):
-    """Function for evaluating the call price in Monte Carlo Estimation"""
-    share_terminal = terminal_shareprice2(S_0, risk_free_rate, sigma, Z, T)
-    return np.exp(-risk_free_rate*T)*np.maximum(K-share_terminal,0)
-
-#Empty vectors to be filled later
-mput_estimates = [None]*50
-mput_std = [None]*50
-
-#Applying MC estimation
-for i in range(1,51):
-    norm_array = norm.rvs(size = 1000*i)
-    mput_val = put_price(S0,K,r,sigma,norm_array,T)
-    mput_estimates[i-1] = np.mean(mput_val)
-    mput_std[i-1] = np.std(mput_val)/np.sqrt(1000*i)
-    
-#Determining the analytical solution
-d_1 = (math.log(S0/K)+(r + sigma**2/2)*T)/(sigma*math.sqrt(T))
-d_2 = d_1 - sigma*math.sqrt(T)
-mput_analytic = K*math.exp(-r*T)*norm.cdf(-d_2)-S0*norm.cdf(-d_1)
-
-print2(mput_analytic, mput_estimates[49])
-
-#Plotting the graph
-plt.plot([mput_analytic]*50)
-plt.plot(mput_estimates,'.')
-plt.plot(mput_analytic+np.array(mput_std)*3, 'r')
-plt.plot(mput_analytic-np.array(mput_std)*3, 'r')
-plt.xlabel("Sample Size")
-plt.ylabel("Value")
 
 
 
 
-
+##############################################################################################################
+##############################################################################################################
 def sharpe(returns, rf, days=252):
     volatility = returns.std() * np.sqrt(days) 
     sharpe_ratio = (returns.mean() - rf) / volatility
