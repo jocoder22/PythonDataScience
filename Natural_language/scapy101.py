@@ -10,6 +10,10 @@ largge = 'en_core_web_lg'
 path = r"D:\PythonDataScience\tweeter"
 os.chdir(path)
 
+def print2(*args):
+    for arg in args:
+        print(arg, end="\n\n")
+
 data = pd.read_csv('nyt2.csv')
 
 text_clean = []
@@ -19,4 +23,4 @@ mytext = str()
 for text in data['News_content']:
     mytext += text + " "
 
-print(data.head())
+print2(data.head(), mytext)
