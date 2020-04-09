@@ -38,7 +38,7 @@ allstocks['Volatility'] = allstocks['Log_Ret'].rolling(window=252).std() * np.sq
 allstocks[['Close', 'Volatility']].plot(subplots=True, color='blue',figsize=(8, 6))
 plt.show()
 
-print(allstocks.head())
+print(allstocks.head(), end="\n\n")
 
 
 
