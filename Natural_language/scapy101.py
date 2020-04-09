@@ -8,6 +8,7 @@ from collections import defaultdict
 
 sp = '\n\n'
 largge = 'en_core_web_lg'
+small_ = 'en_core_web_sm'
 path = r"D:\PythonDataScience\tweeter"
 os.chdir(path)
 
@@ -17,55 +18,65 @@ def print2(*args):
 
 data = pd.read_csv('nyt2.csv')
 
-text_clean = []
-
-mytext = str()
-
-for text in data['News_content']:
-    mytext += text + " "
-
-print2(list(data.index))
+print2(list(data.index), data.head())
 
 
-# Instantiate the English model: nlp
 nlp = spacy.load(largge)
 
+# # Extract the lemma for each token and join
+def clean_text(text):
 
-# # calculate similarity
-# for ele in data['News_content'][3]:
-#     nydict = defaultdict(list)
-#     ele_token = nlp(ele)
-#     # ele_token2 = nlp(' '.join([str(t) for t in ele_token if not t.is_stop]))
-#     print(ele_token)
-#     for text in data['News_content'][3]:
-#         text_token = nlp(text)
-#         text_token2 = nlp(' '.join([str(t) for t in text_token if not t.is_stop]))        
-#         print2(ele_token2.similarity(text_token2))
+    doc = nlp(text)
 
-# search_doc = nlp("This was very strange argument between american and british person")
-# main_doc = nlp("He was from Japan, but a true English gentleman in my eyes, and another one of the reasons as to why I liked going to school.")
+    result = " ".join([token.lemma_ for token in doc if (not token.is_punct) and 
+            (not token.is_stop) and ('-PRON-' not in token.lemma_ )])
 
-# search_doc_no_stop_words = nlp(' '.join([str(t) for t in search_doc if not t.is_stop]))
-# main_doc_no_stop_words = nlp(' '.join([str(t) for t in main_doc if not t.is_stop]))
-
-# print(search_doc_no_stop_words.similarity(main_doc_no_stop_words))
+    return result
 
 
-about_text = ("""Gus Proto is a Python developer currently
-            working for a London-based Fintech
-            company. He is interested in learning
-            Natural Language Processing.""")
+def text_similarity(text1, text2):
+
+    mydict = defaultdict(list)
+
+    n = 0
+
+    for ind, ele in enumerate(text1):
+        
+        ele_token = clean_text(ele)
+
+        ele_token2 = nlp(ele_token)
+        print("->", n, end= " ", sep= " ")
+        for text in text2:
+            text_token = clean_text(text)
+            text_token2 = nlp(text_token) 
+            mydict[ind].append(ele_token2.similarity(text_token2))       
+            print(".", end=" ")
+
+            n += 1
+    print("Done!", end="\n\n")
+
+    df  = pd.DataFrame(mydict)
+
+    return df
 
 
-about_doc = nlp(about_text)
+df33 = text_similarity(data.loc[:5, "News_content"], data.loc[:, "News_content"])
+all_data = pd.DataFrame()
 
-for token in about_doc:
-    if not token.is_stop:
-        print (token)
+df33.columns = [f'type{i}' for i in range(len(df33.columns))]
+print2(df33)
+for lee in df33.columns:
+    df33.sort_values(by = lee, inplace=True, ascending=False)
+    first5 = df33[lee].head()
+    first5.columns = ["similarity"]
+    print2(first5)
+    all_data = pd.concat([all_data, first5], axis=0, sort=True)
 
-words_all = [token.text for token in about_doc if (not token.is_punct) and (not token.is_stop)]
-words_all = ' '.join(str(t) for t in words_all)
-# about_no_stopword_doc = nlp(' '.join([str(t) for t in words_all if not t.is_stop]))
-# about_no_stopword_doc = ' '.join(str(t) for t in words_all if not t.is_stop)
-# print (about_no_stopword_doc)
-print2(words_all)
+all_data.columns = ["similarity"]
+all_data.sort_values(by=["similarity"], ascending=False, inplace=True)
+ggg = all_data.loc[~all_data.index.isin([0,1,2,3,4,5])].reset_index()
+# print2(ggg[~ggg.index.isin([range(5)])])
+print2(ggg.drop_duplicates(subset=["index"]), ggg)
+
+
+# print2(text_similarity(data.loc[:5, "News_content"], data.loc[:9, "News_content"]))

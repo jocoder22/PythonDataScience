@@ -8,7 +8,7 @@ from spacy import displacy
 from pathlib import Path
 
 # pip install pyICU
-
+# python -m spacy download en_core_web_sm
 
 sp = '\n\n'
 largge = 'en_core_web_lg'
