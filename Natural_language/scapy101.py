@@ -75,8 +75,7 @@ for lee in df33.columns:
 all_data.columns = ["similarity"]
 all_data.sort_values(by=["similarity"], ascending=False, inplace=True)
 ggg = all_data.loc[~all_data.index.isin([0,1,2,3,4,5])].reset_index()
-# print2(ggg[~ggg.index.isin([range(5)])])
 print2(ggg.drop_duplicates(subset=["index"]), ggg)
 
 
-# print2(text_similarity(data.loc[:5, "News_content"], data.loc[:9, "News_content"]))
+
