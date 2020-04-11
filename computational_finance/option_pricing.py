@@ -220,11 +220,7 @@ def option_prices(current_price, risk_free, sigma, term, current_time=0, type="c
     return analytic_price, mput_estimates[numb-1]
 
 
-
-
 option_prices(current_price, risk_free, sigma, T, current_time, type="call", plot=True)
-
-
 
 
 
