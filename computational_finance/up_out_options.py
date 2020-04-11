@@ -18,26 +18,44 @@ r= 0.05         # Risk-free rate
 sigma= 0.2      # Annualized volatility
 
 
+def Call_option_price(S0, K, T, r, sigma):
+    """The call_option_price function calculate the call option prices
+ 
+    Args: 
+        S0 (float/int): intial stock price
+        K (float/int): strike price
+        r (float/int): risk free rate
+        T (float/int): term of share price
+        sigma (float/int): share volatility
 
-n_simulation= 100 # Number of simulations and steps
-n_steps= 100
-dt= T/n_steps
+ 
+    Returns: 
+        price (float/int): price of the option
+ 
+    """
+ 
+    n_simulation= 100 # Number of simulations and steps
+    n_steps= 100
+    dt= T/n_steps
 
-call= np.zeros([n_simulation], dtype=float)
+    call= np.zeros([n_simulation], dtype=float)
 
-for j in range(0,n_simulation):
-    sT=s0
-    total=0
-    for i in range(0,int(n_steps)):
-        e = norm.rvs()
-        sT*= np.exp((r-0.5*sigma**2)*dt+sigma*e*np.sqrt(dt))
-        total+=sT
-    price_average = total/n_steps
-    call[j]=max(price_average-x, 0)
+    for j in range(0,n_simulation):
+        sT=S0
+        total=0
+        for i in range(0,int(n_steps)):
+            e = norm.rvs()
+            sT*= np.exp((r-0.5*sigma**2)*dt+sigma*e*np.sqrt(dt))
+            total+=sT
 
-call_price=np.mean(call)*np.exp(-r*T)
+        price_average = total/n_steps
+        call[j]=max(price_average-x, 0)
 
-print(f'Call price = {round(call_price, 3)}')
+    price=np.mean(call)*np.exp(-r*T)
+
+    print(f'Call price = {round(price, 3)}')
+
+    return price
 
 
 
