@@ -108,10 +108,11 @@ def up_and_out_call(s0,K,T,r,sigma,barrier):
     dt = T/n_steps
     total=0
 
+    # simulates option price
     for j in range(0,n_simulation):
         sT=s0
         out=False
-        
+
         # simulate the stock price evolution
         for i in range(0,int(n_steps)):
             e = norm.rvs()
