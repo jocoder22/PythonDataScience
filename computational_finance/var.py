@@ -103,13 +103,13 @@ print2(portreturn, mVaR_estimate)
 stocksname = ['AAPL', 'MSFT', 'GOOGL', 'NFLX', 'TSLA', 'AMZN', 'TM', 'JPM', 'C']
 
 # startdate = datetime(2017, 4, 15)
-# enddate = datetime(2018, 4, 10)
-# startdate = datetime(2017, 4, 15)
-# stock = pdr.get_data_yahoo(stocksname, startdate, enddate)[['Adj Close']]
+enddate = datetime(2018, 4, 10)
+startdate = datetime(2017, 4, 15)
+stock = pdr.get_data_yahoo(stocksname, startdate, enddate)[['Adj Close']]
 
 
-startdate = datetime(2019, 4, 15)
-stock = pdr.get_data_yahoo(stocksname, startdate)[['Adj Close']]
+# startdate = datetime(2019, 4, 15)
+# stock = pdr.get_data_yahoo(stocksname, startdate)[['Adj Close']]
 
 #General share information
 #Share prices. Portfolio contains 9 shares 
