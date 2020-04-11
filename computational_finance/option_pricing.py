@@ -197,7 +197,6 @@ def option_prices(current_price, risk_free, sigma, term, current_time=0, type="c
         analytic_price = -current_price*norm.cdf(-d1) + (norm.cdf(-d2)*strike_price*np.exp(-risk_free * (T - current_time)))
 
 
-
     print(" ", end="\n\n")
     print(f"Analytical European {type} option value: {analytic_price}")
     print(f"Monte carlo European {type} option value: {mput_estimates[numb-1]}")
@@ -216,6 +215,7 @@ def option_prices(current_price, risk_free, sigma, term, current_time=0, type="c
         plt.xlabel("Number of simulations")
         plt.title(f"Monte carlo estimation of European {type.capitalize()} option value")
         plt.show()
+
 
     return analytic_price, mput_estimates[numb-1]
 
