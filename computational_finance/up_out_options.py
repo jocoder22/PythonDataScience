@@ -12,7 +12,7 @@ np.random.seed(112)
 
 
 s0= 40          # Today's stock price
-x= 40           # Strike/Exercise price
+K= 40           # Strike/Exercise price
 T= 0.5          # Maturity (in years)
 r= 0.05         # Risk-free rate
 sigma= 0.2      # Annualized volatility
@@ -33,7 +33,8 @@ def Call_option_price(S0, K, T, r, sigma):
         price (float/int): price of the option
  
     """
- 
+    np.random.seed(112)
+
     n_simulation= 100 # Number of simulations and steps
     n_steps= 100
     dt= T/n_steps
@@ -49,7 +50,7 @@ def Call_option_price(S0, K, T, r, sigma):
             total+=sT
 
         price_average = total/n_steps
-        call[j]=max(price_average-x, 0)
+        call[j]=max(price_average-K, 0)
 
     price=np.mean(call)*np.exp(-r*T)
 
@@ -58,4 +59,4 @@ def Call_option_price(S0, K, T, r, sigma):
     return price
 
 
-
+Call_option_price(s0,K,T,r,sigma)
