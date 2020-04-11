@@ -53,8 +53,24 @@ print2(np.shape(portval_current), portval_current)
 #Terminal share function
 #Simulate stock price using Geometric Brownian Motion. 
 def terminal_shareprice(S_0, risk_free_rate,sigma,Z,T):
-    """Generates the terminal share price given some random normal values, Z"""
-    return S_0*np.exp((risk_free_rate-sigma**2/2)*T+sigma*np.sqrt(T)*Z)
+    """Generates the terminal share price given some random normal values, Z
+     
+    Args: 
+        S_0 (int): initial stock price
+        risk_free_rate (float): risk free rate
+        sigma (float): stock variability
+        Z (float): normal random variables
+        T (float): Time
+    
+    
+    Returns: 
+        term_price: terminal shareprice
+     
+    """
+        
+    term_price =  S_0*np.exp((risk_free_rate-sigma**2/2)*T+sigma*np.sqrt(T)*Z)
+
+    return term_price
 
 #Creating 10000 simulations of future portfolio values
 #Drawing random numbers from a normal distribution 
