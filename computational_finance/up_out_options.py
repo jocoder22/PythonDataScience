@@ -111,9 +111,13 @@ def up_and_out_call(s0,K,T,r,sigma,barrier):
     for j in range(0,n_simulation):
         sT=s0
         out=False
+        
+        # simulate the stock price evolution
         for i in range(0,int(n_steps)):
             e = norm.rvs()
             sT *= np.exp((r-sigma**2/2)*dt+sigma*e*np.sqrt(dt))
+
+            # out whenever the stock price exceeds the barrier
             if sT > barrier:
                 out=True
         if out==False:
