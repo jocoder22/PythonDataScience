@@ -13,7 +13,8 @@ from scipy.cluster.vq import vq, kmeans, whiten
 # plt.style.use('ggplot')
 
 
-path = r"C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\UnsupervisedME"
+# path = r"C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\UnsupervisedME"
+path = r"D:\PythonDataScience\MachineLearning\UnsupervisedME"
 os.chdir(path)
 
 sp = '\n\n'
@@ -80,7 +81,7 @@ plt.show()
 
 # Kmeans clustering
 # Define the cluster centers
-K_cluster, _ = kmeans(dataset2[['MPG', 'Horsepower']], 3)
+K_cluster, _ = kmeans(dataset2[['MPG', 'Horsepower']], 4)
 
 # Define the cluster labels
 dataset2['k_labels'], _ = vq(dataset2[['MPG', 'Horsepower']], K_cluster)
@@ -93,11 +94,47 @@ plt.show()
 
 # finding number of clusters
 distortions = []
-n_clusters = range(1, 5)
+n_clusters = range(1, 23)
 
 # Create a list of distortions 
 for idx in n_clusters:
     _ , distortion = kmeans(dataset2[['MPG', 'Horsepower']], idx)
+    distortions.append(distortion)
+
+# Create a data frame with two lists
+_plot = pd.DataFrame({'n_clusters': n_clusters, 'distortions': distortions})
+
+
+# Create a line plot of num_clusters and distortions
+sns.lineplot(x='n_clusters', y='distortions', data=_plot)
+plt.show()
+
+
+
+
+
+
+# Kmeans clustering
+# Define the cluster centers
+K_cluster, _ = kmeans(dataset2, 4)
+
+# Define the cluster labels
+dataset2['k_labels'], _ = vq(dataset2, K_cluster)
+
+# plot the clusters
+sns.scatterplot(x='MPG', y='Horsepower', 
+                hue='k_labels', data=dataset2)
+plt.show()
+
+
+
+# finding number of clusters
+distortions = []
+n_clusters = range(1, 23)
+
+# Create a list of distortions 
+for idx in n_clusters:
+    _ , distortion = kmeans(dataset2, idx)
     distortions.append(distortion)
 
 # Create a data frame with two lists

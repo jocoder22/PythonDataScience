@@ -45,3 +45,9 @@ url = 'http://s3.amazonaws.com/assets.datacamp.com/course/importing_data_into_r/
 xl = pd.read_excel(url,sheet_name=None)
 # Print the sheetnames to the shell
 print(xl.keys())
+
+url2 = "https://viewqk2nn0jlef.udacity-student-workspaces.com/edit/DIAS%20Attributes%20-%20Values%202017.xlsx"
+
+xl2 = pd.read_excel(url2,sheet_name=None)
+# Print the sheetnames to the shell
+print(xl2.keys())

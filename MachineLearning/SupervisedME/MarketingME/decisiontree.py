@@ -17,7 +17,7 @@ def print2(*args):
         
         
 # load pickle file
-mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
+mydir = r"D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
 features = pd.read_pickle(os.path.join(mydir, "features.pkl"))
 target= pd.read_pickle(os.path.join(mydir, "target.pkl"))
 

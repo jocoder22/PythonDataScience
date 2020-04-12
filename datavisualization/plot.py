@@ -2,14 +2,14 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-plt.ion()
+# plt.ion()
 
 xplot = np.linspace(0, 10, 1000)
 yplot = np.sin(xplot)
 
 plt.plot(xplot, yplot)
-# plt.show()
-plt.pause(0.0001)  
+plt.show()
+# plt.pause(0.0001)  
 
 '''
 Colors:
@@ -91,5 +91,5 @@ plt.plot(xplot+7, yplot, color='g', linewidth=10, zorder=15, alpha=0.3)
 plt.show()
 
 # Remember to close the pyplot
-plt.close()
+# plt.close()
 
