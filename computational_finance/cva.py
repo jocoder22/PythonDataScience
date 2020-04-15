@@ -34,8 +34,8 @@ recovery_rate = 0.2     # recovery rate
 # and term as inputs, and determines the terminal value of a share price, 
 # assuming geometric Brownian Motion. Note, you should vectorize this function where possible. 
 
-def terminal_shareprice(present_price, risk_free, sigma, Z, T):
-    """ terminal_shareprice function gives the terminal value of a share price,
+def terminalValue(present_price, risk_free, sigma, Z, T):
+    """ terminalValue function gives the terminal value of a share price,
         assuming geometric Brownian Motion and vectorization where possible.
         
     Inputs: 
@@ -51,3 +51,18 @@ def terminal_shareprice(present_price, risk_free, sigma, Z, T):
     """
     
     return present_price*np.exp((risk_free - sigma**2/2)*T + sigma*np.sqrt(T)*Z)
+
+
+def callpayoff(terminalval, strikeprice):
+    """The callpayoff function 
+ 
+    Args: 
+        terminalval (float/int): initial share price
+        strikeprice (float/int): : strike price
+ 
+    Returns: 
+        payoff (float/int)
+ 
+    """
+    return np.maximum(terminalval - strikeprice, 0)
+    

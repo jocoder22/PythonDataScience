@@ -69,7 +69,7 @@ def black_schole_callprice(S, K, T, rf, sigma):
  
     Args: 
         S: current stock price
-        K: exercise price
+        K: strike price
         T: maturity date in years
         rf: risk-free rate (continusouly compounded)
         sigma: volatiity of underlying security 
