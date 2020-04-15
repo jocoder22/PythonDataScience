@@ -72,3 +72,5 @@ plt.show()
 # plt.legend()
 # plt.show()
 
+for i in range(12):
+    print(i)
