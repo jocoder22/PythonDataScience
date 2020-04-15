@@ -6,6 +6,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
+def print2(*args):
+    for arg in args:
+        print(arg, sep="\n\n", end="\n\n")
 
 np.random.seed(112)
 
