@@ -12,7 +12,6 @@ from scipy.cluster.vq import vq, kmeans, whiten
 
 # plt.style.use('ggplot')
 
-
 # path = r"C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\UnsupervisedME"
 path = r"D:\PythonDataScience\MachineLearning\UnsupervisedME"
 os.chdir(path)
@@ -21,7 +20,6 @@ sp = '\n\n'
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data'
 # urlname = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.names'
 # urlindex = "https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/Index"
-
 
 url2 = "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/breast-cancer-wisconsin.data"
 urlname = "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/breast-cancer-wisconsin.names"
