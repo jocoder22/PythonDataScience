@@ -76,7 +76,6 @@ sns.scatterplot(x='MPG', y='Horsepower',
 plt.show()
 
 
-
 # Kmeans clustering
 # Define the cluster centers
 K_cluster, _ = kmeans(dataset2[['MPG', 'Horsepower']], 4)
@@ -106,10 +105,6 @@ _plot = pd.DataFrame({'n_clusters': n_clusters, 'distortions': distortions})
 # Create a line plot of num_clusters and distortions
 sns.lineplot(x='n_clusters', y='distortions', data=_plot)
 plt.show()
-
-
-
-
 
 
 # Kmeans clustering
