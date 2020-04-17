@@ -38,6 +38,7 @@ def c_M1_t(t):
   """
   
   s_ij = 1j*t*(np.log(s0) + (r - sigma**2/2)*T)
+  
   sigma_t = sigma**2/2 * T * t**2/2
   
   return np.exp(s_ij - sigma_t)
@@ -122,6 +123,70 @@ def upsilon_n(b2, b1, c, n):
   
   else:
     return (1/b * (np.sin(a) - np.sin(c)))
+  
+  
+def v_n(K, b2, b1, n):
+  """
+  
+  
+  """
+  
+  
+  up_silon = upsilon_n(b2, b1, 0, n)
+  
+  psi_ = psi_n(b2, b1, 0, n)
+  
+  return 2*K*(up_silon - psi_)
+
+
+def logchar_func(u, s0, r, sigma, K, T):
+  """
+  
+  
+  """
+  
+  s_ij1 = 1j*u*(np.log(s0/K) + (r - sigma**2/2)*T)
+              
+  sigma_t1 = sigma**2/2 * T * u**2/2
+  
+  return np.exp(s_ij1 - sigma_t1)
+
+
+def call_price(N, s0, sigma, r, K, T, b2, b1):
+  """
+  
+  
+  """
+  
+  a, b, c = get_npi(b2, b1, c, n)
+  
+  vn = v_n(K, b2, b1, 0)
+  log_char = logchar_func(0, s0, r, sigma, K, T)
+  
+  price = vn * (log_char / 2)
+  
+  for n in range(1,N):
+    vnn = v_n(K, b2, b1, n)
+    log_charn = logchar_func(a, s0, r, sigma, K, T)
+    exp_n = (-ij*b*b1)
+    
+    price += logcharn * exp_n * vnn
+  
+  
+  return price.real*np.exp(-r * T)
+
+
+# b1, b2 for call
+c1 = r
+c2 = T*sigma**2
+c4 = 0
+L = 10
+
+b1 = c1 - L * np.sqrt(c2-np.sqrt(c4))
+b2 = c1 + L * np.sqrt(c2-np.sqrt(c4))
+
+
+
  
 
 
