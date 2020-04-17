@@ -43,6 +43,19 @@ def c_M1_t(t):
   return np.exp(s_ij - sigma_t)
 
 
+def c_M2_t(t):
+  """
+  
+  
+  """
+  
+  sigma_ij = np.exp(1j*t*sigma**2/2*T)
+  
+  M1_t = c_M1_t(t)
+  
+  return sigma_ij*M1_t
+
+
 
 
 
