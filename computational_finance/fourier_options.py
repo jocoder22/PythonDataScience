@@ -201,6 +201,11 @@ plt.xlabel("N")
 plt.ylabel("Call price")
 
 
+# plot the log absolute error
+plt.plot(np.log(np.absolute(COS_callprice - analytic_callprice)))
+plt.xlabel("N")
+plt.ylabel("Log absolute error")
+
 
 
 
