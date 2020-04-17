@@ -57,18 +57,73 @@ def c_M2_t(t):
 
 
 
-# technique for approximating integral value (using areas of rectangles)
-t_max = 20
-N = 100
-
-# calculating delta 
-delta_t = t_max/N
-t_range = np.linspace(1,N, N)
-t_n = t_range * delta_t
 
 
-s0_integral = sum(((np.exp(-1j*t_n*k_log)*(c_M2_t(t_n)).imag)/t_n)*delta_t)
-k_integral = sum(((np.exp(-1j*t_n*k_log)*(c_M1_t(t_n)).imag)/t_n)*delta_t)  
+def fourier_option_prices(s0):
+  """
+  
+  
+  
+  """
+  # technique for approximating integral value (using areas of rectangles)
+  t_max = 20
+  N = 100
+
+  # calculating delta 
+  delta_t = t_max/N
+  t_range = np.linspace(1,N, N)
+  t_n = t_range * delta_t
+
+
+  s0_integral = sum(((np.exp(-1j*t_n*k_log)*(c_M2_t(t_n)).imag)/t_n)*delta_t)
+  k_integral = sum(((np.exp(-1j*t_n*k_log)*(c_M1_t(t_n)).imag)/t_n)*delta_t)  
+  
+  s0_part = s0*(1/2 + s0_integral/np.pi)
+  k_part = np.exp(-r*T)*K*(1/2 + k_integral/np.pi)
+  
+  return s0_part - K_part
+
+
+def get_npi(b2, b1, c, n):
+  """
+  
+  
+  """
+  npi_d = np.pi*n*(d-b1)/(b2-b1)
+  npi_c = np.pi*n*(c-b1)/(b2-b1)
+  npi_2 = npi.pi*n/(b2-b1)
+  
+  return npi_d, npi_2, npi_c
+
+  
+def upsilon_n(b2, b1, c, n):
+  """
+  
+  
+  """
+  
+  a, b, c = get_npi(b2, b1, c, n)
+  
+  val_one = (np.cos(a)*np.exp(d) - np.cos(c)*np.exp(c))
+  val_two = (b*(np.sin(a)*np.exp(d) - np.sin(c)*np.exp(c)))
+  
+  return (val_one + val_two) / (1 + b**2)
+  
+  
+ def psi_n(b2, b1, d, c, n):
+  """
+  
+  
+  """
+  a, b, c = get_npi(b2, b1, c, n)
+  
+  if n == 0:
+    return d - c
+  
+  else:
+    return (1/b * (np.sin(a) - np.sin(c)))
+ 
+
 
 
 
