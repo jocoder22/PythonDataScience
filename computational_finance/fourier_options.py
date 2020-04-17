@@ -67,4 +67,8 @@ t_range = np.linspace(1,N, N)
 t_n = t_range * delta_t
 
 
-               
+s0_integral = sum(((np.exp(-1j*t_n*k_log)*(c_M2_t(t_n)).imag)/t_n)*delta_t)
+k_integral = sum(((np.exp(-1j*t_n*k_log)*(c_M1_t(t_n)).imag)/t_n)*delta_t)  
+
+
+
