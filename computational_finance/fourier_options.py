@@ -6,3 +6,22 @@
 # o Strike price, 𝐾, of $110
 # o Maturity time, 𝑇, of one year
 # As per usual, we make all the assumptions of the Black-Scholes model.
+
+
+# import necessary modules
+import numpy as np
+from scipy.stats import norm
+import matplotlib.pyplot as plt
+
+
+# share specific information
+s0 = 100
+r = 0.06
+sigma = 0.3
+
+
+# option specific information
+K = 110
+T = 1
+k_log = np.log(K)
+
