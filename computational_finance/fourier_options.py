@@ -57,7 +57,14 @@ def c_M2_t(t):
 
 
 
+# technique for approximating integral value (using areas of rectangles)
+t_max = 20
+N = 100
 
+# calculating delta 
+delta_t = t_max/N
+t_range = np.linspace(1,N, N)
+t_n = t_range * delta_t
 
 
                
