@@ -29,3 +29,22 @@ k_log = np.log(K)
 
 anlytic_callprice = anal_option_prices(s0, r, sigma, T, type="call")
 
+
+# define characteristic functions
+def c_M1_t(t):
+  """
+  
+  
+  """
+  
+  s_ij = 1j*t*(np.log(s0) + (r - sigma**2/2)*T)
+  sigma_t = sigma**2/2 * T * t**2/2
+  
+  return np.exp(s_ij - sigma_t)
+
+
+
+
+
+
+               
