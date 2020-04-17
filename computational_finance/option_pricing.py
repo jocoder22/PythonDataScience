@@ -146,6 +146,45 @@ def discounted_putpayoff(terminal_price, strikeprice, riskfree, T, type="call"):
 numb = 50
 
 
+
+def anal_option_prices(current_price, risk_free, sigma, term, current_time=0, type="call"):
+    """The Ana_option_prices function calculate both analytical price for either call or put option
+ 
+    Args: 
+        present_price (float/int): initial share price
+        riskfree (float/int): risk free rate
+        sigma (float/int): share volatility
+        Z (float/int): normal random variables
+        T (float/int): term of share price
+        type (str): type of option, "call" or "put"
+ 
+    Returns: 
+        price (float/int): price of the option
+ 
+    """   
+    
+    # calculate d1 and d2
+    d1_numerator = np.log(current_price/strike_price) + (risk_free + sigma**2/2) * (T - current_time)
+    d1_denominator = sigma * np.sqrt(T - current_time)
+
+    d1 = d1_numerator / d1_denominator
+    d2 =  d1 - d1_denominator
+
+
+    if type == "call":
+        analytic_price = current_price*norm.cdf(d1) - (norm.cdf(d2)*strike_price*np.exp(-risk_free * (T - current_time)))
+
+    else:
+        analytic_price = -current_price*norm.cdf(-d1) + (norm.cdf(-d2)*strike_price*np.exp(-risk_free * (T - current_time)))
+
+        
+    return analytic_price
+
+
+anal_option_prices(current_price, risk_free, sigma, T, type="call")
+
+
+
 # 3. Write a for loop which cycles through sample size (1000, 2000, ..., 50000), and calculates the 
 # Monte Carlo estimate of a European put option, and well as the standard deviation of 
 # the Monte Carlo estimator.
