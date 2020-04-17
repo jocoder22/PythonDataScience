@@ -27,7 +27,7 @@ T = 1
 k_log = np.log(K)
 
 
-anlytic_callprice = anal_option_prices(s0, r, sigma, T, type="call")
+analytic_callprice = anal_option_prices(s0, r, sigma, T, type="call")
 
 
 # define characteristic functions
@@ -184,6 +184,23 @@ L = 10
 
 b1 = c1 - L * np.sqrt(c2-np.sqrt(c4))
 b2 = c1 + L * np.sqrt(c2-np.sqrt(c4))
+
+
+calculate COS for various N
+COS_callprice = np.zero(50)
+
+
+for i in range(1,51):
+  COS_callprice[i-1] = call_price(i, s0, sigma, r, K, T, b2, b1)
+  
+  
+# plotting the results
+plt.plot(COS_callprice)
+plot.plot([analytic_callprice]*50)
+plt.xlabel("N")
+plt.ylabel("Call price")
+
+
 
 
 
