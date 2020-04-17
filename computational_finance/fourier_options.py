@@ -12,6 +12,7 @@
 import numpy as np
 from scipy.stats import norm
 import matplotlib.pyplot as plt
+from option_pricing import anal_option_prices
 
 
 # share specific information
@@ -24,4 +25,7 @@ sigma = 0.3
 K = 110
 T = 1
 k_log = np.log(K)
+
+
+anlytic_callprice = anal_option_prices(s0, r, sigma, T, type="call")
 
