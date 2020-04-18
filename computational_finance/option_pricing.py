@@ -181,7 +181,7 @@ def anal_option_prices(current_price, risk_free, sigma, term, current_time=0, ty
     return analytic_price
 
 
-anal_option_prices(current_price, risk_free, sigma, T, type="call")
+# anal_option_prices(current_price, risk_free, sigma, T, type="call")
 
 
 
