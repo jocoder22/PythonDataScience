@@ -4,6 +4,8 @@ import pandas as pd
 from numpy.random import randn
 import matplotlib.pyplot as plt
 
+# https://www.shanelynn.ie/summarising-aggregation-and-grouping-data-in-python-pandas/
+
 def print2(*args):
     for arg in args:
         print(arg, end='\n\n')

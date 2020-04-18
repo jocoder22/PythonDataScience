@@ -2,6 +2,8 @@ import os
 import numpy as np
 import pandas as pd
 
+
+# https://www.shanelynn.ie/summarising-aggregation-and-grouping-data-in-python-pandas/
 def print2(*args):
     for arg in args:
         print(arg, end='\n\n')
