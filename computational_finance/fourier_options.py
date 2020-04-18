@@ -82,7 +82,7 @@ def fourier_option_prices(s0):
   s0_part = s0*(1/2 + s0_integral/np.pi)
   k_part = np.exp(-r*T)*K*(1/2 + k_integral/np.pi)
   
-  return s0_part - K_part
+  return s0_part - k_part
 
 
 def get_npi(b2, b1, c, n):
@@ -92,7 +92,7 @@ def get_npi(b2, b1, c, n):
   """
   npi_d = np.pi*n*(d-b1)/(b2-b1)
   npi_c = np.pi*n*(c-b1)/(b2-b1)
-  npi_2 = npi.pi*n/(b2-b1)
+  npi_2 = np.pi*n/(b2-b1)
   
   return npi_d, npi_2, npi_c
 
@@ -105,18 +105,19 @@ def upsilon_n(b2, b1, c, n):
   
   a, b, c = get_npi(b2, b1, c, n)
   
-  val_one = (np.cos(a)*np.exp(d) - np.cos(c)*np.exp(c))
-  val_two = (b*(np.sin(a)*np.exp(d) - np.sin(c)*np.exp(c)))
+  val_one = (np.cos(a)*np.exp(b) - np.cos(c)*np.exp(c))
+  val_two = (b*(np.sin(a)*np.exp(b) - np.sin(c)*np.exp(c)))
   
   return (val_one + val_two) / (1 + b**2)
   
   
- def psi_n(b2, b1, d, c, n):
+def psi_n(b2, b1, d, c, n):
+
   """
   
   
   """
-  a, b, c = get_npi(b2, b1, c, n)
+  a, b, c = get_npi(b2, b1, c, n) 
   
   if n == 0:
     return d - c
@@ -168,9 +169,9 @@ def call_price(N, s0, sigma, r, K, T, b2, b1):
   for n in range(1,N):
     vnn = v_n(K, b2, b1, n)
     log_charn = logchar_func(a, s0, r, sigma, K, T)
-    exp_n = (-ij*b*b1)
+    exp_n = (-1j*b*b1)
     
-    price += logcharn * exp_n * vnn
+    price += log_charn * exp_n * vnn
   
   
   return price.real*np.exp(-r * T)
@@ -186,8 +187,8 @@ b1 = c1 - L * np.sqrt(c2-np.sqrt(c4))
 b2 = c1 + L * np.sqrt(c2-np.sqrt(c4))
 
 
-calculate COS for various N
-COS_callprice = np.zero(50)
+# calculate COS for various N
+COS_callprice = np.zeros(50)
 
 
 for i in range(1,51):
@@ -196,7 +197,7 @@ for i in range(1,51):
   
 # plotting the results
 plt.plot(COS_callprice)
-plot.plot([analytic_callprice]*50)
+plt.plot([analytic_callprice]*50)
 plt.xlabel("N")
 plt.ylabel("Call price")
 
