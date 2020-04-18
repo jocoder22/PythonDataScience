@@ -33,10 +33,11 @@ def anal_option_prices(current_price, risk_free, sigma, term, strike_price, curr
     """   
     
     # calculate d1 and d2
-    d1_numerator = np.log(current_price/strike_price) + (risk_free + sigma**2/2) * (T - current_time)
+    d1_numerator = np.log(current_price/strike_price) 
+    d11_numerator = (risk_free + sigma**2/2) * (T - current_time)
     d1_denominator = sigma * np.sqrt(T - current_time)
 
-    d1 = d1_numerator / d1_denominator
+    d1 = (d1_numerator + d11_numerator) / d1_denominator
     d2 =  d1 - d1_denominator
 
 
@@ -237,7 +238,6 @@ COS_callprice = np.zeros(50)
 for i in range(1,51):
   COS_callprice[i-1] = call_price(i, s0, sigma, r, K, T, b2, b1)
   
-print(COS_callprice)
 # plotting the results
 plt.plot(COS_callprice)
 plt.plot([analytic_callprice]*50)
