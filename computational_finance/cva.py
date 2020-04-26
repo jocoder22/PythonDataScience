@@ -222,3 +222,7 @@ plt.title("Monte Carlo Estimates of risk-adjusted call option price")
 plt.legend(('Risk-neutral price', 'Risk-adjusted price', 'Risk-neutral price UB', 'Risk-neutral price LB'))
 plt.show()
 print2(cva_est, cva_std, firm_default_prob)
+
+
+url = "https://view98n6mw6nlkh.udacity-student-workspaces.com/edit/data/portfolio.json"
+portfolio = pd.read_json(url, orient='records', lines=True)
