@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import ncx2
 
+sp = {"end": "\n\n", "sep":"\n\n"}
 
 #Variable declaration
 S0 = 100
