@@ -105,6 +105,7 @@ def xplus(u):
 def g(u):
     return xminus(u)/xplus(u)
 
+
 def C(u):
     val1 = T*xminus(u)-np.log((1-g(u)*np.exp(-T*d(u)))/(1-g(u)))/a
     return r*T*1j*u + theta*kappa*val1
@@ -114,9 +115,16 @@ def D(u):
     val2 = 1-g(u)*np.exp(-T*d(u))
     return (val1/val2)*xminus(u)
 
+def log_char(u):
+    return np.exp(C(u) + D(u)*v0 + 1j*u*np.log(S0))
+
+def adj_char(u):
+    return log_char(u-1j)/log_char(-1j)
+
 
 first_integral = sum((((np.exp(-1j*t_n*k_log)*adj_char(t_n)).imag)/t_n)*delta_t)
 second_integral = sum((((np.exp(-1j*t_n*k_log)*log_char(t_n)).imag)/t_n)*delta_t)
 
 fourier_call_val = S0*(1/2 + first_integral/np.pi)-np.exp(-r*T)*K*(1/2 + second_integral/np.pi)
+print(fourier_call_val, analytic_callprice, **sp)
 
