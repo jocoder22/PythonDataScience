@@ -48,8 +48,72 @@ analytic_callprice = S0*norm.cdf(d_1_stock)-K*np.exp(-r*(T))*norm.cdf(d_2_stock)
 
 #Call price under CEV
 z = 2 + 1/(1-gamma)
+
 def C(t,K):
     kappa = 2*r/(sigma**2*(1-gamma)*(np.exp(2*r*(1-gamma)*t)-1))
     x = kappa*S0**(2*(1-gamma))*np.exp(2*r*(1-gamma)*t)
     y = kappa*K**(2*(1-gamma))
     return S0*(1-ncx2.cdf(y,z,x))-K*np.exp(-r*t)*ncx2.cdf(x,z-2,y)
+
+#Share specific information
+S0 = 100
+v0 = 0.06
+kappa = 9
+theta = 0.06
+r = 0.1
+sigma = 0.3
+rho = -0.4
+
+#Variable declaration
+S0 = 100
+sigma = 0.3
+gamma = 0.75
+r = 0.1
+T = 3
+
+
+
+#Call Option specific information
+K = 105
+T = 3
+k_log = np.log(K)
+
+#Approximation information
+t_max = 30
+N = 100
+
+
+#Characteristic function code
+
+a = sigma**2/2
+
+def b(u):
+    return kappa - rho*sigma*1j*u
+
+def c(u):
+    return -(u**2+1j*u)/2
+
+def d(u):
+    return np.sqrt(b(u)**2-4*a*c(u))
+
+def xminus(u):
+    return (b(u)-d(u))/(2*a)
+
+def xplus(u):
+    return (b(u)+d(u))/(2*a)
+
+def g(u):
+    return xminus(u)/xplus(u)
+
+def C(u):
+    val1 = T*xminus(u)-np.log((1-g(u)*np.exp(-T*d(u)))/(1-g(u)))/a
+    return r*T*1j*u + theta*kappa*val1
+
+def D(u):
+    val1 = 1-np.exp(-T*d(u))
+    val2 = 1-g(u)*np.exp(-T*d(u))
+    return (val1/val2)*xminus(u)
+
+
+first_integral = sum((((np.exp(-1j*t_n*k_log)*adj_char(t_n)).imag)/t_n)*delta_t)
+second_integral = sum((((np.exp(-1j*t_n*k_log)*log_char(t_n)).imag)/t_n)*delta_t)
