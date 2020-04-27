@@ -147,7 +147,7 @@ numb = 50
 
 
 
-def anal_option_prices(current_price, risk_free, sigma, term, current_time=0, type="call"):
+def anal_option_prices(current_price, strike_price, risk_free, sigma, term, current_time=0, type="call"):
     """The Ana_option_prices function calculate both analytical price for either call or put option
  
     Args: 
@@ -285,3 +285,9 @@ def modigliani_ratio(returns, benchmark_returns, rf, days=252):
     benchmark_volatility = benchmark_returns.std() * np.sqrt(days)
     m2_ratio = (sharpe_ratio * benchmark_volatility) + rf
     return m2_ratio
+
+
+
+
+print("###############################################################")
+print(anal_option_prices(100, 105, 0.03, 0.5, 0.5))
