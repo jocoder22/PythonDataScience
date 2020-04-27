@@ -8,6 +8,7 @@ import math
 import random
 
 sp = {"end": "\n\n", "sep":"\n\n"}
+np.random.seed(100)
 
 #Share specific information
 S0 = 100
@@ -154,8 +155,9 @@ sigma = .3
 gamma = .75
 T = [x/12 for x in range(1,13)]
 share_prices = {}
-mc_share_prices ={}
-std_share_prices ={}
+mc_share_prices = {}
+std_share_prices = {}
+
 for i in range(1,51):
     # Added for monte carlo
     norm_array = norm.rvs(size = 1000*i)
@@ -179,3 +181,48 @@ for i in range(1,51):
 
 for key, value in share_prices.items():
     print(key, np.mean(np.mean(value)))
+
+
+
+def path_generator(current_price, risk_free, sigma, gamma, Z, dt):
+    """The path_generator function simulates the share price or 
+        firm value path
+ 
+    Args: 
+        present_price (float/int): initial share price
+        riskfree (float/int): risk free rate
+        sigma (float/int): share volatility
+        Z (float/int): normal random variables
+        dt (float/int): term of share price
+
+ 
+ 
+    Returns: 
+        price (float/int): price of the option
+ 
+    """
+    # S_T_MC = S_T*np.exp((risk_free- ((sigma*S_T**(1-gamma))**2/2)*(1/12)) + (sigma*S_T**(1-gamma))*np.sqrt(1/12)*norm_array)
+    return current_price * np.exp(np.cumsum(((risk_free - sigma**2/2)*dt + sigma**current_price**(gamma-1)*np.sqrt(dt)*Z), axis=1))
+
+
+dt = 1/12 # time step
+numb = 50 # number of simulations
+T = 1
+M1 = 1 + T/dt  # the number of time periods (in our case the number of months in a year)
+
+x = np.arange(0, T+dt, dt)
+
+for i in range(1, numb+1):
+    Z = norm.rvs(size=1000*i*int(M1))
+    Z = Z.reshape(1000*i, int(M1))
+    stockvalue = path_generator(S0, risk_free, sigma, gamma, Z, x)
+
+
+plt.figure(figsize = [11, 6])
+plt.plot(x*12, stockvalue[0:20].T)
+plt.axhline(S0, c="black")
+plt.axhline(S0, c="black")
+plt.xlabel('Time (Month)',)
+plt.ylabel('Firm value trajectories')
+plt.title('Trajectories of stock price in the Merton model')
+plt.show()
