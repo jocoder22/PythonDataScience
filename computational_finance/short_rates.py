@@ -51,4 +51,14 @@ for i in range(nyears):
   r_sim[:,i+1] = vasicek_mean(r_sim[:,i],t[i], t[i+1]) + np.sqrt(vasicek_var(t[i], t[i+t])) * z[:,i]
   
   
-s_mean = r0 
+s_mean = r0 * np.exp(-alpha*t) + b*(1-np.exp(-alpha*t))
+
+
+
+# plot results
+_graph = np.ones(r_sim.shape)*t
+plt.plot(np.transpose(_graph), np.transpose(r_sim*100), 'r')
+plt.plot(t, s_mean*100)
+plt.xlabel("Year")
+plt.ylabel("Short Rate")
+plt.show()
