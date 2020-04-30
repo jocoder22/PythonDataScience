@@ -32,4 +32,23 @@ def vasicek_var(t1,t2):
   return term1* term2
 
 
+# simulate interest rate paths
+np.random.seed(0)
 
+nyears = 10
+simulations = 10
+
+t = np.array(range(0,nyears+1))
+
+z = norm.rvs(size = [simulations, nyears])
+r_sim = np.zeros([simulations, nyears])
+r_sim[:,0] = r0
+vasicek_mean_vector = np.zeros(nyears+1)
+
+
+
+for i in range(nyears):
+  r_sim[:,i+1] = vasicek_mean(r_sim[:,i],t[i], t[i+1]) + np.sqrt(vasicek_var(t[i], t[i+t])) * z[:,i]
+  
+  
+s_mean = r0 
