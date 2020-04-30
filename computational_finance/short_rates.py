@@ -11,7 +11,7 @@ sigma = 0.025
 
 
 #  define useful functions
-def vasicef_mean(r, t1, t2):
+def vasicek_mean(r, t1, t2):
   """
   
   """
@@ -19,4 +19,17 @@ def vasicef_mean(r, t1, t2):
   b_discounted = b * (1 - np.exp(-alpha*(t2-t1)))
   
   return r0_discounted + b_discounted
+
+
+def vasicek_var(t1,t2):
+  """
+  
+  """
+ 
+  term1 = sigma**2/(2 * alpha)
+  term2 = 1 - np.exp(-2*alpha * (t2-t1))
+  
+  return term1* term2
+
+
 
