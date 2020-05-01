@@ -6,4 +6,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
-from short_rate import vasicek_mean, vasicek_var
+from short_rates import vasicek_mean, vasicek_var
+
+
