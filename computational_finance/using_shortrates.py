@@ -130,3 +130,13 @@ for i in range(nyears):
 
 zcb_prices = np.mean(np.exp(-y_simtemp), axis=0)
 
+# Yt estimates
+r_mat = np.cumsum(r_simtem[:,0:-1], axis = 1) * (t[1:] - t[0:-1])
+r_mat2 = np.cumsum(r_simtem[:,0:-1] + r_simtem[:,1:], axis = 1)/2 * (t[1:] - t[0:-1])
+
+
+
+
+
+
+
