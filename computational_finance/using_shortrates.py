@@ -146,10 +146,12 @@ trap_prices[1:] = np.mean(np.exp(-r_mat2), axis = 0)
 bond_vec = bond_price(r0,0,t)
 
 # plotting bond prices
-plt.plot(t, bond_vec)
-plt.plot(t, zcb_prices, ".")
-plt.plot(t, squad_prices, "x")
-
+plt.plot(t, bond_vec, label="Analytical solution")
+plt.plot(t, zcb_prices, ".", label="Simulated Yt and rt")
+plt.plot(t, squad_prices, "x", label="Quadrature: Simulated rt and estimated Yt")
+plt.plot(t, squad_prices, "^", label="Quadrature Squared: Simulated rt and estimated Yt")
+plt.legend()
+plt.show()
 
 
 
