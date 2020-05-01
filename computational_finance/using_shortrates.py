@@ -146,15 +146,26 @@ trap_prices[1:] = np.mean(np.exp(-r_mat2), axis = 0)
 bond_vec = bond_price(r0,0,t)
 
 # plotting bond prices
-plt.plot(t, bond_vec, label="Analytical solution")
-plt.plot(t, zcb_prices, ".", label="Simulated Yt and rt")
-plt.plot(t, squad_prices, "x", label="Quadrature: Simulated rt and estimated Yt")
-plt.plot(t, squad_prices, "^", label="Quadrature Squared: Simulated rt and estimated Yt")
+plt.plot(t, bond_vec, label="Analytical solution: Closed-form")
+plt.plot(t, zcb_prices, ".", label="Joint Simulation: Simulated Yt and rt")
+plt.plot(t, squad_prices, "x", label="Simple Quadrature: Simulated rt and estimated Yt")
+plt.plot(t, trap_prices, "^", label="Trapezoidal Quadrature: Simulated rt and estimated Yt")
 plt.legend()
 plt.show()
 
+# calculate bond yields
+bond_yield = -np.log(bond_vec[1:])/t[1:])
+month_yield = -np.log(zcb_prices[1:])/t[1:])
+squad_yield = -np.log(squad_prices[1:])/t[1:])
+trap_yield = -np.log(trap_prices[1:])/t[1:])
 
-
+# plotting bond yields
+plt.plot(t[1:], bond_yield*100, label="Analytical solution: Closed-form")
+plt.plot(t[1:], month_yield*100, ".", label="Joint Simulation: Simulated Yt and rt")
+plt.plot(t[1:], squad_yield*100, "x", label="Simple Quadrature: Simulated rt and estimated Yt")
+plt.plot(t[1:], trap_yield*100, "^", label="Trapezoidal Quadrature: Simulated rt and estimated Yt")
+plt.legend()
+plt.show()
 
 
 
