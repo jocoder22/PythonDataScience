@@ -12,8 +12,8 @@ sigma = 0.025
 
 #  define useful functions
 def vasicek_mean(r, t1, t2):
-  """The vasicek_mean function calculate the mean of interest rate model
-      using vasicek method
+  """The vasicek_mean function calculate the mean of of short rate at t2 given the
+      short rate at t1 < t2 using the vasicek method
       
       Input:
         r(float): interest rate
@@ -33,8 +33,8 @@ def vasicek_mean(r, t1, t2):
 
 
 def vasicek_var(t1,t2):
-  """The vasicek_var function calculate the variance on interest rate
-      using the vasicek method
+  """The vasicek_var function calculate the variance of short rate at t2 given the
+      short rate at t1 < t2 using the vasicek method
       
       Inputs:
         t1(int/float) : time at t1
