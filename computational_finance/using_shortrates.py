@@ -8,6 +8,12 @@ from scipy.stats import norm
 
 from short_rates import vasicek_mean, vasicek_var
 
+# set market parameters
+r0 =  0.05
+alpha = 0.2
+b = 0.08
+sigma = 0.025
+
 # Analytical bond price (ZCB)
 def a_part(t1,t2):
   """
