@@ -135,6 +135,22 @@ r_mat = np.cumsum(r_simtem[:,0:-1], axis = 1) * (t[1:] - t[0:-1])
 r_mat2 = np.cumsum(r_simtem[:,0:-1] + r_simtem[:,1:], axis = 1)/2 * (t[1:] - t[0:-1])
 
 
+# bond prices estimates
+squad_prices = np.ones(nyears+1)
+trap_prices = np.ones(nyears+1)
+
+squad_prices[1:] = np.mean(np.exp(-r_mat), axis = 0)
+trap_prices[1:] = np.mean(np.exp(-r_mat2), axis = 0)
+
+# calculate closed form bond prices
+bond_vec = bond_price(r0,0,t)
+
+# plotting bond prices
+plt.plot(t, bond_vec)
+plt.plot(t, zcb_prices, ".")
+plt.plot(t, squad_prices, "x")
+
+
 
 
 
