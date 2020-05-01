@@ -21,15 +21,15 @@ def vasicek_mean(r, t1, t2):
         t2(int/float) : time at t2
         
        Output:
-          result(float) : the vasicek mean
+          vasicek_mean_value(float) : the vasicek mean
   
   """
   r0_discounted = r * np.exp(-alpha*(t2-t1))
   b_discounted = b * (1 - np.exp(-alpha*(t2-t1)))
  
-  result = r0_discounted + b_discounted
+  vasicek_mean_value = r0_discounted + b_discounted
 
-  return result
+  return vasicek_mean_value
 
 
 def vasicek_var(t1,t2):
@@ -41,16 +41,16 @@ def vasicek_var(t1,t2):
         t2(int/float) : time at t2
         
       Output:
-        result(float) : vasicek variance
+        vasicek_variance(float) : vasicek variance
   
   """
  
   term1 = sigma**2/(2 * alpha)
   term2 = 1 - np.exp(-2*alpha * (t2-t1))
   
-  result =  term1* term2
+  vasicek_variance =  term1* term2
 
-  return result
+  return vasicek_variance
 
 
 # simulate interest rate paths
