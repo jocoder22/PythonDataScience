@@ -43,3 +43,46 @@ def bond_price(r,t,T):
   bondprice = np.exp(-a_part(t,T)*r*d_part(t,T))
   
   return bondprice
+
+
+def y_mean(y,r,t1,t2):
+  """
+  
+  """
+  ymean = y + (t2-t1)*b + (r-b)*a_part(t1,t2)
+  
+  return ymean
+
+
+def y_var(t1,t2):
+  """
+  
+  """
+  var1 = sigma**2/alpha**2
+  val2 = t2-t1 - a_part(t1,t2) 
+  val3 = alpha*(a_part(t1,t2)**2/2)
+  
+  yvar = var1 * (val2 - val3)
+  
+  return yvar
+
+def ry_var(t1,t2):
+  """
+  
+  
+  """
+  ry_covariance = sigma**2*(a_part(t1,t2)**2)/2
+  
+  return ry_variance
+
+def ry_rho(t1,t2):
+  """
+  
+  
+  """
+  ry_variance = ry_var(t1,t2)
+  ry_stds = np.sqrt(vasicek_var(t1,t2)*y_var(t1,t2))
+  ry_correlation = ry_variance / ry_stds
+  
+  return ry_correlation
+    
