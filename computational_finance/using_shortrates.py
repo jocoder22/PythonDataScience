@@ -120,11 +120,13 @@ correlations = ry_rho(t[0:-1],t[1:])
 z_month2 = correlations*z_moth1 + np.sqrt(1-correlations**2)*z_month2
 
 for i in range(nyears):
-  sim_r_mean = vasicek_mean(r_simtemp[:,i
-  sim_r_val = 
+  sim_r_mean = vasicek_mean(r_simtemp[:,i],t[i],t[t+1])
+  sim_r_val = np.sqrt(vasicek_var(t[i],t[i+1]))*z_moth1[:,i]
   r_simtemp[:,0] = sim_r_mean + sim_r_val
   
-  sim_r_mean =
-  sim_r_val =   
-  y_simtemp[:,0] = y0
+  sim_y_mean = y_mean(y_simtemp[:,i],r_simtemp[:,i], t[i],t[t+1])
+  sim_y_val = np.sqrt(y_var(t[i],t[i+1]))*z_moth2[:,i] 
+  y_simtemp[:,0] = sim_y_mean + sim_y_val
+
+zcb_prices = np.mean(np.exp(-y_simtemp), axis=0)
 
