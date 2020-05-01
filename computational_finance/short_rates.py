@@ -34,14 +34,24 @@ def vasicek_mean(r, t1, t2):
 
 
 def vasicek_var(t1,t2):
-  """
+  """The vasicek_var function calculate the variance on interest rate
+      using the vasicek method
+      
+      Inputs:
+        t1(int/float) : time at t1
+        t2(int/float) : time at t2
+        
+      Output:
+        result(float) : vasicek variance
   
   """
  
   term1 = sigma**2/(2 * alpha)
   term2 = 1 - np.exp(-2*alpha * (t2-t1))
   
-  return term1* term2
+  result =  term1* term2
+
+  return result
 
 
 # simulate interest rate paths
