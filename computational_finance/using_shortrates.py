@@ -35,3 +35,11 @@ def d_part(t1, t2):
   
   return result
   
+def bond_price(r,t,T):
+  """
+  
+  
+  """
+  bondprice = np.exp(-a_part(t,T)*r*d_part(t,T))
+  
+  return bondprice
