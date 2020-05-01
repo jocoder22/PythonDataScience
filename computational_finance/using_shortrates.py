@@ -86,3 +86,27 @@ def ry_rho(t1,t2):
   
   return ry_correlation
     
+  
+# initialize y value
+y0 = 0
+np.random.seed(0)
+
+# initialize number of years and number of simulations
+nyears = 10
+nsimulations = 100000
+
+t = np.array(range(0, nyears+1))
+
+z_mont1 = norm.rvs(size = [nsimulations, nyears])
+z_mont2 = norm.rvs(size = [nsimulations, nyears])
+
+r_simtemp = np.zeros([nsimulations, nyears+1])
+y_simtemp = np.zeros([nsimulations, nyears+1])
+
+
+r_simtemp[:,0] = r0
+y_simtemp[:,0] = y0
+
+
+
+
