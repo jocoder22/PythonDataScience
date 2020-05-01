@@ -12,13 +12,25 @@ sigma = 0.025
 
 #  define useful functions
 def vasicek_mean(r, t1, t2):
-  """
+  """The vasicek_mean function calculate the mean of interest rate model
+      using vasicek method
+      
+      Input:
+        r(float): interest rate
+        t1(int/float) : time at t1
+        t2(int/float) : time at t2
+        
+       Output:
+          result(float) : the vasicek mean
   
   """
   r0_discounted = r * np.exp(-alpha*(t2-t1))
   b_discounted = b * (1 - np.exp(-alpha*(t2-t1)))
-  
-  return r0_discounted + b_discounted
+ 
+  result = r0_discounted + b_discounted
+
+  return result
+
 
 
 def vasicek_var(t1,t2):
