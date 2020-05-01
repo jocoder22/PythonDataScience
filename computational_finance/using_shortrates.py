@@ -103,8 +103,8 @@ nsimulations = 100000
 
 t = np.array(range(0, nyears+1))
 
-z_mont1 = norm.rvs(size = [nsimulations, nyears])
-z_mont2 = norm.rvs(size = [nsimulations, nyears])
+z_month1 = norm.rvs(size = [nsimulations, nyears])
+z_month2 = norm.rvs(size = [nsimulations, nyears])
 
 r_simtemp = np.zeros([nsimulations, nyears+1])
 y_simtemp = np.zeros([nsimulations, nyears+1])
@@ -114,5 +114,17 @@ r_simtemp[:,0] = r0
 y_simtemp[:,0] = y0
 
 
+correlations = ry_rho(t[0:-1],t[1:])
 
+# generate correlated standard normals
+z_month2 = correlations*z_moth1 + np.sqrt(1-correlations**2)*z_month2
+
+for i in range(nyears):
+  sim_r_mean = vasicek_mean(r_simtemp[:,i
+  sim_r_val = 
+  r_simtemp[:,0] = sim_r_mean + sim_r_val
+  
+  sim_r_mean =
+  sim_r_val =   
+  y_simtemp[:,0] = y0
 
