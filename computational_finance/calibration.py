@@ -10,12 +10,12 @@ r = 0.1  # from govt bond prices and their yields
 
 # set put parameters
 # sigma and price are unknown
-Kp = 100
+Kp = 110
 Tp = 2
 
 # set call parameters
 Kc = 95
-Tc = 2
+Tc = 1
 price = 15
 
 # define functions
@@ -33,6 +33,5 @@ def F(sigma):
 
 # finding sigma
 sigma_val = opt.broyden1(F, 0.2) # 0.2 is a random initializaton value
-
 
 print(sigma_val)
