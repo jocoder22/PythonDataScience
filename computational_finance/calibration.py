@@ -25,13 +25,21 @@ def d1(sigma):
 def d2(sigma):
   return d1(sigma) - sigma*np.sqrt(Tc)
 
-def callprice(sigma):
-  return norm.cdf(d1(sigma))*s0 - norm.cdf(d2(sigma))*Kc*np.exp(-r * Tc)
+def optionprice(sigma, type="call"):
+  if type == "call":
+    return norm.cdf(d1(sigma))*s0 - norm.cdf(d2(sigma))*Kc*np.exp(-r * Tc)
+  else:
+    return -norm.cdf(-d1(sigma))*s0 + norm.cdf(-d2(sigma))*Kc*np.exp(-r * Tc)
 
-def F(sigma):
-  return callprice(sigma) - price
+def F(sigma, type="call"): # this gives F(x) = 0
+  return callprice(sigma, type="call") - price
 
 # finding sigma
-sigma_val = opt.broyden1(F, 0.2) # 0.2 is a random initializaton value
+sigma_val = opt.broyden1(F, 0.2, args=("call")) # 0.2 is a random initializaton value
 
 print(sigma_val)
+
+
+# Find the put price
+def putprice(sigma):
+  
