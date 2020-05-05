@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from scipy.stats import norm
-import scipy.optimize
+import scipy.optimize as opt
 
 
 # Set general parameters
@@ -29,4 +29,10 @@ def callprice(sigma):
   return norm.cdf(d1(sigma))*s0 - norm.cdf(d2(sigma))*Kc*np.exp(-r * Tc)
 
 def F(sigma):
-  return Callprice(sigma) - price
+  return callprice(sigma) - price
+
+# finding sigma
+sigma_val = opt.broyden1(F, 0.2) # 0.2 is a random initializaton value
+
+
+print(sigma_val)
