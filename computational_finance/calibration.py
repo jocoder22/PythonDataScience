@@ -62,19 +62,34 @@ sigma_val3 = opt.broyden1(F3, xin = 0.1)
 print(sigma_val3)
 
 
+# call parameters
+callparam = (100,95,0.1,1,"call")
 
-callparam = (100,110,0.1,2,"call")
 def optionprice2(sigma, param):
   (s0, strike, rate, time, type) = param
+
+  d11 = 1/(sigma * np.sqrt(time)) * (np.log(s0/strike) + (rate + sigma**2/2)*time)
+
+  d22 = d11 - sigma*np.sqrt(time)
+
   if type == "call":
-    return norm.cdf(d1(sigma))*s0 - norm.cdf(d2(sigma))*strike*np.exp(-rate * time)
+    return norm.cdf(d11)*s0 - norm.cdf(d22)*strike*np.exp(-rate * time)
   else:
-    return -norm.cdf(-d1(sigma))*s0 + norm.cdf(-d2(sigma))*strike*np.exp(-rate * time)
+    return -norm.cdf(-d11)*s0 + norm.cdf(-d22)*strike*np.exp(-rate * time)
 
 
-putparam = (100,95,0.1,1,"put")
+def F4(sigma): # this gives F(x) = 0
+  return optionprice2(sigma, callparam) - price
+
+sigma_val4 = opt.broyden1(F4, xin = 0.14) 
+print(sigma_val4)
+
+
+putparam = (100,110,0.1,2,"put")
+
 # calculate the put price
-put_price = optionprice(sigma_val3, putparam)
+put_price = optionprice2(sigma_val3, putparam)
 print(put_price)
+
 
   
