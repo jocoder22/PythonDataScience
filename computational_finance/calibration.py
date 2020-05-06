@@ -25,11 +25,11 @@ def d1(sigma):
 def d2(sigma):
   return d1(sigma) - sigma*np.sqrt(Tc)
 
-# def optionprice(sigma, type="call"):
-#   if type == "call":
-#     return norm.cdf(d1(sigma))*s0 - norm.cdf(d2(sigma))*Kc*np.exp(-r * Tc)
-#   else:
-#     return -norm.cdf(-d1(sigma))*s0 + norm.cdf(-d2(sigma))*Kc*np.exp(-r * Tc)
+def optionprice(sigma, type="call"):
+  if type == "call":
+    return norm.cdf(d1(sigma))*s0 - norm.cdf(d2(sigma))*Kc*np.exp(-r * Tc)
+  else:
+    return -norm.cdf(-d1(sigma))*s0 + norm.cdf(-d2(sigma))*Kc*np.exp(-r * Tc)
   
 def callprice(sigma):
     return norm.cdf(d1(sigma))*s0 - norm.cdf(d2(sigma))*Kc*np.exp(-r * Tc)
@@ -38,16 +38,16 @@ def F(sigma): # this gives F(x) = 0
   return callprice(sigma) - price
 
 # finding sigma
-sigma_val = opt.broyden1(F, 0.2, args=("call")) # 0.2 is a random initializaton value
+sigma_val = opt.broyden1(F, 0.2) # 0.2 is a random initializaton value
 
 print(sigma_val)
 
 
-def F(sigma, type="call"): # this gives F(x) = 0
+def F2(sigma, type="call"): # this gives F(x) = 0
   return optionprice(sigma, type="call") - price
 
 
-G_partial = partial(F, type="call")
+G_partial = partial(F2, type="call")
 
 # finding sigma
 sigma_val2 = opt.broyden1(G_partial, 0.2) # 0.2 is a random initializaton value
