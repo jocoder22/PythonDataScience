@@ -63,6 +63,7 @@ print(sigma_val3)
 
 
 
+callparam = (100,110,0.1,2,"call")
 def optionprice2(sigma, param):
   (s0, strike, rate, time, type) = param
   if type == "call":
