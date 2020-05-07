@@ -36,4 +36,20 @@ def D_part(t1, t2, alpha, b , sigma):
 def bondprice(r, t, T, alpha,b,sigma):
   return np.exp(-A_part(t,T,alpha)*r + D_part(t,T,alpha, b,sigma))
 
+# the F function
+# find the values for which the differences between the bondprice and yield curve bond prices are minimized
+def F(x):
+  alpha = x[0]
+  b = x[1]
+  sigma = x[2]
+  return sum(np.abs(bondprice(r0,0,years,alpha,b,sigma) - bond_prices))
+
+
+# minimizing F function
+bnds = ((0,1),(0,0.2), (0.0.2))
+opt_value = opt.fmin_slsqp(F, (0.3,0.05,0.03), bounds=bnds)
+opt_alpha = opt_value[0]
+opt_b = opt_value[1]
+opt_sigma = opt_value[2]
+
 
