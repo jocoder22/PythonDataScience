@@ -36,3 +36,4 @@ def D_part(t1, t2, alpha, b , sigma):
 def bondprice(r, t, T, alpha,b,sigma):
   return np.exp(-A_part(t,T,alpha)*r + D_part(t,T,alpha, b,sigma))
 
+
