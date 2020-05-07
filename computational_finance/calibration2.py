@@ -53,3 +53,16 @@ opt_b = opt_value[1]
 opt_sigma = opt_value[2]
 
 
+# Calculating model prices and yield
+model_prices = bondprice(r0,0,years, opt_alpha, opt_b, opt_sigma)
+model_yield =  -np.log(model_prices)/years
+
+# plotting prices
+plt.plot(years, bond_prices, label="Market prices")
+plt.plot(years, model_prices, ".", label ="Calibarted prices")
+plt.xlabel("Maturity")
+plt.ylable("Bond price")
+plt.legend()
+plt.show()
+
+
