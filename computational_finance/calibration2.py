@@ -65,4 +65,11 @@ plt.ylable("Bond price")
 plt.legend()
 plt.show()
 
+# plotting yields
+plt.plot(years, yield_curve*100, label="Yield curve")
+plt.plot(years, model_yield*100, "x", label ="Calibarted  yield")
+plt.xlabel("Maturity")
+plt.ylable("Yield")
+plt.legend()
+plt.show()
 
