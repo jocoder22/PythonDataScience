@@ -49,4 +49,16 @@ def C(u, theta, kappa, sigma):
   val0 = val1 - val12
   return r*T*1j*u + theta*kappa*val0
 
+def D(u, theta, kappa, sigma):
+  va1 = 1-np.exp(-T*d(u, theta, kappa, sigma))
+  va2 = 1-g(u, theta, kappa, sigma) * np.exp(-T*d(u,theta, kappa, sigma))
+  return (va1/va2)*xminus(u,theta, kappa, sigma)
+
+def log_char(u, theta, kappa, sigma):
+  return np.exp(C(u,theta, kappa, sigma) + D(u,theta, kappa, sigma)*v0 + ij*u*np.log(s0))
+
+def adj_char(u,theta, kappa, sigma):
+  return log_char(u-1j, theta, kappa, sigma)/log_char(-ij, theta, kappa, sigma)
+
+
   
