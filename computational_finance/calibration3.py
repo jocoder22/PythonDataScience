@@ -61,4 +61,14 @@ def adj_char(u,theta, kappa, sigma):
   return log_char(u-1j, theta, kappa, sigma)/log_char(-ij, theta, kappa, sigma)
 
 
+# variables for Gil-Pelaez
+delta_t = t_max/N
+from_1_to_N = np.linspace(1,N,N)
+t_n = (from_1_to_N - 1/2)*delta_t
+
+def Hest_Pricer(x):
+  theta = x[0]
+  kappa = x[1]
+  sigma = x[2]
   
+  first_integral = np.sum((((np.exp(-1j*t_n*k_log)*adj_char(t_n,theta,kappa,sigma)).imag)/t_n)*delta_t, axis=1)
