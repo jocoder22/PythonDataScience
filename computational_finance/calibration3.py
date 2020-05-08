@@ -72,3 +72,11 @@ def Hest_Pricer(x):
   sigma = x[2]
   
   first_integral = np.sum((((np.exp(-1j*t_n*k_log)*adj_char(t_n,theta,kappa,sigma)).imag)/t_n)*delta_t, axis=1)
+  second_integral = np.sum((((np.exp(-1j*t_n*k_log)*log_char(t_n,theta,kappa,sigma)).imag)/t_n)*delta_t, axis=1)
+  
+  fourier_callval = s0*(1/2 + first_integral/np.pi) - np.exp(-r*T)*k*(1/2 + second_integral/np.pi)
+  
+  
+def opt_func(x):
+  return sum(np.abs(price - Hest_Pricer(x)))
+
