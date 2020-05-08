@@ -41,3 +41,12 @@ def xplus(u,theta,kappa, sigma):
 
 def g(u,theta, kappa, sigma):
   return xminus(u,theta,kappa, sigma)/xplus(u,theta,kappa,sigma)
+
+def C(u, theta, kappa, sigma):
+  val1 = T*xminus(u, theta, kappa, sigma)
+  val12 = np.log((1-g(u,theta, kappa, sigma)*np.exp(-T*d(u,theta,kappa,sigma)))
+                 /(1-g(u,theta,kappa, sigma)))/a(sigma)
+  val0 = val1 - val12
+  return r*T*1j*u + theta*kappa*val0
+
+  
