@@ -80,3 +80,11 @@ def Hest_Pricer(x):
 def opt_func(x):
   return sum(np.abs(price - Hest_Pricer(x)))
 
+
+# calibrating our model
+opt_vals = opt.fmin_slsqp(opt_func, (0.1,3,0.1))
+
+theta_hat = opt_vals[0]
+kappa_hat = opt_vals[1]
+sigma_hat = opt_vals[2]
+
