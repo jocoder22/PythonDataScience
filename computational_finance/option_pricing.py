@@ -283,7 +283,5 @@ def modigliani_ratio(returns, benchmark_returns, rf, days=252):
     return m2_ratio
 
 
-
-
 print("###############################################################")
 print(anal_option_prices(100, 105, 0.03, 0.5, 0.5))
