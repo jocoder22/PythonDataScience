@@ -227,7 +227,6 @@ def option_prices(current_price, risk_free, sigma, term, current_time=0, type="c
     d1 = d1_numerator / d1_denominator
     d2 =  d1 - d1_denominator
 
-
     if type == "call":
         analytic_price = current_price*norm.cdf(d1) - (norm.cdf(d2)*strike_price*np.exp(-risk_free * (T - current_time)))
 
