@@ -7,15 +7,10 @@
 # o Maturity time, 𝑇, of one year
 # As per usual, we make all the assumptions of the Black-Scholes model.
 
-
-
-
 # import necessary modules
 import numpy as np
 from scipy.stats import norm
 import matplotlib.pyplot as plt
-
-
 
 def anal_option_prices(current_price, risk_free, sigma, term, strike_price, current_time=0, type="call"):
     """The Ana_option_prices function calculate both analytical price for either call or put option
