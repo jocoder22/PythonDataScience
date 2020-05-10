@@ -19,11 +19,11 @@ r = risk_free = 0.03
 sigma = 0.5
 rho = -0.4
 sigma = 0.5
-sigma = 0.5
+
 gamma = 0.75
 
 #Call Option specific information
-K = 105
+K = 100
 T = 0.5
 k_log = np.log(K)
 
@@ -31,6 +31,34 @@ k_log = np.log(K)
 t_max = 30
 N = 100
 
+
+
+
+S0 = 100
+v0 = 0.06
+kappa = 9
+theta = 0.06
+r = 0.08
+sigma = 0.3
+rho = -0.4
+
+#Variable declaration
+# S0 = 100
+sigma = 0.3
+gamma = 0.75
+# r = 0.1
+# T = 3
+
+
+
+#Call Option specific information
+K = 100
+T = 1
+k_log = np.log(K)
+
+#Approximation information
+t_max = 30
+N = 100
 # ## new variables
 # S0 =100
 # v0 = .06
@@ -202,7 +230,7 @@ def path_generator(current_price, risk_free, sigma, gamma, Z, dt):
  
     """
     # S_T_MC = S_T*np.exp((risk_free- ((sigma*S_T**(1-gamma))**2/2)*(1/12)) + (sigma*S_T**(1-gamma))*np.sqrt(1/12)*norm_array)
-    return current_price * np.exp(np.cumsum(((risk_free - sigma**2/2)*dt + sigma**current_price**(gamma-1)*np.sqrt(dt)*Z), axis=1))
+    return current_price * np.exp(np.cumsum(((risk_free - sigma**2/2)*dt + sigma*current_price**(gamma-1)*np.sqrt(dt)*Z), axis=1))
 
 
 dt = 1/12 # time step

@@ -8,6 +8,8 @@
 # As per usual, we make all the assumptions of the Black-Scholes model.
 
 
+
+
 # import necessary modules
 import numpy as np
 from scipy.stats import norm
