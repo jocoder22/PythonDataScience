@@ -259,8 +259,6 @@ def option_prices(current_price, risk_free, sigma, term, current_time=0, type="c
 
 option_prices(current_price, risk_free, sigma, T, current_time, type="call", plot=True)
 
-
-
 ##############################################################################################################
 ##############################################################################################################
 def sharpe(returns, rf, days=252):
