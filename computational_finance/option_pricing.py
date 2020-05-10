@@ -220,7 +220,6 @@ def option_prices(current_price, risk_free, sigma, term, current_time=0, type="c
         mput_estimates[i-1] = np.mean(mputvals)
         mput_std[i-1] = np.std(mputvals)/np.sqrt(1000*i)
         
-        
 
     d1_numerator = np.log(current_price/strike_price) + (risk_free + sigma**2/2) * (T - current_time)
     d1_denominator = sigma * np.sqrt(T - current_time)
