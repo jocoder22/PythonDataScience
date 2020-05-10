@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import norm
 import scipy.optimize as opt
+import matplotlib.pyplot as plt
 
 
 r0 = 0.05
