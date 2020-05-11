@@ -15,13 +15,12 @@ years = np.linspace(1,10,10)
 yield_curve = (years)**(1/5)/75 + 0.04
 bond_prices = np.exp(-yield_curve*years)
 
-
 # plot yield curve
 plt.plot(years, yield_curve*100)
 plt.xlabel("Maturity")
 plt.ylabel("Yield")
 plt.title("Yield Curve")
-plt.show
+plt.show()
 
 
 # calibrating Vasicek model
