@@ -83,7 +83,7 @@ def opt_func(x):
 # calibrating our model
 opt_vals = opt.fmin_slsqp(opt_func, (0.1,3,0.1))
 
-theta_hat = opt_vals[0]
-kappa_hat = opt_vals[1]
-sigma_hat = opt_vals[2]
+theta_hat = opt_vals[0]  # 0.05988378
+kappa_hat = opt_vals[1]   # 3.07130476
+sigma_hat = opt_vals[2]   # 0.25690418
 
