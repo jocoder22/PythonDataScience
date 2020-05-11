@@ -12,6 +12,7 @@ import numpy as np
 from scipy.stats import norm
 import matplotlib.pyplot as plt
 
+
 def anal_option_prices(current_price, risk_free, sigma, term, strike_price, current_time=0, type="call"):
     """The Ana_option_prices function calculate both analytical price for either call or put option
  
@@ -43,8 +44,7 @@ def anal_option_prices(current_price, risk_free, sigma, term, strike_price, curr
 
     else:
         analytic_price = -current_price*norm.cdf(-d1) + (norm.cdf(-d2)*strike_price*np.exp(-risk_free * (T - current_time)))
-
-        
+   
     return analytic_price
 
 
