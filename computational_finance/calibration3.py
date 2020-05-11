@@ -21,7 +21,7 @@ N = 100
 
 # define characteristic function
 def a(sigma):
-  return sigma**/2
+  return sigma**2/2
 
 def b(u,theta,kappa,sigma):
   return kappa - rho*sigma*1j*u
