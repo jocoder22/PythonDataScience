@@ -19,7 +19,6 @@ rho = -0.4
 t_max = 30
 N = 100
 
-
 # define characteristic function
 def a(sigma):
   return sigma**/2
