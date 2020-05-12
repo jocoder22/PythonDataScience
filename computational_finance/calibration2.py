@@ -36,6 +36,11 @@ def D_part(t1, t2, alpha, b , sigma):
   val2 = sigma**2*A_part(t1,t2,alpha)**2/(4*alpha)
   return val1 - val2
 
+def D_part2(t1, t2, alpha, b , sigma):
+  val1 = (t2-t1 -A_part(t1, t2, alpha))*(sigma**2/(4*alpha**2)-b)
+  val2 = sigma**2/2*A_part(t1,t2,alpha)**2/(4*alpha)
+  return val1 - val2
+
 def bondprice(r, t, T, alpha,b,sigma):
   return np.exp(-A_part(t,T,alpha)*r + D_part(t,T,alpha, b,sigma))
 
