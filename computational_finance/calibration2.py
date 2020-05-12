@@ -28,8 +28,8 @@ def A_part(t1, t2, alpha):
   return (1- np.exp(-alpha*(t2-t1)))/alpha
 
 def D_part(t1, t2, alpha, b , sigma):
-  val1 = (t2-t1 -A_part(t1, t2, alpha))*(sigma**2/2 / (2*alpha**2)-b)
-  val2 = sigma**2/2*A_part(t1,t2,alpha)**2/(4*alpha)
+  val1 = (t2-t1 -A_part(t1, t2, alpha))*(sigma**2/(2*alpha**2)-b)
+  val2 = sigma**2*A_part(t1,t2,alpha)**2/(4*alpha)
   return val1 - val2
 
 def bondprice(r, t, T, alpha,b,sigma):
