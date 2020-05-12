@@ -73,3 +73,6 @@ plt.ylabel("Yield")
 plt.legend()
 plt.show()
 
+
+yield_error = sum(abs(yield_curve - model_yield))
+price_error = sum(abs(model_prices - bond_prices))
