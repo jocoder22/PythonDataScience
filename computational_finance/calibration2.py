@@ -44,6 +44,7 @@ def F(x):
   return sum(np.abs(bondprice(r0,0,years,alpha,b,sigma) - bond_prices))
 
 
+
 # minimizing F function
 bnds = ((0,1),(0,0.2), (0,0.2))
 opt_value = opt.fmin_slsqp(F, (0.3,0.05,0.03), bounds=bnds)
