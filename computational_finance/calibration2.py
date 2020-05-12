@@ -5,6 +5,10 @@ from scipy.stats import norm
 import scipy.optimize as opt
 import matplotlib.pyplot as plt
 
+def print2(*args):
+  for arg in args:
+    print(arg, end="\n\n")
+
 r0 = 0.05
 # create yield curve for integer maturities
 years = np.linspace(1,10,10)
