@@ -76,3 +76,5 @@ plt.show()
 
 yield_error = sum(abs(yield_curve - model_yield))
 price_error = sum(abs(model_prices - bond_prices))
+
+print2(price_error, yield_error)
