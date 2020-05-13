@@ -137,8 +137,7 @@ opt_sigma = opt_value[2]
 model_prices = bond_price_fun(r0,0,t, opt_alpha, opt_b, opt_sigma)
 model_yield =  -np.log(model_prices/nomialbondprice)/t
 
-
-opt_value
+pp2(opt_value)
 
 # plotting prices
 plt.plot(t, bond_prices, label="Market prices")
@@ -149,7 +148,7 @@ plt.legend()
 plt.show()
 
 
-model_prices
+pp2(model_prices)
 
 
 # ###### Plan of Attack
