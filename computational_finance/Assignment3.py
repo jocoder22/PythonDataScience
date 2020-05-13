@@ -46,8 +46,6 @@
 # 
 # Where $L(𝑡_i,𝑡_{𝑖+1})$ is the LIBOR forward rate which applies from $t_i$ to $t_{i+1}$, at time $t_i$. Note that these LIBOR rates are updated as you run through the simulation, and so your continuously compounded rates should be as well. 
 
-# In[1]:
-
 
 # import required modules
 import numpy as np
@@ -86,10 +84,6 @@ plt.title('Spot rate to Months')
 plt.show()
 
 
-# In[ ]:
-
-
-
 
 
 # For this submission, complete the following tasks: 
@@ -102,8 +96,6 @@ plt.show()
 #     of the option for the jointly simulated stock and firm paths with no default risk, and then the value of the option 
 #     with counterparty default risk. (Hint: you may want to use the reshape and ravel attributes of numpy arrays to ensure 
 #     your dimensions match correctly. 
-
-# In[297]:
 
 
 # # Calibrate Libor forward rates
@@ -146,14 +138,7 @@ model_prices = bond_price_fun(r0,0,t, opt_alpha, opt_b, opt_sigma)
 model_yield =  -np.log(model_prices/nomialbondprice)/t
 
 
-# In[298]:
-
-
 opt_value
-
-
-# In[299]:
-
 
 # plotting prices
 plt.plot(t, bond_prices, label="Market prices")
@@ -162,9 +147,6 @@ plt.xlabel("Maturity")
 plt.ylabel("Bond price")
 plt.legend()
 plt.show()
-
-
-# In[293]:
 
 
 model_prices
@@ -180,14 +162,6 @@ model_prices
 # 7. Find the option price assuming no counterparty default risk
 # 8. Find the option price assuming counterparty default risk
 
-# In[ ]:
-
-
-
-
-
-# In[330]:
-
 
 np.random.seed(0)
 n_simulations = 100000
@@ -195,14 +169,7 @@ n_simulations = 100000
 n_steps = 12
 t =  np.linspace(1,12,12)
 
-
-# In[331]:
-
-
 spot_rates[0]/100
-
-
-# In[332]:
 
 
 alpha = opt_val[0]
@@ -212,9 +179,6 @@ r0 =  spot_rates[0]/100
 
 vasi_bond = bond_price_fun(r0,0,t, alpha, b, sigma)
 print((alpha, b, sigma), vasi_bond)
-
-
-# In[333]:
 
 
 analytic_bondprices = model_prices
@@ -227,24 +191,12 @@ mc_forward = np.ones([n_simulations, n_steps-1])*(vasi_bond[:-1]-vasi_bond[1:])/
 predcorr_forward = np.ones([n_simulations, n_steps-1])*(vasi_bond[:-1]-vasi_bond[1:])/(1*vasi_bond[1:])
 
 
-# In[334]:
-
-
 predcorr_capfac = np.ones([n_simulations,n_steps])
 mc_capfac = np.ones([n_simulations,n_steps])
 delta = np.ones([n_simulations,n_steps-1])*(t[1:]-t[:-1])
 sigmaj =.2
 mean_muhat = []
 mean_mcforward = np.ones([n_steps, n_steps])
-
-
-# In[ ]:
-
-
-
-
-
-# In[335]:
 
 
 for i in range(1,n_steps):
@@ -260,9 +212,6 @@ for i in range(1,n_steps):
     predcorr_forward[:,i:] = predcorr_forward[:,i:]*np.exp((mu_initial+mu_term-sigmaj**2)*delta[:,i:]/2+sigmaj*np.sqrt(delta[:,i:])*Z)
 
 
-# In[336]:
-
-
 # Implying capitalisation factors from the forward rates
 mc_capfac[:,1:] = np.cumprod(1+delta*mc_forward, axis = 1)
 predcorr_capfac[:,1:] = np.cumprod(1+delta*predcorr_forward, axis = 1)
@@ -276,9 +225,6 @@ mc_final = np.mean(mc_price,axis = 0)
 predcorr_final = np.mean(predcorr_price,axis = 0)
 
 
-# In[337]:
-
-
 # plotting prices
 plt.figure(figsize = [10, 6])
 plt.plot(t, vasi_bond, label="Vesicek bond prices")
@@ -290,19 +236,7 @@ plt.legend()
 plt.show()
 
 
-# In[329]:
-
-
 vasi_bond - mc_final,predcorr_final 
-
-
-# In[ ]:
-
-
-
-
-
-# In[37]:
 
 
 model_yield = 1/predcorr_final - 1
@@ -311,32 +245,13 @@ continuous_forwards = np.log(1 + model_yield)
 continuous_forwards
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[38]:
-
 
 np.exp(continuous_forwards[-1])/np.exp(continuous_forwards[-2])
-
-
-# In[39]:
 
 
 for i in range(len(continuous_forwards)-1):
     print(np.exp(continuous_forwards[i+1])/np.exp(continuous_forwards[i])-1)
 
-
-# In[40]:
 
 
 cont = []
@@ -349,8 +264,6 @@ for i in range(len(continuous_forwards)-1):
 # cont
 cont_monthly = np.exp(np.array(cont)*12)-1
 
-
-# In[41]:
 
 
 ## Previous variabes from assignment 1
@@ -372,22 +285,10 @@ t_max = 30
 N = 100
 
 
-# In[ ]:
-
-
-
-
-
-# In[42]:
-
 
 ###CEV local volatility term is incorporated into S_T
 def discounted_call_payoff(S_T,K,risk_free_rate,time):
     return np.exp(-risk_free_rate*time)*np.maximum(S_T-K,0)
-
-
-# In[43]:
-
 
 '''
 Simulate a share price path using CEV local volatility terms 
@@ -459,13 +360,7 @@ for i in range(1,n_steps):
     std_mc_call_prices_dict[i] = std_mc_call_prices
 
 
-# In[ ]:
-
-
 share_prices 
-
-
-# In[ ]:
 
 
 ## Call price under CEV
@@ -480,33 +375,8 @@ def CEV_call(S0,t,K):
 cev_call_price = CEV_call(S0,T,K)
 
 
-# In[ ]:
-
 
 print('Monte Carlo call price is (N=50,000 and T = 1): ', mc_call_prices[-1])
 print('CEV call price is: ', cev_call_price)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
 
 
