@@ -339,9 +339,7 @@ for i in range(1,n_steps):
     mc_call_prices_dict[i] = mc_call_prices
     std_mc_call_prices_dict[i] = std_mc_call_prices
 
-
 pp2(share_prices)
-
 
 ## Call price under CEV
 z = 2 + 1/(1-gamma)
@@ -354,9 +352,5 @@ def CEV_call(S0,t,K):
 
 cev_call_price = CEV_call(S0,T,K)
 
-
-
 print('Monte Carlo call price is (N=50,000 and T = 1): ', mc_call_prices[-1])
 print('CEV call price is: ', cev_call_price)
-
-
