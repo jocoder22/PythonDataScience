@@ -70,9 +70,7 @@ bondprices = np.array([99.38, 98.76,98.15,97.54,96.94,96.34,95.74,95.16,94.57,93
 spot_rates = -np.log(bondprices/nomialbondprice)/months *100
 nominal_est = np.exp(spot_rates * months / 100)* bondprices
 
-
 pp2(spot_rates, spot_rates[0])
-
 
 # plot bond yield and bond prices
 plt.figure(figsize = [12, 8])
@@ -82,9 +80,6 @@ plt.ylabel("Spot rate")
 plt.title('Spot rate to Months')
 # plt.legend()
 plt.show()
-
-
-
 
 # For this submission, complete the following tasks: 
 # 
@@ -124,14 +119,12 @@ def F(x):
   sigma = x[2]
   return sum(np.abs(bond_price_fun(r0, 0,t,alpha,b,sigma) - bondprices))
 
-
 # # minimizing F function
 bnds = ((0.00001,1),(0.00001,0.2), (0.00001,0.2))
 opt_value = opt.fmin_slsqp(F, (0.03,0.05,0.03), bounds=bnds)
 opt_alpha = opt_value[0]
 opt_b = opt_value[1]
 opt_sigma = opt_value[2]
-
 
 # Calculating model prices and yield
 model_prices = bond_price_fun(r0,0,t, opt_alpha, opt_b, opt_sigma)
@@ -147,9 +140,7 @@ plt.ylabel("Bond price")
 plt.legend()
 plt.show()
 
-
 pp2(model_prices)
-
 
 # ###### Plan of Attack
 # 1. Find the monthly forward rates implied by the ZCB yield curve.
@@ -161,15 +152,13 @@ pp2(model_prices)
 # 7. Find the option price assuming no counterparty default risk
 # 8. Find the option price assuming counterparty default risk
 
-
 np.random.seed(0)
 n_simulations = 100000
 # 12 months
 n_steps = 12
 t =  np.linspace(1,12,12)
 
-spot_rates[0]/100
-
+pp2(spot_rates[0]/100)
 
 alpha = opt_val[0]
 b = opt_val[1]
@@ -177,8 +166,7 @@ sigma = opt_val[2]
 r0 =  spot_rates[0]/100
 
 vasi_bond = bond_price_fun(r0,0,t, alpha, b, sigma)
-print((alpha, b, sigma), vasi_bond)
-
+pp2((alpha, b, sigma), vasi_bond)
 
 analytic_bondprices = model_prices
 
