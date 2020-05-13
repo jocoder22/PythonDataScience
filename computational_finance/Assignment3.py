@@ -56,7 +56,10 @@ import scipy.optimize as opt
 import math
 import random
 
-
+def pp2(*args):
+    for arg in args:
+        print(arg, end="\n\n")
+        
 # calculate bond yield curve
 num_months = 12
 # months = np.arange(1,num_months+1)
@@ -68,10 +71,7 @@ spot_rates = -np.log(bondprices/nomialbondprice)/months *100
 nominal_est = np.exp(spot_rates * months / 100)* bondprices
 
 
-spot_rates
-
-
-spot_rates[0]
+pp2(spot_rates, spot_rates[0])
 
 
 # plot bond yield and bond prices
