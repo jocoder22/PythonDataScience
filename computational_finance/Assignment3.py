@@ -59,9 +59,6 @@ import math
 import random
 
 
-# In[182]:
-
-
 # calculate bond yield curve
 num_months = 12
 # months = np.arange(1,num_months+1)
@@ -73,19 +70,10 @@ spot_rates = -np.log(bondprices/nomialbondprice)/months *100
 nominal_est = np.exp(spot_rates * months / 100)* bondprices
 
 
-# In[183]:
-
-
 spot_rates
 
 
-# In[184]:
-
-
 spot_rates[0]
-
-
-# In[185]:
 
 
 # plot bond yield and bond prices
