@@ -223,15 +223,12 @@ plt.legend()
 plt.show()
 
 
-vasi_bond - mc_final,predcorr_final 
-
+pp2(vasi_bond - mc_final,predcorr_final )
 
 model_yield = 1/predcorr_final - 1
 
 continuous_forwards = np.log(1 + model_yield)
-continuous_forwards
-
-
+pp2(continuous_forwards)
 
 np.exp(continuous_forwards[-1])/np.exp(continuous_forwards[-2])
 
@@ -239,18 +236,15 @@ np.exp(continuous_forwards[-1])/np.exp(continuous_forwards[-2])
 for i in range(len(continuous_forwards)-1):
     print(np.exp(continuous_forwards[i+1])/np.exp(continuous_forwards[i])-1)
 
-
-
 cont = []
-
 
 cont.append(spot_rates[0]/100)
 # cont = cont + [x for x in continuous_forwards]
 for i in range(len(continuous_forwards)-1):
     cont.append(np.exp(continuous_forwards[i+1])/np.exp(continuous_forwards[i])-1)
+    
 # cont
 cont_monthly = np.exp(np.array(cont)*12)-1
-
 
 
 ## Previous variabes from assignment 1
@@ -270,7 +264,6 @@ k_log = np.log(K)
 
 t_max = 30
 N = 100
-
 
 
 ###CEV local volatility term is incorporated into S_T
@@ -347,7 +340,7 @@ for i in range(1,n_steps):
     std_mc_call_prices_dict[i] = std_mc_call_prices
 
 
-share_prices 
+pp2(share_prices)
 
 
 ## Call price under CEV
