@@ -91,3 +91,12 @@ for i in range(1, nyears):
 # Implying capitalisation factors from the forward rates 
 mc_capfac[:,i:] = np.cumprod(1 + delta*mc_forward, axis =1) 
 predcorr_capfac[:,i:] = np.cumprod(1 + delta*predcorr_forward, axis =1) 
+
+
+# Inverting the capitalisation factors to imply bond prices (discount factors)
+mc_prices = mc_capfact**(-1)
+predcorr_prices = predcorr_capfac**(-1)
+
+# Taking averages
+mc_final = np.mean(mc_prices, axis=0)
+predcorr_final = np.mean(predcorr_prices, axis=0)
