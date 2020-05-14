@@ -100,3 +100,14 @@ predcorr_prices = predcorr_capfac**(-1)
 # Taking averages
 mc_final = np.mean(mc_prices, axis=0)
 predcorr_final = np.mean(predcorr_prices, axis=0)
+
+
+# plot the bond prices
+plt.figure(figsize[10,8])
+plt.plot(t, vasicek_bond, label = "Vasicek Bond Prices")
+plt.plot(t, mc_final, 'x', label = "Simple Monte Carlos Bond Prices")
+plt.plot(t, predcorr_final, 'o', label="Predictor Corrected Bond Prices")
+plt.xlabel("Maturity")
+plt.ylabel("Bond Prices")
+plt.legend()
+plt.show()
