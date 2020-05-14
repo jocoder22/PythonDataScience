@@ -6,6 +6,8 @@ from scipy.stats import norm
 import matplotlib.pyplot as plt
 import random
 
+from short_rates import vasicek_mean, vasicek_var
+
 # set market parameters
 r0 =  0.05
 alpha = 0.2
