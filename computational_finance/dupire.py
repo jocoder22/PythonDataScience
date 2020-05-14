@@ -14,7 +14,6 @@ delta_t = 0.01
 delta_K = 0.01
 
 
-
 beta = gamma+1
 
 zb = 2 + 2/(2-beta)
