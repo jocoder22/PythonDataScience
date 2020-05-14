@@ -154,12 +154,6 @@ pp2(model_prices)
 #     1. Using a sample size of 100000, jointly simulate LIBOR forward rates, stock paths, and counterparty firm values.  
 #     You should simulate the values monthly, and should have LIBOR forward rates applying over one month, starting one month apart, up to maturity. You may assume that the counterparty firm and stock values are uncorrelated with LIBOR forward  
 #     rates.
-#     
-#     2. Calculate the one-year discount factor which applies for each simulation, and use this to find first the value 
-#     of the option for the jointly simulated stock and firm paths with no default risk, and then the value of the option 
-#     with counterparty default risk. (Hint: you may want to use the reshape and ravel attributes of numpy arrays to ensure 
-#     your dimensions match correctly. 
-
 
 np.random.seed(0)
 n_simulations = 100000
@@ -244,6 +238,11 @@ for i in range(len(continuous_forwards)-1):
 annualized_rates = np.exp(np.array(cont)*12)-1
 pp2(annualized_rates)
 
+#     
+#     2. Calculate the one-year discount factor which applies for each simulation, and use this to find first the value 
+#     of the option for the jointly simulated stock and firm paths with no default risk, and then the value of the option 
+#     with counterparty default risk. (Hint: you may want to use the reshape and ravel attributes of numpy arrays to ensure 
+#     your dimensions match correctly. 
 
 ## Previous variabes from assignment 1
 S0 = 100
@@ -334,3 +333,102 @@ cev_call_price = CEV_call(S0,T,K)
 
 print('Monte Carlo call price is: ', mc_call_prices[-1])
 print('CEV call price is: ', cev_call_price)
+
+
+# plotting prices
+plt.figure(figsize = [10, 6])
+plt.plot(np.arange(0,13),mc_call_prices, '.')
+plt.plot(np.arange(0,13),mc_call_prices+3*np.array(std_mc_call_prices),'black')
+plt.plot(np.arange(0,13),mc_call_prices-3*np.array(std_mc_call_prices),'g')
+plt.xlabel("Months")
+plt.ylabel("Price")
+plt.title("Monte Carlo Estimates of risk-neutral call option price")
+plt.legend(('Risk-neutral price', 'Risk-neutral price UB', 'Risk-neutral price LB'))
+plt.show()
+
+
+
+call_std_risky_dict = {}
+cva_mean_risky_dict = {}
+cva_std_risky_dict = {}
+call_val_with_cva_risky_dict = {}
+cev_call_prices_risky_dict = {}
+mc_call_prices_risky_dict = {}
+std_cev_call_prices_risky_dict = {}
+std_mc_call_prices_risky_dict = {}
+
+share_prices = []
+
+S_T = S0
+F_T = firm_value_0
+prices = [S_T]
+prices_mc = [S_T]
+
+std = [0]
+n_simulations = 100000
+
+share_prices_risky = [S_T]
+firm_prices_risky = [F_T]
+cev_call_prices_risky = [np.maximum(S_T-K,0)]
+mc_call_prices_risky = [np.maximum(S_T-K,0)]
+std_cev_call_prices_risky = [0]
+std_mc_call_prices_risky = [0]
+corr_matrix = np.array([[1, correlation], [correlation,1]])
+norm_matrix = norm.rvs(size = np.array([2,n_simulations]))
+corr_norm_matrix = np.matmul(np.linalg.cholesky(corr_matrix), norm_matrix)
+
+
+for t in months_in_year:
+    vol = sigma*S_T**(gamma-1)
+    delta_time = (1/12)
+    
+    ## Share price path is calculated here with simulated forward rates,
+    ## CEV local volatility terms, and joint normal random variables
+    S_T = S_T*np.exp((annualized_rates[int(t*12-1)]-(vol**2/2))*delta_time +(vol*np.sqrt(delta_time)*corr_norm_matrix[0,]))
+    F_T = F_T*np.exp((annualized_rates[int(t*12-1)]-(vol**2/2))*delta_time +(vol*np.sqrt(delta_time)*corr_norm_matrix[1,]))
+    share_prices_risky.append(np.mean(S_T))
+    firm_prices_risky.append(np.mean(F_T))
+    
+    if t == 1/12:
+        print("Monthly evolution of local volatility, share price and firm␣value")
+    print(np.mean(vol), np.mean(S_T), np.mean(F_T))
+    
+    ## Perform Monte Carlo simulations
+    call_val = discounted_call_payoff(S_T, K, annualized_rates[int(t*12-1)], L,t)
+    amount_lost = np.exp(-annualized_rates[int(t*12-1)]*t)*(1-recovery_rate)*(F_T<debt)*call_val
+    mc_call_step = discounted_call_payoff(S_T, K,annualized_rates[int(t*12-1)], L, t)
+    
+    mc_call_prices.append(np.mean(mc_call_step))
+    std_mc_call_prices.append(np.std(mc_call_step)/np.sqrt(n_simulations)) # standard errors
+    
+    call_mean = np.mean(call_val)
+    cva_mean = np.mean(amount_lost)
+    
+    call_std = np.std(call_val)/np.sqrt(n_simulations)
+    cva_std = np.std(amount_lost)/np.sqrt(n_simulations)
+    
+    call_val_with_cva = call_mean - cva_mean
+    
+    call_mean_risky_dict[t] = call_mean
+    call_std_risky_dict[t] = call_std
+    cva_mean_risky_dict[t] = cva_mean
+    cva_std_risky_dict[t] = cva_std
+    
+    call_val_with_cva_risky_dict[t] = call_val_with_cva
+    
+
+plt.figure(figsize=[12,8])
+plt.plot([x*12 for x in months_in_year],list(call_mean_risky_dict.values()), '.')
+plt.plot([x*12 for x in months_in_year],list(call_val_with_cva_risky_dict.values()),'-')
+plt.plot([x*12 for x in months_in_year],list(call_mean_risky_dict.values())+3*np.array(list(call_std_risky_dict.values())),'black')
+plt.plot([x*12 for x in months_in_year],list(call_mean_risky_dict.values())-3*np.array(list(call_std_risky_dict.values())),'g')
+plt.xlabel("Months")
+plt.ylabel("Price")
+plt.title("Monte Carlo Estimates of risk-adjusted call option price")
+plt.legend(('Risk-neutral price', 'Risk-adjusted price', 'Risk-neutral price␣UB', 'Risk-neutral price LB'))
+plt.show()
+
+
+print("Risk-neutral call price at the end of 12 months is: ", list(call_mean_risky_dict.values())[-1])
+print("Risk-adjusted call price at the end of 12 months is: ", list(call_val_with_cva_risky_dict.values())[-1])
+
