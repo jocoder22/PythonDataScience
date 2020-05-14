@@ -87,7 +87,7 @@ for i in range(1, nyears):
   mu_temp = np.cumsum(delta[:,i:]*for_temp[:,i:]*sigmaj**2/(1 + delta[:,i:]*for_temp[:,i:]), axis =1)
   predcorr_forward[:,i:] = predcorr_forward[:,i:]*np.exp((mu_  + mu_temp - sigmaj**2/2)*delta[:,i:]+sigmaj*np.sqrt(delta[:,i:])*z)
   
-  r_sim[:,i+1] = vasicek_mean(r_sim[:,i],t[i], t[i+1]) + np.sqrt(vasicek_var(t[i], t[i+t])) * z[:,i]
   
-  
-s_mean = r0 * np.exp(-alpha*t) + b*(1-np.exp(-alpha*t))
+# Implying capitalisation factors from the forward rates 
+mc_capfac[:,i:] = np.cumprod(1 + delta*mc_forward, axis =1) 
+predcorr_capfac[:,i:] = np.cumprod(1 + delta*predcorr_forward, axis =1) 
