@@ -17,50 +17,47 @@ sigma = 0.025
 
 # problem parameters
 t =  np.linspace(0,40,21)
+sigmaj = 0.2
 
 
 #  define useful functions
-def vasicek_mean(r, t1, t2):
-  """The vasicek_mean function calculate the mean of of short rate at t2 given the
-      short rate at t1 < t2 using the vasicek method
-      
-      Input:
-        r(float): interest rate
-        t1(int/float) : time at t1
-        t2(int/float) : time at t2
-        
-       Output:
-          vasicek_mean_value(float) : the vasicek mean
+# Analytical bond price (ZCB)
+def a_part(t1,t2):
+  """
   
   """
-  r0_discounted = r * np.exp(-alpha*(t2-t1))
-  b_discounted = b * (1 - np.exp(-alpha*(t2-t1)))
- 
-  vasicek_mean_value = r0_discounted + b_discounted
+  numer_ = 1 - np.exp(-alpha * (t2-t1))
+  
+  result = numer_/alpha
+  
+  return result
 
-  return vasicek_mean_value
 
 
-def vasicek_var(t1,t2):
-  """The vasicek_var function calculate the variance of short rate at t2 given the
-      short rate at t1 < t2 using the vasicek method
-      
-      Inputs:
-        t1(int/float) : time at t1
-        t2(int/float) : time at t2
-        
-      Output:
-        vasicek_variance(float) : vasicek variance
+def d_part(t1, t2):
+  """
+  
+  
   
   """
- 
-  term1 = sigma**2/(2 * alpha)
-  term2 = 1 - np.exp(-2*alpha * (t2-t1))
   
-  vasicek_variance =  term1* term2
+  val2 =  (t2 - t1 - a_part(t1,t2))*  (sigma**2/(4*alpha**2)-b)
+  val3 = sigma**2/2 * a_part(t1,t2)**2 / (4*alpha)
+  
+  result = val2 - val3
+  
+  return result
+  
+def bond_price(r,t,T):
+  """
+  
+  
+  """
+  bondprice = np.exp(-a_part(t,T)*r*d_part(t,T))
+  
+  return bondprice
 
-  return vasicek_variance
-
+vasicek_bond - bond_price(r0,0,t)
 
 # simulate interest rate paths
 np.random.seed(0)
