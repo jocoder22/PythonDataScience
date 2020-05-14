@@ -164,22 +164,11 @@ pp2(model_prices)
 np.random.seed(0)
 n_simulations = 100000
 n_steps = 12
-t =  np.linspace(1,12,12)
-
-pp2(spot_rates[0]/100)
-
-alpha = opt_val[0]
-b = opt_val[1]
-sigma = opt_val[2]
-r0 =  spot_rates[0]/100
-
-model_prices = bond_price_fun(r0,0,t, alpha, b, sigma)
-model_yield = -np.log(model_prices)/t
-pp2((alpha, b, sigma), model_prices)
+t =  np.linspace(1,num_months,num_months)
+t_sim =  np.linspace(0,num_months - 1,num_months)
 
 
-
-analytic_bondprices = model_prices
+vasi_bond = bond_price_fun(r0,0,t_sim, opt_alpha, opt_b, opt_sigma)
 
 # mc_forward = np.ones([n_simulations, n_steps])*(bond_prices[:])/(2*bond_prices[:])
 # mc_forward = np.ones([n_simulations, n_steps-1])*(analytic_bondprices[:-1]-analytic_bondprices[1:])/(1*analytic_bondprices[1:])
@@ -241,21 +230,19 @@ model_yield = 1/predcorr_final - 1
 continuous_forwards = np.log(1 + model_yield)
 pp2(continuous_forwards)
 
-np.exp(continuous_forwards[-1])/np.exp(continuous_forwards[-2])
-
 
 for i in range(len(continuous_forwards)-1):
     print(np.exp(continuous_forwards[i+1])/np.exp(continuous_forwards[i])-1)
 
 cont = []
 
-cont.append(spot_rates[0]/100)
-# cont = cont + [x for x in continuous_forwards]
+cont.append(spot_rates[0])
 for i in range(len(continuous_forwards)-1):
     cont.append(np.exp(continuous_forwards[i+1])/np.exp(continuous_forwards[i])-1)
     
 # cont
-cont_monthly = np.exp(np.array(cont)*12)-1
+annualized_rates = np.exp(np.array(cont)*12)-1
+pp2(annualized_rates)
 
 
 ## Previous variabes from assignment 1
@@ -263,7 +250,13 @@ S0 = 100
 T = 1
 sigma = 0.3
 K = 100
-# r = 0.08
+L = 150
+
+correlation = 0.2
+sigma_firm = 0.25
+debt = 175
+recovery_rate = 0.25
+firm_value_0 = 200
 
 ## new variables
 v0 = 0.06
@@ -276,79 +269,55 @@ k_log = np.log(K)
 t_max = 30
 N = 100
 
-
-###CEV local volatility term is incorporated into S_T
-def discounted_call_payoff(S_T,K,risk_free_rate,time):
-    return np.exp(-risk_free_rate*time)*np.maximum(S_T-K,0)
-
 '''
 Simulate a share price path using CEV local volatility terms 
 and perform Monte Carlo simulations to calculate 
 option prices with different sample sizes
 '''
 months_in_year = [x/12 for x in range(1,13)]
-# share_prices_dict = {}
-# cev_call_prices_dict = {}
-# mc_call_prices_dict = {}
-# std_cev_call_prices_dict = {}
-# std_mc_call_prices_dict = {}
+share_prices_dict = {}
+cev_call_prices_dict = {}
+mc_call_prices_dict = {}
+std_cev_call_prices_dict = {}
+std_mc_call_prices_dict = {}
 
 share_prices = []
 
-# share_prices_dict[0] = S0
-#norm_array = norm.rvs(size = 1000*i)
-# S_T = S0
-# prices = [S_T]
-# prices_mc = [S_T]
-# std = [0]
+S_T = S0
+prices = [S_T]
+prices_mc = [S_T]
+std = [0]
 
-# share_prices[0] = S_T
-# cev_call_prices = [np.maximum(S_T-K,0)]
-# mc_call_prices = [np.maximum(S_T-K,0)]
-# std_cev_call_prices = [0]
-# std_mc_call_prices = [0]
+share_prices[0] = S_T
+cev_call_prices = [np.maximum(S_T-K,0)]
+mc_call_prices = [np.maximum(S_T-K,0)]
+std_cev_call_prices = [0]
+std_mc_call_prices = [0]
 
-for i in range(1,n_steps):
-    ## Added for monte carlo
-    #norm_array = norm.rvs(size = 1000*i)
-#     S_T = S0
-#     prices = [S_T]
-#     prices_mc = [S_T]
-#     std = [0]
     
-#     share_prices = [S_T]
-#     cev_call_prices = [np.maximum(S_T-K,0)]
-#     mc_call_prices = [np.maximum(S_T-K,0)]
-#     std_cev_call_prices = [0]
-#     std_mc_call_prices = [0]
-    
-#     for indx, t in enumerate(months_in_year):
-    r = cont_monthly[i]
+for t in months_in_year:
     vol = sigma*S_T**(gamma-1)
     delta_time = (1/12)
-
-#         Z = norm.rvs(size = [n_simulations,1])
-    Z_CEV = norm.rvs(size = n_simulations)
-#         Z_CEV = np.random.normal(0,1, i*1000)
+    Z_CEV = np.random.normal(0,1, n_simulations)
 
     ## Part 2: Share price path is calculated here with CEV local volatility terms
-    S_T = S_T*np.exp((r-(vol**2/2))*delta_time + (vol*np.sqrt(delta_time)*Z_CEV))
+    S_T = S_T*np.exp((annualized_rates[int(t*12-1)]-(vol**2/2))*delta_time + (vol*np.sqrt(delta_time)*Z_CEV))
     share_prices.append(np.mean(S_T))
 
-    if i == 50:
-        if t == 1/12:
-            print('Stock volatility drops as share price increases (vol vs S_T)')
-        print(np.mean(vol), np.mean(S_T))
+    
+    if t == 1/12:
+        print('Stock volatility drops as share price increases (vol vs S_T)')
+    print(np.mean(vol), np.mean(S_T))
 
     ## Part 3. Perform Monte Carlo simulations
-    mc_call_step = discounted_call_payoff(S_T, K, r, t)
+    mc_call_step = discounted_call_payoff(S_T, K, annualized_rates[int(t*12-1)], L, t)
     mc_call_prices.append(np.mean(mc_call_step))
     std_mc_call_prices.append(np.std(mc_call_step)/np.sqrt(n_simulations))# standard errors
    
-#     share_prices.append(share_prices)
+    share_prices_dict[t] = share_prices
  
-    mc_call_prices_dict[i] = mc_call_prices
-    std_mc_call_prices_dict[i] = std_mc_call_prices
+    mc_call_prices_dict[t] = mc_call_prices
+    std_mc_call_prices_dict[t] = std_mc_call_prices
 
 pp2(share_prices)
 
@@ -356,12 +325,12 @@ pp2(share_prices)
 z = 2 + 1/(1-gamma)
 def CEV_call(S0,t,K):
     
-    kappa2 = 2*r/(sigma**2*(1-gamma)*(np.exp(2*r*(1-gamma)*t)-1))
-    x = kappa2*S0**(2*(1-gamma))*np.exp(2*r*(1-gamma)*t)
+    kappa2 = 2*annualized_rates[-1]/(sigma**2*(1-gamma)*(np.exp(2*annualized_rates[-1]*(1-gamma)*t)-1))
+    x = kappa2*S0**(2*(1-gamma))*np.exp(2*annualized_rates[-1]*(1-gamma)*t)
     y = kappa2*K**(2*(1-gamma))
-    return S0*(1-ncx2.cdf(y,z,x))-K*np.exp(-r*t)*ncx2.cdf(x,z-2,y)
+    return S0*(1-ncx2.cdf(y,z,x))-K*np.exp(-annualized_rates[-1]*t)*ncx2.cdf(x,z-2,y)
 
 cev_call_price = CEV_call(S0,T,K)
 
-print('Monte Carlo call price is (N=50,000 and T = 1): ', mc_call_prices[-1])
+print('Monte Carlo call price is: ', mc_call_prices[-1])
 print('CEV call price is: ', cev_call_price)
