@@ -24,6 +24,7 @@ def a_part(t1,t2):
   return result
 
 
+
 def d_part(t1, t2):
   """
   
