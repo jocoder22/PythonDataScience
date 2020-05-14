@@ -55,50 +55,43 @@ from scipy.stats import ncx2
 import scipy.optimize as opt
 import math
 import random
+import pandas as pd
 
 def pp2(*args):
     for arg in args:
         print(arg, end="\n\n")
         
+        
+def discounted_call_payoff(S,K, r, L, T):
+    if (np.mean(S) > L):
+        return 0
+    return np.exp(-r*T)*np.maximum(S - K,0)
+        
 # calculate bond yield curve
 num_months = 12
-# months = np.arange(1,num_months+1)
-months = np.linspace(1,12,12)
-nomialbondprice = 100
-bondprices = np.array([99.38, 98.76,98.15,97.54,96.94,96.34,95.74,95.16,94.57,93.99,93.42,92.85])
+months = np.linspace(1,num_months,num_months)
+par_value = 100
+bondprices = np.array([99.38, 98.76,98.15,97.54,96.94,96.34,95.74,95.16,94.57,93.99,93.42,92.85])/100
 
-spot_rates = -np.log(bondprices/nomialbondprice)/months *100
-nominal_est = np.exp(spot_rates * months / 100)* bondprices
+yield_curve = -np.log(bondprices)/months
 
-pp2(spot_rates, spot_rates[0])
+pp2(bondprices,yield_curve)
 
 # plot bond yield and bond prices
 plt.figure(figsize = [12, 8])
-plt.plot(months, spot_rates)
+plt.plot(months, yield_curve)
 plt.xlabel("Months")
-plt.ylabel("Spot rate")
-plt.title('Spot rate to Months')
+plt.ylabel("yield")
+plt.title('yield to Months')
 # plt.legend()
 plt.show()
-
-# For this submission, complete the following tasks: 
-# 
-#     1. Using a sample size of 100000, jointly simulate LIBOR forward rates, stock paths, and counterparty firm values.  
-#     You should simulate the values monthly, and should have LIBOR forward rates applying over one month, starting one month apart, up to maturity. You may assume that the counterparty firm and stock values are uncorrelated with LIBOR forward  
-#     rates.
-#     
-#     2. Calculate the one-year discount factor which applies for each simulation, and use this to find first the value 
-#     of the option for the jointly simulated stock and firm paths with no default risk, and then the value of the option 
-#     with counterparty default risk. (Hint: you may want to use the reshape and ravel attributes of numpy arrays to ensure 
-#     your dimensions match correctly. 
 
 
 # # Calibrate Libor forward rates
 # # calibrating Vasicek model
 # # Analytical bond price
 np.random.seed(0)
-r0 =  spot_rates[0]/100
-t = np.linspace(1,12,12)
+r0 =  yield_curve[0]
 
 def A(t1,t2,alpha):
     return (1-np.exp(-alpha*(t2-t1)))/alpha
@@ -117,20 +110,34 @@ def F(x):
   alpha = x[0]
   b = x[1]
   sigma = x[2]
-  return sum(np.abs(bond_price_fun(r0, 0,t,alpha,b,sigma) - bondprices))
+  return sum(np.abs(bond_price_fun(r0, 0,months,alpha,b,sigma) - bondprices))
 
 # # minimizing F function
 bnds = ((0.00001,1),(0.00001,0.2), (0.00001,0.2))
 opt_value = opt.fmin_slsqp(F, (0.03,0.05,0.03), bounds=bnds)
-opt_alpha = opt_value[0]
-opt_b = opt_value[1]
-opt_sigma = opt_value[2]
+# opt_alpha = opt_value[0]
+# opt_b = opt_value[1]
+# opt_sigma = opt_value[2]
+opt_alpha, opt_b, opt_sigma = opt_value
 
 # Calculating model prices and yield
-model_prices = bond_price_fun(r0,0,t, opt_alpha, opt_b, opt_sigma)
-model_yield =  -np.log(model_prices/nomialbondprice)/t
+model_prices = bond_price_fun(r0,0,months, opt_alpha, opt_b, opt_sigma)
+model_yield =  -np.log(model_prices)/months
 
 pp2(opt_value)
+
+df = pd.DataFrame({
+      "MarketPrice":bondprices,
+      "Modelprice": model_prices,
+      "Marketyield": yield_curve,
+      "Modelyield": model_yield
+})
+
+df["PriceDiff"] = df.MarketPrice - df.Modelprice
+df["YieldDiff"] = df.Marketyield - df.Modelyield
+
+
+pp2(df)
 
 # plotting prices
 plt.plot(t, bond_prices, label="Market prices")
@@ -142,19 +149,20 @@ plt.show()
 
 pp2(model_prices)
 
-# ###### Plan of Attack
-# 1. Find the monthly forward rates implied by the ZCB yield curve.
-# 2. Convert the monthly forward rates to continuously compounded rates.
-# 3. Calibrate the interest rates given by Vasicek model using the continuously compounded rates.
-# 4. Find the CEV local volatility term for each month.
-# 5. Using CEV local volatility terms and calibrated interest rates, estimate monthly stock price path and counterparty firm values.
-# 6. Calculate the one-year discount factor
-# 7. Find the option price assuming no counterparty default risk
-# 8. Find the option price assuming counterparty default risk
+# For this submission, complete the following tasks: 
+# 
+#     1. Using a sample size of 100000, jointly simulate LIBOR forward rates, stock paths, and counterparty firm values.  
+#     You should simulate the values monthly, and should have LIBOR forward rates applying over one month, starting one month apart, up to maturity. You may assume that the counterparty firm and stock values are uncorrelated with LIBOR forward  
+#     rates.
+#     
+#     2. Calculate the one-year discount factor which applies for each simulation, and use this to find first the value 
+#     of the option for the jointly simulated stock and firm paths with no default risk, and then the value of the option 
+#     with counterparty default risk. (Hint: you may want to use the reshape and ravel attributes of numpy arrays to ensure 
+#     your dimensions match correctly. 
+
 
 np.random.seed(0)
 n_simulations = 100000
-# 12 months
 n_steps = 12
 t =  np.linspace(1,12,12)
 
@@ -165,8 +173,11 @@ b = opt_val[1]
 sigma = opt_val[2]
 r0 =  spot_rates[0]/100
 
-vasi_bond = bond_price_fun(r0,0,t, alpha, b, sigma)
-pp2((alpha, b, sigma), vasi_bond)
+model_prices = bond_price_fun(r0,0,t, alpha, b, sigma)
+model_yield = -np.log(model_prices)/t
+pp2((alpha, b, sigma), model_prices)
+
+
 
 analytic_bondprices = model_prices
 
