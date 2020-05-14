@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# coding: utf-8
 
 sigma = 0.3
 gamma = 0.75
@@ -5,14 +7,12 @@ r = 0.1
 T = 3
 
 
-   
 test_strikes = np.linspace(80,120,41)
 
 K = np.linspace(80,120,41)
 
 delta_t = 0.01
 delta_K = 0.01
-
 
 beta = gamma+1
 
@@ -24,9 +24,7 @@ def C_h(t,K):
   y = kappa*K**(2-beta) 
   return S0*(1-(ncx2.cdf(2*y,zb,2*x)))-K*(1-(1-ncx2.cdf(2*x,zb-2,2*y)))*np.exp(-r*t)
 
-
-
-C_h(T,K)
+print(C_h(T,K))
 
 z1=C_h(T,K)/400
 
