@@ -62,18 +62,31 @@ vasicek_bond - bond_price(r0,0,t)
 # simulate interest rate paths
 np.random.seed(0)
 
-nyears = 10
-simulations = 10
+nyears = len(t)
+simulations = 100000
 
-t = np.array(range(0,nyears+1))
+mc_forward = np.ones([simulations, nyears-1])*(vasicek_bond[:-1] - vasicek_bond[1:])/(2*vasicek_bond[1:])
+predcorr_forward = np.ones([simulations, nyears-1])*(vasicek_bond[:-1] - vasicek_bond[1:])/(2*vasicek_bond[1:])
+predcorr_capfac = np.ones([simulations, nyears])
+mc_capfac = np.ones([simulations, nyears])
 
-z = norm.rvs(size = [simulations, nyears])
-r_sim = np.zeros([simulations, nyears])
-r_sim[:,0] = r0
-vasicek_mean_vector = np.zeros(nyears+1)
+delta = np.ones([simulations, nyears-1])*(t[1:] - t[:-1])
+z = norm.rvs(size = [simulations, 1])
 
 
-for i in range(nyears):
+for i in range(1, nyears):
+  z = norm.rvs(size = [simulations, 1])
+  
+  # explicit Monte Carlo simulation
+  muhat = np.cumsum(delta[:,i:]*mc_forward[:,i:]*sigmaj**2/(1 + delta[:,i:]*mc_forward[:,i:]), axis =1)
+  mc_forward[:,i:] = mc_forward[:,i:]*np.exp((muhat - sigmaj**2/2)*delta[:,i:]+sigmaj*np.sqrt(delta[:,i:])*z)
+  
+  # Predictor-Corrector Monte Carlo simulation
+  mu_ = np.cumsum(delta[:,i:]*predcorr_forward[:,i:]*sigmaj**2/(1 + delta[:,i:]*predcorr_forward[:,i:]), axis =1)
+  for_temp = predcorr_forward[:,i:]*np.exp((mu_ - sigmaj**2/2)*delta[:,i:]+sigmaj*np.sqrt(delta[:,i:])*z)
+  mu_temp = np.cumsum(delta[:,i:]*for_temp[:,i:]*sigmaj**2/(1 + delta[:,i:]*for_temp[:,i:]), axis =1)
+  predcorr_forward[:,i:] = predcorr_forward[:,i:]*np.exp((mu_  + mu_temp - sigmaj**2/2)*delta[:,i:]+sigmaj*np.sqrt(delta[:,i:])*z)
+  
   r_sim[:,i+1] = vasicek_mean(r_sim[:,i],t[i], t[i+1]) + np.sqrt(vasicek_var(t[i], t[i+t])) * z[:,i]
   
   
