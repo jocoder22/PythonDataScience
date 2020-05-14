@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# coding: utf-8
+
 import numpy as np
 from scipy.stats import norm
 import matplotlib.pyplot as plt
@@ -8,6 +11,10 @@ r0 =  0.05
 alpha = 0.2
 b = 0.08
 sigma = 0.025
+
+
+# problem parameters
+t =  np.linspace(0,40,21)
 
 
 #  define useful functions
