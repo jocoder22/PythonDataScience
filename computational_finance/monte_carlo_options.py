@@ -16,5 +16,14 @@ nsimulations = 500000
 # estimate the returns
 returns_ = np.random.randn(nsimulations, ndays)*annualized_vol/np.sqrt(ndays)
 
+# calcuate teh stock price paths
+stockpath = np.cumprod(1+returns_, axis=1)*stockprice
+
+# plot 50 first returns paths
+plt.figure(figsize=[10,8])
+plt.plot(stockpath[:50,:])
+plt.xlabel("Days", fontsize=11)
+plt.ylabel("Stock Price", fontsize=11)
+plt.show()
 
 
