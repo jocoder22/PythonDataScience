@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import ncx2
 
+S0 = 100
 sigma = 0.3
 gamma = 0.75
 r = 0.1
