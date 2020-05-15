@@ -34,11 +34,15 @@ call_price = np.mean((stockpath[:,-1] - strikeprice)*((stockpath[:,-1] - strikep
 put_price = np.mean((strikeprice - stockpath[:,-1])*((stockpath[:,-1] - strikeprice) < 0))
 
 # include risk free rate
+# include risk free rate
 def option_price(S,K,T,sigma,rate, type="call", N=10000):
   discount = np.exp(-rate*(T/252))
   _price = np.cumprod(1+ (np.random.randn(T,N) *sigma/np.sqrt(252)), axis=0)*S
   if type == "call":
-    return np.sum((_price[-1,:] - K*discount)[_price[-1,:] > k*discount])/_price.shape[1]
+    return np.sum((_price[-1,:] - K*discount)[_price[-1,:] > K*discount])/_price.shape[1]
   else:
-    return -np.sum((_price[-1,:] - K*discount)[_price[-1,:] < k*discount])/_price.shape[1]
+    return -np.sum((_price[-1,:] - K*discount)[_price[-1,:] < K*discount])/_price.shape[1]
 
+days = 126
+call2 = option_price(stockprice,strikeprice,days,annualized_vol,r)
+pp2(call2)
