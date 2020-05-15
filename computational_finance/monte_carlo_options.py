@@ -45,4 +45,5 @@ def option_price(S,K,T,sigma,rate, type="call", N=10000):
 
 days = 126
 call2 = option_price(stockprice,strikeprice,days,annualized_vol,r)
-pp2(call2)
+put2 = option_price(stockprice,strikeprice,days,annualized_vol,r, type="put")
+pp2(call2, put2)
