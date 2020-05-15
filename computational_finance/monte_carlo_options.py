@@ -27,3 +27,8 @@ plt.ylabel("Stock Price", fontsize=11)
 plt.show()
 
 
+# option prices: vanilla options
+# call options
+call_price = np.mean((stockpath[:,-1] - strikeprice)*((stockpath[:,-1] - strikeprice) > 0))
+put_price = np.mean((strikeprice - stockpath[:,-1])*((stockpath[:,-1] - strikeprice) < 0))
+
