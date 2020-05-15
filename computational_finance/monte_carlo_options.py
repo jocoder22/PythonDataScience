@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 stockprice = 100
 strikeprice = 100
 annualized_vol = 0.15   # implied annualised volatility
+r = 0.02
 ndays = 252
 
 # set monte carlo parameters
@@ -31,4 +32,13 @@ plt.show()
 # call options
 call_price = np.mean((stockpath[:,-1] - strikeprice)*((stockpath[:,-1] - strikeprice) > 0))
 put_price = np.mean((strikeprice - stockpath[:,-1])*((stockpath[:,-1] - strikeprice) < 0))
+
+# include risk free rate
+def option_price(S,K,T,sigma,rate, type="call", N=10000):
+  discount = np.exp(-rate*(T/252))
+  _price = np.cumprod(1+ (np.random.randn(T,N) *sigma/np.sqrt(252)), axis=0)*S
+  if type == "call":
+    return np.sum((_price[-1,:] - K*discount)[_price[-1,:] > k*discount])/_price.shape[1]
+  else:
+    return -np.sum((_price[-1,:] - K*discount)[_price[-1,:] < k*discount])/_price.shape[1]
 
