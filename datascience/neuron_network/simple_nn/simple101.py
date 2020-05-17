@@ -108,17 +108,11 @@ print(f'Test accuracy : {accuracy:.2f}')
 # then secondly, add the weights
 # model = load_model("BestModel.h5")
    
-# to load only the weights you must define the model as above
+# to load only the weights you must laod the model as above,and then run
 # model.load_weights('weights\Best.h5')
 # model.fit with callbacks save only the weights
 
 model.load_weights(r'weights\Best.h5')
-
-
-pred = model.predict(X_test)
-print(type(pred), y_test.shape, **sp)
-
-print(pred.shape)
 
 # # evaluate test accuracy
 score = model.evaluate(X_test, y_test, verbose = 0)
