@@ -17,7 +17,7 @@ import tensorflow as tf
 path = r'D:\PythonDataScience\datascience\neuron_network'
 os.chdir(path)
 
-# modelname = 'Best.{epoch:03d}_Loss:{loss:05f}.h5'
+
 modelname = 'Best.h5'
 savedir = os.path.join(os.getcwd(), 'weights')
 if not os.path.isdir(savedir):
@@ -27,26 +27,25 @@ filepath = os.path.join(savedir, modelname)
 sp = {"end":"\n\n", "sep":"\n\n"}
 
 # # from tensorflow.keras.datasets import mnist
-# import tensorflow as tf
 # # # load mnist datasets
 # (xtrain, ytrain),(xtest, ytest) = tf.keras.datasets.mnist.load_data(path='mnist.npz')
 # # (xtrain, ytrain),(xtest, ytest) = mnist.load_data(path='mnist.npz')
 
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
-# fig = plt.figure(figsize=[20,20])
-# for i in range(6):
-#     ax = fig.add_subplot(1,6, i+1, xticks=[], yticks=[])
-#     ax.imshow(X_train[i], cmap='gray')
-#     ax.set_title(str(y_train[i]))
-# plt.show()
+fig = plt.figure(figsize=[20,20])
+for i in range(6):
+    ax = fig.add_subplot(1,6, i+1, xticks=[], yticks=[])
+    ax.imshow(X_train[i], cmap='gray')
+    ax.set_title(str(y_train[i]))
+plt.show()
 
-# # show the first digit
-# plt.imshow(X_train[0], cmap='gray')
-# plt.xticks([])
-# plt.yticks([])
-# plt.title(str(y_train[0]))
-# plt.show()
+# show the first digit
+plt.imshow(X_train[0], cmap='gray')
+plt.xticks([])
+plt.yticks([])
+plt.title(str(y_train[0]))
+plt.show()
 
 # rescale [0,255] 
 X_train = X_train.astype('float32')/255
