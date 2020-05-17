@@ -10,6 +10,7 @@ annualized_vol = 0.15   # implied annualised volatility
 r = 0.02
 ndays = 252
 
+
 # set monte carlo parameters
 np.random.seed(0)
 nsimulations = 500000
