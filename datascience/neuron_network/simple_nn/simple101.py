@@ -20,5 +20,15 @@ for i in range(6):
     ax.set_title(str(y_train[i]))
 plt.show()
 
+# show the first digit
+plt.imshow(X_train[0], cmap='gray')
+plt.xticks([])
+plt.yticks([])
+plt.title(str(y_train[0]))
+plt.show()
 
-print(X_train.shape)
+# rescale [0,255] 
+X_train = X_train.astype('float32')/255
+X_train = X_test.astype("float32")/255
+
+
