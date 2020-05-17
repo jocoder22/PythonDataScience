@@ -33,6 +33,7 @@ sp = {"end":"\n\n", "sep":"\n\n"}
 
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
+# show some of the images
 fig = plt.figure(figsize=[20,20])
 for i in range(6):
     ax = fig.add_subplot(1,6, i+1, xticks=[], yticks=[])
