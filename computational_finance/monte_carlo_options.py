@@ -50,6 +50,7 @@ def option_price(S,K,T,sigma,rate, type="call", N=10000):
   else:
     return -np.sum((_price[-1,:] - K*discount)[_price[-1,:] < K*discount])/_price.shape[1]
 
+
 days = 126
 call2 = option_price(stockprice,strikeprice,days,annualized_vol,r)
 put2 = option_price(stockprice,strikeprice,days,annualized_vol,r, type="put")
