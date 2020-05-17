@@ -13,6 +13,18 @@ from keras.layers import Dense, Flatten, Dropout
 from keras.callbacks import ModelCheckpoint
 import tensorflow as tf
 
+# change current working directory
+path = r'D:\PythonDataScience\datascience\neuron_network'
+os.chdir(path)
+
+# modelname = 'Best.{epoch:03d}_Loss:{loss:05f}.h5'
+modelname = 'Best.h5'
+savedir = os.path.join(os.getcwd(), 'weights')
+if not os.path.isdir(savedir):
+    os.makedirs(savedir)
+filepath = os.path.join(savedir, modelname)
+
+sp = {"end":"\n\n", "sep":"\n\n"}
 
 # # from tensorflow.keras.datasets import mnist
 # import tensorflow as tf
