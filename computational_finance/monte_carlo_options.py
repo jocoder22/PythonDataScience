@@ -18,7 +18,7 @@ ndays = 252
 
 # set monte carlo parameters
 np.random.seed(25)
-nsimulations = 10000000
+nsimulations = 100000
 
 # estimate the returns
 # returns_ = np.random.randn(nsimulations, ndays)*annualized_vol/np.sqrt(ndays)
@@ -27,12 +27,11 @@ returns_ = norm.rvs(size = [nsimulations, ndays])*annualized_vol/np.sqrt(ndays)
 # calcuate teh stock price paths
 stockpath = np.cumprod(1+returns_, axis=1)*stockprice
 
-pp2(stockpath.shape)
-ndays2 = np.linspace(0,ndays)
+
 # # plot 50 first returns paths
 plt.figure(figsize=[10,8])
-plt.plot(stockpath[:100,:].T)
-# for i in stockpath[:100,:]:
+plt.plot(stockpath[:50,:].T)
+# for i in stockpath[:50,:]:
 #   plt.plot(i)
 plt.xlabel("Days", fontsize=11)
 plt.ylabel("Stock Price", fontsize=11)
