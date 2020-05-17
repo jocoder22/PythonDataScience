@@ -73,6 +73,13 @@ model.compile(loss="categorical_crossentropy",
              optimizer='rmsprop',
              metrics=['accuracy'])
 
+
+# save model
+# modelname = 'BestModel.h5'
+# filepath2 = os.path.join(os.getcwd(), modelname)
+# model.save(filepath2)
+       
+
 # evaluate test accuracy
 score = model.evaluate(X_test, y_test, verbose = 0)
 accuracy = score[1] * 100
@@ -89,22 +96,24 @@ print(f'Test accuracy : {accuracy:.2f}')
 #                 verbose=1, shuffle=True)
 
 
-# to load only the weights you must define the model as above
-# model.load_weights('weights\Best.h5')
-# model.fit with callbacks save only the weights
-
-# save model
-# modelname = 'BestModel.h5'
-# filepath2 = os.path.join(os.getcwd(), modelname)
-# model.save(filepath2)
-
-# model = load_model("BestModel.h5")
-model.load_weights(r'weights\Best.h5')
 # plt.figure(figsize=[10,8])
 # plt.plot(hist.history['loss'], label="Train Loss")
 # plt.plot(hist.history['val_loss'], label="Validation Loss")
 # plt.legend()
 # plt.show()
+
+
+# loading model
+# first load the model
+# then secondly, add the weights
+# model = load_model("BestModel.h5")
+   
+# to load only the weights you must define the model as above
+# model.load_weights('weights\Best.h5')
+# model.fit with callbacks save only the weights
+
+model.load_weights(r'weights\Best.h5')
+
 
 pred = model.predict(X_test)
 print(type(pred), y_test.shape, **sp)
