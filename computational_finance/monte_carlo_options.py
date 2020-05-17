@@ -3,6 +3,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+def pp2(*args):
+  for arg in args:
+    print(arg, end="\n\n")
+
 # set stock parameters
 stockprice = 100
 strikeprice = 100
@@ -13,7 +17,7 @@ ndays = 252
 
 # set monte carlo parameters
 np.random.seed(0)
-nsimulations = 500000
+nsimulations = 1000000
 
 # estimate the returns
 returns_ = np.random.randn(nsimulations, ndays)*annualized_vol/np.sqrt(ndays)
@@ -23,7 +27,7 @@ stockpath = np.cumprod(1+returns_, axis=1)*stockprice
 
 # plot 50 first returns paths
 plt.figure(figsize=[10,8])
-plt.plot(stockpath[:50,:])
+plt.plot(stockpath[:5,:])
 plt.xlabel("Days", fontsize=11)
 plt.ylabel("Stock Price", fontsize=11)
 plt.show()
@@ -33,6 +37,8 @@ plt.show()
 # call options
 call_price = np.mean((stockpath[:,-1] - strikeprice)*((stockpath[:,-1] - strikeprice) > 0))
 put_price = np.mean((strikeprice - stockpath[:,-1])*((stockpath[:,-1] - strikeprice) < 0))
+pp2(call_price, put_price)
+
 
 # include risk free rate
 # include risk free rate
