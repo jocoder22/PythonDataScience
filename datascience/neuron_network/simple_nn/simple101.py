@@ -112,7 +112,7 @@ print(f'Test accuracy : {accuracy:.2f}')
 
 model.load_weights(r'weights\Best.h5')
 
-# # evaluate test accuracy
+# # evaluate test accuracy after machine learning
 score = model.evaluate(X_test, y_test, verbose = 0)
 accuracy = score[1] * 100
 
