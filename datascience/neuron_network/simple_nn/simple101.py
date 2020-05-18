@@ -13,6 +13,10 @@ from keras.layers import Dense, Flatten, Dropout
 from keras.callbacks import ModelCheckpoint
 import tensorflow as tf
 
+def pp2(*args):
+    for arg in args:
+        print(arg, end="\n\n")
+
 # change current working directory
 path = r'D:\PythonDataScience\datascience\neuron_network'
 os.chdir(path)
@@ -81,7 +85,7 @@ model.compile(loss="categorical_crossentropy",
 score = model.evaluate(X_test, y_test, verbose = 0)
 accuracy = score[1] * 100
 
-print(f'Test accuracy : {accuracy:.2f}')
+pp2(f'Test accuracy : {accuracy:.2f}', score)
 
 # only comment the lines below after training our model
 # checkpoint = ModelCheckpoint(filepath=filepath, verbose=1,
@@ -116,7 +120,7 @@ model.load_weights(r'weights\Best.h5')
 score = model.evaluate(X_test, y_test, verbose = 0)
 accuracy = score[1] * 100
 
-print(f'Test accuracy : {accuracy:.2f}')
+pp2(f'Test accuracy : {accuracy:.2f}', score)
 
 
 
