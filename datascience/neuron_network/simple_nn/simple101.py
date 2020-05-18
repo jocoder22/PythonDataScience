@@ -77,8 +77,7 @@ model.compile(loss="categorical_crossentropy",
 # filepath2 = os.path.join(os.getcwd(), modelname)
 # model.save(filepath2)
        
-
-# evaluate test accuracy
+# evaluate test accuracy before machine learning
 score = model.evaluate(X_test, y_test, verbose = 0)
 accuracy = score[1] * 100
 
