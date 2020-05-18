@@ -17,7 +17,6 @@ import tensorflow as tf
 path = r'D:\PythonDataScience\datascience\neuron_network'
 os.chdir(path)
 
-
 modelname = 'Best.h5'
 savedir = os.path.join(os.getcwd(), 'weights')
 if not os.path.isdir(savedir):
@@ -72,7 +71,6 @@ model.summary()
 model.compile(loss="categorical_crossentropy", 
              optimizer='rmsprop',
              metrics=['accuracy'])
-
 
 # save model
 # modelname = 'BestModel.h5'
