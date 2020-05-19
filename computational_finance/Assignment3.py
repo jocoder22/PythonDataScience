@@ -149,9 +149,11 @@ pp2(model_prices)
 
 # For this submission, complete the following tasks: 
 # 
-#     1. Using a sample size of 100000, jointly simulate LIBOR forward rates, stock paths, and counterparty firm values.  
-#     You should simulate the values monthly, and should have LIBOR forward rates applying over one month, starting one month apart, up to maturity. You may assume that the counterparty firm and stock values are uncorrelated with LIBOR forward  
-#     rates.
+#     1. Using a sample size of 100000, jointly simulate LIBOR forward rates, stock paths, 
+#      and counterparty firm values.  
+#     You should simulate the values monthly, and should have LIBOR forward rates applying over one 
+#     month, starting one month apart, up to maturity. You may assume that the counterparty firm and stock 
+#     values are uncorrelated with LIBOR forward  rates.
 
 np.random.seed(0)
 n_simulations = 100000
