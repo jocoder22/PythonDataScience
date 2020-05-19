@@ -84,7 +84,6 @@ plt.title('yield to Months')
 # plt.legend()
 plt.show()
 
-
 # # Calibrate Libor forward rates
 # # calibrating Vasicek model
 # # Analytical bond price
@@ -134,7 +133,6 @@ df = pd.DataFrame({
 df["PriceDiff"] = df.MarketPrice - df.Modelprice
 df["YieldDiff"] = df.Marketyield - df.Modelyield
 
-
 pp2(df)
 
 # plotting prices
@@ -179,7 +177,6 @@ sigmaj =.2
 mean_muhat = []
 mean_mcforward = np.ones([n_steps, n_steps])
 
-
 for i in range(1,n_steps):
     Z = norm.rvs(size = [n_simulations,1])
     
@@ -192,7 +189,6 @@ for i in range(1,n_steps):
     mu_term = np.cumsum(delta[:,i:]*for_temp*sigmaj**2/(1+delta[:,i:]*for_temp),axis = 1)
     predcorr_forward[:,i:] = predcorr_forward[:,i:]*np.exp((mu_initial+mu_term-sigmaj**2)*delta[:,i:]/2+sigmaj*np.sqrt(delta[:,i:])*Z)
 
-
 # Implying capitalisation factors from the forward rates
 mc_capfac[:,1:] = np.cumprod(1+delta*mc_forward, axis = 1)
 predcorr_capfac[:,1:] = np.cumprod(1+delta*predcorr_forward, axis = 1)
@@ -204,7 +200,6 @@ predcorr_price = predcorr_capfac**(-1)
 # Taking averages
 mc_final = np.mean(mc_price,axis = 0)
 predcorr_final = np.mean(predcorr_price,axis = 0)
-
 
 # plotting prices
 plt.figure(figsize = [10, 6])
