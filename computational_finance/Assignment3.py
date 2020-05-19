@@ -46,7 +46,6 @@
 # 
 # Where $L(𝑡_i,𝑡_{𝑖+1})$ is the LIBOR forward rate which applies from $t_i$ to $t_{i+1}$, at time $t_i$. Note that these LIBOR rates are updated as you run through the simulation, and so your continuously compounded rates should be as well. 
 
-
 # import required modules
 import numpy as np
 from scipy.stats import norm
@@ -60,8 +59,7 @@ import pandas as pd
 def pp2(*args):
     for arg in args:
         print(arg, end="\n\n")
-        
-        
+                
 def discounted_call_payoff(S,K, r, L, T):
     if (np.mean(S) > L):
         return 0
