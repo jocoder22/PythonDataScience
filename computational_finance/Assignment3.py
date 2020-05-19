@@ -169,7 +169,6 @@ vasi_bond = bond_price_fun(r0,0,t_sim, opt_alpha, opt_b, opt_sigma)
 mc_forward = np.ones([n_simulations, n_steps-1])*(vasi_bond[:-1]-vasi_bond[1:])/(1*vasi_bond[1:])
 predcorr_forward = np.ones([n_simulations, n_steps-1])*(vasi_bond[:-1]-vasi_bond[1:])/(1*vasi_bond[1:])
 
-
 predcorr_capfac = np.ones([n_simulations,n_steps])
 mc_capfac = np.ones([n_simulations,n_steps])
 delta = np.ones([n_simulations,n_steps-1])*(t[1:]-t[:-1])
@@ -210,7 +209,6 @@ plt.xlabel("Maturity")
 plt.ylabel("Bond price")
 plt.legend()
 plt.show()
-
 
 pp2(vasi_bond - mc_final,predcorr_final )
 
