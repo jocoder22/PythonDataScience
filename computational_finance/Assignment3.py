@@ -217,7 +217,6 @@ model_yield = 1/predcorr_final - 1
 continuous_forwards = np.log(1 + model_yield)
 pp2(continuous_forwards)
 
-
 for i in range(len(continuous_forwards)-1):
     print(np.exp(continuous_forwards[i+1])/np.exp(continuous_forwards[i])-1)
 
@@ -285,8 +284,7 @@ cev_call_prices = [np.maximum(S_T-K,0)]
 mc_call_prices = [np.maximum(S_T-K,0)]
 std_cev_call_prices = [0]
 std_mc_call_prices = [0]
-
-    
+  
 for t in months_in_year:
     vol = sigma*S_T**(gamma-1)
     delta_time = (1/12)
@@ -327,7 +325,6 @@ cev_call_price = CEV_call(S0,T,K)
 print('Monte Carlo call price is: ', mc_call_prices[-1])
 print('CEV call price is: ', cev_call_price)
 
-
 # plotting prices
 plt.figure(figsize = [10, 6])
 plt.plot(np.arange(0,13),mc_call_prices, '.')
@@ -338,8 +335,6 @@ plt.ylabel("Price")
 plt.title("Monte Carlo Estimates of risk-neutral call option price")
 plt.legend(('Risk-neutral price', 'Risk-neutral price UB', 'Risk-neutral price LB'))
 plt.show()
-
-
 
 call_std_risky_dict = {}
 cva_mean_risky_dict = {}
@@ -369,7 +364,6 @@ std_mc_call_prices_risky = [0]
 corr_matrix = np.array([[1, correlation], [correlation,1]])
 norm_matrix = norm.rvs(size = np.array([2,n_simulations]))
 corr_norm_matrix = np.matmul(np.linalg.cholesky(corr_matrix), norm_matrix)
-
 
 for t in months_in_year:
     vol = sigma*S_T**(gamma-1)
@@ -409,7 +403,6 @@ for t in months_in_year:
     
     call_val_with_cva_risky_dict[t] = call_val_with_cva
     
-
 plt.figure(figsize=[12,8])
 plt.plot([x*12 for x in months_in_year],list(call_mean_risky_dict.values()), '.')
 plt.plot([x*12 for x in months_in_year],list(call_val_with_cva_risky_dict.values()),'-')
