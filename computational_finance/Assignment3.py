@@ -414,7 +414,5 @@ plt.title("Monte Carlo Estimates of risk-adjusted call option price")
 plt.legend(('Risk-neutral price', 'Risk-adjusted price', 'Risk-neutral price␣UB', 'Risk-neutral price LB'))
 plt.show()
 
-
 print("Risk-neutral call price at the end of 12 months is: ", list(call_mean_risky_dict.values())[-1])
 print("Risk-adjusted call price at the end of 12 months is: ", list(call_val_with_cva_risky_dict.values())[-1])
-
