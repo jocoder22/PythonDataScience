@@ -111,7 +111,6 @@ pp2(f'Test accuracy : {accuracy:.2f}', score)
 # model.fit with callbacks save only the weights and then run
 # model.load_weights('weights\Best.h5')
 
-
 model.load_weights(r'weights\Best.h5')
 
 # # evaluate test accuracy after machine learning
