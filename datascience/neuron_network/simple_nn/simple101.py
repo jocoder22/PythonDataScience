@@ -102,7 +102,6 @@ pp2(f'Test accuracy : {accuracy:.2f}', score)
 # plt.legend()
 # plt.show()
 
-
 # loading model
 # first load the model
 # then secondly, add the weights
