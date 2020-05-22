@@ -10,7 +10,6 @@ def interest(amt, rate, timet, down=None):
     total = amt * int 
     return total-amt, total 
 
-
 a, b = interest(320000, 0.04257, 360)
 print(f'Interest paid is ${a:.2f}, and total amount is ${b:.2f}')
 print(f'Monthly payment is {b/360:.2f}')
