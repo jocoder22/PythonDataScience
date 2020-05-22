@@ -90,7 +90,6 @@ pp2(f'Test accuracy : {accuracy:.2f}', score)
 # only comment the lines below after training our model
 # checkpoint = ModelCheckpoint(filepath=filepath, verbose=1,
 #                             save_best_only=True)
-
 # hist = model.fit(X_train, y_train, batch_size=128,
 #                 epochs=10, validation_split=0.2,
 #                 callbacks=[checkpoint],
