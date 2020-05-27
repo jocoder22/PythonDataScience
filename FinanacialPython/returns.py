@@ -8,6 +8,7 @@ from math import ceil
 import sklearn
 from datetime import datetime, date
 import tensorflow as tf
+import MySQLdb
 
 # import talib as tb
 from tensorflow.python.keras.datasets import imdb
@@ -48,7 +49,6 @@ print(ALL.head())
 #      for i in installed_packages])
 # print(in_list, len(in_list))
 
-
 # df = pd.read_csv("D:\PythonDataScience\listt.txt", delim_whitespace=True, 
 #                  skiprows=2, names=['Modules', 'Version'])
 #                 # can use delimiter=r"\s+"
@@ -68,10 +68,6 @@ with sqlite3.connect('D:\PythonDataScience\sql\survey.db') as con:
     for name in res:
         print(name[0])
         
-
-
-
-import MySQLdb
 db = MySQLdb.connect(user="my-username",passwd="my-password",host="localhost",db="my-databasename")
 cursor = db.cursor()
 cursor.execute("SELECT * from my-table-name")
