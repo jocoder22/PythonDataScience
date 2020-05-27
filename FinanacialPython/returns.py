@@ -18,7 +18,6 @@ from tensorflow.python.keras.layers import Dense, Embedding
 from tensorflow.python.keras.layers import LSTM, Dropout, Flatten
 from tensorflow.python.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
 
-
 import pandas_datareader as pdr
 
 from sklearn.model_selection import train_test_split
@@ -42,7 +41,6 @@ print(ALL.head())
 # sorted(["%s==%s" % (i.key, i.version) for i in pip.get_installed_distributions()])
 
 # https://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/
-
 
 # import pkg_resources
 # installed_packages = pkg_resources.working_set
