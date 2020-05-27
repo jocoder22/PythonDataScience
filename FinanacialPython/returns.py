@@ -24,8 +24,6 @@ import pandas_datareader as pdr
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
-
-
 sp = {"sep":"\n\n", "end":"\n\n"}
 
 symbol = 'AAL'
