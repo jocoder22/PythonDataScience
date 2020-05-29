@@ -69,3 +69,6 @@ returns_windowed = portfolio_returns.rolling(30)
 # Compute the annualized volatility series
 volatility_series = returns_windowed.std()*np.sqrt(252)
 
+# Plot the portfolio volatility
+volatility_series.plot().set_ylabel("Annualized Volatility, 30-day Window")
+plt.show()
