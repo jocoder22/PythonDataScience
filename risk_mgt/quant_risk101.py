@@ -9,6 +9,13 @@ from pandas.util.testing import assert_frame_equal
 stocklist = ["C","JPM","MS", "GS"]
 
 starttime = datetime.datetime(2000, 1, 1)
-apple = pdr.get_data_yahoo(stocklist, starttime)
+portfolio = pdr.get_data_yahoo(stocklist, starttime)
 
-print(apple.head(), apple.columns, apple.info())
+# multiindex dataframe
+print(portfolio.head(), portfolio.columns, portfolio.info())
+
+# get only the closing prices
+# portfolio_close = pdr.get_data_yahoo(stocklist, starttime)['Close']
+portfolio_close = portfolio['Close']
+
+print2(portfolio_close.head())
