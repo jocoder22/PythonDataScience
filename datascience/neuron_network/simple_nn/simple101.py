@@ -13,6 +13,7 @@ from keras.layers import Dense, Flatten, Dropout
 from keras.callbacks import ModelCheckpoint
 import tensorflow as tf
 
+
 def pp2(*args):
     for arg in args:
         print(arg, end="\n\n")
