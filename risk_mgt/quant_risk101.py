@@ -45,3 +45,27 @@ portfolio_returns = asset_returns.dot(weights)
 # Plot portfolio returns
 portfolio_returns.plot().set_ylabel("Daily Return, %")
 plt.show()
+
+print2(asset_prices.head(), asset_returns.head(), portfolio_returns.head())
+
+# Generate the covariance matrix from portfolio asset's returns
+covariance = asset_returns.cov()
+
+# Annualize the covariance using 252 trading days per year
+covariance = covariance * 252
+
+# Display the covariance matrix
+print2(covariance)
+
+# Compute and display portfolio volatility
+portfolio_variance = np.transpose(weights) @ covariance @ weights
+portfolio_volatility = np.sqrt(portfolio_variance)
+print2(portfolio_volatility)
+
+
+# Calculate the 30-day rolling window of portfolio returns
+returns_windowed = portfolio_returns.rolling(30)
+
+# Compute the annualized volatility series
+volatility_series = returns_windowed.std()*np.sqrt(252)
+
