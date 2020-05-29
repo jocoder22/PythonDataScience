@@ -8,6 +8,7 @@ from math import ceil
 import sklearn
 from datetime import datetime, date
 import tensorflow as tf
+import MySQLdb
 
 # import talib as tb
 from tensorflow.python.keras.datasets import imdb
@@ -18,16 +19,12 @@ from tensorflow.python.keras.layers import Dense, Embedding
 from tensorflow.python.keras.layers import LSTM, Dropout, Flatten
 from tensorflow.python.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
 
-
 import pandas_datareader as pdr
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
-
-
 sp = {"sep":"\n\n", "end":"\n\n"}
-
 symbol = 'AAL'
 
 # symbol = 'RELIANCE.NS'
@@ -45,13 +42,11 @@ print(ALL.head())
 
 # https://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/
 
-
 # import pkg_resources
 # installed_packages = pkg_resources.working_set
 # in_list = sorted(["%s==%s" % (i.key, i.version)
 #      for i in installed_packages])
 # print(in_list, len(in_list))
-
 
 # df = pd.read_csv("D:\PythonDataScience\listt.txt", delim_whitespace=True, 
 #                  skiprows=2, names=['Modules', 'Version'])
@@ -72,10 +67,6 @@ with sqlite3.connect('D:\PythonDataScience\sql\survey.db') as con:
     for name in res:
         print(name[0])
         
-
-
-
-import MySQLdb
 db = MySQLdb.connect(user="my-username",passwd="my-password",host="localhost",db="my-databasename")
 cursor = db.cursor()
 cursor.execute("SELECT * from my-table-name")
