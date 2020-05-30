@@ -14,9 +14,10 @@ stocklist = ["C","JPM","MS", "GS"]
 p_labels = ["Citibank", "J.P. Morgan", "Morgan Stanley", "Goldman Sachs"]
 
 starttime = datetime.datetime(2000, 1, 1)
+endtime = datetime.datetime(2019, 10, 1)
 
 # get only the closing prices
-portfolio = pdr.get_data_yahoo(stocklist, starttime)['Close']
+portfolio = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
 
 # set the weights
 weights = [0.20, 0.30, 0.30, 0.20]
@@ -36,6 +37,47 @@ weblink = ("https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23e1e9f0&ch
         "2020-05-29&revision_date=2020-05-29&nd=1991-01-01")
 
 # df = pd.read_csv(weblink, parse_dates=True, index_col=0, names=["Mortage Deliquency Rate"])
-df = pd.read_csv(weblink).set_index("DATE")
-df.columns = ["Mortage Deliquency Rate"]
-print2(df.loc["2005-03-31":], returns)
+mdr = pd.read_csv(weblink).set_index("DATE")
+mdr.columns = ["Mortage Deliquency Rate"]
+print2(mdr.loc["2005-03-31":], returns)
+
+
+# Convert daily returns to quarterly average returns
+returns_q = returns.resample('Q').mean().dropna()
+
+print2(mdr.shape, returns_q.shape, returns_q.head(), mdr.head())
+
+# Examine the beginning of the quarterly series
+print2(returns_q.head())
+
+# Now convert daily returns to weekly minimum returns
+returns_w = returns.resample('W').min().dropna()
+
+# Examine the beginning of the weekly series
+print2(returns_w.head())
+
+
+# Create a scatterplot between quarterly average returns and delinquency
+plt.scatter(returns_q, mdr)
+plt.axis([-0.007,0.006,0,14]) 
+plt.show()
+
+
+# Convert daily returns to quarterly minimium returns
+returns_m = returns.resample('Q').min().dropna()
+
+# Create a scatterplot between quarterly minimum returns and delinquency
+plt.scatter(returns_m, mdr)
+plt.axis([-0.125,0.006,0,14]) 
+plt.xlabel("Quarterly Average Return")
+plt.ylabel("Mortage Deliquemcy Rate (Percent)")
+plt.show()
+
+
+# Create a scatterplot between quarterly minimum returns and delinquency
+plt.scatter(returns_m.loc['2005-01-01':'2010-12-31'], mdr.loc['2005-01-01':'2010-12-31'])
+plt.axis([-0.125,0.006,0,14]) 
+plt.xlabel("Quarterly Minimum Return")
+plt.ylabel("Mortage Deliquemcy Rate (Percent)")
+plt.show()
+
