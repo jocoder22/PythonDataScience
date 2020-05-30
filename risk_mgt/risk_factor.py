@@ -6,7 +6,6 @@ import pandas_datareader as pdr
 import statsmodels.api as sm
 from pandas.util.testing import assert_frame_equal
 
-
 def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
@@ -56,7 +55,6 @@ returns_w = returns.resample('W').min().dropna()
 
 # Examine the beginning of the weekly series
 print2(returns_w.head())
-
 
 # Create a scatterplot between quarterly average returns and delinquency
 plt.scatter(returns_qmean, mdr)
