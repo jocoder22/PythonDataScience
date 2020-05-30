@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 import pandas_datareader as pdr
+import statsmodels.api as sm
 from pandas.util.testing import assert_frame_equal
 
 
@@ -20,7 +21,7 @@ endtime = datetime.datetime(2019, 10, 1)
 portfolio = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
 
 # set the weights
-weights = [0.20, 0.30, 0.30, 0.20]
+weights = [0.25, 0.25, 0.25, 0.25]
 
 # calculate percentage return and portfolio return
 asset_returns = portfolio.pct_change()
@@ -43,12 +44,12 @@ print2(mdr.loc["2005-03-31":], returns)
 
 
 # Convert daily returns to quarterly average returns
-returns_q = returns.resample('Q').mean().dropna()
+returns_qmean = returns.resample('Q').mean().dropna()
 
-print2(mdr.shape, returns_q.shape, returns_q.head(), mdr.head())
+print2(mdr.shape, returns_qmean.shape, returns_qmean.head(), mdr.head())
 
 # Examine the beginning of the quarterly series
-print2(returns_q.head())
+print2(returns_qmean.head())
 
 # Now convert daily returns to weekly minimum returns
 returns_w = returns.resample('W').min().dropna()
@@ -58,16 +59,16 @@ print2(returns_w.head())
 
 
 # Create a scatterplot between quarterly average returns and delinquency
-plt.scatter(returns_q, mdr)
+plt.scatter(returns_qmean, mdr)
 plt.axis([-0.007,0.006,0,14]) 
 plt.show()
 
 
 # Convert daily returns to quarterly minimium returns
-returns_m = returns.resample('Q').min().dropna()
+returns_qmin = returns.resample('Q').min().dropna()
 
 # Create a scatterplot between quarterly minimum returns and delinquency
-plt.scatter(returns_m, mdr)
+plt.scatter(returns_qmin, mdr)
 plt.axis([-0.125,0.006,0,14]) 
 plt.xlabel("Quarterly Average Return")
 plt.ylabel("Mortage Deliquemcy Rate (Percent)")
@@ -75,9 +76,64 @@ plt.show()
 
 
 # Create a scatterplot between quarterly minimum returns and delinquency
-plt.scatter(returns_m.loc['2005-01-01':'2010-12-31'], mdr.loc['2005-01-01':'2010-12-31'])
+plt.scatter(returns_qmin.loc['2005-01-01':'2010-12-31'], mdr.loc['2005-01-01':'2010-12-31'])
 plt.axis([-0.125,0.006,0,14]) 
 plt.xlabel("Quarterly Minimum Return")
 plt.ylabel("Mortage Deliquemcy Rate (Percent)")
 plt.show()
 
+
+# Add a constant to the regression
+Y = returns_qmean.values
+X = mdr.values
+X = sm.add_constant(mdr.values)
+
+# Create the regression factor model and fit it to the data
+results = sm.OLS(Y, X).fit()
+
+# Print a summary of the results
+print2(results.summary())
+
+
+
+# Add a constant to the regression
+Y = returns_qmin.values
+X = mdr.values
+X = sm.add_constant(mdr.values)
+
+# Create the regression factor model and fit it to the data
+results = sm.OLS(Y, X).fit()
+
+# Print a summary of the results
+print2(results.summary())
+
+
+
+# using only periods of global recession
+returns_qmean = returns_qmean.loc['2005-01-01':'2010-12-31']
+returns_qmin = returns_qmin.loc['2005-01-01':'2010-12-31']
+mdr = mdr.loc['2005-01-01':'2010-12-31']
+
+# Add a constant to the regression
+Y = returns_qmean.values
+X = mdr.values
+X = sm.add_constant(mdr.values)
+
+# Create the regression factor model and fit it to the data
+results = sm.OLS(Y, X).fit()
+
+# Print a summary of the results
+print2(results.summary())
+
+
+
+# Add a constant to the regression
+Y = returns_qmin.values
+X = mdr.values
+X = sm.add_constant(mdr.values)
+
+# Create the regression factor model and fit it to the data
+results = sm.OLS(Y, X).fit()
+
+# Print a summary of the results
+print2(results.summary())
