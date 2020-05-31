@@ -93,7 +93,6 @@ results = sm.OLS(Y, X).fit()
 print2(results.summary())
 
 
-
 # Add a constant to the regression
 Y = returns_qmin.values
 X = mdr.values
