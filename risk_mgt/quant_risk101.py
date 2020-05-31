@@ -62,7 +62,6 @@ portfolio_variance = np.transpose(weights) @ covariance @ weights
 portfolio_volatility = np.sqrt(portfolio_variance)
 print2(portfolio_volatility)
 
-
 # Calculate the 30-day rolling window of portfolio returns
 returns_windowed = portfolio_returns.rolling(30)
 
