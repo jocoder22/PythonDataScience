@@ -72,7 +72,6 @@ plt.xlabel("Quarterly Average Return")
 plt.ylabel("Mortage Deliquemcy Rate (Percent)")
 plt.show()
 
-
 # Create a scatterplot between quarterly minimum returns and delinquency
 plt.scatter(returns_qmin.loc['2005-01-01':'2010-12-31'], mdr.loc['2005-01-01':'2010-12-31'])
 plt.axis([-0.125,0.006,0,14]) 
@@ -91,7 +90,6 @@ results = sm.OLS(Y, X).fit()
 
 # Print a summary of the results
 print2(results.summary())
-
 
 # Add a constant to the regression
 Y = returns_qmin.values
