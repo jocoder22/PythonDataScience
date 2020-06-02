@@ -60,7 +60,6 @@ plt.scatter(returns_qmean, mdr)
 plt.axis([-0.007,0.006,0,14]) 
 plt.show()
 
-
 # Convert daily returns to quarterly minimium returns
 returns_qmin = returns.resample('Q').min().dropna()
 
