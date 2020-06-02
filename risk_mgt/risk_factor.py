@@ -41,7 +41,6 @@ mdr = pd.read_csv(weblink).set_index("DATE")
 mdr.columns = ["Mortage Deliquency Rate"]
 print2(mdr.loc["2005-03-31":], returns)
 
-
 # Convert daily returns to quarterly average returns
 returns_qmean = returns.resample('Q').mean().dropna()
 
