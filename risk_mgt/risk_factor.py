@@ -77,7 +77,6 @@ plt.xlabel("Quarterly Minimum Return")
 plt.ylabel("Mortage Deliquemcy Rate (Percent)")
 plt.show()
 
-
 # Add a constant to the regression
 Y = returns_qmean.values
 X = mdr.values
