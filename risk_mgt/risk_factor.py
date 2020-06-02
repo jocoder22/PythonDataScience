@@ -99,7 +99,6 @@ results = sm.OLS(Y, X).fit()
 # Print a summary of the results
 print2(results.summary())
 
-
 # using only periods of global recession
 returns_qmean = returns_qmean.loc['2005-01-01':'2010-12-31']
 returns_qmin = returns_qmin.loc['2005-01-01':'2010-12-31']
