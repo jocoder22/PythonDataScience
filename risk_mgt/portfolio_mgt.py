@@ -41,7 +41,11 @@ plt.plot(mean_returns, linestyle = 'None', marker = 'o')
 plt.show()
 
 # Create the CovarianceShrinkage instance variable
+# this is bette, because it shrinks the errors
 cs = CovarianceShrinkage(prices).ledoit.wolf()
+
+# Compute the sample covariance matrix of returns
+sample_cov = prices.pct_change().cov() * 252
 
 # Create the EfficientFrontier instance variable
 ef = EfficientFrontier(mu, S)
