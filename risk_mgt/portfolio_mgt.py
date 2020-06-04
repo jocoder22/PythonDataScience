@@ -6,6 +6,8 @@ import datetime
 import pandas_datareader as pdr
 from pandas.util.testing import assert_frame_equal
 
+from pypfopt.expected_returns import mean_historical_return
+
 def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
@@ -27,4 +29,12 @@ starttime = datetime.datetime(2000, 1, 1)
 endtime = datetime.datetime(2019, 10, 1)
 
 # get only the closing prices
-portfolio = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
+assets = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
+
+
+# Compute the annualized average historical return
+mean_returns = mean_historical_return(assets, frequency = 252)
+
+# Plot the annualized average historical return
+plt.plot(mean_returns, linestyle = 'None', marker = 'o')
+plt.show()
