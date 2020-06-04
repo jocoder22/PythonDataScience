@@ -41,7 +41,7 @@ plt.plot(mean_returns, linestyle = 'None', marker = 'o')
 plt.show()
 
 # Create the CovarianceShrinkage instance variable
-cs = CovarianceShrinkage(prices).Iedoit.wolf()
+cs = CovarianceShrinkage(prices).ledoit.wolf()
 
 # Create the EfficientFrontier instance variable
 ef = EfficientFrontier(mu, S)
@@ -53,3 +53,6 @@ weights = ef.max_sharpe()
 cw = ef.clean_weights()
 ef.save_weights_to_file("weights.txt")  # saves to file
 print(cm)
+
+# Evaluate performance of optimal portfolio
+ef.portfolio_performance(verbose=True)
