@@ -13,7 +13,7 @@ def print2(*args):
 stocklist = ["C","JPM","MS", "GS"]
 stocklist = ["JPM", "GS", "BAC", "MS", "C","CS",
              "BCS" , "DB", "UBS", "RY", "WFC",
-             "HSBC", "JFE", "BNP.PA", "MFG", "LAZ", "NMR", "EVR",
+             "HSBC", "JEF", "BNP.PA", "MFG", "LAZ", "NMR", "EVR",
              "BMO", "MUFG"]
              
              
