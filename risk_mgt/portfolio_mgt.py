@@ -12,6 +12,12 @@ def print2(*args):
         print(arg, end="\n\n")
 
 stocklist = ["C","JPM","MS", "GS"]
+stocklist = ["JPM", "GS", "BAC", "MS", "C","CS",
+             "BCS" , "DB", "UBS", "RY", "WFC",
+             "HSBC", "JFE", "BNP.PA", "MFG", "LAZ", "NMR", "EVR",
+             "BMO", "MUFG"]
+             
+             
 p_labels = ["Citibank", "J.P. Morgan", "Morgan Stanley", "Goldman Sachs"]
 pp_labels = ["JPMorgan Chase", "Goldman Sachs", "BofA Securities", "Morgan Stanley", "Citigroup", "Credit Suisse", 
              "Barclays Investment Bank", "Deutsche Bank", "UBS", "RBC Capital Markets", "Wells Fargo Securities",
