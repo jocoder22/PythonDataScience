@@ -4,7 +4,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 import pandas_datareader as pdr
-import statsmodels.api as sm
 from pandas.util.testing import assert_frame_equal
 
 def print2(*args):
