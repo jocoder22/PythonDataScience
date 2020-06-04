@@ -13,6 +13,10 @@ def print2(*args):
 
 stocklist = ["C","JPM","MS", "GS"]
 p_labels = ["Citibank", "J.P. Morgan", "Morgan Stanley", "Goldman Sachs"]
+pp_labels = ["JPMorgan Chase", "Goldman Sachs", "BofA Securities", "Morgan Stanley", "Citigroup", "Credit Suisse", 
+             "Barclays Investment Bank", "Deutsche Bank", "UBS", "RBC Capital Markets", "Wells Fargo Securities",
+             "HSBC", "Jefferies Group", "BNP Paribas", "Mizuho", "Lazard", "Nomura", "Evercore Partners", 
+             "BMO Capital Markets", "Mitsubishi UFJ Financial Group"]
 
 starttime = datetime.datetime(2000, 1, 1)
 endtime = datetime.datetime(2019, 10, 1)
