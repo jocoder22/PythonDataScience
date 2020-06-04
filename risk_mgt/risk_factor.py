@@ -112,8 +112,6 @@ X = sm.add_constant(mdr.values)
 # Create the regression factor model and fit it to the data
 results = sm.OLS(Y, X).fit()
 
-
-
 # Print a summary of the results
 print2(results.summary())
 
