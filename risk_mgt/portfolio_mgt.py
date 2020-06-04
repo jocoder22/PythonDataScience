@@ -8,6 +8,8 @@ from pandas.util.testing import assert_frame_equal
 from pypfopt.risk_models import CovarianceShrinkage
 from pypfopt.expected_returns import mean_historical_return
 from pypfopt.efficient_frontier import EfficientFrontier
+from pypfopt.discrete_allocation import DiscreteAllocation, get_latest_prices
+from pypfopt.cla import CLA
 
 def print2(*args):
     for arg in args:
@@ -63,8 +65,6 @@ ef.portfolio_performance(verbose=True)
 
 
 
-
-
 # Create a dictionary of time periods (or 'epochs')
 epochs = { 'before' : {'start': '1-1-2005', 'end': '31-12-2006'},
            'during' : {'start': '1-1-2007', 'end': '31-12-2008'},
@@ -99,3 +99,24 @@ print(efficient_portfolio_during.min_volatility())
 plt.scatter(vol, ret, s = 4, c = 'g', marker = '.', label = 'During')
 plt.legend()
 plt.show()
+
+# plotting using PyPortfolioOpt
+plot_covariance(cs,plot_correlation=False, show_tickers=True)
+plot_efficient_frontier(efficient_portfolio_during, points=100, show_assets=True)
+plot_weights(cw)
+
+# Dealing with many negligible weights
+# efficient portfolio allocation
+ef = EfficientFrontier(mu, cs)
+ef.add_objective(objective_functions.L2_reg, gamma=0.1)
+w = ef.max_sharpe()
+print(ef.clean_weights())
+
+
+# Post-processing weights
+# These are the quantities of shares that should be bought to have a $20,000 portfolio
+latest_prices = get_latest_prices(assets)
+da = DiscreteAllocation(w, latest_prices, total_portfolio_value=20000)
+allocation, leftover = da.lp_portfolio()
+print(allocation)
+
