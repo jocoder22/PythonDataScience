@@ -48,3 +48,8 @@ ef = EfficientFrontier(mu, S)
 
 # Compute the Weights portfolio that maximises the Sharpe ratio
 weights = ef.max_sharpe()
+
+# clean_weights() method truncates tiny weights to zero and rounds others
+cw = ef.clean_weights()
+ef.save_weights_to_file("weights.txt")  # saves to file
+print(cm)
