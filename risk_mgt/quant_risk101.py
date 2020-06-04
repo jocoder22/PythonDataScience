@@ -28,7 +28,6 @@ print2(portfolio_close.head())
 portfolio_close.plot().set_ylabel("Closing Prices, USD")
 plt.show()
 
-
 # set the weights
 weights = [0.20, 0.30, 0.30, 0.20]
 # Select portfolio asset prices for the middle of the crisis, 2008-2009
