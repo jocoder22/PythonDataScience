@@ -66,9 +66,9 @@ ef.portfolio_performance(verbose=True)
 
 
 # Create a dictionary of time periods (or 'epochs')
-epochs = { 'before' : {'start': '1-1-2005', 'end': '31-12-2006'},
+epochs = { 'before' : {'start': starttime, 'end': '31-12-2006'},
            'during' : {'start': '1-1-2007', 'end': '31-12-2008'},
-           'after'  : {'start': '1-1-2009', 'end': '31-12-2010'}
+           'after'  : {'start': '1-1-2009', 'end': endtime}
          }
 
 # Compute the sample covariance matrix of returns
