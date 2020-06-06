@@ -20,3 +20,10 @@ endtime = datetime.datetime(2019, 10, 1)
 assets = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
 
 weights = [0.2, 0.15, 0.2, 0.15, 0.2, 0.1]
+
+returns = assets.pct_change().dropna()
+
+print2(assets.head(), returns.head())
+
+portfolioReturn = returns.dot(weights)
+
