@@ -18,3 +18,5 @@ endtime = datetime.datetime(2019, 10, 1)
 
 # get only the closing prices
 assets = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
+
+weights = [0.2, 0.15, 0.2, 0.15, 0.2, 0.1]
