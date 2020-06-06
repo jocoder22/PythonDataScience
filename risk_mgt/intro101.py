@@ -26,4 +26,18 @@ returns = assets.pct_change().dropna()
 print2(assets.head(), returns.head())
 
 portfolioReturn = returns.dot(weights)
+portfolioValue = (1 + portfolioReturn).cumprod()
 
+print2(portfolioReturn, portfolioValue)
+
+
+# Calculate individual mean returns 
+meanDailyReturns = returns.mean()
+
+# Define weights for the portfolio
+weights = np.array([0.2, 0.2, 0.2, 0.1, 0.15, 0.15])
+
+# Calculate expected portfolio performance
+portReturn = np.sum(meanDailyReturns*weights)
+
+print2(portReturn, meanDailyReturns)
