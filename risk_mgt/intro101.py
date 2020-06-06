@@ -10,6 +10,11 @@ def print2(*args):
         print(arg, end="\n\n")
 
 
-stocklist = ["JPM", "GS", "BAC", "MS", "C","CS"]             
-             
+stocklist = ["JPM", "GS", "BAC", "MS", "C","CS"]                         
 pp_labels = ["JPMorgan Chase", "Goldman Sachs", "BofA Securities", "Morgan Stanley", "Citigroup", "Credit Suisse"] 
+
+starttime = datetime.datetime(2000, 1, 1)
+endtime = datetime.datetime(2019, 10, 1)
+
+# get only the closing prices
+assets = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
