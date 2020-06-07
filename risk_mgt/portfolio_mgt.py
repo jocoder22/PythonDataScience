@@ -1,6 +1,8 @@
 #!/usr/bin/env python
+import os
 import numpy as np
 import pandas as pd
+
 import matplotlib.pyplot as plt
 import datetime
 import pandas_datareader as pdr
@@ -17,18 +19,19 @@ def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
 
-
 @contextmanager
-def changepath(path):
+def changepath(patht):
     currentpath = os.getcwd()
 
-    os.chdir(path)
+    os.chdir(patht)
 
     try:
         yield 
 
     finally:
         os.chdir(currentpath)
+
+path = r"D:\PythonDataScience\risk_mgt"
 
 stocklist = ["C","JPM","MS", "GS"]
 stocklist = ["JPM", "GS", "BAC", "MS", "C","CS",
@@ -72,6 +75,9 @@ weights = ef.max_sharpe()
 
 # clean_weights() method truncates tiny weights to zero and rounds others
 cw = ef.clean_weights()
+
+with changepath(path):
+    df = pd.read_csv('AMZN.csv')
 ef.save_weights_to_file("weights.txt")  # saves to file
 print(cw)
 
