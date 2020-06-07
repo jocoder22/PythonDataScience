@@ -44,7 +44,7 @@ plt.show()
 
 # Create the CovarianceShrinkage instance variable
 # this is bette, because it shrinks the errors, and give annualized covariance
-cs = CovarianceShrinkage(assets).ledoit.wolf()
+cs = CovarianceShrinkage(assets)ledoit_wolf()
 
 # Compute the sample covariance matrix of returns
 sample_covariance = assets.pct_change().cov() * 252
