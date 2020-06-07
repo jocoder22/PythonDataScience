@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import datetime
 import pandas_datareader as pdr
 from pandas.util.testing import assert_frame_equal
+from contextlib import contextmanager
+
 from pypfopt.risk_models import CovarianceShrinkage
 from pypfopt.expected_returns import mean_historical_return
 from pypfopt.efficient_frontier import EfficientFrontier
@@ -14,6 +16,19 @@ from pypfopt.cla import CLA
 def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
+
+
+@contextmanager
+def changepath(path):
+    currentpath = os.getcwd()
+
+    os.chdir(path)
+
+    try:
+        yield 
+
+    finally:
+        os.chdir(currentpath)
 
 stocklist = ["C","JPM","MS", "GS"]
 stocklist = ["JPM", "GS", "BAC", "MS", "C","CS",
@@ -44,7 +59,7 @@ plt.show()
 
 # Create the CovarianceShrinkage instance variable
 # this is bette, because it shrinks the errors, and give annualized covariance
-cs = CovarianceShrinkage(assets)ledoit_wolf()
+cs = CovarianceShrinkage(assets).ledoit_wolf()
 
 # Compute the sample covariance matrix of returns
 sample_covariance = assets.pct_change().cov() * 252
@@ -81,7 +96,7 @@ e_cov = {}
 for x in epochs.keys():
   sub_price = assets.loc[epochs[x]['start']:epochs[x]['end']]
   e_return[x] = mean_historical_return(assets, frequency = 252)
-  e_cov[x] = CovarianceShrinkage(sub_price).ledoit.wolf()
+  e_cov[x] = CovarianceShrinkage(sub_price).ledoit_wolf()
 
 # Display the efficient covariance matrices for all epochs
 print("Efficient Covariance Matrices\n", e_cov)
