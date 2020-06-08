@@ -30,7 +30,6 @@ portfolioValue = (1 + portfolioReturn).cumprod()
 
 print2(portfolioReturn, portfolioValue)
 
-
 # Calculate individual mean returns 
 meanDailyReturns = returns.mean()
 
