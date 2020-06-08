@@ -64,3 +64,49 @@ def stock_movt(data_input):
     # return the final dataset
     return data_out
     
+
+# define a function to the returns transition matrix
+def transitionMatrix(data_input2):
+    """The transitionMatrix function will return the transition matrix moving from
+        present state of the stocks either 
+        uu = both stocks moved upwards,
+        ud = the first moved upwards and the second moved downwards,
+        ud = the first moved downwards and the second moved upwards, or 
+        dd = both stocks moved downwards
+        
+        to another state in one step, i.e from present day (today) to next day
+
+    Args: 
+        data_input (DataFrame): the DataFrame with the stoch present state
+        
+    Returns: 
+        DataFrame: The transition matrix dataframe
+
+    """
+    
+    # Get the present state of the stocks movements
+    present_state = data_input2["direction"].values.tolist()
+    
+    # Create transition matrix, using crosstab lagged one day
+    data_out2 = pd.crosstab(pd.Series(present_state[1:],name='Next_Movt'),
+                pd.Series(present_state[:-1],name='Present_State'), normalize="index")
+    data_out2['Total'] = data_out2.sum(axis=1)
+    
+    
+    # return the transition matrix
+    return data_out2
+
+# Calculate normalized count values for taindata
+traincount = trainMovt["direction"].value_counts(normalize=True).reset_index()
+traincount.columns = ['index', "Train"]
+traincount
+
+
+# Calculate normalized count values for test data
+testcount = testMovt["direction"].value_counts(normalize=True).reset_index()
+testcount.columns = ['index', "Test"]
+testcount
+
+# merge the normalized count dataframe for comparison
+countdata = traincount.merge(testcount, on="index")
+
