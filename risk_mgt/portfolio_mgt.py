@@ -14,6 +14,8 @@ from pypfopt.expected_returns import mean_historical_return
 from pypfopt.efficient_frontier import EfficientFrontier
 from pypfopt.discrete_allocation import DiscreteAllocation, get_latest_prices
 from pypfopt.cla import CLA
+from pypfopt import objective_functions
+from pypfopt import Plotting  as pplot
 
 def print2(*args):
     for arg in args:
@@ -22,7 +24,6 @@ def print2(*args):
 @contextmanager
 def changepath(patht):
     currentpath = os.getcwd()
-
     os.chdir(patht)
 
     try:
@@ -31,6 +32,7 @@ def changepath(patht):
     finally:
         os.chdir(currentpath)
 
+
 path = r"D:\PythonDataScience\risk_mgt"
 
 stocklist = ["C","JPM","MS", "GS"]
@@ -38,8 +40,7 @@ stocklist = ["JPM", "GS", "BAC", "MS", "C","CS",
              "BCS" , "DB", "UBS", "RY", "WFC",
              "HSBC", "JEF", "BNP.PA", "MFG", "LAZ", "NMR", "EVR",
              "BMO", "MUFG"]
-             
-             
+                     
 p_labels = ["Citibank", "J.P. Morgan", "Morgan Stanley", "Goldman Sachs"]
 pp_labels = ["JPMorgan Chase", "Goldman Sachs", "BofA Securities", "Morgan Stanley", "Citigroup", "Credit Suisse", 
              "Barclays Investment Bank", "Deutsche Bank", "UBS", "RBC Capital Markets", "Wells Fargo Securities",
@@ -51,6 +52,10 @@ endtime = datetime.datetime(2019, 10, 1)
 
 # get only the closing prices
 assets = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
+
+
+path2 = r"D:\TimerSeriesAnalysis\AMZN.csv"
+df = pd.read_csv(path2, parse_dates=True, index_col="Date")
 
 
 # Compute the annualized average historical return
@@ -77,8 +82,8 @@ weights = ef.max_sharpe()
 cw = ef.clean_weights()
 
 with changepath(path):
-    df = pd.read_csv('AMZN.csv')
-ef.save_weights_to_file("weights.txt")  # saves to file
+  ef.save_weights_to_file("weights.txt")  # saves to file
+
 print(cw)
 
 # Evaluate performance of optimal portfolio
@@ -122,9 +127,9 @@ plt.legend()
 plt.show()
 
 # plotting using PyPortfolioOpt
-plot_covariance(cs,plot_correlation=False, show_tickers=True)
-plot_efficient_frontier(efficient_portfolio_during, points=100, show_assets=True)
-plot_weights(cw)
+pplot.plot_covariance(cs,plot_correlation=False, show_tickers=True)
+pplot.plot_efficient_frontier(efficient_portfolio_during, points=100, show_assets=True)
+pplot.plot_weights(cw)
 
 # Dealing with many negligible weights
 # efficient portfolio allocation
