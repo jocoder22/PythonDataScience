@@ -117,7 +117,6 @@ def stock_movt(data_input):
 #     # Remove the columns for each stock movement
 #     data_out.drop(columns=['_movt0', '_movt1'], inplace=True)
     
-    
     # return the final dataset
     return data_out
     
@@ -166,4 +165,5 @@ print2(traincount, testcount)
 
 # merge the normalized count dataframe for comparison
 countdata = traincount.merge(testcount, on="index")
+print2(countdata)
 
