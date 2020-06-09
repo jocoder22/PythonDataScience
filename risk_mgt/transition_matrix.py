@@ -153,6 +153,15 @@ def transitionMatrix(data_input2, colm):
     # return the transition matrix
     return data_out2
 
+
+# spilt the data, train(80%) and test (20%)
+train, test = np.split(data, [int(0.8*data.shape[0])])
+
+# define the groups
+trainMovt = stock_movt(train)
+testMovt = stock_movt(train)
+
+
 # Calculate normalized count values for taindata
 traincount = trainMovt["direction"].value_counts(normalize=True).reset_index()
 traincount.columns = ['index', "Train"]
