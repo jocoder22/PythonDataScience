@@ -7,6 +7,9 @@ import datetime
 import matplotlib.pyplot as plt
 import pandas_datareader as pdr
 
+def print2(*args):
+    for arg in args:
+        print(arg, end="\n\n")
 
 # My first stock is Neflix
 # I'm using daily close prices
