@@ -70,7 +70,7 @@ def stock_movt(data_input):
     
 
 # define a function to the returns transition matrix
-def transitionMatrix(data_input2):
+def transitionMatrix(data_input2, colm):
     """The transitionMatrix function will return the transition matrix moving from
         present state of the stocks either 
         uu = both stocks moved upwards,
@@ -81,7 +81,8 @@ def transitionMatrix(data_input2):
         to another state in one step, i.e from present day (today) to next day
 
     Args: 
-        data_input (DataFrame): the DataFrame with the stoch present state
+        data_input2 (DataFrame): the DataFrame with the stoch present state
+        colm: (string) column for transition matrix
         
     Returns: 
         DataFrame: The transition matrix dataframe
@@ -89,11 +90,11 @@ def transitionMatrix(data_input2):
     """
     
     # Get the present state of the stocks movements
-    present_state = data_input2["direction"].values.tolist()
+    present_state = data_input2[colm].values.tolist()
     
     # Create transition matrix, using crosstab lagged one day
-    data_out2 = pd.crosstab(pd.Series(present_state[1:],name='Next_Movt'),
-                pd.Series(present_state[:-1],name='Present_State'), normalize="index")
+    data_out2 = pd.crosstab(pd.Series(present_state[1:],name='Present_State'),
+                pd.Series(present_state[:-1],name='Next_Movt'), normalize="index")
     data_out2['Total'] = data_out2.sum(axis=1)
     
     
