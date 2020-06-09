@@ -103,13 +103,12 @@ def transitionMatrix(data_input2, colm):
 # Calculate normalized count values for taindata
 traincount = trainMovt["direction"].value_counts(normalize=True).reset_index()
 traincount.columns = ['index', "Train"]
-traincount
 
 
 # Calculate normalized count values for test data
 testcount = testMovt["direction"].value_counts(normalize=True).reset_index()
 testcount.columns = ['index', "Test"]
-testcount
+print2(traincount, testcount)
 
 # merge the normalized count dataframe for comparison
 countdata = traincount.merge(testcount, on="index")
