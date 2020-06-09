@@ -201,3 +201,8 @@ print2(traincount, testcount)
 countdata = traincount.merge(testcount, on="index")
 print("This is for Direction Movement", countdata, sep ="\n", end="\n\n")
 
+
+# kk = random.sample(range(10, 999), 50000)
+# kk1 = random.sample(range(10, 999), 50000)
+kk = np.random.randint(-3, 3, (5000, 1)).flatten()
+kk1 = np.random.uniform(-3, 3, (5000, 1)).flatten()
