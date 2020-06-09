@@ -27,6 +27,18 @@ netflix = pdr.get_data_yahoo(stock_1, starttime, endtime)['Close']
 logReturn_netflix = np.log(netflix).diff().dropna()
 logReturn_netflix.head()
 
+# calculate mean
+logReturn_netflix.mean()
+
+# calculate standard deviation
+logReturn_netflix.std()
+
+# calculate skewness
+logReturn_netflix.skew()
+
+# calculate excess kurtosis
+logReturn_netflix.kurtosis()
+
 
 # My second stock is Tesla
 # I'm using daily close prices
