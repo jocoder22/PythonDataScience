@@ -28,16 +28,19 @@ logReturn_netflix = np.log(netflix).diff().dropna()
 logReturn_netflix.head()
 
 # calculate mean
-logReturn_netflix.mean()
+netflixmean = logReturn_netflix.mean()
+
 
 # calculate standard deviation
-logReturn_netflix.std()
+netflixstd = logReturn_netflix.std()
 
 # calculate skewness
-logReturn_netflix.skew()
+netflixskewness = logReturn_netflix.skew()
 
 # calculate excess kurtosis
-logReturn_netflix.kurtosis()
+netflixkurtosis = logReturn_netflix.kurtosis()
+
+print2(netflixmean, netflixstd, netflixskewness, netflixkurtosis)
 
 
 # My second stock is Tesla
