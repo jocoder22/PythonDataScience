@@ -25,7 +25,7 @@ netflix = pdr.get_data_yahoo(stock_1, starttime, endtime)['Close']
 
 # Calculate log return
 logReturn_netflix = np.log(netflix).diff().dropna()
-logReturn_netflix.head()
+print2(logReturn_netflix.head())
 
 # calculate mean
 netflixmean = logReturn_netflix.mean()
@@ -57,7 +57,22 @@ tesla = pdr.get_data_yahoo(stock_2, starttime, endtime)['Close']
 
 # Calculate log return
 logReturn_tesla = np.log(tesla).diff().dropna()
-logReturn_tesla.head()
+print2(logReturn_tesla.head())
+
+# calculate mean
+teslamean = logReturn_tesla.mean()
+
+
+# calculate standard deviation
+teslastd = logReturn_tesla.std()
+
+# calculate skewness
+teslaskewness = logReturn_tesla.skew()
+
+# calculate excess kurtosis
+teslakurtosis = logReturn_tesla.kurtosis()
+
+print2(teslamean, teslastd, teslaskewness, teslakurtosis)
 
 # Calulate their correlation
 # Create combine data using pandas dataframe
