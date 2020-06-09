@@ -161,6 +161,18 @@ train, test = np.split(data, [int(0.8*data.shape[0])])
 trainMovt = stock_movt(train)
 testMovt = stock_movt(train)
 
+print2(train.head(), test.head(), trainMovt.head(), testMovt.head())
+
+# define transition matrix on groupMovt
+traingroupMovt = transitionMatrix(trainMovt, "groupMovt")
+testgroupMovt = transitionMatrix(testMovt, "groupMovt")
+
+# define transition matrix on direction
+traindirectionMovt = transitionMatrix(trainMovt, "direction")
+testdirectionMovt = transitionMatrix(testMovt, "direction")
+
+print2(traingroupMovt, testgroupMovt, traindirectionMovt, testdirectionMovt)
+
 
 # Calculate normalized count values for taindata
 traincount = trainMovt["direction"].value_counts(normalize=True).reset_index()
