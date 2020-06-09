@@ -27,6 +27,23 @@ netflix = pdr.get_data_yahoo(stock_1, starttime, endtime)['Close']
 logReturn_netflix = np.log(netflix).diff().dropna()
 logReturn_netflix.head()
 
+
+# My second stock is Tesla
+# I'm using daily close prices
+stock_2 = "TSLA"
+
+# using 2 years of data from January 01, 2018 to December 31, 2019
+starttime = datetime.datetime(2018, 1, 1)
+endtime = datetime.datetime(2019, 12, 31)
+
+# get only the closing prices
+tesla = pdr.get_data_yahoo(stock_2, starttime, endtime)['Close']
+
+
+# Calculate log return
+logReturn_tesla = np.log(tesla).diff().dropna()
+logReturn_tesla.head()
+
 # Calulate their correlation
 # Create combine data using pandas dataframe
 data = pd.DataFrame({"Netflix" : logReturn_neflix, "Tesla" :logReturn_tesla})
