@@ -49,16 +49,20 @@ def stock_movt(data_input):
     
     # Make a copy of the input dataset
     data_out = data_input.copy()
+    col = data_input.columns
+    col1 = f"{col[0]}_movt"
+    col2 = f"{col[1]}_movt"
 
     # Make categorise, u for up and d for down movements for each stock
-    data_out['_movt0'] = np.where(data_input.iloc[:,0] > 0,"u","d")
-    data_out['_movt1'] = np.where(data_input.iloc[:,1] > 0,"u","d")
+    data_out[col1] = np.where(data_input.iloc[:,0] > 0,"u","d")
+    data_out[col2] = np.where(data_input.iloc[:,1] > 0,"u","d")
     
     # Create direction to represent the combined movements of the stocks
-    data_out['direction'] = data_out['_movt0'] .str.cat(data_out['_movt1'])
+    data_out["groupMovt"] = np.where(data_out[col1] == data_out[col2], "Together", "Apart")
+    data_out['direction'] = data_out[col1] .str.cat(data_out[col2])
     
-    # Remove the columns for each stock movement
-    data_out.drop(columns=['_movt0', '_movt1'], inplace=True)
+#     # Remove the columns for each stock movement
+#     data_out.drop(columns=['_movt0', '_movt1'], inplace=True)
     
     
     # return the final dataset
