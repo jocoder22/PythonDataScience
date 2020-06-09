@@ -11,7 +11,7 @@ def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
 
-# My first stock is Neflix
+# My first stock is Netflix
 # I'm using daily close prices
 stock_1 = "NFLX"
 
@@ -20,16 +20,16 @@ starttime = datetime.datetime(2018, 1, 1)
 endtime = datetime.datetime(2019, 12, 31)
 
 # get only the closing prices
-neflix = pdr.get_data_yahoo(stock_1, starttime, endtime)['Close']
+netflix = pdr.get_data_yahoo(stock_1, starttime, endtime)['Close']
 
 
 # Calculate log return
-logReturn_neflix = np.log(neflix).diff().dropna()
-logReturn_neflix.head()
+logReturn_netflix = np.log(netflix).diff().dropna()
+logReturn_netflix.head()
 
 # Calulate their correlation
 # Create combine data using pandas dataframe
-data = pd.DataFrame({"Neflix" : logReturn_neflix, "Tesla" :logReturn_tesla})
+data = pd.DataFrame({"Netflix" : logReturn_neflix, "Tesla" :logReturn_tesla})
 data.corr()
 
 # define a function to show stocks movements
