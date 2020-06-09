@@ -77,7 +77,11 @@ print2(teslamean, teslastd, teslaskewness, teslakurtosis)
 # Calulate their correlation
 # Create combine data using pandas dataframe
 data = pd.DataFrame({"Netflix" : logReturn_neflix, "Tesla" :logReturn_tesla})
-data.corr()
+correlation = data.corr()
+covariance = data.cov()
+
+print2(correlation, covariance)
+
 
 # define a function to show stocks movements
 def stock_movt(data_input):
