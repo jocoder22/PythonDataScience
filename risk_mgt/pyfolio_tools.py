@@ -13,12 +13,20 @@ def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
 
-stocklist = ["C","JPM","MS", "GS"]                    
-p_labels = ["Citibank", "J.P. Morgan", "Morgan Stanley", "Goldman Sachs"]
+stocklist = ["C","JPM","MS", "GS", "^GSPC"]                    
+p_labels = ["Citibank", "J.P. Morgan", "Morgan Stanley", "Goldman Sachs", "SP500"]
 
 starttime = datetime.datetime(2000, 1, 1)
 endtime = datetime.datetime(2019, 10, 1)
 
 # get only the closing prices
 assets = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
+
+returns = assets.pct_change()
+
+returns.index = pd.to_datetime(returns.index)
+
+
+# Create tear sheat
+rts = returns.create_returns_tear_sheat(returns)
 
