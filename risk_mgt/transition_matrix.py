@@ -76,7 +76,7 @@ print2(teslamean, teslastd, teslaskewness, teslakurtosis)
 
 # Calulate their correlation
 # Create combine data using pandas dataframe
-data = pd.DataFrame({"Netflix" : logReturn_neflix, "Tesla" :logReturn_tesla})
+data = pd.DataFrame({"Netflix" : logReturn_netflix, "Tesla" :logReturn_tesla})
 correlation = data.corr()
 covariance = data.cov()
 
@@ -107,8 +107,8 @@ def stock_movt(data_input):
     col2 = f"{col[1]}_movt"
 
     # Make categorise, u for up and d for down movements for each stock
-    data_out[col1] = np.where(data_input.iloc[:,0] > 0,"u","d")
-    data_out[col2] = np.where(data_input.iloc[:,1] > 0,"u","d")
+    data_out[col1] = np.where(data_out[col[0]] > 0,"u","d")
+    data_out[col2] = np.where(data_out[col[1]] > 0,"u","d")
     
     # Create direction to represent the combined movements of the stocks
     data_out["groupMovt"] = np.where(data_out[col1] == data_out[col2], "Together", "Apart")
@@ -155,11 +155,16 @@ def transitionMatrix(data_input2, colm):
 
 
 # spilt the data, train(80%) and test (20%)
-train, test = np.split(data, [int(0.8*data.shape[0])])
+# train, test = np.split(data, [int(0.8 * len(data))])
+
+# Split the data into train (80%) and test (20%) datasets
+size_t = int(len(data) * 0.8)
+train, test = data[0:size_t], data[size_t:]
+print2(train.shape, test.shape, train.head(), test.head())
 
 # define the groups
 trainMovt = stock_movt(train)
-testMovt = stock_movt(train)
+testMovt = stock_movt(test)
 
 print2(train.head(), test.head(), trainMovt.head(), testMovt.head())
 
