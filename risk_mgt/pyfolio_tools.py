@@ -17,7 +17,7 @@ stocklist = ["C","JPM","MS", "GS", "^GSPC"]
 p_labels = ["Citibank", "J.P. Morgan", "Morgan Stanley", "Goldman Sachs", "SP500"]
 
 starttime = datetime.datetime(2000, 1, 1)
-endtime = datetime.datetime(2019, 10, 1)
+endtime = datetime.datetime(2020, 5, 1)
 
 # get only the closing prices
 assets = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
@@ -29,4 +29,7 @@ returns.index = pd.to_datetime(returns.index)
 
 # Create tear sheat
 rts = returns.create_returns_tear_sheat(returns)
+
+# using backtest and live data
+rts_live = returns.create_returns_tear_sheat(returns, start_live_date="2019-03-15")
 
