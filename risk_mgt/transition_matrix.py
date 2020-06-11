@@ -170,7 +170,6 @@ testdirectionMovt = transitionMatrix(testMovt, "direction")
 
 print2(traingroupMovt, testgroupMovt, traindirectionMovt, testdirectionMovt)
 
-
 # Calculate normalized count values for taindata
 traincount = trainMovt["groupMovt"].value_counts(normalize=True).reset_index()
 traincount.columns = ['index', "Train"]
@@ -184,7 +183,6 @@ print2(traincount, testcount)
 countdata = traincount.merge(testcount, on="index")
 print("This is for Group Movement", countdata, sep ="\n", end="\n\n")
 
-
 # Calculate normalized count values for taindata
 traincount = trainMovt["direction"].value_counts(normalize=True).reset_index()
 traincount.columns = ['index', "Train"]
@@ -197,7 +195,6 @@ print2(traincount, testcount)
 # merge the normalized count dataframe for comparison
 countdata = traincount.merge(testcount, on="index")
 print("This is for Direction Movement", countdata, sep ="\n", end="\n\n")
-
 
 # kk = random.sample(range(10, 999), 50000)
 # kk1 = random.sample(range(10, 999), 50000)
