@@ -22,14 +22,12 @@ endtime = datetime.datetime(2019, 12, 31)
 # get only the closing prices
 netflix = pdr.get_data_yahoo(stock_1, starttime, endtime)['Close']
 
-
 # Calculate log return
 logReturn_netflix = np.log(netflix).diff().dropna()
 print2(logReturn_netflix.head())
 
 # calculate mean
 netflixmean = logReturn_netflix.mean()
-
 
 # calculate standard deviation
 netflixstd = logReturn_netflix.std()
@@ -42,7 +40,6 @@ netflixkurtosis = logReturn_netflix.kurtosis()
 
 print2(netflixmean, netflixstd, netflixskewness, netflixkurtosis)
 
-
 # My second stock is Tesla
 # I'm using daily close prices
 stock_2 = "TSLA"
@@ -54,14 +51,12 @@ endtime = datetime.datetime(2019, 12, 31)
 # get only the closing prices
 tesla = pdr.get_data_yahoo(stock_2, starttime, endtime)['Close']
 
-
 # Calculate log return
 logReturn_tesla = np.log(tesla).diff().dropna()
 print2(logReturn_tesla.head())
 
 # calculate mean
 teslamean = logReturn_tesla.mean()
-
 
 # calculate standard deviation
 teslastd = logReturn_tesla.std()
@@ -81,7 +76,6 @@ correlation = data.corr()
 covariance = data.cov()
 
 print2(correlation, covariance)
-
 
 # define a function to show stocks movements
 def stock_movt(data_input):
@@ -147,7 +141,6 @@ def transitionMatrix(data_input2, colm):
     data_out2 = pd.crosstab(pd.Series(present_state[1:],name='Present_State'),
                 pd.Series(present_state[:-1],name='Next_Movt'), normalize="index")
     data_out2['Total'] = data_out2.sum(axis=1)
-    
     
     # return the transition matrix
     return data_out2
