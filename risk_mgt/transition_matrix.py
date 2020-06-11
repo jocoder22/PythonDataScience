@@ -99,7 +99,6 @@ def stock_movt(data_input):
         DataFrame: The DataFrame with the movement column
 
     """
-    
     # Make a copy of the input dataset
     data_out = data_input.copy()
     col = data_input.columns
