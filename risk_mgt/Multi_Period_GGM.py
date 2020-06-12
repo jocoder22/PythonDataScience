@@ -6,6 +6,20 @@ Year = ["2008", "2009", "2010", "2011", "2012", "2013"]
 FCFE_growth = [0.18, 0.18, 0.16, 0.12, 0.11, 0.06]
 equity_discount_rate = 0.125
 
+
+def ggm(dividend, dividend_growth_rate, equity_discount_r):
+  """
+  
+  
+  
+  
+  """
+  
+  pv_ggm = dividend*(1 + dividend_growth_rate)/(equity_discount_r -  dividend_growth_rate)
+  
+  return pv_ggm
+
+
 def presentvalue(amt, rate, time):
   """
   
@@ -14,7 +28,7 @@ def presentvalue(amt, rate, time):
   
   """
   
-  pv = amt/(1+ rate)^time
+  pv = amt/(1+ rate)**time
   
   return pv
 
