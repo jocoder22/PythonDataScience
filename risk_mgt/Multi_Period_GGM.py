@@ -92,3 +92,36 @@ def multi_ggm(fcfe_list, dividend, g, r):
   value = comp1 + comp2_
   return round(value, 3)
 
+
+
+def multi_ggm(fcfe_list, dividend, g, r):
+  """
+  
+  
+  
+  """
+  
+  n = len(fcfe_list)
+  FCFE = []
+  FCFE.append(dividend * (1+fcfe_list[0]))
+
+  for i in range(n-1):
+    FCFE.append(FCFE[i] * (1+ fcfe_list[i+1]))
+
+  data = round(list(map(Decimal,FCFE)),2)
+
+  pv_fcfe = [round(Decimal(presentvalue(v, r, 1+i)),2) for i,v in enumerate(FCFE)]
+  
+  
+  comp1 = sum(pv_fcfe)
+  
+  comp2_ = Decimal(comp2(FCFE[-1],g ,r, n))
+  value = comp1 + comp2_
+  # value =  comp2_
+  return round(value, 2), pv_fcfe,FCFE, data
+
+
+print(multi_ggm(FCFE_growth,fcfe2007,g, equity_discount_rate))
+
+
+print(round(Decimal(1) / Decimal(7),3))
