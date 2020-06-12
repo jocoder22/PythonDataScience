@@ -55,6 +55,4 @@ def plot_pct_returns(df):
     #ax.xaxis.set_minor_formatter(matplotlib.dates.DateFormatter("%b"))
     plt.setp(ax.get_xticklabels(), rotation=0, ha="center")
     plt.legend()
-    plt.show()
-
-    
+    plt.show()   
