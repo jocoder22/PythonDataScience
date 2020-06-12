@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 import pandas as pd
+from decimal import *
 
 Year = ["2008", "2009", "2010", "2011", "2012", "2013"]
 FCFE_growth = [0.18, 0.18, 0.16, 0.12, 0.11, 0.06]
