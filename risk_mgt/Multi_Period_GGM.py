@@ -43,8 +43,8 @@ def comp2(val, g, r, t):
 
   """
   
-  V0 = ggm(val, g, r)
-  V = presentvalue(V0, r, t)
+  V0 = ggm(val, Decimal(g), Decimal(r))
+  V = presentvalue(V0, Decimal(r), Decimal(t))
   
   return V
 
