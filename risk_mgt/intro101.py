@@ -56,3 +56,5 @@ def plot_pct_returns(df):
     plt.setp(ax.get_xticklabels(), rotation=0, ha="center")
     plt.legend()
     plt.show()
+
+    
