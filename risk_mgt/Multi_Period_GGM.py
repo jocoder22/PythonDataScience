@@ -94,14 +94,21 @@ def multi_ggm(fcfe_list, dividend, g, r):
   return round(value, 3)
 
 
-def multi_ggm(fcfe_list, dividend, g, r):
+def multi_ggm2(fcfe_list_, dividend_, g_, r_):
   """
   
   
   
   """
+  from decimal import Decimal
   
-  n = len(fcfe_list)
+  fcfe_list = list(map(Decimal, fcfe_list))
+  dividend = Decimal(dividend_)
+  g = Decimal(g_)
+  r = Decimal(r_)
+  n = Decimal(len(fcfe_list))
+  
+  fcfe_list = 
   FCFE = []
   FCFE.append(dividend * (1+fcfe_list[0]))
 
