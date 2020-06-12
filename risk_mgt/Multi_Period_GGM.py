@@ -31,4 +31,5 @@ pv_fcfe = [round(presentvalue(v, equity_discount_rate, 1+i),3) for i,v in enumer
 print(fcfe)
 print(pv_fcfe)
 
+comp1 = sum(pv_fcfe)
 
