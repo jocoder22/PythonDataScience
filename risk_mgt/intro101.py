@@ -9,7 +9,6 @@ def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
 
-
 stocklist = ["JPM", "GS", "BAC", "MS", "C","CS"]                         
 pp_labels = ["JPMorgan Chase", "Goldman Sachs", "BofA Securities", "Morgan Stanley", "Citigroup", "Credit Suisse"] 
 
