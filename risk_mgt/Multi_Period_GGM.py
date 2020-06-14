@@ -10,10 +10,15 @@ g = 0.06
 
 
 def ggm(dividend, dividend_growth_rate, equity_discount_r):
-  """
-  
-  
-  
+  """The ggm function computes the multi-peroid valuation using Gordon Growth Model (ggm)
+
+    Inputs:
+      dividend: the most recently paid dividend per share
+      dividend_growth_rate: the periodic growth rate of dividends
+      equity_discount_rate: the periodic equity discount rate
+
+    Output:
+      ppv_ggm: present value of share
   
   """
   
