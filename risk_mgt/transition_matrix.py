@@ -22,14 +22,12 @@ endtime = datetime.datetime(2019, 12, 31)
 # get only the closing prices
 netflix = pdr.get_data_yahoo(stock_1, starttime, endtime)['Close']
 
-
 # Calculate log return
 logReturn_netflix = np.log(netflix).diff().dropna()
 print2(logReturn_netflix.head())
 
 # calculate mean
 netflixmean = logReturn_netflix.mean()
-
 
 # calculate standard deviation
 netflixstd = logReturn_netflix.std()
@@ -42,7 +40,6 @@ netflixkurtosis = logReturn_netflix.kurtosis()
 
 print2(netflixmean, netflixstd, netflixskewness, netflixkurtosis)
 
-
 # My second stock is Tesla
 # I'm using daily close prices
 stock_2 = "TSLA"
@@ -54,14 +51,12 @@ endtime = datetime.datetime(2019, 12, 31)
 # get only the closing prices
 tesla = pdr.get_data_yahoo(stock_2, starttime, endtime)['Close']
 
-
 # Calculate log return
 logReturn_tesla = np.log(tesla).diff().dropna()
 print2(logReturn_tesla.head())
 
 # calculate mean
 teslamean = logReturn_tesla.mean()
-
 
 # calculate standard deviation
 teslastd = logReturn_tesla.std()
@@ -82,7 +77,6 @@ covariance = data.cov()
 
 print2(correlation, covariance)
 
-
 # define a function to show stocks movements
 def stock_movt(data_input):
     """The stock_movt function will add a column to the dataset
@@ -99,7 +93,6 @@ def stock_movt(data_input):
         DataFrame: The DataFrame with the movement column
 
     """
-    
     # Make a copy of the input dataset
     data_out = data_input.copy()
     col = data_input.columns
@@ -149,7 +142,6 @@ def transitionMatrix(data_input2, colm):
                 pd.Series(present_state[:-1],name='Next_Movt'), normalize="index")
     data_out2['Total'] = data_out2.sum(axis=1)
     
-    
     # return the transition matrix
     return data_out2
 
@@ -178,7 +170,6 @@ testdirectionMovt = transitionMatrix(testMovt, "direction")
 
 print2(traingroupMovt, testgroupMovt, traindirectionMovt, testdirectionMovt)
 
-
 # Calculate normalized count values for taindata
 traincount = trainMovt["groupMovt"].value_counts(normalize=True).reset_index()
 traincount.columns = ['index', "Train"]
@@ -192,7 +183,6 @@ print2(traincount, testcount)
 countdata = traincount.merge(testcount, on="index")
 print("This is for Group Movement", countdata, sep ="\n", end="\n\n")
 
-
 # Calculate normalized count values for taindata
 traincount = trainMovt["direction"].value_counts(normalize=True).reset_index()
 traincount.columns = ['index', "Train"]
@@ -205,7 +195,6 @@ print2(traincount, testcount)
 # merge the normalized count dataframe for comparison
 countdata = traincount.merge(testcount, on="index")
 print("This is for Direction Movement", countdata, sep ="\n", end="\n\n")
-
 
 # kk = random.sample(range(10, 999), 50000)
 # kk1 = random.sample(range(10, 999), 50000)
