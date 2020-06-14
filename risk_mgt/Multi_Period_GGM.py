@@ -6,6 +6,7 @@ from decimal import *
 Year = ["2008", "2009", "2010", "2011", "2012", "2013"]
 FCFE_growth = [0.18, 0.18, 0.16, 0.12, 0.11, 0.06]
 equity_discount_rate = 0.125
+fcfe2007 = 2.0
 g = 0.06
 
 
@@ -35,7 +36,7 @@ def presentvalue(amt, rate, time):
   
   """
   
-  pv = amt/(1+ rate)**time
+  pv = amt/(1 + rate)**time
   
   return pv
 
@@ -55,25 +56,25 @@ def comp2(val, g, r, t):
   return V
 
 
-fcfe2007 = 2.0
 
-fcfe = []
-fcfe.append(fcfe2007 * (1+FCFE_growth[0]))
 
-for i in range(len(FCFE_growth)-1):
-  fcfe.append(round((fcfe[i] * (1+ FCFE_growth[i+1])),3))
+# fcfe = []
+# fcfe.append(fcfe2007 * (1+FCFE_growth[0]))
+
+# for i in range(len(FCFE_growth)-1):
+#   fcfe.append(round((fcfe[i] * (1+ FCFE_growth[i+1])),3))
   
-pv_fcfe = [round(presentvalue(v, equity_discount_rate, 1+i),3) for i,v in enumerate(fcfe)]
+# pv_fcfe = [round(presentvalue(v, equity_discount_rate, 1+i),3) for i,v in enumerate(fcfe)]
   
-print(fcfe)
-print(pv_fcfe)
+# print(fcfe)
+# print(pv_fcfe)
 
-comp1 = sum(pv_fcfe)
-print(comp1)
+# comp1 = sum(pv_fcfe)
+# print(comp1)
 
-cc = comp2(fcfe[-1],g ,equity_discount_rate, 6)
-value = comp1 + cc
-print(value)
+# cc = comp2(fcfe[-1],g ,equity_discount_rate, 6)
+# value = comp1 + cc
+# print(value)
 
 
 
@@ -117,8 +118,6 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
     n = Decimal(len(fcfe_list))
     nn = len(fcfe_list)
     one = Decimal(1)
-
-
 
     FCFE = []
     FCFE.append(dividend * (one+fcfe_list[0]))
