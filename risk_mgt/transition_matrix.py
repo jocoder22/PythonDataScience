@@ -155,12 +155,12 @@ def transitionMatrix(data_input2, colm):
 
 
 # spilt the data, train(80%) and test (20%)
-# train, test = np.split(data, [int(0.8 * len(data))])
+train, test = np.split(data, [int(0.8 * len(data))])
 
 # Split the data into train (80%) and test (20%) datasets
-size_t = int(len(data) * 0.8)
-train, test = data[0:size_t], data[size_t:]
-print2(train.shape, test.shape, train.head(), test.head())
+# size_t = int(len(data) * 0.8)
+# train, test = data[0:size_t], data[size_t:]
+# print2(train.shape, test.shape, train.head(), test.head())
 
 # define the groups
 trainMovt = stock_movt(train)
