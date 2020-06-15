@@ -2,15 +2,20 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 import datetime
 import pandas_datareader as pdr
 from pandas.util.testing import assert_frame_equal
 
 
-def plot2(assets):
+def plot2(assets_):
+    assets = assets_.pct_change()
     plt.figure(figsize=[10, 8])
     plt.plot(assets)
     plt.legends(assest.columns)
+    plt.title("Returns")
+    plt.ylabel("Return")
+ 
     
     sns.heatmap(assets.corr(), annot=True, rotation=0)
 
