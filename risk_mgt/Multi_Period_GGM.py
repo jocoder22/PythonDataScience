@@ -125,8 +125,13 @@ def Hmodel(dividend, gl, h, gs, equity_discount_rate, one=1l):
   for key, val in save_locals.items():
     f"{key}_" = Decimal(val)
     
-  n1 = dividend_(one_ + gl_)
-  n2 = dividend_*(h-/2)*(gs_ - gl_)
+  n1 = round(dividend_(one_ + gl_), 2)
+  n2 = round(dividend_*(h-/2)*(gs_ - gl_), 2)
+  m = round(equity_discount_rate_ - gl_, 2)
+  
+  hvalue = round((n1 + n2)/m), 2)
+  
+  return hvalue
   
   
 Year = ["2008", "2009", "2010", "2011", "2012", "2013"]
