@@ -10,14 +10,20 @@ from pandas.util.testing import assert_frame_equal
 
 def plot2(assets_):
     assets = assets_.pct_change()
-    plt.figure(figsize=[10, 8])
+    plt.figure(figsize=[12, 6])
     plt.plot(assets)
     plt.legends(assest.columns)
-    plt.title("Returns")
+    plt.title("Assets Return")
     plt.ylabel("Return")
+    plt.xlabel("Time")
+    plt.show()
  
+    plt.figure(figsize=[6, 6])
+    sns.heatmap(assets.corr(), annot=True, cbar=False)
+    plt.yticks(rotation=0)
+    ptl.title("Correlation Heatmap")
     
-    sns.heatmap(assets.corr(), annot=True, rotation=0)
+    plt.show()
 
 def print2(*args):
     for arg in args:
