@@ -1,13 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 import pandas as pd
-from decimal import *
-
-Year = ["2008", "2009", "2010", "2011", "2012", "2013"]
-FCFE_growth = [0.18, 0.18, 0.16, 0.12, 0.11, 0.06]
-equity_discount_rate = 0.125
-fcfe2007 = 2.0
-g = 0.06
+# from decimal import Decimal
 
 
 def ggm(dividend, dividend_growth_rate, equity_discount_r):
@@ -67,9 +61,6 @@ def comp2(val, g, r, t):
   return V
 
 
-
-
-
 def multi_ggm2(fcfe_list_, dividend_, g_, r_):
   """The ggm function computes the multi-peroid valuation using Gordon Growth Model (ggm)
 
@@ -113,4 +104,34 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
     return round(mp_ggm, 2)
 
 
+def Hmodel(dividend, gl, h, gs, equity_discount_rate, one=1l):
+    """The Hmodel function computes the multi-peroid valuation using the H Model (H-Model)
+
+    Inputs:
+      dividend_ : the last dividend payment
+      h_: length of peroid for expected linear decline to sustainable long term growth rate
+      gs: the short term growth rate
+      gl: long term growth rate after h
+      equity_discount_rate: the periodic equity discount rate
+
+    Output:
+      hvalue: multi-period asset value
+  
+  """
+  form decimal import Decimal
+  
+  save_locals = local()
+  
+  for key, val in save_locals.items():
+    f"{key}_" = Decimal(val)
+    
+  n1 = dividend_(one_ + gl_)
+  n2 = dividend_*(h-/2)*(gs_ - gl_)
+  
+  
+Year = ["2008", "2009", "2010", "2011", "2012", "2013"]
+FCFE_growth = [0.18, 0.18, 0.16, 0.12, 0.11, 0.06]
+equity_discount_rate = 0.125
+fcfe2007 = 2.0
+g = 0.06
 print(multi_ggm2(FCFE_growth,fcfe2007,g, equity_discount_rate))
