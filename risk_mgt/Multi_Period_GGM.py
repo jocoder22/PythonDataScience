@@ -147,7 +147,7 @@ print(multi_ggm2(FCFE_growth,fcfe2007,g, equity_discount_rate))
 
 dividend = 2.50
 n_years = 15
-gs = 0.015
-gl = 0.10
-r = 0.06
+gs = 0.15
+gl = 0.06
+r = 0.10
 print(Hmodel(dividend, n_years, gs, gl, r))
