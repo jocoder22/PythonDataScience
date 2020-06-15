@@ -209,7 +209,7 @@ def comp2(val, g, r, t, one22):
   return V
 
 
-# def multi_ggm2(fcfe_list_, dividend_, g_, r_):
+# def multi_ggm22(fcfe_list_, dividend_, g_, r_):
 def multi_ggm2(fcfe_list, dividend, g, r):
   """The ggm function computes the multi-peroid valuation using Gordon Growth Model (ggm)
     Inputs:
@@ -224,21 +224,15 @@ def multi_ggm2(fcfe_list, dividend, g, r):
   # from decimal import Decimal
   
   save_locals = locals()
-  # print(len(save_locals))
   
   listt = []
+  
   for i, val in enumerate(save_locals.values()):
     if isinstance(val, list):
       listt.append(list(map(Decimal, val)))
-
     else:
       listt.append(Decimal(val))
 
-  print(listt)
-
-  
-  
-  fcfe_list2 = fcfe_list.copy()
   nn = len(fcfe_list)
   n = Decimal(nn)
 
@@ -273,35 +267,6 @@ def multi_ggm2(fcfe_list, dividend, g, r):
   return round(mp_ggm, 2)
 
 
-# def Hmodel(dividend,h, gs, gl, equity_discount_rate, one=1):
-#   """The Hmodel function computes the multi-peroid valuation using the H Model (H-Model)
-#     Inputs:
-#       dividend_ : the last dividend payment
-#       h_: length of peroid for expected linear decline to sustainable long term growth rate
-#       gs: the short term growth rate
-#       gl: long term growth rate after h
-#       equity_discount_rate: the periodic equity discount rate
-#     Output:
-#       hvalue: multi-period asset value
-  
-#   """
-
-#   # from decimal import Decimal
-  
-#   save_locals = locals()
-  
-#   for key, val in save_locals.items():
-#     key = Decimal(val)
-    
-#   n1 = dividend*(one + gl)
-#   n2 = dividend*(h/2)*(gs - gl)
-#   m = equity_discount_rate - gl
-  
-#   hvalue = round((n1 + n2)/m, 2)
-  
-#   return hvalue
-
-
   
 Year = ["2008", "2009", "2010", "2011", "2012", "2013"]
 FCFE_growth = [0.18, 0.18, 0.16, 0.12, 0.11, 0.06]
@@ -309,4 +274,4 @@ equity_discount_rate = 0.125
 fcfe2007 = 2.0
 g = 0.06
 
-print(multi_ggm2(FCFE_growth,fcfe2007,g, equity_discount_rate))
+print(multi_ggm22(FCFE_growth,fcfe2007,g, equity_discount_rate))
