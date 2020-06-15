@@ -11,7 +11,7 @@ g = 0.06
 
 
 def ggm(dividend, dividend_growth_rate, equity_discount_r):
-  """The ggm function computes the multi-peroid valuation using Gordon Growth Model (ggm)
+  """The ggm function computes the single-peroid valuation using Gordon Growth Model (ggm)
 
     Inputs:
       dividend: the most recently paid dividend per share
@@ -29,26 +29,35 @@ def ggm(dividend, dividend_growth_rate, equity_discount_r):
 
 
 def presentvalue(amt, rate, time):
-  """
+  """The presentvalue function computes the present value of a future payment
+
+    Inputs:
+      amt: the amount to be paid in future
+      rate: the interest rate
+      time: the time period
+
+    Output:
+      pv: present value
+    
+    """
   
-  
-  
-  
-  """
-  
-  pv = amt/(1 + rate)**time
-  
-  return pv
+    pv = amt/(1 + rate)**time
+
+    return pv
 
 
 def comp2(val, g, r, t):
-  """
+  """The comp2 function computes the present value of a future payment
 
+    Inputs:
+      amt: the amount to be paid in future
+      rate: the interest rate
+      time: the time period
 
-
-
-
-  """
+    Output:
+      pv: present value
+    
+    """
   
   V0 = ggm(val, Decimal(g), Decimal(r))
   V = presentvalue(V0, Decimal(r), Decimal(t))
