@@ -47,15 +47,17 @@ def presentvalue(amt, rate, time):
 
 
 def comp2(val, g, r, t):
-  """The comp2 function computes the present value of a future payment
+  """The comp2 function computes the present value of 
+      the terminal dividend payment
 
     Inputs:
-      amt: the amount to be paid in future
+      val: the terminal value of dividend
+      g: divident growth rate
       rate: the interest rate
       time: the time period
 
     Output:
-      pv: present value
+      pv: present value of time dividend payment
     
     """
   
