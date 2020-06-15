@@ -69,57 +69,21 @@ def comp2(val, g, r, t):
 
 
 
-# fcfe = []
-# fcfe.append(fcfe2007 * (1+FCFE_growth[0]))
-
-# for i in range(len(FCFE_growth)-1):
-#   fcfe.append(round((fcfe[i] * (1+ FCFE_growth[i+1])),3))
-  
-# pv_fcfe = [round(presentvalue(v, equity_discount_rate, 1+i),3) for i,v in enumerate(fcfe)]
-  
-# print(fcfe)
-# print(pv_fcfe)
-
-# comp1 = sum(pv_fcfe)
-# print(comp1)
-
-# cc = comp2(fcfe[-1],g ,equity_discount_rate, 6)
-# value = comp1 + cc
-# print(value)
-
-
-
-def multi_ggm(fcfe_list, dividend, g, r):
-  """
-  
-  
-  
-  """
-  
-  n = len(fcfe_list)
-  FCFE = []
-  FCFE.append(dividend * (1+fcfe_list[0]))
-
-  for i in range(n-1):
-    FCFE.append(FCFE[i] * (1+ fcfe_list[i+1]))
-
-  pv_fcfe = [presentvalue(v, equity_discount_rate, 1+i) for i,v in enumerate(FCFE)]
-  
-  
-  comp1 = sum(pv_fcfe)
-  comp2_ = comp2(FCFE[-1],g ,equity_discount_rate, n)
-  value = comp1 + comp2_
-  return round(value, 3)
-
-
-
 
 def multi_ggm2(fcfe_list_, dividend_, g_, r_):
-    """
+  """The ggm function computes the multi-peroid valuation using Gordon Growth Model (ggm)
 
+    Inputs:
+      fcfe_list_: the free cash flow to equity for each year
+      dividend_ : the last dividend payment
+      g_: the periodic growth rate of dividends
+      equity_discount_rate: the periodic equity discount rate
 
-
-    """
+    Output:
+      mp_ggm: multi-period asset value
+  
+  """
+  
     from decimal import Decimal
 
     fcfe_list = list(map(Decimal, fcfe_list_)) 
@@ -144,9 +108,9 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
     comp1 = sum(pv_fcfe)
 
     comp2_ = Decimal(comp2(data[-1],g ,r, n))
-    value = comp1 + comp2_
+    mp_ggm = comp1 + comp2_
 
-    return round(value, 2)
+    return round(mp_ggm, 2)
 
 
 print(multi_ggm2(FCFE_growth,fcfe2007,g, equity_discount_rate))
