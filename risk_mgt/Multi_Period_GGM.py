@@ -104,8 +104,8 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
     return round(mp_ggm, 2)
 
 
-def Hmodel(dividend, gl, h, gs, equity_discount_rate, one=1l):
-    """The Hmodel function computes the multi-peroid valuation using the H Model (H-Model)
+def Hmodel(dividend,h, gs, gl, equity_discount_rate, one=1):
+  """The Hmodel function computes the multi-peroid valuation using the H Model (H-Model)
 
     Inputs:
       dividend_ : the last dividend payment
@@ -118,25 +118,36 @@ def Hmodel(dividend, gl, h, gs, equity_discount_rate, one=1l):
       hvalue: multi-period asset value
   
   """
-  form decimal import Decimal
+
+  # from decimal import Decimal
   
-  save_locals = local()
+  save_locals = locals()
   
   for key, val in save_locals.items():
-    f"{key}_" = Decimal(val)
+    key = Decimal(val)
     
-  n1 = round(dividend_(one_ + gl_), 2)
-  n2 = round(dividend_*(h-/2)*(gs_ - gl_), 2)
-  m = round(equity_discount_rate_ - gl_, 2)
+  n1 = dividend*(one + gl)
+  n2 = dividend*(h/2)*(gs - gl)
+  m = equity_discount_rate - gl
   
-  hvalue = round((n1 + n2)/m), 2)
+  hvalue = round((n1 + n2)/m, 2)
   
   return hvalue
-  
+
+
   
 Year = ["2008", "2009", "2010", "2011", "2012", "2013"]
 FCFE_growth = [0.18, 0.18, 0.16, 0.12, 0.11, 0.06]
 equity_discount_rate = 0.125
 fcfe2007 = 2.0
 g = 0.06
+
 print(multi_ggm2(FCFE_growth,fcfe2007,g, equity_discount_rate))
+
+
+dividend = 2.50
+n_years = 15
+gs = 0.015
+gl = 0.10
+r = 0.06
+print(Hmodel(dividend, n_years, gs, gl, r))
