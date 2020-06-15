@@ -6,6 +6,14 @@ import datetime
 import pandas_datareader as pdr
 from pandas.util.testing import assert_frame_equal
 
+
+def plot2(assets):
+    plt.figure(figsize=[10, 8])
+    plt.plot(assets)
+    plt.legends(assest.columns)
+    
+    sns.heatmap(assets.corr(), annot=True, rotation=0)
+
 def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
