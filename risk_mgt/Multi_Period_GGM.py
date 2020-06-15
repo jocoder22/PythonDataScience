@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 import pandas as pd
-# from decimal import Decimal
-
+from decimal import Decimal
 
 def ggm(dividend, dividend_growth_rate, equity_discount_r):
   """The ggm function computes the single-peroid valuation using Gordon Growth Model (ggm)
@@ -20,7 +19,6 @@ def ggm(dividend, dividend_growth_rate, equity_discount_r):
   pv_ggm = dividend*(1 + dividend_growth_rate)/(equity_discount_r -  dividend_growth_rate)
   
   return pv_ggm
-
 
 def presentvalue(amt, rate, time):
   """The presentvalue function computes the present value of a future payment
@@ -74,8 +72,7 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
       mp_ggm: multi-period asset value
   
   """
-  
-    from decimal import Decimal
+ 
 
     fcfe_list = list(map(Decimal, fcfe_list_)) 
     dividend = Decimal(dividend_)
