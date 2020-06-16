@@ -72,7 +72,7 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
     Output:
       mp_ggm: multi-period asset value
   
-  
+
   """
  
 
@@ -93,7 +93,6 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
     data= [round(Decimal(v), 2) for v in FCFE]
 
     pv_fcfe = [round(Decimal(presentvalue(v, r, 1+i)),2) for i,v in enumerate(FCFE)]
-
 
     comp1 = sum(pv_fcfe)
 
@@ -178,10 +177,12 @@ def ggm(dividend, dividend_growth_rate, equity_discount_r, one11):
 
 def presentvalue(amt, rate, time, one1):
   """The presentvalue function computes the present value of a future payment
+
     Inputs:
       amt: the amount to be paid in future
       rate: the interest rate
       time: the time period
+      
     Output:
       pv: present value
     
