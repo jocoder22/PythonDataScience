@@ -31,11 +31,11 @@ def presentvalue(amt, rate, time):
     Output:
       pv: present value
     
-    """
+  """
   
-    pv = amt/(1 + rate)**time
+  pv = amt/(1 + rate)**time
 
-    return pv
+  return pv
 
 
 def comp2(val, g, r, t):
@@ -52,7 +52,7 @@ def comp2(val, g, r, t):
       pv: present value of time dividend payment
     
 
-    """
+  """
   
   V0 = ggm(val, Decimal(g), Decimal(r))
   V = presentvalue(V0, Decimal(r), Decimal(t))
@@ -76,30 +76,30 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
   """
  
 
-    fcfe_list = list(map(Decimal, fcfe_list_)) 
-    dividend = Decimal(dividend_)
-    g = Decimal(g_)
-    r = Decimal(r_)
-    n = Decimal(len(fcfe_list))
-    nn = len(fcfe_list)
-    one = Decimal(1)
+  fcfe_list = list(map(Decimal, fcfe_list_)) 
+  dividend = Decimal(dividend_)
+  g = Decimal(g_)
+  r = Decimal(r_)
+  n = Decimal(len(fcfe_list))
+  nn = len(fcfe_list)
+  one = Decimal(1)
 
-    FCFE = []
-    FCFE.append(dividend * (one+fcfe_list[0]))
+  FCFE = []
+  FCFE.append(dividend * (one+fcfe_list[0]))
 
-    for i in range(nn-1):
-        FCFE.append(FCFE[i] * (one+ fcfe_list[i+1]))
+  for i in range(nn-1):
+      FCFE.append(FCFE[i] * (one+ fcfe_list[i+1]))
 
-    data= [round(Decimal(v), 2) for v in FCFE]
+  data= [round(Decimal(v), 2) for v in FCFE]
 
-    pv_fcfe = [round(Decimal(presentvalue(v, r, 1+i)),2) for i,v in enumerate(FCFE)]
+  pv_fcfe = [round(Decimal(presentvalue(v, r, 1+i)),2) for i,v in enumerate(FCFE)]
 
-    comp1 = sum(pv_fcfe)
+  comp1 = sum(pv_fcfe)
 
-    comp2_ = Decimal(comp2(data[-1],g ,r, n))
-    mp_ggm = comp1 + comp2_
+  comp2_ = Decimal(comp2(data[-1],g ,r, n))
+  mp_ggm = comp1 + comp2_
 
-    return round(mp_ggm, 2)
+  return round(mp_ggm, 2)
 
 
 def Hmodel(dividend,h, gs, gl, equity_discount_rate, one=1):
@@ -162,10 +162,12 @@ print(Hmodel(dividend, n_years, gs, gl, r))
 
 def ggm(dividend, dividend_growth_rate, equity_discount_r, one11):
   """The ggm function computes the single-peroid valuation using Gordon Growth Model (ggm)
+
     Inputs:
       dividend: the most recently paid dividend per share
       dividend_growth_rate: the periodic growth rate of dividends
       equity_discount_rate: the periodic equity discount rate
+
     Output:
       ppv_ggm: present value of share
   
