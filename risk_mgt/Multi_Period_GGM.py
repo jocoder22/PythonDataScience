@@ -213,7 +213,7 @@ def comp2(val, g, r, t, one22):
 
 
 # def multi_ggm22(fcfe_list_, dividend_, g_, r_):
-def multi_ggm2(fcfe_list, dividend, g, r):
+def multi_ggm22(fcfe_list, dividend, g, r):
   """The ggm function computes the multi-peroid valuation using Gordon Growth Model (ggm)
 
     Inputs:
