@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from decimal import Decimal
 
-def ggm(dividend, dividend_growth_rate, equity_discount_r):
+def ggm2(dividend, dividend_growth_rate, equity_discount_r):
   """The ggm function computes the single-peroid valuation using Gordon Growth Model (ggm)
 
     Inputs:
@@ -20,7 +20,7 @@ def ggm(dividend, dividend_growth_rate, equity_discount_r):
   
   return pv_ggm
 
-def presentvalue(amt, rate, time):
+def presentvalue2(amt, rate, time):
   """The presentvalue function computes the present value of a future payment
 
     Inputs:
@@ -38,7 +38,7 @@ def presentvalue(amt, rate, time):
   return pv
 
 
-def comp2(val, g, r, t):
+def comp22(val, g, r, t):
   """The comp2 function computes the present value of 
       the terminal dividend payment
 
@@ -51,11 +51,10 @@ def comp2(val, g, r, t):
     Output:
       pv: present value of time dividend payment
     
-
   """
   
-  V0 = ggm(val, Decimal(g), Decimal(r))
-  V = presentvalue(V0, Decimal(r), Decimal(t))
+  V0 = ggm2(val, Decimal(g), Decimal(r))
+  V = presentvalue2(V0, Decimal(r), Decimal(t))
   
   return V
 
@@ -72,10 +71,8 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
     Output:
       mp_ggm: multi-period asset value
   
-
   """
  
-
   fcfe_list = list(map(Decimal, fcfe_list_)) 
   dividend = Decimal(dividend_)
   g = Decimal(g_)
@@ -92,11 +89,11 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
 
   data= [round(Decimal(v), 2) for v in FCFE]
 
-  pv_fcfe = [round(Decimal(presentvalue(v, r, 1+i)),2) for i,v in enumerate(FCFE)]
+  pv_fcfe = [round(Decimal(presentvalue2(v, r, 1+i)),2) for i,v in enumerate(FCFE)]
 
   comp1 = sum(pv_fcfe)
 
-  comp2_ = Decimal(comp2(data[-1],g ,r, n))
+  comp2_ = Decimal(comp22(data[-1],g ,r, n))
   mp_ggm = comp1 + comp2_
 
   return round(mp_ggm, 2)
@@ -118,7 +115,6 @@ def Hmodel(dividend,h, gs, gl, equity_discount_rate, one=1):
   """
 
   # from decimal import Decimal
-  
   save_locals = locals()
   
   for key, val in save_locals.items():
