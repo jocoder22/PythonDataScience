@@ -223,7 +223,7 @@ def multi_ggm2(fcfe_list, dividend, g, r):
       dividend_ : the last dividend payment
       g_: the periodic growth rate of dividends
       equity_discount_rate: the periodic equity discount rate
-      
+
     Output:
       mp_ggm: multi-period asset value
   
@@ -242,15 +242,15 @@ def multi_ggm2(fcfe_list, dividend, g, r):
 
   nn = len(fcfe_list)
   n = Decimal(nn)
+  one = Decimal(1)
 
-  print(len(save_locals))
+  # print(len(save_locals))
   # fcfe_list = list(map(Decimal, fcfe_list_)) 
   # dividend = Decimal(dividend_)
   # g = Decimal(g_)
   # r = Decimal(r_)
   # n = Decimal(len(fcfe_list))
-  one = Decimal(1)
-
+  
   FCFE = []
   FCFE.append(listt[1] * (one + listt[0][0]))
 
@@ -258,17 +258,16 @@ def multi_ggm2(fcfe_list, dividend, g, r):
     FCFE.append(FCFE[i] * (one + listt[0][i+1]))
 
   # data= [round(Decimal(v), 2) for v in FCFE]
-
-  print(FCFE)
+  # print(FCFE)
 
   pv_fcfe = [round(presentvalue(v, listt[3], Decimal(i+1),one),2) for i,v in enumerate(FCFE)]
 
-  print(pv_fcfe)
+  # print(pv_fcfe)
   comp1 = sum(pv_fcfe)
-  print(comp1)
+  # print(comp1)
 
   comp2_ = comp2(round(FCFE[-1],2), listt[2],listt[3], n, one)
-  print(comp2_)
+  # print(comp2_)
   mp_ggm = comp1 + comp2_
 
   return round(mp_ggm, 2)
