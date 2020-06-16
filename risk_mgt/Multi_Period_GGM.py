@@ -182,7 +182,7 @@ def presentvalue(amt, rate, time, one1):
       amt: the amount to be paid in future
       rate: the interest rate
       time: the time period
-      
+
     Output:
       pv: present value
     
@@ -196,11 +196,13 @@ def presentvalue(amt, rate, time, one1):
 def comp2(val, g, r, t, one22):
   """The comp2 function computes the present value of 
       the terminal dividend payment
+
     Inputs:
       val: the terminal value of dividend
       g: divident growth rate
       rate: the interest rate
       time: the time period
+
     Output:
       pv: present value of time dividend payment
     
@@ -215,11 +217,13 @@ def comp2(val, g, r, t, one22):
 # def multi_ggm22(fcfe_list_, dividend_, g_, r_):
 def multi_ggm2(fcfe_list, dividend, g, r):
   """The ggm function computes the multi-peroid valuation using Gordon Growth Model (ggm)
+
     Inputs:
       fcfe_list_: the free cash flow to equity for each year
       dividend_ : the last dividend payment
       g_: the periodic growth rate of dividends
       equity_discount_rate: the periodic equity discount rate
+      
     Output:
       mp_ggm: multi-period asset value
   
