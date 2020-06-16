@@ -51,6 +51,7 @@ def comp2(val, g, r, t):
     Output:
       pv: present value of time dividend payment
     
+
     """
   
   V0 = ggm(val, Decimal(g), Decimal(r))
@@ -70,6 +71,7 @@ def multi_ggm2(fcfe_list_, dividend_, g_, r_):
 
     Output:
       mp_ggm: multi-period asset value
+  
   
   """
  
