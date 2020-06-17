@@ -3,6 +3,10 @@ import numpy as np
 import pandas as pd
 from decimal import Decimal
 
+def print2(*args):
+  for arg in args:
+    print(arg, end="\n\n")
+
 def ggm2(dividend, dividend_growth_rate, equity_discount_r):
   """The ggm function computes the single-peroid valuation using Gordon Growth Model (ggm)
 
