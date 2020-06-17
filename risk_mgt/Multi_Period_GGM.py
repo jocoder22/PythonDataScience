@@ -279,3 +279,14 @@ fcfe2007 = 2.0
 g = 0.06
 
 print(multi_ggm22(FCFE_growth,fcfe2007,g, equity_discount_rate))
+
+
+initial = 5000
+mmm = []
+for i in range(10):
+  final = initial * 1.05
+  mmm.append(final)
+  final += 5000
+  initial = final
+
+print(final, mmm, mmm[-1]/5000, sep="\n\n")
