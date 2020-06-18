@@ -26,4 +26,4 @@ def spot_from_par(parList, year):
 
     
 par_rate = [0.06, 0.069673, 0.079050, 0.08811, 0.096855]
-print(spot_from_par(par_rate, 5))
+print2(spot_from_par(par_rate, 5))
