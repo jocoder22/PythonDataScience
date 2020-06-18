@@ -1,4 +1,8 @@
 
+def print2(*args):
+  for arg in args:
+    print(arg, end="\n\n")
+
 def spot_from_par(parList, year):
   price, n = 100, year
   total = 0
