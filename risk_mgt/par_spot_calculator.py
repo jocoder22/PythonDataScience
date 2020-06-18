@@ -5,6 +5,17 @@ def print2(*args):
     print(arg, end="\n\n")
 
 def spot_from_par(parList, year):
+  """The spot_from_par function calculates the spot rate from the 
+     par rate using bootstrapping method
+     
+     Inputs:
+          parList (list) : list with par rates for increasing years
+          year (int) : the year spot rate
+          
+     Output:
+          rate (float) : the calculate n-year spot rate
+  
+  """
   price, n , total = 100, year, 0
 
   for ind, val in enumerate(parList, start=1):
