@@ -9,4 +9,6 @@ def spot_from_par(parList, year):
       # print(round(rate*100,2), price - total)
       return round(rate*100, 2)
 
+    
+par_rate = [0.06, 0.069673, 0.079050, 0.08811, 0.096855]
 print(spot_from_par(par_rate, 5))
