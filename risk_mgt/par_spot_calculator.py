@@ -23,6 +23,7 @@ def spot_from_par(parList, year):
 
   for ind, val in enumerate(parList, start=1):
     total += (parList[n-1]*price)/pow((1 + val),ind)
+    
     if ind == n-1:
       rate = pow((parList[n-1]*price + price)/(price - total), 1/n) - 1
       return round(rate*100, 2)
