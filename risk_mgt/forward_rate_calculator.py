@@ -13,12 +13,12 @@ def forward_rate(spotList, tstar, t):
           
        Output:
             result (float): forward rate
-  
   """
   
   nume = pow(1 + spotList[t + tstar - 1], t+tstar)
   denom = pow(1 + spotList[tstar -1], tstar)
   result =  pow((nume / denom ), 1/t) - 1
+  
   return round(result * 100, 2) 
 
 print(forward_rate(nlist,1,2))
