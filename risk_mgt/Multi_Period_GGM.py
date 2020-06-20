@@ -282,10 +282,12 @@ print(multi_ggm22(FCFE_growth,fcfe2007,g, equity_discount_rate))
 
 initial = 5000
 mmm = []
-for i in range(10):
+for i in range(40):
   final = initial * 1.05
   mmm.append(final)
   final += 5000
   initial = final
+  if i > 20:
+    initial -= 5000
 
 print(final, mmm, mmm[-1]/5000, sep="\n\n")
