@@ -269,8 +269,6 @@ def multi_ggm22(fcfe_list, dividend, g, r):
 
   return round(mp_ggm, 2)
 
-
-  
 Year = ["2008", "2009", "2010", "2011", "2012", "2013"]
 FCFE_growth = [0.18, 0.18, 0.16, 0.12, 0.11, 0.06]
 equity_discount_rate = 0.125
