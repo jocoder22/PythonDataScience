@@ -109,5 +109,20 @@ plt.legend(cum_spdr.columns)
 plt.show()
 
 
-spdr_funds_ave = spdr_funds_R.mean()
-spdr_funds_tracing = spdr_funds_R.std()
+
+
+
+spdr_index = spdr_funds_R["S&P500"]
+spdr_funds = pd.DataFrame()
+
+for col in spdr_funds_R.columns:
+    spdr_f = spdr_funds_R[[col]].sub([spdr_index], axis='columns')
+    spdr_funds = pd.concat([spdr_funds, spdr_f], axis=1, sort=True)
+
+spdr_funds.drop("S&P500", axis=1, inplace=True)
+
+print2(spdr_funds)
+spdr_funds_ave = spdr_funds.mean()
+spdr_funds_tracing = spdr_funds.std()
+madj_tracing = np.sqrt((spdr_funds**2).sum() / spdr_funds.shape[0])
+print2(spdr_funds_ave, spdr_funds_tracing, madj_tracing)
