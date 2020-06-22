@@ -40,7 +40,7 @@ print2(etfs.head())
 etfs_return = etfs.pct_change().dropna()
 
 etfs_return.fillna(0, inplace=True)
-returns2= round(etfs_return*100, 1)
+returns2= round(etfs_return*100, 3)
 
 print2(etfs_return, returns2)
 
@@ -58,3 +58,12 @@ r_activeR.columns = ["Active_SPDR", "Active_Vanguard", "Active_iShares"]
 
 
 print2(etfs_activeR, r_activeR)
+
+mean_return = etfs_return.mean()
+_return = returns2.mean()
+
+
+average_return = mean_return - etfs_return["S&P500"].mean()
+average_return
+
+cum_return = (1+etfs_return).cumprod() - 1
