@@ -35,3 +35,26 @@ etfs.columns = ["S&P500", "SPDR", "Vanguard", "iShares"]
 
 print2(etfs.head())
 
+
+
+etfs_return = etfs.pct_change().dropna()
+
+etfs_return.fillna(0, inplace=True)
+returns2= round(etfs_return*100, 1)
+
+print2(etfs_return, returns2)
+
+
+eft_index = etfs_return["S&P500"]
+etfs_activeR = etfs_return.sub([eft_index, eft_index,eft_index,eft_index], axis='columns')
+etfs_activeR.drop("S&P500", axis=1, inplace=True)
+etfs_activeR.columns = ["Active_SPDR", "Active_Vanguard", "Active_iShares"]
+
+
+r_index = returns2["S&P500"]
+r_activeR = returns2.sub([r_index, r_index,r_index, r_index], axis='columns')
+r_activeR.drop("S&P500", axis=1, inplace=True)
+r_activeR.columns = ["Active_SPDR", "Active_Vanguard", "Active_iShares"]
+
+
+print2(etfs_activeR, r_activeR)
