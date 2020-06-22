@@ -126,3 +126,29 @@ spdr_funds_ave = spdr_funds.mean()
 spdr_funds_tracing = spdr_funds.std()
 madj_tracing = np.sqrt((spdr_funds**2).sum() / spdr_funds.shape[0])
 print2(spdr_funds_ave, spdr_funds_tracing, madj_tracing)
+
+
+
+def activeReturn(funds, ref_index):
+    """The activeReturn computes the active return
+    
+    Inputs:
+        funds: selected funds
+        ref_index:  the reference index    
+    
+    
+    """
+    
+#     _index = funds[ref_index]
+#     _activeR = funds.sub(funds.columns, axis='columns')
+#     _activeR.drop(funds, axis=1, inplace=True)
+#     _activeR.columns = [f"Active_{i}" for i in _activeR.columns]
+
+    _activeR = funds.sub([ref_index], axis='columns')
+    _activeR.columns = [f"Active_{funds.columns.tolist()[0]}"]
+    
+    return _activeR
+
+
+active_mm = activeReturn(spdr_funds_R[["XLU"]], spdr_funds_R["S&P500"])
+active_mm.head()
