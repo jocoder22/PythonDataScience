@@ -67,3 +67,28 @@ average_return = mean_return - etfs_return["S&P500"].mean()
 average_return
 
 cum_return = (1+etfs_return).cumprod() - 1
+
+
+plt.figure(figsize=[14,6])
+plt.plot(cum_return)
+plt.legend(cum_return.columns)
+plt.plot()
+
+tracking_e = etfs_activeR.std()
+tracking_e_ = r_activeR.std()
+
+print(tracking_e, tracking_e_)
+
+
+r_rbarSquared = (etfs_activeR- etfs_activeR.mean()) ** 2
+ave_return = np.sqrt(r_rbarSquared.sum()/(etfs.shape[0] - 1))
+
+
+
+
+
+
+
+m_rbarSquared = etfs_activeR ** 2
+madj_return = np.sqrt(m_rbarSquared.sum()/etfs.shape[0])
+print(ave_return, madj_return)
