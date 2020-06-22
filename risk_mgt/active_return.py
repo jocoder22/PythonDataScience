@@ -40,7 +40,7 @@ print2(etfs.head())
 etfs_return = etfs.pct_change().dropna()
 
 etfs_return.fillna(0, inplace=True)
-returns2= round(etfs_return*100, 3)
+returns2 = round(etfs_return*100, 3)
 
 print2(etfs_return, returns2)
 
@@ -71,24 +71,43 @@ cum_return = (1+etfs_return).cumprod() - 1
 
 plt.figure(figsize=[14,6])
 plt.plot(cum_return)
+# cum_return.plot()
 plt.legend(cum_return.columns)
-plt.plot()
+plt.show()
 
 tracking_e = etfs_activeR.std()
 tracking_e_ = r_activeR.std()
 
-print(tracking_e, tracking_e_)
+print2(tracking_e, tracking_e_)
 
 
-r_rbarSquared = (etfs_activeR- etfs_activeR.mean()) ** 2
+r_rbarSquared = (etfs_activeR - etfs_activeR.mean()) ** 2
 ave_return = np.sqrt(r_rbarSquared.sum()/(etfs.shape[0] - 1))
-
-
-
-
-
 
 
 m_rbarSquared = etfs_activeR ** 2
 madj_return = np.sqrt(m_rbarSquared.sum()/etfs.shape[0])
-print(ave_return, madj_return)
+print2(ave_return, madj_return)
+
+
+
+tickers = ["^GSPC","XLB", "XLE", "XLF", "XLI", "XLK", "XLP", "XLRE", "XLU", "XLV", "XLY"]
+
+# get only the closing prices
+spdr_funds = pdr.get_data_yahoo(tickers, starttime, endtime)['Close']
+spdr_funds.columns = ["S&P500","XLB", "XLE", "XLF", "XLI", "XLK", "XLP", "XLRE", "XLU", "XLV", "XLY"]
+spdr_funds.head()
+
+spdr_funds_R = spdr_funds.pct_change()
+spdr_funds_R.fillna(0, inplace=True)
+print2(spdr_funds_R.head())
+
+cum_spdr = (1+spdr_funds_R).cumprod()
+plt.figure(figsize=[14,6])
+plt.plot(cum_spdr)
+plt.legend(cum_spdr.columns)
+plt.show()
+
+
+spdr_funds_R = spdr_funds_R.mean()
+spdr_funds_R = spdr_funds_R.std()
