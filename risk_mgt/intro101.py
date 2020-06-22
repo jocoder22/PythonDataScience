@@ -38,6 +38,8 @@ weights = np.array([0.2, 0.2, 0.2, 0.1, 0.15, 0.15])
 # Calculate expected portfolio performance
 portReturn = np.sum(meanDailyReturns*weights)
 
+
+
 print2(portReturn, meanDailyReturns)
 
 assets["portfolio"] = returns.dot(weights)
