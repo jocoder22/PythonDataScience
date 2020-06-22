@@ -9,6 +9,12 @@ import datetime
 import pandas_datareader as pdr
 # from statistics import stdev 
 
+
+def print2(*args):
+    for arg in args:
+        print(arg, end="\n\n")
+
+
 # I'm using daily close prices
 # SPDR S$p500 ETF (SPY)
 SPY = "SPY"
@@ -26,3 +32,6 @@ endtime = datetime.datetime(2019, 12, 31)
 # get only the closing prices
 etfs = pdr.get_data_yahoo(etfs_tickers, starttime, endtime)['Close']
 etfs.columns = ["S&P500", "SPDR", "Vanguard", "iShares"]
+
+print2(etfs.head())
+
