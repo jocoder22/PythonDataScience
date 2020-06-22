@@ -152,3 +152,12 @@ def activeReturn(funds, ref_index):
 
 active_mm = activeReturn(spdr_funds_R[["XLU"]], spdr_funds_R["S&P500"])
 active_mm.head()
+
+
+
+DatetimeIndex(['1990-01-01', '1991-01-01', '1992-01-01', '1993-01-01',
+               '1994-01-01', '1995-01-01', '1996-01-01', '1997-01-01',
+               '1998-01-01', '1999-01-01', '2000-01-01', '2001-01-01',
+               '2002-01-01', '2003-01-01', '2004-01-01', '2005-01-01',
+               '2006-01-01'],
+              dtype='datetime64[ns]', name='Date', freq=None)
