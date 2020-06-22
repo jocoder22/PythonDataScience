@@ -109,5 +109,5 @@ plt.legend(cum_spdr.columns)
 plt.show()
 
 
-spdr_funds_R = spdr_funds_R.mean()
-spdr_funds_R = spdr_funds_R.std()
+spdr_funds_ave = spdr_funds_R.mean()
+spdr_funds_tracing = spdr_funds_R.std()
