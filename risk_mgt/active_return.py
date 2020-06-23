@@ -48,13 +48,13 @@ print2(etfs_return, returns2)
 eft_index = etfs_return["S&P500"]
 etfs_activeR = etfs_return.sub([eft_index, eft_index,eft_index,eft_index], axis='columns')
 etfs_activeR.drop("S&P500", axis=1, inplace=True)
-etfs_activeR.columns = ["Active_SPDR", "Active_Vanguard", "Active_iShares"]
+etfs_activeR.columns = ["Active_iShares", "Active_SPDR", "Active_Vanguard"]
 
 
 r_index = returns2["S&P500"]
 r_activeR = returns2.sub([r_index, r_index,r_index, r_index], axis='columns')
 r_activeR.drop("S&P500", axis=1, inplace=True)
-r_activeR.columns = ["Active_SPDR", "Active_Vanguard", "Active_iShares"]
+r_activeR.columns = ["Active_iShares", "Active_SPDR", "Active_Vanguard"]
 
 
 print2(etfs_activeR, r_activeR)
