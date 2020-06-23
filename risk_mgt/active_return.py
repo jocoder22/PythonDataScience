@@ -155,6 +155,20 @@ def activeReturn(etf, ref_index):
 active_mm = activeReturn(spdr_funds_R[["XLU"]], spdr_funds_R["S&P500"])
 active_mm.head()
 
+# calculate mean adjusted tracking error
+#loop through the selected SPY funds dataframe
+for col in spdr_funds.columns[:-1]:
+    # compute active returns for each
+    active_ = activeReturn(spdr_funds[[col]], spdr_funds["S&P500]) * 100
+    
+    # compute mean adjusted tracking error for each
+    mate_ = np.sqrt((active_ ** 2).sum()/active_.shape[0])
+                                                         
+    # print out the computed mean adjusted tracking error                                                    
+    print(f'{col} mean adjusted tracking error: {round(mate_.values[0], 4)}')                                                    
+                                                      
+                                                         
+                                                         
 
 
 DatetimeIndex(['1990-01-01', '1991-01-01', '1992-01-01', '1993-01-01',
