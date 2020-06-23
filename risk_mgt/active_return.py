@@ -39,7 +39,7 @@ print2(etfs.head())
 
 etfs_return = etfs.pct_change().dropna()
 
-etfs_return.fillna(0, inplace=True)
+# etfs_return.fillna(0, inplace=True)
 returns2 = round(etfs_return*100, 3)
 
 print2(etfs_return, returns2)
@@ -63,8 +63,8 @@ mean_return = etfs_return.mean()
 _return = returns2.mean()
 
 
-average_return = mean_return - etfs_return["S&P500"].mean()
-average_return
+mean_return_diff = mean_return - etfs_return["S&P500"].mean()
+mean_return_diff
 
 cum_return = (1+etfs_return).cumprod() - 1
 
@@ -82,12 +82,12 @@ print2(tracking_e, tracking_e_)
 
 
 r_rbarSquared = (etfs_activeR - etfs_activeR.mean()) ** 2
-ave_return = np.sqrt(r_rbarSquared.sum()/(etfs.shape[0] - 1))
+te = np.sqrt(r_rbarSquared.sum()/(r_rbarSquared.shape[0] - 1))
 
 
 m_rbarSquared = etfs_activeR ** 2
-madj_return = np.sqrt(m_rbarSquared.sum()/etfs.shape[0])
-print2(ave_return, madj_return)
+mate = np.sqrt(m_rbarSquared.sum()/m_rbarSquared.shape[0])
+print2(te, mate)
 
 
 
@@ -98,8 +98,8 @@ spdr_funds = pdr.get_data_yahoo(tickers, starttime, endtime)['Close']
 spdr_funds.columns = ["XLB", "XLE", "XLF", "XLI", "XLK", "XLP", "XLU", "XLV", "XLY", "S&P500"]
 spdr_funds.head()
 
-spdr_funds_R = spdr_funds.pct_change()
-spdr_funds_R.fillna(0, inplace=True)
+spdr_funds_R = spdr_funds.pct_change().dropna()
+# spdr_funds_R.fillna(0, inplace=True)
 print2(spdr_funds_R.head())
 
 cum_spdr = (1+spdr_funds_R).cumprod()
@@ -111,19 +111,19 @@ plt.show()
 
 
 spdr_index = spdr_funds_R["S&P500"]
-spdr_funds = pd.DataFrame()
+spdr_funds_ar = pd.DataFrame()
 
 for col in spdr_funds_R.columns:
     spdr_f = spdr_funds_R[[col]].sub([spdr_index], axis='columns')
-    spdr_funds = pd.concat([spdr_funds, spdr_f], axis=1, sort=True)
+    spdr_funds_ar = pd.concat([spdr_funds_ar, spdr_f], axis=1, sort=True)
 
 spdr_funds.drop("S&P500", axis=1, inplace=True)
 
-print2(spdr_funds)
-spdr_funds_ave = spdr_funds.mean()
-spdr_funds_tracing = spdr_funds.std()
-madj_tracing = np.sqrt((spdr_funds**2).sum() / spdr_funds.shape[0])
-print2(spdr_funds_ave, spdr_funds_tracing, madj_tracing)
+print2(spdr_funds_ar.head())
+spdr_funds_ave = spdr_funds_ar.mean()
+spdr_funds_te = spdr_funds_ar.std()
+spdr_funds_mate = np.sqrt((spdr_funds_ar**2).sum() / spdr_funds_ar.shape[0])
+print2(spdr_funds_ave, spdr_funds_te, spdr_funds_mate)
 
 
 
@@ -140,8 +140,8 @@ def activeReturn(etf, ref_index):
     
     """
     # computer daily returns
-    etf_return = etf.pct_change().fillna(0)
-    index_return = ref_index.pct_change().fillna(0)
+    etf_return = etf.pct_change().dropna()
+    index_return = ref_index.pct_change().dropna()
     
     # computer active returns
     _activeR = etf_return.sub([index_return], axis='columns')
