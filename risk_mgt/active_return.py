@@ -129,18 +129,25 @@ print2(spdr_funds_ave, spdr_funds_tracing, madj_tracing)
 
 
 
-def activeReturn(funds, ref_index):
+def activeReturn(etf, ref_index):
     """The activeReturn computes the active return
     
     Inputs:
-        funds: selected funds
-        ref_index:  the reference index    
+        etf (Series) : selected ETF
+        ref_index:  the reference stock market index 
+        
+     Output:
+        _activeR (Series) : active returns
     
     
     """
-
-    _activeR = funds.sub([ref_index], axis='columns')
-    _activeR.columns = [f"Active_{funds.columns.tolist()[0]}"]
+    # computer daily returns
+    etf_return = etf.pct_change().fillna(0)
+    index_return = ref_index.pct_change().fillna(0)
+    
+    # computer active returns
+    _activeR = etf_return.sub([index_return], axis='columns')
+    _activeR.columns = [f"Active_{etf.columns[0]}"]
     
     return _activeR
 
