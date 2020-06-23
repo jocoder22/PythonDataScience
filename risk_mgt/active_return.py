@@ -138,11 +138,6 @@ def activeReturn(funds, ref_index):
     
     
     """
-    
-#     _index = funds[ref_index]
-#     _activeR = funds.sub(funds.columns, axis='columns')
-#     _activeR.drop(funds, axis=1, inplace=True)
-#     _activeR.columns = [f"Active_{i}" for i in _activeR.columns]
 
     _activeR = funds.sub([ref_index], axis='columns')
     _activeR.columns = [f"Active_{funds.columns.tolist()[0]}"]
