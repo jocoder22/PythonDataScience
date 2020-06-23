@@ -23,7 +23,7 @@ SPY = "SPY"
 # 1. Vanguard S$P500 ETF (VOO)
 # 2. iShares Core S&P500 ETF (IVV)
 
-etfs_tickers = ["^GSPC", "SPY", "VOO", "IVV"]
+etfs_tickers = ["IVV", "SPY", "VOO", "^GSPC"]
 
 # using 2 years of data from January 01, 2018 to December 31, 2019
 starttime = datetime.datetime(2018, 1, 1)
@@ -31,7 +31,7 @@ endtime = datetime.datetime(2019, 12, 31)
 
 # get only the closing prices
 etfs = pdr.get_data_yahoo(etfs_tickers, starttime, endtime)['Close']
-etfs.columns = ["S&P500", "SPDR", "Vanguard", "iShares"]
+etfs.columns = ["iShares", "SPDR", "Vanguard",  "S&P500"]
 
 print2(etfs.head())
 
