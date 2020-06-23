@@ -91,11 +91,11 @@ print2(ave_return, madj_return)
 
 
 
-tickers = ["^GSPC","XLB", "XLE", "XLF", "XLI", "XLK", "XLP", "XLRE", "XLU", "XLV", "XLY"]
+tickers = ["XLB", "XLE", "XLF", "XLI", "XLK", "XLP", "XLRE", "XLU", "XLV", "XLY", "^GSPC"]
 
 # get only the closing prices
 spdr_funds = pdr.get_data_yahoo(tickers, starttime, endtime)['Close']
-spdr_funds.columns = ["S&P500","XLB", "XLE", "XLF", "XLI", "XLK", "XLP", "XLRE", "XLU", "XLV", "XLY"]
+spdr_funds.columns = ["XLB", "XLE", "XLF", "XLI", "XLK", "XLP", "XLRE", "XLU", "XLV", "XLY", "S&P500"]
 spdr_funds.head()
 
 spdr_funds_R = spdr_funds.pct_change()
