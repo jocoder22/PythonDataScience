@@ -153,6 +153,7 @@ def activeReturn(etf, ref_index):
 active_mm = activeReturn(spdr_funds_R[["XLU"]], spdr_funds_R["S&P500"])
 active_mm.head()
 
+
 # calculate mean adjusted tracking error
 # loop through the selected SPY funds dataframe
 for col in spdr_funds.columns[:-1]:
@@ -172,7 +173,7 @@ plt.plot(cum_spdr[["XLY", "S&P500"]])
 plt.legend(["XLY", "S&P500"])
 plt.show()
                                                          
-
+"""
 DatetimeIndex(['1990-01-01', '1991-01-01', '1992-01-01', '1993-01-01',
                '1994-01-01', '1995-01-01', '1996-01-01', '1997-01-01',
                '1998-01-01', '1999-01-01', '2000-01-01', '2001-01-01',
@@ -180,7 +181,7 @@ DatetimeIndex(['1990-01-01', '1991-01-01', '1992-01-01', '1993-01-01',
                '2006-01-01'],
               dtype='datetime64[ns]', name='Date', freq=None)
 
- array([[100, 100, 100],
+ newplat = np.array([[100, 100, 100],
        [ 90,  93,  91],
        [104, 110, 104],
        [124, 136, 127],
@@ -201,3 +202,4 @@ DatetimeIndex(['1990-01-01', '1991-01-01', '1992-01-01', '1993-01-01',
 [100  90 104 124 161 186 204 235 258 271 339 254 216 216 238 262 275]
 [100  93 110 136 182 216 245 291 330 359.7 460 355 311 321 364 413 447]
 [100  91 104 127 167 190 206 234 260 271 346 256 221 223 243 262 273]            
+"""
