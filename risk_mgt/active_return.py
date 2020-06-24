@@ -113,11 +113,11 @@ plt.show()
 spdr_index = spdr_funds_R["S&P500"]
 spdr_funds_ar = pd.DataFrame()
 
-for col in spdr_funds_R.columns:
+for col in spdr_funds_R.columns[:-1]:
     spdr_f = spdr_funds_R[[col]].sub([spdr_index], axis='columns')
     spdr_funds_ar = pd.concat([spdr_funds_ar, spdr_f], axis=1, sort=True)
 
-spdr_funds.drop("S&P500", axis=1, inplace=True)
+# spdr_funds.drop("S&P500", axis=1, inplace=True)
 
 print2(spdr_funds_ar.head())
 spdr_funds_ave = spdr_funds_ar.mean()
@@ -153,7 +153,9 @@ def activeReturn(etf, ref_index):
 active_mm = activeReturn(spdr_funds_R[["XLU"]], spdr_funds_R["S&P500"])
 print(active_mm.head())
 
-"""
+print()
+
+
 # calculate mean adjusted tracking error
 # loop through the selected SPY funds dataframe
 for col in spdr_funds.columns[:-1]:
@@ -172,7 +174,7 @@ plt.figure(figsize=[10,6])
 plt.plot(cum_spdr[["XLY", "S&P500"]])
 plt.legend(["XLY", "S&P500"])
 plt.show()
-"""                                                        
+                                                       
 """
 DatetimeIndex(['1990-01-01', '1991-01-01', '1992-01-01', '1993-01-01',
                '1994-01-01', '1995-01-01', '1996-01-01', '1997-01-01',
