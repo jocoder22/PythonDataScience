@@ -51,6 +51,7 @@ pwi["Weight_0"] = pwi["PricePerShare_0"] / pwi["Value_0"].sum()
 
 divisor = pwi.shape[0]
 indexValue = pwi["Value_0"].sum() / divisor
+print2(indexValue)
 
 pwi.reset_index(inplace=True)
 print(tabulate.tabulate(pwi, headers=pwi.columns, tablefmt="fancy_grid", showindex="never"))
@@ -65,4 +66,6 @@ pwi_["Value_1"] = pwi_["SharesIn_index"].mul(pwi_["PricePerShare_1"])
 pwi_["Weight_1"] = pwi_["PricePerShare_1"] / pwi_["Value_1"].sum()
 
 
-
+divisor = pwi_.shape[0]
+indexValue = pwi_["Value_1"].sum() / divisor
+print2(indexValue)
