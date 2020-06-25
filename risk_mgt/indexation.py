@@ -69,3 +69,26 @@ pwi_["Weight_1"] = pwi_["PricePerShare_1"] / pwi_["Value_1"].sum()
 divisor = pwi_.shape[0]
 indexValue = pwi_["Value_1"].sum() / divisor
 print2(indexValue)
+
+
+## Price Weighted index
+## Total index return = income returns + price return
+pwi_t = pd.DataFrame(index=indexes.Security)
+pwi_t["SharesIn_index"] = 1.0
+pwi_t["PricePerShare_1"] = indexes["PricePerShare_1"].values
+pwi_t["DividendPerShare"] = indexes["DividendPerShare"].values
+pwi_t["Value_1"] = pwi_t["SharesIn_index"].mul(pwi_t.loc[:,["PricePerShare_1", "DividendPerShare"]].sum(axis=1))
+pwi_t["Weight_1"] = pwi_t["PricePerShare_1"] / pwi_t["Value_1"].sum()
+print2(pwi_t)
+
+divisor = pwi_t.shape[0]
+indexValue3 = pwi_t["Value_1"].sum() / divisor
+
+index_return2 = indexValue3/indexValue - 1
+print2(indexValue3, round(index_return2*100, 2))
+
+
+pwi_t.reset_index(inplace=True)
+print(tabulate.tabulate(pwi_t, headers=pwi_t.columns, tablefmt="fancy_grid", showindex="never"))
+
+
