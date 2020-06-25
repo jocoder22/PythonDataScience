@@ -28,4 +28,4 @@ indexes["PricePerShare_0"], indexes["Return"] = [60, 30, 15, 12, 4.80], [0.095, 
 indexes["PricePerShare_1"],indexes["DividendPerShare"] = [65.7, 26.58, 9.87, 16.56, 7.08], [1.05, 0.14, 0.00, 0.07, 0.00]
 indexes["SharesOutstanding"] = [3300, 11000, 5500, 8800, 7700]
 indexes["FloatAdjFactor"] = [1.0, 0.7, 0.9, 0.25, 0.8]
-indexes["MarketFloat"] = indexes["FloatAdjFactor"].mul(ndexes["SharesOutstanding"])
+indexes["MarketFloat"] = indexes["FloatAdjFactor"].mul(indexes["SharesOutstanding"])
