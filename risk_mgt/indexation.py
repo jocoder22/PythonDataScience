@@ -41,6 +41,7 @@ print(tabulate.tabulate(indexes, headers=indexes.columns, tablefmt="fancy_grid",
 
 
 ## Price Weighted index
+## Time 0
 pwi = pd.DataFrame(index=indexes.Security)
 
 pwi["SharesIn_index"] = 1.0
@@ -53,3 +54,15 @@ indexValue = pwi["Value_0"].sum() / divisor
 
 pwi.reset_index(inplace=True)
 print(tabulate.tabulate(pwi, headers=pwi.columns, tablefmt="fancy_grid", showindex="never"))
+
+
+## Price Weighted index
+## Time 1
+pwi_ = pd.DataFrame(index=indexes.Security)
+pwi_["SharesIn_index"] = 1.0
+pwi_["PricePerShare_1"] = indexes["PricePerShare_1"].values
+pwi_["Value_1"] = pwi_["SharesIn_index"].mul(pwi_["PricePerShare_1"])
+pwi_["Weight_1"] = pwi_["PricePerShare_1"] / pwi_["Value_1"].sum()
+
+
+
