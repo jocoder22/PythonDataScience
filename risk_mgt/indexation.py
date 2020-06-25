@@ -18,6 +18,7 @@ data["TotalReturn"] = data.sum(axis = 1)
 
 v0 = 100
 ivalue = v0 * (1 + data["PriceIncome"]).cumprod()
+itotal = (v0 * (1 + data["TotalReturn"]).cumprod()).iloc[-1]
 
-print2(data, round(ivalue.iloc[-1], 4))
+print2(data, round(ivalue.iloc[-1], 4), round(itotal, 4))
 
