@@ -35,6 +35,7 @@ indexes["FloatAdjFactor"] = [1.0, 0.7, 0.9, 0.25, 0.8]
 indexes["MarketFloat"] = indexes["FloatAdjFactor"].mul(indexes["SharesOutstanding"])
 
 
+
 indexes.reset_index(inplace=True)
 print(tabulate.tabulate(indexes, headers=indexes.columns, tablefmt="fancy_grid", showindex="never"))
 
