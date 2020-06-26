@@ -58,6 +58,22 @@ pwi.reset_index(inplace=True)
 print(tabulate.tabulate(pwi, headers=pwi.columns, tablefmt="fancy_grid", showindex="never"))
 
 
+def priceIndexed(price0, ret):
+    
+    total0 = price0.sum()
+    index0 = total0/len(price0)
+    print(f"Index price at t0: {index0}")
+    
+    price1 = price0 * (1 + ret)
+    total1 = price1.sum()
+    index1 = total1/len(price1)
+    print(f"Index price at t0: {index1}")
+    
+    ret = total1/total0 - 1
+    
+    return round(ret*100, 2)
+  
+  
 ## Price Weighted index
 ## Time 1
 pwi_ = pd.DataFrame(index=indexes.Security)
