@@ -57,7 +57,8 @@ print2(indexValue)
 pwi.reset_index(inplace=True)
 print(tabulate.tabulate(pwi, headers=pwi.columns, tablefmt="fancy_grid", showindex="never"))
 
-
+#################################################################################
+# Define function to calculate price-weighted index
 def priceIndexed(price0, ret):
     
     total0 = price0.sum()
@@ -70,8 +71,10 @@ def priceIndexed(price0, ret):
     print(f"Index price at t0: {index1}")
     
     ret = total1/total0 - 1
+    retr = round(ret*100, 2)
     
-    return round(ret*100, 2)
+    print(f"Index price return: {retr}")
+    return retr
   
   
 ## Price Weighted index
