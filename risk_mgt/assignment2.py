@@ -27,4 +27,33 @@ df2 = pd.concat(frames, axis=1, sort=False)
 df = df2[["XLE", "XLI"]]
 
 
-weight_XLE  = [round(i,1) for i in np.linspace(0,1,11)]
+weight_XLE  = [round(i,1) for i in np.linspace(0,1, 11)]
+weight_XLI = [round(i,1) for i in  np.linspace(1,0, 11)]
+
+returnlist = []
+vollist = []
+
+def portfolioreturnVol(data, weight):
+    assets_return = data.pct_change().dropna()
+    portreturn = assets_return.dot(weight)
+    port_com = (1 + portreturn).cumprod() 
+    final_return = 1 - port_com[-1]
+    
+    #  annu_ = assets_return.cov() * np.sqrt(252)
+    covariance = assets_return.cov()
+    port_val = np.transpose(weight) @ covariance @ weight
+    _ann_vol = np.sqrt(port_val) * np.sqrt(252)
+    
+    return final_return, _ann_vol
+    
+for i in range(len(weight_XLI)):
+    weight = [weight_XLE[i], weight_XLI[i]]
+    rt, vol = portfolioreturnVol(df, weight) 
+    returnlist.append(rt)
+    vollist.append(vol)
+    
+print2(returnlist, vollist)
+
+plt.figure(figsize=[10,8])
+plt.plot(vollist, returnlist)
+plt.show()
