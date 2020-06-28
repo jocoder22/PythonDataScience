@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# Import required modules for this CRT
-
 import numpy as np
 import pandas as pd
 
