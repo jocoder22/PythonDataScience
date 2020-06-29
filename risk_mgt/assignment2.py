@@ -64,9 +64,11 @@ plt.show()
 sp500 = df2[["S&P500"]]
 sp500_ret = sp500.pct_change().dropna()
 
+# compute s&p500 retruns
 sp500_com = (1 + sp500_ret).cumprod() 
 final_sp500_return = 1 - sp500_com[-1]
 
+# compute s&p500 retruns annualized volatility
 annul_sp500_vol = sp500_ret.std() * np.sqrt(252)
              
              
