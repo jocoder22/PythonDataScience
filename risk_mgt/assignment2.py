@@ -63,6 +63,10 @@ plt.show()
 
 sp500 = df2[["S&P500"]]
 sp500_ret = sp500.pct_change().dropna()
+
+sp500_com = (1 + sp500_ret).cumprod() 
+final_sp500_return = 1 - sp500_com[-1]
+
 annul_sp500_vol = sp500_ret.std() * np.sqrt(252)
              
              
