@@ -57,3 +57,12 @@ print2(returnlist, vollist)
 plt.figure(figsize=[10,8])
 plt.plot(vollist, returnlist)
 plt.show()
+
+
+# compute returns and volatility for S&P500
+
+sp500 = df2[["S&P500"]]
+sp500_ret = sp500.pct_change().dropna()
+annul_sp500_vol = sp500_ret.std() * np.sqrt(252)
+             
+             
