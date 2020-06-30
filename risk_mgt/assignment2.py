@@ -28,6 +28,11 @@ r_f = 0.0225
 r_m = 0.09
 std_market = 0.15
 
+# compute CAPM expected returns
+expected_ret_xle = r_f + beta_xle*(r_m - r_f)
+expected_ret_xli = r_f + beta_xli*(r_m - r_f)
+expected_ret = np.array([expected_ret_xle, expected_ret_xli])
+
 # combine the excel sheets
 frames = [data[i].rename(columns={data[i].columns[1]:names[i]}).set_index("Date") for i in range(3)]
 df2 = pd.concat(frames, axis=1, sort=False)
