@@ -31,6 +31,8 @@ std_market = 0.15
 # compute CAPM expected returns
 expected_ret_xle = r_f + beta_xle*(r_m - r_f)
 expected_ret_xli = r_f + beta_xli*(r_m - r_f)
+expected_ret_bmak = r_f + beta_bmk*(r_m - r_f)
+
 expected_ret = np.array([expected_ret_xle, expected_ret_xli])
 
 # combine the excel sheets
