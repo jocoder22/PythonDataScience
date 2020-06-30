@@ -142,3 +142,8 @@ data2 = pd.DataFrame({'xle_weight':xle_weights2,
                        'volatility':vollist2})
 
 print2(data2)
+
+selected_port = data2.loc[(data2['expected_return'] > 0.0943) & (data2['volatility'] < 0.168)]
+
+# selected_port.reset_index(inplace=True)
+print(tabulate.tabulate(selected_port, headers=selected_port.columns, tablefmt="fancy_grid", showindex="never"))
