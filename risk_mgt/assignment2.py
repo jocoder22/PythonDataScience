@@ -111,7 +111,23 @@ def compute_bmk_returnsVol(data):
 
     return  final_return, bmk_Vol    
 
+def compute_sharpe_ratio(returns, vol, riskfree_rate):
+    return (returns - riskfree_rate) / vol
 
 hist_return, vol = compute_bmk_returnsVol(sp500)
 
 print2(expected_ret_bmak, hist_return, vol)
+
+
+xle_weights2 = []
+xli_weights2 = []
+returnlist2 = []
+vollist2 = []
+
+for i in range(len(weight_XLI)):
+    xle_weights2.append(weight_XLE[i])
+    xli_weights2.append(weight_XLI[i])
+    weight = [weight_XLE[i], weight_XLI[i]]
+    rt, vol = portfolioreturnVol(df, weight) 
+    returnlist.append(rt)
+    vollist.append(vol)
