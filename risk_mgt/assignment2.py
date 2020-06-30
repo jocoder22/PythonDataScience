@@ -85,5 +85,17 @@ final_sp500_return = 1 - sp500_com.iloc[-1,:]
 annul_sp500_vol = sp500_ret.std() * np.sqrt(252)
 
 print2(sp500_com.tail(), final_sp500_return, sp500_com.iloc[-1,:][0])
+
+
+def compute_portfolio_return(returns, weights):  
+    return returns.dot(weights)
+
+def compute_portfolio_vol(data, weight):    
+    assets_return = data.pct_change().dropna()
+    covariance = assets_return.cov()
+    portfolio_val = np.transpose(weight) @ covariance @ weight
+    annualized_volatility = np.sqrt(portfolio_val) * np.sqrt(252)
+    
+    return annualized_volatility
              
              
