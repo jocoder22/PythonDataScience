@@ -103,8 +103,15 @@ def compute_portfolio_vol(data, weight):
 def compute_bmk_returnsVol(data):
     # compute benchmark returns using historic data
     bmk_returns = data.pct_change().dropna()
+    sp500_com_ = (1 + bmk_returns).cumprod() 
+    final_return = 1 - sp500_com_.iloc[-1,:][0]
 
     # calculate benchmark returns annualised volatility
     bmk_Vol = bmk_returns.std()[0]*np.sqrt(252)  
 
-    return  bmk_returns, bmk_Vol        
+    return  final_return, bmk_Vol    
+
+
+hist_return, vol = compute_bmk_returnsVol(sp500)
+
+print2(expected_ret_bmak, hist_return, vol)
