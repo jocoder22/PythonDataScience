@@ -98,4 +98,11 @@ def compute_portfolio_vol(data, weight):
     
     return annualized_volatility
              
-             
+def compute_bmk_returnsVol(data):
+    # compute benchmark returns using historic data
+    bmk_returns = data.pct_change().dropna()
+
+    # calculate benchmark returns annualised volatility
+    bmk_Vol = bmk_returns.std()[0]*np.sqrt(252)  
+
+    return  bmk_returns, bmk_Vol        
