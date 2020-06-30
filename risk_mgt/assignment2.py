@@ -20,6 +20,14 @@ data = pd.read_excel(path, skiprows=1, sheet_name=[0,1,2])
 # labels for data
 names = ["XLE", "XLI", "S&P500"]
 
+# Define market variables
+beta_xle = 1.07
+beta_xli = 1.06
+beta_bmk = 1.0
+r_f = 0.0225
+r_m = 0.09
+std_market = 0.15
+
 # combine the excel sheets
 frames = [data[i].rename(columns={data[i].columns[1]:names[i]}).set_index("Date") for i in range(3)]
 df2 = pd.concat(frames, axis=1, sort=False)
@@ -66,9 +74,11 @@ sp500_ret = sp500.pct_change().dropna()
 
 # compute s&p500 retruns
 sp500_com = (1 + sp500_ret).cumprod() 
-final_sp500_return = 1 - sp500_com[-1]
+final_sp500_return = 1 - sp500_com.iloc[-1,:]
 
 # compute s&p500 retruns annualized volatility
 annul_sp500_vol = sp500_ret.std() * np.sqrt(252)
+
+print2(sp500_com.tail(), final_sp500_return, sp500_com.iloc[-1,:][0])
              
              
