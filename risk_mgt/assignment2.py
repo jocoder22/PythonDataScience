@@ -77,7 +77,6 @@ plt.show()
 
 
 # compute returns and volatility for S&P500
-
 sp500 = df2[["S&P500"]]
 sp500_ret = sp500.pct_change().dropna()
 
