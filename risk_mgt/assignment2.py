@@ -16,6 +16,8 @@ def describe2(x):
 # import excel sheets
 path = "D:\Wqu_FinEngr\Portfolio Theory and Asset Pricing\GroupWork\GWP_PTAP_Data_2010.10.08.xlsx"
 data = pd.read_excel(path, skiprows=1, sheet_name=[0,1,2])
+data = pd.read_excel(path, skiprows=1, sheet_name=[0,1,2]).rename(
+    columns={0:"XLE", 1:"XLI", 2:"S&P500"})
 
 # labels for data
 names = ["XLE", "XLI", "S&P500"]
