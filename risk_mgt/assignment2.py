@@ -138,6 +138,10 @@ for i in range(len(weight_XLI)):
     returnlist2.append(ret)
     vollist2.append(vol)
 
+plt.figure(figsize=[10,8])
+plt.scatter(vollist2, returnlist2)
+plt.show()
+
 data2 = pd.DataFrame({'xle_weight':xle_weights2,
                        'xli_weight':xli_weights2,
                        'expected_return':returnlist2,
