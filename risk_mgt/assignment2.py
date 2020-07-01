@@ -115,9 +115,9 @@ def compute_bmk_returnsVol(data):
 def compute_sharpe_ratio(returns, vol, riskfree_rate):
     return (returns - riskfree_rate) / vol
 
-hist_return, vol = compute_bmk_returnsVol(sp500)
+hist_return, vol_bmk = compute_bmk_returnsVol(sp500)
 
-print2(expected_ret_bmak, hist_return, vol)
+print2(expected_ret_bmak, hist_return, vol_bmk)
 
 
 xle_weights2 = []
@@ -147,3 +147,10 @@ selected_port = data2.loc[(data2['expected_return'] > 0.0943) & (data2['volatili
 
 # selected_port.reset_index(inplace=True)
 print(tabulate.tabulate(selected_port, headers=selected_port.columns, tablefmt="fancy_grid", showindex="never"))
+
+# compute sharpe ratio
+port_sharpe_ratio = compute_sharpe_ratio(selected_port['expected_return'][4],selected_port['volatility'][4], r_f)
+bmk_sharpe_ratio = compute_sharpe_ratio(expected_ret_bmak, vol_bmk, r_f)
+data_sharpe = {"Porfolio Sharpe Ratio":[port_sharpe_ratio], "Benchmark Sharpe Ratio":[bmk_sharpe_ratio]}
+print(tabulate.tabulate(data_sharpe, headers=data_sharpe.keys(), tablefmt="fancy_grid", showindex="never"))
+print2(port_sharpe_ratio, bmk_sharpe_ratio)c
