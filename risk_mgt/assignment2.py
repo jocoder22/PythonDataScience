@@ -116,8 +116,22 @@ annul_sp500_vol = sp500_ret.std() * np.sqrt(252)
 print2(sp500_com.tail(), final_sp500_return, sp500_com.iloc[-1,:][0])
 
 
-def compute_portfolio_return(returns, weights):  
-    return returns.dot(weights)
+def compute_portfolio_return(returns, weights): 
+    """The compute_portfolio_return computes porfolio returns using
+        CAPM expected return
+        
+        Inputs:
+            returns(float): CAPM expected assets returns
+            weights(float): assets weights in the portfolio
+            
+         Output:
+            portfolio_returns: the portfolio returns
+    
+    """
+    # compute portfolio returns
+    portfolio_returns = returns.dot(weights)
+    
+    return portfolio_returns 
 
 def compute_portfolio_vol(data, weight):    
     assets_return = data.pct_change().dropna()
