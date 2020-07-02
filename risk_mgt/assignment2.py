@@ -66,7 +66,9 @@ def portfolioreturnVol(data, weight):
     _ann_vol = np.sqrt(port_val) * np.sqrt(252)
     
     return final_return, _ann_vol
-    
+
+# loop through the weight combination
+# calculate the portfolio expected returns and volatility
 for i in range(len(weight_XLI)):
     weight = [weight_XLE[i], weight_XLI[i]]
     rt, vol = portfolioreturnVol(df, weight) 
@@ -75,6 +77,7 @@ for i in range(len(weight_XLI)):
     
 print2(returnlist, vollist)
 
+# plot the efficient frontier
 plt.figure(figsize=[10,8])
 plt.plot(vollist, returnlist)
 plt.show()
