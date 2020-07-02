@@ -36,18 +36,21 @@ expected_ret_xle = r_f + beta_xle*(r_m - r_f)
 expected_ret_xli = r_f + beta_xli*(r_m - r_f)
 expected_ret_bmak = r_f + beta_bmk*(r_m - r_f)
 
+# combine the CAPM expected returns in np array
 expected_ret = np.array([expected_ret_xle, expected_ret_xli])
 
 # combine the excel sheets
 frames = [data[i].rename(columns={data[i].columns[1]:names[i]}).set_index("Date") for i in range(3)]
 df2 = pd.concat(frames, axis=1, sort=False)
 
+# subset for XLE, XLI
 df = df2[["XLE", "XLI"]]
 
-
+# assign the weights
 weight_XLE  = [round(i,1) for i in np.linspace(0,1, 11)]
 weight_XLI = [round(i,1) for i in  np.linspace(1,0, 11)]
 
+# initiate empty list containers
 returnlist = []
 vollist = []
 
