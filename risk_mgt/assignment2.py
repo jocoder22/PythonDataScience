@@ -55,17 +55,36 @@ returnlist = []
 vollist = []
 
 def portfolioreturnVol(data, weight):
+    """The portfolioreturnVol function computes the portfolio expected returns
+        and volatility.
+        
+        Inputs:
+            data(dataframe): Historic assets close prices
+            weights(float) : weights of assets in the portofolio
+            
+        Outputs:
+            final_return: portfolio expected return on the last day
+            _annualised_vol: Annualised portfolio volatility
+    
+    """
+    # compute simple assets returns
     assets_return = data.pct_change().dropna()
+    
+    # compute portfolio returns
     portreturn = assets_return.dot(weight)
+    
+    # compute portfolio cumulative returns
+    # extract the last day portfolio returns
     port_com = (1 + portreturn).cumprod() 
     final_return = 1 - port_com[-1]
     
     #  annu_ = assets_return.cov() * np.sqrt(252)
+    # compute portfolio annualised volatility
     covariance = assets_return.cov()
     port_val = np.transpose(weight) @ covariance @ weight
-    _ann_vol = np.sqrt(port_val) * np.sqrt(252)
+    _annualised_vol = np.sqrt(port_val) * np.sqrt(252)
     
-    return final_return, _ann_vol
+    return final_return, _annualised_vol
 
 # loop through the weight combination
 # calculate the portfolio expected returns and volatility
