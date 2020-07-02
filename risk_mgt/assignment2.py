@@ -3,14 +3,15 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from printdesc import print2, describe2, changepath
 import tabulate
 
-def print2(*args):
-    for obj in args:
-        print(obj, end="\n\n")
+# def print2(*args):
+#     for obj in args:
+#         print(obj, end="\n\n")
 
-def describe2(x):
-    print2(x.head(), x.shape, x.info())
+# def describe2(x):
+#     print2(x.head(), x.shape, x.info())
 
 
 # import excel sheets
