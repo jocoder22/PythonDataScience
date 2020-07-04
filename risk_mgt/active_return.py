@@ -9,10 +9,11 @@ import datetime
 import pandas_datareader as pdr
 # from statistics import stdev 
 
+from printdescribe import print2, describe2, changepath
 
-def print2(*args):
-    for arg in args:
-        print(arg, end="\n\n")
+# def print2(*args):
+#     for arg in args:
+#         print(arg, end="\n\n")
 
 
 # I'm using daily close prices
