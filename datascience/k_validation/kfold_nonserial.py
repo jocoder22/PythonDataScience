@@ -11,6 +11,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LogisticRegression, LinearRegression
+from printdescribe import print2, describe2, changepath
 
 @contextmanager
 def changepath(path):
