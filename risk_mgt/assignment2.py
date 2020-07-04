@@ -4,13 +4,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import tabulate
+from printdescribe import print2, describe2, changepath
 
-def print2(*args):
-    for obj in args:
-        print(obj, end="\n\n")
+# def print2(*args):
+#     for obj in args:
+#         print(obj, end="\n\n")
 
-def describe2(x):
-    print2(x.head(), x.shape, x.info())
+# def describe2(x):
+#     print2(x.head(), x.shape, x.info())
 
 
 # import excel sheets
@@ -153,4 +154,17 @@ port_sharpe_ratio = compute_sharpe_ratio(selected_port['expected_return'][4],sel
 bmk_sharpe_ratio = compute_sharpe_ratio(expected_ret_bmak, vol_bmk, r_f)
 data_sharpe = {"Porfolio Sharpe Ratio":[port_sharpe_ratio], "Benchmark Sharpe Ratio":[bmk_sharpe_ratio]}
 print(tabulate.tabulate(data_sharpe, headers=data_sharpe.keys(), tablefmt="fancy_grid", showindex="never"))
-print2(port_sharpe_ratio, bmk_sharpe_ratio)c
+print2(port_sharpe_ratio, bmk_sharpe_ratio)
+describe2(df2)
+print2(df2.shape)
+
+
+def xprint(d):
+    for arg in (d.head(), d.info(), d.shape, d. columns):
+        print(arg, end='\n\n')
+
+xprint(df2)
+
+xx = df2.info()
+print(xx)
+print2(pd.DataFrame(xx), xx)
