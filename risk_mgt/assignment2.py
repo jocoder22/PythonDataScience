@@ -13,6 +13,7 @@ from printdescribe import print2, describe2, changepath
 
 # import excel sheets
 path = "D:\Wqu_FinEngr\Portfolio Theory and Asset Pricing\GroupWork\GWP_PTAP_Data_2010.10.08.xlsx"
+
 with changepath(path):
     data = pd.read_excel(path, skiprows=1, sheet_name=[0,1,2])
     data = pd.read_excel(path, skiprows=1, sheet_name=[0,1,2]).rename(
