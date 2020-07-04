@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from printdesc import print2, describe2, changepath
 import tabulate
 from printdescribe import print2, describe2, changepath
 
@@ -13,10 +14,15 @@ from printdescribe import print2, describe2, changepath
 # def describe2(x):
 #     print2(x.head(), x.shape, x.info())
 
+# def describe2(x):
+#     print2(x.head(), x.shape, x.info())
 
 # import excel sheets
 path = "D:\Wqu_FinEngr\Portfolio Theory and Asset Pricing\GroupWork\GWP_PTAP_Data_2010.10.08.xlsx"
-data = pd.read_excel(path, skiprows=1, sheet_name=[0,1,2])
+with changepath(path):
+    data = pd.read_excel(path, skiprows=1, sheet_name=[0,1,2])
+    data = pd.read_excel(path, skiprows=1, sheet_name=[0,1,2]).rename(
+        columns={0:"XLE", 1:"XLI", 2:"S&P500"})
 
 # labels for data
 names = ["XLE", "XLI", "S&P500"]
@@ -34,34 +40,58 @@ expected_ret_xle = r_f + beta_xle*(r_m - r_f)
 expected_ret_xli = r_f + beta_xli*(r_m - r_f)
 expected_ret_bmak = r_f + beta_bmk*(r_m - r_f)
 
+# combine the CAPM expected returns in np array
 expected_ret = np.array([expected_ret_xle, expected_ret_xli])
 
 # combine the excel sheets
 frames = [data[i].rename(columns={data[i].columns[1]:names[i]}).set_index("Date") for i in range(3)]
 df2 = pd.concat(frames, axis=1, sort=False)
 
+# subset for XLE, XLI
 df = df2[["XLE", "XLI"]]
 
-
+# assign the weights
 weight_XLE  = [round(i,1) for i in np.linspace(0,1, 11)]
 weight_XLI = [round(i,1) for i in  np.linspace(1,0, 11)]
 
+# initiate empty list containers
 returnlist = []
 vollist = []
 
 def portfolioreturnVol(data, weight):
+    """The portfolioreturnVol function computes the portfolio expected returns
+        and volatility.
+        
+        Inputs:
+            data(dataframe): Historic assets close prices
+            weights(float) : weights of assets in the portofolio
+            
+        Outputs:
+            final_return: portfolio expected return on the last day
+            _annualised_vol: Annualised portfolio volatility
+    
+    """
+    # compute simple assets returns
     assets_return = data.pct_change().dropna()
+    
+    # compute portfolio returns
     portreturn = assets_return.dot(weight)
+    
+    # compute portfolio cumulative returns
+    # extract the last day portfolio returns
     port_com = (1 + portreturn).cumprod() 
     final_return = 1 - port_com[-1]
     
     #  annu_ = assets_return.cov() * np.sqrt(252)
+    # compute portfolio annualised volatility
     covariance = assets_return.cov()
     port_val = np.transpose(weight) @ covariance @ weight
-    _ann_vol = np.sqrt(port_val) * np.sqrt(252)
+    _annualised_vol = np.sqrt(port_val) * np.sqrt(252)
     
-    return final_return, _ann_vol
-    
+    return final_return, _annualised_vol
+
+# loop through the weight combination
+# calculate the portfolio expected returns and volatility
 for i in range(len(weight_XLI)):
     weight = [weight_XLE[i], weight_XLI[i]]
     rt, vol = portfolioreturnVol(df, weight) 
@@ -70,13 +100,13 @@ for i in range(len(weight_XLI)):
     
 print2(returnlist, vollist)
 
+# plot the efficient frontier
 plt.figure(figsize=[10,8])
 plt.plot(vollist, returnlist)
 plt.show()
 
 
 # compute returns and volatility for S&P500
-
 sp500 = df2[["S&P500"]]
 sp500_ret = sp500.pct_change().dropna()
 
@@ -90,8 +120,22 @@ annul_sp500_vol = sp500_ret.std() * np.sqrt(252)
 print2(sp500_com.tail(), final_sp500_return, sp500_com.iloc[-1,:][0])
 
 
-def compute_portfolio_return(returns, weights):  
-    return returns.dot(weights)
+def compute_portfolio_return(returns, weights): 
+    """The compute_portfolio_return computes porfolio returns using
+        CAPM expected return
+        
+        Inputs:
+            returns(float): CAPM expected assets returns
+            weights(float): assets weights in the portfolio
+            
+         Output:
+            portfolio_returns: the portfolio returns
+    
+    """
+    # compute portfolio returns
+    portfolio_returns = returns.dot(weights)
+    
+    return portfolio_returns 
 
 def compute_portfolio_vol(data, weight):    
     assets_return = data.pct_change().dropna()
@@ -136,6 +180,10 @@ for i in range(len(weight_XLI)):
 
     returnlist2.append(ret)
     vollist2.append(vol)
+
+plt.figure(figsize=[10,8])
+plt.scatter(vollist2, returnlist2)
+plt.show()
 
 data2 = pd.DataFrame({'xle_weight':xle_weights2,
                        'xli_weight':xli_weights2,
