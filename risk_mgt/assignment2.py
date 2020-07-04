@@ -7,12 +7,6 @@ from printdesc import print2, describe2, changepath
 import tabulate
 from printdescribe import print2, describe2, changepath
 
-# def print2(*args):
-#     for obj in args:
-#         print(obj, end="\n\n")
-
-# def describe2(x):
-#     print2(x.head(), x.shape, x.info())
 
 # def describe2(x):
 #     print2(x.head(), x.shape, x.info())
