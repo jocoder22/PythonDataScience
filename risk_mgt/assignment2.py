@@ -156,8 +156,8 @@ def compute_portfolio_vol(data, weight):
     annualized_volatility = np.sqrt(portfolio_val) * np.sqrt(252)
     
     return annualized_volatility
-       
-             
+
+
 def compute_bmk_returnsVol(data):
     # compute benchmark returns using historic data
     bmk_returns = data.pct_change().dropna()
@@ -171,7 +171,22 @@ def compute_bmk_returnsVol(data):
 
 
 def compute_sharpe_ratio(returns, vol, riskfree_rate):
-    return (returns - riskfree_rate) / vol
+    """The compute_sharpe_ratio function computes sharpe ratio.
+    
+    Inputs:
+        returns (float): portfolio returns
+        volatility(float): portfolio volatililty
+        riskfree_rate (float): the risk free rate
+        
+        Output:
+        sharperatio: the calculated Sharpe ratio
+    
+    """   
+
+    sharperatio = (returns - riskfree_rate) / vol
+    
+    return sharperatio
+    
 
 hist_return, vol_bmk = compute_bmk_returnsVol(sp500)
 
