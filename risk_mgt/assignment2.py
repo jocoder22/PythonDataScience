@@ -131,13 +131,32 @@ def compute_portfolio_return(returns, weights):
     
     return portfolio_returns 
 
-def compute_portfolio_vol(data, weight):    
+def compute_portfolio_vol(data, weight):
+    """The compute_portfolio_vol function computes annaulized portfolio volatilty.
+    
+    Inputs:
+        data(float): assets close prices
+        weights(float): assets weights in the portfolio
+        
+        Output:
+        annualized_volatility: the annualized portfolio volatility
+    
+    """   
+
+    # compute assets returns 
     assets_return = data.pct_change().dropna()
+
+    # computes assets covariance matrix
     covariance = assets_return.cov()
+
+    # computes portfolio volatility
     portfolio_val = np.transpose(weight) @ covariance @ weight
+
+    # computes annualized volatility
     annualized_volatility = np.sqrt(portfolio_val) * np.sqrt(252)
     
     return annualized_volatility
+       
              
 def compute_bmk_returnsVol(data):
     # compute benchmark returns using historic data
