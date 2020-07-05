@@ -138,7 +138,7 @@ def compute_portfolio_vol(data, weight):
         data(float): assets close prices
         weights(float): assets weights in the portfolio
         
-        Output:
+    Output:
         annualized_volatility: the annualized portfolio volatility
     
     """   
@@ -177,8 +177,8 @@ def compute_sharpe_ratio(returns, vol, riskfree_rate):
         returns (float): portfolio returns
         volatility(float): portfolio volatililty
         riskfree_rate (float): the risk free rate
-        
-        Output:
+    
+    Output:
         sharperatio: the calculated Sharpe ratio
     
     """   
@@ -186,7 +186,7 @@ def compute_sharpe_ratio(returns, vol, riskfree_rate):
     sharperatio = (returns - riskfree_rate) / vol
     
     return sharperatio
-    
+
 
 hist_return, vol_bmk = compute_bmk_returnsVol(sp500)
 
