@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from printdesc import print2, describe2, changepath
+from printdescribe import print2, describe2, changepath
 import tabulate
 from printdescribe import print2, describe2, changepath
 
@@ -12,15 +12,15 @@ from printdescribe import print2, describe2, changepath
 #     print2(x.head(), x.shape, x.info())
 
 # import excel sheets
-path = "D:\Wqu_FinEngr\Portfolio Theory and Asset Pricing\GroupWork\GWP_PTAP_Data_2010.10.08.xlsx"
+# path = "D:\Wqu_FinEngr\Portfolio Theory and Asset Pricing\GroupWork\GWP_PTAP_Data_2010.10.08.xlsx"
+path = r"D:\Wqu_FinEngr\Portfolio Theory and Asset Pricing\GroupWork"
 
 with changepath(path):
-    data = pd.read_excel(path, skiprows=1, sheet_name=[0,1,2])
-    data = pd.read_excel(path, skiprows=1, sheet_name=[0,1,2]).rename(
-        columns={0:"XLE", 1:"XLI", 2:"S&P500"})
+    data = pd.read_excel("GWP_PTAP_Data_2010.10.08.xlsx", skiprows=1, sheet_name=[0,1,2])
 
 # labels for data
 names = ["XLE", "XLI", "S&P500"]
+
 
 # Define market variables
 beta_xle = 1.07
