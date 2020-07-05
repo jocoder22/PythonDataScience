@@ -12,7 +12,6 @@ from printdescribe import print2, describe2, changepath
 #     print2(x.head(), x.shape, x.info())
 
 # import excel sheets
-# path = "D:\Wqu_FinEngr\Portfolio Theory and Asset Pricing\GroupWork\GWP_PTAP_Data_2010.10.08.xlsx"
 path = r"D:\Wqu_FinEngr\Portfolio Theory and Asset Pricing\GroupWork"
 
 with changepath(path):
