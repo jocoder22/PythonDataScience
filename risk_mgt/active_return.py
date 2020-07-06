@@ -58,16 +58,18 @@ r_activeR.columns = ["Active_iShares", "Active_SPDR", "Active_Vanguard"]
 
 print2(etfs_activeR, r_activeR)
 
+# compute overall mean
 mean_return = etfs_return.mean()
 _return = returns2.mean()
 
 
+# compute the mean difference from the benchmark
 mean_return_diff = mean_return - etfs_return["S&P500"].mean()
 mean_return_diff
 
 cum_return = (1+etfs_return).cumprod() - 1
 
-
+# plot the cumulative returns
 plt.figure(figsize=[14,6])
 plt.plot(cum_return)
 # cum_return.plot()
@@ -89,7 +91,7 @@ mate = np.sqrt(m_rbarSquared.sum()/m_rbarSquared.shape[0])
 print2(te, mate)
 
 
-
+# tickers for the SYP efts
 tickers = ["XLB", "XLE", "XLF", "XLI", "XLK", "XLP", "XLU", "XLV", "XLY", "^GSPC"]
 
 # get only the closing prices
