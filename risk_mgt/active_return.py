@@ -36,16 +36,14 @@ etfs.columns = ["iShares", "SPDR", "Vanguard",  "S&P500"]
 
 print2(etfs.head())
 
-
-
+# compute simple reurns
 etfs_return = etfs.pct_change().dropna()
 
 # etfs_return.fillna(0, inplace=True)
 returns2 = round(etfs_return*100, 3)
-
 print2(etfs_return, returns2)
 
-
+# compute active returns
 eft_index = etfs_return["S&P500"]
 etfs_activeR = etfs_return.sub([eft_index, eft_index,eft_index,eft_index], axis='columns')
 etfs_activeR.drop("S&P500", axis=1, inplace=True)
