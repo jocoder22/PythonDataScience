@@ -67,6 +67,7 @@ _return = returns2.mean()
 mean_return_diff = mean_return - etfs_return["S&P500"].mean()
 mean_return_diff
 
+# compute cumulative returns
 cum_return = (1+etfs_return).cumprod() - 1
 
 # plot the cumulative returns
