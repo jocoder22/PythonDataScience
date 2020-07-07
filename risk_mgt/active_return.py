@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # Import required modules for this CRT
-
 import numpy as np
 import pandas as pd
 
@@ -82,12 +81,15 @@ tracking_e_ = r_activeR.std()
 
 print2(tracking_e, tracking_e_)
 
-
+# compute mean difference squared and standard deviation
 r_rbarSquared = (etfs_activeR - etfs_activeR.mean()) ** 2
 te = np.sqrt(r_rbarSquared.sum()/(r_rbarSquared.shape[0] - 1))
 
 
+# compute active return squared
 m_rbarSquared = etfs_activeR ** 2
+
+# compute mean adjusted tracking error
 mate = np.sqrt(m_rbarSquared.sum()/m_rbarSquared.shape[0])
 print2(te, mate)
 
