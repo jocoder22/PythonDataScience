@@ -91,8 +91,7 @@ m_rbarSquared = etfs_activeR ** 2
 mate = np.sqrt(m_rbarSquared.sum()/m_rbarSquared.shape[0])
 print2(te, mate)
 
-
-# tickers for the SYP efts
+# tickers for the efts
 tickers = ["XLB", "XLE", "XLF", "XLI", "XLK", "XLP", "XLU", "XLV", "XLY", "^GSPC"]
 
 # get only the closing prices
@@ -109,7 +108,6 @@ plt.figure(figsize=[14,6])
 plt.plot(cum_spdr)
 plt.legend(cum_spdr.columns)
 plt.show()
-
 
 
 spdr_index = spdr_funds_R["S&P500"]
