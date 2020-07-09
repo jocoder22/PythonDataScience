@@ -119,8 +119,11 @@ plt.show()
 spdr_index = spdr_funds_R["S&P500"]
 spdr_funds_ar = pd.DataFrame()
 
+# iterate over the dataframe
 for col in spdr_funds_R.columns[:-1]:
+    # and compute the active returns
     spdr_f = spdr_funds_R[[col]].sub([spdr_index], axis='columns')
+    # concatenate dataframes
     spdr_funds_ar = pd.concat([spdr_funds_ar, spdr_f], axis=1, sort=True)
 
 # spdr_funds.drop("S&P500", axis=1, inplace=True)
