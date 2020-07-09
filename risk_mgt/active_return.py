@@ -105,6 +105,7 @@ spdr_funds_R = spdr_funds.pct_change().dropna()
 # spdr_funds_R.fillna(0, inplace=True)
 print2(spdr_funds_R.head())
 
+# plot the cumulative returns
 cum_spdr = (1+spdr_funds_R).cumprod()
 plt.figure(figsize=[14,6])
 plt.plot(cum_spdr)
