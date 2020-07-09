@@ -44,6 +44,7 @@ print2(etfs_return, returns2)
 
 # compute active returns
 eft_index = etfs_return["S&P500"]
+ppp = returns2.sub(returns2.iloc[:,-1], axis=0).drop(['S&P500'], axis=1)
 etfs_activeR = etfs_return.sub([eft_index, eft_index,eft_index,eft_index], axis='columns')
 etfs_activeR.drop("S&P500", axis=1, inplace=True)
 etfs_activeR.columns = ["Active_iShares", "Active_SPDR", "Active_Vanguard"]
