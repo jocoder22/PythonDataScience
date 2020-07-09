@@ -25,7 +25,7 @@ netflix = pdr.get_data_yahoo(stock_1, starttime, endtime)['Close']
 # Calculate log return
 logReturn_netflix = np.log(netflix).diff().dropna()  # fastest
 logReturn_netflix2 = np.log(netflix.diff()/netflix.shift() + 1).dropna() # faster
-logReturn_netflix2 = np.log(netflix.pct_change + 1).dropna()
+logReturn_netflix2 = np.log(netflix.pct_change() + 1).dropna()
 
 print2(logReturn_netflix.head())
 
