@@ -32,6 +32,7 @@ endtime = datetime.datetime(2019, 12, 31)
 etfs = pdr.get_data_yahoo(etfs_tickers, starttime, endtime)['Close']
 etfs.columns = ["iShares", "SPDR", "Vanguard",  "S&P500"]
 
+# print out dataset head
 print2(etfs.head())
 
 # compute simple reurns
@@ -78,6 +79,7 @@ plt.show()
 tracking_e = etfs_activeR.std()
 tracking_e_ = r_activeR.std()
 
+# print out tracking errors
 print2(tracking_e, tracking_e_)
 
 # compute mean difference squared and standard deviation
@@ -102,6 +104,8 @@ spdr_funds.head()
 
 spdr_funds_R = spdr_funds.pct_change().dropna()
 # spdr_funds_R.fillna(0, inplace=True)
+
+# print out dataset head
 print2(spdr_funds_R.head())
 
 # plot the cumulative returns
@@ -121,6 +125,7 @@ for col in spdr_funds_R.columns[:-1]:
 
 # spdr_funds.drop("S&P500", axis=1, inplace=True)
 
+# print out dataset head
 print2(spdr_funds_ar.head())
 spdr_funds_ave = spdr_funds_ar.mean()
 spdr_funds_te = spdr_funds_ar.std()
