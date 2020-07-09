@@ -6,7 +6,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 import pandas_datareader as pdr
-# from statistics import stdev 
 
 from printdescribe import print2, describe2, changepath
 
@@ -54,8 +53,8 @@ r_activeR = returns2.sub([r_index, r_index,r_index, r_index], axis='columns')
 r_activeR.drop("S&P500", axis=1, inplace=True)
 r_activeR.columns = ["Active_iShares", "Active_SPDR", "Active_Vanguard"]
 
-
-print2(etfs_activeR, r_activeR)
+# print out dataset head
+print2(etfs_activeR.head(), r_activeR.head())
 
 # compute overall mean
 mean_return = etfs_return.mean()
