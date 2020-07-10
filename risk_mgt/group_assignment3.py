@@ -28,16 +28,28 @@ df_activeReturn = df_return.sub(df_return['S&P 500'], axis=0).drop(['S&P 500'], 
 print2(df_activeReturn)
 
 
+tracking_error = df_activeReturn.std()
+mate_ = np.sqrt((df_activeReturn ** 2).sum()/df_activeReturn.shape[0])
+print2(tracking_error, mate_)
 
 for col in df_return.columns[:-1]:
     plt.figure(figsize=[10, 8])
     plt.plot(df_return[[col, "S&P 500"]])
     plt.legend([col, "S&P500"])
-    plt.show()
+    plt.title(f"Returns {col} vs S&P 500")
+    # plt.show()
+    plt.pause(2)
+    # plt.clf()
+    plt.close()
 
 
 
 plt.figure(figsize=[10, 8])
 plt.plot(df_return)
 plt.legend(df_return.columns.tolist())
-plt.show()
+# plt.show()
+plt.pause(3)
+# plt.clf()
+plt.close()
+
+
