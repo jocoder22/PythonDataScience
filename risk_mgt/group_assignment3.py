@@ -35,6 +35,8 @@ for col in df_return.columns[:-1]:
     plt.legend([col, "S&P500"])
     plt.show()
 
+
+
 plt.figure(figsize=[10, 8])
 plt.plot(df_return)
 plt.legend(df_return.columns.tolist())
