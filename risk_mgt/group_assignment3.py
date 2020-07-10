@@ -14,3 +14,13 @@ with changepath(path):
                 sheet_name='10 SPDRs and S&P 500', index_col=0)
 
 describe2(data)
+print2(data)
+
+
+df_return = data.pct_change().dropna()
+print2(df_return)
+
+
+# df_activeReturn = df_return.sub(df_return.iloc[:,-1], axis=0).drop(['SP_500'], axis=1)
+df_activeReturn = df_return.sub(df_return['S&P 500'], axis=0).drop(['S&P 500'], axis=1)
+print2(df_activeReturn)
