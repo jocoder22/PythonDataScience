@@ -2,10 +2,8 @@
 import numpy as np
 import pandas as pd
 from decimal import Decimal
+from printdescribe import print2, describe2, changepath
 
-def print2(*args):
-  for arg in args:
-    print(arg, end="\n\n")
 
 def ggm2(dividend, dividend_growth_rate, equity_discount_r):
   """The ggm function computes the single-peroid valuation using Gordon Growth Model (ggm)
@@ -288,4 +286,4 @@ for i in range(40):
   if i > 20:
     initial -= 5000
 
-print(final, mmm, mmm[-1]/5000, sep="\n\n")
+print2(final, mmm, mmm[-1]/5000)
