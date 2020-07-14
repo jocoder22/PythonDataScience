@@ -6,7 +6,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 import pandas_datareader as pdr
-
 from printdescribe import print2, describe2, changepath
 
 # def print2(*args):
@@ -161,7 +160,7 @@ def activeReturn(etf, ref_index):
 
 
 active_mm = activeReturn(spdr_funds_R[["XLU"]], spdr_funds_R["S&P500"])
-print(active_mm.head())
+print2(active_mm.head())
 
 # calculate mean adjusted tracking error
 # loop through the selected SPY funds dataframe
