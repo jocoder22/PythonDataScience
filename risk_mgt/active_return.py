@@ -138,7 +138,6 @@ spdr_funds_mate = np.sqrt((spdr_funds_ar**2).sum() / spdr_funds_ar.shape[0])
 print2(spdr_funds_ave, spdr_funds_te, spdr_funds_mate)
 
 
-
 def activeReturn(etf, ref_index):
     """The activeReturn computes the active return
     
@@ -163,9 +162,6 @@ def activeReturn(etf, ref_index):
 
 active_mm = activeReturn(spdr_funds_R[["XLU"]], spdr_funds_R["S&P500"])
 print(active_mm.head())
-
-print()
-
 
 # calculate mean adjusted tracking error
 # loop through the selected SPY funds dataframe
