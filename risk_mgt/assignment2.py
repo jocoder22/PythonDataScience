@@ -5,11 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from printdescribe import print2, describe2, changepath
 import tabulate
-from printdescribe import print2, describe2, changepath
-
-
-# def describe2(x):
-#     print2(x.head(), x.shape, x.info())
 
 # import excel sheets
 path = r"D:\Wqu_FinEngr\Portfolio Theory and Asset Pricing\GroupWork"
@@ -242,5 +237,5 @@ def xprint(d):
 xprint(df2)
 
 xx = df2.info()
-print(xx)
+print2(xx)
 print2(pd.DataFrame(xx), xx)
