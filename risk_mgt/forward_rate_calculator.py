@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import numpy as np
+from printdescribe import print2, describe2, changepath
 
 nlist = [0.06,0.07, 0.08, 0.09, 0.10 ]
 def forward_rate(spotList, tstar, t):
@@ -21,5 +22,5 @@ def forward_rate(spotList, tstar, t):
   
   return round(result * 100, 2) 
 
-print(forward_rate(nlist,1,2))
+print2(forward_rate(nlist,1,2))
 
