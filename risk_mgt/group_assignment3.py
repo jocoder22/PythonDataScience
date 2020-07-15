@@ -50,3 +50,4 @@ dd = pd.concat([tracking_error, mate_], axis=1)
 dd.columns = ["TrackingError", "Mean_Adj TrackingError"]
 
 print2(dd)
+print(tabulate.tabulate(round(dd, 2), headers=dd.columns, tablefmt="fancy_grid"))
