@@ -38,8 +38,6 @@ print2(tracking_error, mate_)
 #     # plt.clf()
 #     plt.close()
 
-
-
 # plt.figure(figsize=[10, 8])
 # plt.plot(df_return)
 # plt.legend(df_return.columns.tolist())
