@@ -1,14 +1,10 @@
 import numpy as np
 import pandas as pd
 import tabulate
+from printdescribe import print2, describe2, changepath
 
 PriceReturn = [5.2, 4.1, -2.6]
 IncomeReturn = [1.5, 1.5, 1.5]
-
-
-def print2(*args):
-  for arg in args:
-    print(arg, end="\n\n")
 
 PriceReturn = [5.2, 4.1, -2.6]
 IncomeReturn = [1.5, 1.5, 1.5]
