@@ -21,7 +21,14 @@ taua_transpose = s0.dot(si)
 pf = pd.DataFrame(s1)
 print2(s0,s1,si,s2, tau,taua_transpose, np.transpose(tau), pf)
 
+# initialize the probabilities
+prob = np.array([0.25, 0.5, 0.25])
 
-X_star = np.array([75, 150, 75]).reshape(-1,1)
+# compute Xstar, the unique solution
+Xstar = 100*prob / tau
+X_star = Xstar.reshape(-1,1)
+
+# compute strategy with optimal utility
 x_star = si @ X_star
-print2(x_star)
+x_star2 = si @ Xstar
+print2(x_star, x_star2, Xstar)
