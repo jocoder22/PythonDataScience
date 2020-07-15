@@ -19,7 +19,6 @@ itotal = (v0 * (1 + data["TotalReturn"]).cumprod()).iloc[-1]
 
 print2(data, round(ivalue.iloc[-1], 4), round(itotal, 4))
 
-
 indexes = pd.DataFrame(index="A B C D E".split())
 indexes.index.name = "Security"
 
@@ -30,12 +29,8 @@ indexes["SharesOutstanding"] = [3300, 11000, 5500, 8800, 7700]
 indexes["FloatAdjFactor"] = [1.0, 0.7, 0.9, 0.25, 0.8]
 indexes["MarketFloat"] = indexes["FloatAdjFactor"].mul(indexes["SharesOutstanding"])
 
-
-
 indexes.reset_index(inplace=True)
 print(tabulate.tabulate(indexes, headers=indexes.columns, tablefmt="fancy_grid", showindex="never"))
-
-
 
 ## Price Weighted index
 ## Time 0
@@ -71,8 +66,7 @@ def priceIndexed(price0, ret):
     
     print(f"Index price return: {retr}")
     return retr
-  
-  
+   
 ## Price Weighted index
 ## Time 1
 pwi_ = pd.DataFrame(index=indexes.Security)
@@ -81,11 +75,9 @@ pwi_["PricePerShare_1"] = indexes["PricePerShare_1"].values
 pwi_["Value_1"] = pwi_["SharesIn_index"].mul(pwi_["PricePerShare_1"])
 pwi_["Weight_1"] = pwi_["PricePerShare_1"] / pwi_["Value_1"].sum()
 
-
 divisor = pwi_.shape[0]
 indexValue = pwi_["Value_1"].sum() / divisor
 print2(indexValue)
-
 
 ## Price Weighted index
 ## Total index return = income returns + price return
@@ -103,8 +95,5 @@ indexValue3 = pwi_t["Value_1"].sum() / divisor
 index_return2 = indexValue3/indexValue - 1
 print2(indexValue3, round(index_return2*100, 2))
 
-
 pwi_t.reset_index(inplace=True)
 print(tabulate.tabulate(pwi_t, headers=pwi_t.columns, tablefmt="fancy_grid", showindex="never"))
-
-
