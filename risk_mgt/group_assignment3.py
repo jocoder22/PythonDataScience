@@ -17,15 +17,12 @@ with changepath(path):
 describe2(data)
 print2(data)
 
-
 df_return = data.pct_change().dropna()
 print2(df_return)
-
 
 # df_activeReturn = df_return.sub(df_return.iloc[:,-1], axis=0).drop(['SP_500'], axis=1)
 df_activeReturn = df_return.sub(df_return['S&P 500'], axis=0).drop(['S&P 500'], axis=1)
 print2(df_activeReturn)
-
 
 tracking_error = df_activeReturn.std()
 mate_ = np.sqrt((df_activeReturn ** 2).sum()/df_activeReturn.shape[0])
