@@ -17,20 +17,7 @@ from pypfopt.cla import CLA
 from pypfopt import objective_functions
 from pypfopt import Plotting  as pplot
 
-def print2(*args):
-    for arg in args:
-        print(arg, end="\n\n")
-
-@contextmanager
-def changepath(patht):
-    currentpath = os.getcwd()
-    os.chdir(patht)
-
-    try:
-        yield 
-
-    finally:
-        os.chdir(currentpath)
+from printdescribe import print2, describe2, changepath
 
 
 path = r"D:\PythonDataScience\risk_mgt"
@@ -54,9 +41,10 @@ endtime = datetime.datetime(2019, 10, 1)
 assets = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
 
 
-path2 = r"D:\TimerSeriesAnalysis\AMZN.csv"
-df = pd.read_csv(path2, parse_dates=True, index_col="Date")
-
+# path2 = r"D:\TimerSeriesAnalysis\AMZN.csv"
+path2 = r"D:\TimerSeriesAnalysis"
+with changepath(path2):
+    df = pd.read_csv("AMZN.csv", parse_dates=True, index_col="Date")
 
 # Compute the annualized average historical return
 mu = mean_historical_return(assets, frequency = 252)
@@ -84,12 +72,10 @@ cw = ef.clean_weights()
 with changepath(path):
   ef.save_weights_to_file("weights.txt")  # saves to file
 
-print(cw)
+print2(cw)
 
 # Evaluate performance of optimal portfolio
 ef.portfolio_performance(verbose=True)
-
-
 
 # Create a dictionary of time periods (or 'epochs')
 epochs = { 'before' : {'start': starttime, 'end': '31-12-2006'},
@@ -144,5 +130,5 @@ print(ef.clean_weights())
 latest_prices = get_latest_prices(assets)
 da = DiscreteAllocation(w, latest_prices, total_portfolio_value=20000)
 allocation, leftover = da.lp_portfolio()
-print(allocation)
+print2(allocation)
 
