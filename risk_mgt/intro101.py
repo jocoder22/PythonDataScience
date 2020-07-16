@@ -4,11 +4,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 import pandas_datareader as pdr
+from printdescribe import print2
 
-def print2(*args):
-    for arg in args:
-        print(arg, end="\n\n")
-
+# initialize stock tickers list
 stocklist = ["JPM", "GS", "BAC", "MS", "C","CS"]                         
 pp_labels = ["JPMorgan Chase", "Goldman Sachs", "BofA Securities", "Morgan Stanley", "Citigroup", "Credit Suisse"] 
 
@@ -18,8 +16,10 @@ endtime = datetime.datetime(2019, 10, 1)
 # get only the closing prices
 assets = pdr.get_data_yahoo(stocklist, starttime, endtime)['Close']
 
+# initialize the weights
 weights = [0.2, 0.15, 0.2, 0.15, 0.2, 0.1]
 
+# compute the simple returns
 returns = assets.pct_change().dropna()
 
 print2(assets.head(), returns.head())
@@ -37,8 +37,6 @@ weights = np.array([0.2, 0.2, 0.2, 0.1, 0.15, 0.15])
 
 # Calculate expected portfolio performance
 portReturn = np.sum(meanDailyReturns*weights)
-
-
 
 print2(portReturn, meanDailyReturns)
 
