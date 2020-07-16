@@ -28,6 +28,7 @@ prob = np.array([0.25, 0.5, 0.25])
 Xstar = 100*prob / tau
 X_star = Xstar.reshape(-1,1)
 
+
 # compute strategy with optimal utility
 x_star = si @ X_star
 x_star2 = si @ Xstar
