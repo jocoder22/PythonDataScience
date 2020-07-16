@@ -20,3 +20,4 @@ pp.columns = ["price"]
 # compute simple and log returns
 pp["simple"] = pp.pct_change()*100
 pp["log"] = np.log(pp["price"]).diff()*100
+pp["simplecum"] = (1 + pp["simple"]).cumprod() - 1
