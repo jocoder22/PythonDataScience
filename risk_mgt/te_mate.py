@@ -12,6 +12,5 @@ data = pd.DataFrame({"bmask1":bmask1, "bmask2":bmask2, "fund":fund})
 data2 = data.pct_change().dropna()
 data2["Ret1"] = data2.fund - data2.bmask1
 data2["Ret2"] = data2.fund - data2.bmask2
-mate = np.sqrt(pow(returns, 2).sum()/data2.shape[0])
-print2(data, data2, returns, round(mate*100, 2), sep="\n\n")
-
+mate = np.sqrt(pow(data2, 2).sum()/data2.shape[0])
+print2(data, data2, round(mate*100, 2), sep="\n\n")
