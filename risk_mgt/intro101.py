@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 import pandas_datareader as pdr
-from printdescribe import print2
+from printdescribe import print2, describe2
 
 # initialize stock tickers list
 stocklist = ["JPM", "GS", "BAC", "MS", "C","CS"]                         
@@ -22,9 +22,14 @@ weights = [0.2, 0.15, 0.2, 0.15, 0.2, 0.1]
 # compute the simple returns
 returns = assets.pct_change().dropna()
 
+# visualse the data
 print2(assets.head(), returns.head())
+describe2(assets, returns)
 
+# compute portfolio returns
 portfolioReturn = returns.dot(weights)
+
+# compute portfolio value for $1 investment
 portfolioValue = (1 + portfolioReturn).cumprod()
 
 print2(portfolioReturn, portfolioValue)
