@@ -18,9 +18,23 @@ pp = pdr.get_data_yahoo(stock, starttime, endtime)['Close']
 pp.columns = ["price"]
 
 # compute simple and log returns
-pp["simple"] = pp.pct_change()*100
-pp["log"] = np.log(pp["price"]).diff()*100
+# compute simple returns
+pp["simple"] = pp.pct_change()
+
+# compute log returns
+pp["log"] = np.log(pp["price"]).diff()
+pp["log2"] = np.log(pp["simple"] + 1)
+
+# compute cumulative simple returns
 pp["simplecum"] = (1 + pp["simple"]).cumprod() - 1
+
+# compute cumulative log returns
 pp["logcum"] =  pp["log"].cumsum()
 
-print2(pp)
+# display the tail of data and last row of data
+print2(pp.tail(), pp.iloc[-1, :])
+
+# uses:
+# simple return - portfolioreturns, short return(equal  negative(long/(long + 1)))
+# log return = annualized(periodic returns), short position(which is negative long position)
+# log return = foreign exchage(negative of counter currency)
