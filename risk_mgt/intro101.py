@@ -32,7 +32,7 @@ portfolioReturn = returns.dot(weights)
 # compute portfolio value for $1 investment
 portfolioValue = (1 + portfolioReturn).cumprod()
 
-print2(portfolioReturn, portfolioValue)
+print2(portReturn, meanDailyReturns, portfolioValue)
 
 # Calculate individual mean returns 
 meanDailyReturns = returns.mean()
