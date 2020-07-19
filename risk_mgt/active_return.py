@@ -174,6 +174,7 @@ plt.figure(figsize=[10,6])
 plt.plot(cum_spdr[["XLY", "S&P500"]])
 plt.legend(["XLY", "S&P500"])
 plt.show()
+     
                                                        
 """
 DatetimeIndex(['1990-01-01', '1991-01-01', '1992-01-01', '1993-01-01',
