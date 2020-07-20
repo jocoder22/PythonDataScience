@@ -16,11 +16,14 @@ class Worker:
   
 class Staff(Worker):
   
-  def __init__(self, name, wage = 22.29, hour = 7.5, bonus = 1.05):
+  def __init__(self, name, wage = 22.29, hour = 7.5, reward = 0.05):
     Worker.__init__(self, name, wage, hour)
     self.bonus = bonus
     
     
-   def get_reward(self, bonus):
-      self.salary +* bonus
+   def give_reward(self):
+      self.salary +* self.bonus
+      Worker.salary()
+      
+     
     
