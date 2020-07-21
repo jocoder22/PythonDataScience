@@ -19,6 +19,8 @@ class Patients:
 
         return patient_str
 
+
+
 class Staff:
 
     def __init__(self, name, id, gender):
