@@ -49,8 +49,8 @@ class Staff:
 
     
 patient1 = Patients("Charles", 459234, "Male")
-str(patient1)
 patient5 = Staff("Charles", 894863, "Male")
 
+str(patient1)
 print2(patient1, patient5, repr(patient5))
 str(patient5)
