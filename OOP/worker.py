@@ -1,30 +1,32 @@
 #!/usr/bin/env python
 import pandas as pd
+from printdescribe import print2
 
 class Worker:
-  
-  def __init__(self, name, wage = 15.53, hour = 8):
-    self.name = name
-    self.wage = wage
-    self.hour = hour
-#     self.salary = Worker.salary()
-    self.salary = self.wage * self.hour
-
-  def _salary(self, bonus = 1):
-    amount = self.wage * self.hour  * bonus
-    self.salary = amount
-  
+    
+    def __init__(self, name, wage = 15.53, hour = 8):
+        self.name = name
+        self.wage = wage
+        self.hour = hour
+        self.salary = Worker._salary(self)
+        # self.salary = self.wage * self.hour
+    
+    def _salary(self, bonus = 1):
+        amount = self.wage * self.hour  * bonus
+        # self.salary = amount
+        return amount
+    
   
 class Staff(Worker):
-  
-  def __init__(self, name, wage = 22.29, hour = 7.5, compensation = 0.15):
-    Worker.__init__(self, name, wage, hour)
-    self.compensation = compensation
+    
+    def __init__(self, name, wage = 22.29, hour = 7.5, compensation = 0.15):
+        Worker.__init__(self, name, wage, hour)
+        self.compensation = compensation
     
     
-   def _salary(self, bonus):
-      totalbenefits = bonus * self.compensation
-      Worker._salary(bonus = totalbenefits)
+    def _salary(self, bonus):
+        totalbenefits = bonus * self.compensation
+        Worker._salary(self, bonus = totalbenefits)
       
 
       
@@ -57,5 +59,10 @@ mngr.give_raise(1000)
 print(mngr.salary)
 mngr.give_raise(2000, bonus=1.03)
 print(mngr.salary)
-     
+
+
+worker1 = Worker("Amy")
+staff1 = Staff("Ashley")
+staff2 = Staff("Bruny", wage=42.4)
+print2(staff1.salary, worker1.salary, staff2.salary)
     
