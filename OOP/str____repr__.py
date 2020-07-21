@@ -46,7 +46,6 @@ class Staff:
         return staff_repr
 
     
-
 patient1 = Patients("Charles", 459234, "Male")
 str(patient1)
 patient5 = Staff("Charles", 894863, "Male")
