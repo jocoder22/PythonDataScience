@@ -27,6 +27,7 @@ class Staff:
             and isinstance(other, Staff)
 
 
+
 patient1 = Patients("Charles", 459234, "Male")
 patient2 = Patients("Charles", 876323, "Male")
 patient3 = Patients("Marylene", 459234, "Female")
