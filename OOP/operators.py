@@ -9,10 +9,10 @@ class Patients:
         self.gender = gender
 
     def __eq__(self, other):
-        # return self.name == other.name and self.id == other.id\
-        #     and  type(self) == type(other)
         return self.name == other.name and self.id == other.id\
-            and isinstance(other, Patients)
+            and  type(self) == type(other)
+        # return self.name == other.name and self.id == other.id\
+        #     and isinstance(other, Patients)
 
 
 class Staff:
