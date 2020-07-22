@@ -6,6 +6,13 @@ class Worker:
     def __init__(self, name, newsalary):
         self.name = name
         self._salary = newsalary
+        
+    def __str__(self):
+        str = f"""
+            Worker:
+                name = {self.name}
+                Salary = ${self.salary} 
+        """
 
     @property
     def salary(self):
