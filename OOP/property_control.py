@@ -7,8 +7,13 @@ class Worker:
         self.name = name
         self._salary = newsalary
 
+    @property
+    def salary(self):
+        return self._salary
     
-    def _salary(self, bonus = 1):
-        amount = self.wage * self.hour  * bonus
-        # self.salary = amount
-        return amount
+    @salary.setter
+    def salary(self):
+        if self._salary < 50000 or self._salary > 150000:
+            raise ValueError("Salary out of range")
+         
+        self._salary = newsalary
