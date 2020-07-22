@@ -10,10 +10,16 @@ class Worker:
     def __str__(self):
         str = f"""
             Worker:
-                name = {self.name}
+                Name = {self.name}
                 Salary = ${self.salary} 
         """
-
+        return str
+    
+    def __repr__(self):
+        repr = f"Worker('{self.name}', {self.salary})"
+        
+        return repr
+    
     @property
     def salary(self):
         return self._salary
