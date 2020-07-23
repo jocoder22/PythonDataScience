@@ -21,22 +21,33 @@ class HourError(ValueError):
 class Worker:
   
   _MAX_HOUR = 60
+  _MAX_SALARY = 150000
+
   
-  def __init__(self, name, wage = 15.53, hour = 8):
+  def __init__(self, name, wage = 15.53, hour = 8, bonus=1):
         self.name = name
         self.wage = wage
         
-        if self.hour > Worker._MAX_HOUR:
-          raise HourError
-          
+        if hour > Worker._MAX_HOUR:
+          raise HourError()
+        
         self.hour = hour
-        
-        
-        self.salary = Worker._salary()
+        self.bonus = bonus
+        self._salary = 0
     
-    def _salary(self, bonus = 1):
-        amount = self.wage * self.hour  * bonus
-        # self.salary = amount
-        return amount
+    
+  def salary_cal(self):
+        _amount_sal = self.wage * self.hour  * self.bonus
+      
+        if _amount_sal > Worker._MAX_SALARY:
+            raise SalaryError("Salary out of range!")
+        return _amount_sal
 
 
+  @property
+  def salary(self):
+        self._salary = Worker.salary_cal(self)
+        return self._salary
+
+john = Worker("John Smith", 4183.50, 50)
+jane = Worker("Jane Pretty", 196.00, 80)
