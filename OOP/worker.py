@@ -28,9 +28,7 @@ class Staff(Worker):
         totalbenefits = bonus * self.compensation
         Worker._salary(self, bonus = totalbenefits)
       
-
-      
-      
+     
 class Employee:
     def __init__(self, name, salary=30000):
         self.name = name
