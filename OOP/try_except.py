@@ -10,9 +10,12 @@ class HourError(ValueError):
   
   def __init__(self):
     ValueError.__init__(self)
+
+        
+  def __str__(self):
     print(HourError._message)
-    
-    
+    return HourError._message
+        
     
     
 class Worker:
