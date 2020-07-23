@@ -17,13 +17,17 @@ class HourError(ValueError):
     
 class Worker:
   
+  _MAX_HOUR = 60
+  
   def __init__(self, name, wage = 15.53, hour = 8):
         self.name = name
         self.wage = wage
         
-        if hour > 60:
+        if self.hour > Worker._MAX_HOUR:
           raise HourError
+          
         self.hour = hour
+        
         
         self.salary = Worker._salary()
     
