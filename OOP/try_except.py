@@ -34,6 +34,9 @@ class Worker:
         self.hour = hour
         self.bonus = bonus
         self._salary = 0
+
+  def __repr__(self):
+    return f"Worker('John Smith', 35.6, 8, 1)"
     
     
   def salary_cal(self):
