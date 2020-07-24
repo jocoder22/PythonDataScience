@@ -25,23 +25,23 @@ class Worker:
 
   
   def __init__(self, name, wage = 15.53, hour = 8, bonus=1):
-        self.name = name
-        self.wage = wage
-        
-        if hour > Worker._MAX_HOUR:
-          raise HourError()
-        
-        self.hour = hour
-        self.bonus = bonus
-        self._salary = 0
+    self.name = name
+    self.wage = wage
+    
+    if hour > Worker._MAX_HOUR:
+      raise HourError()
+    
+    self.hour = hour
+    self.bonus = bonus
+    self._salary = 0
 
     
   def salary_cal(self):
-        _amount_sal = self.wage * self.hour  * self.bonus
-      
-        if _amount_sal > Worker._MAX_SALARY:
-            raise SalaryError("Salary out of range!")
-        return _amount_sal
+    _amount_sal = self.wage * self.hour  * self.bonus
+  
+    if _amount_sal > Worker._MAX_SALARY:
+      raise SalaryError("Salary out of range!")
+    return _amount_sal
 
 
   @property
