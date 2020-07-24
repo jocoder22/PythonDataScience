@@ -35,16 +35,6 @@ class Worker:
         self.bonus = bonus
         self._salary = 0
 
-  def __str__(self):
-    strr = f"""
-      Worker:
-        Name: {self.name}
-        Hourly wages: {self.wage}
-        Hours  worked: {self.hour}
-        Bonus earned: {self.bonus}
-        Total salary: {self.salary}
-    """
-    return strr
     
   def salary_cal(self):
         _amount_sal = self.wage * self.hour  * self.bonus
@@ -59,8 +49,21 @@ class Worker:
         self._salary = Worker.salary_cal(self)
         return self._salary
 
+
   def __repr__(self):
     return f"Worker('John Smith', 35.6, 8, 1)"
+
+
+  def __str__(self):
+    strr = f"""
+      Worker:
+        Name: {self.name}
+        Hourly wages: {self.wage}
+        Hours  worked: {self.hour}
+        Bonus earned: {self.bonus}
+        Total salary: {self.salary}
+    """
+    return strr
 
 
 john = Worker("John Smith", 4183.50, 50)
