@@ -58,13 +58,14 @@ class Worker:
     strr = f"""
       Worker:
         Name: {self.name}
-        Hourly wages: {self.wage}
+        Hourly wages: ${self.wage}
         Hours  worked: {self.hour}
         Bonus earned: {self.bonus}
-        Total salary: {self.salary}
+        Total salary: ${self.salary}
     """
     return strr
 
 
-john = Worker("John Smith", 4183.50, 50)
-jane = Worker("Jane Pretty", 196.00, 80)
+john = Worker("John Smith", 43.50, 50)
+jane = Worker("Jane Pretty", 196.00, 40)
+print(jane)
