@@ -50,6 +50,22 @@ class Manager(Employee):
     def give_raise(self, amount, bonus=1.05):
         new_amount = amount * bonus
         Employee.give_raise(self, new_amount)
+
+    
+    
+
+    def __repr__(self):
+        return f"Worker('{self.name}', self.salary, '{self.project}')"
+
+
+    def __str__(self):
+        strr = f"""
+        Worker:
+            Name: {self.name}
+            Total salary: ${self.salary}
+            Projet: {self.project}
+        """
+        return strr
     
     
 mngr = Manager("Ashta Dunbar", 78500)
