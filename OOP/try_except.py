@@ -46,8 +46,8 @@ class Worker:
 
   @property
   def salary(self):
-        self._salary = Worker.salary_cal(self)
-        return self._salary
+    self._salary = Worker.salary_cal(self)
+    return self._salary
 
 
   def __repr__(self):
