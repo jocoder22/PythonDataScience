@@ -51,7 +51,7 @@ class Worker:
 
 
   def __repr__(self):
-    return f"Worker('John Smith', 35.6, 8, 1)"
+    return f"Worker('{self.name}', {self.wage}, {self.hour}, {self.bonus})"
 
 
   def __str__(self):
@@ -68,4 +68,4 @@ class Worker:
 
 john = Worker("John Smith", 43.50, 50)
 jane = Worker("Jane Pretty", 196.00, 40)
-print(jane)
+print2(jane, repr(jane))
