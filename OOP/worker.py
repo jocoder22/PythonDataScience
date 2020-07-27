@@ -29,7 +29,7 @@ class Worker:
         """
         return strr
     
-  
+
 class Staff(Worker):
     
     def __init__(self, name, wage = 22.29, hour = 7.5, compensation = 0.15):
