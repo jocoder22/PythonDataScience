@@ -2,6 +2,7 @@
 import pandas as pd
 from printdescribe import print2
 
+
 class Worker:
     
     def __init__(self, name, wage = 15.53, hour = 8):
@@ -64,6 +65,7 @@ class SeniorStaff(Staff):
     #     return tt + f"Total Compensation: {self.compensation}"
         
     #     #  """
+ 
      
 class Employee:
     def __init__(self, name, salary=30000):
