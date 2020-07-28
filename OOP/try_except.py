@@ -65,8 +65,6 @@ class Worker:
     """
     return strr
 
-
-
 john = Worker("John Smith", 43.50, 50)
 jane = Worker("Jane Pretty", 196.00, 40)
 print2(jane, repr(jane))
