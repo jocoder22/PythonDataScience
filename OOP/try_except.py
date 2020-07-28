@@ -10,8 +10,7 @@ class HourError(ValueError):
   
   def __init__(self):
     ValueError.__init__(self)
-
-        
+     
   def __str__(self):
     print(HourError._message)
     return HourError._message
@@ -23,7 +22,6 @@ class Worker:
   _MAX_HOUR = 60
   _MAX_SALARY = 150000
 
-  
   def __init__(self, name, wage = 15.53, hour = 8, bonus=1):
     self.name = name
     self.wage = wage
