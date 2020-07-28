@@ -35,7 +35,6 @@ class Worker:
     self.bonus = bonus
     self._salary = 0
 
-    
   def salary_cal(self):
     _amount_sal = self.wage * self.hour  * self.bonus
   
@@ -43,16 +42,13 @@ class Worker:
       raise SalaryError("Salary out of range!")
     return _amount_sal
 
-
   @property
   def salary(self):
     self._salary = Worker.salary_cal(self)
     return self._salary
 
-
   def __repr__(self):
     return f"Worker('{self.name}', {self.wage}, {self.hour}, {self.bonus})"
-
 
   def __str__(self):
     strr = f"""
