@@ -11,7 +11,7 @@ y = np.array([9,17,5])
 m = (np.mean(X) * np.mean(y) - np.mean(X*y)) / (np.mean(X)**2 - np.mean(X**2))
 b = np.mean(y) - m * np.mean(X)
 
-print(f"Value of m: {m}", f"Value of b: {b}")
+print2(f"Value of m: {m}", f"Value of b: {b}")
 
 
 
@@ -34,4 +34,4 @@ m, b = A_normal @ b_normal
 
 # The computed values of m and b should be compared with the values
 # m = 0.2 and b = 1.0, used to generate the data
-print(f"Value of m: {m}", f"Value of b: {b}")
+print2(f"Value of m: {m}", f"Value of b: {b}")
