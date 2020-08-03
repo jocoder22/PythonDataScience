@@ -1,4 +1,7 @@
 import numpy as np
+from sklearn.linear_model import LinearRegression
+from printdescribe import print2
+
 np.random.seed(901)
 
 A = np.array([[2,1],[4,1],[1,1]])
@@ -35,3 +38,17 @@ m, b = A_normal @ b_normal
 # The computed values of m and b should be compared with the values
 # m = 0.2 and b = 1.0, used to generate the data
 print2(f"Value of m: {m}", f"Value of b: {b}")
+
+
+
+X = np.array(x_train).reshape(-1, 1)
+y = np.array(y_train)
+
+reg = LinearRegression().fit(X, y)
+reg.score(X, y)
+m, b = reg.coef_[0],reg.intercept_
+
+print2(f"Value of m: {m}", f"Value of b: {b}")
+
+
+
