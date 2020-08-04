@@ -22,8 +22,8 @@ print2(f"Value of m: {m}", f"Value of b: {b}")
 
 
 # create data for training
-x = np.linspace(0,1,100)
-y = 0.2*x_train + 1 + 0.01*np.random.randn(x_train.shape[0])
+X = np.linspace(0,1,100)
+y = 0.2*X + 1 + 0.01*np.random.randn(X.shape[0])
 
 
 # prepare data for normal equation
