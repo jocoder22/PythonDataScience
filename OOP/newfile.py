@@ -75,6 +75,6 @@ model.compile(loss="mse", optimizer=Adam(lr=0.01), metrics=['mse'])
 model.fit(x=X, y=y, batch_size=20, epochs=300, verbose=0)
 beta = model.get_weights()
 m_, b_ = beta[0][0][0], beta[1][0]
-print2(" ", "#"*20)
+print2(" ", "#"*100)
 print2(f"Value of m: {m}", f"Value of b: {b}")
 print2(f"Value of m using Keras: {m_}", f"Value of b using Keras: {b_}")
