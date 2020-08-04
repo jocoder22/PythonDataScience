@@ -46,7 +46,9 @@ print2(f"Value of m: {m}", f"Value of b: {b}")
 # QR factorization using numpy
 # Your code here 
 Q, R = np.linalg.qr(A)
-m, b = np.linalg.inv(R).dot(Q.T,y)
+# m, b = np.linalg.inv(R) @ Q.T @ y
+m, b = np.linalg.inv(R).dot(Q.T.dot(y))
+
 
 print2(Q.shape, f'R = {R}', f'Q^TQ = {np.dot(Q.T,Q)}')
 print2(f"Value of m: {m}", f"Value of b: {b}")
