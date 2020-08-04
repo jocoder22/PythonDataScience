@@ -21,7 +21,7 @@ b = np.mean(y) - m * np.mean(X)
 print2(f"Value of m: {m}", f"Value of b: {b}")
 
 
-
+# create data for training
 x_train = np.linspace(0,1,100)
 y_train = 0.2*x_train + 1 + 0.01*np.random.randn(x_train.shape[0])
 
@@ -45,6 +45,7 @@ print2(f"Value of m: {m}", f"Value of b: {b}")
 
 
 
+# finding the beta using Scikit-learn
 X = np.array(x_train).reshape(-1, 1)
 y = np.array(y_train)
 
