@@ -46,14 +46,26 @@ print2(f"Value of m: {m}", f"Value of b: {b}")
 
 
 # finding the beta using Scikit-learn
-X = np.array(x_train).reshape(-1, 1)
+X = np.array(x_train)
 y = np.array(y_train)
 
-reg = LinearRegression().fit(X, y)
+reg = LinearRegression().fit(X.reshape(-1, 1), y)
 reg.score(X, y)
 m, b = reg.coef_[0],reg.intercept_
 
 print2(f"Value of m: {m}", f"Value of b: {b}")
+
+
+# finding the coefficients using Keras
+model = Sequential()
+model.add(Dense(1, input_dim=1, kernel_initializer='normal', activation='linear'))
+
+# Compile model
+model.compile(loss="mean squared error", optimizer=Adam(lr=0.01), metrics=['mse'])
+
+# Fit model: use a batch_size=20, epochs=300
+model.fit(x=x_train, y=y_train, batch_size=, epochs=, verbose=1)
+
 
 
 
