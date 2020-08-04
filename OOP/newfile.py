@@ -71,3 +71,4 @@ model.compile(loss="mean squared error", optimizer=Adam(lr=0.01), metrics=['mse'
 
 # Fit model: use a batch_size=20, epochs=300
 model.fit(x=x_train, y=y_train, batch_size=, epochs=, verbose=1)
+model.get_weights()
