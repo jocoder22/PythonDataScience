@@ -28,6 +28,7 @@ y_train = 0.2*x_train + 1 + 0.01*np.random.randn(x_train.shape[0])
 X = np.array(x_train)
 y = np.array(y_train)
 
+# prepare data for normal equation
 b = np.asarray([1]) # hint: np.asarray()
 col2 = np.ones((X.shape)) # hint: np.ones()
 A = np.vstack((X, col2)).T # hint: np.vstack().T
@@ -43,6 +44,14 @@ m, b = A_normal @ b_normal
 # m = 0.2 and b = 1.0, used to generate the data
 print2(f"Value of m: {m}", f"Value of b: {b}")
 
+
+# QR factorization using numpy
+# Your code here 
+Q, R = # End of your code 
+m, b = 
+
+print2(Q.shape, f'R = {R}', f'Q^TQ = {np.dot(Q.T,Q)}')
+print2(f"Value of m: {m}", f"Value of b: {b}")
 
 
 # finding the beta using Scikit-learn
@@ -65,11 +74,3 @@ model.compile(loss="mean squared error", optimizer=Adam(lr=0.01), metrics=['mse'
 
 # Fit model: use a batch_size=20, epochs=300
 model.fit(x=x_train, y=y_train, batch_size=, epochs=, verbose=1)
-
-
-
-
-
-
-
-
