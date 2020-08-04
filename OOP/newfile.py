@@ -22,11 +22,9 @@ print2(f"Value of m: {m}", f"Value of b: {b}")
 
 
 # create data for training
-x_train = np.linspace(0,1,100)
-y_train = 0.2*x_train + 1 + 0.01*np.random.randn(x_train.shape[0])
+x = np.linspace(0,1,100)
+y = 0.2*x_train + 1 + 0.01*np.random.randn(x_train.shape[0])
 
-X = np.array(x_train)
-y = np.array(y_train)
 
 # prepare data for normal equation
 b = np.asarray([1]) # hint: np.asarray()
@@ -55,9 +53,6 @@ print2(f"Value of m: {m}", f"Value of b: {b}")
 
 
 # finding the beta using Scikit-learn
-X = np.array(x_train)
-y = np.array(y_train)
-
 reg = LinearRegression().fit(X.reshape(-1, 1), y)
 reg.score(X, y)
 m, b = reg.coef_[0],reg.intercept_
