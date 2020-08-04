@@ -10,7 +10,8 @@ np.random.seed(901)
 
 A = np.array([[2,1],[4,1],[1,1]])
 b = np.array([[9],[17],[5]])
-m. p = np.linalg.inv(A.T @ A) @ A.T @ b
+m = np.linalg.inv(A.T @ A) @ A.T @ b
+print2(f"Value of m: {m}", f"Value of b: {b}")
 
 
 X = np.array([2,4,1])
@@ -55,7 +56,8 @@ print2(f"Value of m: {m}", f"Value of b: {b}")
 
 
 # finding the beta using Scikit-learn
-reg = LinearRegression().fit(X.reshape(-1, 1), y)
+X = np.array(X).reshape(-1,1)
+reg = LinearRegression().fit(X, y)
 reg.score(X, y)
 m, b = reg.coef_[0],reg.intercept_
 
@@ -67,8 +69,12 @@ model = Sequential()
 model.add(Dense(1, input_dim=1, kernel_initializer='normal', activation='linear'))
 
 # Compile model
-model.compile(loss="mean squared error", optimizer=Adam(lr=0.01), metrics=['mse'])
+model.compile(loss="mse", optimizer=Adam(lr=0.01), metrics=['mse'])
 
 # Fit model: use a batch_size=20, epochs=300
-model.fit(x=x_train, y=y_train, batch_size=, epochs=, verbose=1)
-model.get_weights()
+model.fit(x=X, y=y, batch_size=20, epochs=300, verbose=0)
+beta = model.get_weights()
+m_, b_ = beta[0][0][0], beta[1][0]
+print2(" ", "#"*20)
+print2(f"Value of m: {m}", f"Value of b: {b}")
+print2(f"Value of m using Keras: {m_}", f"Value of b using Keras: {b_}")
