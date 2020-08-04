@@ -1,5 +1,9 @@
 import numpy as np
 from sklearn.linear_model import LinearRegression
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import Adam
+
 from printdescribe import print2
 
 np.random.seed(901)
