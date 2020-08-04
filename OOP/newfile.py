@@ -73,6 +73,8 @@ model.compile(loss="mse", optimizer=Adam(lr=0.01), metrics=['mse'])
 
 # Fit model: use a batch_size=20, epochs=300
 model.fit(x=X, y=y, batch_size=20, epochs=300, verbose=0)
+
+# get the beta's
 beta = model.get_weights()
 m_, b_ = beta[0][0][0], beta[1][0]
 print2(" ", "#"*100)
