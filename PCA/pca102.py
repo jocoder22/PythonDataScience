@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from sklearn import preprocessing
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.pipeline import Pipeline
@@ -24,5 +25,10 @@ for gene in data.index:
     np.random.seed(90 + n)
     data.loc[gene, "ko1":] =  np.random.poisson(lam=np.random.randint(10,100),size=6)
     n += 5
+    
+
+
+scaled_data = preprocessing.scale(data.T)
+scaled_data[:20]
     
     
