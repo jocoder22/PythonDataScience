@@ -14,9 +14,15 @@ wt = ["wt"+str(i) for i in range(1,7)]
 ko = ["ko"+str(i) for i in range(1,7)]
 data = pd.DataFrame(columns=[*wt ,*ko], index=genes)
 
-print2(wt, ko, data.head())
-
-for gene in data.index:
-  data.loc[gene, :] = np.random.poisson(lam=np.random.randint(10,200),size=data.shape[1])
-
+print2( wt, ko)
+data = pd.DataFrame(columns=[*wt ,*ko], index=genes)
 print2(data.head())
+
+n = 2
+for gene in data.index:
+    data.loc[gene, :"wt6"] =  np.random.poisson(lam=np.random.randint(10,100),size=6)
+    np.random.seed(90 + n)
+    data.loc[gene, "ko1":] =  np.random.poisson(lam=np.random.randint(10,100),size=6)
+    n += 5
+    
+    
