@@ -58,3 +58,8 @@ plt.ylabel(f"PC2 - {per_var[1]}")
 plt.xlabel(f"PC1 - {per_var[0]}")
 plt.title("PCA Plot")
 plt.show()
+
+loading_scores = pd.Series(pca.components_[0], index=genes)
+sorted_scores = loading_scores.abs().sort_values(ascending=False)
+top_ten = sorted_scores[:10].index.values
+print2(loading_scores[top_ten])
