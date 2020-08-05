@@ -2,7 +2,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import random
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -10,18 +9,14 @@ from sklearn.pipeline import Pipeline
 import seaborn as sns
 from printdescribe import print2
 
-url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data'
+genes = ["gene"+str(i) for i in range(1,101)]
+wt = ["wt"+str(i) for i in range(1,7)]
+ko = ["ko"+str(i) for i in range(1,7)]
+data = pd.DataFrame(columns=[*wt ,*ko], index=genes)
 
+print2(wt, ko, data.head())
 
-colname = '''MPG Cylinders Displacement Horsepower Weight Acceleration 
-             Model_year Origin Car_name'''.split()
+for gene in data.index:
+  data.loc[gene, :] = np.random.poisson(lam=np.random.randint(10,200),size=data.shape[1])
 
-dataset = pd.read_csv(url, names=colname, na_values=['na','Na', '?'],
-                skipinitialspace=True, comment='\t', sep=" ", quotechar='"')
-
-print2(dataset.head, dataset.shape)
-describe2(dataset.iloc[:,:6])
-
-dataset.drop(columns='Car_name', inplace=True)
-print2(dataset.isna().sum())
-dataset.dropna(inplace=True) 
+print2(data.head())
