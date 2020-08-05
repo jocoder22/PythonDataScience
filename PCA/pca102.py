@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-# import requests
+import random
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
