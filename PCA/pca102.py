@@ -62,4 +62,4 @@ plt.show()
 loading_scores = pd.Series(pca.components_[0], index=genes)
 sorted_scores = loading_scores.abs().sort_values(ascending=False)
 top_ten = sorted_scores[:10].index.values
-print2(loading_scores[top_ten])
+print2(loading_scores[top_ten], loading_scores[top_ten].sort_values(ascending=False))
