@@ -9,7 +9,6 @@ alpha = 0.2
 b = 0.08
 sigma = 0.025
 
-
 #  define useful functions
 def vasicek_mean(r, t1, t2):
   """The vasicek_mean function calculate the mean of of short rate at t2 given the
