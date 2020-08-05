@@ -66,13 +66,11 @@ r_sim = np.zeros([simulations, nyears])
 r_sim[:,0] = r0
 vasicek_mean_vector = np.zeros(nyears+1)
 
-
 for i in range(nyears):
   r_sim[:,i+1] = vasicek_mean(r_sim[:,i],t[i], t[i+1]) + np.sqrt(vasicek_var(t[i], t[i+t])) * z[:,i]
   
   
 s_mean = r0 * np.exp(-alpha*t) + b*(1-np.exp(-alpha*t))
-
 
 # plot results
 _graph = np.ones(r_sim.shape)*t
