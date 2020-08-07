@@ -22,9 +22,11 @@ print2(data.head())
 
 n = 2
 for gene in data.index:
-    data.loc[gene, :"wt6"] =  np.random.poisson(lam=np.random.randint(10,100),size=6)
+    data.loc[gene, :"wt6"] =  np.random.poisson(
+        lam=np.random.randint(10,100),size=6)
     np.random.seed(90 + n)
-    data.loc[gene, "ko1":] =  np.random.poisson(lam=np.random.randint(10,100),size=6)
+    data.loc[gene, "ko1":] =  np.random.poisson(
+        lam=np.random.randint(10,100),size=6)
     n += 5
     
 
@@ -51,12 +53,15 @@ plt.title("Scree Plot")
 plt.show()
 
 
-pca_df = pd.DataFrame(pca_data, index=[*wt, *ko], columns=labels)
+pca_df = pd.DataFrame(pca_data, index=[*wt, *ko], 
+                      columns=labels)
 plt.scatter(pca_df.PC1, pca_df.PC2)
 
 
 for sample in pca_df.index:
-    plt.annotate(sample, (pca_df.PC1.loc[sample], pca_df.PC2.loc[sample]))
+    plt.annotate(sample, (pca_df.PC1.loc[sample], 
+                          pca_df.PC2.loc[sample]))
+    
     
 plt.ylabel(f"PC2 - {per_var[1]}")
 plt.xlabel(f"PC1 - {per_var[0]}")
@@ -67,4 +72,5 @@ plt.show()
 loading_scores = pd.Series(pca.components_[0], index=genes)
 sorted_scores = loading_scores.abs().sort_values(ascending=False)
 top_ten = sorted_scores[:10].index.values
-print2(loading_scores[top_ten], loading_scores[top_ten].sort_values(ascending=False))
+print2(loading_scores[top_ten], 
+       loading_scores[top_ten].sort_values(ascending=False))
