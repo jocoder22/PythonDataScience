@@ -47,9 +47,11 @@ plt.xlabel("Pricipal Component")
 plt.title("Scree Plot")
 plt.show()
 
+
 pca_df = pd.DataFrame(pca_data, index=[*wt, *ko], columns=labels)
 
 plt.scatter(pca_df.PC1, pca_df.PC2)
+
 
 for sample in pca_df.index:
     plt.annotate(sample, (pca_df.PC1.loc[sample], pca_df.PC2.loc[sample]))
