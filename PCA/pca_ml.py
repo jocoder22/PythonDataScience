@@ -28,3 +28,12 @@ plt.ylabel('Explained Variance')
 plt.xlabel('Principal Components')
 plt.title('Explained Variance Ratio')
 plt.show()
+
+
+per_var = np.round(pca.explained_variance_ratio_*100, 1)
+labels = ["PC"+str(i) for i in range(1,len(per_var)+1)]
+plt.bar(labels,per_var)
+plt.ylabel("Percentage of Explained Variance")
+plt.xlabel("Pricipal Component")
+plt.title("Scree Plot")
+plt.show()
