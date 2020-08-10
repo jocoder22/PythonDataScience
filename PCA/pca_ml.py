@@ -11,11 +11,12 @@ from IPython.display import HTML
 
 from printdescribe import print2
 
+# download the data
 iris = datasets.load_iris()
 
-X = iris.data
-y = iris.target
-target_names = iris.target_names
+data = iris.data
+labels = iris.target
+labelnames = iris.target_names
 
 # Fit PCA
 pca = PCA(n_components=3)
