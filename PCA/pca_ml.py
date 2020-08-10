@@ -16,3 +16,14 @@ iris = datasets.load_iris()
 X = iris.data
 y = iris.target
 target_names = iris.target_names
+
+# Fit PCA
+pca = PCA(n_components=3)
+pca.fit(data)
+
+# Plot
+plt.plot(range(0, 3), pca.explained_variance_ratio_)
+plt.ylabel('Explained Variance')
+plt.xlabel('Principal Components')
+plt.title('Explained Variance Ratio')
+plt.show()
