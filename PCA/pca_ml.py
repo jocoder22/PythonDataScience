@@ -47,6 +47,9 @@ for i in range(1,len(per_var)+1):
     print(f'PC {i} effects = {str(dict(zip(labelnames[:], vectors[i-1])))}')
     
     
+# Perform PCA
+pca_result = pca.transform(data)
+
 # set the markers and colors
 markers = ["*","o", "+"]
 colors = ["r", "y", "k"]
@@ -54,6 +57,7 @@ colors = ["r", "y", "k"]
 # plot the real data
 for i, label in enumerate(np.unique(labels)):
     plt.scatter(pca_result[:,0][labels==label],pca_result[:,1][labels==label], 
-                c=colors[i], marker=markers[i], lw=0.5, edgecolors='k')
-plt.title("The projection onto 2 PCA components");
+                c=colors[i], marker=markers[i], lw=0.5, edgecolors='k', label=labelnames[i])
+plt.title("The projection onto 2 PCA components")
+plt.legend(loc='best', shadow=False, scatterpoints=3);
     
