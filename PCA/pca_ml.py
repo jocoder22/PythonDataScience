@@ -37,3 +37,12 @@ plt.ylabel("Percentage of Explained Variance")
 plt.xlabel("Pricipal Component")
 plt.title("Scree Plot")
 plt.show()
+
+
+vectors = pca.components_.round(3)
+print2(vectors)
+
+
+for i in range(1,len(per_var)+1):
+    print(f'PC {i} effects = {str(dict(zip(labelnames[:], vectors[i-1])))}')
+    
