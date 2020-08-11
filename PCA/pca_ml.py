@@ -43,7 +43,7 @@ vectors = pca.components_.round(3)
 print2(vectors)
 
 # show percentage made up of each variable
-for i in range(1,len(per_var)+1):
+for i in range(1,len(pe_var)+1):
     print(f'PC {i} effects = {str(dict(zip(labelnames[:], vectors[i-1])))}')
     
     
