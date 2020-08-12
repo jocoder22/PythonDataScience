@@ -34,7 +34,20 @@ X_train, X_test, y_train, y_test = train_test_split(features, targets,
                                                     random_state=RANDOMSTATE)
 
 
-# Fit to data and predict using pipelined scaling, GNB and PCA.
-std_clf = make_pipeline(StandardScaler(), PCA(n_components=2), GaussianNB())
-std_clf.fit(X_train, y_train)
-pred_test_std = std_clf.predict(X_test)
+
+# define colors and markers
+X = wine_train
+y = wine_train_labels
+colors = ["red", "black", "blue"]
+markers = ["*","o","+"]
+
+# Fit to data and predict using pipelined scaling, PCA.
+pca = make_pipeline(StandardScaler(), PCA(n_components=2))
+pca.fit(X_train)
+pca_result = pca.transform(X_test)
+
+# plot
+for i, label in enumerate(np.unique(y_test)):
+    plt.scatter(pca_result[:,0][labels==label],pca_result[:,1][labels==label], 
+                c=colors[i], marker=markers[i], lw=1)
+plt.title("The projection onto 2 PCA components");
