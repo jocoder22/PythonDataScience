@@ -52,6 +52,18 @@ plt.title("The projection onto 2 PCA components");
 
 
 # Fit to data and predict using pipelined scaling, LDA.
+lda = LDA(n_components=2)
+lda.fit(X_train,y_train)
+lda_result = lda.transform(X_test)
+
+# plot
+for i, label in enumerate(np.unique(y_test)):
+    plt.scatter(lda_result[:,0][y_test==label],lda_result[:,1][y_test==label], 
+                c=colors[i], marker=markers[i], lw=1)
+plt.title("The projection onto 2 LDA components with scaling");
+
+
+# Fit to data and predict without using pipelined scaling, LDA.
 lda2 = LDA(n_components=2)
 lda2.fit(X_train,y_train)
 lda_result = lda2.transform(X_test)
@@ -60,4 +72,4 @@ lda_result = lda2.transform(X_test)
 for i, label in enumerate(np.unique(y_test)):
     plt.scatter(lda_result[:,0][y_test==label],lda_result[:,1][y_test==label], 
                 c=colors[i], marker=markers[i], lw=1)
-plt.title("The projection onto 2 LDA components");
+plt.title("The projection onto 2 LDA components without scaling");
