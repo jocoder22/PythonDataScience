@@ -36,10 +36,8 @@ X_train, X_test, y_train, y_test = train_test_split(features, targets,
 
 
 # define colors and markers
-X = wine_train
-y = wine_train_labels
-colors = ["red", "black", "blue"]
-markers = ["*","o","+"]
+markers = ["*","o", "+"]
+colors = ["r", "y", "k"]
 
 # Fit to data and predict using pipelined scaling, PCA.
 pca = make_pipeline(StandardScaler(), PCA(n_components=2))
