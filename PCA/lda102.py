@@ -22,7 +22,7 @@ from sklearn.pipeline import make_pipeline
 print(__doc__)
 
 
-RANDOMSTATE = 142
+RANDOMSTATE = 42
 FIGSIZE = (12, 8)
 
 
@@ -30,7 +30,7 @@ features, targets = load_wine(return_X_y=True)
 
 # create train/test split using 25% test size
 X_train, X_test, y_train, y_test = train_test_split(features, targets,
-                                                    test_size=0.25,
+                                                    test_size=0.30,
                                                     random_state=RANDOMSTATE)
 
 
