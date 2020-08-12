@@ -32,3 +32,9 @@ features, targets = load_wine(return_X_y=True)
 X_train, X_test, y_train, y_test = train_test_split(features, targets,
                                                     test_size=0.20,
                                                     random_state=RANDOMSTATE)
+
+
+# Fit to data and predict using pipelined scaling, GNB and PCA.
+std_clf = make_pipeline(StandardScaler(), PCA(n_components=2), GaussianNB())
+std_clf.fit(X_train, y_train)
+pred_test_std = std_clf.predict(X_test)
