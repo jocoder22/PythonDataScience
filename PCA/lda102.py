@@ -10,9 +10,9 @@ from IPython.display import display
 from IPython.display import Image
 from IPython.display import HTML
 
-from printdescribe import 
+from printdescribe import print2
 
-rom sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.naive_bayes import GaussianNB
 
