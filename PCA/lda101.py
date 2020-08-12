@@ -10,7 +10,7 @@ from IPython.display import display
 from IPython.display import Image
 from IPython.display import HTML
 
-from printdescribe import 
+from printdescribe import print2
 
 # download the data
 iris = datasets.load_iris()
