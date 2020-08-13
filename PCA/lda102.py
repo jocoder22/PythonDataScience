@@ -24,9 +24,16 @@ print(__doc__)
 
 RANDOMSTATE = 42
 FIGSIZE = (12, 8)
+show = plt.show()
 
+# features, targets = load_wine(return_X_y=True)
 
-features, targets = load_wine(return_X_y=True)
+# download the data
+wine = datasets.load_wine()
+
+features = wine.data
+targets = wine.target
+labelnames = wine.target_names
 
 # create train/test split using 25% test size
 X_train, X_test, y_train, y_test = train_test_split(features, targets,
@@ -38,6 +45,7 @@ X_train, X_test, y_train, y_test = train_test_split(features, targets,
 # define colors and markers
 markers = ["*","o", "+"]
 colors = ["r", "y", "k"]
+labels = y_test
 
 # Fit to data and predict using pipelined scaling, PCA.
 pca = make_pipeline(StandardScaler(), PCA(n_components=2))
@@ -47,8 +55,10 @@ pca_result = pca.transform(X_test)
 # plot
 for i, label in enumerate(np.unique(y_test)):
     plt.scatter(pca_result[:,0][labels==label],pca_result[:,1][labels==label], 
-                c=colors[i], marker=markers[i], lw=1)
-plt.title("The projection onto 2 PCA components");
+                c=colors[i], marker=markers[i], lw=1,label=labelnames[i])
+plt.title("The projection onto 2 PCA components")
+plt.legend(loc='best', shadow=False, scatterpoints=3)
+plt.show();
 
 
 # Fit to data and predict using pipelined scaling, LDA.
@@ -60,7 +70,9 @@ lda_result = lda.transform(X_test)
 for i, label in enumerate(np.unique(y_test)):
     plt.scatter(lda_result[:,0][y_test==label],lda_result[:,1][y_test==label], 
                 c=colors[i], marker=markers[i], lw=1)
-plt.title("The projection onto 2 LDA components with scaling");
+plt.title("The projection onto 2 LDA components with scaling")
+plt.legend(loc='best', shadow=False, scatterpoints=3)
+plt.show();
 
 
 # Fit to data and predict without using pipelined scaling, LDA.
@@ -72,7 +84,9 @@ lda_result = lda2.transform(X_test)
 for i, label in enumerate(np.unique(y_test)):
     plt.scatter(lda_result[:,0][y_test==label],lda_result[:,1][y_test==label], 
                 c=colors[i], marker=markers[i], lw=1)
-plt.title("The projection onto 2 LDA components without scaling");
+plt.title("The projection onto 2 LDA components without scaling")
+plt.legend(loc='best', shadow=False, scatterpoints=3)
+show;
 
 
 

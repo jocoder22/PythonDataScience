@@ -41,6 +41,7 @@ plt.xlabel('Principal Components')
 plt.title('Explained Variance Ratio')
 plt.show()
 
+
 # Bar chart percent explained
 pe_var = np.round(lda.explained_variance_ratio_*100, 1)
 ldalabels = ["LDA"+str(i) for i in range(1,len(pe_var)+1)]
