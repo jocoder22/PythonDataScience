@@ -50,7 +50,12 @@ labels = y_test
 gmm = make_pipeline(StandardScaler(), classifier)
 gmm.fit(X_train)
 pred_train = gmm.predict(X_train)
+train_accuracy = np.mean(pred_train.ravel() == y_train.ravel()) * 100
+print2(f"Train accuracy: {np.round(train_accurary,2)}")
+  
 pred_test = gmm.predict(X_test)
+test_accuracy = np.mean(pred_test.ravel() == y_test.ravel()) * 100
+print2(f"Test accuracy: {np.round(test_accurary,2)}")
 
 # plot
 for i, label in enumerate(np.unique(y_test)):
