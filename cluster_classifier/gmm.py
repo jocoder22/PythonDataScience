@@ -37,3 +37,5 @@ X_train, X_test, y_train, y_test = train_test_split(features, targets,
 n_classes = len(np.unique(y_train))
 
 
+# Try GMMs.
+classifier =  GMM(n_components=n_classes, covariance_type= 'tied')
