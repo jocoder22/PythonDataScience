@@ -4,9 +4,11 @@ import matplotlib as mpl
 import numpy as np
 
 from sklearn import datasets
-from sklearn.cross_validation import StratifiedKFold
+# from sklearn.cross_validation import StratifiedKFold
+from sklearn.model_selection import StratifiedKFold
 from sklearn.externals.six.moves import xrange
 from sklearn.mixture import GMM
+from sklearn import mixture
 
 from printdescribe import print2
 
@@ -36,13 +38,27 @@ X_train, X_test, y_train, y_test = train_test_split(features, targets,
 
 n_classes = len(np.unique(y_train))
 
+# # Break up the dataset into non-overlapping training (80%) and testing (20%) sets
+# skf = StratifiedKFold(n_splits=5)
+
+# # Only take the first fold.
+# train_index, test_index = next(iter(skf.split(iris.data, iris.target)))
+
+# X_train = iris.data[train_index]
+# y_train = iris.target[train_index]
+# X_test = iris.data[test_index]
+# y_test = iris.target[test_index]
+
 
 # Try GMMs.
-classifier =  GMM(n_components=n_classes, covariance_type= 'tied')
+classifier =  mixture.GaussianMixture(n_components=n_classes, covariance_type= 'tied')
+classifier.means_init = np.array([X_train[y_train == i].mean(axis=0)
+                                    for i in range(n_classes)])
 
 # define colors and markers
 markers = ["*","o", "+"]
-colors = ["r", "y", "k"]
+# colors = ["r", "y", "k"]
+colors = ['navy', 'turquoise', 'darkorange']
 col = ['r*','yo','k+']
 labels = y_test
 
@@ -51,12 +67,26 @@ gmm = make_pipeline(StandardScaler(), classifier)
 gmm.fit(X_train)
 pred_train = gmm.predict(X_train)
 train_accuracy = np.mean(pred_train.ravel() == y_train.ravel()) * 100
-print2(f"Train accuracy: {np.round(train_accurary,2)}")
+print2(f"Train accuracy: {np.round(train_accuracy,2)}")
   
 pred_test = gmm.predict(X_test)
 test_accuracy = np.mean(pred_test.ravel() == y_test.ravel()) * 100
-print2(f"Test accuracy: {np.round(test_accurary,2)}")
+print2(f"Test accuracy: {np.round(test_accuracy,2)}")
 
+
+
+
+for n, color in enumerate(colors):
+  #     plot the original data
+    data = iris.data[iris.target == n]
+    plt.scatter(data[:, 0], data[:, 1], s=2.8, color=color,
+                label=iris.target_names[n])
+    
+  #     plot the prediction
+    data = X_test[y_test == n]
+    plt.scatter(data[:, 0], data[:, 1], marker='x', color=color)
+    
+    
 # plot
 for i, label in enumerate(np.unique(y_test)):
     plt.plot(pca_result[:,0][labels==label],pca_result[:,1][labels==label], 
