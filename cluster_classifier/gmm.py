@@ -40,8 +40,6 @@ n_classes = len(np.unique(y_train))
 # Try GMMs.
 classifier =  GMM(n_components=n_classes, covariance_type= 'tied')
 
-
-
 # define colors and markers
 markers = ["*","o", "+"]
 colors = ["r", "y", "k"]
@@ -51,7 +49,8 @@ labels = y_test
 # Fit to data and predict using pipelined scaling, PCA.
 gmm = make_pipeline(StandardScaler(), classifier)
 gmm.fit(X_train)
-pca_result = pca.transform(X_test)
+pred_train = gmm.predict(X_train)
+pred_test = gmm.predict(X_test)
 
 # plot
 for i, label in enumerate(np.unique(y_test)):
