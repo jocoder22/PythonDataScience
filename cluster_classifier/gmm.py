@@ -18,10 +18,17 @@ from sklearn.datasets import load_wine
 from sklearn.pipeline import make_pipeline
 print(__doc__)
 
+RANDOMSTATE = 42
 
 # download the data
 iris = datasets.load_iris()
 
-data = iris.data
-labels = iris.target
+features = iris.data
+targets = iris.target
 labelnames = iris.target_names
+
+
+# create train/test split using 25% test size
+X_train, X_test, y_train, y_test = train_test_split(features, targets,
+                                                    test_size=0.30,
+                                                    random_state=RANDOMSTATE)    
