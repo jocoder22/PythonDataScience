@@ -107,7 +107,7 @@ cointegration_test('MSFT', 'XLF', normalised_prices)
 # Applying an AR(1) Model and Forecasting for the next period (t+1)
 model = ARIMA(log_returns['MSFT'], order=(1,0,0))
 model_fit = model.fit(disp=0)
-print(model_fit.summary())
+print2(model_fit.summary())
 
 
 residuals = pd.DataFrame(model_fit.resid)
@@ -115,7 +115,7 @@ residuals.plot()
 plt.show()
 residuals.plot(kind='kde')
 plt.show()
-print(residuals.describe())
+print2(residuals.describe())
 
 
 X = log_returns['MSFT'].values
@@ -132,7 +132,7 @@ for t in range(len(test)):
     obs = test[t]
     history.append(obs)
 error = mean_squared_error(test, predictions)
-print('Test MSE: %.3f' % error)
+print2('Test MSE: %.3f' % error)
 
 
 plt.plot(test)
