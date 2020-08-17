@@ -141,4 +141,11 @@ show()
 
 
 # rolling window volatililty
-mr = datasets['MSFT', ['Adj Close']].pct_change()
+mr = mr = datasets['Adj Close']["MSFT"].pct_change().dropna()
+
+
+rolling = mr.rolling(30)
+vol = rolling.std().dropna()
+vol_monthly = vol.resample("M").mean()
+vol_monthly.plot(title="Monthly volatility").set_ylabel("Standard Deviation")
+show();
