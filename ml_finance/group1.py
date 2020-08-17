@@ -39,3 +39,27 @@ show()
 moving_average = datasets['Adj Close'].rolling(window = 30).mean()
 ewma = datasets['Adj Close'].ewm(span=30).mean()
 
+figure_counter = 0
+matplotlib.rcParams['figure.figsize'] = [12, 5]
+for ticker in assets:
+  figure_counter = figure_counter + 1
+  plt.figure(figure_counter)
+  plt.plot(datasets['Adj Close'][ticker])
+  plt.plot(moving_average[ticker], '--')
+  plt.plot(ewma[ticker], '--')
+  plt.legend(['Price', '30-day mov avg','30-day EWM avg'])
+  plt.title(ticker)
+  plt.grid()
+  show()
+
+
+  # Normalizing prices
+normalised_prices = (datasets['Adj Close'] - means)/stddevs
+
+matplotlib.rcParams['figure.figsize'] = [12, 7]
+plt.plot(normalised_prices);
+plt.ylabel('Normalised Price');
+plt.legend(assets);
+plt.grid()
+show()
+
