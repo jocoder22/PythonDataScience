@@ -22,9 +22,7 @@ start_date = '2013-01-01'
 end_date = '2019-12-31'
 
 assets = ['MSFT', 'FDN', 'JPM', 'XLF']
-
 datasets = dr.DataReader(assets, data_source='yahoo', start=start_date, end=end_date)
-
 print2(datasets['Adj Close'].head())
 
 
