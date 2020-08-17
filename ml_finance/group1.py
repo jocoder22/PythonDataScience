@@ -34,3 +34,8 @@ plt.ylabel('Price')
 plt.legend(assets)
 plt.grid()
 show()
+
+# Obtaining the 30-day moving average and exponentially weighted moving average
+moving_average = datasets['Adj Close'].rolling(window = 30).mean()
+ewma = datasets['Adj Close'].ewm(span=30).mean()
+
