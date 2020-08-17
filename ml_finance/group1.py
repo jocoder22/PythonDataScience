@@ -35,6 +35,14 @@ plt.legend(assets)
 plt.grid()
 show()
 
+
+# Obtaining the mean and standard devivation of the Assests
+means = datasets['Adj Close'].mean()
+print(means)
+print("............")
+stddevs = datasets['Adj Close'].std()
+print(stddevs)
+
 # Obtaining the 30-day moving average and exponentially weighted moving average
 moving_average = datasets['Adj Close'].rolling(window = 30).mean()
 ewma = datasets['Adj Close'].ewm(span=30).mean()
@@ -50,7 +58,7 @@ for ticker in assets:
   plt.legend(['Price', '30-day mov avg','30-day EWM avg'])
   plt.title(ticker)
   plt.grid()
-  show()
+  show
 
 
   # Normalizing prices
@@ -61,5 +69,50 @@ plt.plot(normalised_prices);
 plt.ylabel('Normalised Price');
 plt.legend(assets);
 plt.grid()
-show()
+show
+
+# Identifying and Testing for Structural Breaks
+def no_structural_breaks_test(ticker, benchmark, data):
+  results = smf.ols(ticker + ' ~ ' + benchmark, data = data).fit()
+  names = ['test statistic', 'pval', 'crit']
+  test = breaks_cusumolsresid(results.resid, results.df_model)
+  print('Test for the null-hypothesis of no structural breaks for '+ ticker + ' vs ' + benchmark + ':')
+  print(list(zip(names, test)))
+  print()
+
+no_structural_breaks_test('MSFT', 'FDN', normalised_prices)
+no_structural_breaks_test('MSFT', 'JPM', normalised_prices)
+no_structural_breaks_test('MSFT', 'XLF', normalised_prices)
+
+# Applying the Jarque Bera Test
+log_returns = np.log(datasets['Adj Close']).diff().dropna()
+
+for ticker in assets:
+  print('Jarque-Bera test for ' + ticker + ': ', jarque_bera(log_returns[ticker]))
+
+
+# Applying a Cointegration Test
+def cointegration_test(ticker, benchmark, data):
+  johansen_results = coint_johansen(normalised_prices[[ticker, benchmark]], 0, 1)
+  print(ticker, ': ') 
+  print('Maximum eigenvalue statistic:', johansen_results.lr2)
+  print('Critical values (90%, 95%, 99%) for maximum eigenvalue statistic', johansen_results.cvm)
+  print()
+
+cointegration_test('MSFT', 'FDN', normalised_prices)
+cointegration_test('MSFT', 'JPM', normalised_prices)
+cointegration_test('MSFT', 'XLF', normalised_prices)
+
+
+# Applying an AR(1) Model and Forecasting for the next period (t+1)
+model = ARIMA(log_returns['MSFT'], order=(1,0,0))
+model_fit = model.fit(disp=0)
+print(model_fit.summary())
+
+residuals = pd.DataFrame(model_fit.resid)
+residuals.plot()
+plt.show()
+residuals.plot(kind='kde')
+plt.show()
+print(residuals.describe())
 
