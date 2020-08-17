@@ -176,7 +176,45 @@ plt.show()
 
 
 
+import statsmodels.api as sm
+# Add intercept constants to each sub-period 'before' and 'after'
+kkb = np.ones([before.shape[0]])
+kka = np.ones([after.shape[0]])
+before_with_intercept = sm.add_constant(kkb)
+after_with_intercept  = sm.add_constant(kka)
 
+
+kmr = np.ones([mr.shape[0]])
+mr_intercept  = sm.add_constant(kmr)
+# result = sm.OLS(mr, mr_intercept).fit()
+# M=sm.robust.norms.HuberT()).fit()
+
+
+result = sm.RLM(mr, mr_intercept, M=sm.robust.norms.HuberT()).fit()
+# Retrieve the sum-of-squared residuals
+ssr_total = np.power(result.resid, 2).sum()
+
+# Fit OLS regressions to each sub-period
+# r_b = sm.OLS(before, before_with_intercept).fit()
+# r_a = sm.OLS(after,  after_with_intercept).fit()
+
+
+r_b = sm.RLM(before, before_with_intercept, M=sm.robust.norms.HuberT()).fit()
+r_a = sm.RLM(after,  after_with_intercept, M=sm.robust.norms.HuberT()).fit()
+
+# Get sum-of-squared residuals for both regressions
+# ssr_before = r_b.ssr
+# ssr_after = r_a.ssr
+
+ssr_before = np.power(r_b.resid, 2).sum()
+ssr_after = np.power(r_a.resid, 2).sum()
+
+# Compute and display the Chow test statistic
+d_f = 1
+df2 = 2*d_f
+numerator = ((ssr_total - (ssr_before + ssr_after)) / d_f)
+denominator = ((ssr_before + ssr_after) / (mr.shape[0] - df2))
+print("Chow test statistic: ", numerator / denominator)
 
 
 
