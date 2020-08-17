@@ -149,3 +149,7 @@ vol = rolling.std().dropna()
 vol_monthly = vol.resample("M").mean()
 vol_monthly.plot(title="Monthly volatility").set_ylabel("Standard Deviation")
 show();
+
+
+vol_monthly.pct_change().plot(title="$\Delta$ Monthly volatility").set_ylabel("$\Delta$ Standard Deviation")
+show();
