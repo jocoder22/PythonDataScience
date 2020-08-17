@@ -141,3 +141,4 @@ show()
 
 
 # rolling window volatililty
+mr = datasets['MSFT', ['Adj Close']].pct_change()
