@@ -61,7 +61,7 @@ for ticker in assets:
   show
 
 
-  # Normalizing prices
+# Normalizing prices
 normalised_prices = (datasets['Adj Close'] - means)/stddevs
 
 matplotlib.rcParams['figure.figsize'] = [12, 7]
@@ -70,6 +70,7 @@ plt.ylabel('Normalised Price');
 plt.legend(assets);
 plt.grid()
 show
+
 
 # Identifying and Testing for Structural Breaks
 def no_structural_breaks_test(ticker, benchmark, data):
@@ -80,12 +81,14 @@ def no_structural_breaks_test(ticker, benchmark, data):
   print(list(zip(names, test)))
   print()
 
+
 no_structural_breaks_test('MSFT', 'FDN', normalised_prices)
 no_structural_breaks_test('MSFT', 'JPM', normalised_prices)
 no_structural_breaks_test('MSFT', 'XLF', normalised_prices)
 
 # Applying the Jarque Bera Test
 log_returns = np.log(datasets['Adj Close']).diff().dropna()
+
 
 for ticker in assets:
   print('Jarque-Bera test for ' + ticker + ': ', jarque_bera(log_returns[ticker]))
@@ -99,6 +102,7 @@ def cointegration_test(ticker, benchmark, data):
   print('Critical values (90%, 95%, 99%) for maximum eigenvalue statistic', johansen_results.cvm)
   print()
 
+
 cointegration_test('MSFT', 'FDN', normalised_prices)
 cointegration_test('MSFT', 'JPM', normalised_prices)
 cointegration_test('MSFT', 'XLF', normalised_prices)
@@ -109,12 +113,14 @@ model = ARIMA(log_returns['MSFT'], order=(1,0,0))
 model_fit = model.fit(disp=0)
 print(model_fit.summary())
 
+
 residuals = pd.DataFrame(model_fit.resid)
 residuals.plot()
 plt.show()
 residuals.plot(kind='kde')
 plt.show()
 print(residuals.describe())
+
 
 X = log_returns['MSFT'].values
 size = int(len(X) * 0.66)
@@ -132,6 +138,7 @@ for t in range(len(test)):
 error = mean_squared_error(test, predictions)
 print('Test MSE: %.3f' % error)
 
+
 plt.plot(test)
 plt.plot(predictions, color='red')
-plt.show()
+show()
