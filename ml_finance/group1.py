@@ -153,3 +153,20 @@ show();
 
 vol_monthly.pct_change().plot(title="$\Delta$ Monthly volatility").set_ylabel("$\Delta$ Standard Deviation")
 show();
+
+
+# Create a plot of quarterly minimum portfolio returns
+plt.plot(qmin, label="Quarterly minimum return")
+
+# Create a plot of quarterly mean volatility
+plt.plot(vol_q, label="Quarterly mean volatility")
+
+
+
+qmin = mr.resample("Q").min().dropna()
+vol_q = vol.resample("Q").mean().dropna()
+
+# Create legend and plot
+# Create legend and plot
+plt.legend()
+plt.show()
