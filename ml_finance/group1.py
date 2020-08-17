@@ -14,6 +14,8 @@ from statsmodels.tsa.arima_model import ARIMA
 from sklearn.metrics import mean_squared_error
 from statsmodels.tsa.vector_ar.vecm import coint_johansen
 
+import scipy.stats
+
 from printdescribe import print2
 show = plt.show
 
@@ -170,3 +172,12 @@ vol_q = vol.resample("Q").mean().dropna()
 # Create legend and plot
 plt.legend()
 plt.show()
+
+
+
+
+
+
+
+
+scipy.stats.f.ppf(q=1-0.01, dfn=d_f, dfd=(mr.shape[0] - df2))
