@@ -15,6 +15,7 @@ from sklearn.metrics import mean_squared_error
 from statsmodels.tsa.vector_ar.vecm import coint_johansen
 
 from printdescribe import print2
+show = plt.show
 
 # Obtaining Stock Data of Microsoft and Benchmark Data
 start_date = '2013-01-01'
@@ -28,7 +29,8 @@ print2(datasets['Adj Close'].head())
 
 
 # matplotlib.rcParams['figure.figsize'] = [15, 7]
-plt.plot(datasets['Adj Close']);
-plt.ylabel('Price');
-plt.legend(assets);
-plt.grid();
+plt.plot(datasets['Adj Close'])
+plt.ylabel('Price')
+plt.legend(assets)
+plt.grid()
+show()
