@@ -132,3 +132,6 @@ for t in range(len(test)):
 error = mean_squared_error(test, predictions)
 print('Test MSE: %.3f' % error)
 
+plt.plot(test)
+plt.plot(predictions, color='red')
+plt.show()
