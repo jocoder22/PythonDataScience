@@ -141,7 +141,7 @@ show()
 
 
 # rolling window volatililty
-mr = mr = datasets['Adj Close']["MSFT"].pct_change().dropna()
+mr =  datasets['Adj Close']["MSFT"].pct_change().dropna()
 
 
 rolling = mr.rolling(30)
