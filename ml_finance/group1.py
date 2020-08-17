@@ -38,10 +38,8 @@ show()
 
 # Obtaining the mean and standard devivation of the Assests
 means = datasets['Adj Close'].mean()
-print(means)
-print("............")
 stddevs = datasets['Adj Close'].std()
-print(stddevs)
+print2(means, stddevs)
 
 # Obtaining the 30-day moving average and exponentially weighted moving average
 moving_average = datasets['Adj Close'].rolling(window = 30).mean()
