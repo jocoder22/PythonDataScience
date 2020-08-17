@@ -138,3 +138,6 @@ print2('Test MSE: %.3f' % error)
 plt.plot(test)
 plt.plot(predictions, color='red')
 show()
+
+
+# rolling window volatililty
