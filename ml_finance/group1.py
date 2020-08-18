@@ -61,6 +61,7 @@ for ticker in assets:
 
 # Normalizing prices
 normalised_prices = (datasets['Adj Close'] - means)/stddevs
+normalised_returns = (datasets['Adj Close'].pct_change() - means)/stddevs
 
 matplotlib.rcParams['figure.figsize'] = [12, 7]
 plt.plot(normalised_prices);
@@ -234,8 +235,16 @@ print("Chow test statistic: ", numerator / denominator)
 scipy.stats.f.ppf(q=1-0.01, dfn=d_f, dfd=(mr.shape[0] - df2))
 
 """
-print2(normalised_prices.head())
-mr = normalised_prices["MSFT"]
+# print2(normalised_prices.head())
+# mr = normalised_prices["MSFT"]
+
+# print2(normalised_returns.head())
+# mr = normalised_returns["MSFT"].dropna()
+
+
+mmr = normalised_prices.resample("Q").mean()
+print2(mmr.head())
+mr = mmr["MSFT"].dropna()
 
 print2(mr.head(), mr.shape)
 before = mr.loc[:"2016-08"]
