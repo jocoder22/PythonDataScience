@@ -297,8 +297,6 @@ ssr_after = np.power(r_a.resid, 2).sum()
 """
 
 
-
-
 # Compute and display the Chow test statistic
 d_f = 1
 df2 = 2*d_f
