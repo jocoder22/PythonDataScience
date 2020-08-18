@@ -69,6 +69,8 @@ plt.legend(assets);
 plt.grid()
 show
 
+"""
+
 
 # Identifying and Testing for Structural Breaks
 def no_structural_breaks_test(ticker, benchmark, data):
@@ -174,11 +176,15 @@ plt.plot(vol_q, label="Quarterly mean volatility")
 plt.legend()
 plt.show()
 
-
+"""
 
 
 import statsmodels.api as sm
+
+"""
 # Add intercept constants to each sub-period 'before' and 'after'
+before = mr.loc[:"2007"]
+after = mr.loc["2008":]
 
 kmr = np.ones([mr.shape[0]])
 kkb = np.ones([before.shape[0]])
@@ -226,3 +232,65 @@ denominator = ((ssr_before + ssr_after) / (mr.shape[0] - df2))
 print("Chow test statistic: ", numerator / denominator)
 
 scipy.stats.f.ppf(q=1-0.01, dfn=d_f, dfd=(mr.shape[0] - df2))
+
+"""
+print2(normalised_prices.head())
+mr = normalised_prices["MSFT"]
+
+print2(mr.head(), mr.shape)
+before = mr.loc[:"2016-08"]
+after = mr.loc["2016-09":]
+print2("#"*20, before.tail())
+
+
+
+
+
+
+kmr = np.ones([mr.shape[0]])
+kkb = np.ones([before.shape[0]])
+kka = np.ones([after.shape[0]])
+
+mr_intercept  = sm.add_constant(kmr)
+before_with_intercept = sm.add_constant(kkb)
+after_with_intercept  = sm.add_constant(kka)
+
+
+# Fit OLS regressions to each tota; period
+result = sm.OLS(mr, mr_intercept).fit()
+
+# # Retrieve the sum-of-squared residuals
+ssr_total = result.ssr
+
+
+# Fit OLS regressions to each sub-period
+r_b = sm.OLS(before, before_with_intercept).fit()
+r_a = sm.OLS(after,  after_with_intercept).fit()
+
+# # Retrieve the sum-of-squared residuals
+ssr_before = r_b.ssr
+ssr_after = r_a.ssr
+
+# # Fit OLS regressions to each total period
+# result = sm.RLM(mr, mr_intercept, M=sm.robust.norms.HuberT()).fit()
+
+# # Retrieve the sum-of-squared residuals
+# ssr_total = np.power(result.resid, 2).sum()
+
+# # Fit OLS regressions to each sub-period
+# r_b = sm.RLM(before, before_with_intercept, M=sm.robust.norms.HuberT()).fit()
+# r_a = sm.RLM(after,  after_with_intercept, M=sm.robust.norms.HuberT()).fit()
+
+# # Get sum-of-squared residuals for both regressions
+# ssr_before = np.power(r_b.resid, 2).sum()
+# ssr_after = np.power(r_a.resid, 2).sum()
+
+# Compute and display the Chow test statistic
+d_f = 1
+df2 = 2*d_f
+numerator = ((ssr_total - (ssr_before + ssr_after)) / d_f)
+denominator = ((ssr_before + ssr_after) / (mr.shape[0] - df2))
+print("Chow test statistic: ", numerator / denominator)
+
+f = scipy.stats.f.ppf(q=1-0.01, dfn=d_f, dfd=(mr.shape[0] - df2))
+print2(f"Critical point: {f}")
