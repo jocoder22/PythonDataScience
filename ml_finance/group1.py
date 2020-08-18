@@ -252,10 +252,6 @@ after = mr.loc["2016-09":]
 print2("#"*20, before.tail())
 
 
-
-
-
-
 kmr = np.ones([mr.shape[0]])
 kkb = np.ones([before.shape[0]])
 kka = np.ones([after.shape[0]])
