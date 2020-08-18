@@ -261,6 +261,7 @@ before_with_intercept = sm.add_constant(kkb)
 after_with_intercept  = sm.add_constant(kka)
 
 
+
 # Fit OLS regressions to each tota; period
 result = sm.OLS(mr, mr_intercept).fit()
 
@@ -276,19 +277,27 @@ r_a = sm.OLS(after,  after_with_intercept).fit()
 ssr_before = r_b.ssr
 ssr_after = r_a.ssr
 
-# # Fit OLS regressions to each total period
-# result = sm.RLM(mr, mr_intercept, M=sm.robust.norms.HuberT()).fit()
 
-# # Retrieve the sum-of-squared residuals
-# ssr_total = np.power(result.resid, 2).sum()
 
-# # Fit OLS regressions to each sub-period
-# r_b = sm.RLM(before, before_with_intercept, M=sm.robust.norms.HuberT()).fit()
-# r_a = sm.RLM(after,  after_with_intercept, M=sm.robust.norms.HuberT()).fit()
+"""
+# Fit OLS regressions to each total period
+result = sm.RLM(mr, mr_intercept, M=sm.robust.norms.HuberT()).fit()
 
-# # Get sum-of-squared residuals for both regressions
-# ssr_before = np.power(r_b.resid, 2).sum()
-# ssr_after = np.power(r_a.resid, 2).sum()
+# Retrieve the sum-of-squared residuals
+ssr_total = np.power(result.resid, 2).sum()
+
+# Fit OLS regressions to each sub-period
+r_b = sm.RLM(before, before_with_intercept, M=sm.robust.norms.HuberT()).fit()
+r_a = sm.RLM(after,  after_with_intercept, M=sm.robust.norms.HuberT()).fit()
+
+# Get sum-of-squared residuals for both regressions
+ssr_before = np.power(r_b.resid, 2).sum()
+ssr_after = np.power(r_a.resid, 2).sum()
+
+"""
+
+
+
 
 # Compute and display the Chow test statistic
 d_f = 1
