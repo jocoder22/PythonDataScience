@@ -241,7 +241,6 @@ scipy.stats.f.ppf(q=1-0.01, dfn=d_f, dfd=(mr.shape[0] - df2))
 # print2(normalised_returns.head())
 # mr = normalised_returns["MSFT"].dropna()
 
-
 mmr = normalised_prices.resample("Q").mean()
 print2(mmr.head())
 mr = mmr["MSFT"].dropna()
@@ -251,7 +250,6 @@ before = mr.loc[:"2016-08"]
 after = mr.loc["2016-09":]
 print2("#"*20, before.tail())
 
-
 kmr = np.ones([mr.shape[0]])
 kkb = np.ones([before.shape[0]])
 kka = np.ones([after.shape[0]])
@@ -259,8 +257,6 @@ kka = np.ones([after.shape[0]])
 mr_intercept  = sm.add_constant(kmr)
 before_with_intercept = sm.add_constant(kkb)
 after_with_intercept  = sm.add_constant(kka)
-
-
 
 # Fit OLS regressions to each tota; period
 result = sm.OLS(mr, mr_intercept).fit()
