@@ -302,4 +302,4 @@ denominator = ((ssr_before + ssr_after) / (mr.shape[0] - df2))
 print("Chow test statistic: ", numerator / denominator)
 
 f = scipy.stats.f.ppf(q=1-0.01, dfn=d_f, dfd=(mr.shape[0] - df2))
-print2(f"Critical point: {f}")
+print2(f"F Critical point: {f}")
