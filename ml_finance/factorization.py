@@ -2,7 +2,12 @@
 # Importing Libraries 
 import numpy as np 
 import pandas as pd 
+from scipy.linalg import lu, qr, cholesky
+from numpy import linalg as LA
+
 from printdescribe import print2
+
+np.random.seed(42)
 
 import pandas_datareader.data as dr
 import matplotlib
@@ -57,8 +62,15 @@ print2(A2_, B2_)
 # 1. square symmetric matrix
 # 2. All eigenvalues are greater than zero
 # ==> positive definite matrices
-# create square symmetric matrices
-sa = (A + A.T)/2
-sa2 = A @ A.T
-sa3 = np.tril(A) + np.tril(A, -1).T
+# create positive definite square symmetric matrices
+n = 5
+matrix1 = np.random.randint(20,30,size=(N,N))
+A = (b + b.T)/2
+sa = A @ A.T
+
+# check for definite positivity
+# w = list of eigenvalues
+# v = colums of eigenvectors, one column per eigenvalues
+w,v = LA.eig(sa)
+print2(v)
 
