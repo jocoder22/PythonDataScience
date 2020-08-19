@@ -17,4 +17,11 @@ B = np.arange(10,26).reshape(-1,4)
 
 # PLU decomposition; used for square matrix
 P,L, U = lu(A)
+Pb,Lb, Ub = lu(B)
+
 print2(P,L,U)
+print2(Pb,Lb,Ub)
+
+# recombine the triangular factor matrices
+A_ = P @ L @ U
+B_ = Pb @ Lb @ Ub
