@@ -74,3 +74,13 @@ sa = A @ A.T
 w,v = LA.eig(sa)
 print2(v)
 
+# perform cholesky decomposition
+# numpy.linalg.cholesky gives lower triangle
+chola_numpy = LA.cholesky(sa)
+chola_numpy_ = chola_numpy @ chola_numpy.T
+print2(chola_numpy, chola_numpy_, sa)
+
+# while scipy.linalg.cholesky gives upper triangle
+chola = cholesky(sa)
+chola_ = chola.T @ chola
+print2(chola, chola_, sa)
