@@ -53,4 +53,12 @@ B2_ = Qb @ Rb
 print2(A2_, B2_)
 
 
+# cholesky decomposition, for
+# 1. square symmetric matrix
+# 2. All eigenvalues are greater than zero
+# ==> positive definite matrices
+# create square symmetric matrices
+sa = (A + A.T)/2
+sa2 = A @ A.T
+sa3 = np.tril(A) + np.tril(A, -1).T
 
