@@ -27,3 +27,15 @@ A_ = P @ L @ U
 B_ = Pb @ Lb @ Ub
 
 print2(A_, B_)
+
+
+# QR decomposition for all matrix
+# create matrix
+A2 = np.linspace(1,35,35).reshape(-1,5)
+B2 = np.arange(10,34).reshape(-1,4)
+print2(A2, B2)
+
+# perfom QR decomposition
+
+
+
