@@ -363,3 +363,15 @@ def strcbreak(data, breakpoint):
     f = st.f.ppf(q=1-0.01, dfn=d_f, dfd=(mr.shape[0]/2 - df2))
     print2(f"F Critical point: {f}")
     
+
+    
+df4 = datasets.expanding(min_periods=1).std().dropna()  
+df5 = datasets.pct_change().expanding().std().dropna()
+
+# plot the graphs
+fig, (ax1, ax2) = plt.subplots(2, sharex=True)
+ax1.plot(m1)
+ax2.plot(m2)
+plt.legend(m1.columns)
+plt.show();
+df5.plot()
