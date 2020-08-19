@@ -25,3 +25,5 @@ print2(Pb,Lb,Ub)
 # recombine the triangular factor matrices
 A_ = P @ L @ U
 B_ = Pb @ Lb @ Ub
+
+print2(A_, B_)
