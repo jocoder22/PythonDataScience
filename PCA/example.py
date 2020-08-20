@@ -48,13 +48,15 @@ print2(np.round(pred, 2))
 print2(gcc.score(nn))
 
 
+
+###########################################################################
+############# kmeans ######################################################
+cc = np.array([-1.5,-1.0,-0.5,1.5,2.0,2.5]).reshape(-1,1)
 bb = np.array([-8.0,-3.0,0.0,6.5,9.0,45.5]).reshape(-1,1)
 
 kmean = KMeans(n_clusters=2, random_state=42).fit(bb)
 center, labels = kmean.cluster_centers_, kmean.labels_
 print2(center, labels)
-
-
 
 
 kmean = KMeans(n_clusters=2, random_state=42).fit(cc)
