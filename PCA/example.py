@@ -56,7 +56,8 @@ bb = np.array([-8.0,-3.0,0.0,6.5,9.0,45.5]).reshape(-1,1)
 
 kmean = KMeans(n_clusters=2, random_state=42).fit(bb)
 center, labels = kmean.cluster_centers_, kmean.labels_
-print2(center, labels)
+print2(f'Cluster center for bb : {center}',
+        f'Cluster labels for bb: {labels}')
 
 
 kmean = KMeans(n_clusters=2, random_state=42).fit(cc)
@@ -66,6 +67,6 @@ print2(center, labels)
 print(cc[3:].var())
 
 
-pth = "https://www.analyticsvidhya.com/wp-content/uploads/2019/10/Clustering_gmm.csv"
-pf = pd.read_csv(pth)
-print2(pf.head, pf.shape)
+# pth = "https://www.analyticsvidhya.com/wp-content/uploads/2019/10/Clustering_gmm.csv"
+# pf = pd.read_csv(pth)
+# print2(pf.head, pf.shape)
