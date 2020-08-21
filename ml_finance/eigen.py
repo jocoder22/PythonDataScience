@@ -77,7 +77,8 @@ plt.style.use("ggplot")
 plt.rcParams["figure.figsize"] = 10,8
 plt.rcParams["axes.facecolor"] = "0.92"
 
-tf.reset_default_graph()
+# tf.reset_default_graph()
+reset = tf.reset_default_graph()
 
 mat1 = tf.constant([[3., 4.]])
 mat2 = tf.constant([[2.],[6.]])
@@ -87,8 +88,24 @@ print2(f"matrix 1: {mat1}", f"matrix 2: {mat2}")
 product = tf.matmul(mat1, mat2)
 print2(product)
 
-
+reset
 with tf.Session() as ses:
   result = ses.run(product)
   
  print2(result, result.shape, type(result))
+
+
+reset
+trend = tf.Variable(2, name="trender")
+state = tf.Variable(3, name="counter")
+update = tf.assign(state, state * trend)
+
+init_op = tf.global_variables_initializer()
+
+with tf.Session() as sess:
+    sess.run(init_op)
+    print2(state.eval())
+    
+    for _ in range(3):
+        sess.run(update)
+        print(state.eval())
