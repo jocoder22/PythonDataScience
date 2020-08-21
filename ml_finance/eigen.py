@@ -63,3 +63,32 @@ print2(np.array_equiv(A, A_))
 print2(np.allclose(A, A_))
 
 
+
+
+import IPython.display
+%matplotlib inline
+import matplotlib.pyplot as plt
+import numpy as np
+import tensorflow as tf
+
+from printdescribe import print2
+
+plt.style.use("ggplot")
+plt.rcParams["figure.figsize"] = 10,8
+plt.rcParams["axes.facecolor"] = "0.92"
+
+tf.reset_default_graph()
+
+mat1 = tf.constant([[3., 4.]])
+mat2 = tf.constant([[2.],[6.]])
+
+print2(f"matrix 1: {mat1}", f"matrix 2: {mat2}")
+
+product = tf.matmul(mat1, mat2)
+print2(product)
+
+
+with tf.Session() as ses:
+  result = ses.run(product)
+  
+ print2(result, result.shape, type(result))
