@@ -129,3 +129,16 @@ with tf.Session() as sess:
     print(result[0])
     print(result[1])
     print(result[0][0])
+
+   
+# placeholder and feed
+# Declaration
+input4 = tf.placeholder(tf.float32)
+input5 = tf.placeholder(tf.float32)
+
+# calculation
+output = input4 + input5
+
+# run session
+with tf.Session() as sess:
+    print(sess.run(output, feed_dict={input4: 84., input5: 39.})    
