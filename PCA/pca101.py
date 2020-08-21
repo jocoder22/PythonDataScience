@@ -12,7 +12,6 @@ from printdescribe import print2, describe2
 
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data'
 
-
 colname = '''MPG Cylinders Displacement Horsepower Weight Acceleration 
              Model_year Origin Car_name'''.split()
 
@@ -26,11 +25,9 @@ dataset.drop(columns='Car_name', inplace=True)
 print2(dataset.isna().sum())
 dataset.dropna(inplace=True) 
 
-
 scaler =  StandardScaler()
 feature = dataset.pop('MPG')
 dataset = scaler.fit_transform(dataset)
-
 
 pca = PCA()
 pcomp = pca.fit_transform(dataset)
@@ -44,7 +41,6 @@ plt.show()
 # Inspect the explained variance ratio per component
 print2(pcompf.explained_variance_ratio_)
 print2(pca.explained_variance_ratio_.cumsum())
-
 
 
 # Using Pipeline
