@@ -10,7 +10,6 @@ from sklearn.pipeline import Pipeline
 import seaborn as sns
 from printdescribe import print2
 
-
 genes = ["gene"+str(i) for i in range(1,101)]
 wt = ["wt"+str(i) for i in range(1,7)]
 ko = ["ko"+str(i) for i in range(1,7)]
@@ -29,14 +28,12 @@ for gene in data.index:
         lam=np.random.randint(10,100),size=6)
     n += 5
     
-
 scaled_data = preprocessing.scale(data.T)
 scaled_data[:20]
 
 scaler =  StandardScaler()
 dataset = scaler.fit_transform(data.T)
 print(dataset[:20])
-
 
 pca = PCA()
 pca.fit(scaled_data)
@@ -50,22 +47,18 @@ plt.xlabel("Pricipal Component")
 plt.title("Scree Plot")
 plt.show()
 
-
 pca_df = pd.DataFrame(pca_data, index=[*wt, *ko], 
                       columns=labels)
 plt.scatter(pca_df.PC1, pca_df.PC2)
 
-
 for sample in pca_df.index:
     plt.annotate(sample, (pca_df.PC1.loc[sample], 
                           pca_df.PC2.loc[sample]))
-    
-    
+       
 plt.ylabel(f"PC2 - {per_var[1]}")
 plt.xlabel(f"PC1 - {per_var[0]}")
 plt.title("PCA Plot")
 plt.show()
-
 
 loading_scores = pd.Series(pca.components_[0], index=genes)
 sorted_scores = loading_scores.abs().sort_values(ascending=False)
