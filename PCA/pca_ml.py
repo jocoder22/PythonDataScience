@@ -38,7 +38,6 @@ plt.xlabel("Pricipal Component")
 plt.title("Scree Plot")
 plt.show()
 
-
 vectors = pca.components_.round(3)
 print2(vectors)
 
@@ -59,5 +58,4 @@ for i, label in enumerate(np.unique(labels)):
     plt.scatter(pca_result[:,0][labels==label],pca_result[:,1][labels==label], 
                 c=colors[i], marker=markers[i], lw=0.5, edgecolors='k', label=labelnames[i])
 plt.title("The projection onto 2 PCA components")
-plt.legend(loc='best', shadow=False, scatterpoints=3);
-    
+plt.legend(loc='best', shadow=False, scatterpoints=3);  
