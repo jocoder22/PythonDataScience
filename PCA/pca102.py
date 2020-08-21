@@ -33,8 +33,6 @@ for gene in data.index:
 scaled_data = preprocessing.scale(data.T)
 scaled_data[:20]
 
-  
-   
 scaler =  StandardScaler()
 dataset = scaler.fit_transform(data.T)
 print(dataset[:20])
