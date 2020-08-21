@@ -17,6 +17,10 @@ from statsmodels.tsa.vector_ar.vecm import coint_johansen
 import scipy.stats
 
 from printdescribe import print2
+
+plt.style.use("ggplot")
+plt.rcParams["figure.figsize"] = 10,8
+plt.rcParams["axes.facecolor"] = "0.92"
 show = plt.show
 
 # Obtaining Stock Data of Microsoft and Benchmark Data
