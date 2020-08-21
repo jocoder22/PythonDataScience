@@ -89,21 +89,8 @@ plt.legend(loc='best', shadow=False, scatterpoints=3)
 show;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+############################################################################################################
+############################################################################################################
 
 features, target = load_wine(return_X_y=True)
 
@@ -178,7 +165,6 @@ plt.tight_layout()
 plt.show()
 
 
-
 # Fit to data and predict using pipelined RandomForestClassifier and PCA.
 unscaled_clf = make_pipeline(RandomForestClassifier())
 unscaled_clf.fit(X_train, y_train)
@@ -195,4 +181,3 @@ print('{:.2%}\n'.format(metrics.accuracy_score(y_test, pred_test)))
 
 print('\nPrediction accuracy for the standardized test dataset with PCA')
 print('{:.2%}\n'.format(metrics.accuracy_score(y_test, pred_test_std)))
-
