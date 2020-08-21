@@ -72,4 +72,3 @@ for i, label in enumerate(np.unique(labels)):
 plt.title("The projection onto 2 LCA components")
 plt.legend(loc='best', shadow=False, scatterpoints=3)
 plt.show();
-    
