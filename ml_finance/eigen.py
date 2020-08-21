@@ -141,4 +141,16 @@ output = input4 + input5
 
 # run session
 with tf.Session() as sess:
-    print(sess.run(output, feed_dict={input4: 84., input5: 39.})    
+    print(sess.run(output, feed_dict={input4: 84., input5: 39.})
+          
+          
+          
+          
+# linear regression
+x_train = np.linspace(0,1,100)
+y_train = 0.2 * x_train + 1 + 0.01 * np.random.randn(x_train.shape[0])
+
+plt.plot(x_train, y_train, "r.")
+plt.title('Generated Data for Regression')
+plt.xlabel("x")
+plt.ylabel("y");          
