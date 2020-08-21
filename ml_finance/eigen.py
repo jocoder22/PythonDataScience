@@ -107,9 +107,25 @@ with tf.Session() as sess:
     print2(state.eval())
     
     for _ in range(3):
-        sess.run(update)
+        result = sess.run(update)
         print(state.eval())
         
         val = state.eval()
         
-print2(val)
+print2(result, val)
+
+
+reset
+input1 = tf.constant([41.])
+input2 = tf.constant([42.])
+input3 = tf.constant([43.])
+
+additions = tf.add(input1, input3)
+mul = input2 * additions
+
+with tf.Session() as sess:
+    result = sess.run([additions, mul])
+    print(result)
+    print(result[0])
+    print(result[1])
+    print(result[0][0])
