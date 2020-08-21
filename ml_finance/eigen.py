@@ -109,3 +109,7 @@ with tf.Session() as sess:
     for _ in range(3):
         sess.run(update)
         print(state.eval())
+        
+        val = state.eval()
+        
+print2(val)
