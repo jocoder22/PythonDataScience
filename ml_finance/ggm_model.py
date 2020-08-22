@@ -106,3 +106,14 @@ plt.title('Number of Clusters: The Elbow Method ', size=15)
 plt.xlabel('Number of clusters', size=12)
 plt.ylabel('Distortions', size=12)
 plt.show();
+
+# Create the KMeans model
+# insert the code. Make sure you set init='k-means++', and random_state=42
+ncluster = 10
+kmean = KMeans(n_clusters=ncluster, init='k-means++', random_state=42)
+
+# Fit the training data to the model
+kmean.fit(X_train)
+
+# Retrieve the cluster centres
+centres =  kmean.cluster_centers_
