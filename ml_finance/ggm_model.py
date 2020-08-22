@@ -107,6 +107,21 @@ plt.xlabel('Number of clusters', size=12)
 plt.ylabel('Distortions', size=12)
 plt.show();
 
+
+# distortions percentage change
+dt_series = pd.Series(distortions)
+
+# calculate percentage change
+dt_change = dt_series.pct_change()[1:]
+
+# Create a line plot of num_clusters and percentage change in distortions
+plt.plot(n_clusters[1:], dt_change, 'go-')
+plt.title('Number of Clusters: The Elbow Method ', size=15) 
+plt.xlabel('Number of clusters', size=12)
+plt.ylabel('Distortions', size=12)
+plt.grid()
+plt.show();
+
 # Create the KMeans model
 # insert the code. Make sure you set init='k-means++', and random_state=42
 ncluster = 10
