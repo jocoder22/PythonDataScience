@@ -12,3 +12,13 @@ from sklearn.mixture import GaussianMixture
 
 from printdescribe import print2
 plt.rcParams["figure.figsize"] = 8,6
+
+# Load in the `digits` data
+digits = datasets.load_digits()
+print2(digits.keys())
+
+# Find the number of unique labels
+number_digits = len(np.unique(digits.target))
+print2(number_digits)
+
+
