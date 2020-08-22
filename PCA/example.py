@@ -65,7 +65,8 @@ center, labels = kmean.cluster_centers_, kmean.labels_
 print2(f'Cluster center for cc : {center}',
         f'Cluster labels for cc: {labels}')
 
-print2(cc[3:], cc[3:].var(), cc[:3], cc[:3].var())
+print2(cc[3:], cc[3:].mean(), cc[:3], cc[:3].var())
+print2(bb[:5].mean())
 
 
 # pth = "https://www.analyticsvidhya.com/wp-content/uploads/2019/10/Clustering_gmm.csv"
