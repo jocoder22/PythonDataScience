@@ -213,3 +213,33 @@ for i in range(n_clusters):
     m,n = clusters.shape
     
     init_array[i, :] = clusters[randint(0, m-1), :]
+
+# Your code here
+# Create the KMeans model
+# insert the code. Make sure you set init='k-means++', and random_state=42
+kmean = KMeans(n_clusters=ncluster, init=init_array, n_init=1, random_state=42)
+
+# Fit the training data to the model
+kmean.fit(X_train)
+
+# Retrieve the cluster centres
+centres =  kmean.cluster_centers_
+
+# Don't change the code in this cell
+# Figure size in inches
+fig = plt.figure(figsize=(8, 3))
+
+# Add title
+fig.suptitle('Cluster Center Images', fontsize=14, fontweight='bold')
+
+# For all labels (0-9)
+for i in range(10):
+    # Initialize subplots in a grid of 2X5, at i+1th position
+    ax = fig.add_subplot(2, 5, 1 + i)
+    # Display images
+    ax.imshow(centres[i].reshape((8, 8)), cmap=plt.cm.binary)
+    # Don't show the axes
+    plt.axis('off')
+
+# Show the plot
+plt.show()
