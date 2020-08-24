@@ -285,3 +285,24 @@ plt.show()
 # check for accuracy of the classification
 accuracy_score(y_test, labels)
 
+
+##########################################################################################
+########################### GMM model ####################################################
+##########################################################################################
+data = X_train.data
+# np.random.seed(1)
+
+# Your code here
+gmm_model = GMM(n_components=10, covariance_type='full', random_state=1)
+gmm_model.fit(data)
+print(gmm_model.converged_)
+
+# Extract the means as well as the covariances
+# Your code here
+mns = gmm_model.means_
+covs = gmm_model.covariances_
+
+# Reshape the images
+im = mns.reshape(10, 8, 8)
+
+
