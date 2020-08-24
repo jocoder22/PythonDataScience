@@ -151,3 +151,13 @@ for i in range(10):
 
 # Show the plot
 plt.show()
+
+
+# Predict the labels for `X_test`
+# Insert code
+pred = kmean.predict(X_test)
+
+# Print out the confusion matrix with `confusion_matrix()`
+# insert code
+mat = confusion_matrix(y_test, pred)
+print2(mat)
