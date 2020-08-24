@@ -254,4 +254,34 @@ pred = kmean.predict(X_test)
 mat = confusion_matrix(y_test, pred)
 print2(mat)
 
+# display as a heatmap
+sns.heatmap(mat, square=True, annot=True, fmt='d', cbar=False,
+            xticklabels=digits.target_names,
+            yticklabels=digits.target_names)
+plt.xlabel('true label')
+plt.ylabel('predicted label')
+plt.show()
+
+# check for accuracy of the classification
+accuracy_score(y_test, pred)
+
+clusters2 = pred
+
+labels = np.zeros_like(clusters2)
+for i in range(10):
+    mask = (clusters2 == i)
+    labels[mask] = mode(y_test[mask])[0]
+
+
+mat2 = confusion_matrix(y_test, labels)
+
+sns.heatmap(mat2.T, square=True, annot=True, fmt='d', cbar=False,
+            xticklabels=digits.target_names,
+            yticklabels=digits.target_names)
+plt.xlabel('true label')
+plt.ylabel('predicted label')
+plt.show()
+
+# check for accuracy of the classification
+accuracy_score(y_test, labels)
 
