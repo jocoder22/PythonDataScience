@@ -161,3 +161,14 @@ pred = kmean.predict(X_test)
 # insert code
 mat = confusion_matrix(y_test, pred)
 print2(mat)
+
+# check for accuracy of the classification
+accuracy_score(y_test, pred)
+
+# display as a heatmap
+sns.heatmap(mat, square=True, annot=True, fmt='d', cbar=False,
+            xticklabels=digits.target_names,
+            yticklabels=digits.target_names)
+plt.xlabel('true label')
+plt.ylabel('predicted label')
+plt.show()
