@@ -178,10 +178,12 @@ plt.xlabel('true label')
 plt.ylabel('predicted label')
 plt.show()
 
+
 # random select the cluster
 kmeans = KMeans(n_clusters=10, random_state=0)
 kmeans.fit(X_train)
 clusters = kmeans.predict(X_test)
+
 
 labels = np.zeros_like(clusters)
 for i in range(10):
@@ -276,6 +278,7 @@ for i in range(10):
 
 
 mat2 = confusion_matrix(y_test, labels)
+
 
 sns.heatmap(mat2.T, square=True, annot=True, fmt='d', cbar=False,
             xticklabels=digits.target_names,
