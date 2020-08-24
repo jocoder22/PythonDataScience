@@ -9,7 +9,9 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.cluster import KMeans
-from sklearn.mixture import GaussianMixture
+from sklearn.mixture import GaussianMixture as GMM
+
+from scipy.stats import mode 
 
 from printdescribe import print2
 plt.rcParams["figure.figsize"] = 8,6
@@ -172,3 +174,13 @@ sns.heatmap(mat, square=True, annot=True, fmt='d', cbar=False,
 plt.xlabel('true label')
 plt.ylabel('predicted label')
 plt.show()
+
+# random select the cluster
+kmeans = KMeans(n_clusters=10, random_state=0)
+kmeans.fit(X_train)
+clusters = kmeans.predict(X_test)
+
+labels = np.zeros_like(clusters)
+for i in range(10):
+    mask = (clusters == i)
+    labels[mask] = mode(y_test[mask])[0]
