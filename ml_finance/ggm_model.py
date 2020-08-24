@@ -12,6 +12,7 @@ from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture as GMM
 
 from scipy.stats import mode 
+import seaborn as sns 
 
 from printdescribe import print2
 plt.rcParams["figure.figsize"] = 8,6
@@ -192,3 +193,23 @@ sns.heatmap(mat.T, square=True, annot=True, fmt='d', cbar=False,
 plt.xlabel('true label')
 plt.ylabel('predicted label')
 plt.show()
+
+print2(mat)
+
+# check for accuracy of the classification
+accuracy_score(y_test, labels)
+
+# Your code here
+np.random.seed(42)
+
+n_clusters, n_features = ncluster, X_test.shape[1]
+init_array = np.zeros((n_clusters, n_features))
+
+# random cetroid from each cluster
+for i in range(n_clusters):
+#     clusters = digits.data[digits.target==i]
+    clusters = X_test[y_test==i]
+    
+    m,n = clusters.shape
+    
+    init_array[i, :] = clusters[randint(0, m-1), :]
