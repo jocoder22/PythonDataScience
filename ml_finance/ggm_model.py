@@ -311,6 +311,7 @@ im = mns.reshape(10, 8, 8)
 # Figure size in inches
 fig = plt.figure(figsize=(8, 3))
 
+
 # Add title
 fig.suptitle('Cluster Center Images', fontsize=14, fontweight='bold')
 
