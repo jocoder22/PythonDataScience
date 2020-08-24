@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.decomposition import PCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture as GMM
@@ -184,3 +184,11 @@ labels = np.zeros_like(clusters)
 for i in range(10):
     mask = (clusters == i)
     labels[mask] = mode(y_test[mask])[0]
+
+mat = confusion_matrix(y_test, labels)
+sns.heatmap(mat.T, square=True, annot=True, fmt='d', cbar=False,
+            xticklabels=digits.target_names,
+            yticklabels=digits.target_names)
+plt.xlabel('true label')
+plt.ylabel('predicted label')
+plt.show()
