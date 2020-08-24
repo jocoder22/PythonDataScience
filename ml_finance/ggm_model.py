@@ -2,6 +2,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+from numpy.random import randint
 
 from sklearn import datasets
 from sklearn.decomposition import PCA
@@ -67,7 +69,7 @@ for i in range(len(colors)):
     plt.scatter(x, y, marker='o', s=20, facecolors=colors[i], edgecolors='k')
     
 # LDA Scatter Plot
-plt.legend(digits.target_names, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+plt.legend(digits.target_names, bbox_to_anchor=(1.05, 1), loc=2, scatterpoints=3,borderaxespad=0.)
 plt.xlabel('First LDA Component')
 plt.ylabel('Second LDA Component')
 plt.title("LDA Scatter Plot")
@@ -319,6 +321,38 @@ for i in range(10):
     
     # Display images
     ax.imshow(im[i].reshape((8, 8)), cmap=cm.binary)
+    plt.axis('off')
+
+# Show the plot
+plt.show()
+
+print (mns.shape)
+print (covs.shape)
+
+# Your code here
+samples = np.zeros((10,64))
+
+for i in range(10):
+#     samples[i] = covs[i,5]
+    samples[i] = mns[i]
+
+im = samples.reshape(10,8,8)  
+
+
+# Don't Change this code
+# Figure size in inches
+fig = plt.figure(figsize=(8, 3))
+
+# Add title
+fig.suptitle('Cluster Center Images', fontsize=14, fontweight='bold')
+
+# For all labels (0-9)
+for i in range(10):
+    # Initialize subplots in a grid of 2X5, at i+1th position
+    ax = fig.add_subplot(2, 5, 1 + i)
+    # Display images
+    ax.imshow(im[i].reshape((8, 8)), cmap=plt.cm.binary)
+    # Don't show the axes
     plt.axis('off')
 
 # Show the plot
