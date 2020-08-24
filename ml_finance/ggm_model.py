@@ -305,4 +305,21 @@ covs = gmm_model.covariances_
 # Reshape the images
 im = mns.reshape(10, 8, 8)
 
+# Don't change this code
+# Figure size in inches
+fig = plt.figure(figsize=(8, 3))
 
+# Add title
+fig.suptitle('Cluster Center Images', fontsize=14, fontweight='bold')
+
+# For all labels (0-9)
+for i in range(10):
+    # Initialize subplots in a grid of 2X5, at i+1th position
+    ax = fig.add_subplot(2, 5, 1 + i)
+    
+    # Display images
+    ax.imshow(im[i].reshape((8, 8)), cmap=cm.binary)
+    plt.axis('off')
+
+# Show the plot
+plt.show()
