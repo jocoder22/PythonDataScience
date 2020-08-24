@@ -334,7 +334,7 @@ samples = np.zeros((10,64))
 
 for i in range(10):
 #     samples[i] = covs[i,5]
-    samples[i] = mns[i]
+    samples[i] = samples[i] = np.random.multivariate_normal(mns[i], covs[i])
 
 im = samples.reshape(10,8,8)  
 
