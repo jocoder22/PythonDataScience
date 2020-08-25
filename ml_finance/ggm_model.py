@@ -211,6 +211,9 @@ np.random.seed(42)
 n_clusters, n_features = ncluster, X_test.shape[1]
 init_array = np.zeros((n_clusters, n_features))
 
+
+
+# Set initial mean estimate
 # random cetroid from each cluster
 for i in range(n_clusters):
 #     clusters = digits.data[digits.target==i]
@@ -219,6 +222,24 @@ for i in range(n_clusters):
     m,n = clusters.shape
     
     init_array[i, :] = clusters[randint(0, m-1), :]
+
+
+
+# Create empty matrix
+initial_mean_estimate = np.zeros((10, 64))
+
+# Set each centroid to a unique number (randomly selected)
+for i in range(10):
+    # Create a basket of all the samples from a given digit, e.g. 5
+    dat = digits.data[digits.target==i]
+    m, n = dat.shape
+    
+    # Select a random number 
+    rnd = randint(0, m-1)
+    initial_mean_estimate[i, :] = dat[rnd, :]
+    
+print ('Shape: ', initial_mean_estimate.shape)
+
 
 # Your code here
 # Create the KMeans model
