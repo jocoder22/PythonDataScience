@@ -217,13 +217,34 @@ init_array = np.zeros((n_clusters, n_features))
 # random cetroid from each cluster
 for i in range(n_clusters):
 #     clusters = digits.data[digits.target==i]
-    clusters = X_test[y_test==i]
+    cluster = X_test[y_test==i]
     
-    m,n = clusters.shape
+    m,n = cluster.shape
     
-    init_array[i, :] = clusters[randint(0, m-1), :]
+    # init_array[i, :] = cluster[randint(0, m-1), :]
+    init_array[i, :] = cluster[np.random.choice(range(cluster.shape[0])), :]
 
 
+def choice2d(data):
+
+    m, n = data.shape
+
+    result = cluster[np.random.choice(range(m)), :]
+
+    return result
+
+
+
+init_array = np.zeros((n_clusters, n_features))
+
+# Set each centroid to a unique number (randomly selected)
+for i in range(10):
+    # Create a basket of all the samples from a given digit, e.g. 5
+    dat = digits.data[digits.target==i]
+ 
+    init_array[i, :] = choice2d(dat)
+    
+print ('Shape: ', init_array.shape)
 
 # Create empty matrix
 initial_mean_estimate = np.zeros((10, 64))
