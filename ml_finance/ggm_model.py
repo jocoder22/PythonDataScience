@@ -13,6 +13,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture as GMM
 
+from scipy.stats import multivariate_normal as mv_normal
+
 from scipy.stats import mode 
 import seaborn as sns 
 
@@ -340,7 +342,8 @@ samples = np.zeros((10,64))
 
 for i in range(10):
 #     samples[i] = covs[i,5]
-    samples[i] = samples[i] = np.random.multivariate_normal(mns[i], covs[i])
+    # samples[i] = np.random.multivariate_normal(mns[i], covs[i])
+    samples[i] = .mv_normal.rvs(mns[i], covs[i])
 
 print2(samples.shape)
 im = samples.reshape(10,8,8)  
