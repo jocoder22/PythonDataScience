@@ -226,10 +226,9 @@ for i in range(n_clusters):
 
 
 def choice2d(data):
-
-    m, n = data.shape
-
-    result = cluster[np.random.choice(range(m)), :]
+    
+    # m, n = data.shape
+    result = data[np.random.choice(range(data.shape[0])), :]
 
     return result
 
