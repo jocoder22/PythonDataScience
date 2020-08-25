@@ -226,7 +226,7 @@ for i in range(n_clusters):
 
 
 def choice2d(data):
-    
+
     # m, n = data.shape
     result = data[np.random.choice(range(data.shape[0])), :]
 
@@ -339,6 +339,7 @@ accuracy_score(y_test, labels)
 ##########################################################################################
 data = X_train.data
 # np.random.seed(1)
+
 
 # Your code here
 gmm_model = GMM(n_components=10, covariance_type='full', random_state=1)
