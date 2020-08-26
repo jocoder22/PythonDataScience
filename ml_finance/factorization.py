@@ -54,7 +54,6 @@ B2_ = Qb @ Rb
 # print results
 print2(A2_, B2_)
 
-
 # cholesky decomposition, for
 # 1. square symmetric matrix
 # 2. All eigenvalues are greater than zero
@@ -71,11 +70,13 @@ sa = A @ A.T
 w,v = LA.eig(sa)
 print2(v)
 
+
 # perform cholesky decomposition
 # numpy.linalg.cholesky gives lower triangle
 chola_numpy = LA.cholesky(sa)
 chola_numpy_ = chola_numpy @ chola_numpy.T
 print2(chola_numpy, chola_numpy_, sa)
+
 
 # while scipy.linalg.cholesky gives upper triangle
 chola = cholesky(sa)
