@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd 
 from scipy.linalg import lu, qr, cholesky
 from numpy import linalg as LA
-
 from printdescribe import print2
 
 plt.style.use("ggplot")
