@@ -62,9 +62,6 @@ print2(np.array_equal(A, A_))
 print2(np.array_equiv(A, A_))
 print2(np.allclose(A, A_))
 
-
-
-
 import IPython.display
 %matplotlib inline
 import matplotlib.pyplot as plt
@@ -114,7 +111,6 @@ with tf.Session() as sess:
         
 print2(result, val)
 
-
 reset
 input1 = tf.constant([41.])
 input2 = tf.constant([42.])
@@ -143,9 +139,7 @@ output = input4 + input5
 with tf.Session() as sess:
     print(sess.run(output, feed_dict={input4: 84., input5: 39.})
           
-          
-          
-          
+                 
 # linear regression
 x_train = np.linspace(0,1,100)
 y_train = 0.2 * x_train + 1 + 0.01 * np.random.randn(x_train.shape[0])
