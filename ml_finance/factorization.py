@@ -61,6 +61,7 @@ matrix1 = np.random.randint(20,30,size=(N,N))
 A = (b + b.T)/2
 sa = A @ A.T
 
+
 # check for definite positivity
 # w = list of eigenvalues
 # v = colums of eigenvectors, one column per eigenvalues
