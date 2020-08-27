@@ -9,7 +9,6 @@ from printdescribe import print2
 plt.style.use("ggplot")
 plt.rcParams["figure.figsize"] = 10,8
 plt.rcParams["axes.facecolor"] = "0.92"
-
 np.random.seed(42)
 
 # create matrix
