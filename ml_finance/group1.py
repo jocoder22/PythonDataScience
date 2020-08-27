@@ -13,9 +13,7 @@ from statsmodels.stats.diagnostic import breaks_cusumolsresid
 from statsmodels.tsa.arima_model import ARIMA
 from sklearn.metrics import mean_squared_error
 from statsmodels.tsa.vector_ar.vecm import coint_johansen
-
 import scipy.stats
-
 from printdescribe import print2
 
 plt.style.use("ggplot")
@@ -62,10 +60,12 @@ for ticker in assets:
   plt.grid()
   show
 
+  
 
 # Normalizing prices
 normalised_prices = (datasets['Adj Close'] - means)/stddevs
 normalised_returns = (datasets['Adj Close'].pct_change() - means)/stddevs
+
 
 matplotlib.rcParams['figure.figsize'] = [12, 7]
 plt.plot(normalised_prices);
