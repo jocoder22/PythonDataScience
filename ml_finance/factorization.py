@@ -59,6 +59,9 @@ print2(A2_, B2_)
 # 2. All eigenvalues are greater than zero
 # ==> positive definite matrices
 # create positive definite square symmetric matrices
+#####################################################################################
+#####################################################################################
+
 n = 5
 matrix1 = np.random.randint(20,30,size=(N,N))
 A = (b + b.T)/2
