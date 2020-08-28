@@ -57,8 +57,7 @@ print2(A2_, B2_)
 #####################################################################################
 # cholesky decomposition, for
 # 1. square symmetric matrix
-# 2. All eigenvalues are greater than zero
-# ==> positive definite matrices
+# 2. All eigenvalues are greater than zero ==> positive definite matrices
 # create positive definite square symmetric matrices
 #####################################################################################
 #####################################################################################
