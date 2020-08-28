@@ -51,6 +51,9 @@ B2_ = Qb @ Rb
 # print results
 print2(A2_, B2_)
 
+
+#####################################################################################
+#####################################################################################
 # cholesky decomposition, for
 # 1. square symmetric matrix
 # 2. All eigenvalues are greater than zero
