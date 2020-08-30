@@ -3,6 +3,13 @@ import numpy as np
 import pandas as pd 
 from scipy.linalg import lu, qr, cholesky
 from numpy import linalg as LA
+# from printdescribe import print2
+
+# import IPython.display
+# # %matplotlib inline
+import matplotlib.pyplot as plt
+import tensorflow as tf
+
 from printdescribe import print2
 
 plt.style.use("ggplot")
@@ -11,7 +18,7 @@ plt.rcParams["axes.facecolor"] = "0.92"
 np.random.seed(42)
 
 # Create square matrix
-A =  = np.arange(3,19, dtype=float).reshape(-1,4)
+A = np.arange(3,19, dtype=float).reshape(-1,4)
 # Ai =  = np.arange(3,19).reshape(-1,4)
 # perform eigendecomposition
 val, vec = LA.eig(A)
@@ -61,13 +68,6 @@ print2(np.array_equal(A, A_))
 print2(np.array_equiv(A, A_))
 print2(np.allclose(A, A_))
 
-import IPython.display
-%matplotlib inline
-import matplotlib.pyplot as plt
-import numpy as np
-import tensorflow as tf
-
-from printdescribe import print2
 
 plt.style.use("ggplot")
 plt.rcParams["figure.figsize"] = 10,8
@@ -146,4 +146,4 @@ y_train = 0.2 * x_train + 1 + 0.01 * np.random.randn(x_train.shape[0])
 plt.plot(x_train, y_train, "r.")
 plt.title('Generated Data for Regression')
 plt.xlabel("x")
-plt.ylabel("y");          
+plt.ylabel("y"); 
