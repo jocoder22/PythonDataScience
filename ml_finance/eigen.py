@@ -8,10 +8,11 @@ from numpy import linalg as LA
 # import IPython.display
 # # %matplotlib inline
 import matplotlib.pyplot as plt
-import tensorflow as tf
-
+# import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from printdescribe import print2
 
+tf.disable_v2_behavior()
 plt.style.use("ggplot")
 plt.rcParams["figure.figsize"] = 10,8
 plt.rcParams["axes.facecolor"] = "0.92"
@@ -50,23 +51,23 @@ vec_sorted = vec[:,indx]
 print2(val, vec, indx, val_sorted, vec_sorted)
 
 
-# Recovering the original matrix
-A_re = vec.dot(diag(val)).dot(inv(vec))
-Q = vec
-v_diagonal = diag(val)
-Q_inverse = inv(vec)
+# # Recovering the original matrix
+# A_re = vec.dot(np.diagonal(val)).dot(inv(vec))
+# Q = vec
+# v_diagonal = diagonal(val)
+# Q_inverse = inv(vec)
 
-# can sort the eiganvalues directly
-val_sorted2 = np.sort(val)
-print2(val_sorted2)
+# # can sort the eiganvalues directly
+# val_sorted2 = np.sort(val)
+# print2(val_sorted2)
 
-A_ = Q @ v_diagonal @ Q_inverse
-print2(A, A_)
+# A_ = Q @ v_diagonal @ Q_inverse
+# print2(A, A_)
 
-# check equality
-print2(np.array_equal(A, A_))
-print2(np.array_equiv(A, A_))
-print2(np.allclose(A, A_))
+# # check equality
+# print2(np.array_equal(A, A_))
+# print2(np.array_equiv(A, A_))
+# print2(np.allclose(A, A_))
 
 
 plt.style.use("ggplot")
@@ -88,7 +89,7 @@ reset
 with tf.Session() as ses:
   result = ses.run(product)
   
- print2(result, result.shape, type(result))
+print2(result, result.shape, type(result))
 
 
 reset
@@ -136,7 +137,7 @@ output = input4 + input5
 
 # run session
 with tf.Session() as sess:
-    print(sess.run(output, feed_dict={input4: 84., input5: 39.})
+    print(sess.run(output, feed_dict={input4: 84., input5: 39.}))
           
                  
 # linear regression
