@@ -2,19 +2,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+fig = plt.figure(figsize=[10,8])
+ax = fig.add_subplot(projection='3d')
 
-x =[1,2,3,4,5,6,7,8,9,10]
-y =[5,6,2,3,13,4,1,2,4,8]
-z =[2,3,3,3,5,7,9,11,9,10]
+t = np.arange(30)
 
-
+x = -1 - t
+y = 2 - t
+z = 7 + 3*t
 
 ax.scatter(x, y, z, c='r', marker='o')
 
-ax.set_xlabel('X Label')
-ax.set_ylabel('Y Label')
+ax.set_xlabel('X Label', labelpad = 20.0)
+ax.set_ylabel('Y Label', labelpad = 20.0)
 ax.set_zlabel('Z Label')
 
 plt.show()
