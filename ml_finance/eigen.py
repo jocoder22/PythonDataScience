@@ -27,6 +27,8 @@ val, vec = LA.eig(A)
 # print the result
 print2(val, vec)
 
+
+
 # checking the result
 # Au = lamda * u
 Avec = A @ vec[:,0]
