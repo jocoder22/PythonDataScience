@@ -43,12 +43,12 @@ with tf.Session() as sess:
 sess = tf.InteractiveSession()
 
 xx = tf.Variable([31.0, 20.0])
-aa = tf.constant([23.0, 83.0])
+aa = tf.constant([43.0, 83.0])
 
 # Initialize 'xx' using the run() method of its initializer op.
 xx.initializer.run()
 
-# Add an op to subtract 'aa' from 'xx'.  Run it and print the result
+# Add an op to subtract 'aa' from 'xx'. Run it and print the result
 substract = xx - aa
 print2(substract.eval())
 
