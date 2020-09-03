@@ -37,3 +37,19 @@ print2(type(result))
 
 with tf.Session() as sess:
     print2('matrix1:', matrix1.eval(),'matrix2', matrix2.eval())
+
+
+# Here is another way of starting a session
+sess = tf.InteractiveSession()
+
+x = tf.Variable([1.0, 2.0])
+a = tf.constant([3.0, 3.0])
+
+# Initialize 'x' using the run() method of its initializer op.
+x.initializer.run()
+
+# Add an op to subtract 'a' from 'x'.  Run it and print the result
+sub = x - a
+print2(sub.eval())
+
+sess.close()
