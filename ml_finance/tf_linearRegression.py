@@ -74,3 +74,45 @@ with tf.Session() as sess:
     # evaluate training accuracy
     curr_W, curr_b, curr_mse = sess.run([w, b, mse], feed_dict = {x:x_train, y:y_train})
     print(f"w: {curr_W} b: {curr_b} loss: {curr_mse}")
+
+
+
+# Using TensorFlow's built-in optimiser
+tf.reset_default_graph()
+
+# # Variables
+w = tf.Variable([-0.3], dtype=tf.float32)
+b = tf.Variable([0.3], dtype=tf.float32)
+
+# # Placeholders
+x = tf.placeholder(tf.float32)
+y = tf.placeholder(tf.float32)
+
+# Linear model
+linear_model = w * x + b
+
+# loss
+mse = tf.reduce_sum(tf.square(linear_model - y))
+
+# Optimizer
+optimizer = tf.train.GradientDescentOptimizer(0.001)
+train_step = optimizer.minimize(mse)
+
+init_op = tf.global_variables_initializer()
+
+# Execute
+print(" ", "Using TensorFlow's built-in optimiser",sep='\n')
+with tf.Session() as sess:
+     
+    sess.run(init_op)
+    
+    # 1000 steps
+    for i in range(1000):
+        # Print loss every 100 steps
+        if i%100 == 0:
+            print('mse = ', sess.run(mse, feed_dict = {x:x_train, y:y_train}))
+        
+        sess.run(train_step, feed_dict = {x:x_train,y:y_train})
+    
+    # Print final results
+    print('w : ', w.eval(), 'b : ', b.eval())
