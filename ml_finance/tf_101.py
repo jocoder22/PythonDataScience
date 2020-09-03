@@ -129,3 +129,5 @@ output = input1 * input2
 # Run session
 with tf.Session() as sess:
     print2(sess.run(output, feed_dict={input1: 90.40, input2: 8.50 }))
+
+    
