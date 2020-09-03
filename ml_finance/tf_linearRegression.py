@@ -8,6 +8,14 @@ tf.disable_v2_behavior()
 from printdescribe import print2
 print2(" ")
 
+# set matplotlib parameters
+plt.style.use('ggplot')
+plt.rcParams['figure.figsize'] = 10, 6
+plt.rcParams['axes.facecolor'] = "0.92"
+
+# set random seed
+np.random.seed(3)
+
 # Generate data
 x_train = np.linspace(0, 1, 100) 
 y_train =  0.2 * x_train + 8.89 + 0.21 * np.random.randn(x_train.shape[0])
@@ -19,6 +27,7 @@ plt.ylabel('y')
 plt.show()
 
 
+# reset default graph
 tf.reset_default_graph()
 
 # Set hyperparameter
