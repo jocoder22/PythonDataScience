@@ -19,3 +19,18 @@ matrix1 = tf.constant([[3., 3.]])
 matrix2 = tf.constant([[2.],[2.]])
 
 print2('matrix1:', matrix1, 'matrix2', matrix2)
+
+# Create a matrix multiplication op
+product = tf.matmul(matrix1, matrix2)
+
+print2(product)
+
+# Launch graph in a session
+with tf.Session() as sess:
+    result = sess.run(product)
+
+# After the session is closed, all TensorFlow tensors and ops cease to exist
+# result is actually a NumPy array and therefore persists after the session is closed
+
+print2(result)
+print2(type(result))
