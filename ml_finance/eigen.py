@@ -27,8 +27,6 @@ val, vec = LA.eig(A)
 # print the result
 print2(val, vec)
 
-
-
 # checking the result
 # Au = lamda * u
 Avec = A @ vec[:,0]
@@ -51,7 +49,6 @@ vec_sorted = vec[:,indx]
 
 # print the results
 print2(val, vec, indx, val_sorted, vec_sorted)
-
 
 # # Recovering the original matrix
 # A_re = vec.dot(np.diagonal(val)).dot(inv(vec))
