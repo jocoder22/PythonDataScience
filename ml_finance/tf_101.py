@@ -79,7 +79,53 @@ with tf.Session() as sess:
   # Print the initial value of 'state'
   print2(state.eval())
     
-  # Run the op that updates 'state' and print 'state'. Note that the graph is executed several times.
+  # Run the op that updates 'state' and print 'state'. 
+  # Note that the graph is executed several times.
   for _ in range(3):
     sess.run(update)
     print2(state.eval())
+        
+    val = state.eval()
+
+# print the value of val
+print2(val)
+
+# Multiple outputs
+# Below is an example of how you can fetch multiple tensors at the same time.
+# The values (NumPy arrays) of the different tensors are returned in a list.
+
+tf.reset_default_graph()
+
+# Declarations
+input1 = tf.constant([90.10])
+input2 = tf.constant([45.30])
+input3 = tf.constant([89.70])
+
+# Calculations
+intermed = tf.add(input2, input3)
+mul = input1 * intermed
+
+# Run session
+with tf.Session() as sess:
+    result = sess.run([mul, intermed])
+    print2(result)
+    print2(result[1])
+    print2(result[0][0])
+
+
+# Placeholders and feed
+# When creating placeholders, you can feed them values when you execute the graph.
+# The placeholders are fed through dictionaries.
+# Note that you input arrays and the outputs are also arrays.
+tf.reset_default_graph()
+
+# Declarations
+input1 = tf.placeholder(tf.float32)
+input2 = tf.placeholder(tf.float32)
+
+# Calculations
+output = input1 * input2
+
+# Run session
+with tf.Session() as sess:
+    print2(sess.run(output, feed_dict={input1: 90.40, input2: 8.50 }))
