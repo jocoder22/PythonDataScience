@@ -15,13 +15,13 @@ tf.reset_default_graph()
 
 
 # Let's start by initialising two contants, called matrix1 and matrix 2
-matrix1 = tf.constant([[3., 3.]])
-matrix2 = tf.constant([[2.],[2.]])
+matrix11 = tf.constant([[23., 13.]])
+matrix12 = tf.constant([[42.],[62.]])
 
-print2('matrix1:', matrix1, 'matrix2', matrix2)
+print2('matrix11:', matrix11, 'matrix2', matrix12)
 
 # Create a matrix multiplication op
-product = tf.matmul(matrix1, matrix2)
+product = tf.matmul(matrix11, matrix12)
 
 print2(product)
 
@@ -36,20 +36,20 @@ print2(result)
 print2(type(result))
 
 with tf.Session() as sess:
-    print2('matrix1:', matrix1.eval(),'matrix2', matrix2.eval())
+    print2('matrix11:', matrix11.eval(),'matrix12', matrix12.eval())
 
 
 # Here is another way of starting a session
 sess = tf.InteractiveSession()
 
-x = tf.Variable([1.0, 2.0])
-a = tf.constant([3.0, 3.0])
+xx = tf.Variable([31.0, 20.0])
+aa = tf.constant([23.0, 83.0])
 
-# Initialize 'x' using the run() method of its initializer op.
-x.initializer.run()
+# Initialize 'xx' using the run() method of its initializer op.
+xx.initializer.run()
 
-# Add an op to subtract 'a' from 'x'.  Run it and print the result
-sub = x - a
-print2(sub.eval())
+# Add an op to subtract 'aa' from 'xx'.  Run it and print the result
+substract = xx - aa
+print2(substract.eval())
 
 sess.close()
