@@ -31,6 +31,9 @@ with tf.Session() as sess:
 
 # After the session is closed, all TensorFlow tensors and ops cease to exist
 # result is actually a NumPy array and therefore persists after the session is closed
-
+print2("")
 print2(result)
 print2(type(result))
+
+with tf.Session() as sess:
+    print2('matrix1:', matrix1.eval(),'matrix2', matrix2.eval())
