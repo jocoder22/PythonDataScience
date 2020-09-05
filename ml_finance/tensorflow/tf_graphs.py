@@ -98,5 +98,3 @@ file_writer.close()
 # Access to the variables in a graph
 for op in tf.get_default_graph().get_operations():
     print(op.name)
-
-

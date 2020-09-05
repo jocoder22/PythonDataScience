@@ -82,7 +82,6 @@ with tf.Session() as sess:
 print("Weights:", prev_weights.shape)
 print("Bias:", prev_bias)
 
-
 m,n = update_weights.shape
 
 def show_update_weights(i=0):
@@ -94,7 +93,8 @@ def show_update_weights(i=0):
     plt.title('The weigths of filter '+str(i))
     
     plt.show()
-    
+
+
 w = interact(show_update_weights, i =(0, n-1))
 im = update_weights.T[0].reshape([28,28])
 plt.imshow(im, cmap='viridis') 
