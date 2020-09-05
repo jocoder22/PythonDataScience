@@ -102,6 +102,6 @@ plt.title('The weigths of filter '+str(0))
 
 plt.show()
 
+# get the name scopes and operations
 graph = tf.get_default_graph()
-
 print2(graph.get_name_scope(), graph.get_all_collection_keys(), graph.get_operations())
