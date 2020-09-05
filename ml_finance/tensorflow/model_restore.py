@@ -38,6 +38,8 @@ with tf.Session() as sess:
     # is the previously saved graph
     saver.restore(sess,"./test/test.ckpt")
     graph = tf.get_default_graph()
+
+    print2(graph.get_name_scope(), graph.get_all_collection_keys(), graph.get_operations())
     
     # Check that we recognise the variables saved before.
     var = [v.name for v in tf.trainable_variables()]
@@ -99,3 +101,7 @@ plt.imshow(im, cmap='viridis')
 plt.title('The weigths of filter '+str(0))
 
 plt.show()
+
+graph = tf.get_default_graph()
+
+print2(graph.get_name_scope(), graph.get_all_collection_keys(), graph.get_operations())
