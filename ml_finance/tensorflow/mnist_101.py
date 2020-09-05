@@ -124,6 +124,7 @@ with tf.Session() as sess:
     save_path = saver.save(sess,"./test/test.ckpt")  
     saver.export_meta_graph(filename='./test/test.meta',
                             collection_list=["train_var"])
+                            
 print2('weights:', weights)
 print2('bias:', bias)
 
