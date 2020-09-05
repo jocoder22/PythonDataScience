@@ -53,16 +53,19 @@ with tf.name_scope('variables') as scope:
     w = tf.Variable([-3.], dtype=tf.float32, name = 'w')
     b = tf.Variable([3.], dtype=tf.float32, name = 'b')
 
+
 # Model input (placeholders)
 with tf.name_scope('placeholders') as scope:
     x = tf.placeholder(tf.float32, name = 'x')
     y = tf.placeholder(tf.float32, name = 'y')
+
 
 # Linear model
 with tf.name_scope('model') as scope:
     linear_model = w * x + b
     mse = tf.reduce_sum(tf.square(linear_model - y), name = 'mse') 
     grad = tf.gradients(mse, [w, b], name = 'grad')
+
 
 # Gradient descent update
 with tf.name_scope('training') as scope:
