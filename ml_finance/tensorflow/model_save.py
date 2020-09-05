@@ -95,6 +95,8 @@ with tf.Session() as sess:
     sess.run(init_op)
     
     graph = tf.get_default_graph()
+    print2(graph.get_name_scope())
+
     for epoch in range(n_epoch):   
         
         # One step of the training
@@ -124,6 +126,8 @@ with tf.Session() as sess:
     save_path = saver.save(sess,"./test/test.ckpt")  
     saver.export_meta_graph(filename='./test/test.meta',
                             collection_list=["train_var"])
+    
+    print2(graph.get_name_scope())
                             
 print2('weights:', weights)
 print2('bias:', bias)
@@ -142,3 +146,8 @@ im = weights.T[0].reshape([28,28])
 plt.imshow(im, cmap='viridis') 
 plt.title('The weigths of filter '+str(0))
 plt.show()
+
+
+# get the name scopes and operations
+graph = tf.get_default_graph()
+print2(graph.get_name_scope(), graph.get_all_collection_keys())

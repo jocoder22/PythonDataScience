@@ -56,7 +56,7 @@ with tf.Session() as sess:
     y_ = tf.get_collection("train_var")[3]
 
     # Now we simply continue the training
-    for train_step in range(200):
+    for train_step in range(50):
         
         sess.run(train_op, feed_dict={x: mnist.train.images, 
                                       y_: mnist.train.labels})
@@ -104,4 +104,5 @@ plt.show()
 
 # get the name scopes and operations
 graph = tf.get_default_graph()
+print2(graph.get_name_scope(), graph.get_all_collection_keys())
 print2(graph.get_name_scope(), graph.get_all_collection_keys(), graph.get_operations())
