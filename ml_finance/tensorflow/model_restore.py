@@ -99,8 +99,8 @@ w = interact(show_update_weights, i =(0, n-1))
 im = update_weights.T[0].reshape([28,28])
 plt.imshow(im, cmap='viridis') 
 plt.title('The weigths of filter '+str(0))
-
 plt.show()
+
 
 # get the name scopes and operations
 graph = tf.get_default_graph()
