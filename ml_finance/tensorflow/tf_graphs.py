@@ -99,6 +99,8 @@ file_writer.close()
 for op in tf.get_default_graph().get_operations():
     print(op.name)
 
+
+
 path2 = r"D:\Wqu_FinEngr\Machine Learning in Finance\CourseMaterials\Module5\WQU_MLiF_Module5_Notebooks\ML M5 Notebooks (updated)"
 
 
