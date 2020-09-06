@@ -35,6 +35,7 @@ for file in os.scandir(os.path.join(f"{root_logdir}")):
     print(file)
     shutil.rmtree(file)
 
+
 # filelist = [ f for f in os.listdir(mydir) if f.endswith(".bak") ]
 # for f in filelist:
 #     os.remove(os.path.join(mydir, f))
