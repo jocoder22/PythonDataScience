@@ -71,7 +71,6 @@ update = tf.assign(state, state + 1)
 init_op = tf.global_variables_initializer()
 
 
-
 # Launch the graph and run the ops.
 with tf.Session() as sess:
     
