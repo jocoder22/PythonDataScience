@@ -77,6 +77,7 @@ with tf.name_scope('training') as scope:
 # Define init Op
 with tf.name_scope('init_op') as scope:
     init_op = tf.global_variables_initializer()
+   
     
 # Define a saver Op that will allow us to save the graph
 mse_summary = tf.summary.scalar('MSE', mse)
