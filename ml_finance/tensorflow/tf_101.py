@@ -70,6 +70,8 @@ update = tf.assign(state, state + 1)
 # We first have to add the `init` Op to the graph.
 init_op = tf.global_variables_initializer()
 
+
+
 # Launch the graph and run the ops.
 with tf.Session() as sess:
     
