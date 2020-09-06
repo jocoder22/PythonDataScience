@@ -77,8 +77,8 @@ with tf.name_scope('training') as scope:
 # Define init Op
 with tf.name_scope('init_op') as scope:
     init_op = tf.global_variables_initializer()
-   
-    
+
+
 # Define a saver Op that will allow us to save the graph
 mse_summary = tf.summary.scalar('MSE', mse)
 file_writer = tf.summary.FileWriter(logdir, tf.get_default_graph())
@@ -86,7 +86,6 @@ file_writer = tf.summary.FileWriter(logdir, tf.get_default_graph())
 # Execution
 with tf.Session() as sess:
     sess.run(init_op)
-    
     graph = tf.get_default_graph()
     
     # 1000 steps
