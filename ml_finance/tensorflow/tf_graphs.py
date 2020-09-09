@@ -5,14 +5,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import shutil
 # import tensorflow as tf
-
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
+
 
 from printdescribe import print2, changepath
 from datetime import datetime
-print2(" ")
 
+tf.disable_v2_behavior()
+print2(" ")
 
 path22 = r"D:\PythonDataScience"
 sys.path.insert(0, path22)
