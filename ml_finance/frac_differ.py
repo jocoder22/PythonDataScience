@@ -34,7 +34,7 @@ for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
 
     
 from mlfinlab.features.fracdiff import FractionalDifferentiation as ff
-fracdata = ff.frac_diff(stock, 0.5, thresh=1e3)
+fracdata = ff.frac_diff(stock, 0.2, thresh=1e3)
 print(fracdata.head())
 
 fracdata.columns = ["close_diff"]
@@ -42,6 +42,7 @@ fracdata.columns = ["close_diff"]
 result = pd.concat([stock,fracdata], axis=1, sort=False)
 result["logprice"] = np.log(result['Close'])
 result["logdiff"] = np.log(result['Close']/result['Close'].shift(1))
+result["frac0.5"] = ff.frac_diff(stock, 0.5, thresh=1e3)
 result.dropna(inplace=True)
 print(result.head())
 
