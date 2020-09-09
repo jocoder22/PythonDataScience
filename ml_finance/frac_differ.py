@@ -31,3 +31,8 @@ for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
                                                       prefix=package.__name__+'.',
                                                       onerror=lambda x: None):
     print(modname)
+
+    
+from mlfinlab.features.fracdiff import FractionalDifferentiation as ff
+fracdata = ff.frac_diff(stock, 0.5, thresh=1e3)
+print(fracdata.head())
