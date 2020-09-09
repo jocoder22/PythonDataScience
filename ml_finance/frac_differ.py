@@ -44,3 +44,7 @@ result["logprice"] = np.log(result['Close'])
 result["logdiff"] = np.log(result['Close']/result['Close'].shift(1))
 result.dropna(inplace=True)
 print(result.head())
+
+
+sns.relplot(height=10, data=result, kind="line")
+plot.show();
