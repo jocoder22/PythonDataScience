@@ -14,3 +14,11 @@ np.random.seed(4)
 sns.relplot(data=pd.Series(
     np.cumsum(np.random.normal(0,1,1000))))
 plt.show();
+
+
+start = datetime(2010, 6, 29)
+end = datetime(2018, 3, 27)
+symbol = 'GOOG'
+
+stock = pdr.get_data_yahoo(symbol, start, end)[['Close']]
+print2(stock.head())
