@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+import pandas_datareader as pdr
+from datetime import datetime, date
 from printdescribe import print2
 
 sns.relplot(data=pd.Series(np.random.normal(0,1,1000)))
