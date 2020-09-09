@@ -22,3 +22,12 @@ symbol = 'GOOG'
 
 stock = pdr.get_data_yahoo(symbol, start, end)[['Close']]
 print2(stock.head())
+
+
+import pkgutil
+import mlfinlab
+package=mlfinlab
+for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
+                                                      prefix=package.__name__+'.',
+                                                      onerror=lambda x: None):
+    print(modname)
