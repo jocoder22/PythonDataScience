@@ -22,7 +22,6 @@ patht =  r"D:\PythonDataScience\ml_finance"
 os.chdir(patht)
 # print2(os.getcwd())
 
-
 now = datetime.utcnow().strftime("%Y%m%d%H%M%S")
 root_logdir = "tf_logs"
 logdir = f"{root_logdir}/run-{now}/"
