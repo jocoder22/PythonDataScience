@@ -15,7 +15,6 @@ tf.reset_default_graph()
 # Let's start by initialising two contants, called matrix1 and matrix 2
 matrix11 = tf.constant([[23., 13.]])
 matrix12 = tf.constant([[42.],[62.]])
-
 print2('matrix11:', matrix11, 'matrix2', matrix12)
 
 # Create a matrix multiplication op
