@@ -36,3 +36,6 @@ for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
 from mlfinlab.features.fracdiff import FractionalDifferentiation as ff
 fracdata = ff.frac_diff(stock, 0.5, thresh=1e3)
 print(fracdata.head())
+
+fracdata.columns = ["close_diff"]
+
