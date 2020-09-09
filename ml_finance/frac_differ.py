@@ -39,3 +39,8 @@ print(fracdata.head())
 
 fracdata.columns = ["close_diff"]
 
+result = pd.concat([stock,fracdata], axis=1, sort=False)
+result["logprice"] = np.log(result['Close'])
+result["logdiff"] = np.log(result['Close']/result['Close'].shift(1))
+result.dropna(inplace=True)
+print(result.head())
