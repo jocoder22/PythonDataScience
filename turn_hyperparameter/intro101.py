@@ -16,5 +16,7 @@ print2(data.head(), data.info(), data.shape)
 
 data["default payment next month"].value_counts()
 
-
-data["default"].value_counts(normalize=True)*100
+data = data.rename(columns={"default payment next month" : "default"})
+print2(data.head())
+prop = data["default"].value_counts(normalize=True)*100
+print2(prop)
