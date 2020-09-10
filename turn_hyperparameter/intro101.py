@@ -20,3 +20,13 @@ data = data.rename(columns={"default payment next month" : "default"})
 print2(data.head())
 prop = data["default"].value_counts(normalize=True)*100
 print2(prop)
+
+
+X_train, X_test, y_train, y_test = tts(data.iloc[:,:-1], data.iloc[:,-1], test_size=0.3, 
+                                       stratify=data.iloc[:,-1], random_state=42)
+
+print2(X_train.shape)
+
+model_lg = LogisticRegression(solver="lbfgs", max_iter=10000)
+model_lg.fit(X_train, y_train)
+print2(model_lg.coef_)
