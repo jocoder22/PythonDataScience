@@ -1,8 +1,11 @@
 import numpy as np
 import pandas as pd
+
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split as tts
+from sklearn import tree
+
 import matplotlib.pyplot as plt
 
 from printdescribe import print2, describe2
@@ -63,3 +66,13 @@ chosen_tree = model_rfc.estimators_[7]
 # get the column it split on
 split_col = chosen_tree.tree_.feature[1]
 split_col_name = X_train.columns[split_col]
+
+
+# get the level it split on
+split_value = chosen_tree.tree_.threshold[1]
+print2(f"This is the node split on feature {split_col_name}, at a value of {split_value}")
+
+
+plt.rcParams["figure.figsize"] = 21,16
+imgplot = tree.plot_tree(chosen_tree)
+plt.show()
