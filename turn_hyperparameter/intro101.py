@@ -76,3 +76,14 @@ print2(f"This is the node split on feature {split_col_name}, at a value of {spli
 plt.rcParams["figure.figsize"] = 21,16
 imgplot = tree.plot_tree(chosen_tree)
 plt.show()
+
+
+fig, axes = plt.subplots(nrows = 1,ncols = 1,figsize = (2,2), dpi=400)
+feature_name = list(data.iloc[:,:-1].columns)
+target_name = list(data.iloc[:, [-1]].columns)
+tree.plot_tree(chosen_tree,
+               feature_names = feature_name, 
+               class_names=target_name,
+               filled = True);
+# fig.savefig('choosen_7.png')
+plt.show()
