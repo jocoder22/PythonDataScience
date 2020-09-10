@@ -56,3 +56,10 @@ print2(sorted_coeffs)
 model_rfc = RandomForestClassifier(n_estimators=100, max_depth=2)
 print2(model_rfc)
 
+model_rfc.fit(X_train, y_train)
+
+chosen_tree = model_rfc.estimators_[7]
+# visualize the left, second form top node
+# get the column it split on
+split_col = chosen_tree.tree_.feature[1]
+split_col_name = X_train.columns[split_col]
