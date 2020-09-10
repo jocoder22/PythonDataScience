@@ -42,4 +42,17 @@ print2(coeffs)
 
 coeffs = pd.DataFrame(coeffs, columns=["Variable", "Coefficient"])
 coeffs.sort_values(by=["Coefficient"], axis=0, inplace=True, ascending=False)
-print2(coeffs.head())
+print2(coeffs.head(), coeffs.tail())
+
+
+
+val_names2 = X_train.columns.tolist()
+model_coeffs = model_lg.coef_[0]
+coeff_data = pd.DataFrame({"Variable":val_names2, "Coefficient":model_coeffs})
+sorted_coeffs = coeff_data.sort_values(by=["Coefficient"], axis=0, ascending=False)[0:5]
+print2(sorted_coeffs)
+
+
+model_rfc = RandomForestClassifier(n_estimators=100, max_depth=2)
+print2(model_rfc)
+
