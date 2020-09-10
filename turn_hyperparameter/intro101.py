@@ -57,7 +57,7 @@ sorted_coeffs = coeff_data.sort_values(by=["Coefficient"], axis=0, ascending=Fal
 print2(sorted_coeffs)
 
 
-model_rfc = RandomForestClassifier(n_estimators=100, max_depth=2)
+model_rfc = RandomForestClassifier(n_estimators=10, max_depth=2)
 print2(model_rfc)
 
 model_rfc.fit(X_train, y_train)
@@ -81,10 +81,28 @@ plt.show()
 
 fig, axes = plt.subplots(nrows = 1,ncols = 1,figsize = (2,2), dpi=400)
 feature_name = list(data.iloc[:,:-1].columns)
-target_name = list(data.iloc[:, [-1]].columns[0)
+target_name = list(data.iloc[:, [-1]].columns[0])
 tree.plot_tree(chosen_tree,
                feature_names = feature_name, 
                class_names=target_name,
                filled = True);
 # fig.savefig('choosen_7.png')
 plt.show()
+
+y_hat = model_rfc.predict(X_test)
+# Get confusion matrix & accuracy for the old rf_model
+print("Confusion Matrix: \n\n {} \n Accuracy Score: \n\n {}".format(
+  confusion_matrix(y_test,y_hat),
+  accuracy_score(y_hat, y_test))) 
+
+
+
+model_rfc100 = RandomForestClassifier(n_estimators=500, max_depth=10)
+model_rfc100.fit(X_train, y_train)
+y_hat100 = model_rfc100.predict(X_test)
+
+# Get confusion matrix & accuracy for the old rf_model
+print("Confusion Matrix: \n\n {} \n Accuracy Score: \n\n {}".format(
+  confusion_matrix(y_test,y_hat100),
+  accuracy_score(y_hat100, y_test))) 
+                                              
