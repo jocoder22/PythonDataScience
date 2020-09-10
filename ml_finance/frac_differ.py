@@ -37,7 +37,7 @@ from mlfinlab.features.fracdiff import FractionalDifferentiation as ff
 fracdata = ff.frac_diff(stock, 0.2, thresh=1e3)
 print(fracdata.head())
 
-fracdata.columns = ["close_diff"]
+fracdata.columns = ["frac0.2"]
 
 result = pd.concat([stock,fracdata], axis=1, sort=False)
 result["logprice"] = np.log(result['Close'])
@@ -47,5 +47,5 @@ result.dropna(inplace=True)
 print(result.head())
 
 
-sns.relplot(height=10, data=result, kind="line")
-plot.show();
+sns.relplot(height=8, data=result, kind="line")
+plt.show();
