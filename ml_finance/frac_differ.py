@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pkgutil
+import mlfinlab
+from mlfinlab.features.fracdiff import FractionalDifferentiation as ff
 
 import pandas_datareader as pdr
 from datetime import datetime, date
@@ -24,8 +27,7 @@ stock = pdr.get_data_yahoo(symbol, start, end)[['Close']]
 print2(stock.head())
 
 
-import pkgutil
-import mlfinlab
+
 package=mlfinlab
 for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
                                                       prefix=package.__name__+'.',
@@ -33,7 +35,7 @@ for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
     print(modname)
 
     
-from mlfinlab.features.fracdiff import FractionalDifferentiation as ff
+
 fracdata = ff.frac_diff(stock, 0.2, thresh=1e3)
 print(fracdata.head())
 
