@@ -38,4 +38,8 @@ zipper = list(zip(var_names, model_lg.coef_[0]))
 print2(zipper)
 
 coeffs = [list(x) for x in zipper]
-coeffs
+print2(coeffs)
+
+coeffs = pd.DataFrame(coeffs, columns=["Variable", "Coefficient"])
+coeffs.sort_values(by=["Coefficient"], axis=0, inplace=True, ascending=False)
+print2(coeffs.head())
