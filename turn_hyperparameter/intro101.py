@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split as tts
+from sklearn.metrics import confusion_matrix, accuracy_score
 from sklearn import tree
 
 import matplotlib.pyplot as plt
@@ -80,7 +81,7 @@ plt.show()
 
 fig, axes = plt.subplots(nrows = 1,ncols = 1,figsize = (2,2), dpi=400)
 feature_name = list(data.iloc[:,:-1].columns)
-target_name = list(data.iloc[:, [-1]].columns)
+target_name = list(data.iloc[:, [-1]].columns[0)
 tree.plot_tree(chosen_tree,
                feature_names = feature_name, 
                class_names=target_name,
