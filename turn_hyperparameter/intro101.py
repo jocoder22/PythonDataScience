@@ -30,3 +30,12 @@ print2(X_train.shape)
 model_lg = LogisticRegression(solver="lbfgs", max_iter=10000)
 model_lg.fit(X_train, y_train)
 print2(model_lg.coef_)
+
+
+# var_names = list(data.iloc[:,:-1].columns)
+var_names = list(X_train.columns)
+zipper = list(zip(var_names, model_lg.coef_[0]))
+print2(zipper)
+
+coeffs = [list(x) for x in zipper]
+coeffs
