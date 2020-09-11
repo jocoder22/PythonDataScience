@@ -98,3 +98,60 @@ print("Confusion Matrix \n", confusion_matrix(y_test, predictions))
 # Get the ROC-AUC score
 predictions_proba = grid_rfclass.best_estimator_.predict_proba(X_test)[:,1]
 print("ROC-AUC Score \n", roc_auc_score(y_test, predictions_proba))
+
+
+
+
+import random
+# Create lists for criterion and max_features
+criterion_list = ['gini', 'entropy']
+max_feature_list = ["auto", "sqrt", "log2", "None"]
+
+learning = np.linspace(0.001,2,150)
+
+# Create a list of values for the max_depth hyperparameter
+max_depth_list = list(range(3,56))
+
+# Combination list
+combinations_list = [list(x) for x in product(max_depth_list, learning, max_feature_list)]
+
+# Sample hyperparameter combinations for a random search
+combinations_random_chosen = random.sample(combinations_list, 150)
+
+# Print the result
+print(combinations_random_chosen)
+
+
+
+nn = pd.DataFrame(combinations_random_chosen, columns = ["max_depth", "learning_rate", 'max_feature'])
+# plt.scatter(nn.max_feature, nn.max_depth, cmap=nn.criterion)
+# plt.gca().set(ylabel = "Min Sample leaf", xlabel="Learing Rate")
+# plt.show()
+
+groups = nn.groupby('max_feature')
+fig, ax = plt.subplots()
+# ax.set_color_cycle(colors)
+ax.margins(0.05)
+for name, group in groups:
+    ax.plot(group.learning_rate, group.max_depth, marker='o', linestyle='', ms=12, label=name)
+ax.legend(numpoints=1, loc='upper left')
+
+plt.show()
+
+
+nn['classes'] = pd.Categorical(nn['max_feature']).codes
+pp3 = nn.max_feature.value_counts()
+pp4 = tuple(pp3.index)
+
+
+pp = np.unique(nn.classes).tolist()
+pp2 = tuple(pp)
+
+plt.scatter(nn.max_depth, nn.learning_rate, alpha=0.5,
+            s=nn.max_depth*2, c=nn.classes, cmap='viridis')
+plt.gca().set(xlabel=nn.columns[0], ylabel=nn.columns[1])
+plt.legend(tuple(pp), tuple(pp3.index), loc='upper left');
+
+
+import seaborn as sns
+sns.pairplot(x_vars=["max_depth"], y_vars=["learning_rate"], data=nn, hue="max_feature", size=10);
