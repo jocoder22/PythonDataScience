@@ -3,6 +3,7 @@ import pandas as pd
 
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 
 from printdescribe import print2
