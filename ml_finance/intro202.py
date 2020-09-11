@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 
@@ -81,3 +81,20 @@ print(best_row)
 # Get the n_estimators parameter from the best-performing square and print
 best_n_estimators = grid_rfclass.best_params_["max_depth"]
 print(best_n_estimators)
+
+
+# See what type of object the best_estimator_ property is
+print(type(grid_rfclass.best_estimator_))
+
+# Create an array of predictions directly using the best_estimator_ property
+predictions = grid_rfclass.best_estimator_.predict(X_test)
+
+# Take a look to confirm it worked, this should be an array of 1's and 0's
+print(predictions[0:5])
+
+# Now create a confusion matrix 
+print("Confusion Matrix \n", confusion_matrix(y_test, predictions))
+
+# Get the ROC-AUC score
+predictions_proba = grid_rfclass.best_estimator_.predict_proba(X_test)[:,1]
+print("ROC-AUC Score \n", roc_auc_score(y_test, predictions_proba))
