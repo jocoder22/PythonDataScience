@@ -63,3 +63,4 @@ predictions = grid_rfclass.fit(X_train, y_train).predict(X_test)
 results = pd.DataFrame(grid_rfclass.cv_results_)
 print(results.shape)
 
+print2(results.iloc[:,:9], results.iloc[:,9:18], results.iloc[:,18:])
