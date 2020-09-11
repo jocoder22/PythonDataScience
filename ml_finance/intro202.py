@@ -72,3 +72,12 @@ print2(grid_rfclass.best_estimator_, grid_rfclass.best_index_, grid_rfclass.best
 
 pd.set_option("display.max_colwidth", -1)
 print(results.loc[:,"params"])
+
+
+# Create a variable from the row related to the best-performing square
+best_row = results.loc[[grid_rfclass.best_index_]]
+print(best_row)
+
+# Get the n_estimators parameter from the best-performing square and print
+best_n_estimators = grid_rfclass.best_params_["max_depth"]
+print(best_n_estimators)
