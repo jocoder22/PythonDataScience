@@ -35,3 +35,9 @@ print2(results_df)
 
 target_names = ['class 0', 'class 1']
 print2(classification_report(y_test, predictions, target_names=target_names))
+
+# import os
+# print(os.cpu_count())
+
+# from sklearn import metrics
+# print2(metrics.SCORERS.keys())
