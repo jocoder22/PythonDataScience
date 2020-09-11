@@ -12,3 +12,4 @@ data = pd.read_excel(path,header=1, index_col=0)
 data = data.rename(columns={'default payment next month':"default"})
 
 X_train, X_test, y_train, y_test = train_test_split(data.iloc[:,:-1], data.iloc[:,-1], stratify=data.iloc[:,-1], test_size=0.3)
+print2(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
