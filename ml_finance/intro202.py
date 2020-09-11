@@ -41,3 +41,25 @@ print2(classification_report(y_test, predictions, target_names=target_names))
 
 # from sklearn import metrics
 # print2(metrics.SCORERS.keys())
+
+# Create a Random Forest Classifier with specified criterion
+rfclass = RandomForestClassifier(criterion='entropy', n_estimators=100)
+
+# Create the parameter grid
+param_grid = {'max_depth': [2, 4, 8, 15], 'max_features': ['auto', 'sqrt']} 
+
+# Create a GridSearchCV object
+grid_rfclass = GridSearchCV(
+    estimator=rf_class,
+    param_grid=param_grid,
+    scoring='roc_auc',
+    n_jobs=-1,
+    cv=5,
+    refit=True, return_train_score=True)
+print(grid_rfclass)
+
+
+predictions = grid_rfclass.fit(X_train, y_train).predict(X_test)
+results = pd.DataFrame(grid_rfclass.cv_results_)
+print(results.shape)
+
