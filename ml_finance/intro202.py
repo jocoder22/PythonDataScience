@@ -68,3 +68,7 @@ print2(results.iloc[:,:9], results.iloc[:,9:18], results.iloc[:,18:])
 
 print2(results[results["rank_test_score"]==1])
 print2(grid_rfclass.best_estimator_, grid_rfclass.best_index_, grid_rfclass.best_params_, grid_rfclass.best_score_)
+
+
+pd.set_option("display.max_colwidth", -1)
+print(results.loc[:,"params"])
