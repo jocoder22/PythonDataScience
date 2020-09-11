@@ -31,3 +31,7 @@ for lr in learning_rates:
 # Gather everything into a DataFrame
 results_df = pd.DataFrame(results_list, columns=['learning_rate', 'accuracy'])
 print2(results_df)
+
+
+target_names = ['class 0', 'class 1']
+print2(classification_report(y_test, predictions, target_names=target_names))
