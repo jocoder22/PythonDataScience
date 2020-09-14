@@ -65,29 +65,36 @@ sorted_coeffs = coeff_data.sort_values(by=["Coefficient"], axis=0, ascending=Fal
 print2(sorted_coeffs)
 
 
-model_rfc = RandomForestClassifier(n_estimators=10, max_depth=2)
+# Perform feature importance using randomforest classifier
+# initialize the model and view parameters
+model_rfc = RandomForestClassifier(n_estimators=100, max_depth=2)
 print2(model_rfc)
 
+
+# train the model
 model_rfc.fit(X_train, y_train)
 
+# chose a tree to view it and its descendents
 chosen_tree = model_rfc.estimators_[7]
-# visualize the left, second form top node
-# get the column it split on
-split_col = chosen_tree.tree_.feature[1]
-split_col_name = X_train.columns[split_col]
 
+# visualize the left, second form top node, index 1 
+# Note: tress are zero indexed
+split_col = chosen_tree.tree_.feature[1]
+
+# get the column it split on
+split_col_name = X_train.columns[split_col]
 
 # get the level it split on
 split_value = chosen_tree.tree_.threshold[1]
 print2(f"This is the node split on feature {split_col_name}, at a value of {split_value}")
 
-
+# visualize the tree
 # plt.rcParams["figure.figsize"] = 10,12
 plt.figure(figsize = [12, 8])
 imgplot = tree.plot_tree(chosen_tree)
 plt.show()
 
-
+# more detailed visualization
 fig, axes = plt.subplots(nrows = 1,ncols = 1,figsize = (2,2), dpi=400)
 feature_name = list(data.iloc[:,:-1].columns)
 target_name = list(data.iloc[:, [-1]].columns[0])
@@ -98,21 +105,19 @@ tree.plot_tree(chosen_tree,
 # fig.savefig('choosen_7.png')
 plt.show()
 
+# test our model on test data
 y_hat = model_rfc.predict(X_test)
 
 # Get confusion matrix & accuracy for the old rf_model
-print("Confusion Matrix: \n\n {} \n Accuracy Score: \n\n {}".format(
-  confusion_matrix(y_test,y_hat),
-  accuracy_score(y_hat, y_test))) 
+printf("Confusion Matrix: \n\n {confusion_matrix(y_test,y_hat)} \n Accuracy Score: 
+       \n\n {accuracy_score(y_hat, y_test)}")
 
 
-
-model_rfc100 = RandomForestClassifier(n_estimators=500, max_depth=10)
-model_rfc100.fit(X_train, y_train)
-y_hat100 = model_rfc100.predict(X_test)
+model_rfc500 = RandomForestClassifier(n_estimators=500, max_depth=10)
+model_rfc500.fit(X_train, y_train)
+y_hat500 = model_rfc100.predict(X_test)
 
 # Get confusion matrix & accuracy for the old rf_model
-print("Confusion Matrix: \n\n {} \n Accuracy Score: \n\n {}".format(
-  confusion_matrix(y_test,y_hat100),
-  accuracy_score(y_hat100, y_test))) 
+print(f"Confusion Matrix: \n\n {confusion_matrix(y_test,y_hat500)} \n 
+      Accuracy Score: \n\n {accuracy_score(y_hat500, y_test)}") 
                                               
