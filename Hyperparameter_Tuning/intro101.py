@@ -36,11 +36,13 @@ X_train, X_test, y_train, y_test = tts(data.iloc[:,:-1], data.iloc[:,-1], test_s
 
 print2(X_train.shape)
 
+# instantiate logistics regressio model, and train the model
 model_lg = LogisticRegression(solver="lbfgs", max_iter=10000)
 model_lg.fit(X_train, y_train)
 print2(model_lg.coef_)
 
 
+# select the model coefficients and zip to column's names
 # var_names = list(data.iloc[:,:-1].columns)
 var_names = list(X_train.columns)
 zipper = list(zip(var_names, model_lg.coef_[0]))
@@ -49,12 +51,13 @@ print2(zipper)
 coeffs = [list(x) for x in zipper]
 print2(coeffs)
 
+# form a pandas dataframe, sort and view
 coeffs = pd.DataFrame(coeffs, columns=["Variable", "Coefficient"])
 coeffs.sort_values(by=["Coefficient"], axis=0, inplace=True, ascending=False)
 print2(coeffs.head(), coeffs.tail())
 
 
-
+# Anothe approach: form pandas dataframe, sort and view
 val_names2 = X_train.columns.tolist()
 model_coeffs = model_lg.coef_[0]
 coeff_data = pd.DataFrame({"Variable":val_names2, "Coefficient":model_coeffs})
