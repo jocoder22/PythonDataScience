@@ -108,16 +108,16 @@ plt.show()
 # test our model on test data
 y_hat = model_rfc.predict(X_test)
 
-# Get confusion matrix & accuracy for the old rf_model
-printf("Confusion Matrix: \n\n {confusion_matrix(y_test,y_hat)} \n Accuracy Score: 
+# Get confusion matrix & accuracy for the model
+printf(f"Confusion Matrix: \n\n {confusion_matrix(y_test,y_hat)} \n Accuracy Score: 
        \n\n {accuracy_score(y_hat, y_test)}")
 
-
+# initialize randomfores classifier with 500 estimators, train and predict
 model_rfc500 = RandomForestClassifier(n_estimators=500, max_depth=10)
 model_rfc500.fit(X_train, y_train)
-y_hat500 = model_rfc100.predict(X_test)
+y_hat500 = model_rfc500.predict(X_test)
 
-# Get confusion matrix & accuracy for the old rf_model
+# Get confusion matrix & accuracy for the new model
 print(f"Confusion Matrix: \n\n {confusion_matrix(y_test,y_hat500)} \n 
       Accuracy Score: \n\n {accuracy_score(y_hat500, y_test)}") 
                                               
