@@ -138,6 +138,15 @@ plt.axhline(daily_vol.mean()*0.5, color="r")
 plt.show();
 
 
+datasets['dv'] = daily_vol
+datasets['dv'].fillna(0, inplace=True)
+datasets['upper'] = datasets['Adj Close'] + datasets['dv'] * 1000
+datasets['lower'] = datasets['Adj Close'] - datasets['dv'] * 1000
+
+datasets['Adj Close'].plot(figsize=(10,10))
+datasets['upper'].plot(c="g")
+datasets['lower'].plot(c="r")
+# (datasets['side2']).dropna().plot(c='black');
 
 
 primary_forecast = pd.DataFrame(labels['bin'])
@@ -221,5 +230,21 @@ y_training_validation = y[start_date:end_date]
 X_train, X_validate, y_train, y_validate = train_test_split(X_training_validation, y_training_validation, test_size=0.30, shuffle=False)
 
 train_df = pd.concat([y_train, X_train], axis=1, join='inner')
+
+train_df['bin'].value_counts()
+
+
+# Upsample the training data to have a 50 - 50 split
+# https://elitedatascience.com/imbalanced-classes
+majority = train_df[train_df['bin'] == 0]
+minority = train_df[train_df['bin'] == 1]
+
+new_minority = resample(minority, 
+                   replace=True,     # sample with replacement
+                   n_samples=majority.shape[0],    # to match majority class
+                   random_state=42)
+
+train_df = pd.concat([majority, new_minority])
+train_df = shuffle(train_df, random_state=42)
 
 train_df['bin'].value_counts()
