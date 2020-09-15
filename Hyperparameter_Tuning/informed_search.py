@@ -71,3 +71,16 @@ print2(results.head(), results.columns)
 # newdata = results.loc[:,['param_min_samples_leaf', 'param_max_depth', 'param_learning_rate', 'mean_test_score', 'mean_train_score']]
 
 # print2(newdata.head())
+
+
+def visualize_first():
+  for name in results_df.columns[0:2]:
+    plt.clf()
+    plt.scatter(results_df[name],results_df['accuracy'], c=['blue']*500)
+    plt.gca().set(xlabel='{}'.format(name), ylabel='accuracy', title='Accuracy for different {}s'.format(name))
+    plt.gca().set_ylim([0,100])
+    x_line = 20
+    if name == "learn_rate":
+      	x_line = 1
+    plt.axvline(x=x_line, color="red", linewidth=4)
+    plt.show()
