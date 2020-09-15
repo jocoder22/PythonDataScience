@@ -419,3 +419,39 @@ perf_stats_all = perf_func(returns=primary_model_rets,
 perf_stats_df = pd.DataFrame(data=perf_stats_all, columns=['Primary Model'])
 
 pf.show_perf_stats(primary_model_rets)
+
+
+meta_returns = labels.loc[valid_dates, 'ret'] * y_pred
+daily_meta_rets = get_daily_returns(meta_returns)
+
+# Save the KPIs in a dataframe
+perf_stats_all = perf_func(returns=daily_meta_rets, 
+                           factor_returns=None, 
+                           positions=None,
+                           transactions=None,
+                           turnover_denom="AGB")
+
+perf_stats_df['Meta Model'] = perf_stats_all
+
+pf.show_perf_stats(daily_meta_rets)
+
+
+# Define a trailing 252 trading day window
+window = 252
+
+# Calculate the max drawdown in the past window days for each day 
+rolling_max = datasets['Adj Close'].rolling(window, min_periods=1).max()
+daily_drawdown = datasets['Adj Close']/rolling_max - 1.0
+
+# Calculate the minimum (negative) daily drawdown
+max_daily_drawdown = daily_drawdown.rolling(window, min_periods=1).min()
+
+# Plot the results
+daily_drawdown.plot()
+max_daily_drawdown.plot()
+
+# Show the plot
+plt.show()
+
+
+# pf.create_returns_tear_sheet(daily_meta_rets)
