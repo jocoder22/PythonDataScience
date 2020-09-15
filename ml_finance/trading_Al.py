@@ -7,6 +7,10 @@ import math
 import statsmodels.tsa.stattools as ts
 import numpy as np
 from scipy import stats
+
+
+import mlfinlab as ml
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -91,3 +95,30 @@ print("-1.0 --> Short Signals")
 print("--------------------")
 print(datasets['side'].value_counts())
 
+
+
+
+# Compute daily volatility
+daily_vol = ml.util.get_daily_vol(close=datasets['Adj Close'], lookback=40)
+
+# Apply Symmetric CUSUM Filter and get timestamps for events
+# Note: Only the CUSUM filter needs a point estimate for volatility
+cusum_events = ml.filters.cusum_filter(datasets['Adj Close'], threshold=daily_vol.mean() * 0.5)
+
+t_events = cusum_events
+
+# Compute vertical barrier
+vertical_barriers = ml.labeling.add_vertical_barrier(t_events=t_events, close=datasets['Adj Close'], num_days=1)
+
+pt_sl = [1, 2]
+min_ret = 0.005
+triple_barrier_events = ml.labeling.get_events(close=datasets['Adj Close'],
+                                               t_events=t_events,
+                                               pt_sl=pt_sl,
+                                               target=daily_vol,
+                                               min_ret=min_ret,
+                                               num_threads=3,
+                                               vertical_barrier_times=vertical_barriers,
+                                               side_prediction=datasets['side'])
+labels = ml.labeling.get_bins(triple_barrier_events, datasets['Adj Close'])
+labels.side.value_counts()
