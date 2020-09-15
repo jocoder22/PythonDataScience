@@ -37,7 +37,7 @@ scoring_function = "accuracy"
 
 # Create the tpot classifier
 tpot_clf = TPOTClassifier(generations=number_generations, population_size=population_size,
-                          offspring_size=population_size, scoring=scoring_function,
+                          offspring_size=offspring_size, scoring=scoring_function,
                           verbosity=2, random_state=2, cv=2)
 
 # Fit the classifier to the training data
