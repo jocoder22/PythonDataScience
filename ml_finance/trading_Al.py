@@ -65,3 +65,29 @@ datasets.loc[short_signals, 'side'] = -1
 
 # Remove Look ahead biase by lagging the signal
 datasets['side'] = datasets['side'].shift(1)
+
+
+datasets['fast_mavg'].dropna().plot(figsize=(10,5))
+datasets['slow_mavg'].dropna().plot()
+(datasets['side']*200).dropna().plot()
+plt.legend();
+
+
+datasets['side2'] = np.where(datasets.side > 0, datasets.side *200,0)
+datasets['fast_mavg'].dropna().plot(figsize=(10,5))
+datasets['slow_mavg'].dropna().plot()
+(datasets['side2']).dropna().plot()
+plt.legend();
+
+
+
+orig_data = datasets.copy()
+
+# Drop the NaN values from our data set
+datasets.dropna(axis=0, how='any', inplace=True)
+
+print("1.0 --> Long Signals")
+print("-1.0 --> Short Signals")
+print("--------------------")
+print(datasets['side'].value_counts())
+
