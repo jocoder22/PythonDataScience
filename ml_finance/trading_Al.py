@@ -15,6 +15,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import resample
 from sklearn.utils import shuffle
 
+from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier, VotingClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import roc_curve
+
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -248,3 +252,84 @@ train_df = pd.concat([majority, new_minority])
 train_df = shuffle(train_df, random_state=42)
 
 train_df['bin'].value_counts()
+
+
+# Create training data
+y_train = train_df['bin']
+X_train= train_df.loc[:, train_df.columns != 'bin']
+
+
+
+
+nest = [int(x) for x in np.linspace(100,600,6)]
+
+parameters = {'max_depth':list(range(10,17)),
+              'n_estimators':nest,
+              'random_state':[42]}
+    
+def perform_grid_search(X_data, y_data):
+    rf = RandomForestClassifier(criterion='entropy')
+    
+    clf = GridSearchCV(rf, parameters, cv=4, scoring='roc_auc', n_jobs=-1)
+    
+    clf.fit(X_data, y_data)
+    
+    print(clf.cv_results_['mean_test_score'])
+    
+    return clf.best_params_['n_estimators'], clf.best_params_['max_depth']
+  
+  # extract parameters
+# n_estimator, depth = perform_grid_search(X_train, y_train)
+c_random_state = 42
+# print(n_estimator, depth, c_random_state)
+# n_estimator, depth = 100, 15
+n_estimator, depth = 100, 15
+
+
+
+# Performance Metrics
+y_pred_rf = rf.predict_proba(X_train)[:, 1]
+y_pred = rf.predict(X_train)
+fpr_rf, tpr_rf, _ = roc_curve(y_train, y_pred_rf)
+print(classification_report(y_train, y_pred))
+
+print("Confusion Matrix")
+print(confusion_matrix(y_train, y_pred))
+
+print('')
+print("Accuracy")
+print(accuracy_score(y_train, y_pred))
+
+plt.figure(1)
+plt.plot([0, 1], [0, 1], 'k--')
+plt.plot(fpr_rf, tpr_rf, label='RF')
+plt.xlabel('False positive rate')
+plt.ylabel('True positive rate')
+plt.title('ROC curve')
+plt.legend(loc='best')
+plt.show()
+
+
+# Meta-label
+# Performance Metrics
+y_pred_rf = rf.predict_proba(X_validate)[:, 1]
+y_pred = rf.predict(X_validate)
+fpr_rf, tpr_rf, _ = roc_curve(y_validate, y_pred_rf)
+print(classification_report(y_validate, y_pred))
+
+print("Confusion Matrix")
+print(confusion_matrix(y_validate, y_pred))
+
+print('')
+print("Accuracy")
+print(accuracy_score(y_validate, y_pred))
+
+
+plt.figure(1)
+plt.plot([0, 1], [0, 1], 'k--')
+plt.plot(fpr_rf, tpr_rf, label='RF ROC')
+plt.xlabel('False positive rate')
+plt.ylabel('True positive rate')
+plt.title('ROC curve')
+plt.legend(loc='best')
+plt.show()
