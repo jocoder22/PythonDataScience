@@ -9,6 +9,7 @@ import numpy as np
 from scipy import stats
 
 import mlfinlab as ml
+import pyfolio as pf
 
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.model_selection import train_test_split
@@ -18,6 +19,8 @@ from sklearn.utils import shuffle
 from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier, VotingClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import roc_curve
+
+
 
 
 import warnings
@@ -380,3 +383,39 @@ plt.show()
 
 
 
+def get_daily_returns(intraday_returns):
+    """
+    This changes returns into daily returns that will work using pyfolio.
+    """
+    day_val_data = 3
+    intra_day_returns = intraday_returns/day_val_data
+    
+    cum_rets = ((intra_day_returns + 1).cumprod())
+
+    # Downsample to daily
+    daily_rets = cum_rets.resample('B').last()
+    
+    
+
+    # Forward fill, Percent Change, Drop NaN
+    daily_rets = daily_rets.ffill().pct_change().dropna()
+    
+    return daily_rets
+
+  
+valid_dates = X_validate.index
+base_rets = labels.loc[valid_dates, 'ret']
+primary_model_rets = get_daily_returns(base_rets)
+
+# Set-up the function to extract the KPIs from pyfolio
+perf_func = pf.timeseries.perf_stats
+
+# Save the statistics in a dataframe
+perf_stats_all = perf_func(returns=primary_model_rets, 
+                           factor_returns=None, 
+                           positions=None,
+                           transactions=None,
+                           turnover_denom="AGB")
+perf_stats_df = pd.DataFrame(data=perf_stats_all, columns=['Primary Model'])
+
+pf.show_perf_stats(primary_model_rets)
