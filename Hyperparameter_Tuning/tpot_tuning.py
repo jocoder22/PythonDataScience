@@ -31,8 +31,8 @@ print2(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # Assign the values outlined to the inputs
 number_generations = 3
-population_size = 4
-offspring_size = 3
+population_size = 5
+offspring_size = 10
 scoring_function = "accuracy"
 
 # Create the tpot classifier
