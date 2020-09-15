@@ -8,8 +8,13 @@ import statsmodels.tsa.stattools as ts
 import numpy as np
 from scipy import stats
 
-
 import mlfinlab as ml
+
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.utils import resample
+from sklearn.utils import shuffle
+
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -129,4 +134,92 @@ print2(labels.head())
 daily_vol.plot()
 plt.axhline(daily_vol.mean()*2.0, color="g")
 plt.axhline(daily_vol.mean(), color="y")
-plt.axhline(daily_vol.mean()*0.5, color="r");
+plt.axhline(daily_vol.mean()*0.5, color="r")
+plt.show();
+
+
+
+
+primary_forecast = pd.DataFrame(labels['bin'])
+primary_forecast['pred'] = 1
+primary_forecast.columns = ['actual', 'pred']
+
+# Performance Metrics
+actual = primary_forecast['actual']
+pred = primary_forecast['pred']
+print(classification_report(y_true=actual, y_pred=pred))
+
+print("Confusion Matrix")
+print(confusion_matrix(actual, pred))
+
+print('')
+print("Accuracy")
+print(accuracy_score(actual, pred))
+
+
+# Momentum: Price Rate of Change, Moving Average Convergence-Divergence, Macd Threshould
+# Volatility: Rolling Standard Deviation
+# Correlation: Serial (Auto) Correlation
+# Returns: Log_returns
+
+# Feature generation
+
+datasets = orig_data
+
+datasets['log_ret'] = np.log(datasets['Adj Close']).diff()
+
+# Momentum
+datasets['mom2'] = datasets['Adj Close'].pct_change(periods=2)
+
+## Moving Average Convergence-Divergence ##
+
+ewma_26 = datasets['Adj Close'].transform(lambda x: x.ewm(span = 26).mean())
+ewma_12 = datasets['Adj Close'].transform(lambda x: x.ewm(span = 12).mean())
+
+macd = ewma_12 - ewma_26
+
+threshold = macd.ewm(span = 9).mean()
+
+datasets['cd threshold'] = threshold
+datasets['MACD'] = macd
+
+# Volatility
+datasets['volatility_5'] = datasets['log_ret'].rolling(window=5, min_periods=5, center=False).std()
+
+# Serial Correlation (Takes about 4 minutes)
+window_autocorr = 10
+
+datasets['autocorr_2'] = datasets['log_ret'].rolling(window=window_autocorr, min_periods=window_autocorr, center=False).apply(lambda x: x.autocorr(lag=2), raw=False)
+
+# Get the various log -t returns
+datasets['log_t1'] = datasets['log_ret'].shift(1)
+
+# Re compute sides
+datasets['side'] = np.nan
+
+long_signals = datasets['fast_mavg'] >= datasets['slow_mavg']
+short_signals = datasets['fast_mavg'] < datasets['slow_mavg']
+
+datasets.loc[long_signals, 'side'] = 1
+datasets.loc[short_signals, 'side'] = -1
+
+# Remove look ahead bias
+datasets = datasets.shift(1)
+
+# Get features at event dates
+X = datasets.loc[labels.index, :]
+
+# Drop unwanted columns
+X.drop(['Open', 'High', 'Low', 'Close', 'Volume', 'Adj Close', 'fast_mavg', 'slow_mavg', 'side'], axis=1, inplace=True)
+
+y = labels['bin']
+
+
+# Split data into training, validation and test sets
+X_training_validation = X[start_date:end_date]
+y_training_validation = y[start_date:end_date]
+X_train, X_validate, y_train, y_validate = train_test_split(X_training_validation, y_training_validation, test_size=0.30, shuffle=False)
+
+train_df = pd.concat([y_train, X_train], axis=1, join='inner')
+
+train_df['bin'].value_counts()
