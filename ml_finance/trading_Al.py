@@ -122,3 +122,11 @@ triple_barrier_events = ml.labeling.get_events(close=datasets['Adj Close'],
                                                side_prediction=datasets['side'])
 labels = ml.labeling.get_bins(triple_barrier_events, datasets['Adj Close'])
 labels.side.value_counts()
+
+
+print2(labels.head())
+
+daily_vol.plot()
+plt.axhline(daily_vol.mean()*2.0, color="g")
+plt.axhline(daily_vol.mean(), color="y")
+plt.axhline(daily_vol.mean()*0.5, color="r");
