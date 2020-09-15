@@ -333,3 +333,50 @@ plt.ylabel('True positive rate')
 plt.title('ROC curve')
 plt.legend(loc='best')
 plt.show()
+
+
+x_validate_min = X_validate.index.min()
+x_validate_max = X_validate.index.max()
+print(x_validate_min)
+print(x_validate_max)
+
+
+# Primary model
+primary_forecast = pd.DataFrame(labels['bin'])
+primary_forecast['pred'] = 1
+primary_forecast.columns = ['actual', 'pred']
+
+start = primary_forecast.index.get_loc(x_validate_min)
+end = primary_forecast.index.get_loc(x_validate_max) + 1
+
+subset_prim = primary_forecast[start:end]
+
+# Performance Metrics
+actual = subset_prim['actual']
+pred = subset_prim['pred']
+print(classification_report(y_true=actual, y_pred=pred))
+
+print("Confusion Matrix")
+print(confusion_matrix(actual, pred))
+
+print('')
+print("Accuracy")
+print(accuracy_score(actual, pred))
+
+# Feature Importance
+title = 'Feature Importance:'
+figsize = (15, 5)
+
+feat_imp = pd.DataFrame({'Importance':rf.feature_importances_})    
+feat_imp['feature'] = X.columns
+feat_imp.sort_values(by='Importance', ascending=False, inplace=True)
+feat_imp = feat_imp
+
+feat_imp.sort_values(by='Importance', inplace=True)
+feat_imp = feat_imp.set_index('feature', drop=True)
+feat_imp.plot.barh(title=title, figsize=figsize)
+plt.xlabel('Feature Importance Score')
+plt.show()
+
+
+
