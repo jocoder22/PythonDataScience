@@ -43,5 +43,12 @@ df.dropna(axis=0, how ="all")
 df.dropna(axis=1)
 
 # Keep only the col with at least 95% non-NA values.
-_95 = int(df.shape[0] * 0.95)
-df.dropna(axis=0, thresh=_95)
+_95col = int(df.shape[0] * 0.95)
+df.dropna(axis=1, thresh=_95col).shape
+df.dropna(axis=1, thresh=_95col).columns
+
+
+# Keep only the row with at least 95% non-NA values.
+_95row = int(df.shape[1] * 0.95)
+df.dropna(axis=0, thresh=_95row).shape
+df.dropna(axis=0, thresh=_95row).index
