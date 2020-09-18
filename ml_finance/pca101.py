@@ -2,8 +2,10 @@
 import os
 import numpy as np
 import pandas as pd 
+import datetime
 import pandas_datareader.data as dr
 from printdescribe import print2, changepath
+
 
 symbols = ['A', 'AA', 'AAPL', 'ABC', 'ABT', 'ADBE', 'ADI', 'ADM', 'ADP', 'ADSK', 'AEE', 'AEP', 'AES', 'AFL', 
            'AGN', 'AIG', 'AIV', 'AKAM', 'AKS', 'ALL', 'AMAT', 'AMD', 'AMGN', 'AMT', 'AMZN', 'AN', 'ANDV', 'ANF', 
@@ -65,6 +67,17 @@ print2(f"Asset Adjusted Closing Pices shape: {data2.shape}", data2.iloc[:,10].he
 # drop columns with NaN
 data2.dropna(axis=1)
 
+# clean the datasets, remove NaN smartly
+# Get a summary view of NaNs
+oo = datasets.isnull().sum()
+
+dd = {}
+n = 0
+for i, v in enumerate(oo.values):
+    if v < 6:
+        dd[oo.index[i]] = v
+        n += 1
+
 # View dataset
 print2(f"Asset Adjusted Closing Pices shape: {data2.shape}", data2.iloc[:,10].head())
 
@@ -79,3 +92,11 @@ norm_returns = (_returns - _returns_mean) / _returns_std
 print2(norm_returns.loc[:, 10].head(), norm_returns.shape)
 
 
+
+# split data into train and test datasets, based on timestamps
+# 70% for the train dataset and 30% for the test dataset
+index_ = data2.index[int(data2.shape[0] * 0.7)]
+
+# set memory space for efficient and fast programming
+X_norm_train, X_norm_test = None, None
+X_train, X_test = None, None
