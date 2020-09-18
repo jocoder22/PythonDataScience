@@ -118,14 +118,13 @@ X_train, X_test = None, None
 # split data into train and test datasets
 X_norm_train = norm_returns[norm_returns.index <= index_].copy()
 X_norm_test = norm_returns[norm_returns.index > index_].copy()
-X_train = _returns[_returns.index <= index_].dropna().copy()
-X_test = _returns.iloc[_returns.index > index_,:].copy()
+X_train_raw = _returns[_returns.index <= index_].dropna().copy()
+X_test_raw = _returns.iloc[_returns.index > index_,:].copy()
 
 # view the datasets
-print2(X_norm_train.shape, X_norm_test.shape, X_train.shape, X_test.shape)
+print2(X_norm_train.shape, X_norm_test.shape, X_train_raw.shape, X_test_raw.shape)
 print2(X_norm_train.iloc[:,:5].head(), X_norm_test.iloc[:,:5].head(), 
-       X_train.iloc[:,:5].head(), X_test.iloc[:,:5].head())
-
+       X_train_raw.iloc[:,:5].head(), X_test_raw.iloc[:,:5].head())
 
 # get the stock tickers
 stock_symbols = norm_returns.columns.values[:-1]
