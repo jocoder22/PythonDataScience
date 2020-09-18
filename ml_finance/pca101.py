@@ -134,4 +134,20 @@ print(num_ticker)
 # intialise a pca and empty dataframe for the matrix
 pca = PCA()
 cov_mat = pd.DataFrame(data=np.ones(shape=(num_ticker, num_ticker)), columns=stock_symbols)
+cov_matraw = cov_mat
 
+cov_mat = X_norm_train.cov()
+cov_matraw = X_train_raw.cov()
+
+pca.fit(cov_mat)
+
+cov_raw_df = pd.DataFrame({"variance":np.diag(cov_matraw)}, index=stock_symbols)
+print2(cov_raw_df.iloc[:,:10].head())
+
+
+var_threshold = [0.7, 0.8, 0.9, 0.95]
+ncomp = len(pca.explained_variance_ratio_)
+var_explained = np.cumsum(pca.explained_variance_ratio_)
+for i in var_threshold:
+    num_comp = np.where(np.logical_not(var_explained < i))[0][0] + 1 
+    print(f'{num_comp} components (about {np.round(num_comp/ncomp *100, 2)}%) explain {100* i}% of variance')
