@@ -56,3 +56,8 @@ with changepath(patth):
     print2('NYT' in datasets.columns)
 
 print2(datasets.iloc[:,191:290].info())
+
+tt = "https://dumbstockapi.com/stock?format=tickers-only&exchange=NYSE"
+pp = pd.read_json(tt)
+
+pp = list(pp.values.ravel())
