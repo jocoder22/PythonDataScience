@@ -71,25 +71,33 @@ data2.dropna(axis=1)
 # Get a summary view of NaNs
 oo = datasets.isnull().sum()
 
-dd = {}
-n = 0
-for i, v in enumerate(oo.values):
-    if v < 6:
-        dd[oo.index[i]] = v
-        n += 1
+# look at the distribution through Histogram
+# bimodular distribution
+plt.figure(figsize=[12, 7])
+oo.hist()
+plt.axhline(y=50, color='r', linestyle='-')
+plt.gca().set(xlabel ="Number of NaNs", ylabel="Features")
+plt.show();
+
+# Retain columns with 99.5% of data
+data5 = datasets.dropna(axis=1, thresh=int(datasets.shape[0]*0.995))
+print2(data5.shape, data5.isnull().sum().sum())
+
+# Remove row with remaining NaNs
+data6 = data5.dropna(axis=0)
+print2(data6.shape, data6.isnull().sum().sum())
 
 # View dataset
-print2(f"Asset Adjusted Closing Pices shape: {data2.shape}", data2.iloc[:,10].head())
-
+print2(f"Asset Adjusted Closing Pices shape: {data6.shape}", data6.iloc[:,:10].head())
 
 # compute normalized returns
-_returns = data2.pct_change()
+_returns = data6.pct_change()
 _returns_mean = _returns.mean()
-_returns_std = returns.std()
+_returns_std = _returns.std()
 norm_returns = (_returns - _returns_mean) / _returns_std
 
 # veiw normalised returns
-print2(norm_returns.loc[:, 10].head(), norm_returns.shape)
+print2(norm_returns.loc[:, :10].head(), norm_returns.shape)
 
 
 
