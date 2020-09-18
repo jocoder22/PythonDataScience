@@ -149,5 +149,26 @@ var_threshold = [0.7, 0.8, 0.9, 0.95]
 ncomp = len(pca.explained_variance_ratio_)
 var_explained = np.cumsum(pca.explained_variance_ratio_)
 for i in var_threshold:
-    num_comp = np.where(np.logical_not(var_explained < i))[0][0] + 1 
+    num_comp = np.where(np.logical_not(var_explained < i))[0][0] + 1
     print(f'{num_comp} components (about {np.round(num_comp/ncomp *100, 2)}%) explain {100* i}% of variance')
+           
+print2(len(pca.explained_variance_ratio_), pca.explained_variance_ratio_.shape)   
+
+
+# bar_width = 0.9
+n_asset = int((1 / 50) * norm_returns.shape[1])
+x_indx = np.arange(n_asset)
+fig, ax = plt.subplots()
+fig.set_size_inches(14, 5)
+# Eigenvalues are measured as percentage of explained variance.
+rects = ax.bar(x_indx, pca.explained_variance_ratio_[:n_asset], bar_width, color='deepskyblue')
+ax.set_xticks(x_indx + bar_width/40 )
+ax.set_xticklabels(list(range(n_asset)), rotation=45)
+ax.set_title('Percent variance explained')
+ax.legend((rects[0],), ('Percent variance explained by principal components',))
+           
+           
+           
+           
+           
+  
