@@ -1,4 +1,4 @@
-!pip install TPOT printdescribe xlrd
+# !pip install TPOT printdescribe xlrd
 
 from tpot import TPOTClassifier
 from sklearn.utils import _safe_indexing

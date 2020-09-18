@@ -1,4 +1,10 @@
 
+import os
+import numpy as np
+import pandas as pd 
+import pandas_datareader.data as dr
+from printdescribe import print2, changepath
+
 symbols = ['A', 'AA', 'AAPL', 'ABC', 'ABT', 'ADBE', 'ADI', 'ADM', 'ADP', 'ADSK', 'AEE', 'AEP', 'AES', 'AFL', 
            'AGN', 'AIG', 'AIV', 'AKAM', 'AKS', 'ALL', 'AMAT', 'AMD', 'AMGN', 'AMT', 'AMZN', 'AN', 'ANDV', 'ANF', 
            'AON', 'APA', 'APC', 'APD', 'APH', 'APOL', 'ARG', 'ATGE', 'AVB', 'AVY', 'AXP', 'AZO', 'BA', 'BAC', 
@@ -29,8 +35,24 @@ symbols = ['A', 'AA', 'AAPL', 'ABC', 'ABT', 'ADBE', 'ADI', 'ADM', 'ADP', 'ADSK',
            'SLM', 'SPLS', 'STJ', 'SVU', 'SWY', 'TEG', 'TER', 'TGNA', 'THC', 'X', 'MAR.1', 'SPX']
 
 
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_columns', None)
-pd.set_option('display.width', None)
-pd.set_option('display.max_colwidth', -1)
-pd.options.display.max_seq_items = None
+# pd.set_option('display.max_rows', None)
+# pd.set_option('display.max_columns', None)
+# pd.set_option('display.width', None)
+# pd.set_option('display.max_colwidth', -1)
+# pd.options.display.max_seq_items = None
+
+patth = r"D:\PythonDataScience\ml_finance"
+
+
+
+
+start_date = '2013-01-01'
+# end_date = '2019-12-31'
+# datasets = dr.DataReader(symbols, data_source='yahoo', start=start_date)['Adj Close']
+
+with changepath(patth):
+    # datasets.to_csv("assets.csv",  index=False,  compression='gzip')
+    datasets = pd.read_csv("assets.csv",   compression='gzip')
+    print2('NYT' in datasets.columns)
+
+print2(datasets.iloc[:,191:290].info())

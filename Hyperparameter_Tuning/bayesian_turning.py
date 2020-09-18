@@ -1,4 +1,4 @@
-!pip install hyperopt
+# !pip install hyperopt
 
 import numpy as np
 import pandas as pd
@@ -30,12 +30,15 @@ print2(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 space = {'max_depth': hp.quniform('max_depth', 2, 10, 2),'learning_rate': hp.uniform('learning_rate', 0.001,0.9)}
 
 # Set up objective function
+n = 1
 def objective(params):
     params = {'max_depth': int(params["max_depth"]),'learning_rate': params["learning_rate"]}
     gbm_clf = GradientBoostingClassifier(n_estimators=100, **params) 
     best_score = cross_val_score(gbm_clf, X_train, y_train, scoring='accuracy', cv=10, n_jobs=-1).mean()
     loss = 1 - best_score
-    writeout(best_score, params, iteration)
+    # writeout(best_score, params, iteration)
+    print(best_score)# params["max_depth"], params["learning_rate"], f"{n} iteration", sep="\n", end="\n\")
+    # n += 1
     return loss
 
   

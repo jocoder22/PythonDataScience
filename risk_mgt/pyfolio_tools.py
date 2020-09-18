@@ -26,7 +26,7 @@ returns = assets.pct_change()
 returns.index = pd.to_datetime(returns.index)
 
 # Create tear sheat
-fig = returns.create_returns_tear_sheat(returns, return_fig=True)
+fig = pf.create_returns_tear_sheat(returns, return_fig=True)
 
 # using backtest and live data
 rts_live = returns.create_returns_tear_sheat(returns, start_live_date="2019-03-15")
@@ -35,4 +35,4 @@ def display_tear_sheet():
   p = 'pyfolio_tear_sheet_3.13.png'
   HtmlManager.getPlots().append(FigHtml([p]))
 
- display_tear_sheet()
+display_tear_sheet()
