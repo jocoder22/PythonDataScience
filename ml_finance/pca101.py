@@ -43,9 +43,6 @@ symbols = ['A', 'AA', 'AAPL', 'ABC', 'ABT', 'ADBE', 'ADI', 'ADM', 'ADP', 'ADSK',
 
 patth = r"D:\PythonDataScience\ml_finance"
 
-
-
-
 start_date = '2013-01-01'
 # end_date = '2019-12-31'
 # datasets = dr.DataReader(symbols, data_source='yahoo', start=start_date)['Adj Close']
@@ -59,5 +56,15 @@ print2(datasets.iloc[:,191:290].info())
 
 tt = "https://dumbstockapi.com/stock?format=tickers-only&exchange=NYSE"
 pp = pd.read_json(tt)
-
 pp = list(pp.values.ravel())
+
+# download data and view
+data2 = dr.DataReader(pp, data_source='yahoo', start=start_date)['Adj Close']
+print2(f"Asset Adjusted Closing Pices shape: {data2.shape}", data2.iloc[:,10].head())
+
+# drop columns with NaN
+data2.dropna(axis=1)
+
+# View dataset
+print2(f"Asset Adjusted Closing Pices shape: {data2.shape}", data2.iloc[:,10].head())
+
