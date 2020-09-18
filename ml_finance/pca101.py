@@ -95,16 +95,22 @@ _returns = data6.pct_change()
 _returns_mean = _returns.mean()
 _returns_std = _returns.std()
 norm_returns = (_returns - _returns_mean) / _returns_std
+norm_returns.dropna(inplace=True)
 
 # veiw normalised returns
-print2(norm_returns.loc[:, :10].head(), norm_returns.shape)
+print2(norm_returns.iloc[:, :10].head(), norm_returns.shape)
 
 
 
 # split data into train and test datasets, based on timestamps
 # 70% for the train dataset and 30% for the test dataset
-index_ = data2.index[int(data2.shape[0] * 0.7)]
+index_ = data6.index[int(data6.shape[0] * 0.7)]
 
 # set memory space for efficient and fast programming
 X_norm_train, X_norm_test = None, None
 X_train, X_test = None, None
+
+X_norm_train = norm_returns[norm_returns.index <= index_].copy()
+X_norm_test = norm_returns[norm_returns.index > index_].copy()
+X_train = _returns[_returns.index <= index_].copy()
+X_test = _returns[_returns.index > index_].copy()
