@@ -68,3 +68,14 @@ data2.dropna(axis=1)
 # View dataset
 print2(f"Asset Adjusted Closing Pices shape: {data2.shape}", data2.iloc[:,10].head())
 
+
+# compute normalized returns
+_returns = data2.pct_change()
+_returns_mean = _returns.mean()
+_returns_std = returns.std()
+norm_returns = (_returns - _returns_mean) / _returns_std
+
+# veiw normalised returns
+print2(norm_returns.loc[:, 10].head(), norm_returns.shape)
+
+
