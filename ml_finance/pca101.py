@@ -11,6 +11,8 @@ from sklearn.decomposition import PCA
 import pandas_datareader.data as dr
 from printdescribe import print2, changepath
 
+import warnings
+warnings.filterwarnings('ignore')
 
 symbols = ['A', 'AA', 'AAPL', 'ABC', 'ABT', 'ADBE', 'ADI', 'ADM', 'ADP', 'ADSK', 'AEE', 'AEP', 'AES', 'AFL', 
            'AGN', 'AIG', 'AIV', 'AKAM', 'AKS', 'ALL', 'AMAT', 'AMD', 'AMGN', 'AMT', 'AMZN', 'AN', 'ANDV', 'ANF', 
@@ -59,15 +61,16 @@ with changepath(patth):
     datasets = pd.read_csv("assets.csv",   compression='gzip')
     print2('NYT' in datasets.columns)
 
-print2(datasets.iloc[:,191:290].info())
+print2(datasets.iloc[:,:10].info())
 
-tt = "https://dumbstockapi.com/stock?format=tickers-only&exchange=NYSE"
-pp = pd.read_json(tt)
-pp = list(pp.values.ravel())
+data2 = datasets.copy()
+# tt = "https://dumbstockapi.com/stock?format=tickers-only&exchange=NYSE"
+# pp = pd.read_json(tt)
+# pp = list(pp.values.ravel())
 
 # download data and view
-data2 = dr.DataReader(pp, data_source='yahoo', start=start_date)['Adj Close']
-print2(f"Asset Adjusted Closing Pices shape: {data2.shape}", data2.iloc[:,10].head())
+# data2 = dr.DataReader(pp, data_source='yahoo', start=start_date)['Adj Close']
+# print2(f"Asset Adjusted Closing Pices shape: {data2.shape}", data2.iloc[:,10].head())
 
 # drop columns with NaN
 data2.dropna(axis=1)
@@ -81,7 +84,7 @@ oo = datasets.isnull().sum()
 plt.figure(figsize=[12, 7])
 oo.hist()
 plt.axhline(y=50, color='r', linestyle='-')
-plt.gca().set(xlabel ="Number of NaNs", ylabel="Features")
+plt.gca().set(xlabel ="Number of NaNs", ylabel="Features", title=f"Dataset of with {data2.shape[1]} features")
 plt.show();
 
 # Retain columns with 99.5% of data
@@ -141,7 +144,7 @@ cov_matraw = X_train_raw.cov()
 
 pca.fit(cov_mat)
 
-cov_raw_df = pd.DataFrame({"variance":np.diag(cov_matraw)}, index=stock_symbols)
+cov_raw_df = pd.DataFrame({"variance":np.diag(cov_matraw)}, columns=stock_symbols)
 print2(cov_raw_df.iloc[:,:10].head())
 
 
@@ -156,16 +159,23 @@ print2(len(pca.explained_variance_ratio_), pca.explained_variance_ratio_.shape)
 
 
 # bar_width = 0.9
-n_asset = int((1 / 50) * norm_returns.shape[1])
+n_asset = int((1/20) * norm_returns.shape[1])
 x_indx = np.arange(n_asset)
 fig, ax = plt.subplots()
 fig.set_size_inches(14, 5)
 # Eigenvalues are measured as percentage of explained variance.
-rects = ax.bar(x_indx, pca.explained_variance_ratio_[:n_asset], bar_width, color='deepskyblue')
-ax.set_xticks(x_indx + bar_width/40 )
+# rects = ax.bar(x_indx, pca.explained_variance_ratio_[:n_asset], bar_width, color='deepskyblue')
+rects = ax.bar(x_indx, pca.explained_variance_ratio_[:n_asset],  color='deepskyblue')
+# ax.set_xticks(x_indx + bar_width/40 )
+ax.set_xticks(x_indx + 0.022 )
 ax.set_xticklabels(list(range(n_asset)), rotation=45)
 ax.set_title('Percent variance explained')
 ax.legend((rects[0],), ('Percent variance explained by principal components',))
+plt.show();
+
+
+if pca is not None:
+    projected = pca.fit_transform(cov_mat)
            
            
            
