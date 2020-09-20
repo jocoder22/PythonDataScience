@@ -199,7 +199,6 @@ if pca is not None:
     plt.axhline(y=0.0, color='r', linestyle='-')
 plt.show();  
 
-
 fig, axes = plt.subplots(2,2, figsize=(44,22))
 axesr = axes.ravel()
 names = 'First Second Third Fourth Fifth Sixth'.split()
