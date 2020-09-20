@@ -41,7 +41,7 @@ symbols = ['A', 'AA', 'AAPL', 'ABC', 'ABT', 'ADBE', 'ADI', 'ADM', 'ADP', 'ADSK',
            'XRAY', 'XRX', 'YUM', 'ZION', '1255459D', '1284849D', '1431816D', '1436513D', '1448062D', '1500785D', '1519128D',
            '1541931D', '9876544D', '9876566D', '9876641D', 'ATI', 'AVP', 'BBBY', 'BF/B', 'BIG', 'BMS', 'BRK/B', 'CSC', 'CVC',
            'DD', 'DOW', 'EMC', 'HSH', 'ITT', 'JCP', 'LXK', 'MDP', 'NYT', 'ODP', 'PBI', 'PLL', 'R', 'RDC', 'RRD', 'RSHCQ', 'SIAL',
-           'SLM', 'SPLS', 'STJ', 'SVU', 'SWY', 'TEG', 'TER', 'TGNA', 'THC', 'X', 'MAR.1', 'SPX']
+           'SLM', 'SPLS', 'STJ', 'SVU', 'SWY', 'TEG', 'TER', 'TGNA', 'THC', 'X', 'MAR.1', '^GSPC']
 
 
 # pd.set_option('display.max_rows', None)
@@ -51,33 +51,50 @@ symbols = ['A', 'AA', 'AAPL', 'ABC', 'ABT', 'ADBE', 'ADI', 'ADM', 'ADP', 'ADSK',
 # pd.options.display.max_seq_items = None
 
 patth = r"D:\PythonDataScience\ml_finance"
+import pandas_datareader as pdr
 
-start_date = '2013-01-01'
+
+start_date = '2000-01-01'
 # end_date = '2019-12-31'
-# datasets = dr.DataReader(symbols, data_source='yahoo', start=start_date)['Adj Close']
+# pdr.get_data_yahoo(symbol, starttime, endtime)[['Adj Close']]
+# dataset2 = pdr.get_data_yahoo("^GSPC", start_date)[['Adj Close']]
+# dataset3 = pdr.get_data_yahoo(symbols, start=start_date)['Adj Close']
+
+# print2(dataset2.head())
 
 with changepath(patth):
-    # datasets.to_csv("assets.csv",  index=False,  compression='gzip')
-    datasets = pd.read_csv("assets.csv",   compression='gzip')
-    print2('NYT' in datasets.columns)
+    # dataset3.to_csv("assets3.csv",  compression='gzip')
+    dataset3 = pd.read_csv("assets3.csv",  compression='gzip', parse_dates=True, index_col="Date")
+    dataset2 = pd.read_csv("assets2.csv",  compression='gzip', parse_dates=True, index_col="Date")
+    # datasets = pd.read_csv("assets.csv",  compression='gzip', index_col=0)
+    # datasets, dataset2 = pd.read_csv(["assets.csv","assets2.csv"])
+ 
+dataset2.rename(columns={"Adj Close": "SPX"}, inplace=True)
+dataset3.drop(columns =["^GSPC"], inplace=True)
 
-print2(datasets.iloc[:,:10].info())
+# # df.set_index('Date', inplace=True)
+# print2(dataset2.head())
+# datasets.reindex(dataset2.index)
 
-data2 = datasets.copy()
+alldata = pd.concat([dataset3, dataset2], axis=1)
+data2 = alldata.copy()
+data2 = data2.loc[:"2013-12-20", :]
+print2(data2.iloc[:,:5].tail(), data2.shape)
 # tt = "https://dumbstockapi.com/stock?format=tickers-only&exchange=NYSE"
 # pp = pd.read_json(tt)
 # pp = list(pp.values.ravel())
 
 # download data and view
 # data2 = dr.DataReader(pp, data_source='yahoo', start=start_date)['Adj Close']
-# print2(f"Asset Adjusted Closing Pices shape: {data2.shape}", data2.iloc[:,10].head())
+# print2(f"Asset Adjusted Closing Pices shape: {data2.shape}", data2.iloc[:,:10].head())
 
 # drop columns with NaN
 data2.dropna(axis=1)
 
+print(data2.iloc[:, :5].head())
 # clean the datasets, remove NaN smartly
 # Get a summary view of NaNs
-oo = datasets.isnull().sum()
+oo = data2.isnull().sum()
 
 # look at the distribution through Histogram
 # bimodular distribution
@@ -88,41 +105,51 @@ plt.gca().set(xlabel ="Number of NaNs", ylabel="Features", title=f"Dataset of wi
 plt.show();
 
 # Retain columns with 99.5% of data
-data5 = datasets.dropna(axis=1, thresh=int(datasets.shape[0]*0.995))
-print2(data5.shape, data5.isnull().sum().sum())
+data5 = data2.dropna(axis=1, thresh=int(data2.shape[0]*0.96))
+print2(data5.shape, data5.isnull().sum().sum(),  data5.iloc[:,:10].head())
 
 # Remove row with remaining NaNs
 data6 = data5.dropna(axis=0)
 print2(data6.shape, data6.isnull().sum().sum())
+print2(f"alldata: {alldata.shape}", f"data6: {data6.shape}")
 
 # View dataset
-print2(f"Asset Adjusted Closing Pices shape: {data6.shape}", data6.iloc[:,:10].head())
+print2(f"Asset Adjusted Closing Prices shape: {data6.shape}", data6.iloc[:,:10].head())
+
+
+# _returns = pd.DataFrame(data=np.zeros(shape=(len(data6.index), data6.shape[1])), 
+#                              columns=data6.columns.values,
+#                              index=data6.index)
+
+# norm_returns = _returns
+# _returns = data6.pct_change().dropna()
 
 # compute normalized returns
-_returns = data6.pct_change()
+_returns = data6.pct_change().dropna()
 _returns_mean = _returns.mean()
 _returns_std = _returns.std()
 norm_returns = (_returns - _returns_mean) / _returns_std
-norm_returns.dropna(inplace=True)
+
+print(norm_returns.iloc[:, :5].head())
 
 # veiw normalised returns
-print2(norm_returns.iloc[:, :10].head(), norm_returns.shape)
+print2(norm_returns.iloc[:, -10:].head(), norm_returns.shape)
 
 
 
 # split data into train and test datasets, based on timestamps
 # 70% for the train dataset and 30% for the test dataset
-index_ = data6.index[int(data6.shape[0] * 0.7)]
+indy_ = norm_returns.index.values[int(norm_returns.shape[0] * 0.7)]
 
 # set memory space for efficient and fast programming
 X_norm_train, X_norm_test = None, None
 X_train, X_test = None, None
 
 # split data into train and test datasets
-X_norm_train = norm_returns[norm_returns.index <= index_].copy()
-X_norm_test = norm_returns[norm_returns.index > index_].copy()
-X_train_raw = _returns[_returns.index <= index_].dropna().copy()
-X_test_raw = _returns.iloc[_returns.index > index_,:].copy()
+X_norm_train = norm_returns[norm_returns.index <= indy_].copy()
+X_norm_test = norm_returns[norm_returns.index > indy_].copy()
+X_train_raw = _returns[_returns.index <= indy_].copy()
+X_test_raw = _returns[_returns.index > indy_].copy()
 
 # view the datasets
 print2(X_norm_train.shape, X_norm_test.shape, X_train_raw.shape, X_test_raw.shape)
@@ -130,17 +157,19 @@ print2(X_norm_train.iloc[:,:5].head(), X_norm_test.iloc[:,:5].head(),
        X_train_raw.iloc[:,:5].head(), X_test_raw.iloc[:,:5].head())
 
 # get the stock tickers
-stock_symbols = norm_returns.columns.values
+stock_symbols = X_norm_train.columns.values[:-1]
 num_ticker = len(stock_symbols)
 print(num_ticker)
 
 # intialise a pca and empty dataframe for the matrix
 pca = PCA()
+assert 'SPX' not in stock_symbols, "By accident included SPX index"
+
 cov_mat = pd.DataFrame(data=np.ones(shape=(num_ticker, num_ticker)), columns=stock_symbols)
 cov_matraw = cov_mat
 
-cov_mat = X_norm_train.cov()
-cov_matraw = X_train_raw.cov()
+cov_mat = X_norm_train[stock_symbols].cov()
+cov_matraw = X_train_raw[stock_symbols].cov()
 
 pca.fit(cov_mat)
 
@@ -181,15 +210,15 @@ if pca is not None:
 # first component get the Principal components
 pc_w = np.zeros(num_ticker)
 
-eigen_prtf1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
+
 if pca is not None:
     pcs = pca.components_
     pc_w = pcs[0] / pcs[0].sum(axis=0)
     
-    eigen_portofilio = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
-    eigen_portofilio.sort_values(by=['weights'], ascending=False, inplace=True)
-    print('Sum of weights of first eigen-portfolio: %.2f' % np.sum(eigen_portofilio))
-    eigen_portofilio.plot(title='First eigen-portfolio weights', 
+    eigen_portofilio1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
+    eigen_portofilio1.sort_values(by=['weights'], ascending=False, inplace=True)
+    print('Sum of weights of first eigen-portfolio: %.2f' % np.sum(eigen_portofilio1))
+    eigen_portofilio1.plot(title='First eigen-portfolio weights', 
                      figsize=(12,6), 
                      xticks=range(0, len(stock_symbols),10), 
                      rot=45, 
@@ -221,7 +250,73 @@ for idx in range(len(axesr)):
     axesr[idx].text(x_text, y_text, name, ha='right', fontsize=10)
 plt.subplots_adjust(left = 0.1, right = 0.95, top = 0.95, hspace = 0.3)
 plt.show();
+
+
+
+def sharpe_ratio(ts_returns, periods_per_year=252):
+    """
+
+    sharpe_ratio - Calculates annualized return, annualized vol, and annualized sharpe ratio, 
+                    where sharpe ratio is defined as annualized return divided by annualized volatility 
+                    
+    Arguments:
+    ts_returns - pd.Series of returns of a single eigen portfolio
+    
+    Return:
+    a tuple of three doubles: annualized return, volatility, and sharpe ratio
+    """
+    
+
+    annualized_return = 0.
+    annualized_vol = 0.
+    annualized_sharpe = 0.
+ 
+    annualized_return = ts_returns.add(1).prod() ** (periods_per_year/ts_returns.shape[0]) - 1
+    annualized_vol = np.sqrt(periods_per_year*ts_returns.var())
+    # annualized_vol = periods_per_year**(1/2) * ts_returns.std()
+    annualized_sharpe = annualized_return / annualized_vol
+
+    return annualized_return, annualized_vol, annualized_sharpe
            
-           
-           
+
+if X_test_raw is not None:
+    eigen_portofilio_returns = np.dot(X_test_raw.loc[:, eigen_portofilio1.index], eigen_portofilio1 / 100)
+    eigen_portofilio_returns = pd.Series(eigen_portofilio_returns.squeeze(), index=X_norm_test.index)
+    
+    
+    
+    returns, volatility, sharpe = sharpe_ratio(eigen_portofilio_returns)
+    print2('First eigen-portfolio:\nReturn = %.2f%%\nVolatility = %.2f%%\nSharpe = %.2f' % (
+        returns*100, volatility*100, sharpe))
+    year_frac = (eigen_portofilio_returns.index[-1] - eigen_portofilio_returns.index[0]).days / 252
+
+    df_plot = pd.DataFrame({'PC1': eigen_portofilio_returns, 'SPX': X_test_raw.loc[:, 'SPX']}, index=X_norm_test.index)
+    np.cumprod(df_plot + 1).plot(title='Returns of the market-cap weighted index vs. First eigen-portfolio', 
+                             figsize=(12,6), linewidth=3)  
+plt.show()
+
+
+
+pc_w = pcs[1] / pcs[1].sum(axis=0)
+
+eigen_portofilio1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
+eigen_portofilio1.sort_values(by=['weights'], ascending=False, inplace=True)
+
+if X_test_raw is not None:
+    eigen_portofilio_returns = np.dot(X_test_raw.loc[:, eigen_portofilio1.index], eigen_portofilio1 / 100)
+    eigen_portofilio_returns = pd.Series(eigen_portofilio_returns.squeeze(), index=X_norm_test.index)
+    
+    
+    
+    returns, volatility, sharpe = sharpe_ratio(eigen_portofilio_returns)
+    print2('Second eigen-portfolio:\nReturn = %.2f%%\nVolatility = %.2f%%\nSharpe = %.2f' % (
+        returns*100, volatility*100, sharpe))
+    year_frac = (eigen_portofilio_returns.index[-1] - eigen_portofilio_returns.index[0]).days / 252
+
+    df_plot = pd.DataFrame({'PC1': eigen_portofilio_returns, 'SPX': X_test_raw.loc[:, 'SPX']}, index=X_norm_test.index)
+    np.cumprod(df_plot + 1).plot(title='Returns of the market-cap weighted index vs. First eigen-portfolio', 
+                             figsize=(12,6), linewidth=3)  
+plt.show()
+
+    
   
