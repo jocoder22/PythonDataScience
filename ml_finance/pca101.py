@@ -202,10 +202,7 @@ plt.show();
 
 fig, axes = plt.subplots(2,2, figsize=(44,22))
 axesr = axes.ravel()
-print(axesr)
-
 names = 'First Second Third Fourth Fifth Sixth'.split()
-print2(names)
 
 pcs = pca.components_
 for idx in range(len(axesr)):
