@@ -174,7 +174,6 @@ ax.set_title('Percent variance explained')
 ax.legend((rects[0],), ('Percent variance explained by principal components',))
 plt.show();
 
-
 if pca is not None:
     projected = pca.fit_transform(cov_mat)
            
@@ -185,7 +184,6 @@ pc_w = np.zeros(num_ticker)
 eigen_prtf1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
 if pca is not None:
     pcs = pca.components_
-
     pc_w = pcs[0] / pcs[0].sum(axis=0)
     
     eigen_portofilio = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
