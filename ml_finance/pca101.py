@@ -130,7 +130,7 @@ print2(X_norm_train.iloc[:,:5].head(), X_norm_test.iloc[:,:5].head(),
        X_train_raw.iloc[:,:5].head(), X_test_raw.iloc[:,:5].head())
 
 # get the stock tickers
-stock_symbols = norm_returns.columns.values[:-1]
+stock_symbols = norm_returns.columns.values
 num_ticker = len(stock_symbols)
 print(num_ticker)
 
@@ -144,7 +144,7 @@ cov_matraw = X_train_raw.cov()
 
 pca.fit(cov_mat)
 
-cov_raw_df = pd.DataFrame({"variance":np.diag(cov_matraw)}, columns=stock_symbols)
+cov_raw_df = pd.DataFrame({"variance":np.diag(cov_matraw)}, index=stock_symbols)
 print2(cov_raw_df.iloc[:,:10].head())
 
 
@@ -163,6 +163,7 @@ n_asset = int((1/20) * norm_returns.shape[1])
 x_indx = np.arange(n_asset)
 fig, ax = plt.subplots()
 fig.set_size_inches(14, 5)
+
 # Eigenvalues are measured as percentage of explained variance.
 # rects = ax.bar(x_indx, pca.explained_variance_ratio_[:n_asset], bar_width, color='deepskyblue')
 rects = ax.bar(x_indx, pca.explained_variance_ratio_[:n_asset],  color='deepskyblue')
@@ -177,7 +178,55 @@ plt.show();
 if pca is not None:
     projected = pca.fit_transform(cov_mat)
            
-           
+# the first eigen-portfolio weights 
+# first component get the Principal components
+pc_w = np.zeros(num_ticker)
+
+eigen_prtf1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
+if pca is not None:
+    pcs = pca.components_
+
+    pc_w = pcs[0] / pcs[0].sum(axis=0)
+    
+    eigen_portofilio = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
+    eigen_portofilio.sort_values(by=['weights'], ascending=False, inplace=True)
+    print('Sum of weights of first eigen-portfolio: %.2f' % np.sum(eigen_portofilio))
+    eigen_portofilio.plot(title='First eigen-portfolio weights', 
+                     figsize=(12,6), 
+                     xticks=range(0, len(stock_symbols),10), 
+                     rot=45, 
+                     linewidth=3)
+    plt.axhline(y=0.0, color='r', linestyle='-')
+plt.show();  
+
+
+fig, axes = plt.subplots(2,2, figsize=(44,22))
+axesr = axes.ravel()
+print(axesr)
+
+names = 'First Second Third Fourth Fifth Sixth'.split()
+print2(names)
+
+pcs = pca.components_
+for idx in range(len(axesr)):
+    pc_w = pcs[idx] / pcs[idx].sum(axis=0)
+    name = f'{names[idx]} Eigen-portfolio weights'
+
+    eigen_portofilio = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
+    eigen_portofilio.sort_values(by=['weights'], ascending=False, inplace=True)
+    eigen_portofilio.plot(
+                     xticks=range(0, len(stock_symbols),10), 
+                     rot=45, 
+                     linewidth=3, 
+                     ax=axesr[idx])
+
+    axesr[idx].axhline(y=0.0, color='r', linestyle='-')
+    _, xmax, _, ymax = axesr[idx].axis()
+    x_text = xmax * 0.95
+    y_text = ymax * 0.6
+    axesr[idx].text(x_text, y_text, name, ha='right', fontsize=10)
+plt.subplots_adjust(left = 0.1, right = 0.95, top = 0.95, hspace = 0.3)
+plt.show();
            
            
            
