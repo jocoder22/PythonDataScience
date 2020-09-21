@@ -320,3 +320,125 @@ plt.show()
 
     
   
+
+
+
+
+# set memory space for efficient and fast programming
+X_norm_train, X_norm_test = None, None
+X_train, X_test = None, None
+
+# split data into train and test datasets
+X_norm_train = norm_returns[norm_returns.index <= indy_].copy()
+X_norm_test = norm_returns[norm_returns.index > indy_].copy()
+X_train_raw = _returns[_returns.index <= indy_].copy()
+X_test_raw = _returns[_returns.index > indy_].copy()
+
+cov_mat = X_norm_train[stock_symbols].cov()
+cov_matraw = X_train_raw[stock_symbols].cov()
+pca = PCA()
+pca.fit(cov_mat)
+pcs = pca.components_
+
+
+# n_portfolios = 120
+n_portfolios = 283
+annualized_ret = np.array([0.] * n_portfolios)
+sharpe_metric = np.array([0.] * n_portfolios)
+annualized_vol = np.array([0.] * n_portfolios)
+idx_highest_sharpe = 0 # index into sharpe_metric which identifies a portfolio with rhe highest Sharpe ratio
+    
+if pca is not None:
+    for ix in range(n_portfolios):
+        
+        ### START CODE HERE ### (≈ 4-5 lines of code)
+        pc_w = pcs[:,ix] / np.sum(pcs[:, ix])
+        # pc_w = pcs[ix] / pcs[ix].sum(axis=0)
+        
+#         print(eigen.index)
+        eigen = pd.DataFrame(data ={'weights': pc_w.squeeze()}, index = stock_symbols) 
+        eigen_returns = pd.Series(np.dot(X_test_raw.loc[:, eigen.index], eigen).squeeze(), index=X_norm_test.index)
+        annualized_ret[ix], annualized_vol[ix], sharpe_metric[ix] = sharpe_ratio(eigen_returns)
+#         print(eigen.index)
+        ### END CODE HERE ###
+    
+    
+    # find portfolio with the highest Sharpe ratio
+    ### START CODE HERE ### (≈ 2-3 lines of code)
+    ### ...
+    
+#     idx_highest_sharpe = sharpe_metric.index(max(sharpe_metric)) 
+#     idx_highest_sharpe = np.argmax(sharpe_metric)
+    idx_highest_sharpe = np.nanargmax(sharpe_metric)
+                                       
+                                       
+    
+    ### END CODE HERE ###
+#     results = pd.DataFrame(data={'Return': annualized_ret, 'Vol': annualized_vol, 'Sharpe': sharpe_metric})
+#     results.dropna(how = 'any', inplace = True)
+#     results.sort_values(by=['Sharpe'], ascending=False, inplace=True)
+#     print(results.head(6))
+
+    print('Eigen portfolio #%d with the highest Sharpe. Return %.2f%%, vol = %.2f%%, Sharpe = %.2f' % 
+          (idx_highest_sharpe,
+           annualized_ret[idx_highest_sharpe]*100, 
+           annualized_vol[idx_highest_sharpe]*100, 
+           sharpe_metric[idx_highest_sharpe]))
+
+    fig, ax = plt.subplots()
+    fig.set_size_inches(12, 4)
+    ax.plot(sharpe_metric, linewidth=3)
+    ax.set_title('Sharpe ratio of eigen-portfolios')
+    ax.set_ylabel('Sharpe ratio')
+    ax.set_xlabel('Portfolios')
+    plt.show()
+
+
+for ix in range(n_portfolios):
+    pc_w = pcs[:, ix] / np.sum(pcs[:, ix])
+    eig = pd.DataFrame(data = {'weights' : pc_w.squeeze() }, index = stock_symbols)
+    eig_ret = pd.Series(np.dot(X_test_raw.loc[:, eig.index], eig).squeeze(), index=X_norm_test.index)
+    annualized_ret[ix], annualized_vol[ix], sharpe_metric[ix] = sharpe_ratio(eig_ret)
+
+idx_highest_sharpe = np.nanargmax(sharpe_metric)
+results = pd.DataFrame(data={'Return': annualized_ret, 'Vol': annualized_vol, 'Sharpe': sharpe_metric})
+results.dropna(how = 'any', inplace = True)
+results.sort_values(by=['Sharpe'], ascending=False, inplace=True)
+print2(results.head(6))
+
+
+
+
+
+
+annualized_ret = np.array([0.] * n_portfolios)
+sharpe_metric = np.array([0.] * n_portfolios)
+annualized_vol = np.array([0.] * n_portfolios)
+idx_highest_sharpe = 0 # index into sharpe_metric which identifies a portfolio with rhe highest Sharpe ratio
+    
+if pca is not None:
+    for ix in range(n_portfolios):
+        
+        ### START CODE HERE ### (≈ 4-5 lines of code)
+        # pc_w = pcs[:,ix] / np.sum(pcs[:, ix])
+        pc_w = pcs[ix] / pcs[ix].sum(axis=0)
+
+
+        # pc_w = pcs[1] / pcs[1].sum(axis=0)
+
+        eigen_portofilio1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
+        eigen_portofilio1.sort_values(by=['weights'], ascending=False, inplace=True)
+
+        if X_test_raw is not None:
+            eigen_portofilio_returns = np.dot(X_test_raw.loc[:, eigen_portofilio1.index], eigen_portofilio1 / 100)
+            eigen_portofilio_returns = pd.Series(eigen_portofilio_returns.squeeze(), index=X_norm_test.index)
+
+
+
+            annualized_ret[ix], annualized_vol[ix], sharpe_metric[ix] = sharpe_ratio(eigen_portofilio_returns)
+
+    print('Eigen portfolio #%d with the highest Sharpe. Return %.2f%%, vol = %.2f%%, Sharpe = %.2f' % 
+        (idx_highest_sharpe,
+        annualized_ret[idx_highest_sharpe]*100, 
+        annualized_vol[idx_highest_sharpe]*100, 
+        sharpe_metric[idx_highest_sharpe]))
