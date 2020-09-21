@@ -213,6 +213,7 @@ pc_w = np.zeros(num_ticker)
 
 if pca is not None:
     pcs = pca.components_
+    # pc_w = pcs[0] / pcs[0].sum(axis=0)
     pc_w = pcs[0] / pcs[0].sum(axis=0)
     
     eigen_portofilio1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_symbols)
@@ -369,7 +370,11 @@ if pca is not None:
     
 #     idx_highest_sharpe = sharpe_metric.index(max(sharpe_metric)) 
 #     idx_highest_sharpe = np.argmax(sharpe_metric)
+
+    sharpe_metric[sharpe_metric >= 100.0] = np.nan
+    np.nan_to_num(sharpe_metric, nan=0, posinf=0, neginf=0, copy = False)
     idx_highest_sharpe = np.nanargmax(sharpe_metric)
+    
                                        
                                        
     
