@@ -174,8 +174,8 @@ if pca is not None:
     ### START CODE HERE ### (≈ 1-2 lines of code)
     # normalized to 1 
     
-    # pc_w = pcs[0] / pcs[0].sum(axis=0)
-    pc_w = pcs[249] / pcs[249].sum(axis=0)
+    pc_w = pcs[0] / pcs[0].sum(axis=0)
+    # pc_w = pcs[249] / pcs[249].sum(axis=0)
     
     ### END CODE HERE ###
     
