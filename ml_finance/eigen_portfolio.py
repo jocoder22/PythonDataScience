@@ -132,19 +132,18 @@ if df_train is not None and df_raw_train is not None:
     assert 'SPX' not in stock_tickers, "By accident included SPX index"
 
     ### START CODE HERE ### (≈ 2-3 lines of code)
+    # calculate the covariance matrix and do pca on the covariance matrix
     cov_matrix = df_train[stock_tickers].cov()
     pca = PCA()
     pca.fit(cov_matrix) 
     
-    # computing PCA on S&P 500 stocks
-
-
-    # not normed covariance matrix
+    # computing PCA on S&P 500 stocks, not normed covariance matrix
     cov_matrix_raw = df_raw_train[stock_tickers].cov()
     
     ### END CODE HERE ###
     
-    cov_raw_df = pd.DataFrame({'Variance': np.diag(cov_matrix_raw)}, index=stock_tickers)    
+    cov_raw_df = pd.DataFrame({'Variance': np.diag(cov_matrix_raw)}, index=stock_tickers)
+
     # cumulative variance explained
     var_threshold = 0.8
     var_explained = np.cumsum(pca.explained_variance_ratio_)
@@ -153,12 +152,15 @@ if df_train is not None and df_raw_train is not None:
 
 print2(pca.explained_variance_ratio_.shape)
 
+
+# Plot pca variance_explained
 if pca is not None:
     bar_width = 0.9
     n_asset = int((1 / 10) * normed_returns.shape[1])
     x_indx = np.arange(n_asset)
     fig, ax = plt.subplots()
     fig.set_size_inches(12, 4)
+    
     # Eigenvalues are measured as percentage of explained variance.
     rects = ax.bar(x_indx, pca.explained_variance_ratio_[:n_asset], bar_width, color='deepskyblue')
     ax.set_xticks(x_indx + bar_width / 2)
