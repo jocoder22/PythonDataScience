@@ -109,6 +109,7 @@ df_test = normed_returns[normed_returns.index > train_end].copy()
 df_raw_train = asset_returns[asset_returns.index <= train_end].copy()
 df_raw_test = asset_returns[asset_returns.index > train_end].copy()
 
+# view the shapes
 print('Train dataset:', df_train.shape)
 print('Test dataset:', df_test.shape)
 print2(df_raw_test.head(), df_train.iloc[:, :10].head(), df_raw_test.iloc[:, :10].head())
@@ -184,11 +185,12 @@ if pca is not None:
     ### START CODE HERE ### (≈ 1-2 lines of code)
     # normalized to 1 
     
+    # get the first components
     pc_w = pcs[0] / pcs[0].sum(axis=0)
     # pc_w = pcs[249] / pcs[249].sum(axis=0)
     
     ### END CODE HERE ###
-    
+    # form dataframe of adjusted first component(squeezed to one dimension) and sort
     eigen_prtf1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_tickers)
     eigen_prtf1.sort_values(by=['weights'], ascending=False, inplace=True)
     print('Sum of weights of first eigen-portfolio: %.2f' % np.sum(eigen_prtf1))
@@ -207,6 +209,7 @@ if pca is not None:
     pcs = pca.components_
     
     ### START CODE HERE ### (≈ 1-2 lines of code)
+    # get the second component
     # normalized to 1 
     pc_w = pcs[1] / pcs[1].sum(axis=0)
     
