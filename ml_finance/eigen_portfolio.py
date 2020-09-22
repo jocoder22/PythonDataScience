@@ -203,6 +203,7 @@ if pca is not None:
 plt.show()
 
 
+
 pc_w = np.zeros(len(stock_tickers))
 eigen_prtf2 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_tickers)
 
@@ -259,6 +260,8 @@ def sharpe_ratio(ts_returns, periods_per_year=252):
     
     return annualized_return, annualized_vol, annualized_sharpe
 
+
+
 if df_raw_test is not None:
     eigen_prtf1_returns = np.dot(df_raw_test.loc[:, eigen_prtf1.index], eigen_prtf1 / 100)
     eigen_prtf1_returns = pd.Series(eigen_prtf1_returns.squeeze(), index=df_test.index)
@@ -307,12 +310,13 @@ if pca is not None:
     ### START CODE HERE ### (≈ 2-3 lines of code)
     ### ...
     
-#     idx_highest_sharpe = sharpe_metric.index(max(sharpe_metric)) 
-#     idx_highest_sharpe = np.argmax(sharpe_metric)
-    # idx_highest_sharpe = np.nanargmax(sharpe_metric)
-    
+    # change lareg sharpe ratio to NaN
     sharpe_metric[sharpe_metric >= 100.0] = np.nan
+    
+    # Zero all values of NaN, positive and negative infinity
     np.nan_to_num(sharpe_metric, nan=0, posinf=0, neginf=0, copy = False)
+    
+    # find the index of the highest values that's not NaN
     idx_highest_sharpe = np.nanargmax(sharpe_metric)
     print2(f"Max sharpe ration: {idx_highest_sharpe}")
                                        
