@@ -314,8 +314,9 @@ if pca is not None:
     
     # find the index of the highest values that's not NaN
     idx_highest_sharpe = np.nanargmax(sharpe_metric)
-    print2(f"Max sharpe ration: {idx_highest_sharpe}")                                       
-
+    print2(f"Max sharpe ration index: {idx_highest_sharpe}")                                       
+    
+    # print out eigen porfolio with highest sharpe ratio
     print('Eigen portfolio #%d with the highest Sharpe. Return %.2f%%, vol = %.2f%%, Sharpe = %.2f' % 
           (idx_highest_sharpe,
            annualized_ret[idx_highest_sharpe]*100, 
