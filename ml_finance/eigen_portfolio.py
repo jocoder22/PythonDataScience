@@ -182,15 +182,11 @@ eigen_prtf1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_
 if pca is not None:
     pcs = pca.components_
 
-    ### START CODE HERE ### (≈ 1-2 lines of code)
-    # normalized to 1 
-    
     # get the first components
     # normalized to 1
     pc_w = pcs[0] / pcs[0].sum(axis=0)
     # pc_w = pcs[249] / pcs[249].sum(axis=0)
     
-    ### END CODE HERE ###
     # form dataframe of normalise first component(squeezed to one dimension) and sort
     eigen_prtf1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_tickers)
     eigen_prtf1.sort_values(by=['weights'], ascending=False, inplace=True)
@@ -210,12 +206,10 @@ eigen_prtf2 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_
 if pca is not None:
     pcs = pca.components_
     
-    ### START CODE HERE ### (≈ 1-2 lines of code)
     # get the second component
     # normalized to 1 
     pc_w = pcs[1] / pcs[1].sum(axis=0)
     
-    ### END CODE HERE ###
     # form dataframe of normalise second component(squeezed to one dimension) and sort
     eigen_prtf2 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_tickers)
     eigen_prtf2.sort_values(by=['weights'], ascending=False, inplace=True)
@@ -244,9 +238,6 @@ def sharpe_ratio(ts_returns, periods_per_year=252):
     annualized_vol = 0.
     annualized_sharpe = 0.
     
-    ### START CODE HERE ### (≈ 4-5 lines of code)
-    ### ...
-
     # compute annaulized returns
     annualized_return = ts_returns.add(1).prod() ** (periods_per_year/ts_returns.shape[0]) - 1
     
@@ -255,19 +246,18 @@ def sharpe_ratio(ts_returns, periods_per_year=252):
 
     # compute annualized sharpe ratio
     annualized_sharpe = annualized_return / annualized_vol
-    
-    ### END CODE HERE ###
+
     
     return annualized_return, annualized_vol, annualized_sharpe
 
 
 
 if df_raw_test is not None:
+    # get the first eigen portfolio return: returns dot portfolio weights (eigen values)
     eigen_prtf1_returns = np.dot(df_raw_test.loc[:, eigen_prtf1.index], eigen_prtf1 / 100)
     eigen_prtf1_returns = pd.Series(eigen_prtf1_returns.squeeze(), index=df_test.index)
     
-    
-    
+    # compute annualized returns, volatility and sharpe ratio
     er, vol, sharpe = sharpe_ratio(eigen_prtf1_returns)
     print('First eigen-portfolio:\nReturn = %.2f%%\nVolatility = %.2f%%\nSharpe = %.2f' % (er*100, vol*100, sharpe))
     year_frac = (eigen_prtf1_returns.index[-1] - eigen_prtf1_returns.index[0]).days / 252
@@ -279,8 +269,11 @@ plt.show()
 
 
 if df_raw_test is not None:
+    # get the second eigen portfolio return: returns dot portfolio weights (eigen values)
     eigen_prtf2_returns = np.dot(df_raw_test.loc[:, eigen_prtf2.index], eigen_prtf2 / 100)
     eigen_prtf2_returns = pd.Series(eigen_prtf2_returns.squeeze(), index=df_test.index)
+    
+    # compute annualized returns, volatility and sharpe ratio
     er, vol, sharpe = sharpe_ratio(eigen_prtf2_returns)
     print('Second eigen-portfolio:\nReturn = %.2f%%\nVolatility = %.2f%%\nSharpe = %.2f' % (er*100, vol*100, sharpe))
 
@@ -295,11 +288,13 @@ idx_highest_sharpe = 0 # index into sharpe_metric which identifies a portfolio w
 if pca is not None:
     for ix in range(n_portfolios):
         
-        # get normalised component
+        # get normalised component, portfolio weights
         pc_w = pcs[:,ix] / np.sum(pcs[:, ix])
         
         # form dataframe and sort
         eigen = pd.DataFrame(data ={'weights': pc_w.squeeze()}, index = stock_tickers) 
+        
+        # get the eigen portfolio return: returns dot portfolio weights (eigen values)
         eigen_returns = pd.Series(np.dot(df_raw_test.loc[:, eigen.index], eigen).squeeze(), index=df_test.index)
         
         # compute annualized returns, volatility and sharpe ratio
