@@ -186,11 +186,12 @@ if pca is not None:
     # normalized to 1 
     
     # get the first components
+    # normalized to 1
     pc_w = pcs[0] / pcs[0].sum(axis=0)
     # pc_w = pcs[249] / pcs[249].sum(axis=0)
     
     ### END CODE HERE ###
-    # form dataframe of adjusted first component(squeezed to one dimension) and sort
+    # form dataframe of normalise first component(squeezed to one dimension) and sort
     eigen_prtf1 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_tickers)
     eigen_prtf1.sort_values(by=['weights'], ascending=False, inplace=True)
     print('Sum of weights of first eigen-portfolio: %.2f' % np.sum(eigen_prtf1))
