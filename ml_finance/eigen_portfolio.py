@@ -22,10 +22,12 @@ with changepath(patth):
     dataset3 = pd.read_csv("assets3.csv",  compression='gzip', parse_dates=True, index_col="Date")
     dataset2 = pd.read_csv("assets2.csv",  compression='gzip', parse_dates=True, index_col="Date")
 
-# combine the datasets
+# rename columns and drop s&p500
 dataset2.rename(columns={"Adj Close": "SPX"}, inplace=True)
 dataset3.drop(columns =["^GSPC"], inplace=True)
 
+
+# combine the datasets
 alldata = pd.concat([dataset3, dataset2], axis=1)
 data2 = alldata.copy()
 data2 = data2.loc[:"2013-12-20", :]
@@ -35,7 +37,7 @@ print2(data2.iloc[:,:5].tail(), data2.shape, data2.iloc[:,-5:].tail())
 # Get a summary view of NaNs
 oo = data2.isnull().sum()
 
-# look at the distribution through Histogram
+# look at the distribution of NaN through Histogram
 # bimodular distribution
 plt.figure(figsize=[12, 7])
 oo.hist()
@@ -43,7 +45,8 @@ plt.axhline(y=50, color='r', linestyle='-')
 plt.gca().set(xlabel ="Number of NaNs", ylabel="Features", title=f"Dataset of with {data2.shape[1]} features")
 plt.show();
 
-# Retain columns with 96% of data
+
+# Retain columns with 96% of data are not NaN
 data3 = data2.dropna(axis=1, thresh=int(data2.shape[0]*0.96))
 print2(data3.shape, data3.isnull().sum().sum(),  data3.iloc[:,:10].head())
 
