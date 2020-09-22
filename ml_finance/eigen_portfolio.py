@@ -295,21 +295,17 @@ idx_highest_sharpe = 0 # index into sharpe_metric which identifies a portfolio w
 if pca is not None:
     for ix in range(n_portfolios):
         
-        ### START CODE HERE ### (≈ 4-5 lines of code)
+        # get normalised component
         pc_w = pcs[:,ix] / np.sum(pcs[:, ix])
         
-#         print(eigen.index)
+        # form dataframe and sort
         eigen = pd.DataFrame(data ={'weights': pc_w.squeeze()}, index = stock_tickers) 
         eigen_returns = pd.Series(np.dot(df_raw_test.loc[:, eigen.index], eigen).squeeze(), index=df_test.index)
+        
+        # compute annualized returns, volatility and sharpe ratio
         annualized_ret[ix], annualized_vol[ix], sharpe_metric[ix] = sharpe_ratio(eigen_returns)
-#         print(eigen.index)
-        ### END CODE HERE ###
     
-    
-    # find portfolio with the highest Sharpe ratio
-    ### START CODE HERE ### (≈ 2-3 lines of code)
-    ### ...
-    
+    # find portfolio with the highest Sharpe ratio 
     # change lareg sharpe ratio to NaN
     sharpe_metric[sharpe_metric >= 100.0] = np.nan
     
