@@ -58,6 +58,7 @@ print2(f"alldata: {alldata.shape}", f"data6: {data4.shape}")
 # View dataset
 print2(f"Asset Adjusted Closing Prices shape: {data4.shape}", data4.iloc[:,-5:].head())
 
+# copy the combned datasets
 asset_prices = data4.copy()
 n_stocks_show = 12
 print('Asset prices shape', asset_prices.shape)
