@@ -215,7 +215,7 @@ if pca is not None:
     pc_w = pcs[1] / pcs[1].sum(axis=0)
     
     ### END CODE HERE ###
-
+    # form dataframe of normalise second component(squeezed to one dimension) and sort
     eigen_prtf2 = pd.DataFrame(data ={'weights': pc_w.squeeze()*100}, index = stock_tickers)
     eigen_prtf2.sort_values(by=['weights'], ascending=False, inplace=True)
     print('Sum of weights of second eigen-portfolio: %.2f' % np.sum(eigen_prtf2))
@@ -246,11 +246,13 @@ def sharpe_ratio(ts_returns, periods_per_year=252):
     ### START CODE HERE ### (≈ 4-5 lines of code)
     ### ...
 
-    
+    # compute annaulized returns
     annualized_return = ts_returns.add(1).prod() ** (periods_per_year/ts_returns.shape[0]) - 1
     
+    # compute annualized volatility
     annualized_vol = np.sqrt(periods_per_year*ts_returns.var())
 
+    # compute annualized sharpe ratio
     annualized_sharpe = annualized_return / annualized_vol
     
     ### END CODE HERE ###
