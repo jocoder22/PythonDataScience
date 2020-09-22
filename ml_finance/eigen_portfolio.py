@@ -30,7 +30,7 @@ dataset3.drop(columns =["^GSPC"], inplace=True)
 # combine the datasets
 alldata = pd.concat([dataset3, dataset2], axis=1)
 data2 = alldata.copy()
-data2 = data2.loc[:"2013-12-20", :]
+# data2 = data2.loc[:"2013-12-20", :]
 print2(data2.iloc[:,:5].tail(), data2.shape, data2.iloc[:,-5:].tail())
 
 # clean the datasets, remove NaN smartly
@@ -65,57 +65,56 @@ print('Asset prices shape', asset_prices.shape)
 print2(asset_prices.iloc[:, :n_stocks_show].head())
 
 
-
-
+# view the head and tail of the datasets
 print('Last column contains SPX index prices:')
 print2(asset_prices.iloc[:, -10:].head())
-
 print('Last column contains SPX index prices:')
 print(asset_prices.iloc[:, -10:].tail())
 
+# Initiate dataset for return calculations
 asset_returns = pd.DataFrame(data=np.zeros(shape=(len(asset_prices.index), asset_prices.shape[1])), 
                              columns=asset_prices.columns.values,
                              index=asset_prices.index)
 
-normed_returns = asset_returns
+# normed_returns = asset_returns
 asset_returns = asset_prices.pct_change().dropna()
 
 # normed_returns is pandas.DataFrame that should contain normalized returns
-normed_returns = asset_prices.pct_change().dropna()
-_mean = normed_returns.mean()
-_std = normed_returns.std()
-normed_returns = (normed_returns - _mean)/_std
+# normed_returns = asset_prices.pct_change().dropna()
+_mean = asset_returns.mean()
+_std = asset_returns.std()
+normed_returns = (asset_returns - _mean)/_std
 
+print2("#"*20)
 print2(normed_returns.iloc[-5:, -10:].head())
 print2(normed_returns.iloc[:, -10:].tail(5))
 
 
 # train_end = datetime.datetime(2012, 3, 26) 
-train_end = normed_returns.index.values[int(normed_returns.shape[0] * 0.7)]
+# get split date as 80% of the dataset for training
+train_end = normed_returns.index.values[int(normed_returns.shape[0] * 0.8)]
 print2(f"This the train end date: {train_end}")
 
-df_train = None
-df_test = None
-df_raw_train = None
-df_raw_test = None
+# define training and testing datasets
+df_train, df_test = None, None
+df_raw_train, df_raw_test = None, None
 
 
-
+# split dataset into train and test datasets
+# splt normalized dataset
 df_train = normed_returns[normed_returns.index <= train_end].copy()
 df_test = normed_returns[normed_returns.index > train_end].copy()
 
+# split dataset that is not normalized
 df_raw_train = asset_returns[asset_returns.index <= train_end].copy()
 df_raw_test = asset_returns[asset_returns.index > train_end].copy()
 
 print('Train dataset:', df_train.shape)
 print('Test dataset:', df_test.shape)
-
 print2(df_raw_test.head(), df_train.iloc[:, :10].head(), df_raw_test.iloc[:, :10].head())
 
-# import sklearn.decomposition
-# from sklearn.decomposition import PCA
-import seaborn as sns
 
+# select the name of the stock, without the s&p500 index
 stock_tickers = normed_returns.columns.values[:-1]
 assert 'SPX' not in stock_tickers, "By accident included SPX index"
 
@@ -123,6 +122,7 @@ n_tickers = len(stock_tickers)
 print2(n_tickers)
 
 
+# initialize a PCA
 pca = None
 cov_matrix = pd.DataFrame(data=np.ones(shape=(n_tickers, n_tickers)), columns=stock_tickers)
 cov_matrix_raw = cov_matrix
@@ -305,7 +305,6 @@ if pca is not None:
     
     sharpe_metric[sharpe_metric >= 100.0] = np.nan
     np.nan_to_num(sharpe_metric, nan=0, posinf=0, neginf=0, copy = False)
-    # idx_highest_sharpe = np.nanargmax(sharpe_metric[sharpe_metric != np.inf])
     idx_highest_sharpe = np.nanargmax(sharpe_metric)
     print2(f"Max sharpe ration: {idx_highest_sharpe}")
                                        
