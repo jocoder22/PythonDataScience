@@ -93,3 +93,20 @@ std_log_ret = pd.DataFrame(data=std_log_ret,
                               columns=asset_returns.columns.values)
 
 std_log_ret.iloc[:, :10].head()
+
+
+# Calculate the 20 and 100 days moving averages of the log-returns
+short_rolling_spx = std_log_ret[['SPX']].rolling(window=20).mean()
+long_rolling_spx = std_log_ret[['SPX']].rolling(window=100).mean()
+
+
+# Plot the index and rolling averages
+fig=plt.figure(figsize=(12, 5), dpi= 80, facecolor='w', edgecolor='k')
+ax = fig.add_subplot(1,1,1)
+ax.plot(log_ret_df_std.index, log_ret_df_std[['SPX']], label='SPX Index')
+ax.plot(short_rolling_spx.index, short_rolling_spx, label='20 days rolling')
+ax.plot(long_rolling_spx.index, long_rolling_spx, label='100 days rolling')
+ax.set_xlabel('Date')
+ax.set_ylabel('Log returns')
+ax.legend(loc=2)
+plt.show()
