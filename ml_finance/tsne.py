@@ -95,7 +95,7 @@ std_log_ret = pd.DataFrame(data=std_log_ret,
                               index=asset_returns.index,
                               columns=asset_returns.columns.values)
 
-std_log_ret.iloc[:, :10].head()
+print2(std_log_ret.iloc[:, :10].head())
 
 
 # Calculate the 20 and 100 days moving averages of the log-returns
@@ -138,7 +138,7 @@ print('crisis_2007_2009', std_log_ret[std_log_ret.regime == 'crisis_2007_2009'].
 print(std_log_ret.shape)
 
 print('Last N days of the dataset:')
-std_log_ret.iloc[:, :10].tail()
+print(std_log_ret.iloc[:, :10].tail())
 
 
 # use data before 2012-03-26 for training, and data after it for testing
@@ -198,12 +198,12 @@ print('Unexplained log-returns of S&P 500 Index stocks:')
 print(df_unexplained.iloc[:, :10].head())
 
 # checking for columns
-all(item in df_train.columns  for  item in ['SPX', 'AAPL', 'AMZN', "C", "DD", "regime"])
+all(item in df_train.columns for item in ['SPX', 'AAPL', 'AMZN', "C", "DD", "regime"])
 
 # view pairplot
 sns.pairplot(df_train.loc[:, ['SPX', 'AAPL', 'AMZN', "C", "DD", "regime"]], 
              vars=['SPX', 'AAPL', 'AMZN', "C", "DD"], hue="regime", size=4.5)
-
+plt.show()
 
 stock_tickers = asset_returns.columns.values[:-1]
 assert 'SPX' not in stock_tickers, "By accident included SPX index"
@@ -217,8 +217,9 @@ df_index_test['PCA_1'] = np.ones(len(df_test.index))
 pca = PCA(n_components=1, random_state=42)
 # cov_matrix = data.cov()
 PCA_1 = pca.fit_transform(data) 
-
+df_index_test['PCA_1'] = PCA_1
 
 # draw the two plots
 df_plot = df_index_test[['SPX', 'PCA_1']].apply(lambda x: (x - x.mean()) / x.std())
 df_plot.plot(figsize=(12, 6), title='Index replication via PCA')
+plt.show()
