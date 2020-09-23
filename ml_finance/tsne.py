@@ -51,9 +51,13 @@ def check__nulls(df):
     
 check__nulls(data2)
 
+# compute asset returns
+asset_returns = np.log(data2 / data2.shift(1))
+asset_returns = asset_returns.iloc[1:, :]
+asset_returns.iloc[:, :n_stocks_show].head()
 
 # Get the SPX time series. This now returns a Pandas Series object indexed by date
-spx_index = data2.loc[:, 'SPX']
+spx_index = asset_returns.loc[:, 'SPX']
 
 short_rolling_spx = pd.core.series.Series(np.zeros(len(asset_prices.index)), index=asset_prices.index)
 long_rolling_spx = short_rolling_spx
