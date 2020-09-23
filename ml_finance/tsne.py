@@ -136,3 +136,11 @@ print(std_log_ret.shape)
 
 print('Last N days of the dataset:')
 std_log_ret.iloc[:, :10].tail()
+
+
+# use data before 2012-03-26 for training, and data after it for testing
+train_end = datetime.datetime(2012, 3, 26) 
+df_train = std_log_ret[std_log_ret.index <= train_end].copy()
+df_test = std_log_ret[std_log_ret.index > train_end].copy()
+print('Train dataset:', df_train.shape)
+print('Test dataset:', df_test.shape)
