@@ -203,3 +203,22 @@ all(item in df_train.columns  for  item in ['SPX', 'AAPL', 'AMZN', "C", "DD", "r
 # view pairplot
 sns.pairplot(df_train.loc[:, ['SPX', 'AAPL', 'AMZN', "C", "DD", "regime"]], 
              vars=['SPX', 'AAPL', 'AMZN', "C", "DD"], hue="regime", size=4.5)
+
+
+stock_tickers = asset_returns.columns.values[:-1]
+assert 'SPX' not in stock_tickers, "By accident included SPX index"
+data = df_test[stock_tickers].values
+
+df_index_test = pd.DataFrame(data=df_test['SPX'].values, index=df_test.index, columns=['SPX'])
+df_index_test['PCA_1'] = np.ones(len(df_test.index)) 
+
+
+# please set random_state=42 when initializing Kernel PCA
+pca = PCA(n_components=1, random_state=42)
+# cov_matrix = data.cov()
+PCA_1 = pca.fit_transform(data) 
+
+
+# draw the two plots
+df_plot = df_index_test[['SPX', 'PCA_1']].apply(lambda x: (x - x.mean()) / x.std())
+df_plot.plot(figsize=(12, 6), title='Index replication via PCA')
