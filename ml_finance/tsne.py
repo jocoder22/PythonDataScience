@@ -83,3 +83,13 @@ ax.set_xlabel('Date')
 ax.set_ylabel('Log returns')
 ax.legend(loc=2)
 plt.show()
+
+
+# Standardize features by removing the mean and scaling to unit variance
+# Centering and scaling happen independently on each feature by computing the relevant statistics 
+std_log_ret = StandardScaler().fit_transform(asset_returns.values)
+std_log_ret = pd.DataFrame(data=std_log_ret, 
+                              index=asset_returns.index,
+                              columns=asset_returns.columns.values)
+
+std_log_ret.iloc[:, :10].head()
