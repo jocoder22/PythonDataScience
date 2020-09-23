@@ -177,6 +177,12 @@ for ind, ix in enumerate(stock_tickers):
     
     y_pred_test = model.predict(X_test)
     R2_out_sample[ind] = r2_score(y_test, y_pred_test)
-#     alphas[ind] = model.coef_[0][0]
     alphas[ind] = model.intercept_[0]
     betas[ind] = model.coef_[0][0]
+
+#  view the predictions
+predict_train.iloc[:, :10].head()    
+    
+ df_lr = pd.DataFrame({'R2 in-sample': R2_in_sample, 'R2 out-sample': R2_out_sample, 'Alpha': alphas, 'Beta': betas}, 
+                     index=stock_tickers)
+df_lr.head(10)
