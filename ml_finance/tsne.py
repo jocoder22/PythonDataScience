@@ -3,11 +3,17 @@ import os
 import numpy as np
 import pandas as pd
 import datetime
+import time
 
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.manifold import TSNE
+from sklearn.metrics import r2_score
+
 from printdescribe import print2, changepath
 
 import warnings
