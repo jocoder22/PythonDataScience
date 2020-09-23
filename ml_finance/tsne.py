@@ -142,7 +142,10 @@ std_log_ret.iloc[:, :10].tail()
 
 
 # use data before 2012-03-26 for training, and data after it for testing
-train_end = datetime.datetime(2012, 3, 26) 
+# train_end = datetime.datetime(2012, 3, 26) 
+train_end = std_log_ret.index.values[int(std_log_ret.shape[0] * 0.8)] # 2016-08-02T00:00:00.000000000
+print2(f"This the train end date: {train_end}")
+
 df_train = std_log_ret[std_log_ret.index <= train_end].copy()
 df_test = std_log_ret[std_log_ret.index > train_end].copy()
 print('Train dataset:', df_train.shape)
