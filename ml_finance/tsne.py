@@ -32,3 +32,18 @@ alldata = pd.concat([dataset3, dataset2], axis=1)
 data2 = alldata.copy()
 # data2 = data2.loc[:"2013-12-20", :]
 print2(data2.iloc[:,:5].tail(), data2.shape, data2.iloc[:,-5:].tail())
+
+
+def check__nulls(df):
+    """
+    Test and report number of NAs in each column of the input data frame
+    :param df: pandas.DataFrame
+    :return: None
+    
+    """
+    for col in df.columns:
+        _nans = np.sum(df[col].isnull())
+        if _nans > 0:
+            print(f'{_nans} NaNs in column {col}')
+            
+    print('New shape of df: ', df.shape)
