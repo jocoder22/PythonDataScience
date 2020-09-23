@@ -223,3 +223,64 @@ df_index_test['PCA_1'] = PCA_1
 df_plot = df_index_test[['SPX', 'PCA_1']].apply(lambda x: (x - x.mean()) / x.std())
 df_plot.plot(figsize=(12, 6), title='Index replication via PCA')
 plt.show()
+
+# create hyperparameters
+np.random.seed(42)
+tsne_results = np.zeros((log_ret_df_std[stock_tickers].shape[0], 2))
+perplexity = 50 
+n_iter = 300
+time_start = time.time()
+
+# initialize tsne
+tsne = TSNE(random_state=42,n_iter=n_iter, perplexity=perplexity, n_components=2)
+tsne_results = tsne.fit_transform(log_ret_df_std[stock_tickers])
+
+time_end = time.time()
+
+print(f'Time elapsed: {time_end - time_start}')
+
+
+df_tsne = pd.DataFrame({'regime': log_ret_df_std.regime.values,
+                        'x-tsne': tsne_results[:,0],
+                        'y-tsne': tsne_results[:,1]},
+                       index=log_ret_df_std.index)
+print('t-SNE (perplexity=%.0f) data:' % perplexity)
+df_tsne.head(10)
+
+
+def plot_tsne_2D(df_tsne, label_column, plot_title):
+    """
+    plot_tsne_2D - plots t-SNE as two-dimensional graph
+    Arguments:
+    label_column - column name where labels data is stored
+    df_tsne - pandas.DataFrame with columns x-tsne, y-tsne
+    plot_title - string
+    """
+    unique_labels = df_tsne[label_column].unique()
+    print('Data labels:', unique_labels)
+    print(df_tsne.shape)
+
+    colors = [ 'b', 'g','r']
+    markers = ['s', 'x', 'o']
+    y_train = df_tsne.regime.values
+
+    plt.figure(figsize=(8, 8))
+    ix = 0
+    bars = [None] * len(unique_labels)
+    for label, c, m in zip(unique_labels, colors, markers):
+        plt.scatter(df_tsne.loc[df_tsne[label_column]==label, 'x-tsne'], 
+                    df_tsne.loc[df_tsne[label_column]==label, 'y-tsne'], 
+                    c=c, label=label, marker=m, s=15)
+#         bars[ix] = plt.bar([0, 1, 2], [0.2, 0.3, 0.1], width=0.4, align="center", color=c)
+#         ix += 1
+
+#     plt.legend(bars, unique_labels)
+    plt.legend()
+    plt.xlabel('first dimension')
+    plt.ylabel('second dimension')
+    plt.title(plot_title)
+    plt.grid()
+    plt.show()
+    
+plot_tsne_2D(df_tsne, 'regime', 'S&P 500 dimensionality reduction with t-SNE (perplexity=%d)' % perplexity)
+
