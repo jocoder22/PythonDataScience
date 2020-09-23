@@ -173,7 +173,7 @@ for ind, ix in enumerate(stock_tickers):
     y_pred_train = model.predict(X_train)
     R2_in_sample[ind] = r2_score(y_train, y_pred_train)
     
-    predict_train.loc[:, ix] = pd.Series(y_pred_train.ravel())
+    predict_train.loc[:, ix] = pd.Series(y_pred_train.ravel(), index=df_train.index)
     
     y_pred_test = model.predict(X_test)
     R2_out_sample[ind] = r2_score(y_test, y_pred_test)
