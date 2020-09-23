@@ -46,7 +46,7 @@ def check__nulls(df):
         if _nans > 0:
             print(f'{_nans} NaNs in column {col}')
             
-    print('New shape of df: ', df.shape)
+    print(f'New shape of df: {df.shape}')
     
     
 check__nulls(data2)
