@@ -63,12 +63,12 @@ check__nulls(data2)
 # compute asset returns
 asset_returns = np.log(data2 / data2.shift(1))
 asset_returns = asset_returns.iloc[1:, :]
-asset_returns.iloc[:, :n_stocks_show].head()
+asset_returns.iloc[:, :10].head()
 
 # Get the SPX time series. This now returns a Pandas Series object indexed by date
 spx_index = asset_returns.loc[:, 'SPX']
 
-short_rolling_spx = pd.core.series.Series(np.zeros(len(asset_prices.index)), index=asset_prices.index)
+short_rolling_spx = pd.core.series.Series(np.zeros(len(data2.index)), index=data2.index)
 long_rolling_spx = short_rolling_spx
 
 # Calculate the 20 and 100 days moving averages of log-returns
@@ -170,7 +170,7 @@ for ind, ix in enumerate(stock_tickers):
     y_pred_train = model.predict(X_train)
     R2_in_sample[ind] = r2_score(y_train, y_pred_train)
     
-    predict_train[:, ix] = pd.Series(y_pred_train.ravel())
+    predict_train.loc[:, ix] = pd.Series(y_pred_train.ravel())
     
     y_pred_test = model.predict(X_test)
     R2_out_sample[ind] = r2_score(y_test, y_pred_test)
