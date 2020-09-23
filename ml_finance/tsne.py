@@ -146,3 +146,31 @@ print('Train dataset:', df_train.shape)
 print('Test dataset:', df_test.shape)
 
 
+# regress each individual stock on the market
+# create a Linear Regression object
+lm = LinearRegression()
+stock_tickers = asset_returns.columns.values[:-1] # exclude SPX
+
+# compute betas for all stocks in the dataset
+R2_in_sample = [0.] * len(stock_tickers)
+R2_out_sample = [0.] * len(stock_tickers)
+betas = [0.] * len(stock_tickers)
+alphas = [0.] * len(stock_tickers)
+
+predict_train = pd.DataFrame(index = df_train.index)
+
+for ind, ix in enumerate(stock_tickers):
+    X_train, y_train =  df_train.loc[:, 'SPX'].values.reshape(-1, 1), df_train[ix].values.reshape(-1, 1)
+    X_test, y_test = df_test['SPX'].values.reshape(-1, 1), df_test[ix].values.reshape(-1, 1)
+    model = lm.fit(X_train, y_train)
+
+    y_pred_train = model.predict(X_train)
+    R2_in_sample[ind] = r2_score(y_train, y_pred_train)
+    
+    predict_train[:, ix] = pd.Series(y_pred_train.ravel())
+    
+    y_pred_test = model.predict(X_test)
+    R2_out_sample[ind] = r2_score(y_test, y_pred_test)
+#     alphas[ind] = model.coef_[0][0]
+    alphas[ind] = model.intercept_[0]
+    betas[ind] = model.coef_[0][0]
