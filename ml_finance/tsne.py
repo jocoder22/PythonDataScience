@@ -103,10 +103,36 @@ long_rolling_spx = std_log_ret[['SPX']].rolling(window=100).mean()
 # Plot the index and rolling averages
 fig=plt.figure(figsize=(12, 5), dpi= 80, facecolor='w', edgecolor='k')
 ax = fig.add_subplot(1,1,1)
-ax.plot(log_ret_df_std.index, log_ret_df_std[['SPX']], label='SPX Index')
+ax.plot(std_log_ret.index, std_log_ret[['SPX']], label='SPX Index')
 ax.plot(short_rolling_spx.index, short_rolling_spx, label='20 days rolling')
 ax.plot(long_rolling_spx.index, long_rolling_spx, label='100 days rolling')
 ax.set_xlabel('Date')
 ax.set_ylabel('Log returns')
 ax.legend(loc=2)
 plt.show()
+
+
+# Assign a label 'regime' to each date:
+# 'regime' = 'benign' for all points except two intervals
+# 'regime' = 'crisis_2001_2002', or
+# 'regime' = 'crisis_2007_2009'
+
+# first assign the default value for all rows
+std_log_ret['regime'] = 'benign'
+dt_start = np.datetime64('2000-03-24T00:00:00.000000000')
+dt_end = np.datetime64('2002-10-09T00:00:00.000000000')
+flag_crisis_2001_2002 = np.logical_and(std_log_ret.index > dt_start, std_log_ret.index < dt_end)
+
+dt_start = np.datetime64('2007-10-09T00:00:00.000000000')
+dt_end = np.datetime64('2009-03-09T00:00:00.000000000')
+flag_crisis_2007_2009 = np.logical_and(std_log_ret.index > dt_start, std_log_ret.index < dt_end)
+
+std_log_ret.loc[flag_crisis_2001_2002,'regime'] = 'crisis_2001_2002'
+std_log_ret.loc[flag_crisis_2007_2009, 'regime'] = 'crisis_2007_2009'
+
+print('crisis_2001_2002', std_log_ret[std_log_ret.regime == 'crisis_2001_2002'].shape[0])
+print('crisis_2007_2009', std_log_ret[std_log_ret.regime == 'crisis_2007_2009'].shape[0])
+print(std_log_ret.shape)
+
+print('Last N days of the dataset:')
+std_log_ret.iloc[:, :10].tail()
