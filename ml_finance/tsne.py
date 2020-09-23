@@ -196,3 +196,10 @@ df_unexplained = df_unexplained -  predict_train
 print('Unexplained log-returns of S&P 500 Index stocks', df_unexplained.shape)
 print('Unexplained log-returns of S&P 500 Index stocks:')
 print(df_unexplained.iloc[:, :10].head())
+
+# checking for columns
+all(item in df_train.columns  for  item in ['SPX', 'AAPL', 'AMZN', "C", "DD", "regime"])
+
+# view pairplot
+sns.pairplot(df_train.loc[:, ['SPX', 'AAPL', 'AMZN', "C", "DD", "regime"]], 
+             vars=['SPX', 'AAPL', 'AMZN', "C", "DD"], hue="regime", size=4.5)
