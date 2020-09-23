@@ -39,6 +39,9 @@ data2 = alldata.copy()
 # data2 = data2.loc[:"2013-12-20", :]
 print2(data2.iloc[:,:5].tail(), data2.shape, data2.iloc[:,-5:].tail())
 
+def get__name(df):
+    df_name =[y for y in globals() if globals()[y] is df][0]
+    return df_name
 
 def check__nulls(df):
     """
@@ -52,7 +55,7 @@ def check__nulls(df):
         if _nans > 0:
             print(f'{_nans} NaNs in column {col}')
             
-    print(f'New shape of df: {df.shape}')
+    print(f'New shape of {get__name(df)}: {df.shape}')
     
     
 check__nulls(data2)
