@@ -181,8 +181,18 @@ for ind, ix in enumerate(stock_tickers):
     betas[ind] = model.coef_[0][0]
 
 #  view the predictions
-predict_train.iloc[:, :10].head()    
+print2(predict_train.iloc[:, :10].head())
     
- df_lr = pd.DataFrame({'R2 in-sample': R2_in_sample, 'R2 out-sample': R2_out_sample, 'Alpha': alphas, 'Beta': betas}, 
+df_lr = pd.DataFrame({'R2 in-sample': R2_in_sample, 'R2 out-sample': R2_out_sample, 'Alpha': alphas, 'Beta': betas}, 
                      index=stock_tickers)
-df_lr.head(10)
+print2(df_lr.head(10))
+
+
+# calculate the unexplained log returns
+df_unexplained = df_train.loc[:, stock_tickers]
+df_unexplained = df_unexplained -  predict_train  
+
+
+print('Unexplained log-returns of S&P 500 Index stocks', df_unexplained.shape)
+print('Unexplained log-returns of S&P 500 Index stocks:')
+print(df_unexplained.iloc[:, :10].head())
