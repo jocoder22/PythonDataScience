@@ -54,9 +54,9 @@ def check__nulls(df):
         if _nans > 0:
             print(f'{_nans} NaNs in column {col}')
             
-    print(f'New shape of {get__name(df)}: {df.shape}')
+    print2(f'New shape of {get__name(df)}: {df.shape}')
     
-    
+#   check for NaN in the data
 check__nulls(data2)
 
 # compute asset returns
