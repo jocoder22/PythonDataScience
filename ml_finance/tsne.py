@@ -185,6 +185,7 @@ print2(predict_train.iloc[:, :10].head())
     
 df_lr = pd.DataFrame({'R2 in-sample': R2_in_sample, 'R2 out-sample': R2_out_sample, 'Alpha': alphas, 'Beta': betas}, 
                      index=stock_tickers)
+
 print2(df_lr.head(10))
 
 
@@ -215,7 +216,6 @@ df_index_test['PCA_1'] = np.ones(len(df_test.index))
 
 # please set random_state=42 when initializing Kernel PCA
 pca = PCA(n_components=1, random_state=42)
-# cov_matrix = data.cov()
 PCA_1 = pca.fit_transform(data) 
 df_index_test['PCA_1'] = PCA_1
 
