@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 from sklearn.decomposition import PCA
-import pandas_datareader.data as dr
+import pandas_datareader.data as pdr
 from printdescribe import print2, changepath
 
 import warnings
