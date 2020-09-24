@@ -24,7 +24,6 @@ patth = r"D:\PythonDataScience\ml_finance"
 
 # import the necessary datasets
 with changepath(patth):
-    # dataset3.to_csv("assets3.csv",  compression='gzip')
     dataset3 = pd.read_csv("assets3.csv",  compression='gzip', parse_dates=True, index_col="Date")
     dataset2 = pd.read_csv("assets2.csv",  compression='gzip', parse_dates=True, index_col="Date")
 
