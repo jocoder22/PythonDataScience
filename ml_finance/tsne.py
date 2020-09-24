@@ -218,6 +218,7 @@ df_index_test['PCA_1'] = np.ones(len(df_test.index))
 pca = PCA(n_components=1, random_state=42)
 PCA_1 = pca.fit_transform(data) 
 df_index_test['PCA_1'] = PCA_1
+print(df_index_test.head())
 
 # draw the two plots
 df_plot = df_index_test[['SPX', 'PCA_1']].apply(lambda x: (x - x.mean()) / x.std())
@@ -234,10 +235,9 @@ time_start = time.time()
 # initialize tsne
 tsne = TSNE(random_state=42,n_iter=n_iter, perplexity=perplexity, n_components=2)
 tsne_results = tsne.fit_transform(log_ret_df_std[stock_tickers])
-
 time_end = time.time()
 
-print(f'Time elapsed: {time_end - time_start}')
+print2(f'Time elapsed: {time_end - time_start}')
 
 
 df_tsne = pd.DataFrame({'regime': log_ret_df_std.regime.values,
