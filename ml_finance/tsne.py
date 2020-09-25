@@ -49,9 +49,11 @@ print2(data4.shape, data4.isnull().sum().sum())
 print2(f"alldata: {alldata.shape}", f"data4: {data4.shape}")
 print2(data4.isnull().sum().sum(),  data4.iloc[:,-10:].head())
 
+
 def get__name(df):
     df_name =[y for y in globals() if globals()[y] is df][0]
     return df_name
+
 
 def check__nulls(df):
     """
