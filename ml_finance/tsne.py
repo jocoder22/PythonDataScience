@@ -38,6 +38,16 @@ data2 = alldata.copy()
 # data2 = data2.loc[:"2013-12-20", :]
 print2(data2.iloc[:,:5].tail(), data2.shape, data2.iloc[:,-5:].tail())
 
+
+# Retain columns with 96% of data are not NaN
+data3 = data2.dropna(axis=1, thresh=int(data2.shape[0]*0.96))
+print2(data3.shape, data3.isnull().sum().sum(),  data3.iloc[:,:10].head())
+
+# Remove row with remaining NaNs
+data4 = data3.dropna(axis=0)
+print2(data4.shape, data4.isnull().sum().sum())
+print2(f"alldata: {alldata.shape}", f"data6: {data4.shape}")
+
 def get__name(df):
     df_name =[y for y in globals() if globals()[y] is df][0]
     return df_name
@@ -60,9 +70,14 @@ def check__nulls(df):
 check__nulls(data2)
 
 # compute asset returns
-asset_returns = np.log(data2 / data2.shift(1))
+asset_returns = np.log(data4 / data4.shift(1))
 asset_returns = asset_returns.iloc[1:, :]
-asset_returns.iloc[:, :10].head()
+asset_returns.dropna()
+print2(asset_returns.iloc[:, :10].head())
+
+# Check the number of NaNs
+print("#"*20)
+check__nulls(asset_returns)
 
 # Get the SPX time series. This now returns a Pandas Series object indexed by date
 spx_index = asset_returns.loc[:, 'SPX']
