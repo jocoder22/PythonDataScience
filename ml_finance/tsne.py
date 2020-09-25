@@ -241,23 +241,23 @@ plt.show()
 
 # create hyperparameters
 np.random.seed(42)
-tsne_results = np.zeros((log_ret_df_std[stock_tickers].shape[0], 2))
+tsne_results = np.zeros((std_log_ret[stock_tickers].shape[0], 2))
 perplexity = 50 
 n_iter = 300
 time_start = time.time()
 
 # initialize tsne
 tsne = TSNE(random_state=42,n_iter=n_iter, perplexity=perplexity, n_components=2)
-tsne_results = tsne.fit_transform(log_ret_df_std[stock_tickers])
+tsne_results = tsne.fit_transform(std_log_ret[stock_tickers])
 time_end = time.time()
 
 print2(f'Time elapsed: {time_end - time_start}')
 
 
-df_tsne = pd.DataFrame({'regime': log_ret_df_std.regime.values,
+df_tsne = pd.DataFrame({'regime': std_log_ret.regime.values,
                         'x-tsne': tsne_results[:,0],
                         'y-tsne': tsne_results[:,1]},
-                       index=log_ret_df_std.index)
+                       index=std_log_ret.index)
 print('t-SNE (perplexity=%.0f) data:' % perplexity)
 df_tsne.head(10)
 
