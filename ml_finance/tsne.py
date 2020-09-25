@@ -69,14 +69,17 @@ def check__nulls(df):
             
     print2(f'New shape of {get__name(df)}: {df.shape}')
     
+
 #   check for NaN in the data
 check__nulls(data2)
+
 
 # compute asset returns
 asset_returns = np.log(data4 / data4.shift(1))
 asset_returns = asset_returns.iloc[1:, :]
 asset_returns.dropna()
 print2(asset_returns.iloc[:, :10].head())
+
 
 # Check the number of NaNs
 print("#"*20)
