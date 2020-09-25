@@ -167,6 +167,7 @@ print(std_log_ret.iloc[:, :10].tail())
 train_end = std_log_ret.index.values[int(std_log_ret.shape[0] * 0.8)] # 2016-08-02T00:00:00.000000000
 print2(f"This the train end date: {train_end}")
 
+
 df_train = std_log_ret[std_log_ret.index <= train_end].copy()
 df_test = std_log_ret[std_log_ret.index > train_end].copy()
 print('Train dataset:', df_train.shape)
@@ -177,6 +178,7 @@ print('Test dataset:', df_test.shape)
 # create a Linear Regression object
 lm = LinearRegression()
 stock_tickers = asset_returns.columns.values[:-1] # exclude SPX
+
 
 # compute betas for all stocks in the dataset
 R2_in_sample = [0.] * len(stock_tickers)
@@ -200,6 +202,7 @@ for ind, ix in enumerate(stock_tickers):
     R2_out_sample[ind] = r2_score(y_test, y_pred_test)
     alphas[ind] = model.intercept_[0]
     betas[ind] = model.coef_[0][0]
+
 
 #  view the predictions
 print2(predict_train.iloc[:, :10].head())
