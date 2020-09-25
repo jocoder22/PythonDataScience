@@ -230,6 +230,7 @@ sns.pairplot(df_train.loc[:, ['SPX', 'AAPL', 'AMZN', "C", "DD", "regime"]],
              vars=['SPX', 'AAPL', 'AMZN', "C", "DD"], hue="regime", size=4.5)
 plt.show()
 
+
 stock_tickers = asset_returns.columns.values[:-1]
 assert 'SPX' not in stock_tickers, "By accident included SPX index"
 data = df_test[stock_tickers].values
