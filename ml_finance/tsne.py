@@ -273,6 +273,7 @@ print('t-SNE (perplexity=%.0f) data:' % perplexity)
 df_tsne.head(10)
 
 
+# 2D display of the plot
 def plot_tsne_2D(df_tsne, label_column, plot_title):
     """
     plot_tsne_2D - plots t-SNE as two-dimensional graph
