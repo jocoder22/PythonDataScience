@@ -296,16 +296,17 @@ def plot_tsne_2D(df_tsne, label_column, plot_title):
         plt.scatter(df_tsne.loc[df_tsne[label_column]==label, 'x-tsne'], 
                     df_tsne.loc[df_tsne[label_column]==label, 'y-tsne'], 
                     c=c, label=label, marker=m, s=15)
-#         bars[ix] = plt.bar([0, 1, 2], [0.2, 0.3, 0.1], width=0.4, align="center", color=c)
-#         ix += 1
+        bars[ix] = plt.bar([0, 1, 2], [0.2, 0.3, 0.1], width=0.4, align="center", color=c)
+        ix += 1
 
-#     plt.legend(bars, unique_labels)
+    plt.legend(bars, unique_labels)
     plt.legend()
     plt.xlabel('first dimension')
     plt.ylabel('second dimension')
     plt.title(plot_title)
     plt.grid()
     plt.show()
-    
+
+# view the plot 
 plot_tsne_2D(df_tsne, 'regime', 'S&P 500 dimensionality reduction with t-SNE (perplexity=%d)' % perplexity)
 
