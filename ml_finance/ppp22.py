@@ -124,7 +124,7 @@ X_train.shape, y_train.shape
 X_train.head()
 
 
-
+# instantiate Decision tree model
 base_estimator = DecisionTreeClassifier(class_weight = 'balanced', random_state=42,
                                         max_depth=10, criterion='entropy',
                                         min_samples_leaf=4, min_samples_split=3, max_features='auto')
@@ -190,4 +190,5 @@ plt.bar(*zip(*clf_fingerpint.non_linear_effect['raw'].items()))
 plt.figure(figsize=(17, 12))
 plt.title('Model pairwise effect')
 plt.bar(*zip(*clf_fingerpint.pair_wise_effect['raw'].items()))
+plt.show()
 # plt.savefig('pairwise.png')
