@@ -12,8 +12,9 @@ from sklearn.metrics import roc_curve, accuracy_score, precision_score, recall_s
 from sklearn.tree import DecisionTreeClassifier
 
 import matplotlib.pyplot as plt
-from mlfinlab.feature_importance import ClassificationModelFingerprint
-from mlfinlab.feature_importance import plot_feature_importance
+import mlfinlab as ml
+# from mlfinlab.feature_importance import ClassificationModelFingerprint
+# from mlfinlab.feature_importance import plot_feature_importance
 # from mlfinlab.feature_importance import (feature_importance_mean_decrease_impurity, feature_importance_mean_decrease_accuracy, feature_importance_sfi, plot_feature_importance)
 # from mlfinlab.feature_importance import ClassificationModelFingerprint
 
@@ -82,7 +83,6 @@ labels = ml.labeling.get_bins(triple_barrier_events, data['close'])
 
 X = data.iloc[:,1:]
 X.head()
-
 
 
 # Volatility
