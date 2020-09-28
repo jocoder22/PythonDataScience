@@ -13,15 +13,15 @@ warnings.filterwarnings('ignore')
 start_date = '2013-01-01'
 # end_date = '2020-02-29'
 
+# Download daily Amazon stock Adjusted close prices and indexes
 assets = ['AMZN', "^GSPC", "^DJI", "^IXIC", "^RUT", "CL=F"]
 datasets = dr.DataReader(assets, data_source='yahoo', start = start_date)["Adj Close"]
-
 datasets.tail()
 
+# Name of the columns
 col = ["Amazon", "Sp500", "Dow20", "Nasdaq", "R2000", "Crude20"]
-
 datasets.columns = col
-
+print2(datasets.head())
 
 datasets.iloc[:, ~datasets.columns.isin(["Dow20", "Nasdaq"])].plot(figsize=(10,5));
 
