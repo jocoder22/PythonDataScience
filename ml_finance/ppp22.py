@@ -184,6 +184,7 @@ plt.bar(*zip(*clf_fingerpint.linear_effect['raw'].items()))
 plt.figure(figsize=(17, 12))
 plt.title('Model non-linear effect')
 plt.bar(*zip(*clf_fingerpint.non_linear_effect['raw'].items()))
+plt.show()
 # plt.savefig('non_linear.png')
 
 # Plot pairwise effect
