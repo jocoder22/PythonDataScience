@@ -57,6 +57,7 @@ short_signals = data['fast_mavg'] < data['slow_mavg']
 data.loc[long_signals, 'side'] = 1
 data.loc[short_signals, 'side'] = -1
 
+
 # Remove Look ahead bias by lagging the signal
 data['side'] = data['side'].shift(1)
 
@@ -80,7 +81,6 @@ labels = ml.labeling.get_bins(triple_barrier_events, data['close'])
 
 
 # X = pd.DataFrame(index=data.index)
-
 X = data.iloc[:,1:]
 X.head()
 
