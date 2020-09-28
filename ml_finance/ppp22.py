@@ -6,6 +6,17 @@ import math
 import statsmodels.tsa.stattools as ts
 import numpy as np
 from scipy import stats
+
+from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
+from sklearn.metrics import roc_curve, accuracy_score, precision_score, recall_score, f1_score
+from sklearn.tree import DecisionTreeClassifier
+
+import matplotlib.pyplot as plt
+from mlfinlab.feature_importance import ClassificationModelFingerprint
+from mlfinlab.feature_importance import plot_feature_importance
+# from mlfinlab.feature_importance import (feature_importance_mean_decrease_impurity, feature_importance_mean_decrease_accuracy, feature_importance_sfi, plot_feature_importance)
+# from mlfinlab.feature_importance import ClassificationModelFingerprint
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -25,15 +36,7 @@ print2(datasets.head())
 
 datasets.iloc[:, ~datasets.columns.isin(["Dow20", "Nasdaq"])].plot(figsize=(10,5));
 
-from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
-from sklearn.metrics import roc_curve, accuracy_score, precision_score, recall_score, f1_score
-from sklearn.tree import DecisionTreeClassifier
 
-import matplotlib.pyplot as plt
-from mlfinlab.feature_importance import ClassificationModelFingerprint
-from mlfinlab.feature_importance import plot_feature_importance
-# from mlfinlab.feature_importance import (feature_importance_mean_decrease_impurity, feature_importance_mean_decrease_accuracy, feature_importance_sfi, plot_feature_importance)
-# from mlfinlab.feature_importance import ClassificationModelFingerprint
 
 
 data = datasets.copy()
