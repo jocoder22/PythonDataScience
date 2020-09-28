@@ -17,6 +17,8 @@ from mlfinlab.feature_importance import plot_feature_importance
 # from mlfinlab.feature_importance import (feature_importance_mean_decrease_impurity, feature_importance_mean_decrease_accuracy, feature_importance_sfi, plot_feature_importance)
 # from mlfinlab.feature_importance import ClassificationModelFingerprint
 
+
+from printdescribe import  print2
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -35,10 +37,6 @@ datasets.columns = col
 print2(datasets.head())
 
 datasets.iloc[:, ~datasets.columns.isin(["Dow20", "Nasdaq"])].plot(figsize=(10,5));
-
-
-
-
 data = datasets.copy()
 data['close'] = data["Amazon"]
 
