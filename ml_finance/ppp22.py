@@ -23,7 +23,7 @@ from printdescribe import  print2
 import warnings
 warnings.filterwarnings('ignore')
 
-
+# instantiate start date
 start_date = '2013-01-01'
 # end_date = '2020-02-29'
 
