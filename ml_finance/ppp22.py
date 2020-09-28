@@ -178,7 +178,9 @@ clf_fingerpint.fit(clf, X_train, num_values=50, pairwise_combinations=feature_co
 plt.figure(figsize=(17, 12))
 plt.title('Model linear effect')
 plt.bar(*zip(*clf_fingerpint.linear_effect['raw'].items()))
-# plt.savefig('linear.png')
+plt.show()
+# plt.savefig('linear.png')c
+
 
 # Plot non-linear effect
 plt.figure(figsize=(17, 12))
