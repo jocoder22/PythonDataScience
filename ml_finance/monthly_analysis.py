@@ -78,7 +78,7 @@ print2(yy.head(), month1.head())
 fig, ax = plt.subplots(nrows=3, ncols=4, sharex=True, sharey=True)
 # ax.margins(0.05)
 for idx, ax in enumerate(ax.flatten(),start=1):
-    # monthname = datetime.date(1900,  idx, 1).strftime('%B')
+
     monthname = calendar.month_name[idx]
     month1 = yy[yy.month == idx]
     ax.plot(month1.year, month1["Adj Close"], label=monthname)
