@@ -19,6 +19,8 @@ data = pdr.get_data_yahoo(symbol, start_date)[['Adj Close']]
 
 print2(data.head())
 ts = data.copy()
+
+
 # ts.groupby([ts.index.month,ts.index.year]).mean().unstack().plot(figsize=(12,8))
 # plt.show()
 
@@ -33,8 +35,6 @@ dayname  = [calendar.day_name[x] for x in range(0,5)]
 plt.xticks(np.arange(5), dayname)
 plt.grid()
 plt.show()
-
-
 
 ts['month'], ts["year"] = ts.index.month, ts.index.year
 
