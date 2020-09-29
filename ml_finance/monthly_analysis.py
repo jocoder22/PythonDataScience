@@ -55,7 +55,6 @@ groups = ts.groupby([ts.index.month, ts.index.year]).mean()
 #     print(name, group)
 
 # plt.show()
-# data2 = 
 # print2(groups)
 fig, ax = plt.subplots(nrows=3, ncols=4, sharex=True, sharey=True)
 # ax.margins(0.05)
@@ -68,8 +67,8 @@ for idx, ax in enumerate(ax.flatten(),start=1):
     ax.legend()
 plt.show()
 
-print2(ts.head())
 
+print2(ts.head())
 yy = ts.groupby(['year','month'], as_index=False).mean()
 month1 = yy[yy.month == idx]
 print2(yy.head(), month1.head())
@@ -78,7 +77,6 @@ print2(yy.head(), month1.head())
 fig, ax = plt.subplots(nrows=3, ncols=4, sharex=True, sharey=True)
 # ax.margins(0.05)
 for idx, ax in enumerate(ax.flatten(),start=1):
-
     monthname = calendar.month_name[idx]
     month1 = yy[yy.month == idx]
     ax.plot(month1.year, month1["Adj Close"], label=monthname)
