@@ -14,7 +14,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 start_date = '2000-01-01'
-symbol = "C"  # "^GSPC"
+symbol = "C"  # "^GSPC" "GOOG"
 data = pdr.get_data_yahoo(symbol, start_date)[['Adj Close']]
 
 print2(data.head())
