@@ -26,7 +26,9 @@ ts = data.copy()
 # ts.groupby([ts.index.month]).min().unstack().plot(figsize=(12,8))
 ts.groupby([ts.index.weekday]).mean().unstack().plot(figsize=(12,8))
 plt.xlabel("plot")
-plt.xticks(np.arange(5), 'Monday Tuesday Wednesday Thursday Friday'.split())
+dayname  = [calendar.day_name[x] for x in range(0,5)]
+# plt.xticks(np.arange(5), 'Monday Tuesday Wednesday Thursday Friday'.split())
+plt.xticks(np.arange(5), dayname)
 # ts.groupby([ts.index.month]).max().unstack().plot(figsize=(12,8))
 # plt.legend(["Min", "Mean", "Max"])
 plt.grid()
@@ -58,13 +60,11 @@ groups = ts.groupby([ts.index.month, ts.index.year]).mean()
 fig, ax = plt.subplots(nrows=3, ncols=4, sharex=True, sharey=True)
 # ax.margins(0.05)
 for idx, ax in enumerate(ax.flatten(),start=1):
-#     ax.plot(data4.iloc[:, idx])
-#     ax.set_xlabel(data4.columns[idx])
     # monthname = datetime.date(1900,  idx, 1).strftime('%B')
     monthname = calendar.month_name[idx]
     month1 = ts[ts.month == idx]
     ax.plot(month1.groupby(['year'])["Adj Close"].min(), label=monthname)
-    # ax.title(str(monthname))
+    ax.set_xlabel(monthname)
     ax.legend()
 plt.show()
 
@@ -78,17 +78,14 @@ print2(yy.head(), month1.head())
 fig, ax = plt.subplots(nrows=3, ncols=4, sharex=True, sharey=True)
 # ax.margins(0.05)
 for idx, ax in enumerate(ax.flatten(),start=1):
-#     ax.plot(data4.iloc[:, idx])
-#     ax.set_xlabel(data4.columns[idx])
     # monthname = datetime.date(1900,  idx, 1).strftime('%B')
     monthname = calendar.month_name[idx]
     month1 = yy[yy.month == idx]
     ax.plot(month1.year, month1["Adj Close"], label=monthname)
-    # ax.title(str(monthname))
     ax.legend()
 plt.show()
 
-
+monthname2 = [calendar.month_name[x] for x in range(1,13)]
 yy2 = ts.groupby(['year','month'], as_index=False).mean()
 y3 = yy2.groupby(["month"], as_index=False)["Adj Close"].mean()
 y3["monthname"] = y3.month.apply(lambda x: calendar.month_name[x])
@@ -96,3 +93,6 @@ plt.plot(y3["monthname"], y3["Adj Close"])
 plt.grid()
 plt.show()
 print2(y3)
+
+dayname  = [calendar.day_name[x] for x in range(0,5)]
+print2(monthname2,dayname)
