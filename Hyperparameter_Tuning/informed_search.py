@@ -85,4 +85,5 @@ def visualize_first():
     plt.axvline(x=x_line, color="red", linewidth=4)
     plt.show()
     
-    
+      
+visualize_first()  

@@ -28,7 +28,17 @@ ts = data.copy()
 
 ts['month'], ts["year"] = ts.index.month, ts.index.year
 month1 = ts[ts.month == 2]
-month1.groupby(['year']).mean().plot()
+month1.loc[:, ['Adj Close', 'year']].groupby(['year']).mean().plot()
 plt.show()
 print2(ts.head(), month1.head())
+
+groups = nn.groupby('max_feature')
+fig, ax = plt.subplots()
+# ax.set_color_cycle(colors)
+ax.margins(0.05)
+for name, group in groups:
+    ax.plot(group.learning_rate, group.max_depth, marker='o', linestyle='', ms=12, label=name)
+ax.legend(numpoints=1, loc='upper left')
+
+plt.show()
 
