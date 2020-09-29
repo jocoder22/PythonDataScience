@@ -24,19 +24,20 @@ ts = data.copy()
 
 # plot average weekday or monthly overall periods
 # ts.groupby([ts.index.month]).min().unstack().plot(figsize=(12,8))
-ts.groupby([ts.index.weekday]).mean().unstack().plot(figsize=(12,8))
-plt.xlabel("plot")
-dayname  = [calendar.day_name[x] for x in range(0,5)]
 # plt.xticks(np.arange(5), 'Monday Tuesday Wednesday Thursday Friday'.split())
-plt.xticks(np.arange(5), dayname)
 # ts.groupby([ts.index.month]).max().unstack().plot(figsize=(12,8))
 # plt.legend(["Min", "Mean", "Max"])
+
+ts.groupby([ts.index.weekday]).mean().unstack().plot(figsize=(12,8))
+dayname  = [calendar.day_name[x] for x in range(0,5)]
+plt.xticks(np.arange(5), dayname)
 plt.grid()
 plt.show()
 
 
 
 ts['month'], ts["year"] = ts.index.month, ts.index.year
+
 # month1 = ts[ts.month == 2]
 # month1.loc[:, ['Adj Close', 'year']].groupby(['year']).mean().plot()
 # plt.show()
@@ -44,11 +45,11 @@ ts['month'], ts["year"] = ts.index.month, ts.index.year
 
 
 groups = ts.groupby([ts.index.month, ts.index.year]).mean()
+
+
 # groups.index = ["Datemonth", "Dateyear"]
 # fig, ax = plt.subplots()
 # # ax.set_color_cycle(colors)
-
-
 # for name, group in groups:
 # #     ax.plot(group.index.month, group["Adj Close"], marker='o', linestyle='', ms=12, label=name)
 # # ax.legend(numpoints=1, loc='upper left')
@@ -56,6 +57,8 @@ groups = ts.groupby([ts.index.month, ts.index.year]).mean()
 
 # plt.show()
 # print2(groups)
+
+
 fig, ax = plt.subplots(nrows=3, ncols=4, sharex=True, sharey=True)
 # ax.margins(0.05)
 for idx, ax in enumerate(ax.flatten(),start=1):
@@ -82,6 +85,7 @@ for idx, ax in enumerate(ax.flatten(),start=1):
     ax.plot(month1.year, month1["Adj Close"], label=monthname)
     ax.legend()
 plt.show()
+
 
 monthname2 = [calendar.month_name[x] for x in range(1,13)]
 yy2 = ts.groupby(['year','month'], as_index=False).mean()
