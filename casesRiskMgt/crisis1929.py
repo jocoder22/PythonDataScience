@@ -7,6 +7,8 @@ import pandas as pd
 import holoviews as hv
 import hvplot.pandas
 
+from printdescribe import print2
+
 hv.extension('bokeh')
 
 
@@ -40,7 +42,7 @@ def get_decade(start=1920, end=1929, extension='prn'):
             You may need a different date range or file extension.\n\
             Check out https://www.nyse.com/data/transactions-statistics-data-library")
     
-download_history = [get_decade(decade[0], decade[1], decade[2]) for decade in date_ranges]
+download_history = [get_decade(decade[0], decade[1], decade[2]) for decade in data_ranges]
 
 # read and format the data
 def load_data(start=1920, end=1929, extension="prn"):
@@ -65,7 +67,7 @@ def load_data(start=1920, end=1929, extension="prn"):
     return data
     
     
-data = pd.concat([load_data(decade[0], decade[1], decade[2]) for decade in date_ranges], axis=0)
+data = pd.concat([load_data(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
 
             
         
