@@ -25,20 +25,20 @@ data_ranges = [[1970,1979, 'dat'],
 # Download data
 
 def get_decade(start=1920, end=1929, extension='prn'):
-  "specify the starting year of the decade eg. 1900, 2010, 2009"
-  try:
-    link = requests.get(f"https://www.nyse.com/publicdocs/nyse.data/Daily_Share_Volume_{start}-{end}.{extension}")
-    file = os.path.join(" ","Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
+    "specify the starting year of the decade eg. 1900, 2010, 2009"
+    try:
+        link = requests.get(f"https://www.nyse.com/publicdocs/nyse.data/Daily_Share_Volume_{start}-{end}.{extension}")
+        file = os.path.join(" ","Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
     
-    if link.status_code == 404:
-      raise
-     else:
-      with open(file, 'w') as temp_file:
-        temp_file.write(str(link.content.decode("utf-8")))
+        if link.status_code == 404:
+            raise
+        else:
+            with open(file, 'w') as temp_file:
+            temp_file.write(str(link.content.decode("utf-8")))
         
-        print2(f"Successfully downloaded {start}-{end}")
-  except:
-    print2("There was an issue with the download \n\
+            print2(f"Successfully downloaded {start}-{end}")
+    except:
+        print2("There was an issue with the download \n\
             You may need a different date range or file extension.\n\
             Check out https://www.nyse.com/data/transactions-statistics-data-library")
     
