@@ -64,6 +64,9 @@ def load_data(start=1920, end=1929, extension="prn"):
     data.Date = pd.to_datetime(data.Date, format='%Y%m%d', errors="coerce")
     return data
     
+    
+data = pd.concat([load_data(decade[0], decade[1], decade[2]) for decade in date_ranges], axis=0)
+
             
         
   
