@@ -11,26 +11,32 @@ from printdescribe import print2
 
 hv.extension('bokeh')
 
-path33 = f"D:\PythonDataScience\casesRiskMgt"
+# path33 = f"D:\PythonDataScience\casesRiskMgt"
+# path33 = f"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\CourseMaterials\Module1\Case Studies in Risk Management Module 1 extra documents"
+path33 = f"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\CourseMaterials\Module1"
 
 data_ranges = [[1970,1979, 'dat'],
                [1960,1969, 'dat'],
                [1950,1959, 'dat'],
-               [1940,1946, 'dat'],
+               [1940,1949, 'dat'],
                [1930,1939, 'dat'],
-               [1920,1929, 'dat'],
-               [1910,1919, 'dat'],
-               [1900,1909, 'dat'],
+               [1920,1929, 'prn'],
+               [1900,1919, 'dat'],
                [1888,1899, 'dat']][::-1]
+
 
 # Download data
 
 def get_decade(start=1920, end=1929, extension='prn'):
   "specify the starting year of the decade eg. 1900, 2010, 2009"
   try:
-      link = requests.get(f"https://www.nyse.com/publicdocs/nyse/data/Daily_Share_Volume_{start}-{end}.{extension}")
-      file = os.path.join(path33,"Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
-    
+      link = requests.get(f'https://www.nyse.com/publicdocs/nyse/data/Daily_Share_Volume_{start}-{end}.{extension}')
+      # file = os.path.join(path33,"Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
+      file = os.path.join(path33,f"Daily_Share_Volume_{start}-{end}.{extension}")
+
+      # print2(link.status_code)
+      # print2(link.content.decode("utf-8"))
+
       if link.status_code == 404:
         raise
       else:
@@ -50,11 +56,13 @@ download_history = [get_decade(decade[0], decade[1], decade[2]) for decade in da
 def load_data(start=1920, end=1929, extension="prn"):
   
   # get the path
-  path = os.path.join(path33, "Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
+  # path = os.path.join(path33, "Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
+  path = os.path.join(path33, f"Daily_Share_Volume_{start}-{end}.{extension}")
   
   if extension == "prn":
-    data = pd.read_csv(path, sep='  ', parse_dates=['Date'], engine='python').iloc[2:, 0:2]
-    data.loc[:, "  Stock U.S Gov't"] = pd.to_numeric(data.loc[:, "  Stock U.S Gov't"], errors='coerce')
+    data = pd.read_csv(path, sep='  ', parse_dates=['Date'], engine='python').iloc[2:, [0,2]]
+    print2(data.head(), data.columns)
+    data.loc[:, " Stock U.S Gov't"] = pd.to_numeric(data.loc[:, " Stock U.S Gov't"], errors='coerce')
     data.Date = pd.to_datetime(data.Date, format='%Y%m%d', errors="coerce")
     data.columns = ['Date', 'Volume']
     return data
