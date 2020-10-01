@@ -89,6 +89,6 @@ m = hv.Scatter(plot_data).options(width=700, height=400).redim('NYSE Share Tradi
   hv.Text(black_tuesday+pd.DateOffset(months=10), 4e7, "Black Tuesday", halign='left').options(color="#FF7E47")
 
 plt.scatter(data['Date'], data['Volume'], s=0.01)
-plt.axvline(black_tuesday, color="red")
+# plt.axvline(black_tuesday, color="red")
 plt.show()
 
