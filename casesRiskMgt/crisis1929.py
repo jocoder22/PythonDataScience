@@ -28,7 +28,7 @@ data_ranges = [[1970,1979, 'dat'],
 def get_decade(start=1920, end=1929, extension='prn'):
   "specify the starting year of the decade eg. 1900, 2010, 2009"
   try:
-      link = requests.get(f"https://www.nyse.com/publicdocs/nyse.data/Daily_Share_Volume_{start}-{end}.{extension}")
+      link = requests.get(f"https://www.nyse.com/publicdocs/nyse/data/Daily_Share_Volume_{start}-{end}.{extension}")
       file = os.path.join(path33,"Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
     
       if link.status_code == 404:
