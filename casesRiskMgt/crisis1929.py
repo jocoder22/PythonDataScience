@@ -14,6 +14,7 @@ hv.extension('bokeh')
 
 # path33 = f"D:\PythonDataScience\casesRiskMgt"
 # path33 = f"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\CourseMaterials\Module1\Case Studies in Risk Management Module 1 extra documents"
+
 path33 = f"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\CourseMaterials\Module1"
 
 data_ranges = [[1970,1979, 'dat'],
@@ -27,7 +28,6 @@ data_ranges = [[1970,1979, 'dat'],
 
 
 # Download data
-
 def get_decade(start=1920, end=1929, extension='prn'):
   "specify the starting year of the decade eg. 1900, 2010, 2009"
   try:
@@ -43,7 +43,6 @@ def get_decade(start=1920, end=1929, extension='prn'):
       else:
         with open(file, 'w') as temp_file:
           temp_file.write(str(link.content.decode("utf-8")))
-        
           print2(f"Successfully downloaded {start}-{end}")
 
   except:
@@ -55,7 +54,6 @@ download_history = [get_decade(decade[0], decade[1], decade[2]) for decade in da
 
 # read and format the data
 def load_data(start=1920, end=1929, extension="prn"):
-  
   # get the path
   # path = os.path.join(path33, "Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
   path = os.path.join(path33, f"Daily_Share_Volume_{start}-{end}.{extension}")
@@ -77,9 +75,7 @@ def load_data(start=1920, end=1929, extension="prn"):
     data.Date = pd.to_datetime(data.Date, format='%Y%m%d', errors="coerce")
     return data
     
-    
 data = pd.concat([load_data(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
-
 
 # create plotting object
 plot_data = hv.Dataset(data, kdims=['Date'], vdims=['Volume'])
