@@ -92,3 +92,41 @@ plt.scatter(data['Date'], data['Volume'], s=0.01)
 # plt.axvline(black_tuesday, color="red")
 plt.show()
 
+
+# Download data
+def getload_decade(start=1920, end=1929, extension='prn'):
+    "specify the starting year of the decade eg. 1900, 2010, 2009"
+    try:
+        link = requests.get(f'https://www.nyse.com/publicdocs/nyse/data/Daily_Share_Volume_{start}-{end}.{extension}')
+
+        print2(link.status_code)
+        if link.status_code == 404:
+            raise
+            
+        else:
+            link2 = f'https://www.nyse.com/publicdocs/nyse/data/Daily_Share_Volume_{start}-{end}.{extension}'
+            if extension == "prn":
+                data = pd.read_csv(link2, sep='  ', parse_dates=['Date'], engine='python').iloc[2:, [0,2]]
+                data.loc[:, " Stock U.S Gov't"] = pd.to_numeric(data.loc[:, " Stock U.S Gov't"], errors='coerce')
+                data.Date = pd.to_datetime(data.Date, format='%Y%m%d', errors="coerce")
+                data.columns = ['Date', 'Volume']
+                print2(f"Successfully downloaded {start}-{end}")
+                return data
+              
+            else:
+                data = pd.read_csv(link2)
+                data.iloc[:,0] = data.iloc[:,0].apply(lambda x: str(x).strip(' '))
+                data = data.iloc[:,0].str.split(' ', 1, expand=True)
+                data.columns = ['Date', 'Volume']
+                data.loc[:, "Volume"] = pd.to_numeric(data.loc[:, "Volume"], errors='coerce')
+                data.Date = pd.to_datetime(data.Date, format='%Y%m%d', errors="coerce")
+                print2(f"Successfully downloaded {start}-{end}")
+                return data
+
+    except:
+        print2("There was an issue with the download \n\
+            You may need a different date range or file extension.\n\
+            Check out https://www.nyse.com/data/transactions-statistics-data-library")
+        
+data2 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
+data3 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0).set_index("Date")
