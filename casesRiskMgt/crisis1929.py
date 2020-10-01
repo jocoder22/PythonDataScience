@@ -11,6 +11,7 @@ from printdescribe import print2
 
 hv.extension('bokeh')
 
+path33 = f"D:\PythonDataScience\casesRiskMgt"
 
 data_ranges = [[1970,1979, 'dat'],
                [1960,1969, 'dat'],
@@ -28,7 +29,7 @@ def get_decade(start=1920, end=1929, extension='prn'):
     "specify the starting year of the decade eg. 1900, 2010, 2009"
     try:
         link = requests.get(f"https://www.nyse.com/publicdocs/nyse.data/Daily_Share_Volume_{start}-{end}.{extension}")
-        file = os.path.join(" ","Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
+        file = os.path.join(path33,"Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
     
         if link.status_code == 404:
             raise
@@ -48,7 +49,7 @@ download_history = [get_decade(decade[0], decade[1], decade[2]) for decade in da
 def load_data(start=1920, end=1929, extension="prn"):
   
   # get the path
-  path = os.path.join(" ", "Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
+  path = os.path.join(path33, "Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
   
   if extension = "prn":
     data = pd.read_csv(path, sep='  ', parse_dates=['Date'], engine='python').iloc[2:, 0:2]
