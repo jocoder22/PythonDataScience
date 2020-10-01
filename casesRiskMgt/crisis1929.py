@@ -3,6 +3,7 @@ import requests
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 import holoviews as hv
 import hvplot.pandas
@@ -79,8 +80,19 @@ def load_data(start=1920, end=1929, extension="prn"):
     
 data = pd.concat([load_data(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
 
-            
-        
-  
-    
-               
+
+# create plotting object
+plot_data = hv.Dataset(data, kdims=['Date'], vdims=['Volume'])
+
+# create scatter plot
+black_tuesday = pd.to_datetime('1929-10-29')
+
+vline = hv.VLine(black_tuesday).options(color='#FF7E47')
+
+m = hv.Scatter(plot_data).options(width=700, height=400).redim('NYSE Share Trading Volume').hist()*vline*\
+  hv.Text(black_tuesday+pd.DateOffset(months=10), 4e7, "Black Tuesday", halign='left').options(color="#FF7E47")
+
+plt.scatter(data['Date'], data['Volume'], s=0.01)
+plt.axvline(black_tuesday, color="red")
+plt.show()
+
