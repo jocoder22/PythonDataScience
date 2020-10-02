@@ -125,17 +125,20 @@ plt.show()
 # Download data
 def getload_decade(start=1920, end=1929, extension='prn'):
     "specify the starting year of the decade eg. 1900, 2010, 2009"
+
+    webaddress = f'https://www.nyse.com/publicdocs/nyse/data/Daily_Share_Volume_{start}-{end}.{extension}'
+
     try:
-        link = requests.get(f'https://www.nyse.com/publicdocs/nyse/data/Daily_Share_Volume_{start}-{end}.{extension}')
+        link = requests.get(webaddress)
 
         print2(link.status_code)
         if link.status_code == 404:
             raise
             
         else:
-            link2 = f'https://www.nyse.com/publicdocs/nyse/data/Daily_Share_Volume_{start}-{end}.{extension}'
+            
             if extension == "prn":
-                data = pd.read_csv(link2, sep='   ', parse_dates=['Date'], engine='python').iloc[2:, 0:2]
+                data = pd.read_csv(webaddress, sep='   ', parse_dates=['Date'], engine='python').iloc[2:, 0:2]
                 print2(data.head(), data.columns)
                 data.loc[:, "  Stock U.S Gov't"] = pd.to_numeric(data.loc[:, "  Stock U.S Gov't"], errors='coerce')
                 data.Date = pd.to_datetime(data.Date, format='%Y%m%d', errors="coerce")
@@ -144,7 +147,7 @@ def getload_decade(start=1920, end=1929, extension='prn'):
                 return data
               
             else:
-                data = pd.read_csv(link2)
+                data = pd.read_csv(webaddress)
                 data.iloc[:,0] = data.iloc[:,0].apply(lambda x: str(x).strip(' '))
                 data = data.iloc[:,0].str.split(' ', 1, expand=True)
                 data.columns = ['Date', 'Volume']
