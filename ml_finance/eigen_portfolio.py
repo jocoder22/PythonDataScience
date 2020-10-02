@@ -247,7 +247,6 @@ def sharpe_ratio(ts_returns, periods_per_year=252):
     # compute annualized sharpe ratio
     annualized_sharpe = annualized_return / annualized_vol
 
-    
     return annualized_return, annualized_vol, annualized_sharpe
 
 
