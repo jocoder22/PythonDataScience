@@ -65,10 +65,8 @@ def load_data(start=1920, end=1929, extension="prn"):
   
   if extension == "prn":
     data = pd.read_csv(path, sep='   ', parse_dates=['Date'], engine='python').iloc[2:,0:2]
-    # data = pd.read_csv(path, sep='   ', parse_dates=['Date'], engine='python').iloc[2:,0:2]
     print2(data.head(), data.columns)
     data.loc[:, "  Stock U.S Gov't"] = pd.to_numeric(data.loc[:, "  Stock U.S Gov't"], errors='coerce')
-    # data.loc[:, "  Stock U.S Gov't"] = pd.to_numeric(data.loc[:, "  Stock U.S Gov't"], errors='coerce')
     data.Date = pd.to_datetime(data.Date, format='%Y%m%d', errors="coerce")
     data.columns = ['Date', 'Volume']
     print2(f"Successfully downloaded {start}-{end}")
@@ -118,7 +116,7 @@ m = hv.Scatter(plot_data).options(width=700, height=400).redim('NYSE Share Tradi
   hv.Text(black_tuesday+pd.DateOffset(months=10), 4e7, "Black Tuesday", halign='left').options(color="#FF7E47")
 
 plt.scatter(data['Date'], data['Volume'], s=0.1)
-# plt.axvline(black_tuesday, color="red")
+plt.axvline(black_tuesday, color="red")
 plt.show()
 
 
