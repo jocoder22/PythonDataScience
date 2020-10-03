@@ -32,7 +32,6 @@ def get_decade(start=1920, end=1929, extension='prn'):
   "specify the starting year of the decade eg. 1900, 2010, 2009"
   try:
       link = requests.get(f'https://www.nyse.com/publicdocs/nyse/data/Daily_Share_Volume_{start}-{end}.{extension}')
-      # file = os.path.join(path33,"Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
       file = os.path.join(path33,f"Daily_Share_Volume_{start}-{end}.{extension}")
 
       # print2(link.status_code)
@@ -82,26 +81,6 @@ def load_data(start=1920, end=1929, extension="prn"):
     print2(f"Successfully downloaded {start}-{end}")
     return data
 
-"""
-# Read and format the data 
-def load_data(start = 1920, end = 1929, extension='prn'):
-    path = os.path.join(path33,"Data",f"Daily_Share_Volume_{start}-{end}.{extension}")
-    
-    if extension=='prn':
-        data = pd.read_csv(path , sep='   ', parse_dates=['Date'], engine='python').iloc[2:,0:2]
-        data.loc[:,"  Stock U.S Gov't"] = pd.to_numeric(data.loc[:,"  Stock U.S Gov't"], errors='coerce')
-        data.Date = pd.to_datetime(data.Date, format='%Y%m%d', errors='coerce')
-        data.columns = ['Date','Volume']
-        return data
-    else:
-        data = pd.read_csv(path)
-        data.iloc[:,0] = data.iloc[:,0].apply(lambda x: str(x).strip(' '))
-        data = data.iloc[:,0].str.split(' ', 1, expand=True)
-        data.columns = ['Date','Volume']
-        data.loc[:,"Volume"] = pd.to_numeric(data.loc[:,"Volume"], errors='coerce')
-        data.Date = pd.to_datetime(data.Date, format='%Y%m%d', errors='coerce')
-        return data
-"""
 data = pd.concat([load_data(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
 
 # create plotting object
@@ -120,7 +99,7 @@ plt.axvline(black_tuesday, color="red")
 plt.show()
 
 
-# Download data
+# Download data, not saving here!
 def getload_decade(start=1920, end=1929, extension='prn'):
     "specify the starting year of the decade eg. 1900, 2010, 2009"
 
@@ -162,5 +141,10 @@ data2 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in
 data3 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0).set_index("Date")
 
 plt.scatter(data2['Date'], data2['Volume'], s=0.1)
+plt.axvline(black_tuesday, color="red")
+plt.show()
+
+# plt.scatter(data2['Date'], data2['Volume'], s=0.1)
+data3.plot()
 plt.axvline(black_tuesday, color="red")
 plt.show()
