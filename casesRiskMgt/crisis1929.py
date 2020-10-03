@@ -135,8 +135,7 @@ def getload_decade(start=1920, end=1929, extension='prn'):
         if link.status_code == 404:
             raise
             
-        else:
-            
+        else:  
             if extension == "prn":
                 data = pd.read_csv(webaddress, sep='   ', parse_dates=['Date'], engine='python').iloc[2:, 0:2]
                 print2(data.head(), data.columns)
