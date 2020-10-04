@@ -146,7 +146,10 @@ plt.show()
 
 print2(data3.head())
 print2(data3.index)
-# plt.scatter(data2['Date'], data2['Volume'], s=0.1)
-data2.plot(x="Date", y='Volume', kind="scatter")
+data2.plot(x="Date", y='Volume', kind="scatter", s=0.1)
+plt.axvline(black_tuesday, color="red")
+plt.show()
+
+data3.plot()
 plt.axvline(black_tuesday, color="red")
 plt.show()
