@@ -138,13 +138,15 @@ def getload_decade(start=1920, end=1929, extension='prn'):
             Check out https://www.nyse.com/data/transactions-statistics-data-library")
         
 data2 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
-data3 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0).set_index("Date")
+data3 = data2.set_index("Date")
 
 plt.scatter(data2['Date'], data2['Volume'], s=0.1)
 plt.axvline(black_tuesday, color="red")
 plt.show()
 
+print2(data3.head())
+print2(data3.index)
 # plt.scatter(data2['Date'], data2['Volume'], s=0.1)
-data3.plot()
+data2.plot(x="Date", y='Volume', kind="scatter")
 plt.axvline(black_tuesday, color="red")
 plt.show()
