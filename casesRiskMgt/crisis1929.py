@@ -94,6 +94,7 @@ vline = hv.VLine(black_tuesday).options(color='#FF7E47')
 m = hv.Scatter(plot_data).options(width=700, height=400).redim('NYSE Share Trading Volume').hist()*vline*\
   hv.Text(black_tuesday+pd.DateOffset(months=10), 4e7, "Black Tuesday", halign='left').options(color="#FF7E47")
 
+# plot the daily traded volume against time
 plt.scatter(data['Date'], data['Volume'], s=0.1)
 plt.axvline(black_tuesday, color="red")
 plt.show()
@@ -140,12 +141,12 @@ def getload_decade(start=1920, end=1929, extension='prn'):
 data2 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
 data3 = data2.set_index("Date")
 
+# plt the volume of trade against time
 plt.scatter(data2['Date'], data2['Volume'], s=0.1)
 plt.axvline(black_tuesday, color="red")
 plt.show()
 
-print2(data3.head())
-print2(data3.index)
+
 data2.plot(x="Date", y='Volume', kind="scatter", s=0.1)
 plt.axvline(black_tuesday, color="red")
 plt.show()
