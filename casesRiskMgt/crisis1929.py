@@ -33,24 +33,20 @@ def get_decade(start=1920, end=1929, extension='prn'):
   try:
       link = requests.get(f'https://www.nyse.com/publicdocs/nyse/data/Daily_Share_Volume_{start}-{end}.{extension}')
       file = os.path.join(path33,f"Daily_Share_Volume_{start}-{end}.{extension}")
-
       # print2(link.status_code)
       # print2(link.content.decode("utf-8"))
-
       if link.status_code == 404:
         raise
       else:
         with open(file, 'w') as temp_file:
           temp_file.write(str(link.content.decode("utf-8")))
           print2(f"Successfully downloaded {start}-{end}")
-
   except:
     print2("There was an issue with the download \n\
             You may need a different date range or file extension.\n\
             Check out https://www.nyse.com/data/transactions-statistics-data-library")
     
 download_history = [get_decade(decade[0], decade[1], decade[2]) for decade in data_ranges]
-
 """
 
 path33 = f"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\CourseMaterials\Module1\data_docs"
@@ -137,7 +133,8 @@ def getload_decade(start=1920, end=1929, extension='prn'):
         print2("There was an issue with the download \n\
             You may need a different date range or file extension.\n\
             Check out https://www.nyse.com/data/transactions-statistics-data-library")
-        
+
+# download data, form dataframe      
 data2 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
 data3 = data2.set_index("Date")
 
