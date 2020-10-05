@@ -77,6 +77,7 @@ def load_data(start=1920, end=1929, extension="prn"):
     print2(f"Successfully downloaded {start}-{end}")
     return data
 
+# load data from folder
 data = pd.concat([load_data(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
 
 # create plotting object
@@ -133,6 +134,7 @@ def getload_decade(start=1920, end=1929, extension='prn'):
         print2("There was an issue with the download \n\
             You may need a different date range or file extension.\n\
             Check out https://www.nyse.com/data/transactions-statistics-data-library")
+
 
 # download data, form dataframe      
 data2 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
