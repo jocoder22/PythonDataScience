@@ -77,6 +77,8 @@ def load_data(start=1920, end=1929, extension="prn"):
     print2(f"Successfully downloaded {start}-{end}")
     return data
 
+
+
 # load data from folder
 data = pd.concat([load_data(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
 
