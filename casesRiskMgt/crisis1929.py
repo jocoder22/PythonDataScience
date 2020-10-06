@@ -93,6 +93,7 @@ vline = hv.VLine(black_tuesday).options(color='#FF7E47')
 m = hv.Scatter(plot_data).options(width=700, height=400).redim('NYSE Share Trading Volume').hist()*vline*\
   hv.Text(black_tuesday+pd.DateOffset(months=10), 4e7, "Black Tuesday", halign='left').options(color="#FF7E47")
 
+
 # plot the daily traded volume against time
 plt.scatter(data['Date'], data['Volume'], s=0.1)
 plt.axvline(black_tuesday, color="red")
