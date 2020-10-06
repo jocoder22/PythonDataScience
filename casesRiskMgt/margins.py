@@ -14,4 +14,5 @@ import hvplot.pandas
 
 from printdescribe import print2
 
+np.random.seed(42)
 hv.extension('bokeh')
