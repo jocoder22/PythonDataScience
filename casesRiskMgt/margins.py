@@ -26,3 +26,10 @@ def prod(mu, sigma, samples):
     return reduce(operator.mul, 
                   list(map(lambda x: plot(mu,sigma, x), 
                            range(1,samples+1))))
+
+
+hv.DynamicMap(prod,kdims=['mu', 'sigma','samples']).redim.range(
+    mu=(0,5), 
+    sigma=(1,10), 
+    samples=(2,10)
+    ).options(width=900, height=400) 
