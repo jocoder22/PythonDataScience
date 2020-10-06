@@ -143,6 +143,7 @@ def getload_decade(start=1920, end=1929, extension='prn'):
 data2 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
 data3 = data2.set_index("Date")
 
+
 # plt the volume of trade against time
 plt.scatter(data2['Date'], data2['Volume'], s=0.1)
 plt.axvline(black_tuesday, color="red")
