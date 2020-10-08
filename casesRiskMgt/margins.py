@@ -22,6 +22,7 @@ def plot(mu, sigma, samples):
     ).hvplot(title='Random Walks', label=f'{samples}')
 
 
+# generate values and plot
 def prod(mu, sigma, samples):
     return reduce(operator.mul, 
                   list(map(lambda x: plot(mu,sigma, x), 
