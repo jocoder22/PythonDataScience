@@ -28,6 +28,7 @@ def prod(mu, sigma, samples):
                            range(1,samples+1))))
 
 
+# draw dynamic graphs
 hv.DynamicMap(prod,kdims=['mu', 'sigma','samples']).redim.range(
     mu=(0,5), 
     sigma=(1,10), 
