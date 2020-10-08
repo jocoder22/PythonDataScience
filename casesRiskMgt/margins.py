@@ -21,6 +21,7 @@ def plot(mu, sigma, samples):
     return pd.Series(np.random.normal(mu,sigma, 1000)).cumsum(
     ).hvplot(title='Random Walks', label=f'{samples}')
 
+
 def prod(mu, sigma, samples):
     return reduce(operator.mul, 
                   list(map(lambda x: plot(mu,sigma, x), 
