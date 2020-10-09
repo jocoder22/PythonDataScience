@@ -78,3 +78,24 @@ class Accounts:
         self.call[reset] = self.accounts[reset]*np.random.uniform(0.2,0.5,np.sum(reset))
 
         return [self.history[4], self.accounts.sum(), self.called_accounts_factor, self.momentum] 
+
+
+def simulation_plots(days=10000, runs=5):
+    run = []
+    
+    for _ in range(runs):
+        a = Accounts()
+        prices = pd.DataFrame([a.price() for day in range(days)], 
+                              columns=['Market Returns', 'Value of Accounts Trading in the Market', 'The effect of Margin Calls on Supply', 'Momentum Effect'])
+        run.append(prices)
+        
+    plot = reduce(operator.mul,[i.iloc[:,0].hvplot() for i in run]) +\
+            reduce(operator.mul,[i.iloc[:,1].hvplot() for i in run]) +\
+            reduce(operator.mul,[i.iloc[:,2].hvplot() for i in run]) +\
+            reduce(operator.mul,[i.iloc[:,3].hvplot() for i in run])
+    
+    
+    return plot.cols(2)
+
+    
+           
