@@ -97,5 +97,6 @@ def simulation_plots(days=10000, runs=5):
     
     return plot.cols(2)
 
-    
-           
+
+%%opts Curve [width=500 height=300]
+hv.DynamicMap(simulation_plots, kdims=['days', 'runs']).redim.range(days=(100,500), runs=(5,15)).options(width=900, height=400)           
