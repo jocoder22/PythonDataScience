@@ -99,4 +99,20 @@ def simulation_plots(days=10000, runs=5):
 
 
 %%opts Curve [width=500 height=300]
-hv.DynamicMap(simulation_plots, kdims=['days', 'runs']).redim.range(days=(100,500), runs=(5,15)).options(width=900, height=400)           
+hv.DynamicMap(simulation_plots, kdims=['days', 'runs']).redim.range(days=(100,500), runs=(5,15)).options(width=900, height=400) 
+
+
+def simulation_prices(days=100, runs=1000, axis=0):
+    run = []
+    
+    for _ in range(runs):
+        a = Accounts()
+        prices = pd.DataFrame([a.price()[0] for day in range(days)], 
+                              columns=['return'])
+        run.append(prices)
+        
+        
+    output = pd.concat(run, axis=axis)
+    output.columns = [f'Run {i+1}' for i in range(output.shape[1])]
+    
+    return output
