@@ -42,7 +42,51 @@ hv.DynamicMap(prod,kdims=['mu', 'sigma','samples']).redim.range(
 hv.DynamicMap(simulation_plots, kdims=['days', 'runs']).redim.range(days=(100,500), runs=(5,15)).options(width=900, height=400)
 
 
+class Accounts:
+    def __init__(self, account_mu=20, account_sigma=5, account_numbers=100, mu=0, sigma=0.05, margin_mu=0.1, momentum_mu=0.025, margin_sigma=0.001):
+        # We initialize paramters for our simulations
+        self.account_mu=account_mu
+        self.account_sigma = account_sigma
+        self.account_numbers = account_numbers
+        
+        self.margin_mu=margin_mu
+        self.momentum_mu=momentum_mu
+        self.margin_sigma=margin_sigma
+        
+        self.accounts= np.maximum(np.random.normal(loc=self.account_mu, scale=self.account_sigma, size = self.account_numbers),0)
+        self.call=self.accounts*np.random.uniform(0.5,0.7,self.account_numbers)
+               
+        self.mu=mu
+        self.sigma=sigma
+        
+        self.called_accounts_factor = 0
+        
+        self.momentum = 0
+        self.history = [0,0,0,0,0]
+        
+        return None
+    
+    def price(self):
+        # Calculate factors
+        self.called_accounts_factor =((self.accounts <= self.call).sum())/self.account_numbers
+        self.momentum = (self.history[4] - self.history.pop(0))
+        
+        # Update paramteres
+        self.mu = self.mu - self.margin_mu*self.called_accounts_factor + self.momentum_mu*self.momentum
+        self.sigma = self.sigma + self.margin_sigma*self.called_accounts_factor
+        
+        # Update accounts
+        self.history.append(np.random.normal(loc=self.mu, scale=self.sigma))
+        self.accounts = self.accounts*(1+self.history[4]*np.random.uniform(low=0.5,high=1.5,size=self.account_numbers))
+        
+        # Reset called accounts
+        reset = (np.random.rand(self.account_numbers)>=0.3) * (self.accounts <= self.call)
+        self.accounts[reset] = np.random.normal(self.account_mu, self.account_sigma)
+        self.call[reset] = self.accounts[reset]*np.random.uniform(0.2,0.5,np.sum(reset))
 
+        return [self.history[4], self.accounts.sum(), self.called_accounts_factor, self.momentum]
+
+        
 def simulation_prices(days=100, runs=1000, axis=0):
     run = []
     
