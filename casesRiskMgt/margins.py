@@ -106,3 +106,7 @@ def simulation_prices(days=100, runs=1000, axis=0):
 hv.DynamicMap(simulation_plots, kdims=['days', 'runs']).redim.range(days=(100,500), runs=(5,15)).options(width=900, height=400)
 
 simulations = simulation_prices()
+
+
+%%opts Overlay [show_title=True] Distribution [height=500, width=1000]
+hv.Distribution(np.random.normal(simulations.mean(),simulations.std(),100000), label='Normal') * hv.Distribution(simulations.iloc[:,0], label='Simulation').options(fill_alpha=0.0)
