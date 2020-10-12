@@ -86,7 +86,7 @@ class Accounts:
 
         return [self.history[4], self.accounts.sum(), self.called_accounts_factor, self.momentum]
 
-
+# define funtion to simulate prices
 def simulation_prices(days=100, runs=1000, axis=0):
     run = []
     
