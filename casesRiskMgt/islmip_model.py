@@ -62,3 +62,6 @@ def IS_LM_IP(z_1=0, z_2=0, z_3=0):
     
     return is_lm_ip + ip_plot
     
+%%opts Curve [width=400, height=350]
+hv.DynamicMap(IS_Lm_IP, kdims=['z_1', 'z_2', 'z_3'], label='IS-LM-IP Model') \
+    .redim.range(z_2=(0,10), z_1=(0,10), z_3=(0,10))
