@@ -35,3 +35,16 @@ def findIntersection(fun1, fun2, x0):
     return fsolve(lambda x: fun1(x) - fun2(x), x0
 
 
+def IS_LM_IP(z_1=0, z_2=0, z_3=0):
+    
+    is_eq = IS(i(), Z_1=0)
+    lm_eq = LM(i(), Z_2=0)
+    ip_eq = IP(i(), Z_3=0)
+    
+    is_shock = IS(i(), Z_1=z_)
+    lm_shock = LM(i(), Z_2=z_2)
+    ip_shock = IP(i(), Z_3=z_3)
+    
+    result = findIntersection(lambda x: LM(i-x, Z_2=z_2, df=False), lambda x: IS(i-x, Z_1=z_1, df=False), 0.0)
+    result = result + 1e-4 if result==0 else result
+    
