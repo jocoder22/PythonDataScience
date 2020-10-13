@@ -48,3 +48,17 @@ def IS_LM_IP(z_1=0, z_2=0, z_3=0):
     result = findIntersection(lambda x: LM(i-x, Z_2=z_2, df=False), lambda x: IS(i-x, Z_1=z_1, df=False), 0.0)
     result = result + 1e-4 if result==0 else result
     
+    is_im_plot = hv.Curve(lm_eq, vdims="Real Interest", kdims="Real Output").options(alpha=0.2, color='#1883F5') *\
+            hv.Curve(is_eq, vdims="Real Interest", kdims="Real Output").options(alpha=0.2, color='orange') *\
+            hv.Curve(lm_shock, vdims="Real Interest", kdims="Real Output", label='LM').options(color='#1883F5') *\
+            hv.Curve(is_shock, vdims="Real Interest", kdims="Real Output", label='IS').options(alpha=1,color='orange') *\
+            hv.VLine(LM(i=result[0], Z_2=z_2, df=False)).options(line_width=1, alpha=0.2, color='black') *\
+            hv.HLine(result[0]).options(line_width=1, alpha=0.2, color='black') 
+    
+    ip_plot = hv.Curve(ip_eq, vdims="Real Interest", kdims='Exchange Rate').options(alpha=0.2, color='#33CC00') *\
+            hv.Curve(ip_shock, vdims="Real Interest", kdims='Exchange Rate', label='IP').options(color='#33CC00') *\
+            hv.VLine(LM(i=result[0], Z_3=z_3, df=False)).options(line_width=1, alpha=0.2, color='black') *\
+            hv.HLine(result[0]).options(line_width=1, alpha=0.2, color='black') 
+    
+    return is_lm_ip + ip_plot
+    
