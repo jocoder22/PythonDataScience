@@ -129,4 +129,61 @@ gdp4_iqr = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
     .apply(lambda x: iqr(x))
 gdp4_iqr_max = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
     .apply(lambda x: iqr(x, rng=(1,99)))
-        
+
+
+# Oil rents data was downloaded
+oilrents = wb.download(indicator='NY.GDP.PETR.RT.ZS', country=country_list,
+                start=pd.to_datetime(startdate, yearfirst=True),
+                end=pd.to_datetime(enddate, yearfirst=True))\
+                    .reset_index().dropna().iloc[::-1, :]\
+                        .reset_index(drop=True)
+
+
+# interpolate missing data
+oilrents.loc[:, "NY.GDP.PETR.RT.ZS"] = oilrents.groupby('country')["NY.GDP.PETR.RT.ZS'"]\
+    .apply(lambda x: pd.Series(x).interpolate())
+
+
+# Detrend using linear method
+oilrents.loc[:, "NY.GDP.PETR.RT.ZS"] = oilrents.groupby('country')["NY.GDP.PETR.RT.ZS"]\
+    .apply(lambda x: pd.Series(signal.detrend(x)))\
+        .reset_index().loc[:, "NY.GDP.PETR.RT.ZS"]
+
+# scale the oilrents against gdp
+oilrents.loc[:, "NY.GDP.PETR.RT.ZS"] = oilrents.groupby('country')["NY.GDP.PETR.RT.ZS"]\
+    .apply(lambda x: (x - x.iloc[0])/iqr(x))
+
+oilrents.loc[:, "NY.GDP.PETR.RT.ZS"] = oilrents.groupby('country')["NY.GDP.PETR.RT.ZS"]*
+    gdp4_iqr.loc[oilrents.country].reset_index(drop=True)
+
+
+
+
+
+# downloaded Broad Money Data
+bmoney = wb.download(indicator='FM.LBL.BMNY.GD.ZS', country=country_list,
+                start=pd.to_datetime(startdate, yearfirst=True),
+                end=pd.to_datetime(enddate, yearfirst=True))\
+                    .reset_index().dropna().iloc[::-1, :]\
+                        .reset_index(drop=True)
+
+
+# interpolate missing data
+bmoney.loc[:, "FM.LBL.BMNY.GD.ZS"] = bmoney.groupby('country')["FM.LBL.BMNY.GD.ZS"]\
+    .apply(lambda x: pd.Series(x).interpolate())
+
+
+# Detrend using linear method
+bmoney.loc[:, "FM.LBL.BMNY.GD.ZS"] = bmoney.groupby('country')["FM.LBL.BMNY.GD.ZS"]\
+    .apply(lambda x: pd.Series(signal.detrend(x)))\
+        .reset_index().loc[:, "FM.LBL.BMNY.GD.ZS"]
+
+# scale the bmoney against gdp
+bmoney.loc[:, "FM.LBL.BMNY.GD.ZS"] = bmoney.groupby('country')["FM.LBL.BMNY.GD.ZS"]\
+    .apply(lambda x: (x - x.iloc[0])/iqr(x))
+
+bmoney.loc[:, "FM.LBL.BMNY.GD.ZS"] = bmoney.groupby('country')["FM.LBL.BMNY.GD.ZS"]*
+    gdp4_iqr.loc[bmoney.country].reset_index(drop=True)
+
+
+
