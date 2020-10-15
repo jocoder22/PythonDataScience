@@ -186,4 +186,8 @@ bmoney.loc[:, "FM.LBL.BMNY.GD.ZS"] = bmoney.groupby('country')["FM.LBL.BMNY.GD.Z
     gdp4_iqr.loc[bmoney.country].reset_index(drop=True)
 
 
+# converts year to numeric integers
+bmoney.year = pd.to_numeric(bmoney.year)
+gdp4.year = pd.to_numeric(gdp4.year)
+oilrents.year = pd.to_numeric(oilrents.year)
 
