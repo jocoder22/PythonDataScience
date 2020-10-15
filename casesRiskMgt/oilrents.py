@@ -120,9 +120,13 @@ gdp4.loc[:, "NY.GDP.PCAP.KD"] = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
 gdp4.loc[:, "NY.GDP.PCAP.KD"] = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
     .apply(lambda x: pd.Series(signal.detrend(x)))\
         .reset_index().loc[:, "NY.GDP.PCAP.KD"]
+
+# scale the dataset
 gdp4.loc[:, "NY.GDP.PCAP.KD"] = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
     .apply(lambda x: (x - x.iloc[0])/iqr(x))
 
 gdp4_iqr = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
-    .apply(lambda x: iqr(x)))
+    .apply(lambda x: iqr(x))
+gdp4_iqr_max = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
+    .apply(lambda x: iqr(x, rng=(1,99)))
         
