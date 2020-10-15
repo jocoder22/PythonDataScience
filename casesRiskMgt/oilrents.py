@@ -6,6 +6,8 @@ from scipy.optimize import fsolve
 from scipy.stats import iqr
 from scipy import signal
 
+import statsmodels.api as sm
+
 import pandas_datareader.wb as wb
 
 import holoviews as hv
@@ -106,3 +108,21 @@ for i in range(0,3):
     ax[i].axvline(maxusa, color="black")
 plt.legend()
 plt.show()
+
+
+gdp4 = gdp()
+# interpolate missing data
+gdp4.loc[:, "NY.GDP.PCAP.KD"] = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
+    .apply(lambda x: pd.Series(x).interpolate())
+
+
+# Detrend using linear method
+gdp4.loc[:, "NY.GDP.PCAP.KD"] = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
+    .apply(lambda x: pd.Series(signal.detrend(x)))\
+        .reset_index().loc[:, "NY.GDP.PCAP.KD"]
+gdp4.loc[:, "NY.GDP.PCAP.KD"] = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
+    .apply(lambda x: (x - x.iloc[0])/iqr(x))
+
+gdp4_iqr = gdp4.groupby('country')["NY.GDP.PCAP.KD"]\
+    .apply(lambda x: iqr(x)))
+        
