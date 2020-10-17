@@ -236,9 +236,10 @@ def AS_AD(country="South Africa", year=1980):
     return as_ad_plot+gdp_plot
 
 
-as_dict = {(a,b):AS_AD(a,b) for a in countries for b in years[1:]}
-hmap = hv.HoloMap(as_dict, kdims=['country', 'year']).collate()
+# as_dict = {(a,b):AS_AD(a,b) for a in countries for b in years[1:]}
+# hmap = hv.HoloMap(as_dict, kdims=['country', 'year']).collate()
 
 # %%opts Curve [width=400, height=400]
-hmap
+# hmap
     
+AS_AD()
