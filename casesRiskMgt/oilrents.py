@@ -230,7 +230,7 @@ def AS_AD(country="South Africa", year=1980):
 
     gdp_plot = gdp.loc[gdp.country==country].hvplot.line(y="NY.GDP.PCAP.KD", x="year") *\
         pd.DataFrame([[AS(pas=-r[0], Z_2=z_22)*0.1*gdp4_iqr_max[country], year]], columns=['GDP', 'YEAR'])\
-            .hvplot.scatter(y="GDP", x='YEAR', r="red")*hv.VLine(year)
+            .hvplot.scatter(y="GDP", x='YEAR', color="red")*hv.VLine(year)
 
     
     return as_ad_plot+gdp_plot
