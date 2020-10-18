@@ -100,6 +100,7 @@ plt.legend()
 plt.show()
 
 
+
 # plot the graphs
 fig, ax = plt.subplots(nrows=3, sharex=True)
 gdp2.groupby(['country'])['NY.GDP.PCAP.KD'].plot(ax=ax[0])
@@ -159,7 +160,6 @@ oilrents.loc[:, "NY.GDP.PETR.RT.ZS"] = oilrents.groupby('country')["NY.GDP.PETR.
 
 # oilrents.loc[:, "NY.GDP.PETR.RT.ZS"] = oilrents.groupby('country')["NY.GDP.PETR.RT.ZS"]*\
 #     gdp4_iqr.loc[oilrents.country].reset_index(drop=True)
-
 
 # downloaded Broad Money Data
 bmoney = wb.download(indicator='FM.LBL.BMNY.GD.ZS', country=country_list,
