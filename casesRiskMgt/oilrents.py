@@ -161,9 +161,6 @@ oilrents.loc[:, "NY.GDP.PETR.RT.ZS"] = oilrents.groupby('country')["NY.GDP.PETR.
 #     gdp4_iqr.loc[oilrents.country].reset_index(drop=True)
 
 
-
-
-
 # downloaded Broad Money Data
 bmoney = wb.download(indicator='FM.LBL.BMNY.GD.ZS', country=country_list,
                 start=pd.to_datetime(startdate, yearfirst=True),
