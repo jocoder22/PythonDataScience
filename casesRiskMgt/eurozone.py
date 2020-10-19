@@ -37,4 +37,17 @@ wbb_eg_ext_debt
 wbb_eg_ext_debt.iloc[:,[0,1,3]]
 
 
+countries = 'ESP IRL'.split()
+indicators = {'GC.DOD.TOTL.GD.ZS':'Debt total'}
+ 
+#grab indicators above for countires above and load into data frame
+df = wbdata.get_dataframe(indicators, country=countries, convert_date=False)
 
+#df is "pivoted", pandas' unstack fucntion helps reshape it into something plottable
+dfu = df.unstack(level=0).dropna()
+
+# a simple matplotlib plot with legend, labels and a title
+dfu.plot(); 
+plt.legend(loc='best'); 
+plt.title("Total Central government debt (Percentage of GDP)"); 
+plt.xlabel('Date'); plt.ylabel('Total debt (% of GDP)');
