@@ -47,6 +47,7 @@ df = wbdata.get_dataframe(indicators, country=countries, convert_date=False)
 dfu = df.unstack(level=0).dropna()
 
 # a simple matplotlib plot with legend, labels and a title
+plt.rcParams["figure.figsize"] = (10,6)
 dfu.plot(); 
 plt.legend(loc='best'); 
 plt.title("Total Central government debt (Percentage of GDP)"); 
