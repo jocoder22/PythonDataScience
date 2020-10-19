@@ -92,5 +92,18 @@ plt.xlabel('Date'); plt.ylabel('Total debt (% of GDP)');
 
 
 
+# CM.MKT.LCAP.CD
+indicator2 = {'CM.MKT.LCAP.CD':'External debt'}
 
+df = wb.download(indicator=indicator2, country=countries,  start=2005, end=2012)
+
+# df is "pivoted", pandas' unstack fucntion helps reshape it into something plottable
+df = df.unstack(level=0).dropna()
+
+# a simple matplotlib plot with legend, labels and a title
+plt.rcParams["figure.figsize"] = (10,6)
+dfu.plot(); 
+plt.legend(loc='best'); 
+plt.title("Central government debt, total (% of GDP)"); 
+plt.xlabel('Date'); plt.ylabel('Total debt (% of GDP)');
 
