@@ -86,6 +86,7 @@ data = pd.concat([load_data(decade[0], decade[1], decade[2]) for decade in data_
 # create plotting object
 plot_data = hv.Dataset(data, kdims=['Date'], vdims=['Volume'])
 
+
 # create scatter plot
 black_tuesday = pd.to_datetime('1929-10-29')
 
