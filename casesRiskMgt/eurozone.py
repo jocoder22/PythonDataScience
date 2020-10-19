@@ -11,6 +11,7 @@ from functools import reduce
 import operator
 
 import pandas_datareader.wb as wb
+import wbdata
 
 import holoviews as hv
 import hvplot.pandas
