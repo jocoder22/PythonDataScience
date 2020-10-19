@@ -112,3 +112,10 @@ plt.xlabel('Date'); plt.ylabel('Total debt (% of GDP)');
 
 df.loc[(df.index.get_level_values('date') >= '2016-01-01') &
        (df.index.get_level_values('date') <= '2019-01-01')]
+
+# CM.MKT.LCAP.CD
+indicator = {'CM.MKT.LCAP.CD':'External debt'}
+
+# df = wb.download(indicator=indicator2, country=countries,  start=2005, end=2012)
+#grab indicators above for countires above and load into data frame
+df = wbdata.get_dataframe(indicator, country=countries, convert_date=True)
