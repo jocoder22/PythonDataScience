@@ -107,3 +107,8 @@ plt.legend(loc='best');
 plt.title("Central government debt, total (% of GDP)"); 
 plt.xlabel('Date'); plt.ylabel('Total debt (% of GDP)');
 
+
+
+
+df.loc[(df.index.get_level_values('date') >= '2016-01-01') &
+       (df.index.get_level_values('date') <= '2019-01-01')]
