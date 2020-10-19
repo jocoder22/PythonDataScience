@@ -52,3 +52,45 @@ dfu.plot();
 plt.legend(loc='best'); 
 plt.title("Total Central government debt (Percentage of GDP)"); 
 plt.xlabel('Date'); plt.ylabel('Total debt (% of GDP)');
+
+
+
+
+
+
+indicator1 = {'CM.MKT.INDX.ZG':'External debt'}
+countries = 'GRC ESP PRT IRL'.split()
+
+# #grab indicators above for countires above and load into data frame
+# dat = wb.download(indicator='DT.DOD.DECT.GN.ZS', country=countries,  start=1960, end=2020)
+# # DT.DOD.DECT.GN.ZS	External debt stocks (% of GNI)
+
+#df2['date']=pd.to_numeric(df2['date'])
+# df_selyrs=df2[(df2['date']>=2014) & (df2['date']<=2016)]
+
+
+#grab indicators above for countires above and load into data frame
+# df = wbdata.get_dataframe(indicators, country=countries, convert_date=True)
+# df = df[df.date >= 2005 & df.date <= 2012]
+# df.reset_index(inplace=True)
+# grab indicators above for countires above and load into data frame
+df = wb.download(indicator=indicator1, country=countries,  start=2005, end=2012)
+
+# df is "pivoted", pandas' unstack fucntion helps reshape it into something plottable
+df = df.unstack(level=0).dropna()
+# df.reset_index(inplace=True)
+# dfu = df[df['date'] >= 2005 & df['date'] <=2013]
+
+# a simple matplotlib plot with legend, labels and a title
+plt.rcParams["figure.figsize"] = (10,6)
+dfu.plot(); 
+plt.legend(loc='best'); 
+plt.title("Central government debt, total (% of GDP)"); 
+plt.xlabel('Date'); plt.ylabel('Total debt (% of GDP)');
+
+
+
+
+
+
+
