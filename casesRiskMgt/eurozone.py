@@ -50,8 +50,9 @@ dfu = df.unstack(level=0).dropna()
 plt.rcParams["figure.figsize"] = (10,6)
 dfu.plot(); 
 plt.legend(loc='best'); 
-plt.title("Total Central government debt (Percentage of GDP)"); 
-plt.xlabel('Date'); plt.ylabel('Total debt (% of GDP)');
+plt.title("Total Central government debt (Percentage of GDP)")
+plt.xlabel('Date'); plt.ylabel('Total debt (% of GDP)')
+plt.show()
 
 
 
@@ -109,9 +110,10 @@ plt.xlabel('Date'); plt.ylabel('Total debt (% of GDP)');
 
 
 
-
-df.loc[(df.index.get_level_values('date') >= '2016-01-01') &
+df = wbdata.get_dataframe(indicators, country=countries, convert_date=True)
+dat_l = df.loc[(df.index.get_level_values('date') >= '2016-01-01') &
        (df.index.get_level_values('date') <= '2019-01-01')]
+print2(dat_l)
 
 # CM.MKT.LCAP.CD
 indicator = {'CM.MKT.LCAP.CD':'External debt'}
