@@ -131,6 +131,6 @@ df.loc[(df.index.get_level_values('date') >= '2016-01-01') &
 
 df = wbdata.get_dataframe(indicator, country=countries, convert_date=True)
 query = df.index.get_level_values(1) >= pd.Timestamp('2013-01-01')
-query2 = df2.index.get_level_values(1) <= pd.Timestamp('2018-01-01')
 df2 = df[query]
+query2 = df2.index.get_level_values(1) <= pd.Timestamp('2018-01-01')
 df2[query2]
