@@ -30,6 +30,14 @@ apple = pdr.robinhood.RobinhoodHistoricalReader(['AAPL'], retry_count=3, pause=0
                                                 span='year').read().reset_index()
 
 dw = durbin_watson(pd.to_numeric(apple.close_price).pct_change().dropna().values)
+print2(f'DW_Statistics: {dw}')
+
+
+starttime = '2018-01-01'
+endtime = '2019-01-01'
+
+apple =  pdr.get_data_yahoo('AAPL', starttime, endtime)
+dw = durbin_watson(pd.to_numeric(apple.Close).pct_change().dropna().values)
 
 print2(f'DW_Statistics: {dw}')
 
