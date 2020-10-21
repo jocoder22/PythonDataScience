@@ -13,7 +13,7 @@ from sklearn import linear_model
 from sklearn.decomposition import PCA
 
 pd.core.common.is_list_like = pd.api.types.is_list_like
-import pandas_datareader.wb as wb
+import pandas_datareader as pdr
 
 import holoviews as hv
 import hvplot
@@ -24,4 +24,12 @@ from printdescribe import print2
 
 hv.extension('bokeh')
 np.random.seed(42)
+
+apple = pdr.robinhood.RobinhoodHistoricalReader(['AAPL'], retry_count=3, pause=0.1,
+                                                timeout=30, session=None, interval='day',
+                                                span='year').read().reset_index()
+
+dw = durbin_watson(pd.to_numeric(apple.close_price).pct_change().dropna().values)
+
+print2(f'DW_Statistics: {dw}')
 
