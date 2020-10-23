@@ -44,7 +44,7 @@ dw = durbin_watson(pd.to_numeric(apple.Close).pct_change().dropna().values)
 
 print2(f'DW_Statistics: {dw}')
 
-
+# Get Nasdaq tickers
 tickers = pdr.nasdaq_trader.get_nasdaq_symbols(retry_count=3, timeout=300, pause=None)
 etfs = tickers.loc[tickers.ETF == True, :]
 symbols = etfs.sample(75).index.tolist()
@@ -56,8 +56,6 @@ print2(all_symbols.head())
 
 symbols = get_nasdaq_symbols()
 print2(symbols.head(), symbols.shape)
-
-
 
 
 symbols = get_nasdaq_symbols()
