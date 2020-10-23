@@ -35,13 +35,15 @@ np.random.seed(42)
 # dw = durbin_watson(pd.to_numeric(apple.close_price).pct_change().dropna().values)
 # print2(f'DW_Statistics: {dw}')
 
-
+# Define start and end dates
 starttime = '2018-01-01'
 endtime = '2019-01-01'
 
+# Download apple stock prices
 apple =  pdr.get_data_yahoo('AAPL', starttime, endtime)
 dw = durbin_watson(pd.to_numeric(apple.Close).pct_change().dropna().values)
 
+# Compute durbin_watson statistics
 print2(f'DW_Statistics: {dw}')
 
 # Get Nasdaq tickers
