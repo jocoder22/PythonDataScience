@@ -15,7 +15,7 @@ from sklearn.decomposition import PCA
 pd.core.common.is_list_like = pd.api.types.is_list_like
 
 import pandas_datareader as pdr
-from pandas_datareader import data as pdr
+from pandas_datareader import data as pdrdd
 from pandas_datareader.nasdaq_trader import get_nasdaq_symbols
 
 import holoviews as hv
@@ -46,6 +46,9 @@ print2(f'DW_Statistics: {dw}')
 
 
 tickers = pdr.nasdaq_trader.get_nasdaq_symbols(retry_count=3, timeout=300, pause=None)
+etfs = tickers.loc[tickers.ETF == True, :]
+symbols = etfs.sample(75).index.tolist()
+print2(etfs.head(), etfs.shape, symbols)
 
 all_symbols = pdr.get_nasdaq_symbols()
 print2(all_symbols.head())
@@ -55,6 +58,22 @@ symbols = get_nasdaq_symbols()
 print2(symbols.head(), symbols.shape)
 
 
+
+
 symbols = get_nasdaq_symbols()
-etfs = symbols.loc[tickers.ETF == True, :]
-print2(etfs.head(), etfs.shape)
+etf2 = symbols.loc[symbols.ETF == True, :]
+etf_symbols = etf2.sample(75).index.tolist()
+print2(etf2.head(), len(etf_symbols))
+
+
+starttime = '1997-12-31'
+endtime = '2018-10-22'
+
+# etfs_data =  pdr.get_data_yahoo(etf_symbols, starttime, endtime)
+# etfs_data.dropna(axis=1, inplace=True)
+# print2(etfs_data.head(), etfs_data.shape)
+
+import yfinance as yf
+data = yf.download(etf_symbols)
+data.dropna(axis=1, inplace=True)
+print2(data.head())
