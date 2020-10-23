@@ -61,6 +61,7 @@ symbols = get_nasdaq_symbols()
 print2(symbols.head(), symbols.shape)
 
 
+# sample Nasdaq tickers
 symbols = get_nasdaq_symbols()
 etf2 = symbols.loc[symbols.ETF == True, :]
 etf_symbols = etf2.sample(75).index.tolist()
