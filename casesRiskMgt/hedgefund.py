@@ -54,6 +54,7 @@ all_symbols = pdr.get_nasdaq_symbols()
 print2(all_symbols.head())
 
 
+# Get the symbols directly
 symbols = get_nasdaq_symbols()
 print2(symbols.head(), symbols.shape)
 
