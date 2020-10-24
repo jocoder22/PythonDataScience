@@ -17,6 +17,7 @@ pd.core.common.is_list_like = pd.api.types.is_list_like
 import pandas_datareader as pdr
 from pandas_datareader import data as pdrdd
 from pandas_datareader.nasdaq_trader import get_nasdaq_symbols
+import yfinance as yf
 
 import holoviews as hv
 import hvplot
