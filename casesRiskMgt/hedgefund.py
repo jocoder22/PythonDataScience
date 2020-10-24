@@ -96,4 +96,20 @@ print2(etfs.head(), etfs.shape, symbols)
 with changepath(pathway):
     data = pd.read_csv('StyleIndexes.csv')
 
-print2(data.head())
+data.set_index(pd.to_datetime(data.Date), inplace=True)
+data.drop(columns=['Date'], inplace=True)
+data.plot()
+plt.show()
+
+data = data.pct_change().dropna()
+# data = data.iloc[::-1].iloc[-1000:, :]
+# data = data.iloc[:1000,:].iloc[::-1,:]
+# print2(data.head(), data.shape)
+data2 = data.add(1).cumprod()
+print2(data2.head(), data.shape)
+data3 = data2.loc["2016-12-31":"2000-01-01", :]
+print2(data3.head())
+data3.plot()
+plt.show()
+
+
