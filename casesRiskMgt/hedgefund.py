@@ -50,7 +50,7 @@ print2(f'DW_Statistics: {dw}')
 tickers = pdr.nasdaq_trader.get_nasdaq_symbols(retry_count=3, timeout=300, pause=None)
 etfs = tickers.loc[tickers.ETF == True, :]
 symbols = etfs.sample(75).index.tolist()
-print2(etfs.head(), etfs.shape, symbols)
+print2(etfs.head(), etfs.shape, symbols, symbols.loc['IBM'])
 
 all_symbols = pdr.get_nasdaq_symbols()
 print2(all_symbols.head())
@@ -75,7 +75,11 @@ endtime = '2018-10-22'
 # etfs_data.dropna(axis=1, inplace=True)
 # print2(etfs_data.head(), etfs_data.shape)
 
-import yfinance as yf
-data = yf.download(etf_symbols)
-data.dropna(axis=1, inplace=True)
-print2(data.head())
+# import yfinance as yf
+# data = yf.download(etf_symbols)
+# data.dropna(axis=1, inplace=True)
+# print2(data.head())
+
+
+# tt = robin_stocks.stocks.get_stock_historicals(etf_symbols)
+# print(tt)
