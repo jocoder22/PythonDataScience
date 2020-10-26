@@ -141,6 +141,7 @@ def getload_decade(start=1920, end=1929, extension='prn'):
             Check out https://www.nyse.com/data/transactions-statistics-data-library")
 
 
+
 # download data, form dataframe      
 data2 = pd.concat([getload_decade(decade[0], decade[1], decade[2]) for decade in data_ranges], axis=0)
 data3 = data2.set_index("Date")
