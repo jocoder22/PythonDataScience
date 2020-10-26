@@ -129,6 +129,7 @@ df.loc[idx[:, ['2010-01-01','2017-01-01']], idx[:]].head()
 df.loc[(df.index.get_level_values('date') >= '2016-01-01') &
        (df.index.get_level_values('date') <= '2019-01-01')]
 
+# download dataset
 df = wbdata.get_dataframe(indicator, country=countries, convert_date=True)
 query = df.index.get_level_values(1) >= pd.Timestamp('2013-01-01')
 df2 = df[query]
