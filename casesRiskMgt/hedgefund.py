@@ -102,6 +102,7 @@ data.plot()
 plt.show()
 
 
+
 data = data.pct_change().dropna()
 # data = data.iloc[::-1].iloc[-1000:, :]
 # data = data.iloc[:1000,:].iloc[::-1,:]
