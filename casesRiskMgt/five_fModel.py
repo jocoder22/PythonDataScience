@@ -25,6 +25,8 @@ pd.core.common.is_list_like = pd.api.types.is_list_like
 from pandas_datareader.famafrench import get_available_datasets
 import pandas_datareader.data as web
 
+from printdescribe import print2
+
 # Download datasets
 portfolios100 = web.DataReader('100_Portfolios_10x10_Daily', 'famafrench')
 factors5 = web.DataReader('F-F_Research_Data_5_Factors_2x3_Daily', 'famafrench')
@@ -65,3 +67,6 @@ pca_factors.fit(factors.dropna())
 
 # pd.Series(pca_factors.explained_variance_ratio_,name='Variance_Explained').hvplot.line(
 #     label='Scree Plot of PCA Variance Explaned (%)').redim(Variance_Explained={'range': (0, 1)})
+
+pe = pd.Series(pca_factors.explained_variance_ratio_,name='Variance_Explained')
+print2(pe)
