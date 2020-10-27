@@ -7,6 +7,7 @@ from operator import mul
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from statsmodels.regression.linear_model import OLS
 from sklearn import linear_model
@@ -53,3 +54,7 @@ plt.show()
 
 factors = factors.loc[portfolios.index,:].divide(100)
 hvplot.scatter_matrix(factors)
+
+# Create a pairplot
+sns.pairplot(factors)
+plt.show()
