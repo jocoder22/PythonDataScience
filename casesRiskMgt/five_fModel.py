@@ -26,3 +26,14 @@ import pandas_datareader.data as web
 # Download datasets
 portfolios100 = web.DataReader('100_Portfolios_10x10_Daily', 'famafrench')
 factors5 = web.DataReader('F-F_Research_Data_5_Factors_2x3_Daily', 'famafrench')
+
+print(portfolios100['DESCR'])
+print(factors5['DESCR'])
+
+# select the Average Equal Weighted Returns -- Daily (1220 rows x 100 cols)
+portfolios = portfolios100[1]
+factors = factors5[0]
+
+pd.melt(portfolios.head(100).divide(100).add(1).cumprod().reset_index(), 
+        id_vars='Date').hvplot.line(x='Date', by='variable')
+plt.show()
