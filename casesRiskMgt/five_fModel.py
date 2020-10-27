@@ -41,25 +41,25 @@ factors = factors5[0]
 # pd.melt(portfolios.head(100).divide(100).add(1).cumprod().reset_index(), 
 #         id_vars='Date').plot.line(x='Date', by='variable')
 pp = portfolios.iloc[:,0:12].divide(100).add(1).cumprod()
-pp.plot()
-plt.show()
+# pp.plot()
+# plt.show()
 
 portfolios = portfolios.divide(100)
 
 # pd.melt(factors[0].head(100).divide(100).add(1).cumprod().reset_index(), 
 #         id_vars='Date').hvplot.line(x='Date', by='variable')
 
-ff = factors.head(100).divide(100).add(1).cumprod()
-ff.plot()
-plt.show()
+# ff = factors.head(100).divide(100).add(1).cumprod()
+# ff.plot()
+# plt.show()
 
 
-factors = factors.loc[portfolios.index,:].divide(100)
-hvplot.scatter_matrix(factors)
+# factors = factors.loc[portfolios.index,:].divide(100)
+# hvplot.scatter_matrix(factors)
 
 # Create a pairplot
-sns.pairplot(factors)
-plt.show()
+# sns.pairplot(factors)
+# plt.show()
 
 
 pca_factors = PCA()
@@ -70,3 +70,6 @@ pca_factors.fit(factors.dropna())
 
 pe = pd.Series(pca_factors.explained_variance_ratio_,name='Variance_Explained')
 print2(pe)
+plt.plot(pe.index, pe.values)
+plt.title('Scree Plot of PCA Variance Explaned (%)')
+plt.show()
