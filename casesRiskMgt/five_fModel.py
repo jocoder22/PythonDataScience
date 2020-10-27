@@ -6,6 +6,7 @@ from operator import mul
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 from statsmodels.regression.linear_model import OLS
 from sklearn import linear_model
@@ -34,6 +35,8 @@ print(factors5['DESCR'])
 portfolios = portfolios100[1]
 factors = factors5[0]
 
-pd.melt(portfolios.head(100).divide(100).add(1).cumprod().reset_index(), 
-        id_vars='Date').hvplot.line(x='Date', by='variable')
+# pd.melt(portfolios.head(100).divide(100).add(1).cumprod().reset_index(), 
+#         id_vars='Date').plot.line(x='Date', by='variable')
+pp = portfolios.iloc[:,0:12].divide(100).add(1).cumprod()
+pp.plot()
 plt.show()
