@@ -40,3 +40,16 @@ factors = factors5[0]
 pp = portfolios.iloc[:,0:12].divide(100).add(1).cumprod()
 pp.plot()
 plt.show()
+
+portfolios = portfolios.divide(100)
+
+# pd.melt(factors[0].head(100).divide(100).add(1).cumprod().reset_index(), 
+#         id_vars='Date').hvplot.line(x='Date', by='variable')
+
+ff = factors.head(100).divide(100).add(1).cumprod()
+ff.plot()
+plt.show()
+
+
+factors = factors.loc[portfolios.index,:].divide(100)
+hvplot.scatter_matrix(factors)
