@@ -79,4 +79,5 @@ tt = pd.DataFrame(pe.values.cumsum())
 plt.plot(tt)
 plt.title('Scree Plot of PCA Variance Explaned (%)')
 plt.axhline(y=0.95, color='r', linestyle='-')
-plt.grid();
+plt.grid()
+plt.show();
