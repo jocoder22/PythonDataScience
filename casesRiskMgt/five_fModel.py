@@ -117,3 +117,9 @@ beta_comp = pd.concat([beta_comp,labels], axis=1)
 
 print(f'This is the feature importance of our two components: \n\n{pca.explained_variance_ratio_}s')
 # print(f'This is the feature importance of our three components: \n\n{pca.explained_variance_ratio_}s')
+
+%%opts Scatter [tools=['hover'], height=400, width=600] (size=5 alpha=0.5)
+hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market equity', 'two']).options(color_index='market equity') + \
+hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market equity', 'two']).options(color_index='two')
+
+
