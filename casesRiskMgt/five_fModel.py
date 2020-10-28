@@ -81,3 +81,16 @@ plt.title('Scree Plot of PCA Variance Explaned (%)')
 plt.axhline(y=0.95, color='r', linestyle='-')
 plt.grid()
 plt.show();
+
+print(pca_factors.explained_variance_ratio_.cumsum())
+
+# We must make sure we have an overlapping dataset
+dates = np.intersect1d(factors.index, portfolios.index)
+factors = factors.loc[dates,:]
+portfolios = portfolios.loc[dates,:]
+
+factors = factors.loc[~factors.isna().any(1)&~portfolios.isna().any(1),:]
+portfolios = portfolios.loc[~factors.isna().any(1)&~portfolios.isna().any(1),:]
+
+lm = linear_model.LinearRegression(normalize=True)
+lm.fit(X=factors, y=portfolios)
