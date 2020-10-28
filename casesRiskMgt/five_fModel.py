@@ -94,3 +94,26 @@ portfolios = portfolios.loc[~factors.isna().any(1)&~portfolios.isna().any(1),:]
 
 lm = linear_model.LinearRegression(normalize=True)
 lm.fit(X=factors, y=portfolios)
+
+
+lm.coef_.shape
+pd.DataFrame(lm.coef_, columns=factors.columns).head()
+
+# pca = PCA(n_components=2)
+pca = PCA(n_components=3)
+pca.fit_transform(lm.coef_)
+print(f'This is the feature importance of our three components: \n\n{pca.explained_variance_ratio_}s')
+
+
+beta_comp = pca.fit_transform(lm.coef_)
+beta_comp = pd.DataFrame(beta_comp, columns=['weight_comp1','weight_comp2'], index=portfolios.columns)
+# beta_comp = pd.DataFrame(beta_comp, columns=['weight_comp1','weight_comp2','weight_comp3'], index=portfolios.columns)
+beta_comp = beta_comp.reset_index()
+
+labels = pd.Series(portfolios.columns).str.split(' ', 1, expand=True)
+labels.columns = ['market equity','two']
+
+beta_comp = pd.concat([beta_comp,labels], axis=1)
+
+print(f'This is the feature importance of our two components: \n\n{pca.explained_variance_ratio_}s')
+# print(f'This is the feature importance of our three components: \n\n{pca.explained_variance_ratio_}s')
