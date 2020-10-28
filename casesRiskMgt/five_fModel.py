@@ -125,3 +125,9 @@ hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market
 portfolio_returns = pd.melt(portfolios.reset_index(), id_vars='Date').drop(columns=['variable']).merge(factors.dropna(), how='left', on='Date').drop(columns=['Date'])
 
 portfolio_returns.head()
+
+model = OLS(portfolio_returns.value-portfolio_returns.RF,portfolio_returns.drop(columns=['value','RF']))
+
+results = model.fit()
+
+print(results.summary())
