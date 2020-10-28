@@ -45,3 +45,10 @@
 
 # Returns
 # a WBDataFrame
+
+
+
+import wbdata as wb                                                              
+
+wb.get_source() 
+wb.get_indicator(source=16)  
