@@ -122,4 +122,6 @@ print(f'This is the feature importance of our two components: \n\n{pca.explained
 hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market equity', 'two']).options(color_index='market equity') + \
 hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market equity', 'two']).options(color_index='two')
 
+portfolio_returns = pd.melt(portfolios.reset_index(), id_vars='Date').drop(columns=['variable']).merge(factors.dropna(), how='left', on='Date').drop(columns=['Date'])
 
+portfolio_returns.head()
