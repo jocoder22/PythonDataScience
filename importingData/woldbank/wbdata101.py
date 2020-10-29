@@ -34,6 +34,8 @@
 # Source
 # the specific source to retrieve data from (defaults on API to 2, World Development Indicators)
 
+
+
 # Convert_date
 # if True, convert date field to a datetime.datetime object.
 
@@ -55,4 +57,8 @@ wb.get_source()
 wb.get_indicator(source=16)  
 
 # do country search
-wbdata.search_countries('united') 
+wb.search_countries('united') 
+
+# get data for country
+# SE.ADT.1524.LT.FM.ZS  Literacy rate, youth (ages 15-24), gender parity index (GPI)
+wb.get_data("SE.ADT.1524.LT.FM.ZS", country="USA")
