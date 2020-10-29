@@ -71,5 +71,6 @@ wb.get_data("SE.ADT.1524.LT.FM.ZS", country="USA")
 
 # selecting data range
 data_date = datetime.datetime(2008, 1, 1), datetime.datetime(2019, 1, 1)                                                                                             
-
-wb.get_data("SE.ADT.1524.LT.FM.ZS", country=["USA", "GBR", "NGA"], data_date=data_date)
+# SH.CON.1524.FE.ZS     Condom use, population ages 15-24, female (% of females ages 15-24)
+# SH.CON.1524.MA.ZS     Condom use, population ages 15-24, male (% of males ages 15-24)
+wb.get_data("SH.CON.1524.FE.ZS", country=["USA", "GBR", "NGA"], data_date=data_date)
