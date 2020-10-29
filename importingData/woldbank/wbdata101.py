@@ -91,3 +91,8 @@ countries = [i['id'] for i in wb.get_country(incomelevel='HIC')]
 indicators = {"IC.BUS.EASE.XQ": "doing_business", "NY.GDP.PCAP.PP.KD": "gdppc"}         
 
 df = wb.get_dataframe(indicators, country=countries, convert_date=True, data_date=date_range)   
+
+# do exploratory data analysis
+df.groupby('country').describe()
+df.groupby("country").describe()['gdppc']['mean'].reset_index().sort_values(by='mean', ascending=False)
+df.groupby("country")['gdppc'].mean().reset_index().sort_values(by='gdppc', ascending=False)
