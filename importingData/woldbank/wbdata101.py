@@ -99,7 +99,7 @@ df.groupby("country")['gdppc'].mean().reset_index().sort_values(by='gdppc', asce
 
 df.sort_index().dropna().groupby('country').last().corr()  
 
-
+# Dataset is multi-indexed dataset so
 # unstack dataset, level 0
 indicators = {"NY.GDP.PCAP.PP.KD": "gdppc"}         
 dd = wb.get_dataframe(indicators, country=countries, convert_date=True, data_date=date_range) 
