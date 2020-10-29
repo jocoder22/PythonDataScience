@@ -96,3 +96,5 @@ df = wb.get_dataframe(indicators, country=countries, convert_date=True, data_dat
 df.groupby('country').describe()
 df.groupby("country").describe()['gdppc']['mean'].reset_index().sort_values(by='mean', ascending=False)
 df.groupby("country")['gdppc'].mean().reset_index().sort_values(by='gdppc', ascending=False)
+
+df.sort_index().dropna().groupby('country').last().corr()  
