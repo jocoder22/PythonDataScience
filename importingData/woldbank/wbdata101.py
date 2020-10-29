@@ -49,8 +49,9 @@
 # a WBDataFrame
 
 
-
-import wbdata as wb                                                              
+import pandas as pd
+import wbdata as wb  
+import datetime 
 
 # search for data sources in world bank data
 wb.get_source() 
@@ -66,3 +67,9 @@ wb.search_countries('niger*')
 # SE.ADT.1524.LT.FM.ZS  Literacy rate, youth (ages 15-24), gender parity index (GPI)
 # return a multi-dictionary(based on year) list
 wb.get_data("SE.ADT.1524.LT.FM.ZS", country="USA")
+
+
+# selecting data range
+data_date = datetime.datetime(2008, 1, 1), datetime.datetime(2019, 1, 1)                                                                                             
+
+wb.get_data("SE.ADT.1524.LT.FM.ZS", country=["USA", "GBR", "NGA"], data_date=data_date)
