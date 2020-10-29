@@ -78,4 +78,8 @@ wb.get_data("SH.CON.1524.FE.ZS", country=["USA", "GBR", "NGA"], data_date=data_d
 
 # search for indicator of interest
 wb.search_indicators("gdp per capita") 
-wb.search_indicators("condom use")  
+wb.search_indicators("condom use") 
+
+
+# get income level classes
+wb.get_incomelevel() 
