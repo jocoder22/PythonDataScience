@@ -74,3 +74,8 @@ data_date = datetime.datetime(2008, 1, 1), datetime.datetime(2019, 1, 1)
 # SH.CON.1524.FE.ZS     Condom use, population ages 15-24, female (% of females ages 15-24)
 # SH.CON.1524.MA.ZS     Condom use, population ages 15-24, male (% of males ages 15-24)
 wb.get_data("SH.CON.1524.FE.ZS", country=["USA", "GBR", "NGA"], data_date=data_date)
+
+
+# search for indicator of interest
+wb.search_indicators("gdp per capita") 
+wb.search_indicators("condom use")  
