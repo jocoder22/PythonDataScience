@@ -50,5 +50,9 @@
 
 import wbdata as wb                                                              
 
+# search for data sources in world bank data
 wb.get_source() 
 wb.get_indicator(source=16)  
+
+# do country search
+wbdata.search_countries('united') 
