@@ -73,7 +73,7 @@ wb.get_data("SE.ADT.1524.LT.FM.ZS", country="USA")
 date_range = datetime.datetime(2008, 1, 1), datetime.datetime(2019, 1, 1)                                                                                             
 # SH.CON.1524.FE.ZS     Condom use, population ages 15-24, female (% of females ages 15-24)
 # SH.CON.1524.MA.ZS     Condom use, population ages 15-24, male (% of males ages 15-24)
-wb.get_data("SH.CON.1524.FE.ZS", country=["USA", "GBR", "NGA"], data_date=date_range)
+wb.get_data("SH.CON.1524.MA.ZS", country=["USA", "GBR", "NGA"], data_date=date_range)
 
 
 # search for indicator of interest
@@ -98,3 +98,9 @@ df.groupby("country").describe()['gdppc']['mean'].reset_index().sort_values(by='
 df.groupby("country")['gdppc'].mean().reset_index().sort_values(by='gdppc', ascending=False)
 
 df.sort_index().dropna().groupby('country').last().corr()  
+
+
+# unstack dataset, level 0
+indicators = {"NY.GDP.PCAP.PP.KD": "gdppc"}         
+dd = wb.get_dataframe(indicators, country=countries, convert_date=True, data_date=date_range) 
+dd.unstack(level=0)
