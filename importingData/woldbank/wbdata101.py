@@ -70,10 +70,10 @@ wb.get_data("SE.ADT.1524.LT.FM.ZS", country="USA")
 
 
 # selecting data range
-data_date = datetime.datetime(2008, 1, 1), datetime.datetime(2019, 1, 1)                                                                                             
+date_range = datetime.datetime(2008, 1, 1), datetime.datetime(2019, 1, 1)                                                                                             
 # SH.CON.1524.FE.ZS     Condom use, population ages 15-24, female (% of females ages 15-24)
 # SH.CON.1524.MA.ZS     Condom use, population ages 15-24, male (% of males ages 15-24)
-wb.get_data("SH.CON.1524.FE.ZS", country=["USA", "GBR", "NGA"], data_date=data_date)
+wb.get_data("SH.CON.1524.FE.ZS", country=["USA", "GBR", "NGA"], data_date=date_range)
 
 
 # search for indicator of interest
@@ -83,3 +83,11 @@ wb.search_indicators("condom use")
 
 # get income level classes
 wb.get_incomelevel() 
+
+
+# let get the data in pandas
+countries = [i['id'] for i in wb.get_country(incomelevel='HIC')]                                                                                                 
+
+indicators = {"IC.BUS.EASE.XQ": "doing_business", "NY.GDP.PCAP.PP.KD": "gdppc"}         
+
+df = wb.get_dataframe(indicators, country=countries, convert_date=True, data_date=date_range)   
