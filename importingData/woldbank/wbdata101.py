@@ -64,4 +64,5 @@ wb.search_countries('niger*')
 
 # get data for country
 # SE.ADT.1524.LT.FM.ZS  Literacy rate, youth (ages 15-24), gender parity index (GPI)
+# return a multi-dictionary(based on year) list
 wb.get_data("SE.ADT.1524.LT.FM.ZS", country="USA")
