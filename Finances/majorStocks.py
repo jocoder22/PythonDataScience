@@ -68,4 +68,4 @@ def stock_analysis(df):
                     
 stock_analysis('AAPL')  
 
-return portfolio.head()
+stock_analysis(tickers)
