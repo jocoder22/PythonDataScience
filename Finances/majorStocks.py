@@ -17,3 +17,8 @@ portfolio.iloc[:,[0,2,4]].plot(figsize=(14,8))
 plt.grid(color='black', which='major', axis='y', linestyle='solid')
 plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15),
           fancybox=True, shadow=True, ncol=3);
+
+portfolio.iloc[:,[1,3,5,6]].plot(figsize=(14,8))
+plt.grid(color='black', which='major', axis='y', linestyle='solid')
+plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15),
+          fancybox=True, shadow=True, ncol=4);
