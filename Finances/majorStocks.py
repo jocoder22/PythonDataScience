@@ -43,6 +43,9 @@ def stock_analysis(df):
         fig.subplots_adjust(top=0.88)
 #         plt.grid(color='black', which='major', axis='y', linestyle='solid')
         plt.show()
+        print("\n\n\n")
+          
+        return stock.head()
 
         
     elif isinstance(df, list):
@@ -60,5 +63,9 @@ def stock_analysis(df):
             fig.subplots_adjust(top=0.88)
             plt.show()
             print("\n\n\n")
+         
+          return portfolio.head()
                     
-stock_analysis('AAPL')        
+stock_analysis('AAPL')  
+
+return portfolio.head()
