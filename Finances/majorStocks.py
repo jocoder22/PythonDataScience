@@ -7,7 +7,11 @@ startdate = datetime(2000, 1, 1)
 enddate = date.today()
 
 tickers = 'FB AMZN AAPL GOOGL NFLX MSFT ^GSPC'.split()
+colname = 'Facebook Amazon Apple Google Netflix Microsoft S&P500'.split()
+
 portfolio = pdr.get_data_yahoo(tickers, startdate, enddate)['Adj Close']
+portfolio.columns = colname
+print(portfolio.head())
 
 portfolio.iloc[:,[0,2,4]].plot(figsize=(14,8))
 plt.grid(color='black', which='major', axis='y', linestyle='solid')
