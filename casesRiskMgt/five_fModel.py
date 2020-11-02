@@ -82,3 +82,53 @@ plt.title('Scree Plot of PCA Variance Explaned (%)')
 plt.axhline(y=0.95, color='r', linestyle='-')
 plt.grid()
 plt.show();
+
+print(pca_factors.explained_variance_ratio_.cumsum())
+
+# We must make sure we have an overlapping dataset
+dates = np.intersect1d(factors.index, portfolios.index)
+factors = factors.loc[dates,:]
+portfolios = portfolios.loc[dates,:]
+
+factors = factors.loc[~factors.isna().any(1)&~portfolios.isna().any(1),:]
+portfolios = portfolios.loc[~factors.isna().any(1)&~portfolios.isna().any(1),:]
+
+lm = linear_model.LinearRegression(normalize=True)
+lm.fit(X=factors, y=portfolios)
+
+
+lm.coef_.shape
+pd.DataFrame(lm.coef_, columns=factors.columns).head()
+
+# pca = PCA(n_components=2)
+pca = PCA(n_components=3)
+pca.fit_transform(lm.coef_)
+print(f'This is the feature importance of our three components: \n\n{pca.explained_variance_ratio_}s')
+
+
+beta_comp = pca.fit_transform(lm.coef_)
+beta_comp = pd.DataFrame(beta_comp, columns=['weight_comp1','weight_comp2'], index=portfolios.columns)
+# beta_comp = pd.DataFrame(beta_comp, columns=['weight_comp1','weight_comp2','weight_comp3'], index=portfolios.columns)
+beta_comp = beta_comp.reset_index()
+
+labels = pd.Series(portfolios.columns).str.split(' ', 1, expand=True)
+labels.columns = ['market equity','two']
+
+beta_comp = pd.concat([beta_comp,labels], axis=1)
+
+print(f'This is the feature importance of our two components: \n\n{pca.explained_variance_ratio_}s')
+# print(f'This is the feature importance of our three components: \n\n{pca.explained_variance_ratio_}s')
+
+%%opts Scatter [tools=['hover'], height=400, width=600] (size=5 alpha=0.5)
+hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market equity', 'two']).options(color_index='market equity') + \
+hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market equity', 'two']).options(color_index='two')
+
+portfolio_returns = pd.melt(portfolios.reset_index(), id_vars='Date').drop(columns=['variable']).merge(factors.dropna(), how='left', on='Date').drop(columns=['Date'])
+
+portfolio_returns.head()
+
+model = OLS(portfolio_returns.value-portfolio_returns.RF,portfolio_returns.drop(columns=['value','RF']))
+
+results = model.fit()
+
+print(results.summary())
