@@ -177,3 +177,19 @@ plt.matshow(ranking, cmap=plt.cm.Blues)
 plt.colorbar()
 plt.title("Ranking of pixels with RFE")
 plt.show()
+
+
+
+#################################### Tree-based feature selection #######################################
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.datasets import load_iris
+from sklearn.feature_selection import SelectFromModel
+X, y = load_iris(return_X_y=True)
+X.shape
+
+clf = ExtraTreesClassifier(n_estimators=50)
+clf = clf.fit(X, y)
+clf.feature_importances_  
+clf = ExtraTreesClassifier(n_estimators=50)
+clf = clf.fit(X, y)
+clf.feature_importances_  
