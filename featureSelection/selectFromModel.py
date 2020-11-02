@@ -13,6 +13,8 @@ y = diabetes.target
 feature_names = diabetes.feature_names
 print(feature_names)
 
+
+############################################  select from Model ##########################################
 # Now we want to select the two features which are the most important. SelectFromModel() allows for setting the threshold. 
 # Only the features with the coef_ higher than the threshold will remain. 
 # Here, we want to set the threshold slightly above the third highest coef_ calculated by LassoCV() from our data.
@@ -48,7 +50,7 @@ plt.ylim([np.min(feature2), np.max(feature2)])
 plt.show()
 
 
-############# Feature selection pipeline ###########################  
+#######################################   Feature selection pipeline   ###########################  
 # Pipeline Anova SVM
 # Simple usage of Pipeline that runs successively a univariate feature selection with anova and then a SVM of the selected features.
 
