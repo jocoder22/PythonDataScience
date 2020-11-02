@@ -69,6 +69,7 @@ pca_factors.fit(factors.dropna())
 #     label='Scree Plot of PCA Variance Explaned (%)').redim(Variance_Explained={'range': (0, 1)})
 
 
+
 pe = pd.Series(pca_factors.explained_variance_ratio_,name='Variance_Explained')
 print2(pe)
 plt.plot(pe.index, pe.values)
@@ -97,7 +98,7 @@ lm = linear_model.LinearRegression(normalize=True)
 lm.fit(X=factors, y=portfolios)
 
 
-lm.coef_.shape
+print2(lm.coef_.shape)
 pd.DataFrame(lm.coef_, columns=factors.columns).head()
 
 # pca = PCA(n_components=2)
@@ -125,7 +126,7 @@ hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market
 
 portfolio_returns = pd.melt(portfolios.reset_index(), id_vars='Date').drop(columns=['variable']).merge(factors.dropna(), how='left', on='Date').drop(columns=['Date'])
 
-portfolio_returns.head()
+print(portfolio_returns.head())
 
 model = OLS(portfolio_returns.value-portfolio_returns.RF,portfolio_returns.drop(columns=['value','RF']))
 
