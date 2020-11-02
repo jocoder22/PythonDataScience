@@ -68,6 +68,7 @@ pca_factors.fit(factors.dropna())
 # pd.Series(pca_factors.explained_variance_ratio_,name='Variance_Explained').hvplot.line(
 #     label='Scree Plot of PCA Variance Explaned (%)').redim(Variance_Explained={'range': (0, 1)})
 
+
 pe = pd.Series(pca_factors.explained_variance_ratio_,name='Variance_Explained')
 print2(pe)
 plt.plot(pe.index, pe.values)
