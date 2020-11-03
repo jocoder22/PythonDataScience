@@ -5,6 +5,8 @@ from sklearn.datasets import load_diabetes
 from sklearn.feature_selection import SelectFromModel
 from sklearn.linear_model import LassoCV
 
+from printdescribe import  print2
+
 diabetes = load_diabetes()
 
 X = diabetes.data
@@ -12,6 +14,8 @@ y = diabetes.target
 
 feature_names = diabetes.feature_names
 print(feature_names)
+
+print(y)
 
 
 ############################################  select from Model ##########################################
@@ -36,6 +40,8 @@ sfm.fit(X, y)
 X_transform = sfm.transform(X)
 
 n_features = sfm.transform(X).shape[1]
+
+print2(n_features)
 
 
 plt.title(
