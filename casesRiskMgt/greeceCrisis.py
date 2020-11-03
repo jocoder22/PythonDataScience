@@ -9,10 +9,12 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.linear_model import LassoCV
-from sklearn.feature_selection import SelectFromModel
-from sklearn.feature_selection import f_regression, mutual_info_regression
+
+
+from sklearn.preprocessing import StandardScaler
 
 from printdescribe import  print2, changepath
+
 
 pth = r"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\GroupWork"
 
@@ -33,6 +35,8 @@ pf = pd.DataFrame(clf.feature_importances_, index = X.columns.tolist(), columns=
 pf_sorted = pf.sort_values(by="Features", ascending=False)
 print2(pf_sorted.head(6).index)
 
+
+# Do lasso based selection
 clf = LassoCV().fit(X, y)
 importance = np.abs(clf.coef_)
 # print(importance)
@@ -65,3 +69,8 @@ for i in loadings.columns:
     highvalue = loadings[i].sort_values(ascending=False)
     print(highvalue.index[0])
     mylist.append(highvalue.index[0])
+
+# standard the dataset
+scaler = StandardScaler()
+st_data = scaler.fit_transform(clean_data)
+X, y = st_data.iloc[:,1:], st_data.iloc[:,0]
