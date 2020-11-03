@@ -38,7 +38,7 @@ print('Selected features: {}'.format(name_features))
 sfm = SelectFromModel(clf, threshold=threshold)
 sfm.fit(X, y)
 X_transform = sfm.transform(X)
-
+print2(X_transform)
 n_features = sfm.transform(X).shape[1]
 
 print2(n_features)
