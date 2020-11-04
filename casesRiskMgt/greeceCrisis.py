@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.linear_model import LassoCV
+import bisect 
 
 
 from sklearn.preprocessing import StandardScaler
@@ -70,7 +71,19 @@ for i in loadings.columns:
     print(highvalue.index[0])
     mylist.append(highvalue.index[0])
 
+
 # standard the dataset
 scaler = StandardScaler()
-st_data = scaler.fit_transform(clean_data)
-X, y = st_data.iloc[:,1:], st_data.iloc[:,0]
+st_X = scaler.fit_transform(X)
+
+# perform exploratory pca
+pca = PCA()
+pca.fit_transform(st_X)
+pce = pca.explained_variance_ratio_
+pcelist = pce.cumsum()
+res = list(map(lambda i: i> 0.96, pcelist)).index(True)
+answer = list(filter(lambda i: i > 0.96, pcelist))[0] 
+res2 = list(pcelist).index(answer)
+res3 = next(x for x, val in enumerate(pcelist) if val > 0.96) 
+res4 = bisect.bisect_left(pcelist, 0.96)
+print2(res, res2, res3, res4)
