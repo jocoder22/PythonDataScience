@@ -187,6 +187,7 @@ plt.show()
 
 
 #################################### Tree-based feature selection #######################################
+#########################################################################################################
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.datasets import load_iris
 from sklearn.feature_selection import SelectFromModel
