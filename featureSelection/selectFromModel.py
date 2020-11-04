@@ -57,7 +57,8 @@ plt.ylim([np.min(feature2), np.max(feature2)])
 plt.show()
 
 
-#######################################   Feature selection pipeline   ###########################  
+#######################################   Feature selection pipeline   ########################################################
+###############################################################################################################################
 # Pipeline Anova SVM
 # Simple usage of Pipeline that runs successively a univariate feature selection with anova and then a SVM of the selected features.
 
