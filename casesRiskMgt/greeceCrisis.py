@@ -81,9 +81,26 @@ pca = PCA()
 pca.fit_transform(st_X)
 pce = pca.explained_variance_ratio_
 pcelist = pce.cumsum()
+
 res = list(map(lambda i: i> 0.96, pcelist)).index(True)
 answer = list(filter(lambda i: i > 0.96, pcelist))[0] 
 res2 = list(pcelist).index(answer)
 res3 = next(x for x, val in enumerate(pcelist) if val > 0.96) 
 res4 = bisect.bisect_left(pcelist, 0.96)
 print2(res, res2, res3, res4)
+
+
+
+pca = PCA(n_components=res)
+pca.fit_transform(st_X)
+colname = ["PC"+ str(i) for i in range(1,res+1)]
+
+loadings = pd.DataFrame(np.abs(pca.components_.T), columns=colname, 
+                        index = X.columns)#.sort_values(by="PC3", ascending=False)
+
+
+mylist = []
+for i in loadings.columns:
+    highvalue = loadings[i].sort_values(ascending=False)
+    print(highvalue.index[0])
+    mylist.append(highvalue.index[0])
