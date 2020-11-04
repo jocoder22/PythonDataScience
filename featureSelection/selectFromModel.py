@@ -18,7 +18,8 @@ print(feature_names)
 print(y)
 
 
-############################################  select from Model ##########################################
+############################################  select from Model ########################################################
+########################################################################################################################
 # Now we want to select the two features which are the most important. SelectFromModel() allows for setting the threshold. 
 # Only the features with the coef_ higher than the threshold will remain. 
 # Here, we want to set the threshold slightly above the third highest coef_ calculated by LassoCV() from our data.
