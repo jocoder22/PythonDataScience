@@ -161,6 +161,7 @@ plt.show()
 
 
 #########################################  Recursive feature elimination #########################################################
+##################################################################################################################################
 # A recursive feature elimination example showing the relevance of pixels in a digit classification task.
 from sklearn.svm import SVC
 from sklearn.datasets import load_digits
