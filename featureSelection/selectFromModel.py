@@ -42,8 +42,6 @@ X_transform = sfm.transform(X)
 print2(X_transform)
 n_features = sfm.transform(X).shape[1]
 
-print2(n_features)
-
 
 plt.title(
     "Features from diabets using SelectFromModel with "
