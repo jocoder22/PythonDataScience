@@ -188,11 +188,11 @@ from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.datasets import load_iris
 from sklearn.feature_selection import SelectFromModel
 X, y = load_iris(return_X_y=True)
-X.shape
+print(X.shape)
 
 clf = ExtraTreesClassifier(n_estimators=50)
 clf = clf.fit(X, y)
 clf.feature_importances_  
 clf = ExtraTreesClassifier(n_estimators=50)
 clf = clf.fit(X, y)
-clf.feature_importances_  
+print(clf.feature_importances_) 
