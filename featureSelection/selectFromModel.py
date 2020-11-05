@@ -28,7 +28,6 @@ clf = LassoCV().fit(X, y)
 importance = np.abs(clf.coef_)
 print(importance)
 
-
 idx_third = importance.argsort()[-3]
 threshold = importance[idx_third] + 0.01
 
@@ -41,7 +40,6 @@ sfm.fit(X, y)
 X_transform = sfm.transform(X)
 print2(X_transform)
 n_features = sfm.transform(X).shape[1]
-
 
 plt.title(
     "Features from diabets using SelectFromModel with "
@@ -66,7 +64,6 @@ from sklearn.feature_selection import SelectKBest, f_regression
 from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-
 
 # import some data to play with
 X, y = make_classification(
