@@ -17,7 +17,6 @@ print(feature_names)
 
 print(y)
 
-
 ############################################  select from Model ########################################################
 ########################################################################################################################
 # Now we want to select the two features which are the most important. SelectFromModel() allows for setting the threshold. 
@@ -53,6 +52,7 @@ plt.ylim([np.min(feature2), np.max(feature2)])
 plt.show()
 
 
+
 #######################################   Feature selection pipeline   ########################################################
 ###############################################################################################################################
 # Pipeline Anova SVM
@@ -85,8 +85,6 @@ print(classification_report(y_test, y_pred))
 
 coef = anova_svm[:-1].inverse_transform(anova_svm['linearsvc'].coef_)
 print(coef)
-
-
 
 
 ################### Comparison of F-test and mutual information  #############################################
@@ -154,7 +152,6 @@ for i in range(6):
 plt.show()
 
 
-
 #########################################  Recursive feature elimination #########################################################
 ##################################################################################################################################
 # A recursive feature elimination example showing the relevance of pixels in a digit classification task.
@@ -179,7 +176,6 @@ plt.matshow(ranking, cmap=plt.cm.Blues)
 plt.colorbar()
 plt.title("Ranking of pixels with RFE")
 plt.show()
-
 
 
 #################################### Tree-based feature selection #######################################
