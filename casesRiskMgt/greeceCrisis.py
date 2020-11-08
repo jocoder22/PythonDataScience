@@ -49,7 +49,7 @@ threshold = importance[idx_third] + 0.01
 
 idx_features = (-importance).argsort()[:6]
 name_features = np.array(feature_names)[idx_features]
-print('Selected features: {}'.format(name_features))
+print2('Selected features: {}'.format(name_features))
 
 
 # Doing pca
@@ -114,7 +114,7 @@ print2(clean_data.shape)
 X2 = sm.add_constant(X)
 est = sm.OLS(y.astype(float), X2.astype(float))
 est2 = est.fit()
-print(est2.summary())
+print2(est2.summary())
 
 
 # do linear regression on gdp and external debt, m3 outstanding
@@ -122,13 +122,13 @@ xx = clean_data.loc[:,["GR EXTERNAL DEBT CURN","GR M3 OUTSTANDING AMOUNTS CURN"]
 X2 = sm.add_constant(xx)
 est = sm.OLS(y.astype(float), X2.astype(float))
 est2 = est.fit()
-print(est2.summary())
+print2(est2.summary())
 
 xxx = clean_data.iloc[:,1:]
 X2 = sm.add_constant(xxx)
 est = sm.OLS(y.astype(float), X2.astype(float))
 est2 = est.fit()
-print(est2.summary())
+print2(est2.summary())
 
 
 xmm = mylist + ["GR EXTERNAL DEBT CURN","GR M3 OUTSTANDING AMOUNTS CURN"]
@@ -137,7 +137,7 @@ xxmm = clean_data.loc[:,xmm]
 X2 = sm.add_constant(xxmm)
 est = sm.OLS(y.astype(float), X2.astype(float))
 est2 = est.fit()
-print(est2.summary())
+print2(est2.summary())
 
 kk2 = ['ATHEX COMPOSITE - PRICE INDEX', 'GR EXPORTS OF GOODS & SERVICES CONN',
         'GR PPI NADJ', 'GR GOVERNMENT BOND - 15 YEAR NADJ',
@@ -148,12 +148,12 @@ xxkk = clean_data.loc[:,kk2]
 Xk = sm.add_constant(xxkk)
 est = sm.OLS(y.astype(float), Xk.astype(float))
 est2 = est.fit()
-print(est2.summary())
+print2(est2.summary())
 
 
 rlm_model = sm.RLM(y.astype(float), Xk.astype(float),  M=sm.robust.norms.HuberT())
 est2 = rlm_model.fit()
-print(est2.summary())
+print2(est2.summary())
 
 
 clean_data["gdp_diff"] = clean_data.iloc[:,0].pct_change()
@@ -163,7 +163,7 @@ xxkk = clean_data.loc[:,kk2]
 Xk = sm.add_constant(xxkk)
 est = sm.Logit(y_d.astype(float), Xk.astype(float))
 est2 = est.fit()
-print(est2.summary())
+print2(est2.summary())
 
 
 y_d = clean_data.iloc[:,-1].dropna()
@@ -175,7 +175,7 @@ xxkk = clean_data.iloc[:,15:].drop(columns=["gdp_diff","dummy",
 Xk = sm.add_constant(xxkk)
 est = sm.Logit(y_d.astype(float), Xk.astype(float), method='bfgs')
 est2 = est.fit()
-print(est2.summary())
+print2(est2.summary())
 
 xxkk = clean_data.iloc[:,1:].drop(columns=["gdp_diff","dummy"])
 print2(xxkk)
