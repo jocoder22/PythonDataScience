@@ -13,9 +13,9 @@ import bisect
 
 
 from sklearn.preprocessing import StandardScaler
-
 from printdescribe import  print2, changepath
 
+import statsmodels.api as sm
 
 pth = r"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\GroupWork"
 
@@ -104,4 +104,22 @@ for i in loadings.columns:
     highvalue = loadings[i].sort_values(ascending=False)
     print(highvalue.index[0])
     mylist.append(highvalue.index[0])
+
+print2(mylist)
+print2(clean_data.shape)
+
+
+# create linear regression
+X2 = sm.add_constant(X)
+est = sm.OLS(y.astype(float), X2.astype(float))
+est2 = est.fit()
+print(est2.summary())
+
+
+# do linear regression on gdp and external debt, m3 outstanding
+xx = clean_data.loc[:,["GR EXTERNAL DEBT CURN","GR M3 OUTSTANDING AMOUNTS CURN"]]
+X2 = sm.add_constant(xx)
+est = sm.OLS(y.astype(float), X2.astype(float))
+est2 = est.fit()
+print(est2.summary())
 
