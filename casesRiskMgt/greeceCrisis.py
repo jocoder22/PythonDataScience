@@ -177,3 +177,5 @@ est = sm.Logit(y_d.astype(float), Xk.astype(float), method='bfgs')
 est2 = est.fit()
 print(est2.summary())
 
+xxkk = clean_data.iloc[:,1:].drop(columns=["gdp_diff","dummy"])
+print2(xxkk)
