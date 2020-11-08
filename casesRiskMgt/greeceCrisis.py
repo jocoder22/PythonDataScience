@@ -149,3 +149,31 @@ Xk = sm.add_constant(xxkk)
 est = sm.OLS(y.astype(float), Xk.astype(float))
 est2 = est.fit()
 print(est2.summary())
+
+
+rlm_model = sm.RLM(y.astype(float), Xk.astype(float),  M=sm.robust.norms.HuberT())
+est2 = rlm_model.fit()
+print(est2.summary())
+
+
+clean_data["gdp_diff"] = clean_data.iloc[:,0].pct_change()
+clean_data["dummy"] = clean_data["gdp_diff"].apply(lambda x: 1 if x > 0 else 0)
+y_d = clean_data.iloc[:,-1]
+xxkk = clean_data.loc[:,kk2]
+Xk = sm.add_constant(xxkk)
+est = sm.Logit(y_d.astype(float), Xk.astype(float))
+est2 = est.fit()
+print(est2.summary())
+
+
+y_d = clean_data.iloc[:,-1].dropna()
+xxkk = clean_data.iloc[:,15:].drop(columns=["gdp_diff","dummy",
+                                            "GR DISCOUNT RATE / SHORT TERM EURO REPO RATE NADJ",
+                                          "EURO OVERNIGHT DEPOSIT (ECB) - MIDDLE RATE",
+                                          "EURO MAIN REFINANCING ECB - MIDDLE RATE"]).dropna()
+# xxkk = clean_data.iloc[:,16:].drop(columns=["gdp_diff","dummy"]).dropna()
+Xk = sm.add_constant(xxkk)
+est = sm.Logit(y_d.astype(float), Xk.astype(float), method='bfgs')
+est2 = est.fit()
+print(est2.summary())
+
