@@ -16,6 +16,7 @@ from sklearn.preprocessing import StandardScaler
 from printdescribe import  print2, changepath
 
 import statsmodels.api as sm
+from statsmodels.formula.api import rlm
 
 pth = r"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\GroupWork"
 
@@ -138,3 +139,13 @@ est = sm.OLS(y.astype(float), X2.astype(float))
 est2 = est.fit()
 print(est2.summary())
 
+kk2 = ['ATHEX COMPOSITE - PRICE INDEX', 'GR EXPORTS OF GOODS & SERVICES CONN',
+        'GR PPI NADJ', 'GR GOVERNMENT BOND - 15 YEAR NADJ',
+        'GR EXTERNAL DEBT CURN', 'GR M3 OUTSTANDING AMOUNTS CURN']
+
+xxkk = clean_data.loc[:,kk2]
+# xxx = clean_data.iloc[:,1:]
+Xk = sm.add_constant(xxkk)
+est = sm.OLS(y.astype(float), Xk.astype(float))
+est2 = est.fit()
+print(est2.summary())
