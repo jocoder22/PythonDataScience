@@ -104,3 +104,4 @@ for i in loadings.columns:
     highvalue = loadings[i].sort_values(ascending=False)
     print(highvalue.index[0])
     mylist.append(highvalue.index[0])
+
