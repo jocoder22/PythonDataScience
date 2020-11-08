@@ -123,3 +123,18 @@ est = sm.OLS(y.astype(float), X2.astype(float))
 est2 = est.fit()
 print(est2.summary())
 
+xxx = clean_data.iloc[:,1:]
+X2 = sm.add_constant(xxx)
+est = sm.OLS(y.astype(float), X2.astype(float))
+est2 = est.fit()
+print(est2.summary())
+
+
+xmm = mylist + ["GR EXTERNAL DEBT CURN","GR M3 OUTSTANDING AMOUNTS CURN"]
+xxmm = clean_data.loc[:,xmm]
+# xxx = clean_data.iloc[:,1:]
+X2 = sm.add_constant(xxmm)
+est = sm.OLS(y.astype(float), X2.astype(float))
+est2 = est.fit()
+print(est2.summary())
+
