@@ -72,7 +72,10 @@ for i in loadings.columns:
     print(highvalue.index[0])
     mylist.append(highvalue.index[0])
 
+print2(mylist)
 
+
+# perform pca with standardized dataset
 # standard the dataset, using standard scaler
 scaler = StandardScaler()
 st_X = scaler.fit_transform(X)
