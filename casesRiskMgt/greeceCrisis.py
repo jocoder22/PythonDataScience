@@ -85,6 +85,7 @@ pca = PCA()
 pca.fit_transform(st_X)
 pce = pca.explained_variance_ratio_
 pcelist = pce.cumsum()
+print2(pcelist)
 
 res = list(map(lambda i: i> 0.96, pcelist)).index(True)
 answer = list(filter(lambda i: i > 0.96, pcelist))[0] 
