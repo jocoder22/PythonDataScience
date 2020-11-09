@@ -73,7 +73,7 @@ for i in loadings.columns:
     mylist.append(highvalue.index[0])
 
 
-# standard the dataset
+# standard the dataset, using standard scaler
 scaler = StandardScaler()
 st_X = scaler.fit_transform(X)
 
