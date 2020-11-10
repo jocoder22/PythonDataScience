@@ -38,17 +38,12 @@
 #   
 #   
 # <hr>
-# 
-
-# In[280]:
-
 
 # import modules
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import RobustScaler, StandardScaler
@@ -69,7 +64,6 @@ import holoviews as hv
 import hvplot
 import hvplot.pandas
 
-
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -79,9 +73,7 @@ import pandas_datareader.data as web
 np.random.seed(42)
 hv.extension('bokeh')
 
-
 get_ipython().run_line_magic('opts', "Curve[width=900 height=400] NdOverlay [legend_position='right']")
-
 
 # Download datasets
 portfolios100 = web.DataReader('100_Portfolios_10x10_Daily', 'famafrench')
@@ -115,7 +107,6 @@ print2(portfolios100.shape, factors5.head(), factors5.shape)
 
 pd.melt(factors5.add(1).cumprod().reset_index(), id_vars=["Date"]).hvplot.line(x='Date', y='value', by='variable')
 
-
 factors_cov = factors5.cov()
 factors_cov
 
@@ -127,15 +118,8 @@ plt.title('Heatmap of factors covariane');
 
 
 # From the heatmap, there mostly positive low covariances. We notice zero or negative zero covariance of riskfree return with <br> other factors.
-
-# In[52]:
-
-
 # calculate the variance
 pd.DataFrame(factors5.var().reset_index().values,columns=["Factors", "Variance"])
-
-
-# In[53]:
 
 
 # compute the correlation matrix
@@ -143,17 +127,10 @@ factors5.corr()
 
 
 # ## Next, consider the ACF and PACF of the process.
-
-# In[88]:
-
-
 # plot the factors together
 plt.figure(figsize = [10, 6])
 plt.plot(factors5)
 plt.grid(axis='y');
-
-
-# In[113]:
 
 
 # plot the factors
@@ -164,9 +141,6 @@ for idx, ax in enumerate(ax.flatten(),start=0):
     ax.set_xlabel(factor_labels[idx])
     ax.grid()
     ax.legend()
-
-
-# In[167]:
 
 
 # plot the acf and pacf for the process
@@ -180,10 +154,6 @@ for indx, colname in enumerate(factors5.columns):
 
 
 # ## Next, consider the ACF and PACF of the process square.
-
-# In[169]:
-
-
 # plot the acf and pacf for the process square
 factor5_sq = factors5**2
 fig, ax = plt.subplots(nrows=6, ncols=2, figsize = (15,22))
@@ -196,8 +166,6 @@ for indx, colname in enumerate(factors5.columns):
 
 
 # ## 2.Using PCA provide a 2-dimensional representation of the weight-space <br> of a set of linear models representing the covariance between our factors <br>and the different benchmark portfolios. Comment on the distribution of the <br> benchmark portfolios across the weight-space.
-
-# In[184]:
 
 
 def pca_function(dataframe, transformer=StandardScaler()):
@@ -253,21 +221,8 @@ def pca_plot(dataframe, variance_e):
     ax.legend((rects[0],), ('Percent variance explained by principal components',))
 
 
-# In[185]:
-
-
 std2, pca22 = pca_function(factors5)
-
-
-# In[186]:
-
-
 explain_com(pca22)
-
-
-# In[187]:
-
-
 pca_plot(std2, pca22)
 
 
