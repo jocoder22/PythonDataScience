@@ -67,7 +67,6 @@ from statsmodels.regression.linear_model import OLS
 from statsmodels.stats.stattools import durbin_watson
 from statsmodels.stats.diagnostic import acorr_ljungbox
 
-
 import holoviews as hv
 import hvplot
 import hvplot.pandas
@@ -76,16 +75,8 @@ import hvplot.pandas
 import warnings
 warnings.filterwarnings('ignore')
 
-
-# In[2]:
-
-
 pd.core.common.is_list_like = pd.api.types.is_list_like
 import pandas_datareader.data as web
-
-
-# In[281]:
-
 
 np.random.seed(42)
 hv.extension('bokeh')
