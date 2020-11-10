@@ -226,33 +226,10 @@ explain_com(pca22)
 pca_plot(std2, pca22)
 
 
-# In[ ]:
-
-
-
-
-
-# In[196]:
-
 
 std2, pca22 = pca_function(portfolios100)
-
-
-# In[197]:
-
-
 explain_com(pca22)
-
-
-# In[199]:
-
-
 pca_plot(std2, pca22)
-
-
-# In[273]:
-
-
 colname = portfolios100.columns
 n = 2
 
@@ -363,12 +340,6 @@ plt.ylabel(f"Principal Component 2")
 plt.xlabel(f"Principal Component 1")
 plt.title("Distribution of factors across the weight space")
 plt.show()
-
-
-# In[ ]:
-
-
-
 
 
 # # 3.Using linear regression test for the significance of these factors, <br> as per the original work of Fama and French.
