@@ -50,14 +50,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import RobustScaler, StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn import linear_model
 
 from printdescribe import print2, describe2
-
 
 from functools import reduce
 from operator import mul
@@ -105,37 +103,14 @@ portfolios100.isnull().sum().sum())
 print(factors5[portfolios100.iloc[:,0] >98.0].sum().sum(),
 factors5.isnull().sum().sum())
 
-
-# In[30]:
-
-
 portfolios100.iloc[:, 90:100].head()
-
-
-# In[33]:
-
-
-portfolios100.shape
-
-
-# In[34]:
-
-
-factors5.head()
-
-
-# In[35]:
-
-
-factors5.shape
+print2(portfolios100.shape, factors5.head(), factors5.shape)
 
 
 # # 1a.	Visually analyze the covariance between various factors and identify <br> the variance explained in principle components of  these factors. 
 # 
 # ## 1b. Next, consider the ACF and PACF of the process and its square.
 # 
-
-# In[284]:
 
 
 pd.melt(factors5.add(1).cumprod().reset_index(), id_vars=["Date"]).hvplot.line(x='Date', y='value', by='variable')
