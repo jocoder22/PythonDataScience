@@ -295,15 +295,6 @@ plt.title("PCA Plot")
 plt.show()
 
 
-# In[ ]:
-
-
-
-
-
-# In[400]:
-
-
 colname = portfolios100.columns
 n = 2
 
@@ -344,16 +335,6 @@ plt.ylabel(f"Principal Component 2")
 plt.xlabel(f"Principal Component 1")
 plt.title("PCA Plot")
 plt.show()
-
-
-# In[ ]:
-
-
-
-
-
-# In[272]:
-
 
 
 # Using Pipeline
