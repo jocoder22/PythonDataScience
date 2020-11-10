@@ -116,27 +116,8 @@ print2(portfolios100.shape, factors5.head(), factors5.shape)
 pd.melt(factors5.add(1).cumprod().reset_index(), id_vars=["Date"]).hvplot.line(x='Date', y='value', by='variable')
 
 
-# In[ ]:
-
-
-
-
-
-# In[38]:
-
-
 factors_cov = factors5.cov()
 factors_cov
-
-
-# In[ ]:
-
-
-
-
-
-# In[46]:
-
 
 plt.figure(figsize = [10, 6])
 # Visualize the covariance matrix using a heatmap
