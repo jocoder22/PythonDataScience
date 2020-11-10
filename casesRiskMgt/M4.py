@@ -82,49 +82,23 @@ np.random.seed(42)
 hv.extension('bokeh')
 
 
-# In[283]:
-
-
 get_ipython().run_line_magic('opts', "Curve[width=900 height=400] NdOverlay [legend_position='right']")
-
-
-# In[18]:
 
 
 # Download datasets
 portfolios100 = web.DataReader('100_Portfolios_10x10_Daily', 'famafrench')
 factors5 = web.DataReader('F-F_Research_Data_5_Factors_2x3_Daily', 'famafrench')
 
-
-# In[19]:
-
-
 portfolios100['DESCR']
-
-
-# In[20]:
-
-
 factors5['DESCR']
-
-
-# In[22]:
-
 
 # select the Average Value Weighted Returns -- Daily (1220 rows x 100 cols)
 portfolios100 = portfolios100[0]
 factors5 = factors5[0]
 
-
-# In[36]:
-
-
 # Checking for missing values porfolios dataset
 print(portfolios100[portfolios100.iloc[:,0] >98.0].sum().sum(),
 portfolios100.isnull().sum().sum())
-
-
-# In[37]:
 
 
 # Checking for missing values in factors dataset
