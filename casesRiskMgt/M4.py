@@ -123,7 +123,7 @@ pd.DataFrame(factors5.var().reset_index().values,columns=["Factors", "Variance"]
 
 
 # compute the correlation matrix
-factors5.corr()
+print2(factors5.corr())
 
 
 # ## Next, consider the ACF and PACF of the process.
@@ -380,7 +380,7 @@ data = pd.DataFrame(data={'RF':rfree, 'Mkt-RF':beta1, 'SMB':beta2, 'HML':beta3, 
                    index = portfolios100.columns) #.reset_index().rename(columns={"index":"Porfolios"})
 
 
-data.head()
+print2(data.head())
 
 
 data.iloc[:,1:5].plot(figsize=(14,8))
