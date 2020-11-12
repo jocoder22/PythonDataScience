@@ -380,14 +380,7 @@ data = pd.DataFrame(data={'RF':rfree, 'Mkt-RF':beta1, 'SMB':beta2, 'HML':beta3, 
                    index = portfolios100.columns) #.reset_index().rename(columns={"index":"Porfolios"})
 
 
-# In[394]:
-
-
 data.head()
-
-
-# In[398]:
-
 
 
 data.iloc[:,1:5].plot(figsize=(14,8))
