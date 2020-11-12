@@ -344,9 +344,6 @@ plt.show()
 
 # # 3.Using linear regression test for the significance of these factors, <br> as per the original work of Fama and French.
 
-# In[311]:
-
-
 import statsmodels.api as sm
 
 factors6, _ = pca_function(factors5)
@@ -362,9 +359,6 @@ result = model.fit()
 print(result.summary())
 
 
-# In[347]:
-
-
 n_portfolios = len(portfolios100.columns)
 rfree = np.array([0.] * n_portfolios)
 beta1 = np.array([0.] * n_portfolios)
@@ -374,9 +368,6 @@ beta4 = np.array([0.] * n_portfolios)
 beta5 = np.array([0.] * n_portfolios)
 
 
-# In[353]:
-
-
 for i in range(portfolios100.shape[1]):
     model = sm.OLS(portfolio2.iloc[:,i], factors6)
     r_ = model.fit()
@@ -384,16 +375,6 @@ for i in range(portfolios100.shape[1]):
     beta1[i], beta2[i], beta3[i] , beta4[i], beta5[i], rfree[i] = pval.T.values
  
     
-
-
-# In[ ]:
-
-
-
-
-
-# In[393]:
-
 
 data = pd.DataFrame(data={'RF':rfree, 'Mkt-RF':beta1, 'SMB':beta2, 'HML':beta3, 'RMW':beta4, 'CMA':beta5},
                    index = portfolios100.columns) #.reset_index().rename(columns={"index":"Porfolios"})
