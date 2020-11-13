@@ -86,7 +86,6 @@ data = pd.concat([load_data(decade[0], decade[1], decade[2]) for decade in data_
 # create plotting object
 plot_data = hv.Dataset(data, kdims=['Date'], vdims=['Volume'])
 
-
 # create scatter plot
 black_tuesday = pd.to_datetime('1929-10-29')
 
@@ -94,7 +93,6 @@ vline = hv.VLine(black_tuesday).options(color='#FF7E47')
 
 m = hv.Scatter(plot_data).options(width=700, height=400).redim('NYSE Share Trading Volume').hist()*vline*\
   hv.Text(black_tuesday+pd.DateOffset(months=10), 4e7, "Black Tuesday", halign='left').options(color="#FF7E47")
-
 
 # plot the daily traded volume against time
 plt.scatter(data['Date'], data['Volume'], s=0.1)
@@ -139,7 +137,6 @@ def getload_decade(start=1920, end=1929, extension='prn'):
         print2("There was an issue with the download \n\
             You may need a different date range or file extension.\n\
             Check out https://www.nyse.com/data/transactions-statistics-data-library")
-
 
 
 # download data, form dataframe      
