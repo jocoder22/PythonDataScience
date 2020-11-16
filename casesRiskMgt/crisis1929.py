@@ -150,10 +150,12 @@ plt.scatter(data2['Date'], data2['Volume'], s=0.1)
 plt.axvline(black_tuesday, color="red")
 plt.show()
 
+
 # plot the same data
 data2.plot(x="Date", y='Volume', kind="scatter", s=0.1)
 plt.axvline(black_tuesday, color="red")
 plt.show()
+
 
 # plot the same data
 data3.plot()
