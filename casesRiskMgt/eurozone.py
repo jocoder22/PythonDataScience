@@ -136,3 +136,6 @@ df2 = df[query]
 query2 = df2.index.get_level_values(1) <= pd.Timestamp('2018-01-01')
 dat_2 = df2[query2]
 print2(dat_2)
+
+
+# https://www.kansascityfed.org/publicat/reswkpap/pdf/rwp14-11.pdf
