@@ -28,6 +28,7 @@ data_ranges = [[1970,1979, 'dat'],
                [1888,1899, 'dat']][::-1]
 
 """
+
 # Download data
 def get_decade(start=1920, end=1929, extension='prn'):
   "specify the starting year of the decade eg. 1900, 2010, 2009"
@@ -48,6 +49,7 @@ def get_decade(start=1920, end=1929, extension='prn'):
             Check out https://www.nyse.com/data/transactions-statistics-data-library")
     
 download_history = [get_decade(decade[0], decade[1], decade[2]) for decade in data_ranges]
+
 """
 
 path33 = f"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\CourseMaterials\Module1\data_docs"
