@@ -40,9 +40,14 @@ graphing.columns = colnames
 graphing = graphing.set_index("Time")
 
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize = (14, 6))
+color = ["r", "g"]
 p = ax.flatten().tolist()
 graphing2 = graphing.iloc[:, [0,2]]
 for indx, colname in enumerate(graphing2.columns):
     ba =  indx
-    graphing[colname].plot(title = f'{colname}', ax=p[ba])
+    graphing[colname].plot(title = f'{colname}', ax=p[ba], color=color[indx])
     fig.subplots_adjust(hspace=.3)
+
+plt.show()
+
+
