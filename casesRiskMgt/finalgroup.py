@@ -13,4 +13,6 @@ with changepath(pth):
 print2(data_r.head())
 
 data_r2 = data_r.iloc[2:,:].set_index("Name")
-print2(data_r2.head())
+print2(data_r2.head(), data_r2.info())
+
+data = data_r2.iloc[:, [0,10,12,27,9]]
