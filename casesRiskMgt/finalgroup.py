@@ -3,6 +3,9 @@ import pandas as pd
 import pandas_datareader.wb as wb
 import matplotlib.pyplot as plt
 
+from statsmodels.formula.api import rlm
+import statsmodels.api as sm
+
 from printdescribe import print2, changepath
 
 pth = r"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\GroupWork"
@@ -67,7 +70,24 @@ p = ax.flatten().tolist()
 graphing4 = graphing.iloc[:, [4,5]]
 for indx, colname in enumerate(graphing4.columns):
     ba =  indx
-    graphing[colname].plot(title = f'{colname}', ax=p[ba], , color=color[indx])
+    graphing[colname].plot(title = f'{colname}', ax=p[ba], color=color[indx])
     fig.subplots_adjust(hspace=.3)
 
 plt.show()
+
+y = cleandata.iloc[:,[1]]
+X = cleandata.iloc[:,[2,3,4,5,10]]
+
+Xk = sm.add_constant(X)
+est = sm.OLS(y.astype(float), Xk.astype(float))
+est2 = est.fit()
+print2(est2.summary())
+
+rlm_model = sm.RLM(y.astype(float), Xk.astype(float),  M=sm.robust.norms.HuberT())
+est2 = rlm_model.fit()
+print(est2.summary())
+
+XX2 = cleandata.iloc[:,[3,4, 5,10]]
+Xk2 = sm.add_constant(XX2)
+
+rlm_model2 = sm.RLM(y.astype(float), Xk2.astype(float),  M=sm.robust.norms.HuberT())
