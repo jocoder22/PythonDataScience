@@ -32,3 +32,17 @@ print2(data4.head())
 
 result = pd.merge(data4, money, left_on="Year", right_on="year", how="outer")
 cleandata = result.dropna()
+
+graphing = cleandata.iloc[:,[0,1,2,3,4,5,10]]
+colnames = ["Time", "GDP", "CPI","InterBank Rate", "M3 Outstanding", "Govt Bond-15yr", "Tax Revenue"]
+graphing.columns = colnames
+
+graphing = graphing.set_index("Time")
+
+fig, ax = plt.subplots(nrows=1, ncols=2, figsize = (14, 6))
+p = ax.flatten().tolist()
+graphing2 = graphing.iloc[:, [0,2]]
+for indx, colname in enumerate(graphing2.columns):
+    ba =  indx
+    graphing[colname].plot(title = f'{colname}', ax=p[ba])
+    fig.subplots_adjust(hspace=.3)
