@@ -51,3 +51,12 @@ for indx, colname in enumerate(graphing2.columns):
 plt.show()
 
 
+fig, ax = plt.subplots(nrows=1, ncols=2, figsize = (14, 6))
+p = ax.flatten().tolist()
+graphing3 = graphing.iloc[:, [1,3]]
+for indx, colname in enumerate(graphing3.columns):
+    ba =  indx
+    graphing[colname].plot(title = f'{colname}', ax=p[ba], color=color[indx])
+    fig.subplots_adjust(hspace=.3)
+
+plt.show()
