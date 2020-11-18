@@ -86,8 +86,13 @@ plt.show()
 y = cleandata.iloc[:,[1]]
 X = cleandata.iloc[:,[2,3,4,5,10]]
 
+# Add constant
 Xk = sm.add_constant(X)
+
+# Build linear regression model
 est = sm.OLS(y.astype(float), Xk.astype(float))
+
+# Estimate coefficients and print the summary
 est2 = est.fit()
 print2(est2.summary())
 
