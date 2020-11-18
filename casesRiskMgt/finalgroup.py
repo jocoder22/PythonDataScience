@@ -10,6 +10,7 @@ from printdescribe import print2, changepath
 
 pth = r"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\GroupWork"
 
+# Access Greece economic data
 with changepath(pth):
     data_r = pd.read_excel("greece_quarterly_30Y_reduced_20201102.xlsx", sheet_name="Reduced")
 
@@ -21,7 +22,7 @@ print2(data_r2.head(), data_r2.info())
 data = data_r2.iloc[:, [0,10,12,27,9]]
 print2(data.head)
 
-# M4 Money Plot
+# Download Greece Tax revenue data
 money = wb.download(indicator='GC.TAX.TOTL.CN', country=['GR','GRC'], 
                     start=pd.to_datetime('1990', yearfirst=True), end=pd.to_datetime('2020', yearfirst=True)
                    , freq='Q')
@@ -89,6 +90,7 @@ print(est2.summary())
 
 XX2 = cleandata.iloc[:,[3,4, 5,10]]
 Xk2 = sm.add_constant(XX2)
+
 
 rlm_model2 = sm.RLM(y.astype(float), Xk2.astype(float),  M=sm.robust.norms.HuberT())
 est22 = rlm_model2.fit()
