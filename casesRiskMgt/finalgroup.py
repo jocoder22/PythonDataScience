@@ -44,7 +44,6 @@ cleandata = result.dropna()
 graphing = cleandata.iloc[:,[0,1,2,3,4,5,10]]
 colnames = ["Time", "GDP", "CPI","InterBank Rate", "M3 Outstanding", "Govt Bond-15yr", "Tax Revenue"]
 graphing.columns = colnames
-
 graphing = graphing.set_index("Time")
 
 
@@ -81,6 +80,7 @@ for indx, colname in enumerate(graphing4.columns):
     fig.subplots_adjust(hspace=.3)
 
 plt.show()
+
 
 # y => gdp , X => the rest of dataset
 y = cleandata.iloc[:,[1]]
