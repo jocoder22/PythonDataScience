@@ -82,6 +82,7 @@ for indx, colname in enumerate(graphing4.columns):
 
 plt.show()
 
+# y => gdp , X => the rest of dataset
 y = cleandata.iloc[:,[1]]
 X = cleandata.iloc[:,[2,3,4,5,10]]
 
