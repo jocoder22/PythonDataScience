@@ -30,19 +30,25 @@ money = money.reset_index()
 print(money.head(10))
 # money_plot = money.iloc[::-1,:].hvplot.line(x='year', y='FM.LBL.BMNY.GD.ZS', by='country', title='Broad money (% of GDP)')
 
+
+# split the Name (quarter  year) and form columns with each split
 data4 = data.reset_index()
 data4[["Quarter", "Year"]] = data4['Name'].str.split(expand=True)
 print2(data4.head())
 
+# Merge the two dataset
 result = pd.merge(data4, money, left_on="Year", right_on="year", how="outer")
 cleandata = result.dropna()
 
+# Select columns for plotting
 graphing = cleandata.iloc[:,[0,1,2,3,4,5,10]]
 colnames = ["Time", "GDP", "CPI","InterBank Rate", "M3 Outstanding", "Govt Bond-15yr", "Tax Revenue"]
 graphing.columns = colnames
 
 graphing = graphing.set_index("Time")
 
+
+# plot the datasets
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize = (14, 6))
 color = ["r", "g"]
 p = ax.flatten().tolist()
