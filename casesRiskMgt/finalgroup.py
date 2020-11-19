@@ -2,12 +2,10 @@ import numpy as np
 import pandas as pd
 import pandas_datareader.wb as wb
 import matplotlib.pyplot as plt
-
 from statsmodels.formula.api import rlm
 import statsmodels.api as sm
 
 from printdescribe import print2, changepath
-
 pth = r"D:\Wqu_FinEngr\Case_Studies_Risk_Mgt\GroupWork"
 
 # Access Greece economic data
@@ -15,7 +13,6 @@ with changepath(pth):
     data_r = pd.read_excel("greece_quarterly_30Y_reduced_20201102.xlsx", sheet_name="Reduced")
 
 print2(data_r.head())
-
 data_r2 = data_r.iloc[2:,:].set_index("Name")
 print2(data_r2.head(), data_r2.info())
 
@@ -29,7 +26,6 @@ money = wb.download(indicator='GC.TAX.TOTL.CN', country=['GR','GRC'],
 money = money.reset_index()
 print(money.head(10))
 # money_plot = money.iloc[::-1,:].hvplot.line(x='year', y='FM.LBL.BMNY.GD.ZS', by='country', title='Broad money (% of GDP)')
-
 
 # split the Name (quarter  year) and form columns with each split
 data4 = data.reset_index()
