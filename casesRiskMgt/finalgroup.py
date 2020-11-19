@@ -86,7 +86,11 @@ est = sm.OLS(y.astype(float), Xk.astype(float))
 est2 = est.fit()
 print2(est2.summary())
 
+
+# Build robust linear regression model
 rlm_model = sm.RLM(y.astype(float), Xk.astype(float),  M=sm.robust.norms.HuberT())
+
+# Estimate coefficients and print the summary
 est2 = rlm_model.fit()
 print(est2.summary())
 
