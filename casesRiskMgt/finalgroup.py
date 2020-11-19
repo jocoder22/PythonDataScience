@@ -42,7 +42,6 @@ colnames = ["Time", "GDP", "CPI","InterBank Rate", "M3 Outstanding", "Govt Bond-
 graphing.columns = colnames
 graphing = graphing.set_index("Time")
 
-
 # plot the datasets
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize = (14, 6))
 color = ["r", "g"]
@@ -54,7 +53,6 @@ for indx, colname in enumerate(graphing2.columns):
     fig.subplots_adjust(hspace=.3)
 
 plt.show()
-
 
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize = (14, 6))
 p = ax.flatten().tolist()
