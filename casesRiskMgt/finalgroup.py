@@ -97,7 +97,6 @@ print(est2.summary())
 XX2 = cleandata.iloc[:,[3,4, 5,10]]
 Xk2 = sm.add_constant(XX2)
 
-
 rlm_model2 = sm.RLM(y.astype(float), Xk2.astype(float),  M=sm.robust.norms.HuberT())
 est22 = rlm_model2.fit()
 print(est22.summary())
