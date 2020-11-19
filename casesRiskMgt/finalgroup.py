@@ -62,7 +62,6 @@ for indx, colname in enumerate(graphing3.columns):
     fig.subplots_adjust(hspace=.3)
 plt.show()
 
-
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize = (14, 6))
 p = ax.flatten().tolist()
 graphing4 = graphing.iloc[:, [4,5]]
@@ -72,7 +71,6 @@ for indx, colname in enumerate(graphing4.columns):
     fig.subplots_adjust(hspace=.3)
 
 plt.show()
-
 
 # y => gdp , X => the rest of dataset
 y = cleandata.iloc[:,[1]]
