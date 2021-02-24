@@ -1,5 +1,5 @@
 import numpy as np
-import pandas as pd 
+import pandas as pd
 import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
 from io import BytesIO
@@ -11,15 +11,16 @@ import requests
 def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
-        
-        
+
+
 # download World Bank population data
-worldpop = pd.read_excel("http://api.worldbank.org/v2/en/indicator/SP.POP.TOTL?downloadformat=excel", 
-                       index_col=None, skiprows=3)
+worldpop = pd.read_excel(
+    "http://api.worldbank.org/v2/en/indicator/SP.POP.TOTL?downloadformat=excel", index_col=None, skiprows=3)
 
 
 # explore the data
-print2(worldpop.shape, worldpop[worldpop.isnull().any(axis=1)], worldpop.columns, worldpop.info())
+print2(worldpop.shape, worldpop[worldpop.isnull().any(
+    axis=1)], worldpop.columns, worldpop.info())
 
 
 # columns with at least one missing value
@@ -41,7 +42,6 @@ print2(worldpop.isnull().all().sum(), worldpop.shape[1])
 print2(worldpop[worldpop.isnull().all(axis=1)])
 
 
-
 # Number of rows with all missing value
 print2(worldpop.isnull().all(axis=1).sum(), worldpop.shape[1])
 # show the column with all missing value
@@ -49,11 +49,12 @@ print2(worldpop[worldpop.isnull().all(axis=1)])
 
 
 # explore the data
-print2(worldpop.shape, worldpop[worldpop.isnull().all(axis=1)], worldpop.columns, worldpop.info())
+print2(worldpop.shape, worldpop[worldpop.isnull().all(
+    axis=1)], worldpop.columns, worldpop.info())
 
 
-
-print2(worldpop2.info(), worldpop2.isnull().sum(), worldpop2[worldpop2.isnull().any(axis=1)])
+print2(worldpop2.info(), worldpop2.isnull().sum(),
+       worldpop2[worldpop2.isnull().any(axis=1)])
 
 print2("China" in worldpop['Country Name'].values)
 
@@ -86,6 +87,7 @@ url = 'http://api.worldbank.org/v2/countries/br;cn;us;de/indicators/SP.POP.TOTL/
 r = requests.get(url)
 print2(r.json()[1][218])
 
+
 # create pandas dataframe, bad way
 df = pd.DataFrame(r.json()[1])
 print2(df.head())
@@ -104,12 +106,12 @@ df2 = pd.DataFrame.from_dict(mydict)
 print2(df2.head())
 
 
-
 # Working with XML file
 url = "http://api.worldbank.org/v2/en/indicator/SP.POP.TOTL?downloadformat=xml"
 
 response = requests.get(url)
-print2(response.headers['content-type']) # very important line ############################
+# very important line ############################
+print2(response.headers['content-type'])
 
 # This is a zip file, so we have to unzip it
 zipp = ZipFile(BytesIO(response.content))
@@ -117,10 +119,8 @@ print2(zipp.namelist())
 mylist = [filename for filename in zipp.namelist()]
 print(mylist[0])
 
-
-soup = BeautifulSoup(zipp.open(mylist[0]), "lxml") 
+soup = BeautifulSoup(zipp.open(mylist[0]), "lxml")
 # print2(soup)
-   
 
 # Create default dictionary
 df = defaultdict(list)
@@ -131,7 +131,6 @@ for record in soup.find_all('record'):
             df[field['name']].append(field.text.split(",")[0]+"_Total")
         else:
             df[field['name']].append(field.text)
-        
 
 dp = pd.DataFrame.from_dict(df)
 print2(dp.head(), dp.columns.tolist())
