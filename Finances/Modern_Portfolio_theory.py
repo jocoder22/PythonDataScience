@@ -24,3 +24,6 @@ df = pdr.get_data_yahoo(symbols, startdate, enddate)['Adj Close']
 portfolio = df.copy()
 portfolio.head()
 portfolio.info()
+
+assets_columns = ['Returns', 'Volatility']
+assets = pd.DataFrame(columns = assets_columns)
