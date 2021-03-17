@@ -35,7 +35,7 @@ portfolio_volatility = []
 portfolio_weights = [] 
 
 number_assets = len(symbols)
-combination_weights = 1000
+combination_weights = 40000
 
 # calculate yearly return for each stock
 stock_returns = portfolio.resample('Y').last().pct_change().mean()
@@ -52,3 +52,15 @@ portfolio_cov_matrix.iloc[:6, :6]
 assets_columns = ['Returns', 'Volatility']
 assets = pd.DataFrame({assets_columns[0] : stock_returns, assets_columns[1]: stock_annualized_vol})
 assets.iloc[:6, :6]
+
+for portt in range(combination_weights):
+    weights_listR = np.random.random(number_assets)
+    weights_listN = weights/np.sum(weights)
+    portfolio_weights.append(weights_listN)
+    returns = np.dot(weights_listN, stock_returns) # Returns are the product of individual expected returns of asset and its 
+                                      # weights 
+    portfolio_returns.append(returns)
+    var = portfolio_cov_matrix.mul(weights_listN, axis=0).mul(weights_listN, axis=1).sum().sum()# Portfolio Variance
+    sd = np.sqrt(var) # Daily standard deviation
+    ann_sd = sd*np.sqrt(250) # Annual standard deviation = volatility
+    portfolio_volatility.append(ann_sd)
