@@ -1,3 +1,4 @@
+# mean-variance portfolio theorem
 #!/usr/bin/env python
 import numpy as np
 import pandas as pd
@@ -37,6 +38,10 @@ combination_weights = 1000
 
 # calculate yearly return for each stock
 stock_returns = portfolio.resample('Y').last().pct_change().mean()
+
+# calculate annaulized or yearly volatility for each stock
+# use use np.sqrt(250)
+stock_annualized_vol = np.log(portfolio/portfolio.shift()).std().apply(lambda x: x*np.sqrt(250))
 
 # compute the portfolio covariance
 portfolio_cov_matrix = np.log(portfolio/portfolio.shift()).cov()
