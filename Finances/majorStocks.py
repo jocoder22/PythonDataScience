@@ -17,7 +17,7 @@ colname2 = sorted('Facebook  Google Apple Amazon Microsoft Netflix S&P500'.split
 newdict = {ticker[i]:colname[i] for i in range(len(colname2))}
 
 portfolio = pdr.get_data_yahoo(tickers, startdate, enddate)['Adj Close']
-portfolio.columns = colname
+portfolio.rename(columns=newdict, inplace=True)
 print(portfolio.head())
 
 portfolio.iloc[:,[0,2,4]].plot(figsize=(14,8))
