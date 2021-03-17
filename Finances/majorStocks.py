@@ -3,11 +3,11 @@ import pandas as pd
 import pandas_datareader as pdr
 from datetime import date, datetime
 
-startdate = datetime(2000, 1, 1)
+startdate = datetime(2015, 1, 1)
 enddate = date.today()
 
 tickers = 'FB AMZN AAPL GOOGL NFLX MSFT ^GSPC'.split()
-colname = 'Facebook Amazon Apple Google Netflix Microsoft S&P500'.split()
+colname = 'Apple Amazon Facebook  Google Microsoft Netflix S&P500'.split()
 
 portfolio = pdr.get_data_yahoo(tickers, startdate, enddate)['Adj Close']
 portfolio.columns = colname
