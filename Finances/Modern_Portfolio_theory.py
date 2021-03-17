@@ -34,3 +34,6 @@ portfolio_weights = []
 
 number_assets = len(symbols)
 combination_weights = 1000
+
+stock_returns = portfolio.resample('Y').last().pct_change().mean()
+portfolio_cov_matrix = np.log(portfolio/portfolio.shift()).cov()
