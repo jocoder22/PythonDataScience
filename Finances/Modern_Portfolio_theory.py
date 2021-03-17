@@ -73,3 +73,6 @@ for i, ticker in enumerate(portfolio.columns.tolist()):
 
 Eff_portfolios  = pd.DataFrame(dict_)
 Eff_portfolios.head()
+
+Eff_portfolios.plot.scatter(x='Volatility', y='Returns', alpha=0.3, grid=True, figsize=[14,12])
+plt.show()
