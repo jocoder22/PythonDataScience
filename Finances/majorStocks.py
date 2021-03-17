@@ -80,3 +80,4 @@ def stock_analysis(df):
 stock_analysis('AAPL')  
 
 stock_analysis(tickers)
+
