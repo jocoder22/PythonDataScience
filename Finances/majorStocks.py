@@ -9,6 +9,13 @@ enddate = date.today()
 tickers = 'FB AMZN AAPL GOOGL NFLX MSFT ^GSPC'.split()
 colname = 'Apple Amazon Facebook  Google Microsoft Netflix S&P500'.split()
 
+
+###################
+ticker2 = sorted('FB AMZN AAPL GOOGL NFLX MSFT ^GSPC'.split())
+colname2 = sorted('Facebook  Google Apple Amazon Microsoft Netflix S&P500'.split())
+
+newdict = {ticker[i]:colname[i] for i in range(len(colname2))}
+
 portfolio = pdr.get_data_yahoo(tickers, startdate, enddate)['Adj Close']
 portfolio.columns = colname
 print(portfolio.head())
