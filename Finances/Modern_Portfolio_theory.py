@@ -50,8 +50,8 @@ portfolio_returns = []
 portfolio_volatility = [] 
 portfolio_weights = [] 
 
-number_assets = len(symbols)
-combination_weights = 20000
+number_assets = len(portfolio.columms)
+combination_weights = 50000
 
 for portt in range(combination_weights):
     weights_listR = np.random.random(number_assets)
