@@ -33,46 +33,49 @@ plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15),
 
 
 def stock_analysis(df):
-    startdate = "2012-01-01"
+    startdate = "2017-01-01"
     labels = ["Adjusted Close", "Volume Traded", "Value Traded"]
+    stock = pdr.get_data_yahoo(df, startdate)[['Volume', 'Adj Close']]
     
     if type(df) == str:
-        stock = pdr.get_data_yahoo(df, startdate)
-        stock['valueTraded'] = stock.Volume *  stock['Adj Close']
+        stock['value Traded'] = stock.Volume *  stock['Adj Close']
         
         fig, axs = plt.subplots(3, sharex=True, figsize=(14,12))
         plt.grid(color='black', which='major', axis='y', linestyle='solid')
 
-        stock.loc[:,['Adj Close']].plot(ax=axs[0], label="Adjusted Close", title=f'{labels[0]} for {df}', grid=True)
-        stock.loc[:,['Volume']].plot(ax=axs[1], label="Volume Traded", title=f'{labels[0]} for {df}', grid=True)
-        stock.loc[:,['valueTraded']].plot(ax=axs[2], label="Value Traded", title=f'{labels[0]} for {df}', grid=True)
+        stock.loc[:,['Adj Close']].plot(ax=axs[0], label="Adjusted Close", title=f'{labels[0]} for {df}', grid=True).set(ylabel=labels[0])
+        stock.loc[:,['Volume']].plot(ax=axs[1], label="Volume Traded", title=f'{labels[1]} for {df}', grid=True).set(ylabel=labels[1])
+        stock.loc[:,['value Traded']].plot(ax=axs[2], label="Value Traded", title=f'{labels[2]} for {df}', grid=True).set(ylabel=labels[2])
         
         fig.tight_layout()
         fig.subplots_adjust(top=0.88)
+        plt.legend()
 #         plt.grid(color='black', which='major', axis='y', linestyle='solid')
         plt.show()
-        print("\n\n\n")
-          
+        print("\n\n\n") 
         return stock.head()
+ 
 
         
-    elif isinstance(df, list):
-        portfolio = pdr.get_data_yahoo(df, startdate)
-        
+    elif isinstance(df, list):  
         for name in df:
-            fig, axs = plt.subplots(3, sharex=True, figsize=(14,12))
+            stock_analysis(name)
             
-            portfolio['Adj Close'][name].plot(ax=axs[0], label=labels[0], title=f'{labels[0]} for {name}', grid=True)
-            portfolio['Volume'][name].plot(ax=axs[1], label=labels[1], title=f'{labels[1]} for {name}', grid=True)
-            valueTraded = portfolio['Volume'][name] * portfolio['Adj Close'][name]
-            valueTraded.plot(ax=axs[2], label=labels[2], title=f'{labels[2]} for {name}', grid=True)
+        return portfolio.head()
+
+#             fig, axs = plt.subplots(3, sharex=True, figsize=(14,12))
             
-            fig.tight_layout()
-            fig.subplots_adjust(top=0.88)
-            plt.show()
-            print("\n\n\n")
+#             portfolio['Adj Close'][name].plot(ax=axs[0], label=labels[0], title=f'{labels[0]} for {name}', grid=True)
+#             portfolio['Volume'][name].plot(ax=axs[1], label=labels[1], title=f'{labels[1]} for {name}', grid=True)
+#             valueTraded = portfolio['Volume'][name] * portfolio['Adj Close'][name]
+#             valueTraded.plot(ax=axs[2], label=labels[2], title=f'{labels[2]} for {name}', grid=True)
+            
+#             fig.tight_layout()
+#             fig.subplots_adjust(top=0.88)
+#             plt.show()
+#             print("\n\n\n")
          
-          return portfolio.head()
+#         return portfolio.head()
                     
 stock_analysis('AAPL')  
 
