@@ -27,3 +27,10 @@ portfolio.info()
 
 assets_columns = ['Returns', 'Volatility']
 assets = pd.DataFrame(columns = assets_columns)
+
+
+portfolio_volatility = [] 
+portfolio_weights = [] 
+
+number_assets = len(symbols)
+combination_weights = 1000
