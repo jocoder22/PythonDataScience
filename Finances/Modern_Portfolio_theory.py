@@ -47,3 +47,8 @@ stock_annualized_vol = np.log(portfolio/portfolio.shift()).std().apply(lambda x:
 # compute the portfolio covariance
 portfolio_cov_matrix = np.log(portfolio/portfolio.shift()).cov()
 portfolio_cov_matrix.iloc[:6, :6]
+
+# create a dataframe for returns(yearly) and Volatility(annualized) for each stock
+assets_columns = ['Returns', 'Volatility']
+assets = pd.DataFrame({assets_columns[0] : stock_returns, assets_columns[1]: stock_annualized_vol})
+assets.iloc[:6, :6]
