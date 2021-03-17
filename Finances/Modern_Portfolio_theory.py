@@ -14,11 +14,11 @@ folders = ['Apple', 'MicroSoft', 'Google', 'Netflix', 'Tesla', 'Amazon', 'Toyota
             'Citigroup', 'Walmat', 'Target', "Fedex", "Ups", "Walgreens", "Disney", "Pfizer",
             "Cvs", "AT_T", "CocaCola", "Boeing", "SolarEdge", "AdvancedMicroDevices", "Twilio",
             "ExpWorld", "HomeDepot", "Ford", "PVH", "Twitter", "Salesforce", 
-            "Alibaba", "NioElectricMotor", "Apple" ,  "BristolMyers"]
+            "Alibaba", "NioElectricMotor", "BristolMyers"]
 
 symbols = ['AAPL', 'MSFT', 'GOOGL', 'NFLX', 'TSLA', 'AMZN', 'TM', 'JPM', 'C', 'WMT', 'TGT', 'FDX',
             'UPS', 'WBA', 'DIS', 'PFE', 'CVS', 'T', 'KO', 'BA', 'SEDG', 'AMD', 'TWLO', 'EXPI', 'HD',
-              'F', 'PVH', 'TWTR', 'CRM', 'BABA', 'NIO', 'AAPL', 'BMY']
+              'F', 'PVH', 'TWTR', 'CRM', 'BABA', 'NIO', 'BMY']
 
 coldict = {symbols[i]:folders[i] for i in range(len(symbols))}
 
@@ -30,7 +30,7 @@ portfolio.info()
 assets_columns = ['Returns', 'Volatility']
 assets = pd.DataFrame(columns = assets_columns)
 
-
+portfolio_returns = []
 portfolio_volatility = [] 
 portfolio_weights = [] 
 
