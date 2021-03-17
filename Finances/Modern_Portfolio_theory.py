@@ -21,4 +21,6 @@ symbols = ['AAPL', 'MSFT', 'GOOGL', 'NFLX', 'TSLA', 'AMZN', 'TM', 'JPM', 'C', 'W
 coldict = {symbols[i]:folders[i] for i in range(len(symbols))}
 
 df = pdr.get_data_yahoo(symbols, startdate, enddate)['Adj Close']
-df.head()
+portfolio = df.copy()
+portfolio.head()
+portfolio.info()
