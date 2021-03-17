@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import pandas_datareader as pdr
 from datetime import date, datetime
+import matplotlib.pyplot as plt
 
 # startdate = datetime(2015, 1, 1)
 startdate = datetime(2018, 9, 12)
@@ -45,3 +46,4 @@ stock_annualized_vol = np.log(portfolio/portfolio.shift()).std().apply(lambda x:
 
 # compute the portfolio covariance
 portfolio_cov_matrix = np.log(portfolio/portfolio.shift()).cov()
+portfolio_cov_matrix.iloc[:6, :6]
