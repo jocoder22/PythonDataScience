@@ -27,15 +27,6 @@ portfolio = df.copy()
 portfolio.head()
 portfolio.info()
 
-assets_columns = ['Returns', 'Volatility']
-assets = pd.DataFrame(columns = assets_columns)
-
-portfolio_returns = []
-portfolio_volatility = [] 
-portfolio_weights = [] 
-
-number_assets = len(symbols)
-combination_weights = 40000
 
 # calculate yearly return for each stock
 stock_returns = portfolio.resample('Y').last().pct_change().mean()
@@ -53,6 +44,15 @@ assets_columns = ['Returns', 'Volatility']
 assets = pd.DataFrame({assets_columns[0] : stock_returns, assets_columns[1]: stock_annualized_vol})
 assets.iloc[:6, :6]
 
+
+
+portfolio_returns = []
+portfolio_volatility = [] 
+portfolio_weights = [] 
+
+number_assets = len(symbols)
+combination_weights = 20000
+
 for portt in range(combination_weights):
     weights_listR = np.random.random(number_assets)
     weights_listN = weights/np.sum(weights)
@@ -64,3 +64,12 @@ for portt in range(combination_weights):
     sd = np.sqrt(var) # Daily standard deviation
     ann_sd = sd*np.sqrt(250) # Annual standard deviation = volatility
     portfolio_volatility.append(ann_sd)
+
+
+dict_ = {'Returns':portfolio_returns, 'Volatility':portfolio_volatility}
+
+for i, ticker in enumerate(portfolio.columns.tolist()):
+    dict_[ticker+'_weight'] = [wt[i] for wt in portfolio_weights]
+
+Eff_portfolios  = pd.DataFrame(dict_)
+Eff_portfolios.head()
