@@ -80,12 +80,21 @@ plt.show()
 
 # get the max return portfolio
 max_ret_port = Eff_portfolios.iloc[Eff_portfolios['Returns'].idxmax()]
+print("Max Return Portfolio")
+print(max_ret_port)
 
 # get the min volatility portfolio
 min_vol_port = Eff_portfolios.iloc[Eff_portfolios['Volatility'].idxmin()]
-
+print("Min Volatility Portfolio")
+print(min_vol_port)
 
 # diplay min volatilit and max return portfolios
 plt.scatter(Eff_portfolios['Volatility'], Eff_portfolios['Returns'], figsize=[14,12])
 plt.scatter(min_vol_port[1], min_vol_port[0], color='b', marker='*', s=300)
 plt.scatter(max_ret_port[1], max_ret_port[0], color='b', marker='*', s=500)
+
+
+# find optimal risky portfolio using sharpe ratio
+risk_free_rate = 0.01 # risk factor
+optimal_rp = Eff_portfolios.iloc[((Eff_portfolios['Returns']-risk_free_rate)/Eff_portfolios['Volatility']).idxmax()]
+prnt(optimal_rp)
