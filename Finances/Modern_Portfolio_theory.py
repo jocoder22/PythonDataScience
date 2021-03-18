@@ -102,8 +102,12 @@ prnt(optimal_rp)
 
 
 # Display optimal risky porfolio
+plt.figure(figsize=[14,12], dpi=60)
 plt.scatter(Eff_portfolios['Volatility'], Eff_portfolios['Returns'], alpha=0.3)
 plt.scatter(max_ret_port[1], max_ret_port[0], color='r', marker='*', s=300)
+plt.text(max_ret_port[1], max_ret_port[0], "text on plot")
 plt.scatter(min_vol_port[1], min_vol_port[0], color='b', marker='*', s=300)
+plt.text(min_vol_port[1], min_vol_port[0], "text on plot")
 plt.scatter(optimal_rp[1], optimal_rp[0], color='g', marker='*', s=300)
+plt.text(optimal_rp[1], optimal_rp[0], "text on plot")
 plt.show()
