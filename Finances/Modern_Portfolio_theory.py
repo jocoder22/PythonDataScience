@@ -77,5 +77,11 @@ Eff_portfolios.head()
 Eff_portfolios.plot.scatter(x='Volatility', y='Returns', alpha=0.3, grid=True, figsize=[14,12])
 plt.show()
 
+
+# get the max return portfolio
 max_ret_port = Eff_portfolios.iloc[Eff_portfolios['Returns'].idxmax()]
+
+# get the min volatility portfolio
 min_vol_port = Eff_portfolios.iloc[Eff_portfolios['Volatility'].idxmin()]
+
+
