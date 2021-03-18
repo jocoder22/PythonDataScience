@@ -95,6 +95,7 @@ plt.scatter(max_ret_port[1], max_ret_port[0], color='b', marker='*', s=500)
 
 
 # find optimal risky portfolio using sharpe ratio
-risk_free_rate = 0.01 # risk factor
+risk_free_rate = 0.01 
 optimal_rp = Eff_portfolios.iloc[((Eff_portfolios['Returns']-risk_free_rate)/Eff_portfolios['Volatility']).idxmax()]
+print("Optimal Risky Portfolio")
 prnt(optimal_rp)
