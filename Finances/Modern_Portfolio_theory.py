@@ -85,3 +85,7 @@ max_ret_port = Eff_portfolios.iloc[Eff_portfolios['Returns'].idxmax()]
 min_vol_port = Eff_portfolios.iloc[Eff_portfolios['Volatility'].idxmin()]
 
 
+# diplay min volatilit and max return portfolios
+plt.scatter(Eff_portfolios['Volatility'], Eff_portfolios['Returns'], figsize=[14,12])
+plt.scatter(min_vol_port[1], min_vol_port[0], color='b', marker='*', s=300)
+plt.scatter(max_ret_port[1], max_ret_port[0], color='b', marker='*', s=500)
