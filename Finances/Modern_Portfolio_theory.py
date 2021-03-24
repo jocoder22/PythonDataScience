@@ -174,4 +174,21 @@ dff["NoSharesRB"] = dff.Ratebased/df.iloc[-1, :].values.T
 print(dff)
 
 
-
+def ratesystem3(listrr):
+    rating = list(range(100,0,-4))
+    newlist = []
+    
+    for i in listrr:
+        for ind, k in enumerate(np.arange(0.2, 5.2, 0.2)):
+            if i <= k:
+                res =  rating[ind] * (5 - i)
+                print(f"Rating: {k},  Real rate: {i}")
+                break
+            else : continue   
+            
+            
+        newlist.append(res)
+        
+    newlist = newlist/np.sum(newlist)
+    
+    return newlist
