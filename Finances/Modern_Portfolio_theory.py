@@ -106,7 +106,7 @@ plt.show()
 risk_free_rate = 0.01 
 optimal_rp = Eff_portfolios.iloc[((Eff_portfolios['Returns']-risk_free_rate)/Eff_portfolios['Volatility']).idxmax()]
 print("Optimal Risky Portfolio")
-prnt(optimal_rp)
+print(optimal_rp)
 
 
 # Display optimal risky porfolio
