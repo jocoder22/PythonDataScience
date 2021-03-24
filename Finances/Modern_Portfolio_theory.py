@@ -140,6 +140,7 @@ folders = ["Alibaba", "AdvancedMicroDevices", "Microsoft", "Salesforce", "Bristo
 # UPS_weight     0.044146
 
 
+
 def ratesystem(listrr):
     rating = np.array([5,4,3,2,1])/15
     newlist = []
@@ -163,6 +164,14 @@ mm = ratesystem(realR)
   
 dff = pd.DataFrame(optimal_rp[2:])
 dff.columns = ["Weights"]
-dff["Ratebased"] = mm * 20000
-  
+
+dff["AmountDollars"] =  optimal_rp[2:] * 20000
+dff["NoShares"] = dff.AmountDollars/df.iloc[-1, :].values.T
+
+dff["Ratebased"] = mm * 20000  
+dff["NoSharesRB"] = dff.Ratebased/df.iloc[-1, :].values.T
+
+print(dff)
+
+
 
