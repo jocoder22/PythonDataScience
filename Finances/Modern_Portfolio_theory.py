@@ -58,7 +58,7 @@ portfolio_returns = []
 portfolio_volatility = [] 
 portfolio_weights = [] 
 
-number_assets = len(portfolio.columms)
+number_assets = len(portfolio.columns)
 combination_weights = 50000
 
 for portt in range(combination_weights):
