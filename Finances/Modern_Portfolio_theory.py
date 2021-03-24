@@ -119,3 +119,50 @@ plt.text(min_vol_port[1], min_vol_port[0], "text on plot")
 plt.scatter(optimal_rp[1], optimal_rp[0], color='g', marker='*', s=300)
 plt.text(optimal_rp[1], optimal_rp[0], "text on plot")
 plt.show()
+
+
+
+
+
+symbols = ["BABA", "AMD", "MSFT", "CRM", "BMY", 'FDX', 'UPS', "DIS"]
+folders = ["Alibaba", "AdvancedMicroDevices", "Microsoft", "Salesforce", "BristolMyers", "Fedex", "Ups", "Disney"]
+
+# Optimal Risky Portfolio
+# Returns        0.336675
+# Volatility     0.359894
+# AMD_weight     0.389512
+# BABA_weight    0.004836
+# BMY_weight     0.063844
+# CRM_weight     0.080910
+# DIS_weight     0.028742
+# FDX_weight     0.331963
+# MSFT_weight    0.056047
+# UPS_weight     0.044146
+
+
+def ratesystem(listrr):
+    rating = np.array([5,4,3,2,1])/15
+    newlist = []
+    
+    for i in listrr:
+        for k in range(1, 6):
+            if i <= k:
+                res = rating[k-1] / i
+                break
+            else : continue   
+            
+            
+        newlist.append(res)
+    
+    return newlist
+  
+  realR = np.array([2.3, 1.7, 1.9, 1.9, 2.0, 2.1 , 1.7, 2.5])
+  
+mm = ratesystem(realR)
+  
+  
+dff = pd.DataFrame(optimal_rp[2:])
+dff.columns = ["Weights"]
+dff["Ratebased"] = mm * 20000
+  
+
