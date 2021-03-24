@@ -63,7 +63,7 @@ combination_weights = 50000
 
 for portt in range(combination_weights):
     weights_listR = np.random.random(number_assets)
-    weights_listN = weights/np.sum(weights)
+    weights_listN = weights_listR/np.sum(weights_listR)
     portfolio_weights.append(weights_listN)
     returns = np.dot(weights_listN, stock_returns) # Returns are the product of individual expected returns of asset and its 
                                       # weights 
