@@ -72,7 +72,7 @@ datetime.strptime(winnerObj.find("span", {"class": "bday"}).contents[0], "%Y-%m-
 
 datadict = dict()
 for name, link in links.items():
-    sleep(10) # wait for ten seconds between pages
+    sleep(2) # wait for ten seconds between pages
     print("Fetching: " + name)
     winnerpg = session.get(baseurl + links[name]).text
     winnerObj = Bs(winnerpg)
@@ -86,9 +86,9 @@ for name, link in links.items():
         except ValueError:
             pass
 
-datadict
+print(datadict)
 NobelData = DataFrame(datadict).T
-NobelData
+print(NobelData)
 
 # plot the dataframe
 NobelData.Month.value_counts().sort_index().plot(kind='hist')
