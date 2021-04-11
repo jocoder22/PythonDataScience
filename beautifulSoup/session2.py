@@ -17,7 +17,6 @@ url = "https://en.wikipedia.org/wiki/List_of_Nobel_laureates"
 
 page = session.get(url).text
 
-
 # make a BeautifulSoup object
 nobelist = Bs(page)
 nobeltable = nobelist.find("table", {"class":['wikitable', 'sortable']})
@@ -29,6 +28,7 @@ for data in tabledata:
 
 # Add the information inside a dictionary
 links = dict()
+
 
 for alinks in tabledata:
     if alinks.a != None:
