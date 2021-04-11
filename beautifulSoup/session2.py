@@ -8,7 +8,6 @@ def print2(*args):
               
 sp = {"sep":"\n\n", "end":"\n\n"}  
 
-
 # Begin a session
 session = requests.Session()
 # to see more https://www.whatismybrowser.com/
