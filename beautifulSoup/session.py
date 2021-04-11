@@ -65,7 +65,6 @@ for child in tbody:  # iterate throught the rows of the table
     print(child)
     count += 1
 
-
 count = 1
 for child in nobelist.table.findAll("tr"):  # iterate throught the rows of the table
     print("\nNode: Number %s \n-----" % count)
