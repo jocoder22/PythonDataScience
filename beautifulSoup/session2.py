@@ -26,6 +26,7 @@ tabledata = nobeltable.findAll("td")
 for data in tabledata:
     print(data.a)
 
+
 # Add the information inside a dictionary
 links = dict()
 
