@@ -9,16 +9,18 @@ import seaborn as sns
 
 from scipy.cluster.hierarchy import linkage, fcluster, dendrogram
 from scipy.cluster.vq import vq, kmeans, whiten
+from printdescribe import changepath
 
 # plt.style.use('ggplot')
 
-
-path = r"C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\UnsupervisedME"
+# path = r"C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\UnsupervisedME"
+path = r"E:\PythonDataScience\MachineLearning\UnsupervisedME"
 os.chdir(path)
 sp = '\n\n'
 
 # Read in the dataset, 
-data = pd.read_csv('car.csv', compression='gzip')
+with changepath(path):
+    data = pd.read_csv('car.csv', compression='gzip')
 
 origin = data.pop('Origin')
 modelyear = data.pop('Model_year')
