@@ -57,10 +57,6 @@ plt.plot(dataset2['MPG'], label='scaled')
 plt.legend()
 plt.show()
 
-
-
-
-
 # Hierarchical clustering
 # Number of cluster investigation
 distance = linkage(dataset2[['MPG', 'Horsepower']], method='ward')
