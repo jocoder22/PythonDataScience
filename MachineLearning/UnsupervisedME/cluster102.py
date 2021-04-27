@@ -33,14 +33,14 @@ dataset2 = pd.DataFrame(data2, columns=data.columns)
 k_cluster, _ = kmeans(dataset2, 3)
 dataset2['k_labels'], _ = vq(dataset2, k_cluster)
 
-print(dataset2.groupby('k_labels').mean(), end=sp)
-print(dataset2.groupby('k_labels').count(), end=sp)
+print(dataset2.groupby('k_labels').mean(), **sp)
+print(dataset2.groupby('k_labels').count(), **sp)
 
 
 # Pivot table of clusters
 dataset2['Origin'] = origin
 dataset2['Model_year'] = modelyear
-print(dataset2.groupby('k_labels')['Model_year', 'Origin'].count(), end=sp)
+print(dataset2.groupby('k_labels')['Model_year', 'Origin'].count(), **sp)
 print(pd.pivot_table(dataset2, index='k_labels', columns='Model_year', fill_value=0,
             values="MPG", aggfunc='count', margins=True, margins_name='Total'), **sp)
 
@@ -49,4 +49,4 @@ groups = pd.crosstab(index=dataset2["k_labels"],
                             columns=dataset2["Model_year"],
                              margins=True, margins_name='Total') # normalize=True).add_prefix('year_')
 groups.index = ['Group_1', 'Group_2', 'Group_3', 'Total']
-print(groups) 
+print(groups, **sp) 
