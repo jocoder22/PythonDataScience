@@ -20,7 +20,7 @@ from tensorflow.python.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
 
 from sklearn.pipeline import FeatureUnion
 from sklearn.preprocessing import FunctionTransformer
-from sklearn.preprocessing import Imputer
+# from sklearn.preprocessing import Imputer
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import roc_auc_score
@@ -43,8 +43,8 @@ import matplotlib
 # print(matplotlib.style.library)
 # plt.style.use('dark_background')
 
-path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
-os.chdir(path)
+# path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
+# os.chdir(path)
 
 sp = '\n\n'
 symbol = 'AAL' # 'AAPL' #'AMZN'  
@@ -52,12 +52,12 @@ starttime = datetime(1996, 1, 1)
 endtime = date.today()
 stock = pdr.get_data_yahoo(symbol, starttime, endtime)
 stock.reset_index(inplace=True)
-print(stock.head(), stock.shape, sep=sp)
+# print(stock.head(), stock.shape, sep=sp)
 
 scaler = MinMaxScaler()
 closeprice = stock[['Close']]
 closeprice = scaler.fit_transform(closeprice)
-print(closeprice)
+# print(closeprice)
 
 window = 14
 val = 0.1
@@ -128,7 +128,7 @@ history = model.fit(xtrain, ytrain, epochs=30, validation_data=(xval, yval),
 # model.load_weights('weights\Best.223_0.000160.h5')
 # model.fit with callbacks save only the weights
 
-
+"""
 model = load_model(f"model\model55.h5")
 # plt.plot(history.history['loss'])
 # plt.plot(history.history['val_loss'])
@@ -151,3 +151,4 @@ plt.show()
 # save model
 # model.save_weights('model_lstm.h5')
 # model.save(f"model\model55.h5")
+"""
