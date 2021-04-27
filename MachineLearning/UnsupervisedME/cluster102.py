@@ -16,7 +16,7 @@ from printdescribe import changepath
 # path = r"C:\Users\Jose\Desktop\PythonDataScience\MachineLearning\UnsupervisedME"
 path = r"E:\PythonDataScience\MachineLearning\UnsupervisedME"
 os.chdir(path)
-sp = '\n\n'
+sp = {"sep":"\n\n", "end":"\n\n"} 
 
 # Read in the dataset, 
 with changepath(path):
@@ -42,7 +42,7 @@ dataset2['Origin'] = origin
 dataset2['Model_year'] = modelyear
 print(dataset2.groupby('k_labels')['Model_year', 'Origin'].count(), end=sp)
 print(pd.pivot_table(dataset2, index='k_labels', columns='Model_year', fill_value=0,
-            values="MPG", aggfunc='count', margins=True, margins_name='Total'), end=sp)
+            values="MPG", aggfunc='count', margins=True, margins_name='Total'), **sp)
 
 
 groups = pd.crosstab(index=dataset2["k_labels"], 
