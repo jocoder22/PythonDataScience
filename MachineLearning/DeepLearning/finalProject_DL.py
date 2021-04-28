@@ -49,7 +49,6 @@ model.add(Dense(10, activation='softmax'))
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # model.add(Dense(1))
-
 # # Compile the model
 # model.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
 
