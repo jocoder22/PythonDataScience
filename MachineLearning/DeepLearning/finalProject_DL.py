@@ -18,7 +18,6 @@ def print2(*args):
 
 sp = {"sep":"\n\n", "end":"\n\n"} 
 
-
 url = 'https://assets.datacamp.com/production/repositories/654/datasets/24769dae9dc51a77b9baa785d42ea42e3f8f7538/mnist.csv'
 
 df = pd.read_csv(url, sep=',')
