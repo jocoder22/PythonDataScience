@@ -45,6 +45,7 @@ print(pd.pivot_table(dataset2, index='k_labels', columns='Model_year', fill_valu
             values="MPG", aggfunc='count', margins=True, margins_name='Total'), **sp)
 
 
+
 groups = pd.crosstab(index=dataset2["k_labels"], 
                             columns=dataset2["Model_year"],
                              margins=True, margins_name='Total') # normalize=True).add_prefix('year_')
