@@ -41,7 +41,6 @@ model.add(Dense(50, activation='relu'))
 model.add(Dense(50, activation='relu'))
 model.add(Dense(50, activation='relu'))
 
-
 # Add the output layer
 model.add(Dense(10, activation='softmax'))
 
