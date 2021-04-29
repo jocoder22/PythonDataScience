@@ -41,7 +41,7 @@ print(a@b, **sp)
 
 def luDecomp2(matt):
     """
-        This compute the LU decomposition of matrix using the Doolittle's algorithms.
+        This compute the LU decomposition of matrix using the crout's algorithms.
         It return a numpy array of the Lower and Upper triangular matrix
 
     """
