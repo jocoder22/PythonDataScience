@@ -73,6 +73,7 @@ def luDecomp2(matt):
     return np.array(ll), np.array(uu)
 
 
+
 a, b = luDecomp2(mat)
 print(a,b, **sp)
 print(a@b)
