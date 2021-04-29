@@ -4,7 +4,13 @@ import pandas as pd
 
 sp = {"end":"\n\n", "sep":"\n\n"}
 
+
 def luDecomp(matt):
+    """
+        This compute the LU decomposition of matrix using the Doolittle's algorithms.
+        It return a numpy array of the Lower and Upper triangular matrix
+
+    """
     w = len(matt)
     uu = [[0] * w for j in range(w)]
     ll = [[0 for i in range(w)] for j in range(w)]
