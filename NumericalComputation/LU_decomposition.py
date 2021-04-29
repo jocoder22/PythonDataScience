@@ -38,7 +38,6 @@ print(a@b, **sp)
 
 
 
-
 def luDecomp2(matt):
     """
         This compute the LU decomposition of matrix using the crout's algorithms.
@@ -72,6 +71,7 @@ def luDecomp2(matt):
             uu[k][j] = (matt[k][j] - sum1) / ll[k][k]
 
     return np.array(ll), np.array(uu)
+
 
 a, b = luDecomp2(mat)
 print(a,b, **sp)
