@@ -28,7 +28,6 @@ def luDecomp(matt):
     return np.array(ll), np.array(uu)
 
 
-
 mat = [[2, -1, -2],
        [-4, 6, 3],
        [-4, -2, 8]]
@@ -36,6 +35,7 @@ mat = [[2, -1, -2],
 a, b = luDecomp(mat)
 print(a,b, **sp)
 print(a@b, **sp)
+
 
 
 
