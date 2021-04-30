@@ -22,3 +22,10 @@ Ma**2
 # rows and columns: Zero Indexed
 Ma.row(1)
 Ma.col(1)
+
+# find the shape
+Ma.shape
+
+# find inverse: **-1
+Ma**-1
+Mb**-1
