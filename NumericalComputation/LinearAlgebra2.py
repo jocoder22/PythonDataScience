@@ -35,3 +35,9 @@ eye(3)
 zeros(3,4)
 ones(2,5)
 diag(3,4,7,0)
+
+# Determinant
+det(Ma)
+
+# Reduced row echelon
+Ma.rref()
