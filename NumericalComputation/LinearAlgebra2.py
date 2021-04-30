@@ -29,3 +29,9 @@ Ma.shape
 # find inverse: **-1
 Ma**-1
 Mb**-1
+
+# Create common matrices, Identity => eye(), zero => zero(), onces => onces(), diagonal => diag()
+eye(3)
+zeros(3,4)
+ones(2,5)
+diag(3,4,7,0)
