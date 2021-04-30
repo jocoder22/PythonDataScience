@@ -41,3 +41,12 @@ det(Ma)
 
 # Reduced row echelon
 Ma.rref()
+
+# Eigen values
+M.eigenvals()
+
+# Eigenvalues
+M.eigenvects()
+
+# Diagonalize
+P, D = M.diagonalize()
