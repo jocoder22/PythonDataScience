@@ -1,11 +1,11 @@
 import sys
 import numpy as np
 import pandas as pd
-# import matplotlib.pyplot as plt
-# import seaborn as sns
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# from datetime import datetime
-# import pyodbc
+from datetime import datetime
+import pyodbc
 from printdescribe import changepath
 
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
