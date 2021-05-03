@@ -3,14 +3,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 from datetime import datetime
 import pyodbc
-from printdescribe import changepath
 
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from pmdarima.arima import auto_arima
 
+from printdescribe import changepath
 
 path1 = r"E:\Capstone\capstoneRepo"
 
