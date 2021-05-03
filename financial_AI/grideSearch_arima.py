@@ -11,17 +11,19 @@ from pmdarima.arima import auto_arima
 
 from printdescribe import changepath
 
+sp = {"end":"\n\n", "sep":"\n\n"}
+
 path1 = r"E:\Capstone\capstoneRepo"
 
 with changepath(path1):
     df = pd.read_csv("finally.csv")
 
-print(df.head())
+print(df.head(), **sp)
 
 df_train = df[:int(len(df)*0.8)]
 df_test = df[int(len(df)*0.8):]
 
-print(df_train.shape, df_test.shape)
+print(df_train.shape, df_test.shape, **sp)
 
 
 model_search = auto_arima(df_train[["SPY_Last"]], 
