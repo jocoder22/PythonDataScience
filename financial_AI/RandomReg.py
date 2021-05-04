@@ -101,6 +101,7 @@ print(y_test2.tail(10))
 # dump(model2, f'model2_{symbol}_{datenow}.joblib')
 
 
+
 # # loading the model
 # model2 = pkl.load(open(filename, 'rb'))
 # result = model2.score(X_test, y_test)
