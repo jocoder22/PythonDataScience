@@ -102,6 +102,7 @@ print(y_test2.tail(10))
 
 
 
+
 # # loading the model
 # model2 = pkl.load(open(filename, 'rb'))
 # result = model2.score(X_test, y_test)
