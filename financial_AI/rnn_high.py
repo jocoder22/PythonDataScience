@@ -49,6 +49,7 @@ allstock = stock.copy()
 # print(stock.isnull().sum())
 # print(stock.info(), stock.describe(), sep=sp)
 
+
 stock['MidPrice'].plot()
 plt.show()
 
