@@ -36,4 +36,5 @@ model_search = auto_arima(df_train[["SPY_Last"]],
                          stepwise=True)
 
 
+
 print(model_search.summary(), **sp)
