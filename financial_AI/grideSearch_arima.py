@@ -25,7 +25,6 @@ df_test = df[int(len(df)*0.8):]
 
 print(df_train.shape, df_test.shape, **sp)
 
-
 model_search = auto_arima(df_train[["SPY_Last"]], 
                          X= df_train[["VIX_Last"]],
                          start_p=1, start_q=1, 
