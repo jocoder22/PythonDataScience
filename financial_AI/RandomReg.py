@@ -26,6 +26,7 @@ start = datetime(2010, 6, 29)
 end = date.today()
 # symbol = 'AAPL'
 # symbol = 'AMZN'
+
 symbol = 'NYT'
 # symbol = 'GOOG'
 
