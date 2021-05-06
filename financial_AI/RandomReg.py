@@ -13,7 +13,6 @@ from sklearn.ensemble import RandomForestRegressor as regg
 from sklearn.model_selection import train_test_split as tts
 
 plt.style.use('ggplot')
-
 # path = r'C:\Users\Jose\Desktop\PythonDataScience\financial_AI'
 # path = r'C:\Users\Jose\Desktop\PythonDataScience\financial_AI'
 # os.chdir(path)
