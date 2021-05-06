@@ -44,7 +44,6 @@ stock['MidPrice'] = (stock.High + stock.Low) / 2.0
 allstock = stock.copy()
 
 # print(stock.head(), stock.tail(), stock.shape, sep=sp)
-
 # EDA:
 # print(stock.isnull().sum())
 # print(stock.info(), stock.describe(), sep=sp)
