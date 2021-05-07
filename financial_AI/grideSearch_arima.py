@@ -12,7 +12,6 @@ from pmdarima.arima import auto_arima
 from printdescribe import changepath
 
 sp = {"end":"\n\n", "sep":"\n\n"}
-
 path1 = r"E:\Capstone\capstoneRepo"
 
 with changepath(path1):
