@@ -66,7 +66,6 @@ print(score, sep=sp, end=sp)
 impt_feature = model2.feature_importances_
 print(impt_feature)
 
-
 ypred = model2.predict(X_test)
 
 fig, ax = plt.subplots()
