@@ -36,7 +36,6 @@ for d in range(1, 41):
     stock[dd] = stock['Close'].shift(-1 * d)
 
 stock.dropna(inplace=True)
-
 print(stock.head(), stock.tail(), sep=sp, end=sp)
 
 X = stock.iloc[:, :33]
