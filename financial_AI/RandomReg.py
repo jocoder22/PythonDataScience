@@ -86,6 +86,7 @@ fig, ax = plt.subplots()
 fig.set_figwidth(24)
 fig.set_figheight(15)
 
+
 y_test['day40'].plot(label='Actual')
 y_test2['pred'].plot(label='Prediction')
 plt.legend()
