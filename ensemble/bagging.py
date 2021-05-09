@@ -48,8 +48,6 @@ pred = _bag.predict(X_test)
 print('F1-Score: {:.2f}'.format(accuracy_score(y_test, pred)))
 print(f'Score for the BaggingClasifier: {_bag.score(X_test, y_test):.2f}')
 
-
-
 # This is the LogisticRegression model
 # Build a balanced logistic regression
 _baselr = LogisticRegression(multi_class='multinomial', solver='lbfgs',
