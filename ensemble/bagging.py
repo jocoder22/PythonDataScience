@@ -27,7 +27,6 @@ with mgt.changepath(path):
     X_train, X_test =  npzfile['X_train'], npzfile['X_test']
     y_train, y_test =npzfile['y_train'], npzfile['y_test']
 
-
  # Instantiate the base model
  # The base model is using a weak model, here we limit the max_depth
 #  for linear model, we use normalized=False argument
