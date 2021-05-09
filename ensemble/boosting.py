@@ -34,11 +34,6 @@ sp = {'sep':'\n\n', 'end':'\n\n'}
 
 print(dir(mgt), **sp)
 
-
-
-
-
-
 with mgt.changepath(path):
     npzfile = np.load('mydata_l.npz')
     X_train, X_test =  npzfile['X_train'], npzfile['X_test']
