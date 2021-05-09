@@ -22,9 +22,6 @@ print(dir(mgt))
 plt.style.use('ggplot')
 sp = {'sep':'\n\n', 'end':'\n\n'}
 
-
-
-
 with mgt.changepath(path):
     npzfile = np.load('mydata.npz')
     X_train, X_test =  npzfile['X_train'], npzfile['X_test']
