@@ -14,3 +14,11 @@ ttTb = tt.T@b
 
 ttaa = np.append(ttTtt, ttTb.reshape(-1,1), axis=1)
 p, l, u = lu(ttaa)
+
+
+result = []
+for i in range(len(l)):
+    result.append(l[i][0])
+
+
+parameter_symbols = [rf'$\beta_{b}$' for b in range(len(result))]
