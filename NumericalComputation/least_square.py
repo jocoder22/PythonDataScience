@@ -23,6 +23,7 @@ ttaa = np.append(ttTtt, ttTb.reshape(-1,1), axis=1)
 # find the LU decomposition
 p, l, u = lu(ttaa)
 
+
 # use the Lowe triangle to extract the beta-coefficients
 result = []
 for i in range(len(l)):
