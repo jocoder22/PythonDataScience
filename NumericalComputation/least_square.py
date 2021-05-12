@@ -28,6 +28,7 @@ result = []
 for i in range(len(l)):
     result.append(l[i][0])
 
+    
 # create symbols for the columns
 parameter_symbols = [rf'$\beta_{b}$' for b in range(len(result))]
 
