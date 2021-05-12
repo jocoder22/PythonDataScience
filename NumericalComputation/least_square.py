@@ -35,5 +35,6 @@ parameter_symbols = [rf'$\beta_{b}$' for b in range(len(result))]
 # create a pandas DataFrame
 df = pd.DataFrame([result],index = ["Results"], columns=parameter_symbols)
 
+
 # print the dataframe
 print(df)
