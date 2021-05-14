@@ -82,6 +82,7 @@ print(f'''
 lm_adaBT = AdaBoostRegressor( n_estimators=250, random_state=500, learning_rate=0.01)
 lm_adaBT.fit(X_train, y_train)
 
+
 # Predict using the AdaBoost model
 pred_adaBT = lm_adaBT.predict(X_test)
 
