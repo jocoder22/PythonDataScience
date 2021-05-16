@@ -101,6 +101,7 @@ _cat.fit(X_train, y_train)
 pred = _cat.predict(X_test)
 
 
+
 # Evaluate the performance using the RMSE
 s_cat = _cat.score(X_test, y_test)
 rmse_cat = np.sqrt(mean_squared_error(y_test, pred))
