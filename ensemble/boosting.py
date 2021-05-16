@@ -77,6 +77,7 @@ print(f'''
         Accuracy AdaBoost Linear Regression model: {score_adaB:.02f}%
         ''', **sp)
 
+
 # Add AdaBoost model
 # Initialize the model with default Tree based regression model
 lm_adaBT = AdaBoostRegressor( n_estimators=250, random_state=500, learning_rate=0.01)
