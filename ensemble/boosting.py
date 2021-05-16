@@ -107,6 +107,7 @@ rmse_cat = np.sqrt(mean_squared_error(y_test, pred))
 print('RMSE (CatBoost): {:.3f}, Accuracy Score: {:.2f}'.format(rmse_cat, s_cat), **sp)
 
 
+
 # Build and fit a XGBoost regressor
 _xgb = xgb.XGBRegressor(objective='reg:squarederror', max_depth = 3, learning_rate = 0.1,  n_estimators = 100, random_state=500)
 _xgb.fit(X_train, y_train)
