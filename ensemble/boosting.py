@@ -69,6 +69,7 @@ lm_adaB.fit(X_train, y_train)
 # Predict using the AdaBoost model
 pred_adaB = lm_adaB.predict(X_test)
 
+
 # Evaluate the performance using the RMSE and Accuracy score
 score_adaB = lm_adaB.score(X_test, y_test)
 rmsea = np.sqrt(mean_squared_error(y_test, pred_adaB))
