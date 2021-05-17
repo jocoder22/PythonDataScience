@@ -39,6 +39,7 @@ _bag = BaggingClassifier(
   random_state=500)
  
  
+ 
 _bag.fit(X_train, y_train)
 
 # Predict the labels of the test set
