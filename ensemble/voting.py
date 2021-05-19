@@ -37,7 +37,6 @@ colname = ['population', 'fertility', 'HIV', 'CO2', 'BMI_male',
            'GDP', 'BMI_female', 'life', 'child_mortality', 'Region']
 
 df = pd.read_csv(url, sep=',')
-
 print(df.head(), df.info(), sep=sp, end=sp)
 
 df.loc[df['life'] < 62, 'lifeCat'] = 'veryLow'
