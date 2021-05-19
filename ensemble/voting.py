@@ -60,7 +60,6 @@ hot1 = OneHotEncoder()
 
 
 df['lifecat'] = label1.fit_transform(df['lifeCat'])
-
 df['rc'] =  df.Region
 
 # df['Rcoded'] = label1.fit_transform(df['Region'])
