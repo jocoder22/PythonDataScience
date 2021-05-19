@@ -66,8 +66,6 @@ df = pd.get_dummies(df, columns=['Region'], prefix='R') #drop_first=True
 with changepath(mypath):
     df.to_csv('lifeExp.csv', index=False)
 
-
-
 y = df['lifecat'].values
 X = df.drop(['life','lifeCat', 'lifecat', 'rc'], axis=1).values
 
