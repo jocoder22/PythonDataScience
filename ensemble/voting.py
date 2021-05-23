@@ -156,10 +156,6 @@ best_dt = DecisionTreeClassifier(bdtp, random_state=5)
 
 
 
-
-
-
-
 # fit a randomforest tree model
 forest = RandomForestClassifier(criterion='gini', n_estimators=50,
                                  random_state=1, n_jobs=2)
