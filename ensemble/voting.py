@@ -77,9 +77,6 @@ scaler = StandardScaler()
 scaler.fit(X)
 
 # then transform to both the training set and the test set.
-
-
-
 # print(y.shape,y.head(), X.head(), X.shape, sep=sp, end=sp)
 # Create training and test set
 X_train, X_test, y_train, y_test = train_test_split(
