@@ -70,6 +70,7 @@ X = df.drop(['life','lifeCat', 'lifecat', 'rc'], axis=1).values
 # scale the dataset
 scaler = StandardScaler()
 
+
 # First fit on training set only.
 scaler.fit(X)
 
