@@ -70,8 +70,6 @@ with changepath(mypath):
 y = df['lifecat'].values
 X = df.drop(['life','lifeCat', 'lifecat', 'rc'], axis=1).values
 
-
-
 # scale the dataset
 scaler = StandardScaler()
 
