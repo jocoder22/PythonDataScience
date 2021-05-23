@@ -26,11 +26,9 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from ctmanager.functionX import changepath
 
-
 mypath = r'C:\Users\Jose\Desktop\PythonDataScience\ensemble'  
 sp = '\n\n'
 pp = '#'*80
-
 
 url = 'https://assets.datacamp.com/production/course_1939/datasets/gm_2008_region.csv'
 colname = ['population', 'fertility', 'HIV', 'CO2', 'BMI_male',
