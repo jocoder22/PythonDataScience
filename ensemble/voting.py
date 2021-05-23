@@ -90,7 +90,6 @@ with changepath(mypath):
                 y_train=y_train, y_test=y_test)
 
 '''
-
 with changepath(mypath):
     npzfile = np.load('mydata.npz')
     X_train, X_test =  npzfile['X_train'], npzfile['X_test']
@@ -117,8 +116,6 @@ for n in range(2,20):
         nc = accuracy
 
 k_neClas = KNeighborsClassifier(7)
-
-
 
 
 # fit the DecisionTreeClassifier
