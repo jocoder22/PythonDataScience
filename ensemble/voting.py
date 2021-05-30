@@ -37,6 +37,7 @@ colname = ['population', 'fertility', 'HIV', 'CO2', 'BMI_male',
 df = pd.read_csv(url, sep=',')
 print(df.head(), df.info(), sep=sp, end=sp)
 
+
 df.loc[df['life'] < 62, 'lifeCat'] = 'veryLow'
 df.loc[df['life'] >= 62, 'lifeCat'] = 'Low'
 df.loc[df['life'] >= 72, 'lifeCat'] = 'Medium'
