@@ -39,6 +39,7 @@ enddate = date.today()
 stock = pdr.get_data_yahoo(stocksname, startdate, enddate)
 
 
+
 # Feature engineering
 stock['MidPrice'] = (stock.High + stock.Low) / 2.0
 allstock = stock.copy()
@@ -50,6 +51,7 @@ allstock = stock.copy()
 
 stock['MidPrice'].plot()
 plt.show()
+
 
 stock.reset_index(inplace=True)
 train_data = stock.loc[:2770, 'MidPrice'].values
