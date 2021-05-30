@@ -80,7 +80,6 @@ for i in range(0, train_data.shape[0] ,smoothing_window_size):
         train_data[i:,:] = scalerMM.transform(train_data[i:,:])
 
 
-
 print(train_data.shape, test_data.shape, train_data.size)
 # Reshape both train and test data
 
