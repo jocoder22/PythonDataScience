@@ -86,6 +86,7 @@ print(xtrain.shape, xval.shape, xtest.shape, sep=sp)
 print(ytrain.shape, yval.shape, ytest.shape, sep=sp)
 
 
+
 """ now = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
 # saving weights
 savedir = os.path.join(os.getcwd(), 'weights')
