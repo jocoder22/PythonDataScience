@@ -66,7 +66,9 @@ print(train_data.shape, test_data.shape, train_data.size)
 
 print(train_data[:5])
 print(train_data[-5:])
+
 smoothing_window_size = 1500 # around 25% of the size
+
 for i in range(0, train_data.shape[0] ,smoothing_window_size):
     window = i+smoothing_window_size
     if window < train_data.shape[0] or window == train_data.shape[0]:
