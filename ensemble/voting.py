@@ -83,9 +83,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 X_train = scaler.transform(X_train)
 X_test= scaler.transform(X_test)
 
+
 with changepath(mypath):
     np.savez('mydata', X_train=X_train, X_test=X_test, 
                 y_train=y_train, y_test=y_test)
+
 
 
 '''
