@@ -41,17 +41,20 @@ fplt.candlestick_ochl(aapl[['Open', 'Close', 'High', 'Low']])
 fplt.show()
 
 
+
+fplt.background = "#fff"
 ax, ax2 = fplt.create_plot('Apple MACD', rows=2)
 fplt.background = "#fff"
 # plot macd with standard colors first
 macd = aapl.Close.ewm(span=12).mean() - aapl.Close.ewm(span=26).mean()
 signal = macd.ewm(span=9).mean()
-
 aapl['macd_diff'] = macd - signal
+
+fplt.background = "#fff"
 fplt.volume_ocv(aapl[['Open','Close','macd_diff']], ax=ax2, colorfunc=fplt.strength_colorfilter)
+fplt.background = "#fff"
 fplt.plot(macd, ax=ax2, legend='MACD')
 fplt.plot(signal, ax=ax2, legend='Signal')
-
 
 # change to b/w coloring templates for next plots
 fplt.candle_bull_color = fplt.candle_bear_color = '#000'
@@ -59,6 +62,7 @@ fplt.volume_bull_color = fplt.volume_bear_color = '#333'
 fplt.candle_bull_body_color = fplt.volume_bull_body_color = '#fff'
 
 # plot price and volume
+fplt.background = "#fff"
 fplt.candlestick_ochl(aapl[['Open','Close','High','Low']], ax=ax)
 hover_label = fplt.add_legend('', ax=ax)
 axo = ax.overlay()
