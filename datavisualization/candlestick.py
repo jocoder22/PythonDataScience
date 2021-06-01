@@ -52,6 +52,7 @@ fplt.volume_ocv(aapl[['Open','Close','macd_diff']], ax=ax2, colorfunc=fplt.stren
 fplt.plot(macd, ax=ax2, legend='MACD')
 fplt.plot(signal, ax=ax2, legend='Signal')
 
+
 # change to b/w coloring templates for next plots
 fplt.candle_bull_color = fplt.candle_bear_color = '#000'
 fplt.volume_bull_color = fplt.volume_bear_color = '#333'
