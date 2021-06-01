@@ -13,7 +13,7 @@ from datetime import datetime, date
 # aapl = yf.download('BABA', '2020-1-1','2021-2-18')
 
 
-symbol = "ZV" #'BABA' # 'AAPL' #'AMZN'  
+symbol = "VZ" #'BABA' # 'AAPL' #'AMZN'  
 starttime = datetime(2021, 1, 1)
 endtime = date.today()
 aapl = pdr.get_data_yahoo(symbol, starttime, endtime)
@@ -23,7 +23,7 @@ print(aapl.head())
 d = [12,26,9]
 w = [5,35,5]
 
-dayy = False
+dayy = True
 if dayy == True:
     dd = d
 else: dd = w
