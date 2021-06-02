@@ -11,19 +11,19 @@ import pandas_datareader as pdr
 from datetime import datetime, date
 
 # aapl = yf.download('BABA', '2020-1-1','2021-2-18')
+sp = {"end":"\n\n", "sep":"\n\n"}
 
-
-symbol = "VZ" #'BABA' # 'AAPL' #'AMZN'  
+symbol = "VZ" # "CMCSA" #"VZ" #'BABA' # 'AAPL' #'AMZN'  
 starttime = datetime(2021, 1, 1)
 endtime = date.today()
 aapl = pdr.get_data_yahoo(symbol, starttime, endtime)
-print(aapl.head())
+print(aapl.head(), aapl.tail(), **sp)
 
 
 d = [12,26,9]
 w = [5,35,5]
 
-dayy = True
+dayy = False
 if dayy == True:
     dd = d
 else: dd = w
@@ -39,9 +39,14 @@ fig, (ax1, ax2) = plt.subplots(2, sharex=True, figsize =(24,10))
 ax1.grid(alpha=0.7); ax2.grid(alpha=0.7)
 ax1.set_title("Candlestick"); ax2.set_title("MACD")
 
+
+
 color = ["green" if close_price > open_price else "red" for close_price, open_price in zip(aapl.Close, aapl.Open)]
 ax1.bar(x=aapl.index, height=np.abs(aapl.Open-aapl.Close), bottom=np.min((aapl.Open,aapl.Close), axis=0), width=0.6, color=color)
 ax1.bar(x=aapl.index, height=aapl.High - aapl.Low, bottom=aapl.Low, width=0.1, color=color)
+
+ax3 = ax2.twinx()
+ax3.plot(aapl.Volume, color="black")
 
 # plt.title(f'MACD chart {symbol}')
 color2 = ["green" if close_price > open_price else "red" for close_price, open_price in zip(aapl.MACD, aapl.MACDsig)]
