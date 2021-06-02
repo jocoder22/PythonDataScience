@@ -33,6 +33,8 @@ signal = macd.ewm(span=dd[2]).mean()
 aapl['macd_diff'] = macd - signal
 aapl['MACD'] = macd 
 aapl['MACDsig'] = signal
+aapl['numb'] = np.arange(1, aapl.shape[0]+1)
+aapl['CUMSUM_C'] = aapl['Volume'].cumsum()
 
 
 fig, (ax1, ax2) = plt.subplots(2, sharex=True, figsize =(24,10))
