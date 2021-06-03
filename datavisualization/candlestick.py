@@ -35,6 +35,14 @@ aapl['MACD'] = macd
 aapl['MACDsig'] = signal
 aapl['numb'] = np.arange(1, aapl.shape[0]+1)
 aapl['CUMSUM_C'] = aapl['Volume'].cumsum()
+aapl["aveg"] = aapl['CUMSUM_C']/aapl['numb'] 
+print(aapl.head(), aapl.tail(), **sp)
+
+fig, (ax1, ax2) = plt.subplots(2, sharex=True, figsize =(24,10))
+ax1.grid(alpha=0.7); ax2.grid(alpha=0.7)
+ax1.plot(aapl.aveg, color="black")
+ax2.plot(aapl.Volume, color="red")
+plt.show()
 
 
 fig, (ax1, ax2) = plt.subplots(2, sharex=True, figsize =(24,10))
