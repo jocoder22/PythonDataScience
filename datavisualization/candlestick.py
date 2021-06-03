@@ -28,15 +28,18 @@ if dayy == True:
     dd = d
 else: dd = w
 
+# computer MACD and signal
 macd = aapl.Close.ewm(span=dd[0]).mean() - aapl.Close.ewm(span=dd[1]).mean()
 signal = macd.ewm(span=dd[2]).mean()
 aapl['macd_diff'] = macd - signal
+
 aapl['MACD'] = macd 
 aapl['MACDsig'] = signal
 aapl['numb'] = np.arange(1, aapl.shape[0]+1)
 aapl['CUMSUM_C'] = aapl['Volume'].cumsum()
 aapl["aveg"] = aapl['CUMSUM_C']/aapl['numb'] 
 print(aapl.head(), aapl.tail(), **sp)
+
 
 fig, (ax1, ax2) = plt.subplots(2, sharex=True, figsize =(24,10))
 ax1.grid(alpha=0.7); ax2.grid(alpha=0.7)
