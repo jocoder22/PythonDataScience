@@ -33,11 +33,16 @@ macd = aapl.Close.ewm(span=dd[0]).mean() - aapl.Close.ewm(span=dd[1]).mean()
 signal = macd.ewm(span=dd[2]).mean()
 aapl['macd_diff'] = macd - signal
 
+# form dataframe
 aapl['MACD'] = macd 
 aapl['MACDsig'] = signal
+
+# compute period mean volume
 aapl['numb'] = np.arange(1, aapl.shape[0]+1)
 aapl['CUMSUM_C'] = aapl['Volume'].cumsum()
 aapl["aveg"] = aapl['CUMSUM_C']/aapl['numb'] 
+
+
 print(aapl.head(), aapl.tail(), **sp)
 
 
