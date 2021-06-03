@@ -101,7 +101,7 @@ mpf.plot(aapl, type='candle')
 mpf.plot(aapl, type='candle', mav=(12,26,9))
 
 
-
+# plot using finplot module
 fplt.background = '#B0E0E6'
 fplt.candlestick_ochl(aapl[['Open', 'Close', 'High', 'Low']])
 fplt.show()
