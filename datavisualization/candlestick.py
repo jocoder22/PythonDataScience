@@ -13,7 +13,7 @@ from datetime import datetime, date
 # aapl = yf.download('BABA', '2020-1-1','2021-2-18')
 sp = {"end":"\n\n", "sep":"\n\n"}
 
-symbol = "VZ" # "CMCSA" #"VZ" #'BABA' # 'AAPL' #'AMZN'  
+symbol = 'AAPL' # "VZ" # "CMCSA" #"VZ" #'BABA' # 'AAPL' #'AMZN'  
 starttime = datetime(2021, 1, 1)
 endtime = date.today()
 aapl = pdr.get_data_yahoo(symbol, starttime, endtime)
@@ -210,27 +210,30 @@ ddata['CCI']= (ddata["man"]-ddata["man"].rolling(20).mean())/(0.015 * ddata["man
 print(ddata.tail())
 
 
-upper_barrier =  130
-lower_barrier = -130
+upper_barrier =  250.0
+lower_barrier = -250.0
 
 def signal33(Data, what=8):
-    
-    for i in range(len(Data)):
-            
+    Data['buy'], Data['sell']= np.zeros(Data.shape[0]), np.zeros(Data.shape[0])
+    for i in range(2,len(Data)):
+        # buy, sell = 11, 12
         if Data.iloc[i, what] < lower_barrier and Data.iloc[i - 1, what] > lower_barrier and Data.iloc[i - 2, what] > lower_barrier :
-            Data['buy'] = 1
-            
+            # Data.iloc[i, 11] = 1
+            Data.iat[i, 11] = 1
+
         if Data.iloc[i, what] > upper_barrier and Data.iloc[i - 1, what] < upper_barrier and Data.iloc[i - 2, what] < upper_barrier :
-            Data['sell'] = -1
+            Data.iloc[i, 12] = -1
 
     return Data
+
+
 
 print(ddata.info())
 signal33(ddata)
 print(ddata.iloc[:,4:].tail(), ddata.shape, **sp)
 print(ddata.describe())
 
-plt.plot(ddata.CCI)
+plt.plot(ddata.Tprice3)
 plt.grid(alpha=0.9)
 plt.show()
 print(ddata.sum(axis=0))
