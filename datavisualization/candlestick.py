@@ -208,3 +208,29 @@ ddata["man"] = np.mean(aapl[['Close', 'High', 'Low']], axis=1)
 ddata['CCI']= (ddata["man"]-ddata["man"].rolling(20).mean())/(0.015 * ddata["man"].rolling(20).apply(mad4,True))
 # ddata["sma20"] = ddata.man.rolling(window=20).mean()
 print(ddata.tail())
+
+
+upper_barrier =  130
+lower_barrier = -130
+
+def signal33(Data, what=8):
+    
+    for i in range(len(Data)):
+            
+        if Data.iloc[i, what] < lower_barrier and Data.iloc[i - 1, what] > lower_barrier and Data.iloc[i - 2, what] > lower_barrier :
+            Data['buy'] = 1
+            
+        if Data.iloc[i, what] > upper_barrier and Data.iloc[i - 1, what] < upper_barrier and Data.iloc[i - 2, what] < upper_barrier :
+            Data['sell'] = -1
+
+    return Data
+
+print(ddata.info())
+signal33(ddata)
+print(ddata.iloc[:,4:].tail(), ddata.shape, **sp)
+print(ddata.describe())
+
+plt.plot(ddata.CCI)
+plt.grid(alpha=0.9)
+plt.show()
+print(ddata.sum(axis=0))
