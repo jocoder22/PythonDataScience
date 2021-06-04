@@ -159,3 +159,39 @@ plt.plot( aapl['macd_diff'].fillna(0), label='MACDhist')
 plt.bar( aapl.index, aapl['macd_diff'].fillna(0), width=0.1, snap=False, label='MACDhist')
 plt.legend()
 plt.show()
+
+
+# Compute CCI
+def cci(Data, lookback, where, constant):
+    
+    # Calculating Typical Price
+    Data[:, where] = (Data[:, 1] + Data[:, 2] + Data[:, 3]) / 3
+    
+    # Calculating the Absolute Mean Deviation
+    specimen = Data[:, where]
+    MAD_Data = pd.Series(specimen)
+    
+    for i in range(len(Data)):
+       Data[i, where + 1] = MAD_Data[i - lookback:i].mad()
+    
+    # Calculating Mean of Typical Price 
+    Data = ma(Data, lookback, where, where + 2)
+    
+    # CCI
+    for i in range(len(Data)):
+      Data[i, where + 3] = (Data[i, where] - Data[i, where + 2]) / (constant * Data[i, where + 1]) 
+    
+    return Data
+
+
+def ma(Data, lookback, what, where):
+    
+  for i in range(len(Data)):
+     try:
+       Data[i, where] = (Data[i - lookback + 1:i + 1, what].mean())
+        
+            except IndexError:
+                pass
+    return Data
+# # Calculating Mean of Typical Price 
+# Data = ma(Data, lookback, where, where + 2)
