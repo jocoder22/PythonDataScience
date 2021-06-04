@@ -45,6 +45,7 @@ aapl["aveg"] = aapl['CUMSUM_C']/aapl['numb']
 # print dataset head and tail
 print(aapl.head(), aapl.tail(), **sp)
 
+"""
 
 # display graph period average volume and daily volume
 fig, (ax1, ax2) = plt.subplots(2, sharex=True, figsize =(24,10))
@@ -160,38 +161,50 @@ plt.bar( aapl.index, aapl['macd_diff'].fillna(0), width=0.1, snap=False, label='
 plt.legend()
 plt.show()
 
+"""
+# from numpy import mean, absolute
+
+def mad2(data):
+    return np.mean(np.abs(data - np.mean(data)))
+
+mad4 = lambda x : np.mean(np.abs(x-np.mean(x)))
+
 
 # Compute CCI
-def cci(Data, lookback, where, constant):
+def cci(Data, lookback=20, wherett ="Tprice", constant=0.015):
     
     # Calculating Typical Price
-    Data[:, where] = (Data[:, 1] + Data[:, 2] + Data[:, 3]) / 3
+    Data[wherett] = np.mean(Data[['Close', 'High', 'Low']], axis=1)
     
     # Calculating the Absolute Mean Deviation
-    specimen = Data[:, where]
+    specimen = Data[wherett]
     MAD_Data = pd.Series(specimen)
     
     for i in range(len(Data)):
-       Data[i, where + 1] = MAD_Data[i - lookback:i].mad()
+       Data["where1"] = MAD_Data[i - lookback:i].mad()
     
+    Data['where1b'] = Data[wherett].rolling(window=20).apply(mad2) 
+    # Data['where1bb'] = Data[wherett].rolling(window=20).map('mad')
     # Calculating Mean of Typical Price 
-    Data = ma(Data, lookback, where, where + 2)
+    Data['where2'] = Data[wherett].rolling(window=20).mean()
     
     # CCI
     for i in range(len(Data)):
-      Data[i, where + 3] = (Data[i, where] - Data[i, where + 2]) / (constant * Data[i, where + 1]) 
+      Data[wherett+ "3"] = (Data[wherett] - Data['where2']) / (constant * Data['where1']) 
     
     return Data
-
-
-def ma(Data, lookback, what, where):
     
-  for i in range(len(Data)):
-     try:
-       Data[i, where] = (Data[i - lookback + 1:i + 1, what].mean())
-        
-            except IndexError:
-                pass
-    return Data
+ 
 # # Calculating Mean of Typical Price 
 # Data = ma(Data, lookback, where, where + 2)
+
+ddata = aapl.loc[:,['Open', 'Close', 'High', 'Low']]
+
+ccc = cci(ddata)
+print(ccc.iloc[:,4:9].tail(), **sp)
+
+
+ddata["man"] = np.mean(aapl[['Close', 'High', 'Low']], axis=1)
+ddata['CCI']= (ddata["man"]-ddata["man"].rolling(20).mean())/(0.015 * ddata["man"].rolling(20).apply(mad4,True))
+# ddata["sma20"] = ddata.man.rolling(window=20).mean()
+print(ddata.tail())
