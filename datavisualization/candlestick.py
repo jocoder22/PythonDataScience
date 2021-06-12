@@ -227,7 +227,6 @@ def signal33(Data, what=8):
     return Data
 
 
-
 print(ddata.info())
 signal33(ddata)
 print(ddata.iloc[:,4:].tail(), ddata.shape, **sp)
