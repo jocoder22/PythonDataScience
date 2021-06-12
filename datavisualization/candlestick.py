@@ -194,7 +194,6 @@ def cci(Data, lookback=20, wherett ="Tprice", constant=0.015):
     
     return Data
     
- 
 # # Calculating Mean of Typical Price 
 # Data = ma(Data, lookback, where, where + 2)
 
