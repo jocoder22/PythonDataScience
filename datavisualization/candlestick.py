@@ -220,6 +220,7 @@ def signal33(Data, what=8):
             # Data.iloc[i, 11] = 1
             Data.iat[i, 11] = 1
 
+
         if Data.iloc[i, what] > upper_barrier and Data.iloc[i - 1, what] < upper_barrier and Data.iloc[i - 2, what] < upper_barrier :
             Data.iloc[i, 12] = -1
 
