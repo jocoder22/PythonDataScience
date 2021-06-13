@@ -163,7 +163,6 @@ plt.show()
 
 """
 # from numpy import mean, absolute
-
 def mad2(data):
     return np.mean(np.abs(data - np.mean(data)))
 
