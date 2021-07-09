@@ -37,3 +37,11 @@ logging.info(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a,
 # logging.warning(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a, b, c)}")
 # logging.error(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a, b, c)}")
 # logging.critical(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a, b, c)}")
+
+# to send logs to a file instead of printing to the console, add file= to the config
+# logging.basicConfig(level=logging.DEBUG, file="mylogging.log")
+# logging.basicConfig(level=logging.INFO, file="mylogging.log")
+# logging.basicConfig(level=logging.WARNING, file="mylogging.log")
+# logging.basicConfig(level=logging.ERROR, file="mylogging.log")
+# logging.basicConfig(level=logging.CRITICAL, file="mylogging.log")
+
