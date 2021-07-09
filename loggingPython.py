@@ -15,3 +15,11 @@ logging.info(f"The result of {3} times {4} to the {5}th power is {xtimesPower(3,
 a, b, c = 3,4,5
 
 logging.info(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a, b, c)}")
+
+# logging default format => {level]:{logger}:{message}
+# 5 hierachical levels
+# 1. DEBUG  (value = 10)
+# 2. INFO   (value = 20)
+# 3. WARNING (value = 30)
+# 4  ERROR     (value = 40)
+# 5. CRITICAL  (value = 50)
