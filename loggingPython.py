@@ -62,3 +62,7 @@ logging.info(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a,
 # 14. relativeCreated = Time in milliseconds when the LogRecord was created relative to tim when the logging module was loaded => $(relativeCreated)d
 # 15. thread $(thread)d
 # 16. name = name of the logger used to log the call => %(name)
+
+
+# creating new logger
+# always use __name__ as the logger name, as it automatically takes the filename
