@@ -32,8 +32,8 @@ logging.info(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a,
 # logging.basicConfig(level=logging.CRITICAL)
 
 ### usage
-# logging.debug()
-# logging.info()
-# logging.warning()
-# logging.error()
-# logging.critical()
+# logging.debug(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a, b, c)}")
+# logging.info(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a, b, c)}")
+# logging.warning(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a, b, c)}")
+# logging.error(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a, b, c)}")
+# logging.critical(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a, b, c)}")
