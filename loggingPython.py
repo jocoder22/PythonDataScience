@@ -45,3 +45,20 @@ logging.info(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a,
 # logging.basicConfig(level=logging.ERROR, file="mylogging.log")
 # logging.basicConfig(level=logging.CRITICAL, file="mylogging.log")
 
+### logging formats
+# 1. asctime = when the logRecord was created => %(asctime)s
+# 2. created = when the logRecord was created => %(created)f pr %(created)s
+# 3. filename = filename portion of pathname => %(filename)s
+# 4. funcname = Name of fuction containing the logging call => %(funcName)s
+# 5. levelname = Text logging level for the message => %(levelname)s
+# 6. levelno = Numeric logging level for the meassage => %(levelno)s
+# 7. lineno = Source code line number where the logging was issued => %(lineno)s
+# 8. message $(message)s
+# 9. module = module name portion of the pathname => $(module)s
+# 10. msecs = milliseconds portion of time when the log was created => $(msecs)
+# 11. pathname $(pathname)s
+# 12. process $(process)d
+# 13. processName $(processName)s
+# 14. relativeCreated = Time in milliseconds when the LogRecord was created relative to tim when the logging module was loaded => $(relativeCreated)d
+# 15. thread $(thread)d
+# 16. name = name of the logger used to log the call => %(name)
