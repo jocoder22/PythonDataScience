@@ -23,3 +23,17 @@ logging.info(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a,
 # 3. WARNING (value = 30)
 # 4  ERROR     (value = 40)
 # 5. CRITICAL  (value = 50)
+
+### configuration
+# logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.WARNING)
+# logging.basicConfig(level=logging.ERROR)
+# logging.basicConfig(level=logging.CRITICAL)
+
+### usage
+# logging.debug()
+# logging.info()
+# logging.warning()
+# logging.error()
+# logging.critical()
