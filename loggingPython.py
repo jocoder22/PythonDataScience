@@ -66,3 +66,19 @@ logging.info(f"The result of {a} times {b} to the {c}th power is {xtimesPower(a,
 
 # creating new logger
 # always use __name__ as the logger name, as it automatically takes the filename
+
+# ### STEPS
+# 1.import logging vis import logging
+# 2. define file handler vis myfile_handler = logging.FileHandler('mylogfile.log')
+# 3. set formatter vis myformatter = logging.Formatter('%(asctime)s : %(levelname)s : %(name)s : %(message)s')
+# 4. set file handler format vis myfile_handler.setFormatter(myformatter)
+
+
+# ## then
+# 5. creates logger vis mylogger = logging.getLogger(__name__)
+# 6. set log level vis mylogger.setLevel(logging.WARNING)
+# 7. add file handler to logger vis mylogger.addHandler(myfile_handler)
+
+
+# https://www.machinelearningplus.com/python/python-logging-guide/
+# https://docs.python.org/3/howto/logging.html
