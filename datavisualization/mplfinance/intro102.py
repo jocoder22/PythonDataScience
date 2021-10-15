@@ -10,7 +10,7 @@ import matplotlib.dates as mdates
 
 from tensorflow.python.keras.models import Sequential, load_model
 from tensorflow.python.keras.preprocessing import sequence
-from tensorflow.python.keras.optimizers import Adam
+# from tensorflow.python.keras.optimizers import Adam
 from tensorflow.python.keras.layers import Dense, Embedding
 from tensorflow.python.keras.layers import LSTM, SimpleRNN, Dropout, Flatten
 from tensorflow.python.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
@@ -52,7 +52,8 @@ plt.show()
 
 # https://pythonprogramming.net/sp500-company-price-data-python-programming-for-finance/?completed=/sp500-company-list-python-programming-for-finance/
 
-path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
+# path = r'C:\Users\Jose\Desktop\PythonDataScience\RNN'
+path = r'E:\PythonDataScience\RNN'
 os.chdir(path)
 
 sp = '\n\n'
@@ -78,7 +79,7 @@ window = 90
 val = 0.1
 test = 0.2
 lrate = 0.001
-epoch = 200
+epoch = 20
 decay_rate = lrate / epoch
 
 def preprocess(data, data2, wdw):
@@ -106,9 +107,9 @@ print(ytrain.shape, yval.shape, ytest.shape, sep=sp)
 
 
 # saving weights
-savedate = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
+# savedate = datetime.now().strftime("%Y_%m_%d %H_%M_%S")
 savedir = os.path.join(os.getcwd(), 'weights')
-modelname = 'Best_{0}.h5'.format(savedate)
+modelname = 'Best_m.h5'
 
 if not os.path.isdir(savedir):
     os.makedirs(savedir)
@@ -121,13 +122,13 @@ monitorbest = ModelCheckpoint(filepath=filepath, monitor='loss',
 callbacks=[monitorbest]
 
 model = Sequential()
-model.add(LSTM(256, return_sequences=True, input_shape=(window, 1)))
-model.add(Dropout(0.3))
+model.add(LSTM(64, return_sequences=True, input_shape=(window, 1)))
+model.add(Dropout(0.2))
 
-model.add(LSTM(190))
-model.add(Dropout(0.3))
+model.add(LSTM(64))
+model.add(Dropout(0.2))
 
-model.add(Dense(5))
+model.add(Dense(16))
 
 model.add(Dense(1))
 
@@ -142,7 +143,7 @@ model.compile(optimizer='adam', loss='mse')
 
 # model.load_weights('weights\Best_2019_03_28 02_07_59.h5') # for both vol and closing price
 # model.fit with callbacks save only the weights
-model.load_weights('weights\Best_2019_03_30 07_13_54.h5') 
+model.load_weights(filepath) 
 
 # # model = load_model(f"model\model55.h5")
 # plt.plot(history.history['loss'], label='loss')

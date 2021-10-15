@@ -20,7 +20,7 @@ def pp2(*args):
         print(arg, end="\n\n")
 
 # change current working directory
-path = r'D:\PythonDataScience\datascience\neuron_network'
+path = r'E:\PythonDataScience\datascience\neuron_network'
 os.chdir(path)
 
 modelname = 'Best.h5'
@@ -79,9 +79,9 @@ model.compile(loss="categorical_crossentropy",
              metrics=['accuracy'])
 
 # save model
-# modelname = 'BestModel.h5'
-# filepath2 = os.path.join(os.getcwd(), modelname)
-# model.save(filepath2)
+modelname = 'BestModel.h5'
+filepath2 = os.path.join(os.getcwd(), modelname)
+model.save(filepath2)
        
 # evaluate test accuracy before machine learning
 score = model.evaluate(X_test, y_test, verbose = 0)
@@ -113,13 +113,15 @@ pp2(f'Test accuracy : {accuracy:.2f}', score)
 # model.fit with callbacks save only the weights and then run
 # model.load_weights('weights\Best.h5')
 
-model.load_weights(r'weights\Best.h5')
+model.load_weights(filepath2)
 
 # # evaluate test accuracy after machine learning
 score = model.evaluate(X_test, y_test, verbose = 0)
 accuracy = score[1] * 100
 
 pp2(f'Test accuracy : {accuracy:.2f}', score)
+
+pred =  model.predict(y_test)
 
 
 
