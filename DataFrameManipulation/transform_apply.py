@@ -1,10 +1,23 @@
+import numpy as np
 import pandas as pd
+from printdescribe import changepath
+
 
 # Your job is to fill in missing 'age' values for passengers on the Titanic
 # with the median age from their 'gender' and 'pclass'. To do this, you'll
 # group by the 'sex' and 'pclass' columns and transform each group with a
 # custom function to call .fillna() and impute the median value.
 # Create a groupby object: by_sex_class
+
+path = "E:\PythonDataScience\DataFrameManipulation"
+
+# get the dataset
+with changepath(path):
+    titanic = pd.read_csv("titanic.csv", index_col=0)
+
+# print(titanic.head())
+print(titanic["age"].isna().sum())
+
 by_sex_class = titanic.groupby(['sex', 'pclass'])
 
 # Write a function that imputes median
@@ -18,24 +31,49 @@ def impute_median(series):
 titanic.age = by_sex_class.age.transform(impute_median)
 
 # Print the output of titanic.tail(10)
-print(titanic.tail(10))
+# print(titanic.tail(10))
+print(titanic["age"].isna().sum())
 
 
 # In this exercise, you're going to analyze economic disparity within
 # regions of the world using the Gapminder data set for 2010. To do this
-#  you'll define a function to compute the aggregate spread of per capita
+# you'll define a function to compute the aggregate spread of per capita
 # GDP in each region and the individual country's z-score of the regional
 # per capita GDP. You'll then select three countries - United States, Great
 #  Britain and China - to see a summary of the regional GDP and that
 # country's z-score against the regional mean.
-def disparity(gr):
-    # Compute the spread of gr['gdp']: s
-    s = gr['gdp'].max() - gr['gdp'].min()
-    # Compute the z-score of gr['gdp'] as (gr['gdp']-gr['gdp'].mean())/gr['gdp'].std(): z
-    z = (gr['gdp'] - gr['gdp'].mean())/gr['gdp'].std()
-    # Return a DataFrame with the inputs {'z(gdp)':z, 'regional spread(gdp)':s}
-    return pd.DataFrame({'z(gdp)': z, 'regional spread(gdp)': s})
 
+def disparity(gr):
+    """
+    
+    
+    """
+    # Compute the spread of gr['gdp']: s
+    spreadRegion = gr['gdp'].max() - gr['gdp'].min()
+
+    regionMean = gr['gdp'].mean()
+
+    # Compute the z-score of gr['gdp'] as (gr['gdp']-gr['gdp'].mean())/gr['gdp'].std(): z
+    zscoreCountry = (gr['gdp'] - gr['gdp'].mean())/gr['gdp'].std()
+
+    # Return a DataFrame with the inputs {'z(gdp)':z, 'regional spread(gdp)':s}
+    return gr.join(pd.DataFrame({'z(gdp)': zscoreCountry, 
+                                'regional spread(gdp)': spreadRegion,
+                                'regional mean(gdp)': regionMean}, index=gr.index))
+    # gr['z(gdp)'], gr['regional spread(gdp)']  =  [zscoreCountry,  spreadRegion]
+
+    # return gr
+
+
+
+# get the dataset
+with changepath(path):
+    gapminder = pd.read_csv("gapminder.csv", index_col=0)
+
+# select the 2010 dataset
+gapminder_2010 = gapminder[gapminder["Year"] == 2010]
+
+print(gapminder_2010.tail(), gapminder_2010.shape, sep="\n")
 
 # Group gapminder_2010 by 'region': regional
 regional = gapminder_2010.groupby('region')
@@ -44,7 +82,10 @@ regional = gapminder_2010.groupby('region')
 reg_disp = regional.apply(disparity)
 
 # Print the disparity of 'United States', 'United Kingdom', and 'China'
-print(reg_disp.loc[['United States', 'United Kingdom', 'China']])
+query1 = "Country == 'United States' or  Country =='United Kingdom' or Country == 'China' or Country == 'Nigeria'" 
+                                                                                                                        
+print(reg_disp[["Country", "z(gdp)", "regional spread(gdp)", "regional mean(gdp)"]].query(query1))
+                                                              
 
 
 # In this exercise you'll take the Titanic data set and analyze survival rates from
@@ -54,10 +95,16 @@ print(reg_disp.loc[['United States', 'United Kingdom', 'China']])
 
 
 def c_deck_survival(gr):
+    """
+    
+    
+    """
 
-    c_passengers = gr['cabin'].str.startswith('C').fillna(False)
+    # select c deck passengers
+    cdeck_passengers = gr['cabin'].str.startswith('C').fillna(False)
 
-    return gr.loc[c_passengers, 'survived'].mean()
+    # compute the mean survival of  c deck passengers
+    return gr.loc[cdeck_passengers, 'survived'].mean()
 
 
 # Create a groupby object using titanic over the 'sex' column: by_sex

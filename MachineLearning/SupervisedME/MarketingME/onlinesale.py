@@ -14,21 +14,24 @@ def print2(*args):
     for arg in args:
         print(arg, end="\n\n")
 
-mydir = "D:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
+mydir = "E:\PythonDataScience\MachineLearning\SupervisedME\MarketingME"
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00352/Online%20Retail.xlsx"
 
 # import excel file from web
 # Note that the output of pd.read_excel() is a Python dictionary with sheet names as keys 
 # and corresponding DataFrames as corresponding values for multisheet dataset
-# Returns a dataframe is sheet_name is specified
+# Returns a dataframe if sheet_name is specified
 
 # data = pd.read_excel(url, sheet_name="Online Retail")
-# data = pd.DataFrame(datat)
+# # data = pd.DataFrame(datat)
 # print(data.keys(), data.columns, data.dtypes, data.head())
 
 # print2(data.head())
 # # saving as pickle file
 # data.to_pickle(os.path.join(mydir, "onlinedata.pkl"))
+
+
+
 
 
 # load pickle file
@@ -41,6 +44,9 @@ onlinedata['InvoiceMonth'] = onlinedata['InvoiceDate'].apply(lambda x: dt.dateti
 customergroups = onlinedata.groupby('CustomerID')['InvoiceMonth']
 onlinedata['CohortMonth'] = customergroups.transform('min')
 onlinedata['CohortMonth2'] = onlinedata.groupby('CustomerID')['InvoiceDate'].transform('min')
+
+print(onlinedata.iloc[:,-3:].head())
+
 
 print2(onlinedata)
 # # Extract year and month for each invoiceDate and cohort group
@@ -82,3 +88,4 @@ print2(onlinedata)
 # plt.show()
 
 # print2(Retention.info(), Retention.index)
+
