@@ -81,7 +81,8 @@ print(new_fellowship)
 
 ### on the output expression
 # [(the final result, output, formular, function)  (the conditions)   (the indexing)  (the interable, iterator, input)]
-No_odd_squares = [num ** 2 for num if num % 2 == 0 else 0 in range(0, 10)]
+Even_squares = [num ** 2 for num in range(0, 10) if num % 2 == 0]
+No_odd_squares = [num ** 2 for num in [ p if p % 2 == 0 else 0  for p in range(0, 10)]]
 
 # Create a list of strings: fellowship
 fellowship = ['frodo', 'samwise', 'merry',

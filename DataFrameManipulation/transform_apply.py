@@ -115,3 +115,8 @@ c_surv_by_sex = by_sex.apply(c_deck_survival)
 
 # Print the survival rates
 print(c_surv_by_sex)
+
+
+No_odd_squares = [num ** 2 for num in range(0, 10) if num % 2 == 0]
+# No_odd_squares = [num ** 2 for num in [ p if p % 2 == 0 else 0  for p in range(0, 10)]]
+print(No_odd_squares)
