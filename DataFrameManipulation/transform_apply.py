@@ -57,12 +57,24 @@ def disparity(gr):
     zscoreCountry = (gr['gdp'] - gr['gdp'].mean())/gr['gdp'].std()
 
     # Return a DataFrame with the inputs {'z(gdp)':z, 'regional spread(gdp)':s}
-    return gr.join(pd.DataFrame({'z(gdp)': zscoreCountry, 
+    ## 1. can use join
+    gr = gr.join(pd.DataFrame({'z(gdp)': zscoreCountry, 
                                 'regional spread(gdp)': spreadRegion,
                                 'regional mean(gdp)': regionMean}, index=gr.index))
-    # gr['z(gdp)'], gr['regional spread(gdp)']  =  [zscoreCountry,  spreadRegion]
 
-    # return gr
+
+    ## 2. can use list unpacking                           
+    # gr['z(gdp)'], gr['regional spread(gdp)'],  gr[''regional mean(gdp)'] =  [zscoreCountry,  spreadRegion, regionMean]
+
+    ## 3. can use dataframe expansion
+    # gr[['z(gdp)', 'regional spread(gdp)', 'regional mean(gdp)']]  =  pd.DataFrame([[zscoreCountry,  spreadRegion, regionMean]],
+    #                                                                                 index=gr.index)
+
+    ## 4. can use assign 
+    # gr = gr.assign(zScore = zscoreCountry, Regionalspread = spreadRegion,
+    #                             Regionalmean = regionMean)
+
+    return gr
 
 
 
@@ -85,6 +97,7 @@ reg_disp = regional.apply(disparity)
 query1 = "Country == 'United States' or  Country =='United Kingdom' or Country == 'China' or Country == 'Nigeria'" 
                                                                                                                         
 print(reg_disp[["Country", "z(gdp)", "regional spread(gdp)", "regional mean(gdp)"]].query(query1))
+# print(reg_disp[["Country", "zScore", "Regionalspread", "Regionalmean"]].query(query1))
                                                               
 
 
