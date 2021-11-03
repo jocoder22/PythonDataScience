@@ -16,21 +16,30 @@ def format_borders(plot, title, ylabel):
     
     
     """
-    config_ticks = {'size': 14, 'color': 'grey', 'labelcolor': 'grey'}
-    config_title = {'size': 18, 'color': 'grey', 'ha': 'left', 'va': 'baseline'}        
+    config_ticks = {'size': 12, 'color': 'grey', 'labelcolor': 'red'}
+    config_title = {'size': 14, 'color': 'grey', 'ha': 'left', 'va': 'baseline'}        
     plot.spines['top'].set_visible(False)
     plot.spines['left'].set_visible(False)
     plot.spines['left'].set_color('grey')
     plot.spines['bottom'].set_color('grey')
 
-    plot.yaxis.tick_right()
+    
     plot.tick_params(axis='both', **config_ticks)
+
+    plot.yaxis.tick_right()
     plot.set_ylabel(ylabel, fontsize=14)
     plot.yaxis.set_label_position("right")
     plot.yaxis.label.set_color('grey')
+
     plot.grid(axis='y', color='gainsboro', linestyle='-', linewidth=0.5)
     plot.set_axisbelow(True)
     plot.set_title(title, **config_title)
+
+    # plot.xaxis.set_ticks_position('top')
+
+    plot_legend = plot.legend(loc='upper left', bbox_to_anchor= (-0.005, 0.95), fontsize=16)
+    for text in plot_legend.get_texts():
+        text.set_color('grey')
 
 
 
@@ -43,3 +52,4 @@ format_borders(axes[0], "Cocakola Daily close Prices", 'Price (in USD)')
 format_borders(axes[1], "Cocakola Daily Volumes", "Volumes (in Millions)")
 plt.show()
 
+# https://github.com/letianzj/QuantResearch/blob/master/market/market_profile.ipynb
