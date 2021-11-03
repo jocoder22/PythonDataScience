@@ -38,7 +38,7 @@ dict2["hoo"] = [948]
 print(sorted(list(dict2)))
 
 # better way to get the keys and values
-for key,value in dict2.items():
+for key, value in dict2.items():
     print(f"keys: {key},  The values: {value}")
 
 
