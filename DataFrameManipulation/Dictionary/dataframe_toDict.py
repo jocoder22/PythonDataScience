@@ -10,10 +10,9 @@ from printdescribe import changepath
 import time
 
 
-path = "E:\PythonDataScience\ensemble"
-
-with changepath(path):
-    data = pd.read_csv("lifeExp.csv")
+data = pd.DataFrame({"PPort":[0.993455, 0.677678, 0.533906, 0.111533, 0.2344567], 
+                "Names": ["Kidd", "Opeje", "Ueasd", "Ldldd", "Hdjd"], 
+                "Shares":[234, 574, 0, 748, 463]})
 
 print(data.head())
 
