@@ -16,3 +16,10 @@ with changepath(path):
     data = pd.read_csv("lifeExp.csv")
 
 print(data.head())
+
+kk = "dict list series split records index".split()
+
+for i in kk:
+    print(f"This is for {i}")
+    print(data.to_dict(orient=i))
+    print("\n\n")

@@ -45,7 +45,6 @@ aapl["aveg"] = aapl['CUMSUM_C']/aapl['numb']
 # print dataset head and tail
 print(aapl.head(), aapl.tail(), **sp)
 
-"""
 
 # display graph period average volume and daily volume
 fig, (ax1, ax2) = plt.subplots(2, sharex=True, figsize =(24,10))
@@ -96,6 +95,8 @@ candlestick(
 plt.grid(alpha=0.9)
 plt.show()
 
+
+"""
 # mpf.plot(aapl)
 ### plot using the  mplfinance module
 mpf.plot(aapl, type='candle')
