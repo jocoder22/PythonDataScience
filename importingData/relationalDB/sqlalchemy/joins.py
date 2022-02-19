@@ -18,7 +18,7 @@ person = Table('Person', metadata, autoload=True, autoload_with=engine)
 
 ssmt = select([survey])
 
-############# join predefined join table
+############# join predefined table
 # Build a statement to join survey and state_fact tables: stmt
 stmt = select([survey.columns.pop2000, state_fact.columns.abbreviation])
 
