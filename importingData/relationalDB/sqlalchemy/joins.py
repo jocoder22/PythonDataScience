@@ -4,12 +4,21 @@ import os
 from sqlalchemy import create_engine, MetaData, Table, select,  and_
 
 path = 'C:/Users/okigboo/Desktop/PythonDataScience/importingData/webData'
+path = 'E:\PythonDataScience\importingData\webData'
 os.chdir(path)
 # Create engine: engine
-engine = create_engine('sqlite:///survey.db')
+# engine = create_engine('sqlite:///survey.db')
+engine = create_engine('sqlite:///surveyDB')
 connection = engine.connect()
 
 metadata = MetaData()
+
+
+for t in metadata.sorted_tables:
+    print(t.name)
+
+"""
+print(metadata)
 
 survey = Table('Survey', metadata, autoload=True, autoload_with=engine)
 site = Table('Site', metadata, autoload=True, autoload_with=engine)
@@ -17,6 +26,8 @@ visits = Table('Visited', metadata, autoload=True, autoload_with=engine)
 person = Table('Person', metadata, autoload=True, autoload_with=engine)
 
 ssmt = select([survey])
+
+
 
 ############# join predefined table
 # Build a statement to join survey and state_fact tables: stmt
@@ -67,3 +78,5 @@ for key in result.keys():
 
           # Print the count by state
           print(state_count)
+
+"""

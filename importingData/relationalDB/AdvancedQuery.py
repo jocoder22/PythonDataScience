@@ -1,11 +1,25 @@
 #!/usr/bin/env python
 # Import packages
-from sqlalchemy import create_engine
+import os
+from sqlalchemy import create_engine, MetaData
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
+path = 'E:\DatacampDataScientistPython'
+os.chdir(path)
+
 # Create engine: engine
 engine = create_engine('sqlite:///Chinook.sqlite')
+
+metadata = MetaData()
+
+
+for t in metadata.sorted_tables:
+    print(t.name)
+
+
+
 
 
 # Open engine in context manager
@@ -19,7 +33,7 @@ with engine.connect() as con:
 print(df.head())
 
 
-# Execute query and store records in DataFrame: df
+# # Execute query and store records in DataFrame: df
 df = pd.read_sql_query("""SELECT *
                         FROM PlaylistTrack 
                         INNER JOIN Track 
@@ -29,3 +43,5 @@ df = pd.read_sql_query("""SELECT *
 
 # Print head of DataFrame
 print(df.head())
+
+
