@@ -5,14 +5,7 @@ import os
 from sqlalchemy import create_engine, MetaData, Table, select
 
 
-path = 'D:\PythonDataScience\importingData\webData'
-os.chdir(path)
 
-# Create engine: engine
-engine = create_engine('sqlite:///survey.db')
-connection = engine.connect()
-
-metadata = MetaData()
 
 print(engine.table_names())  # ['Person', 'Site', 'Survey', 'Visited']
 

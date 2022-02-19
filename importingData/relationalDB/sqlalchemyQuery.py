@@ -6,6 +6,18 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib
 from sqlalchemy import Table, Column, String, Integer, Float, Boolean
+import os
+
+
+
+path = 'D:\PythonDataScience\importingData\webData'
+os.chdir(path)
+
+# Create engine: engine
+engine = create_engine('sqlite:///survey.db')
+connection = engine.connect()
+
+metadata = MetaData()
 
 # Define a new table with a name, count, amount, and valid column: data
 data = Table('data', metadata,
