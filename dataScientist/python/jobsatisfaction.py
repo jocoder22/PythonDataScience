@@ -28,8 +28,6 @@ ejdata["percent"] = ejdata.JobSatisfaction / ejdata.Count
 ejdata.sort_values("percent", ascending=False, inplace=True)
 
 
-
-
 dfff = df.groupby("CompanySize")["JobSatisfaction"].sum().reset_index()
 dff2 = df.groupby("CompanySize")["JobSatisfaction"].count().reset_index()
 dff2.columns = ["CompanySize", "Count"]
