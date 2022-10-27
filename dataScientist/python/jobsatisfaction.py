@@ -13,7 +13,6 @@ df = pd.read_csv(path)
 schema = pd.read_csv(path2)
 print2(df.head(), schema.head())
 
-
 question = list(schema[schema["Column"] == "JobSatisfaction"]["Question"])[0]
 prop = sum(df.JobSatisfaction.isnull()) / df.shape[0]
 prop2 = df.JobSatisfaction.isnull().mean()
