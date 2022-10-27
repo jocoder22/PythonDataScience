@@ -94,7 +94,7 @@ portfolios = portfolios.loc[dates,:]
 factors = factors.loc[~factors.isna().any(1)&~portfolios.isna().any(1),:]
 portfolios = portfolios.loc[~factors.isna().any(1)&~portfolios.isna().any(1),:]
 
-lm = linear_model.LinearRegression(normalize=True)
+lm = linear_model.LinearRegression()
 lm.fit(X=factors, y=portfolios)
 
 
@@ -120,9 +120,9 @@ beta_comp = pd.concat([beta_comp,labels], axis=1)
 print(f'This is the feature importance of our two components: \n\n{pca.explained_variance_ratio_}s')
 # print(f'This is the feature importance of our three components: \n\n{pca.explained_variance_ratio_}s')
 
-%%opts Scatter [tools=['hover'], height=400, width=600] (size=5 alpha=0.5)
-hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market equity', 'two']).options(color_index='market equity') + \
-hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market equity', 'two']).options(color_index='two')
+# %%opts Scatter [tools=['hover'], height=400, width=600] (size=5 alpha=0.5)
+# hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market equity', 'two']).options(color_index='market equity') + \
+# hv.Scatter(beta_comp, kdims = ['weight_comp1'], vdims = ['weight_comp2', 'market equity', 'two']).options(color_index='two')
 
 portfolio_returns = pd.melt(portfolios.reset_index(), id_vars='Date').drop(columns=['variable']).merge(factors.dropna(), how='left', on='Date').drop(columns=['Date'])
 

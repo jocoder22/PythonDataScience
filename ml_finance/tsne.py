@@ -20,7 +20,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # select required folder
-patth = r"D:\PythonDataScience\ml_finance"
+patth = r"E:\PythonDataScience\ml_finance"
 
 # import the necessary datasets
 with changepath(patth):

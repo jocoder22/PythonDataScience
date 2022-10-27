@@ -28,3 +28,4 @@ editions = pd.read_csv(zipp.open(mylist[8]), sep='\t')
 
 ioc_codes = pd.read_csv(zipp.open(mylist[9]))
 allmedals = pd.read_csv(zipp.open(mylist[7]), sep='\t', skiprows=4)
+

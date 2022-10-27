@@ -20,4 +20,4 @@ len([s for s in df if df[s].max() == 1])
 
 
 # pip upgrade
-pip install -U `pip list --outdated | tail -n +3 | awk '{print $1}'`
+# pip install -U `pip list --outdated | tail -n +3 | awk '{print $1}'`
